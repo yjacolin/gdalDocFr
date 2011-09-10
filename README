@@ -1,0 +1,11 @@
+= GeoDocFr =
+
+GeoDocFr est un dépôt git pour stocker la traduction de documentation dans le domaine 
+geospatial Open source. Ces documentations ne sont pas intégrées au sein du dépôt du 
+projet pour diverses raisons.
+
+Les documentations du projet sont :
+* OpenLayers : http://doc.openlayers.org
+* GDAL-OGR : http://gdal.org
+
+
