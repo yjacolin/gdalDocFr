@@ -1,0 +1,146 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF8" />
+    
+    <title>gdal_fillnodata &mdash; GDAL v1.9.0 documentation</title>
+    <link rel="stylesheet" href="../_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.9.0',
+        COLLAPSE_MODINDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/translations.js"></script>
+    <link rel="top" title="GDAL v1.9.0 documentation" href="../index.html" />
+    <link rel="up" title="GDAL" href="index.html" />
+    <link rel="next" title="gdallocationinfo" href="gdallocationinfo.html" />
+    <link rel="prev" title="gdal_sieve" href="gdal_sieve.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="gdallocationinfo.html" title="gdallocationinfo"
+             accesskey="N">suivant</a></li>
+        <li class="right" >
+          <a href="gdal_sieve.html" title="gdal_sieve"
+             accesskey="P">précédent</a> |</li>
+        <li><a href="../index.html">GDAL v1.9.0 documentation</a> &raquo;</li>
+          <li><a href="index.html" accesskey="U">GDAL</a> &raquo;</li> 
+      </ul>
+    </div>
+
+
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <h4>Sujet précédent</h4>
+            <p class="topless"><a href="gdal_sieve.html"
+                                  title="Chapitre précédent">gdal_sieve</a></p>
+            <h4>Sujet suivant</h4>
+            <p class="topless"><a href="gdallocationinfo.html"
+                                  title="Chapitre suivant">gdallocationinfo</a></p>
+            <h3>Cette page</h3>
+            <ul class="this-page-menu">
+              <li><a href="../_sources/gdal/gdal_fillnodata.txt"
+                     rel="nofollow">Montrer la source</a></li>
+            </ul>
+          <div id="searchbox" style="display: none">
+            <h3>Recherche rapide</h3>
+              <form class="search" action="../search.html" method="get">
+                <input type="text" name="q" size="18" />
+                <input type="submit" value="Go" />
+                <input type="hidden" name="check_keywords" value="yes" />
+                <input type="hidden" name="area" value="default" />
+              </form>
+              <p class="searchtip" style="font-size: 90%">
+              Enter search terms or a module, class or function name.
+              </p>
+          </div>
+          <script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="gdal-fillnodata">
+<span id="gdal-gdal-gdal-fillnodata"></span><h1>gdal_fillnodata<a class="headerlink" href="#gdal-fillnodata" title="Lien permanent vers ce titre">¶</a></h1>
+<p><strong>Usage :</strong></p>
+<div class="highlight-python"><pre>gdal_nodatafill [-q] [-md max_distance] [-si smooth_iterations]
+            [-o name=value] [-b band]
+            srcfile [-nomask] [-mask filename] [-of format] [dstfile]</pre>
+</div>
+<p><strong>Description :</strong></p>
+<p>Le script <tt class="docutils literal"><span class="pre">gdal_nodatafill.py</span></tt> remplit les régions sélectionné (généralement
+des zones <em>nodata</em>) en interpolant à partir de pixels valides autour des bords
+de la zone.</p>
+<p>Des détails supplémentaires sur l&#8217;algorithme sont disponibles sur la
+documentation de <em>GDALFillNodata()</em>.</p>
+<ul class="simple">
+<li><strong>-q :</strong> le script se lance en mode silencieux. La barre de progression est
+supprimée et les messages ne sont pas affichés.</li>
+<li><strong>-md max_distance :</strong> la distance maximale (en pixels) que l&#8217;algorithme
+recherchera pour les valeurs à interpoler.</li>
+<li><strong>-si smooth_iterations :</strong> le nombre d&#8217;itérations de filtre d&#8217;atténuation
+moyen 3x3 à lancer après l&#8217;interpolation pour amortir les artefacts. Par
+défaut il n’y a aucune itération d&#8217;atténuation.</li>
+<li><strong>-o name=value :</strong> définie un argument spécial à l&#8217;algorithme. Pour l&#8217;instant
+non géré.</li>
+<li><strong>-b band :</strong> la bande sur laquelle opérée, par défaut la première bande est
+utilisée.</li>
+<li><strong>srcfile :</strong> le fichier source raster utilisé pour identifier les pixels
+cibles. Seule une bande est utilisée.</li>
+<li><strong>-nomask :</strong> n&#8217;utilise pas le masque de validité par défaut pour la bande
+en entrée (tel que <em>nodata</em> ou le masque alpha).</li>
+<li><strong>-mask filename :</strong> utilise la première bande du fichier spécifié comme masque
+de validité (zéro est invalide, autre que zéro est valide).</li>
+<li><strong>dstfile :</strong> le nouveau fichier à créer avec les résultats interpolés. S&#8217;il
+n&#8217;est pas fourni, la bande source sera mise à jour à la place.</li>
+<li><strong>-of format :</strong> sélectionne le format de sortie. Par défaut GeoTIFF (GTIFF).
+Utiliser le nom court du format.</li>
+</ul>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+
+
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="gdallocationinfo.html" title="gdallocationinfo"
+             >suivant</a></li>
+        <li class="right" >
+          <a href="gdal_sieve.html" title="gdal_sieve"
+             >précédent</a> |</li>
+        <li><a href="../index.html">GDAL v1.9.0 documentation</a> &raquo;</li>
+          <li><a href="index.html" >GDAL</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+    <a href="http://creativecommons.org/licenses/by/2.0/fr/deed.fr">Licence Creative Common BY</a>
+    <!--
+      &copy; Copyright 2011, Yves Jacolin.-->
+      Créé avec <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0.7.
+    </div>
+  </body>
+</html>

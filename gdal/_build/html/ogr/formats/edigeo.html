@@ -1,0 +1,174 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF8" />
+    
+    <title>EDIGEO &mdash; GDAL v1.9.0 documentation</title>
+    <link rel="stylesheet" href="../../_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '1.9.0',
+        COLLAPSE_MODINDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../_static/translations.js"></script>
+    <link rel="top" title="GDAL v1.9.0 documentation" href="../../index.html" />
+    <link rel="up" title="Formats vecteur d’OGR" href="index.html" />
+    <link rel="next" title="Pilote de l’API FileGDB" href="filegdb.html" />
+    <link rel="prev" title="DXF d’AutoCAD" href="dxf.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="filegdb.html" title="Pilote de l’API FileGDB"
+             accesskey="N">suivant</a></li>
+        <li class="right" >
+          <a href="dxf.html" title="DXF d’AutoCAD"
+             accesskey="P">précédent</a> |</li>
+        <li><a href="../../index.html">GDAL v1.9.0 documentation</a> &raquo;</li>
+          <li><a href="../index.html" >OGR</a> &raquo;</li>
+          <li><a href="index.html" accesskey="U">Formats vecteur d&#8217;OGR</a> &raquo;</li> 
+      </ul>
+    </div>
+
+
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <h3><a href="../../index.html">Table des matières</a></h3>
+            <ul>
+<li><a class="reference internal" href="#">EDIGEO</a><ul>
+<li><a class="reference internal" href="#etiquettes">Étiquettes</a></li>
+<li><a class="reference internal" href="#voir-egalement">Voir également</a></li>
+</ul>
+</li>
+</ul>
+
+            <h4>Sujet précédent</h4>
+            <p class="topless"><a href="dxf.html"
+                                  title="Chapitre précédent">DXF d&#8217;AutoCAD</a></p>
+            <h4>Sujet suivant</h4>
+            <p class="topless"><a href="filegdb.html"
+                                  title="Chapitre suivant">Pilote de l&#8217;API FileGDB</a></p>
+            <h3>Cette page</h3>
+            <ul class="this-page-menu">
+              <li><a href="../../_sources/ogr/formats/edigeo.txt"
+                     rel="nofollow">Montrer la source</a></li>
+            </ul>
+          <div id="searchbox" style="display: none">
+            <h3>Recherche rapide</h3>
+              <form class="search" action="../../search.html" method="get">
+                <input type="text" name="q" size="18" />
+                <input type="submit" value="Go" />
+                <input type="hidden" name="check_keywords" value="yes" />
+                <input type="hidden" name="area" value="default" />
+              </form>
+              <p class="searchtip" style="font-size: 90%">
+              Enter search terms or a module, class or function name.
+              </p>
+          </div>
+          <script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="edigeo">
+<span id="gdal-ogr-formats-edigeo"></span><h1>EDIGEO<a class="headerlink" href="#edigeo" title="Lien permanent vers ce titre">¶</a></h1>
+<p>(GDAL/OGR &gt;= 1.9.0)</p>
+<p>Ce pilote lit les fichiers encodés dans le format d&#8217;échange français EDIGEO, un
+format de fichier texte dont l&#8217;objectif est l&#8217;échange d&#8217;informations géographiques
+entre SIG, avec de puissantes possibilité de description, modélisation
+topologique, etc.</p>
+<p>Le pilote a été développé pour lire les fichiers du PCI (Plan Cadastral
+Informatisé) français produit par la DGI (Direction Générale des Impôts). Le
+pilote doit pouvoir aussi être capable d&#8217;ouvrir d&#8217;autres produits basé sur la
+norme EDIGEO.</p>
+<p>Le fichier .THF décrivant l&#8217;échange EDIGEO doit être fournie au pilote et celui-ci
+lira les fichiers .DIC, .GEO, .SCD, .QAL and .VEC  associés.</p>
+<p>Dans l&#8217;objectif de définir correctement la projection des couches, le fichier
+IGNF qui contient la définition des SRS IGN doit être placé dans le répertoire des
+fichiers ressources PROJ.4.</p>
+<p>L&#8217;ensemble des fichiers sera parsé en mémoire. Cela peut être une limitation s&#8217;il
+faut gérer un gros échange de fichier EDIGEO.</p>
+<div class="section" id="etiquettes">
+<h2>Étiquettes<a class="headerlink" href="#etiquettes" title="Lien permanent vers ce titre">¶</a></h2>
+<p>Pour les fichiers PCI d&#8217;EDIGEO, les étiquettes sont contenu dans la couche
+ID_S_OBJ_Z_1_2_2. OGR exportera les styles en suivant la
+<a class="reference external" href="http://gdal.org/ogr/ogr_feature_style.html">spécification des styles des features d&#8217;OGR</a>.</p>
+<p>Il ajoutera également les champs suivants :</p>
+<ul class="simple">
+<li><strong>OGR_OBJ_LNK :</strong> l&#8217;id du projet qui est lié à cette étiquette ;</li>
+<li><strong>OBJ_OBJ_LNK_LAYER :</strong> le nom de la couche de l&#8217;objet lié ;</li>
+<li><strong>OGR_ATR_VAL :</strong> la valeur de l&#8217;attribut à afficher (trouvé dans l&#8217;attribut
+ATR de l&#8217;objet <em>OGR_OBJ_LNK</em>) ;</li>
+<li><strong>OGR_ANGLE :</strong> l&#8217;angle de rotation en degré (0 = horizontal, orienté dans le
+sens inverse des aiguilles d&#8217;une montre) ;</li>
+<li><strong>OGR_FONT_SIZE :</strong> la valeur de l&#8217;attribut HEI multiplié par la valeur de
+l&#8217;option de configuration <em>OGR_EDIGEO_FONT_SIZE_FACTOR</em> dont la valeur par
+défaut est 2.</li>
+</ul>
+<p>Combinés avec les attributs FON (font family), ils peuvent être utilisé pour
+définir le style dans QGIS par exemple.</p>
+<p>Par défaut, OGR créera des couches spécifiques (xxx_LABEL) pour expédier en
+différente couche ID_S_OBJ_Z_1_2_2 en fonction de la valeur de
+xxx=OBJ_OBJ_LNK_LAYER. Cela peut être désactivé en définissant
+<em>OGR_EDIGEO_CREATE_LABEL_LAYERS</em> à NO.</p>
+</div>
+<div class="section" id="voir-egalement">
+<h2>Voir également<a class="headerlink" href="#voir-egalement" title="Lien permanent vers ce titre">¶</a></h2>
+<ul class="simple">
+<li><a class="reference external" href="http://georezo.net/wiki/main/donnees/edigeo">Introduction au standard EDIGEO</a> (en Français)</li>
+<li><a class="reference external" href="http://georezo.net/wiki/_media/main/geomatique/norme_edigeo.zip">Standard EDIGEO - AFNOR NF Z 52000</a> (en Français)</li>
+<li><a class="reference external" href="http://www.craig.fr/contenu/ressources/dossiers/pci/pdf/EDIGeO_PCI.pdf">Standard d&#8217;échange des objets du PCI selon la norme EDIGEO</a> (en Français)</li>
+<li><a class="reference external" href="http://www.cadastre.gouv.fr">Page principale du Cadastre français</a> (en Français)</li>
+<li><a class="reference external" href="http://docs.codehaus.org/pages/viewpage.action?pageId=77692976">Description du module EDIGEO dans Geotools</a> (en anglais)</li>
+<li><a class="reference external" href="http://svn.geotools.org/trunk/modules/unsupported/edigeo/src/test/resources/org/geotools/data/edigeo/test-data/">Échantillon de données EDIGEO</a></li>
+</ul>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+
+
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="filegdb.html" title="Pilote de l’API FileGDB"
+             >suivant</a></li>
+        <li class="right" >
+          <a href="dxf.html" title="DXF d’AutoCAD"
+             >précédent</a> |</li>
+        <li><a href="../../index.html">GDAL v1.9.0 documentation</a> &raquo;</li>
+          <li><a href="../index.html" >OGR</a> &raquo;</li>
+          <li><a href="index.html" >Formats vecteur d&#8217;OGR</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+    <a href="http://creativecommons.org/licenses/by/2.0/fr/deed.fr">Licence Creative Common BY</a>
+    <!--
+      &copy; Copyright 2011, Yves Jacolin.-->
+      Créé avec <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0.7.
+    </div>
+  </body>
+</html>

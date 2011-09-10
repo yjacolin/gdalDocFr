@@ -1,0 +1,600 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF8" />
+    
+    <title>Formats vecteur d’OGR &mdash; GDAL v1.9.0 documentation</title>
+    <link rel="stylesheet" href="../../_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '1.9.0',
+        COLLAPSE_MODINDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../_static/translations.js"></script>
+    <link rel="top" title="GDAL v1.9.0 documentation" href="../../index.html" />
+    <link rel="up" title="OGR" href="../index.html" />
+    <link rel="next" title="Aeronav FAA" href="aeronavfaa.html" />
+    <link rel="prev" title="ogrtindex" href="../ogrtindex.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="aeronavfaa.html" title="Aeronav FAA"
+             accesskey="N">suivant</a></li>
+        <li class="right" >
+          <a href="../ogrtindex.html" title="ogrtindex"
+             accesskey="P">précédent</a> |</li>
+        <li><a href="../../index.html">GDAL v1.9.0 documentation</a> &raquo;</li>
+          <li><a href="../index.html" accesskey="U">OGR</a> &raquo;</li> 
+      </ul>
+    </div>
+
+
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <h4>Sujet précédent</h4>
+            <p class="topless"><a href="../ogrtindex.html"
+                                  title="Chapitre précédent">ogrtindex</a></p>
+            <h4>Sujet suivant</h4>
+            <p class="topless"><a href="aeronavfaa.html"
+                                  title="Chapitre suivant">Aeronav FAA</a></p>
+            <h3>Cette page</h3>
+            <ul class="this-page-menu">
+              <li><a href="../../_sources/ogr/formats/index.txt"
+                     rel="nofollow">Montrer la source</a></li>
+            </ul>
+          <div id="searchbox" style="display: none">
+            <h3>Recherche rapide</h3>
+              <form class="search" action="../../search.html" method="get">
+                <input type="text" name="q" size="18" />
+                <input type="submit" value="Go" />
+                <input type="hidden" name="check_keywords" value="yes" />
+                <input type="hidden" name="area" value="default" />
+              </form>
+              <p class="searchtip" style="font-size: 90%">
+              Enter search terms or a module, class or function name.
+              </p>
+          </div>
+          <script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="formats-vecteur-d-ogr">
+<span id="gdal-ogr-formats-index"></span><h1>Formats vecteur d&#8217;OGR<a class="headerlink" href="#formats-vecteur-d-ogr" title="Lien permanent vers ce titre">¶</a></h1>
+<table border="1" class="docutils">
+<colgroup>
+<col width="30%" />
+<col width="18%" />
+<col width="11%" />
+<col width="18%" />
+<col width="24%" />
+</colgroup>
+<thead valign="bottom">
+<tr><th class="head" rowspan="2">Nom du format</th>
+<th class="head" rowspan="2">Code</th>
+<th class="head" rowspan="2">Création</th>
+<th class="head" rowspan="2">Géoréférencement</th>
+<th class="head" rowspan="2">Compilé par défaut</th>
+</tr>
+<tr></tr>
+</thead>
+<tbody valign="top">
+<tr><td rowspan="2"><a class="reference internal" href="aeronavfaa.html#gdal-ogr-formats-aeronavfaa"><em>Aeronav FAA</em></a></td>
+<td rowspan="2">AeronavFAA</td>
+<td rowspan="2">Non</td>
+<td rowspan="2">Oui</td>
+<td rowspan="2">Oui</td>
+</tr>
+<tr></tr>
+<tr><td rowspan="3"><a class="reference internal" href="ao.html#gdal-ogr-formats-ao"><em>ArcObjects d&#8217;ESRI</em></a></td>
+<td rowspan="3">ArcObjects</td>
+<td rowspan="3">Non</td>
+<td rowspan="3">Oui</td>
+<td rowspan="3">Oui, nécessite ArcObjects
+d&#8217;ESRI</td>
+</tr>
+<tr></tr>
+<tr></tr>
+<tr><td rowspan="2"><a class="reference internal" href="avcbin.html#gdal-ogr-formats-avcbin"><em>Arc/Info Binary Coverage</em></a></td>
+<td rowspan="2">AVCBin</td>
+<td rowspan="2">Non</td>
+<td rowspan="2">Oui</td>
+<td rowspan="2">Oui</td>
+</tr>
+<tr></tr>
+<tr><td rowspan="2"><a class="reference internal" href="avce00.html#gdal-ogr-formats-avce00"><em>Couverture Arc/Info E00 (ASCII)</em></a></td>
+<td rowspan="2">AVCE00</td>
+<td rowspan="2">Non</td>
+<td rowspan="2">Oui</td>
+<td rowspan="2">Oui</td>
+</tr>
+<tr></tr>
+<tr><td rowspan="2"><a class="reference internal" href="bna.html#gdal-ogr-formats-bna"><em>BNA - Atlas BNA</em></a></td>
+<td rowspan="2">BNA</td>
+<td rowspan="2">Oui</td>
+<td rowspan="2">Non</td>
+<td rowspan="2">Oui</td>
+</tr>
+<tr></tr>
+<tr><td rowspan="2"><a class="reference internal" href="couchdb_even.html#gdal-ogr-formats-couchdb"><em>CouchDB - CouchDB/GeoCouch</em></a></td>
+<td rowspan="2">couchdb</td>
+<td rowspan="2">Oui</td>
+<td rowspan="2">Non</td>
+<td rowspan="2">Non, nécessite libcurl</td>
+</tr>
+<tr></tr>
+<tr><td rowspan="2"><a class="reference internal" href="dxf.html#gdal-ogr-formats-dxf"><em>DXF d&#8217;AutoCAD</em></a></td>
+<td rowspan="2">DXF</td>
+<td rowspan="2">Oui</td>
+<td rowspan="2">Non</td>
+<td rowspan="2">Oui</td>
+</tr>
+<tr></tr>
+<tr><td rowspan="2"><a class="reference internal" href="csv.html#gdal-ogr-formats-csv"><em>Comma Separated Value (.csv)</em></a></td>
+<td rowspan="2">CSV</td>
+<td rowspan="2">Oui</td>
+<td rowspan="2">Non</td>
+<td rowspan="2">Oui</td>
+</tr>
+<tr></tr>
+<tr><td rowspan="2"><a class="reference internal" href="dods.html#gdal-ogr-formats-dods"><em>DODS/OPeNDAP</em></a></td>
+<td rowspan="2">DODS</td>
+<td rowspan="2">Non</td>
+<td rowspan="2">Oui</td>
+<td rowspan="2">Non, nécessite libdap</td>
+</tr>
+<tr></tr>
+<tr><td rowspan="2"><a class="reference internal" href="edigeo.html#gdal-ogr-formats-edigeo"><em>EDIGEO</em></a></td>
+<td rowspan="2">EDIGeo</td>
+<td rowspan="2">Non</td>
+<td rowspan="2">Oui</td>
+<td rowspan="2">Oui</td>
+</tr>
+<tr></tr>
+<tr><td rowspan="3"><a class="reference internal" href="filegdb.html#gdal-ogr-formats-filegdb"><em>Pilote de l&#8217;API FileGDB</em></a></td>
+<td rowspan="3">FileGDB</td>
+<td rowspan="3">Oui</td>
+<td rowspan="3">Oui</td>
+<td rowspan="3">Non, nécessite la bibliothèque
+de l&#8217;API FileGDB</td>
+</tr>
+<tr></tr>
+<tr></tr>
+<tr><td rowspan="3"><a class="reference internal" href="pgeo.html#gdal-ogr-formats-pgeo"><em>ESRI Personal GeoDatabase</em></a></td>
+<td rowspan="3">PGeo</td>
+<td rowspan="3">Non</td>
+<td rowspan="3">Oui</td>
+<td rowspan="3">Non, nécessite la
+bibliothèque ODBC</td>
+</tr>
+<tr></tr>
+<tr></tr>
+<tr><td rowspan="2"><a class="reference internal" href="sde.html#gdal-ogr-formats-sde"><em>ESRI ArcSDE</em></a></td>
+<td rowspan="2">SDE</td>
+<td rowspan="2">Non</td>
+<td rowspan="2">Oui</td>
+<td rowspan="2">Non, nécessite ESRI SDE</td>
+</tr>
+<tr></tr>
+<tr><td rowspan="2"><a class="reference internal" href="shapefile.html#gdal-ogr-formats-shapefile"><em>ESRI Shapefile</em></a></td>
+<td rowspan="2">ESRI Shapefile</td>
+<td rowspan="2">Oui</td>
+<td rowspan="2">Oui</td>
+<td rowspan="2">Oui</td>
+</tr>
+<tr></tr>
+<tr><td rowspan="2"><a class="reference internal" href="fmeobjects.html#gdal-ogr-formats-fmeobjects"><em>FMEObjects Gateway</em></a></td>
+<td rowspan="2">FMEObjects Gateway</td>
+<td rowspan="2">Non</td>
+<td rowspan="2">Oui</td>
+<td rowspan="2">Non, nécessite FME</td>
+</tr>
+<tr></tr>
+<tr><td rowspan="2"><a class="reference internal" href="geojson.html#gdal-ogr-formats-geojson"><em>GeoJSON</em></a></td>
+<td rowspan="2">GeoJSON</td>
+<td rowspan="2">Oui</td>
+<td rowspan="2">Oui</td>
+<td rowspan="2">Oui</td>
+</tr>
+<tr></tr>
+<tr><td rowspan="2"><a class="reference internal" href="geoconcept.html#gdal-ogr-formats-geoconcept"><em>GeoConcept Export (disponible à partir de GDAL 1.6.0)</em></a></td>
+<td rowspan="2">Geoconcept</td>
+<td rowspan="2">Oui</td>
+<td rowspan="2">Oui</td>
+<td rowspan="2">Oui</td>
+</tr>
+<tr></tr>
+<tr><td rowspan="3"><a class="reference internal" href="geomedia.html#gdal-ogr-formats-geomedia"><em>Base de données MDB de Geomedia</em></a></td>
+<td rowspan="3">Geomedia</td>
+<td rowspan="3">Non</td>
+<td rowspan="3">Non</td>
+<td rowspan="3">Non nécessite la bibliothèque
+ODBC</td>
+</tr>
+<tr></tr>
+<tr></tr>
+<tr><td rowspan="3"><a class="reference internal" href="georss.html#gdal-ogr-formats-georss"><em>GeoRSS : Geographically Encoded Objects pour les flux RSS</em></a></td>
+<td rowspan="3">GeoRSS</td>
+<td rowspan="3">Oui</td>
+<td rowspan="3">Oui</td>
+<td rowspan="3">Oui (la gestion de la lecture
+nécessite libexpat)</td>
+</tr>
+<tr></tr>
+<tr></tr>
+<tr><td rowspan="2"><a class="reference internal" href="gft.html#gdal-ogr-formats-gft"><em>GFT - Google Fusion Tables</em></a></td>
+<td rowspan="2">Google Fusion Tables</td>
+<td rowspan="2">Oui</td>
+<td rowspan="2">Oui</td>
+<td rowspan="2">Non, nécessite libcurl</td>
+</tr>
+<tr></tr>
+<tr><td rowspan="3"><a class="reference internal" href="gml.html#gdal-ogr-formats-gml"><em>GML - Geography Markup Language</em></a></td>
+<td rowspan="3">GML</td>
+<td rowspan="3">Oui</td>
+<td rowspan="3">Oui</td>
+<td rowspan="3">Oui (la gestion de la lecture
+nécessite Xerces ou libexpat)</td>
+</tr>
+<tr></tr>
+<tr></tr>
+<tr><td rowspan="2"><a class="reference internal" href="gmt.html#gdal-ogr-formats-gmt"><em>GMT ASCII Vectors (.gmt)</em></a></td>
+<td rowspan="2">GMT</td>
+<td rowspan="2">Oui</td>
+<td rowspan="2">Oui</td>
+<td rowspan="2">Oui</td>
+</tr>
+<tr></tr>
+<tr><td rowspan="3"><a class="reference internal" href="gpsbabel.html#gdal-ogr-formats-gpsbabel"><em>GPSBabel</em></a></td>
+<td rowspan="3">GPSBabel</td>
+<td rowspan="3">Oui</td>
+<td rowspan="3">Oui</td>
+<td rowspan="3">Oui (nécessite le pilotes
+GPSBabel et GPX)</td>
+</tr>
+<tr></tr>
+<tr></tr>
+<tr><td rowspan="3"><a class="reference internal" href="gpx.html#gdal-ogr-formats-gpx"><em>GPX - GPS Exchange Format</em></a></td>
+<td rowspan="3">GPX</td>
+<td rowspan="3">Oui</td>
+<td rowspan="3">Oui</td>
+<td rowspan="3">Oui (la gestion de la lecture
+nécessite libexpat)</td>
+</tr>
+<tr></tr>
+<tr></tr>
+<tr><td rowspan="2"><a class="reference internal" href="grass.html#gdal-ogr-formats-grass"><em>GRASS</em></a></td>
+<td rowspan="2">GRASS</td>
+<td rowspan="2">Non</td>
+<td rowspan="2">Oui</td>
+<td rowspan="2">Non, nécessite libgrass</td>
+</tr>
+<tr></tr>
+<tr><td rowspan="2"><a class="reference internal" href="gtm.html#gdal-ogr-formats-gtm"><em>GTM - GPS TrackMaker</em></a></td>
+<td rowspan="2">GPSTrackMaker</td>
+<td rowspan="2">Oui</td>
+<td rowspan="2">Oui</td>
+<td rowspan="2">Oui</td>
+</tr>
+<tr></tr>
+<tr><td rowspan="2"><a class="reference internal" href="htf.html#gdal-ogr-formats-htf"><em>HTF - Hydrographic Transfer Format</em></a></td>
+<td rowspan="2">HTF</td>
+<td rowspan="2">Non</td>
+<td rowspan="2">Oui</td>
+<td rowspan="2">Oui</td>
+</tr>
+<tr></tr>
+<tr><td rowspan="3"><a class="reference internal" href="idb.html#gdal-ogr-formats-idb"><em>IDB</em></a></td>
+<td rowspan="3">IDB</td>
+<td rowspan="3">Oui</td>
+<td rowspan="3">Oui</td>
+<td rowspan="3">Non, nécessite Informix
+DataBlade</td>
+</tr>
+<tr></tr>
+<tr></tr>
+<tr><td rowspan="4"><a class="reference internal" href="ili.html#gdal-ogr-formats-ili"><em>INTERLIS</em></a></td>
+<td rowspan="4">Interlis 1, Interlis 2</td>
+<td rowspan="4">Oui</td>
+<td rowspan="4">Oui</td>
+<td rowspan="4">Non, nécessite Xerces (la
+lecture du modèle INTERLIS
+nécessite ili2c.jar)</td>
+</tr>
+<tr></tr>
+<tr></tr>
+<tr></tr>
+<tr><td rowspan="2"><a class="reference internal" href="ingres.html#gdal-ogr-formats-ingres"><em>INGRES</em></a></td>
+<td rowspan="2">INGRES</td>
+<td rowspan="2">Oui</td>
+<td rowspan="2">Non</td>
+<td rowspan="2">Non, nécessite INGRESS</td>
+</tr>
+<tr></tr>
+<tr><td rowspan="3"><a class="reference internal" href="kml.html#gdal-ogr-formats-kml"><em>KML - Keyhole Markup Language</em></a></td>
+<td rowspan="3">KML</td>
+<td rowspan="3">Oui</td>
+<td rowspan="3">Oui</td>
+<td rowspan="3">Oui (la gestion de la lecture
+nécessite libexpat)</td>
+</tr>
+<tr></tr>
+<tr></tr>
+<tr><td rowspan="2"><a class="reference internal" href="libkml.html#gdal-ogr-formats-libkml"><em>Pilote LIBKML (.kml .kmz)</em></a></td>
+<td rowspan="2">LIBKML</td>
+<td rowspan="2">Oui</td>
+<td rowspan="2">Oui</td>
+<td rowspan="2">Non, nécessite libkml</td>
+</tr>
+<tr></tr>
+<tr><td rowspan="2"><a class="reference internal" href="mdb.html#gdal-ogr-formats-mdb"><em>Access MDB databases</em></a></td>
+<td rowspan="2">mdb</td>
+<td rowspan="2">Non</td>
+<td rowspan="2">Oui</td>
+<td rowspan="2">Non, nécessite JDK/JRE</td>
+</tr>
+<tr></tr>
+<tr><td rowspan="2"><a class="reference internal" href="mitab.html#gdal-ogr-formats-mitab"><em>MapInfo TAB et MIF/MID</em></a></td>
+<td rowspan="2">MapInfo File</td>
+<td rowspan="2">Oui</td>
+<td rowspan="2">Oui</td>
+<td rowspan="2">Oui</td>
+</tr>
+<tr></tr>
+<tr><td rowspan="2"><a class="reference internal" href="dgn.html#gdal-ogr-formats-dgn"><em>Microstation DGN</em></a></td>
+<td rowspan="2">DGN</td>
+<td rowspan="2">Oui</td>
+<td rowspan="2">Non</td>
+<td rowspan="2">Oui</td>
+</tr>
+<tr></tr>
+<tr><td rowspan="2"><a class="reference internal" href="memory.html#gdal-ogr-formats-memory"><em>Memory</em></a></td>
+<td rowspan="2">Memory</td>
+<td rowspan="2">Oui</td>
+<td rowspan="2">Oui</td>
+<td rowspan="2">Oui</td>
+</tr>
+<tr></tr>
+<tr><td rowspan="3"><a class="reference internal" href="mysql.html#gdal-ogr-formats-mysql"><em>MySQL</em></a></td>
+<td rowspan="3">MySQL</td>
+<td rowspan="3">Non</td>
+<td rowspan="3">Oui</td>
+<td rowspan="3">Non, nécessite la bibliothèque
+MySQL</td>
+</tr>
+<tr></tr>
+<tr></tr>
+<tr><td rowspan="2"><a class="reference internal" href="nas.html#gdal-ogr-formats-nas"><em>NAS - ALKIS</em></a></td>
+<td rowspan="2">NAS</td>
+<td rowspan="2">Non</td>
+<td rowspan="2">Oui</td>
+<td rowspan="2">Non, nécessite Xerces</td>
+</tr>
+<tr></tr>
+<tr><td rowspan="3"><a class="reference internal" href="oci.html#gdal-ogr-formats-oci"><em>Oracle Spatial</em></a></td>
+<td rowspan="3">OCI</td>
+<td rowspan="3">Oui</td>
+<td rowspan="3">Oui</td>
+<td rowspan="3">Non, nécessite la bibliothèque
+OCI</td>
+</tr>
+<tr></tr>
+<tr></tr>
+<tr><td rowspan="3"><a class="reference internal" href="odbc.html#gdal-ogr-formats-odbc"><em>ODBC RDBMS</em></a></td>
+<td rowspan="3">ODBC</td>
+<td rowspan="3">Non</td>
+<td rowspan="3">Oui</td>
+<td rowspan="3">Non, nécessite la bibliothèque
+ODBC</td>
+</tr>
+<tr></tr>
+<tr></tr>
+<tr><td rowspan="3"><a class="reference internal" href="mssqlspatial.html#gdal-ogr-formats-mssqlspatial"><em>MSSQLSpatial - Microsoft SQL Server Spatial Database</em></a></td>
+<td rowspan="3">MSSQLSpatial</td>
+<td rowspan="3">Oui</td>
+<td rowspan="3">Oui</td>
+<td rowspan="3">Non, nécessite la bibliothèque
+ODBC</td>
+</tr>
+<tr></tr>
+<tr></tr>
+<tr><td rowspan="3"><a class="reference internal" href="ogdi.html#gdal-ogr-formats-ogdi"><em>OGDI Vectors</em></a></td>
+<td rowspan="3">OGDI</td>
+<td rowspan="3">Non</td>
+<td rowspan="3">Oui</td>
+<td rowspan="3">Non, nécessite la bibliothèque
+OGDI</td>
+</tr>
+<tr></tr>
+<tr></tr>
+<tr><td rowspan="2"><a class="reference internal" href="openair.html#gdal-ogr-formats-openair"><em>OpenAir - OpenAir Special Use Airspace Format</em></a></td>
+<td rowspan="2">OpenAir</td>
+<td rowspan="2">Non</td>
+<td rowspan="2">Oui</td>
+<td rowspan="2">Oui</td>
+</tr>
+<tr></tr>
+<tr><td rowspan="4">PCI Geomatics Database File</td>
+<td rowspan="4">PCIDSK</td>
+<td rowspan="4">Non</td>
+<td rowspan="4">Non</td>
+<td rowspan="4">Oui, en utilisant le SDK
+PCISDK (à partir de GDAL
+1.7.0)</td>
+</tr>
+<tr></tr>
+<tr></tr>
+<tr></tr>
+<tr><td rowspan="2"><a class="reference internal" href="pds.html#gdal-ogr-formats-pds"><em>PDS - Planetary Data Systems TABLE</em></a></td>
+<td rowspan="2">PDS</td>
+<td rowspan="2">Non</td>
+<td rowspan="2">Oui</td>
+<td rowspan="2">Oui</td>
+</tr>
+<tr></tr>
+<tr><td rowspan="2"><a class="reference internal" href="pgdump.html#gdal-ogr-formats-pgdump"><em>Dump SQL pour PostgreSQL</em></a></td>
+<td rowspan="2">PostgreSQL SQL dump</td>
+<td rowspan="2">Oui</td>
+<td rowspan="2">Oui</td>
+<td rowspan="2">Oui</td>
+</tr>
+<tr></tr>
+<tr><td rowspan="3"><a class="reference internal" href="pg.html#gdal-ogr-formats-pg"><em>PostgreSQL / PostGIS</em></a></td>
+<td rowspan="3">PostgreSQL</td>
+<td rowspan="3">Oui</td>
+<td rowspan="3">Oui</td>
+<td rowspan="3">Non, nécessite la bibliothèque
+PostgreSQL</td>
+</tr>
+<tr></tr>
+<tr></tr>
+<tr><td rowspan="2">EPIInfo .REC</td>
+<td rowspan="2">REC</td>
+<td rowspan="2">Non</td>
+<td rowspan="2">Non</td>
+<td rowspan="2">Oui</td>
+</tr>
+<tr></tr>
+<tr><td rowspan="2"><a class="reference internal" href="s57.html#gdal-ogr-formats-s57"><em>IHO S-57 (ENC)</em></a></td>
+<td rowspan="2">S57</td>
+<td rowspan="2">Non</td>
+<td rowspan="2">Oui</td>
+<td rowspan="2">Oui</td>
+</tr>
+<tr></tr>
+<tr><td rowspan="2"><a class="reference internal" href="sdts.html#gdal-ogr-formats-sdts"><em>SDTS</em></a></td>
+<td rowspan="2">SDTS</td>
+<td rowspan="2">Non</td>
+<td rowspan="2">Oui</td>
+<td rowspan="2">Oui</td>
+</tr>
+<tr></tr>
+<tr><td rowspan="3"><a class="reference external" href="http://trac.osgeo.org/gdal/ticket/3638">Norwegian SOSI Standard</a></td>
+<td rowspan="3">SOSI</td>
+<td rowspan="3">Non</td>
+<td rowspan="3">Oui</td>
+<td rowspan="3">Non, nécessite la bibliothèque
+FYBA</td>
+</tr>
+<tr></tr>
+<tr></tr>
+<tr><td rowspan="3"><a class="reference internal" href="sqlite.html#gdal-ogr-formats-sqlite"><em>SQLite/SpatiaLite RDBMS</em></a></td>
+<td rowspan="3">SQLite</td>
+<td rowspan="3">Oui</td>
+<td rowspan="3">Oui</td>
+<td rowspan="3">Non, nécessite libsqlite3 ou
+libspatialite</td>
+</tr>
+<tr></tr>
+<tr></tr>
+<tr><td rowspan="2"><a class="reference internal" href="sua.html#gdal-ogr-formats-sua"><em>SUA - Tim Newport-Peace&#8217;s Special Use Airspace Format</em></a></td>
+<td rowspan="2">SUA</td>
+<td rowspan="2">Non</td>
+<td rowspan="2">Oui</td>
+<td rowspan="2">Oui</td>
+</tr>
+<tr></tr>
+<tr><td rowspan="2"><a class="reference internal" href="ntf.html#gdal-ogr-formats-ntf"><em>UK .NTF</em></a></td>
+<td rowspan="2">UK. NTF</td>
+<td rowspan="2">Non</td>
+<td rowspan="2">Oui</td>
+<td rowspan="2">Oui</td>
+</tr>
+<tr></tr>
+<tr><td rowspan="3"><a class="reference internal" href="svg.html#gdal-ogr-formats-svg"><em>SVG - Scalable Vector Graphics</em></a></td>
+<td rowspan="3">SVG</td>
+<td rowspan="3">Non</td>
+<td rowspan="3">Oui</td>
+<td rowspan="3">Non, nécessite la bibliothèque
+libexpat</td>
+</tr>
+<tr></tr>
+<tr></tr>
+<tr><td rowspan="2"><a class="reference internal" href="tiger.html#gdal-ogr-formats-tiger"><em>U.S. Census TIGER/Line</em></a></td>
+<td rowspan="2">TIGER</td>
+<td rowspan="2">Non</td>
+<td rowspan="2">Oui</td>
+<td rowspan="2">Oui</td>
+</tr>
+<tr></tr>
+<tr><td rowspan="2"><a class="reference internal" href="vfk.html#gdal-ogr-formats-vfk"><em>VFK - format de données d&#8217;échange cadastrale Tchèque</em></a></td>
+<td rowspan="2">VFK Data</td>
+<td rowspan="2">Non</td>
+<td rowspan="2">Oui</td>
+<td rowspan="2">Oui</td>
+</tr>
+<tr></tr>
+<tr><td rowspan="2"><a class="reference internal" href="vrt.html#gdal-ogr-formats-vrt"><em>Virtual Format</em></a></td>
+<td rowspan="2">VRT</td>
+<td rowspan="2">Non</td>
+<td rowspan="2">Oui</td>
+<td rowspan="2">Oui</td>
+</tr>
+<tr></tr>
+<tr><td rowspan="2"><a class="reference internal" href="wfs.html#gdal-ogr-formats-wfs"><em>WFS - Service WFS OGC</em></a></td>
+<td rowspan="2">WFS</td>
+<td rowspan="2">Non</td>
+<td rowspan="2">Oui</td>
+<td rowspan="2">Non, nécessite libcurl</td>
+</tr>
+<tr></tr>
+<tr><td rowspan="2"><a class="reference internal" href="xplane.html#gdal-ogr-formats-xplane"><em>X-Plane/Flightgear aeronautical data</em></a></td>
+<td rowspan="2">XPLANE</td>
+<td rowspan="2">Non</td>
+<td rowspan="2">Oui</td>
+<td rowspan="2">Oui</td>
+</tr>
+<tr></tr>
+</tbody>
+</table>
+<div class="toctree-wrapper compound">
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+
+
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="aeronavfaa.html" title="Aeronav FAA"
+             >suivant</a></li>
+        <li class="right" >
+          <a href="../ogrtindex.html" title="ogrtindex"
+             >précédent</a> |</li>
+        <li><a href="../../index.html">GDAL v1.9.0 documentation</a> &raquo;</li>
+          <li><a href="../index.html" >OGR</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+    <a href="http://creativecommons.org/licenses/by/2.0/fr/deed.fr">Licence Creative Common BY</a>
+    <!--
+      &copy; Copyright 2011, Yves Jacolin.-->
+      Créé avec <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0.7.
+    </div>
+  </body>
+</html>

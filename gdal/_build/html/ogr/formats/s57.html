@@ -1,0 +1,372 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF8" />
+    
+    <title>IHO S-57 (ENC) &mdash; GDAL v1.9.0 documentation</title>
+    <link rel="stylesheet" href="../../_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '1.9.0',
+        COLLAPSE_MODINDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../_static/translations.js"></script>
+    <link rel="top" title="GDAL v1.9.0 documentation" href="../../index.html" />
+    <link rel="up" title="Formats vecteur d’OGR" href="index.html" />
+    <link rel="next" title="ESRI ArcSDE" href="sde.html" />
+    <link rel="prev" title="ESRI Personal GeoDatabase" href="pgeo.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="sde.html" title="ESRI ArcSDE"
+             accesskey="N">suivant</a></li>
+        <li class="right" >
+          <a href="pgeo.html" title="ESRI Personal GeoDatabase"
+             accesskey="P">précédent</a> |</li>
+        <li><a href="../../index.html">GDAL v1.9.0 documentation</a> &raquo;</li>
+          <li><a href="../index.html" >OGR</a> &raquo;</li>
+          <li><a href="index.html" accesskey="U">Formats vecteur d&#8217;OGR</a> &raquo;</li> 
+      </ul>
+    </div>
+
+
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <h3><a href="../../index.html">Table des matières</a></h3>
+            <ul>
+<li><a class="reference internal" href="#">IHO S-57 (ENC)</a><ul>
+<li><a class="reference internal" href="#traduction-d-objet">Traduction d&#8217;objet</a></li>
+<li><a class="reference internal" href="#sondages">Sondages</a></li>
+<li><a class="reference internal" href="#options-de-controle-du-format-s-57">Options de contrôle du format S-57</a></li>
+<li><a class="reference internal" href="#export-du-formar-s-57">Export du formar S-57</a></li>
+<li><a class="reference internal" href="#voir-egalement">Voir également</a></li>
+</ul>
+</li>
+</ul>
+
+            <h4>Sujet précédent</h4>
+            <p class="topless"><a href="pgeo.html"
+                                  title="Chapitre précédent">ESRI Personal GeoDatabase</a></p>
+            <h4>Sujet suivant</h4>
+            <p class="topless"><a href="sde.html"
+                                  title="Chapitre suivant">ESRI ArcSDE</a></p>
+            <h3>Cette page</h3>
+            <ul class="this-page-menu">
+              <li><a href="../../_sources/ogr/formats/s57.txt"
+                     rel="nofollow">Montrer la source</a></li>
+            </ul>
+          <div id="searchbox" style="display: none">
+            <h3>Recherche rapide</h3>
+              <form class="search" action="../../search.html" method="get">
+                <input type="text" name="q" size="18" />
+                <input type="submit" value="Go" />
+                <input type="hidden" name="check_keywords" value="yes" />
+                <input type="hidden" name="area" value="default" />
+              </form>
+              <p class="searchtip" style="font-size: 90%">
+              Enter search terms or a module, class or function name.
+              </p>
+          </div>
+          <script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="iho-s-57-enc">
+<span id="gdal-ogr-formats-s57"></span><h1>IHO S-57 (ENC)<a class="headerlink" href="#iho-s-57-enc" title="Lien permanent vers ce titre">¶</a></h1>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last"><strong>Attention :</strong> La traduction de cette page n&#8217;est pas parfaite. La
+traduction du terme <em>sounding</em> en sondage n&#8217;est peut être pas parfaite.
+N&#8217;hésitez pas à contacter l&#8217;auteur de cette page ou à l&#8217;éditer. Merci.</p>
+</div>
+<p>Les jeux de données S-57 d&#8217;IHO sont gérés en lecture seule.</p>
+<p>Le module pilote du format S-57 produit des objets pour tous les objets S-57
+dans un fichier S-57 et les mises à jour associées. Les fichiers S-57 (ENC) ont
+normalement l&#8217;extension &#8221;.000&#8221;.</p>
+<p>Les objets <em>features</em> du format S-57 sont traduit en <em>features</em>. Les objets
+géométriques sont automatiquement collectés et formés dans les géométries sur l&#8217;objet.</p>
+<p>Le lecteur du format S-57 est fonction de la présence de deux fichiers de
+gestion, * s57objectclasses.csv* et <em>s57attributes.csv</em> lors de son
+fonctionnement dans le but de traduire les objets en une classe d&#8217;objet d&#8217;une
+manière spécifique. Ceux-ci doivent être dans le répertoire pointé par la
+variable d&#8217;environnement <em>S57_CSV</em> ou dans le répertoire de travail actuel.</p>
+<p>Les fichiers de mise à jour du format S-57 contiennent des informations sur la
+manière de mettre à jour un fichier de données S-57 distribué. Les fichiers de
+base ont normalement l&#8217;extension .000 tandis que les fichiers de mis à jour ont
+une extension comme .001, .002 etc. Le lecteur S-57 lira et appliquera
+normalement tous les fichiers de mis à jour à la volé de la version en mémoire
+du fichier de base. Les données des objets fournit à l&#8217;application inclus alors
+toutes les mises à jours.</p>
+<div class="section" id="traduction-d-objet">
+<h2>Traduction d&#8217;objet<a class="headerlink" href="#traduction-d-objet" title="Lien permanent vers ce titre">¶</a></h2>
+<p>Normalement tous les objets lu d&#8217;un fichier S-57 sont assigné à une couche basée
+sur le nom de la classe d&#8217;objet (<em>OBJL</em>) à laquelle ils appartiennent. Par exemple,
+avec un <em>OBJL</em> de valeur 2, l&#8217;objet est classé dans &#8220;<em>Airport / airfield</em>&#8221; et
+possède un nom court &#8220;<em>AIRARE</em>&#8221; qui est utilisé comme nom de couche. Un transfert
+typique d&#8217;un fichier S-57 aura plus de 100 couches.</p>
+<p>Chaque type d&#8217;objet a un ensemble prédéfinie d&#8217;attributs comme définie par le
+standard S-57. Par exemple, la classe d&#8217;objet aéroport (<em>AIRARE</em>)peut avoir les
+attributs <em>AIRARE</em>, <em>CATAIR</em>, <em>CONDTN</em>, <em>CONVIS</em>, <em>NOBJNM</em>, <em>OBJNAM</em>, <em>STATUS</em>,
+<em>INFORM</em>, <em>NINFOM</em>, <em>NTXTDS</em>, <em>PICREP</em>, <em>SCAMAX</em>, <em>SCAMIN</em>, <em>TXTDSC</em>, <em>RECDAT</em>,
+<em>RECIND</em>, <em>SORDAT</em>, et <em>SORIND</em>. Ces noms courts peuvent être liés à des noms
+plus long, et plus parlant en utilisant un catalogue d&#8217;attribut/objet S-57 comme
+le standard S-57 lui-même , ou le fichier catalogue (<em>s57attributes.csv</em>, et
+<em>s57objectclasses.csv</em>). Un tel cataloque peut également être utilisé pour
+établir toutes les classes d&#8217;objet disponible, et leurs attributs.</p>
+<p>Ce qui suit sont des attributs communs, incluant des attributs génériques qui
+apparaissent sur tous les objets, sans regard de l&#8217;activation de la classe de
+l&#8217;objet :</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="23%" />
+<col width="54%" />
+<col width="23%" />
+</colgroup>
+<thead valign="bottom">
+<tr><th class="head" rowspan="2">Nom de l&#8217;attribut</th>
+<th class="head" rowspan="2">Description</th>
+<th class="head" rowspan="2">Définie pour</th>
+</tr>
+<tr></tr>
+</thead>
+<tbody valign="top">
+<tr><td rowspan="2">GRUP</td>
+<td rowspan="2">Nombre du groupe</td>
+<td rowspan="2">Tous les objets</td>
+</tr>
+<tr></tr>
+<tr><td rowspan="3">OBJL</td>
+<td rowspan="3">Code de l&#8217;étiquette de l&#8217;objet. Ce nombre indique la
+classe de l&#8217;objet de l&#8217;objet.</td>
+<td rowspan="3">Tous les objets</td>
+</tr>
+<tr></tr>
+<tr></tr>
+<tr><td rowspan="2">RVER</td>
+<td rowspan="2">Version de l&#8217;enregistrement</td>
+<td rowspan="2">&nbsp;</td>
+</tr>
+<tr></tr>
+<tr><td rowspan="5">AGEN</td>
+<td rowspan="5">Code d&#8217;agence numérique, tel que <em>50</em> pour le
+<em>Canadian Hydrographic Service</em>. Une liste
+potentiellement non à jour est disponible dans le
+fichier <em>agencode.txt</em>.</td>
+<td rowspan="5">Tous les objets</td>
+</tr>
+<tr></tr>
+<tr></tr>
+<tr></tr>
+<tr></tr>
+<tr><td rowspan="2">FIDN</td>
+<td rowspan="2">Nombre d&#8217;identification de l&#8217;objet.</td>
+<td rowspan="2">Tous les objets</td>
+</tr>
+<tr></tr>
+<tr><td rowspan="2">FIDS</td>
+<td rowspan="2">Subdivision d&#8217;identification de l&#8217;objet.</td>
+<td rowspan="2">Tous les objets</td>
+</tr>
+<tr></tr>
+<tr><td rowspan="5">DSNM</td>
+<td rowspan="5">Nom du jeu de données. Le nom du fichier d&#8217;où provient
+l&#8217;objet.  Utilisé avec l&#8217;attribut <em>LNAM</em> pour former
+un unique identifiant de gros jeu de données pour un
+objet.</td>
+<td rowspan="5">Tous les objets</td>
+</tr>
+<tr></tr>
+<tr></tr>
+<tr></tr>
+<tr></tr>
+<tr><td rowspan="2">INFORM</td>
+<td rowspan="2">Texte d&#8217;information</td>
+<td rowspan="2">Certains objets</td>
+</tr>
+<tr></tr>
+<tr><td rowspan="2">NINFOM</td>
+<td rowspan="2">Texte d&#8217;information dans la langue nationale</td>
+<td rowspan="2">Certains objets</td>
+</tr>
+<tr></tr>
+<tr><td rowspan="2">OBJNAM</td>
+<td rowspan="2">Nom de l&#8217;objet</td>
+<td rowspan="2">Certains objets</td>
+</tr>
+<tr></tr>
+<tr><td rowspan="2">NOBJNM</td>
+<td rowspan="2">Nom de l&#8217;objet dans la langue nationale</td>
+<td rowspan="2">Certains objets</td>
+</tr>
+<tr></tr>
+<tr><td rowspan="2">SCAMAX</td>
+<td rowspan="2">Échelle maximale pour l&#8217;affichage</td>
+<td rowspan="2">Certains objets</td>
+</tr>
+<tr></tr>
+<tr><td rowspan="2">SCAMIN</td>
+<td rowspan="2">Échelle minimale pour l&#8217;affichage</td>
+<td rowspan="2">Certains objets</td>
+</tr>
+<tr></tr>
+<tr><td rowspan="2">SORDAT</td>
+<td rowspan="2">Date de la source</td>
+<td rowspan="2">Certains objets</td>
+</tr>
+<tr></tr>
+</tbody>
+</table>
+<p>Ce qui suit est présent si <em>LNAM_REFS</em> est activé :</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="23%" />
+<col width="54%" />
+<col width="23%" />
+</colgroup>
+<thead valign="bottom">
+<tr><th class="head" rowspan="2">Nom de l&#8217;attribut</th>
+<th class="head" rowspan="2">Description</th>
+<th class="head" rowspan="2">Définie pour</th>
+</tr>
+<tr></tr>
+</thead>
+<tbody valign="top">
+<tr><td rowspan="4">LNAM</td>
+<td rowspan="4">Nom long. Un encodage des attributs <em>AGEN</em>, <em>FIDN</em> et
+<em>FIDS</em> utilisés pour identifier de manière unique cet
+objet dans un fichier S-57.</td>
+<td rowspan="4">Tous les objets</td>
+</tr>
+<tr></tr>
+<tr></tr>
+<tr></tr>
+<tr><td rowspan="2">LNAM_REFS</td>
+<td rowspan="2">Liste de noms long d&#8217;objets liés</td>
+<td rowspan="2">Tous les objets</td>
+</tr>
+<tr></tr>
+<tr><td rowspan="3">FFPT_RIND</td>
+<td rowspan="3">Indicateurs de relation pour chaque relation
+<em>LNAM_REFS</em></td>
+<td rowspan="3">Tous les objets</td>
+</tr>
+<tr></tr>
+<tr></tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="sondages">
+<h2>Sondages<a class="headerlink" href="#sondages" title="Lien permanent vers ce titre">¶</a></h2>
+<p>La profondeur du sondage est pris en charge d&#8217;une manière assez spéciale
+dans le format S-57, dans l&#8217;objectif de représenter efficacement les nombreux
+points de données disponibles. Dans le format S-57 un objet sondage peut
+avoir plusieurs points de sondages. Le lecteur S-57 découpe chacun d&#8217;eux en son
+propre type d&#8217;objet <em>SOUNDG</em> d&#8217;objet avec un <em>s57_type</em> de &#8216;<em>s57_point3d</em>&#8216;. Tous
+les sondages d&#8217;un enregistrement d&#8217;objet isolé possédera la même valeur
+<em>AGEN</em>, <em>FIDN</em>, <em>FIDS</em> et <em>LNAM</em>.</p>
+</div>
+<div class="section" id="options-de-controle-du-format-s-57">
+<h2>Options de contrôle du format S-57<a class="headerlink" href="#options-de-controle-du-format-s-57" title="Lien permanent vers ce titre">¶</a></h2>
+<p>Il y a plusieurs options de contrôle qui peuvent être utilisées pour modifier
+le comportement du lecteur S-57. Les utilisateurs peuvent définir ceux-ci en
+les ajoutant dans la variable d&#8217;environnement <em>OGR_S57_OPTIONS</em>.</p>
+<ul class="simple">
+<li><strong>UPDATES=APPLY/IGNORE :</strong> est ce que les fichiers mis à jour doivent être
+incorporés dans les données de base à la volée.. <em>APPLY</em> par défaut.</li>
+<li><strong>SPLIT_MULITPOINT=ON/OFF :</strong> est ce que les les sondages multipoint
+doivent être découpées en plusieurs objets sondage. Les géométries
+multipoint ne sont pas bien pris en charge par de nombreux formats, il peut
+donc être intéressant de découpe les objets sondage avec de nombreux points
+en plusieurs objets points seuls. <em>OFF</em> par défaut.</li>
+<li><strong>ADD_SOUNDG_DEPTH=ON/OFF :</strong> est ce qu&#8217;une attribut <em>DEPTH</em> doit être ajouté
+aux objets <em>SOUNDG</em> et y assigner la profondeur du sondage. Cela doit
+seulement être activé lorsque <em>SPLIT_MULTIPOINT</em> est aussi activé. <em>OFF</em> par
+défaut.</li>
+<li><strong>RETURN_PRIMITIVES=ON/OFF :</strong> est ce que toutes les primitives géométriques
+de bas niveau doivent être retournées comme IsolatedNode, ConnectedNode, Edge
+et couche Face. <em>OFF</em> par défaut.</li>
+<li><strong>PRESERVE_EMPTY_NUMBERS=ON/OFF :</strong> si activé, les attributs numériques
+assignant une chaîne vide comme valeur seront préservés comme une valeur
+numérique spéciale. Cette option ne doit généralement pas être utilisée, mais
+peut être utile lors d&#8217;une translation du format S-57 vers le format S-57 sans
+perte. <em>OFF</em> par défaut.</li>
+<li><strong>LNAM_REFS=ON/OFF :</strong> est ce que les champs <em>LNAM</em> et <em>LNAM_REFS</em> doivent
+être attachés aux objets reflétant la relation d&#8217;objet à objet dans le groupe
+FFPT du fichier S-57. <em>OFF</em> par défaut.</li>
+<li><strong>RETURN_LINKAGES=ON/OFF :</strong> est ce que des attributs additionnels lié aux
+objets doivent être attachés à leur géométrie sous-jacente. Ce sont les valeurs
+du groupe FSPT, et sont d&#8217;abord nécessaire lors d&#8217;une translation du format
+S-57 vers le format S-57. <em>OFF</em> par défaut.</li>
+</ul>
+<p><strong>Exemple :</strong></p>
+<div class="highlight-python"><pre>set OGR_S57_OPTIONS = "RETURN_PRIMITIVES=ON,RETURN_LINKAGES=ON,LNAM_REFS=ON"</pre>
+</div>
+</div>
+<div class="section" id="export-du-formar-s-57">
+<h2>Export du formar S-57<a class="headerlink" href="#export-du-formar-s-57" title="Lien permanent vers ce titre">¶</a></h2>
+<p>La possibilité d&#8217;export du S-57 préliminaire a été ajoutée à la version 1.2.0 de
+GDAL/OGR mais a seulement pour une utilisation spécialisée, et n&#8217;est pas
+documenté à ce jour. Définir les options suivantes est le minimum nécessaire
+pour gérer la conversion du format S-57 vers le format S-57 via OGR.</p>
+<div class="highlight-python"><pre>set OGR_S57_OPTIONS = "RETURN_PRIMITIVES=ON,RETURN_LINKAGES=ON,LNAM_REFS=ON"</pre>
+</div>
+</div>
+<div class="section" id="voir-egalement">
+<h2>Voir également<a class="headerlink" href="#voir-egalement" title="Lien permanent vers ce titre">¶</a></h2>
+<ul class="simple">
+<li><a class="reference external" href="http://www.s-57.com/|">Catalogue des objets/attributs en ligne de S-57</a></li>
+<li><a class="reference external" href="http://home.gdal.org/projects/s57/index.html">Page de S-57 de Frank</a> :
+liens vers d&#8217;autres ressources et des jeux de données échantillons.</li>
+</ul>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+
+
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="sde.html" title="ESRI ArcSDE"
+             >suivant</a></li>
+        <li class="right" >
+          <a href="pgeo.html" title="ESRI Personal GeoDatabase"
+             >précédent</a> |</li>
+        <li><a href="../../index.html">GDAL v1.9.0 documentation</a> &raquo;</li>
+          <li><a href="../index.html" >OGR</a> &raquo;</li>
+          <li><a href="index.html" >Formats vecteur d&#8217;OGR</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+    <a href="http://creativecommons.org/licenses/by/2.0/fr/deed.fr">Licence Creative Common BY</a>
+    <!--
+      &copy; Copyright 2011, Yves Jacolin.-->
+      Créé avec <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0.7.
+    </div>
+  </body>
+</html>

@@ -1,0 +1,250 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF8" />
+    
+    <title>MSSQLSpatial - Microsoft SQL Server Spatial Database &mdash; GDAL v1.9.0 documentation</title>
+    <link rel="stylesheet" href="../../_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '1.9.0',
+        COLLAPSE_MODINDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../_static/translations.js"></script>
+    <link rel="top" title="GDAL v1.9.0 documentation" href="../../index.html" />
+    <link rel="up" title="Formats vecteur d’OGR" href="index.html" />
+    <link rel="next" title="MySQL" href="mysql.html" />
+    <link rel="prev" title="MapInfo TAB et MIF/MID" href="mitab.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="mysql.html" title="MySQL"
+             accesskey="N">suivant</a></li>
+        <li class="right" >
+          <a href="mitab.html" title="MapInfo TAB et MIF/MID"
+             accesskey="P">précédent</a> |</li>
+        <li><a href="../../index.html">GDAL v1.9.0 documentation</a> &raquo;</li>
+          <li><a href="../index.html" >OGR</a> &raquo;</li>
+          <li><a href="index.html" accesskey="U">Formats vecteur d&#8217;OGR</a> &raquo;</li> 
+      </ul>
+    </div>
+
+
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <h3><a href="../../index.html">Table des matières</a></h3>
+            <ul>
+<li><a class="reference internal" href="#">MSSQLSpatial - Microsoft SQL Server Spatial Database</a><ul>
+<li><a class="reference internal" href="#se-connecter-a-une-base-de-donnees">Se connecter à une base de données</a></li>
+<li><a class="reference internal" href="#requetes-sql">Requêtes SQL</a><ul>
+<li><a class="reference internal" href="#problemes-lors-de-la-creation">Problèmes lors de la création</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#options-de-creation-de-couche">Options de création de couche</a></li>
+<li><a class="reference internal" href="#creation-d-index-spatial">Création d&#8217;index spatial</a><ul>
+<li><a class="reference internal" href="#exemples">Exemples</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+            <h4>Sujet précédent</h4>
+            <p class="topless"><a href="mitab.html"
+                                  title="Chapitre précédent">MapInfo TAB et MIF/MID</a></p>
+            <h4>Sujet suivant</h4>
+            <p class="topless"><a href="mysql.html"
+                                  title="Chapitre suivant">MySQL</a></p>
+            <h3>Cette page</h3>
+            <ul class="this-page-menu">
+              <li><a href="../../_sources/ogr/formats/mssqlspatial.txt"
+                     rel="nofollow">Montrer la source</a></li>
+            </ul>
+          <div id="searchbox" style="display: none">
+            <h3>Recherche rapide</h3>
+              <form class="search" action="../../search.html" method="get">
+                <input type="text" name="q" size="18" />
+                <input type="submit" value="Go" />
+                <input type="hidden" name="check_keywords" value="yes" />
+                <input type="hidden" name="area" value="default" />
+              </form>
+              <p class="searchtip" style="font-size: 90%">
+              Enter search terms or a module, class or function name.
+              </p>
+          </div>
+          <script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="mssqlspatial-microsoft-sql-server-spatial-database">
+<span id="gdal-ogr-formats-mssqlspatial"></span><h1>MSSQLSpatial - Microsoft SQL Server Spatial Database<a class="headerlink" href="#mssqlspatial-microsoft-sql-server-spatial-database" title="Lien permanent vers ce titre">¶</a></h1>
+<p>Ce pilote implémente la gestion de l&#8217;accés aux tables spatiales dans Microsoft SQL
+Server 2008+ qui contiennent les types de données géométriques et géographiques
+pour représenter les colonnes géométrie.</p>
+<div class="section" id="se-connecter-a-une-base-de-donnees">
+<h2>Se connecter à une base de données<a class="headerlink" href="#se-connecter-a-une-base-de-donnees" title="Lien permanent vers ce titre">¶</a></h2>
+<p>Pour se connecter à un source de données MSSQL, utilisez une chaîne de connexion
+définissant le nom de la base de données avec des paramètres supplémentaires si
+nécessaire. La chaîne de connexion doit être préfixé par &#8216;<em>MSSQL:</em>&#8216;.</p>
+<div class="highlight-python"><pre>MSSQL:server=.\MSSQLSERVER2008;database=dbname;trusted_connection=yes</pre>
+</div>
+<p>En plus des paramètres standards du format de la
+<a class="reference external" href="http://msdn.microsoft.com/en-us/library/ms130822.aspx">chaîne de connexion</a>
+les paramètres personnalisés suivants peuvent également être utilisés avec la
+syntaxe suivante :</p>
+<ul>
+<li><dl class="first docutils">
+<dt><strong>Tables=schema1.table1(geometry column1),schema2.table2(geometry column2) :</strong></dt>
+<dd><p class="first last">en utilisant ce paramètre vous pouvez définir le sous jeu de données des
+couches à utiliser par le pilote. Si ce paramètre n&#8217;est pas définie, les
+couches sont récupérées à partir de la table de métadonnées <em>geometry_column</em>.
+vous pouvez omettre de spécifier la partie sur le schéma et la colonne
+géométrique de la syntaxe.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt><strong>GeometryFormat=native|wkb|wkt :</strong></dt>
+<dd><p class="first last">Le format désiré dans lequel les géométries doivent être récupérées à partir
+du serveur. La valeur par défaut est &#8216;<em>native</em>&#8216; dans ce cas le format de
+sérialisation natif SqlGeometry et SqlGeography est utilisé. Lors de
+l&#8217;utilisation de &#8216;<em>wkb</em>&#8216; ou &#8216;<em>wkt</em>&#8216; la représentation de la géométrie est
+convertie en &#8216;<em>Well Known Binary</em>&#8216; et &#8216;<em>Well Known Text</em>&#8216; dans le serveur.
+Cette conversion nécessite une surcharge significative côté serveur et rend
+l&#8217;accès aux features plus lente qu&#8217;en utilisant le format natif.</p>
+</dd>
+</dl>
+</li>
+</ul>
+<p>Les noms des paramètres ne sont pas sensible à la casse dans la chaîne de
+connexion. La définition du paramètre <strong>Database</strong> est nécessaire pour le pilote
+afin de sélectionner la base de données correctement.</p>
+</div>
+<div class="section" id="requetes-sql">
+<h2>Requêtes SQL<a class="headerlink" href="#requetes-sql" title="Lien permanent vers ce titre">¶</a></h2>
+<p>Le pilote MS SQL Spatial envoie les requêtes SQL directement à MS SQL par défaut,
+plutôt que de les évaluer en interne en utilisant l&#8217;appel à <em>ExecuteSQL()</em> du
+<em>OGRDataSource</em>, ou l&#8217;option de la commande <em>-sql</em> d&#8217;<tt class="docutils literal"><span class="pre">ogr2ogr</span></tt>. Les expressions
+des requêtes attributaires sont aussi envoyé directement à MSSQL. Il est aussi
+possible de demander au pilote MSSQL d&#8217;OGR de prendre en charge les commandes SQL
+avec le moteur <a class="reference internal" href="../sql.html#gdal-ogr-sql"><em>SQL dans OGR</em></a>, en passant la chaîne <strong>&#8220;OGRSQL&#8221;</strong> à la méthode
+<em>ExecuteSQL()</em>, comme le nom du dialect SQL.</p>
+<p>Le pilote MSSQL dans OGR gère les appels <em>OGRLayer::StartTrasaction()</em>,
+<em>OGRLayer::CommitTransaction()</em> et <em>OGRLayer::RollbackTransaction()</em> dans le
+sens normal de SQL.</p>
+<div class="section" id="problemes-lors-de-la-creation">
+<h3>Problèmes lors de la création<a class="headerlink" href="#problemes-lors-de-la-creation" title="Lien permanent vers ce titre">¶</a></h3>
+<p>Ce pilote ne gère pas la création d&#8217;une nouvelle base de données, vous devrez
+utiliser l&#8217;<em>Outils client du Serveur Microsoft SQL</em> pour cela, mais il permet la
+création de nouvelles couches dans une base existante.</p>
+</div>
+</div>
+<div class="section" id="options-de-creation-de-couche">
+<h2>Options de création de couche<a class="headerlink" href="#options-de-creation-de-couche" title="Lien permanent vers ce titre">¶</a></h2>
+<ul class="simple">
+<li><strong>GEOM_TYPE</strong>: l&#8217;option de création <em>GEOM_TYPE</em> peut être définie parmi
+&#8220;geometry&#8221; ou &#8220;geography&#8221;. Si cette option n&#8217;est pas définie la valeur par
+défaut est &#8220;geometry&#8221;. Pour créer la colonne géométrie de type &#8220;geography&#8221;,
+ce paramètre doit être définie en &#8220;geography&#8221;. Dans ce cas, la couche doit
+avoir une référence spatiale valide de l&#8217;un des systèmes de coordonnées
+géographiques définies dans la table de métadonnées du serveur SQL
+<strong>sys.spatial_reference_systems</strong>. Les systèmes de coordonnées projetées ne
+sont pas pris en charge dans ce cas.</li>
+<li><strong>OVERWRITE</strong>: doit être à &#8220;YES&#8221; pour forcer une couche existante au nom définie
+à être détruite avant la création de la couche demandée.</li>
+<li><strong>LAUNDER</strong>: doit être à &#8220;YES&#8221; pour forcer le nettoyage des nouveaux champs
+créés dans cette couche dans une forme compatible avec MSSQL. Cela les convertie
+en minuscule et certains caractères spéciaux comme &#8220;-&#8221; et &#8220;#&#8221; en &#8220;_&#8221;. Si &#8220;NO&#8221;
+les noms exactes sont préservés.
+La valeur par défaut est &#8220;YES&#8221;. Si activé le nom de la table (couche) sera
+aussi nettoyer.</li>
+<li><strong>PRECISION</strong>: doit être à &#8220;YES&#8221; pour forcer les nouveaux champs créés sur cette
+couche de tenter et de représenter les informations sur la largeur et la
+précision, si disponible en utilisant les types <em>numeric(width,precision)</em> ou
+<em>char(width)</em>. Si &#8220;NO&#8221; alors les types <em>float</em>, <em>int</em> et <em>varchar</em> seront
+utilisé. La valeur par défaut est &#8220;YES&#8221;.</li>
+<li><strong>DIM={2,3}</strong>: contrôle la dimension de la couche.  3 par défaut.</li>
+<li><strong>GEOM_NAME</strong>: définie le nom de la colonne géométrique dans la nouvelle table.
+si omis par défaut <em>ogr_geometry</em>.</li>
+<li><strong>SCHEMA</strong>: définie le nom du schéma pour la nouvelle table.
+Si ce paramètre n&#8217;est pas géré le schéma par défaut est &#8220;<em>dbo&#8221;</em>.</li>
+<li><strong>SRID</strong>: définie l&#8217;id de la référence spatiale de la nouvelle table
+explicitement. L&#8217;entrée correspondante doit déjà existé dans la table de
+métadonnées <em>spatial_ref_sys</em>. Si ce paramètre n&#8217;est pas définie le SRID est
+dérivé à partir du code d&#8217;autorité du SRS de la couche source.</li>
+</ul>
+</div>
+<div class="section" id="creation-d-index-spatial">
+<h2>Création d&#8217;index spatial<a class="headerlink" href="#creation-d-index-spatial" title="Lien permanent vers ce titre">¶</a></h2>
+<p>Par défaut le pilote MS SQL Spatial ne créé par d&#8217;index spatiaux pour la table
+pendant la création de la couche. Cependant vous devez créer un index spatial en
+utilisant l&#8217;option sql suivante :</p>
+<div class="highlight-python"><pre>create spatial index on schema.table</pre>
+</div>
+<p>L&#8217;index spatial peut aussi être supprimé en utilisant la syntaxe suivante :</p>
+<div class="highlight-python"><pre>drop spatial index on schema.table</pre>
+</div>
+<div class="section" id="exemples">
+<h3>Exemples<a class="headerlink" href="#exemples" title="Lien permanent vers ce titre">¶</a></h3>
+<p>Créer une couche à partir d&#8217;un source de données OGR :</p>
+<div class="highlight-python"><pre>ogr2ogr -overwrite -f MSSQLSpatial "MSSQL:server=.\MSSQLSERVER2008;database=geodb;trusted_connection=yes" "rivers.tab"</pre>
+</div>
+<p>Se connecter à une couche et dumper son contenu :</p>
+<div class="highlight-python"><pre>ogrinfo -al "MSSQL:server=.\MSSQLSERVER2008;database=geodb;tables=rivers;trusted_connection=yes"</pre>
+</div>
+<p>Créer un index spatial :</p>
+<div class="highlight-python"><pre>ogrinfo -sql "create spatial index on rivers" "MSSQL:server=.\MSSQLSERVER2008;database=geodb;trusted_connection=yes"</pre>
+</div>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+
+
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="mysql.html" title="MySQL"
+             >suivant</a></li>
+        <li class="right" >
+          <a href="mitab.html" title="MapInfo TAB et MIF/MID"
+             >précédent</a> |</li>
+        <li><a href="../../index.html">GDAL v1.9.0 documentation</a> &raquo;</li>
+          <li><a href="../index.html" >OGR</a> &raquo;</li>
+          <li><a href="index.html" >Formats vecteur d&#8217;OGR</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+    <a href="http://creativecommons.org/licenses/by/2.0/fr/deed.fr">Licence Creative Common BY</a>
+    <!--
+      &copy; Copyright 2011, Yves Jacolin.-->
+      Créé avec <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0.7.
+    </div>
+  </body>
+</html>

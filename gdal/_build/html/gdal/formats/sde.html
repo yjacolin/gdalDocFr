@@ -1,0 +1,198 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF8" />
+    
+    <title>ESRI ArcSDE Raster &mdash; GDAL v1.9.0 documentation</title>
+    <link rel="stylesheet" href="../../_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '1.9.0',
+        COLLAPSE_MODINDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../_static/translations.js"></script>
+    <link rel="top" title="GDAL v1.9.0 documentation" href="../../index.html" />
+    <link rel="up" title="Formats" href="index.html" />
+    <link rel="next" title="Terragen — Terragen™ Terrain File" href="terragen.html" />
+    <link rel="prev" title="RS2 – RadarSat 2 XML Product" href="rs2.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="terragen.html" title="Terragen — Terragen™ Terrain File"
+             accesskey="N">suivant</a></li>
+        <li class="right" >
+          <a href="rs2.html" title="RS2 – RadarSat 2 XML Product"
+             accesskey="P">précédent</a> |</li>
+        <li><a href="../../index.html">GDAL v1.9.0 documentation</a> &raquo;</li>
+          <li><a href="../index.html" >GDAL</a> &raquo;</li>
+          <li><a href="index.html" accesskey="U">Formats</a> &raquo;</li> 
+      </ul>
+    </div>
+
+
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <h3><a href="../../index.html">Table des matières</a></h3>
+            <ul>
+<li><a class="reference internal" href="#">ESRI ArcSDE Raster</a><ul>
+<li><a class="reference internal" href="#fonctionnalites-du-pilote-gdal-du-raster-d-arcsde">Fonctionnalités du pilote GDAL du Raster d&#8217;ArcSDE</a></li>
+<li><a class="reference internal" href="#considerations-des-performances">Considérations des performances</a></li>
+<li><a class="reference internal" href="#specification-du-jeu-de-donnees">Spécification du jeu de données</a></li>
+</ul>
+</li>
+</ul>
+
+            <h4>Sujet précédent</h4>
+            <p class="topless"><a href="rs2.html"
+                                  title="Chapitre précédent">RS2 &#8211; RadarSat 2 XML Product</a></p>
+            <h4>Sujet suivant</h4>
+            <p class="topless"><a href="terragen.html"
+                                  title="Chapitre suivant">Terragen &#8212; Terragen™ Terrain File</a></p>
+            <h3>Cette page</h3>
+            <ul class="this-page-menu">
+              <li><a href="../../_sources/gdal/formats/sde.txt"
+                     rel="nofollow">Montrer la source</a></li>
+            </ul>
+          <div id="searchbox" style="display: none">
+            <h3>Recherche rapide</h3>
+              <form class="search" action="../../search.html" method="get">
+                <input type="text" name="q" size="18" />
+                <input type="submit" value="Go" />
+                <input type="hidden" name="check_keywords" value="yes" />
+                <input type="hidden" name="area" value="default" />
+              </form>
+              <p class="searchtip" style="font-size: 90%">
+              Enter search terms or a module, class or function name.
+              </p>
+          </div>
+          <script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="esri-arcsde-raster">
+<span id="gdal-gdal-formats-sde"></span><h1>ESRI ArcSDE Raster<a class="headerlink" href="#esri-arcsde-raster" title="Lien permanent vers ce titre">¶</a></h1>
+<p>ArcSDE d&#8217;ESRI fournit une couche d&#8217;abstraction pour de nombreuses bases de
+données qui permettent le stockage de données raster. ArcSDE gère l&#8217;imagerie à
+n-bandes avec plusieurs bit de profondeur, et l&#8217;implémentation en cours du
+pilote de GDAL doit gérer autant de bande que vous pouvez lui fournir. ArcSDE
+gère le stockage des données LZW, JP2K, et non compressées, et les présente
+d&#8217;une manière transparente à travers son SDK de son API en C.</p>
+<div class="section" id="fonctionnalites-du-pilote-gdal-du-raster-d-arcsde">
+<h2>Fonctionnalités du pilote GDAL du Raster d&#8217;ArcSDE<a class="headerlink" href="#fonctionnalites-du-pilote-gdal-du-raster-d-arcsde" title="Lien permanent vers ce titre">¶</a></h2>
+<p>Le pilote aujourd&#8217;hui gère les fonctionnalités suivantes :</p>
+<ul class="simple">
+<li>Gestion de la lecture seulement.</li>
+<li>Information de transformation spatiale pour les rasters qui l&#8217;ont définie.</li>
+<li>Information des références des coordonnées.</li>
+<li>Interprétation des couleurs (palette pour les jeux de données avec une carte
+des couleurs, en échelle de gris autrement).</li>
+<li>Statistique des bandes si ArcSDE les a mis en cache, autrement GDAL les
+calculera.</li>
+<li>Gestion des aperçues (pyramide) d&#8217;ArcSDE.</li>
+<li>Données sur 1 bit, 4 bit, 8 bit, 16 bit, et 32 bit.</li>
+<li>Gestion de IReadBlock qui correspond à la représentation par ArcSDE de la
+données dans la base de données.</li>
+<li>SDK de ArcSDE 9.1 et 9.2. Les versions plus anciennes peuvent aussi fonctionner,
+mais n&#8217;ont pas été testées.</li>
+</ul>
+<p>Le pilote ne gère pas aujourd&#8217;hui les fonctionnalités suivantes :</p>
+<ul class="simple">
+<li>L&#8217;écriture de jeux de données GDAL dans la base de données.</li>
+<li>Lecture importante, rapide, et en un seul passage de la base de données.</li>
+<li>lecture à partir du &#8220;Catalogues Raster d&#8217;ArcSDE d&#8217;ESRI &#8221;.</li>
+<li>masque NODATA.</li>
+</ul>
+</div>
+<div class="section" id="considerations-des-performances">
+<h2>Considérations des performances<a class="headerlink" href="#considerations-des-performances" title="Lien permanent vers ce titre">¶</a></h2>
+<p>Le pilote raster d&#8217;ArcSDE gère actuellement seulement les méthodes de lecture
+de block. Chaque appel à cette méthode résulte en un requête pour un block de
+données raster pour chaque bandes de données dans le raster, et les requêtes en
+un seul passage pour toutes les bandes pour un block ou une zone donnée n&#8217;est
+pas réalisé actuellement. Par conséquence cette approche résulte en une
+sur-utilisation du réseau. On espère que le pilote sera amélioré pour gérer les
+lectures en un seul passage dans un futur proche.</p>
+<p>Le pilote raster d&#8217;ArcSDE ne devrait consommer seulement une connexion ArcSDE
+tout au long de l&#8217;existence du jeu de données. Chaque connexion à la base de
+données a une surcharge d&#8217;approximativement de 2 secondes,  avec une
+surcharge additionnelle utilisée pour calculer les informations du jeu de
+données. Ainsi, l&#8217;utilisation du pilote dans des situations où il y a plusieurs
+ouverture et fermeture  de jeux de données n&#8217;est pas censé être très performants.
+Bien que le SDK en C d&#8217;ArcSDE gère les threading et les fermetures (locking),
+le pilote raster d&#8217;ArcSDE pour GDAL n&#8217;utilise pas ces fonctionnalités. Ainsi,
+ce pilote doit être considéré  threadsafe, et partager des jeux de données
+entre threads engendrera des résultats indéfinies (et souvent désastreux).</p>
+</div>
+<div class="section" id="specification-du-jeu-de-donnees">
+<h2>Spécification du jeu de données<a class="headerlink" href="#specification-du-jeu-de-donnees" title="Lien permanent vers ce titre">¶</a></h2>
+<p>Les jeux de données SDE sont définies avec les informations suivantes :</p>
+<div class="highlight-python"><pre>SDE:sdemachine.iastate.edu,5151,database,username,password,fully.specified.tablename,RASTER</pre>
+</div>
+<ul class="simple">
+<li><strong>SDE:</strong> – ceci est le préfixe qui indique à GDAL d&#8217;utiliser ou non le pilote
+SDE</li>
+<li><strong>sdemachine.iastate.edu</strong> – le nom du DNS ou adresse IP du serveur auquel on
+se connecte.</li>
+<li><strong>5151</strong> – le numéro du port (5151 ou port:5151) ou l&#8217;entrée du service
+(typiquement esri_sde).</li>
+<li><strong>database</strong> – la base de données à se connecter. Cela peut aussi être vide
+et définie comme ...</li>
+<li><strong>username</strong> – nom utilisateur.</li>
+<li><strong>password</strong> – mot de passe.</li>
+<li><strong>fully.specified.tablename</strong> – il est prudent d&#8217;utiliser un nom de table
+définie entièrement autant que possible, bien que cela ne soit absolument pas
+obligatoire.</li>
+<li><strong>RASTER</strong> – nom optionnel de la colonne raster.</li>
+</ul>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+
+
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="terragen.html" title="Terragen — Terragen™ Terrain File"
+             >suivant</a></li>
+        <li class="right" >
+          <a href="rs2.html" title="RS2 – RadarSat 2 XML Product"
+             >précédent</a> |</li>
+        <li><a href="../../index.html">GDAL v1.9.0 documentation</a> &raquo;</li>
+          <li><a href="../index.html" >GDAL</a> &raquo;</li>
+          <li><a href="index.html" >Formats</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+    <a href="http://creativecommons.org/licenses/by/2.0/fr/deed.fr">Licence Creative Common BY</a>
+    <!--
+      &copy; Copyright 2011, Yves Jacolin.-->
+      Créé avec <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0.7.
+    </div>
+  </body>
+</html>

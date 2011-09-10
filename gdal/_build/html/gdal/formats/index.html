@@ -1,0 +1,1199 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF8" />
+    
+    <title>Formats &mdash; GDAL v1.9.0 documentation</title>
+    <link rel="stylesheet" href="../../_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '1.9.0',
+        COLLAPSE_MODINDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../_static/translations.js"></script>
+    <link rel="top" title="GDAL v1.9.0 documentation" href="../../index.html" />
+    <link rel="up" title="GDAL" href="../index.html" />
+    <link rel="next" title="AIRSAR – AIRSAR Polarimetric Format" href="airsar.html" />
+    <link rel="prev" title="gdal-config" href="../gdal-config.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="airsar.html" title="AIRSAR – AIRSAR Polarimetric Format"
+             accesskey="N">suivant</a></li>
+        <li class="right" >
+          <a href="../gdal-config.html" title="gdal-config"
+             accesskey="P">précédent</a> |</li>
+        <li><a href="../../index.html">GDAL v1.9.0 documentation</a> &raquo;</li>
+          <li><a href="../index.html" accesskey="U">GDAL</a> &raquo;</li> 
+      </ul>
+    </div>
+
+
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <h4>Sujet précédent</h4>
+            <p class="topless"><a href="../gdal-config.html"
+                                  title="Chapitre précédent">gdal-config</a></p>
+            <h4>Sujet suivant</h4>
+            <p class="topless"><a href="airsar.html"
+                                  title="Chapitre suivant">AIRSAR &#8211; AIRSAR Polarimetric Format</a></p>
+            <h3>Cette page</h3>
+            <ul class="this-page-menu">
+              <li><a href="../../_sources/gdal/formats/index.txt"
+                     rel="nofollow">Montrer la source</a></li>
+            </ul>
+          <div id="searchbox" style="display: none">
+            <h3>Recherche rapide</h3>
+              <form class="search" action="../../search.html" method="get">
+                <input type="text" name="q" size="18" />
+                <input type="submit" value="Go" />
+                <input type="hidden" name="check_keywords" value="yes" />
+                <input type="hidden" name="area" value="default" />
+              </form>
+              <p class="searchtip" style="font-size: 90%">
+              Enter search terms or a module, class or function name.
+              </p>
+          </div>
+          <script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="formats">
+<span id="gdal-gdal-formats-index"></span><h1>Formats<a class="headerlink" href="#formats" title="Lien permanent vers ce titre">¶</a></h1>
+<table border="1" class="docutils">
+<colgroup>
+<col width="33%" />
+<col width="11%" />
+<col width="5%" />
+<col width="11%" />
+<col width="22%" />
+<col width="18%" />
+</colgroup>
+<thead valign="bottom">
+<tr><th class="head" rowspan="2">Long Format Name</th>
+<th class="head" rowspan="2">Code</th>
+<th class="head" rowspan="2">Création</th>
+<th class="head" rowspan="2">Géoréférencement</th>
+<th class="head" rowspan="2">Taille maximale du fichier <a class="footnote-reference" href="#id3" id="id1">[1]</a></th>
+<th class="head" rowspan="2">Compilé par défaut</th>
+</tr>
+<tr></tr>
+</thead>
+<tbody valign="top">
+<tr><td rowspan="2"><a class="reference internal" href="divers_formats.html#gdal-gdal-formats-divers-formats-aaigrid"><em>AAIGrid &#8211; Arc/Info ASCII Grid</em></a></td>
+<td rowspan="2">AAIGrid</td>
+<td rowspan="2">Oui</td>
+<td rowspan="2">Oui</td>
+<td rowspan="2">2 Go</td>
+<td rowspan="2">Oui</td>
+</tr>
+<tr></tr>
+<tr><td rowspan="2"><a class="reference internal" href="divers_formats.html#gdal-gdal-formats-divers-formats-ace2"><em>ACE2 &#8211; ACE2</em></a></td>
+<td rowspan="2">ACE2</td>
+<td rowspan="2">Non</td>
+<td rowspan="2">Oui</td>
+<td rowspan="2">&#8211;</td>
+<td rowspan="2">Oui</td>
+</tr>
+<tr></tr>
+<tr><td rowspan="2"><a class="reference internal" href="divers_formats.html#gdal-gdal-formats-divers-formats-adrgarc"><em>ADRG/ARC Digitized Raster Graphics (.gen/.thf)</em></a></td>
+<td rowspan="2">ADRG</td>
+<td rowspan="2">Oui</td>
+<td rowspan="2">Oui</td>
+<td rowspan="2">&#8211;</td>
+<td rowspan="2">Oui</td>
+</tr>
+<tr></tr>
+<tr><td rowspan="2"><a class="reference internal" href="divers_formats.html#gdal-gdal-formats-divers-formats-aig"><em>AIG &#8211; Arc/Info Binary Grid</em></a></td>
+<td rowspan="2">AIG</td>
+<td rowspan="2">Non</td>
+<td rowspan="2">Oui</td>
+<td rowspan="2">&#8211;</td>
+<td rowspan="2">Oui</td>
+</tr>
+<tr></tr>
+<tr><td rowspan="2"><a class="reference internal" href="airsar.html#gdal-gdal-formats-airsar"><em>AIRSAR &#8211; AIRSAR Polarimetric Format</em></a></td>
+<td rowspan="2">AIRSAR</td>
+<td rowspan="2">Non</td>
+<td rowspan="2">Non</td>
+<td rowspan="2">&#8211;</td>
+<td rowspan="2">Oui</td>
+</tr>
+<tr></tr>
+<tr><td rowspan="2"><a class="reference internal" href="blx.html#gdal-gdal-formats-blx"><em>BLX &#8211; Magellan BLX Topo File Format</em></a></td>
+<td rowspan="2">BLX</td>
+<td rowspan="2">Oui</td>
+<td rowspan="2">Oui</td>
+<td rowspan="2">Oui</td>
+<td rowspan="2">Oui</td>
+</tr>
+<tr></tr>
+<tr><td rowspan="2"><a class="reference internal" href="bag.html#gdal-gdal-formats-bag"><em>BAG &#8212; Bathymetry Attributed Grid</em></a></td>
+<td rowspan="2">BAG</td>
+<td rowspan="2">Non</td>
+<td rowspan="2">Oui</td>
+<td rowspan="2">2 Go</td>
+<td rowspan="2">Non, nécessite libhdf5</td>
+</tr>
+<tr></tr>
+<tr><td rowspan="2"><a class="reference internal" href="bmp.html#gdal-gdal-formats-bmp"><em>BMP &#8212; Microsoft Windows Device Independent Bitmap</em></a></td>
+<td rowspan="2">BMP</td>
+<td rowspan="2">Oui</td>
+<td rowspan="2">Oui</td>
+<td rowspan="2">4 Go</td>
+<td rowspan="2">Oui</td>
+</tr>
+<tr></tr>
+<tr><td rowspan="2"><a class="reference internal" href="divers_formats.html#gdal-gdal-formats-divers-formats-bsb"><em>Format BSB &#8211; Maptech/NOAA BSB Nautical Chart</em></a></td>
+<td rowspan="2">BSB</td>
+<td rowspan="2">Non</td>
+<td rowspan="2">Oui</td>
+<td rowspan="2">&#8211;</td>
+<td rowspan="2">Oui, peut être désactivé</td>
+</tr>
+<tr></tr>
+<tr><td rowspan="2"><a class="reference internal" href="divers_formats.html#gdal-gdal-formats-divers-formats-bt"><em>Format BT &#8211; VTP .bt Binary Terrain</em></a></td>
+<td rowspan="2">BT</td>
+<td rowspan="2">Oui</td>
+<td rowspan="2">Oui</td>
+<td rowspan="2">&#8211;</td>
+<td rowspan="2">Oui</td>
+</tr>
+<tr></tr>
+<tr><td rowspan="2"><a class="reference internal" href="divers_formats.html#gdal-gdal-formats-divers-formats-ceos"><em>CEOS &#8211; CEOS Image</em></a></td>
+<td rowspan="2">CEOS</td>
+<td rowspan="2">Non</td>
+<td rowspan="2">Non</td>
+<td rowspan="2">&#8211;</td>
+<td rowspan="2">Oui</td>
+</tr>
+<tr></tr>
+<tr><td rowspan="2">COASP</td>
+<td rowspan="2">COASP</td>
+<td rowspan="2">Non</td>
+<td rowspan="2">Non</td>
+<td rowspan="2">&#8211;</td>
+<td rowspan="2">Oui</td>
+</tr>
+<tr></tr>
+<tr><td rowspan="2"><a class="reference internal" href="cosar.html#gdal-gdal-formats-cosar"><em>COSAR &#8211; TerraSAR-X Complex SAR Data Product</em></a></td>
+<td rowspan="2">COSAR</td>
+<td rowspan="2">Non</td>
+<td rowspan="2">Non</td>
+<td rowspan="2">&#8211;</td>
+<td rowspan="2">Oui</td>
+</tr>
+<tr></tr>
+<tr><td rowspan="2">CPG</td>
+<td rowspan="2">CPG</td>
+<td rowspan="2">Non</td>
+<td rowspan="2">Oui</td>
+<td rowspan="2">&#8211;</td>
+<td rowspan="2">Oui</td>
+</tr>
+<tr></tr>
+<tr><td rowspan="2"><a class="reference internal" href="divers_formats.html#gdal-gdal-formats-divers-formats-ctg"><em>CTG &#8211; USGS LULC Composite Theme Grid</em></a></td>
+<td rowspan="2">CTG</td>
+<td rowspan="2">Non</td>
+<td rowspan="2">Oui</td>
+<td rowspan="2">&#8211;</td>
+<td rowspan="2">Oui</td>
+</tr>
+<tr></tr>
+<tr><td rowspan="2"><a class="reference internal" href="divers_formats.html#gdal-gdal-formats-divers-formats-dimap"><em>DIMAP &#8211; Spot DIMAP</em></a></td>
+<td rowspan="2">DIMAP</td>
+<td rowspan="2">Non</td>
+<td rowspan="2">Oui</td>
+<td rowspan="2">&#8211;</td>
+<td rowspan="2">Oui</td>
+</tr>
+<tr></tr>
+<tr><td rowspan="2">DIPEx</td>
+<td rowspan="2">DIPEx</td>
+<td rowspan="2">Non</td>
+<td rowspan="2">Oui</td>
+<td rowspan="2">&#8211;</td>
+<td rowspan="2">Oui</td>
+</tr>
+<tr></tr>
+<tr><td rowspan="2"><a class="reference internal" href="dods.html#gdal-gdal-formats-dods"><em>DODS &#8211; OPeNDAP Grid Client</em></a></td>
+<td rowspan="2">DODS</td>
+<td rowspan="2">Non</td>
+<td rowspan="2">Oui</td>
+<td rowspan="2">&#8211;</td>
+<td rowspan="2">Non, nécessite libdap</td>
+</tr>
+<tr></tr>
+<tr><td rowspan="2"><a class="reference internal" href="divers_formats.html#gdal-gdal-formats-divers-formats-doq1"><em>DOQ1 &#8211; Première génération USGS DOQ</em></a></td>
+<td rowspan="2">DOQ1</td>
+<td rowspan="2">Non</td>
+<td rowspan="2">Oui</td>
+<td rowspan="2">&#8211;</td>
+<td rowspan="2">Oui</td>
+</tr>
+<tr></tr>
+<tr><td rowspan="2"><a class="reference internal" href="divers_formats.html#gdal-gdal-formats-divers-formats-doq2"><em>DOQ2 – Nouveau USGS DOQ étiqueté</em></a></td>
+<td rowspan="2">DOQ2</td>
+<td rowspan="2">Non</td>
+<td rowspan="2">Oui</td>
+<td rowspan="2">&#8211;</td>
+<td rowspan="2">Oui</td>
+</tr>
+<tr></tr>
+<tr><td rowspan="2"><a class="reference internal" href="dted.html#gdal-gdal-formats-dted"><em>DTED &#8211; Military Elevation Data</em></a></td>
+<td rowspan="2">DTED</td>
+<td rowspan="2">Non</td>
+<td rowspan="2">Oui</td>
+<td rowspan="2">&#8211;</td>
+<td rowspan="2">Oui</td>
+</tr>
+<tr></tr>
+<tr><td rowspan="2"><a class="reference internal" href="divers_formats.html#gdal-gdal-formats-divers-formats-e00grid"><em>E00GRID &#8211; Arc/Info Export E00 GRID</em></a></td>
+<td rowspan="2">E00GRID</td>
+<td rowspan="2">Non</td>
+<td rowspan="2">Oui</td>
+<td rowspan="2">&#8211;</td>
+<td rowspan="2">Oui</td>
+</tr>
+<tr></tr>
+<tr><td rowspan="2"><a class="reference internal" href="divers_formats.html#gdal-gdal-formats-divers-formats-ecrgtoc"><em>ECRG Table Of Contents (TOC.xml)</em></a></td>
+<td rowspan="2">ECRGTOC</td>
+<td rowspan="2">Non</td>
+<td rowspan="2">Oui</td>
+<td rowspan="2">&#8211;</td>
+<td rowspan="2">Oui</td>
+</tr>
+<tr></tr>
+<tr><td rowspan="2"><a class="reference internal" href="ecw.html#gdal-gdal-formats-ecw"><em>Le format ECW - ERDAS Compress Wavelets</em></a></td>
+<td rowspan="2">ECW</td>
+<td rowspan="2">Oui</td>
+<td rowspan="2">Oui</td>
+<td rowspan="2">&#8211;</td>
+<td rowspan="2">Non, nécessite le SDK ECW</td>
+</tr>
+<tr></tr>
+<tr><td rowspan="2"><a class="reference internal" href="divers_formats.html#gdal-gdal-formats-divers-formats-ehdr"><em>EHdr &#8211; ESRI .hdr Labelled</em></a></td>
+<td rowspan="2">EHdr</td>
+<td rowspan="2">Oui</td>
+<td rowspan="2">Oui</td>
+<td rowspan="2">Pas de limites</td>
+<td rowspan="2">Oui</td>
+</tr>
+<tr></tr>
+<tr><td rowspan="2">Erdas Imagine Raw</td>
+<td rowspan="2">EIR</td>
+<td rowspan="2">Non</td>
+<td rowspan="2">Oui</td>
+<td rowspan="2">&#8211;</td>
+<td rowspan="2">Oui</td>
+</tr>
+<tr></tr>
+<tr><td rowspan="2"><a class="reference internal" href="elas.html#gdal-gdal-formats-elas"><em>ELAS - Earth Resources Laboratory Applications Software</em></a></td>
+<td rowspan="2">ELAS</td>
+<td rowspan="2">Oui</td>
+<td rowspan="2">Oui</td>
+<td rowspan="2">&#8211;</td>
+<td rowspan="2">Oui</td>
+</tr>
+<tr></tr>
+<tr><td rowspan="2"><a class="reference internal" href="divers_formats.html#gdal-gdal-formats-divers-formats-envi"><em>ENVI - ENVI .hdr Labelled Raster</em></a></td>
+<td rowspan="2">ENVI</td>
+<td rowspan="2">Oui</td>
+<td rowspan="2">Oui</td>
+<td rowspan="2">Pas de limites</td>
+<td rowspan="2">Oui</td>
+</tr>
+<tr></tr>
+<tr><td rowspan="3"><a class="reference internal" href="epsilon.html#gdal-gdal-formats-epsilon"><em>Epsilon - images compressé par ondelette</em></a></td>
+<td rowspan="3">EPSILON</td>
+<td rowspan="3">Oui</td>
+<td rowspan="3">Non</td>
+<td rowspan="3">&#8211;</td>
+<td rowspan="3">Non, nécessite la
+bibliothèque EPSILON</td>
+</tr>
+<tr></tr>
+<tr></tr>
+<tr><td rowspan="2"><a class="reference internal" href="ers.html#gdal-gdal-formats-ers"><em>ERS &#8211; ERMapper .ERS</em></a></td>
+<td rowspan="2">ERS</td>
+<td rowspan="2">Oui</td>
+<td rowspan="2">Oui</td>
+<td rowspan="2">&nbsp;</td>
+<td rowspan="2">Oui</td>
+</tr>
+<tr></tr>
+<tr><td rowspan="2"><a class="reference internal" href="divers_formats.html#gdal-gdal-formats-divers-formats-envisat"><em>Envisat &#8211; Envisat Image Product</em></a></td>
+<td rowspan="2">Envisat</td>
+<td rowspan="2">Non</td>
+<td rowspan="2">Non</td>
+<td rowspan="2">&#8211;</td>
+<td rowspan="2">Oui</td>
+</tr>
+<tr></tr>
+<tr><td rowspan="2"><a class="reference internal" href="fast.html#gdal-gdal-formats-fast"><em>FAST &#8211; EOSAT FAST Format</em></a></td>
+<td rowspan="2">FAST</td>
+<td rowspan="2">Non</td>
+<td rowspan="2">Oui</td>
+<td rowspan="2">&#8211;</td>
+<td rowspan="2">Oui</td>
+</tr>
+<tr></tr>
+<tr><td rowspan="2">FIT</td>
+<td rowspan="2">FIT</td>
+<td rowspan="2">Oui</td>
+<td rowspan="2">Non</td>
+<td rowspan="2">&#8211;</td>
+<td rowspan="2">Oui</td>
+</tr>
+<tr></tr>
+<tr><td rowspan="2"><a class="reference internal" href="divers_formats.html#gdal-gdal-formats-divers-formats-fits"><em>FITS &#8211; Flexible Image Transport System</em></a></td>
+<td rowspan="2">FITS</td>
+<td rowspan="2">Oui</td>
+<td rowspan="2">Non</td>
+<td rowspan="2">&#8211;</td>
+<td rowspan="2">Non, nécessite libcfitsio</td>
+</tr>
+<tr></tr>
+<tr><td rowspan="2">Fuji BAS Scanner Image</td>
+<td rowspan="2">FujiBAS</td>
+<td rowspan="2">Non</td>
+<td rowspan="2">Non</td>
+<td rowspan="2">&#8211;</td>
+<td rowspan="2">Oui</td>
+</tr>
+<tr></tr>
+<tr><td rowspan="2"><a class="reference internal" href="divers_formats.html#gdal-gdal-formats-divers-formats-hdr"><em>GenBin - Binaire Générique (étiqueté .hdr)</em></a></td>
+<td rowspan="2">GENBIN</td>
+<td rowspan="2">Non</td>
+<td rowspan="2">Non</td>
+<td rowspan="2">&#8211;</td>
+<td rowspan="2">Oui</td>
+</tr>
+<tr></tr>
+<tr><td rowspan="4"><a class="reference internal" href="georaster.html#gdal-gdal-formats-georaster"><em>GeoRaster d&#8217;Oracle Spatial</em></a></td>
+<td rowspan="4">GEORASTER</td>
+<td rowspan="4">Oui</td>
+<td rowspan="4">Oui</td>
+<td rowspan="4">&#8211;</td>
+<td rowspan="4">Non, nécessite les
+bibliothèques clientes
+d&#8217;Oracle</td>
+</tr>
+<tr></tr>
+<tr></tr>
+<tr></tr>
+<tr><td rowspan="2"><a class="reference internal" href="divers_formats.html#gdal-gdal-formats-divers-formats-gff"><em>GFF - Sandia National Laboratories GSAT File Format</em></a></td>
+<td rowspan="2">GFF</td>
+<td rowspan="2">Non</td>
+<td rowspan="2">Non</td>
+<td rowspan="2">&#8211;</td>
+<td rowspan="2">Oui</td>
+</tr>
+<tr></tr>
+<tr><td rowspan="3"><a class="reference internal" href="gif.html#gdal-gdal-formats-gif"><em>GIF &#8211; Graphics Interchange Format</em></a></td>
+<td rowspan="3">GIF</td>
+<td rowspan="3">Oui</td>
+<td rowspan="3">Non</td>
+<td rowspan="3">2 Go</td>
+<td rowspan="3">Oui (fourniture de la
+bibliothèque interne GIF)</td>
+</tr>
+<tr></tr>
+<tr></tr>
+<tr><td rowspan="2"><a class="reference internal" href="grib.html#gdal-gdal-formats-grib"><em>GRIB &#8211; WMO General Regularly-distributed Information sous la forme Binaire</em></a></td>
+<td rowspan="2">GRIB</td>
+<td rowspan="2">Non</td>
+<td rowspan="2">Oui</td>
+<td rowspan="2">2 Go</td>
+<td rowspan="2">Oui, peut être désactivé</td>
+</tr>
+<tr></tr>
+<tr><td rowspan="2"><a class="reference internal" href="divers_formats.html#gdal-gdal-formats-divers-formats-gmt"><em>GMT &#8211; GMT Compatible netCDF</em></a></td>
+<td rowspan="2">GMT</td>
+<td rowspan="2">Non</td>
+<td rowspan="2">Oui</td>
+<td rowspan="2">2 Go</td>
+<td rowspan="2">Non, nécessite libnetcdf</td>
+</tr>
+<tr></tr>
+<tr><td rowspan="2"><a class="reference internal" href="grass.html#gdal-gdal-formats-grass"><em>Le format GRASS</em></a></td>
+<td rowspan="2">GRASS</td>
+<td rowspan="2">Non</td>
+<td rowspan="2">Oui</td>
+<td rowspan="2">&#8211;</td>
+<td rowspan="2">Non, nécessite libgrass</td>
+</tr>
+<tr></tr>
+<tr><td rowspan="2"><a class="reference internal" href="divers_formats.html#gdal-gdal-formats-divers-formats-grssgrd"><em>GRASSASCIIGrid &#8211; GRASS ASCII Grid</em></a></td>
+<td rowspan="2">GRASSASCIIGrid</td>
+<td rowspan="2">Non</td>
+<td rowspan="2">Oui</td>
+<td rowspan="2">&#8211;</td>
+<td rowspan="2">Oui</td>
+</tr>
+<tr></tr>
+<tr><td rowspan="2"><a class="reference internal" href="divers_formats.html#gdal-gdal-formats-divers-formats-gsag"><em>GSAG &#8211; Golden Software ASCII Grid File Format</em></a></td>
+<td rowspan="2">GSAG</td>
+<td rowspan="2">Oui</td>
+<td rowspan="2">Non</td>
+<td rowspan="2">&#8211;</td>
+<td rowspan="2">Oui</td>
+</tr>
+<tr></tr>
+<tr><td rowspan="3"><a class="reference internal" href="divers_formats.html#gdal-gdal-formats-divers-formats-gsbg"><em>GSBG &#8211; Golden Software Binary Grid File Format</em></a></td>
+<td rowspan="3">GSBG</td>
+<td rowspan="3">Oui</td>
+<td rowspan="3">Non</td>
+<td rowspan="3">4GiB (32767x32767 de 4 bytes
+chacun + 56 byte header)</td>
+<td rowspan="3">Oui</td>
+</tr>
+<tr></tr>
+<tr></tr>
+<tr><td rowspan="2"><a class="reference internal" href="divers_formats.html#gdal-gdal-formats-divers-formats-gs7bg"><em>GS7BG &#8211; Golden Software Surfer 7 Binary Grid File Format</em></a></td>
+<td rowspan="2">GS7BG</td>
+<td rowspan="2">Non</td>
+<td rowspan="2">Non</td>
+<td rowspan="2">4 Go</td>
+<td rowspan="2">Oui</td>
+</tr>
+<tr></tr>
+<tr><td rowspan="2">GSC Geogrid</td>
+<td rowspan="2">GSC</td>
+<td rowspan="2">Oui</td>
+<td rowspan="2">Non</td>
+<td rowspan="2">&#8211;</td>
+<td rowspan="2">Oui</td>
+</tr>
+<tr></tr>
+<tr><td rowspan="3"><a class="reference internal" href="gtiff.html#gdal-gdal-formats-gtiff"><em>Le format Gtiff</em></a></td>
+<td rowspan="3">GTiff</td>
+<td rowspan="3">Oui</td>
+<td rowspan="3">Oui</td>
+<td rowspan="3">4 Go pour le TIFF &#8216;classique&#8217;/
+Pas de limites pour le BigTIFF</td>
+<td rowspan="3">Oui (libtiff et libgeotiff
+interne fournie)</td>
+</tr>
+<tr></tr>
+<tr></tr>
+<tr><td rowspan="2">NOAA .gtx vertical datum shift</td>
+<td rowspan="2">GTX</td>
+<td rowspan="2">Oui</td>
+<td rowspan="2">Oui</td>
+<td rowspan="2">&nbsp;</td>
+<td rowspan="2">Oui</td>
+</tr>
+<tr></tr>
+<tr><td rowspan="2"><a class="reference internal" href="divers_formats.html#gdal-gdal-formats-divers-formats-gxf"><em>GXF &#8211; Grid eXchange File</em></a></td>
+<td rowspan="2">GXF</td>
+<td rowspan="2">Non</td>
+<td rowspan="2">Oui</td>
+<td rowspan="2">4 Go</td>
+<td rowspan="2">Oui</td>
+</tr>
+<tr></tr>
+<tr><td rowspan="2"><a class="reference internal" href="hdf4.html#gdal-gdal-formats-hdf4"><em>HDF4 &#8212; Hierarchical Data Format Version 4 (HDF4)</em></a></td>
+<td rowspan="2">HDF4</td>
+<td rowspan="2">Oui</td>
+<td rowspan="2">Oui</td>
+<td rowspan="2">2 Go</td>
+<td rowspan="2">Non, nécessite libdf</td>
+</tr>
+<tr></tr>
+<tr><td rowspan="2"><a class="reference internal" href="hdf5.html#gdal-gdal-formats-hdf5"><em>HDF5 &#8212; Hierarchical Data Format Release 5 (HDF5)</em></a></td>
+<td rowspan="2">HDF5</td>
+<td rowspan="2">Non</td>
+<td rowspan="2">Oui</td>
+<td rowspan="2">2 Go</td>
+<td rowspan="2">Non, nécessite libhdf5</td>
+</tr>
+<tr></tr>
+<tr><td rowspan="2"><a class="reference internal" href="hf2.html#gdal-gdal-formats-hf2"><em>HF2 &#8211; HF2/HFZ heightfield raster</em></a></td>
+<td rowspan="2">HF2</td>
+<td rowspan="2">Oui</td>
+<td rowspan="2">Oui</td>
+<td rowspan="2">&#8211;</td>
+<td rowspan="2">Oui</td>
+</tr>
+<tr></tr>
+<tr><td rowspan="2"><a class="reference internal" href="hfa.html#gdal-gdal-formats-hfa"><em>HFA &#8211; Erdas Imagine .img</em></a></td>
+<td rowspan="2">HFA</td>
+<td rowspan="2">Oui</td>
+<td rowspan="2">Oui</td>
+<td rowspan="2">Pas de limites <a class="footnote-reference" href="#id4" id="id2">[2]</a></td>
+<td rowspan="2">Oui</td>
+</tr>
+<tr></tr>
+<tr><td rowspan="2"><a class="reference internal" href="divers_formats.html#gdal-gdal-formats-divers-formats-ida"><em>IDA &#8211; Analyse et affichage d&#8217;image</em></a></td>
+<td rowspan="2">IDA</td>
+<td rowspan="2">Oui</td>
+<td rowspan="2">Oui</td>
+<td rowspan="2">2 Go</td>
+<td rowspan="2">Oui</td>
+</tr>
+<tr></tr>
+<tr><td rowspan="2"><a class="reference internal" href="ilwis.html#gdal-gdal-formats-ilwis"><em>ILWIS &#8211; Raster Map</em></a></td>
+<td rowspan="2">ILWIS</td>
+<td rowspan="2">Oui</td>
+<td rowspan="2">Oui</td>
+<td rowspan="2">&#8211;</td>
+<td rowspan="2">Oui</td>
+</tr>
+<tr></tr>
+<tr><td rowspan="2"><a class="reference internal" href="ingr.html#gdal-gdal-formats-ingr"><em>INGR &#8212; Intergraph Raster Format</em></a></td>
+<td rowspan="2">INGR</td>
+<td rowspan="2">Oui</td>
+<td rowspan="2">Oui</td>
+<td rowspan="2">2 Go</td>
+<td rowspan="2">Oui</td>
+</tr>
+<tr></tr>
+<tr><td rowspan="2"><a class="reference internal" href="isis2.html#gdal-gdal-formats-isis2"><em>ISIS2 &#8211; Cube ISIS de l&#8217;astrogéologie de l&#8217;USGS (Version 2)</em></a></td>
+<td rowspan="2">ISIS2</td>
+<td rowspan="2">Oui</td>
+<td rowspan="2">Oui</td>
+<td rowspan="2">&#8211;</td>
+<td rowspan="2">Oui</td>
+</tr>
+<tr></tr>
+<tr><td rowspan="2"><a class="reference internal" href="isis3.html#gdal-gdal-formats-isis3"><em>ISIS3 &#8211; USGS Astrogeology ISIS Cube (Version 3)</em></a></td>
+<td rowspan="2">ISIS3</td>
+<td rowspan="2">Non</td>
+<td rowspan="2">Oui</td>
+<td rowspan="2">&#8211;</td>
+<td rowspan="2">Oui</td>
+</tr>
+<tr></tr>
+<tr><td rowspan="2"><a class="reference internal" href="jaxapalsar.html#gdal-gdal-formats-jaxapalsar"><em>JAXA PALSAR Processed Products</em></a></td>
+<td rowspan="2">JAXAPALSAR</td>
+<td rowspan="2">Non</td>
+<td rowspan="2">Non</td>
+<td rowspan="2">&#8211;</td>
+<td rowspan="2">Oui</td>
+</tr>
+<tr></tr>
+<tr><td rowspan="2"><a class="reference internal" href="divers_formats.html#gdal-gdal-formats-divers-formats-jdem"><em>JDEM &#8211; Japanese DEM (.mem)</em></a></td>
+<td rowspan="2">JDEM</td>
+<td rowspan="2">Non</td>
+<td rowspan="2">Oui</td>
+<td rowspan="2">&#8211;</td>
+<td rowspan="2">Oui</td>
+</tr>
+<tr></tr>
+<tr><td rowspan="3"><a class="reference internal" href="jpeg.html#gdal-gdal-formats-jpeg"><em>JPEG &#8211; JPEG JFIF File Format</em></a></td>
+<td rowspan="3">JPEG</td>
+<td rowspan="3">Oui</td>
+<td rowspan="3">Oui</td>
+<td rowspan="3">4 Go (dimensions maximales
+65500 × 65500)</td>
+<td rowspan="3">Oui (libjpeg interne
+fournie)</td>
+</tr>
+<tr></tr>
+<tr></tr>
+<tr><td rowspan="3"><a class="reference internal" href="jpegls.html#gdal-gdal-formats-jpegls"><em>JPEGLS</em></a></td>
+<td rowspan="3">JPEGLS</td>
+<td rowspan="3">Oui</td>
+<td rowspan="3">Non</td>
+<td rowspan="3">&#8211;</td>
+<td rowspan="3">Non, nécessite la
+bibliothèque CharLS</td>
+</tr>
+<tr></tr>
+<tr></tr>
+<tr><td rowspan="2"><a class="reference internal" href="jpeg2000.html#gdal-gdal-formats-jpeg2000"><em>JPEG2000 &#8212; Implémentation du format JPEG-2000 partie 1</em></a></td>
+<td rowspan="2">JPEG2000</td>
+<td rowspan="2">Oui</td>
+<td rowspan="2">Oui</td>
+<td rowspan="2">2 Go</td>
+<td rowspan="2">Non, nécessite libjasper</td>
+</tr>
+<tr></tr>
+<tr><td rowspan="2"><a class="reference internal" href="jp2ecw.html#gdal-gdal-formats-jp2ecw"><em>JP2ECW &#8211; ERMapper JPEG2000 (.jp2)</em></a></td>
+<td rowspan="2">JP2ECW</td>
+<td rowspan="2">Oui</td>
+<td rowspan="2">Oui</td>
+<td rowspan="2">500 Mo</td>
+<td rowspan="2">Non, nécessite le SDK ECW</td>
+</tr>
+<tr></tr>
+<tr><td rowspan="3"><a class="reference internal" href="jp2kak.html#gdal-gdal-formats-jp2kak"><em>JP2KAK &#8211; JPEG-2000 (basé sur Kakadu)</em></a></td>
+<td rowspan="3">JP2KAK</td>
+<td rowspan="3">Oui</td>
+<td rowspan="3">Oui</td>
+<td rowspan="3">Pas de limites</td>
+<td rowspan="3">Non, nécessite la
+bibliothèque Kakadu</td>
+</tr>
+<tr></tr>
+<tr></tr>
+<tr><td rowspan="2"><a class="reference internal" href="jp2mrsid.html#gdal-gdal-formats-jp2mrsid"><em>JP2MrSID &#8212; JPEG2000 via MrSID SDK</em></a></td>
+<td rowspan="2">JP2MrSID</td>
+<td rowspan="2">Oui</td>
+<td rowspan="2">Oui</td>
+<td rowspan="2">&#8211;</td>
+<td rowspan="2">Non, nécessite le SDK MrSID</td>
+</tr>
+<tr></tr>
+<tr><td rowspan="3"><a class="reference internal" href="jp2openjpeg.html#gdal-gdal-formats-jp2openjpeg"><em>JP2OpenJPEG &#8212; pilote JPEG2000 basé sur la bibliothèque OpenJPEG</em></a></td>
+<td rowspan="3">JP2OpenJPEG</td>
+<td rowspan="3">Oui</td>
+<td rowspan="3">Oui</td>
+<td rowspan="3">&nbsp;</td>
+<td rowspan="3">Non, nécessite la
+bibliothèque OpenJPEG</td>
+</tr>
+<tr></tr>
+<tr></tr>
+<tr><td rowspan="3"><a class="reference internal" href="jpipkak.html#gdal-gdal-formats-jpipkak"><em>JPIPKAK - JPIP Streaming</em></a></td>
+<td rowspan="3">JPIPKAK</td>
+<td rowspan="3">Non</td>
+<td rowspan="3">Oui</td>
+<td rowspan="3">&nbsp;</td>
+<td rowspan="3">Non, nécessite la
+bibliothèque Kakadu</td>
+</tr>
+<tr></tr>
+<tr></tr>
+<tr><td rowspan="2">KMLSUPEROVERLAY</td>
+<td rowspan="2">KMLSUPEROVERLAY</td>
+<td rowspan="2">Oui</td>
+<td rowspan="2">Oui</td>
+<td rowspan="2">&#8211;</td>
+<td rowspan="2">Oui</td>
+</tr>
+<tr></tr>
+<tr><td rowspan="2"><a class="reference internal" href="l1b.html#gdal-gdal-formats-l1b"><em>L1B &#8211; NOAA Polar Orbiter Level 1b Data Set (AVHRR)</em></a></td>
+<td rowspan="2">L1B</td>
+<td rowspan="2">Non</td>
+<td rowspan="2">Oui</td>
+<td rowspan="2">&#8211;</td>
+<td rowspan="2">Oui</td>
+</tr>
+<tr></tr>
+<tr><td rowspan="2"><a class="reference internal" href="divers_formats.html#gdal-gdal-formats-divers-formats-lan"><em>LAN &#8211; Erdas 7.x .LAN et .GIS</em></a></td>
+<td rowspan="2">LAN</td>
+<td rowspan="2">Non</td>
+<td rowspan="2">Oui</td>
+<td rowspan="2">2 Go</td>
+<td rowspan="2">Oui</td>
+</tr>
+<tr></tr>
+<tr><td rowspan="2"><a class="reference internal" href="lcp.html#gdal-gdal-formats-lcp"><em>Pilote GDAL pour le format FARSITE v.4 LCP</em></a></td>
+<td rowspan="2">LCP</td>
+<td rowspan="2">Non</td>
+<td rowspan="2">Oui</td>
+<td rowspan="2">Pas de limites</td>
+<td rowspan="2">Oui</td>
+</tr>
+<tr></tr>
+<tr><td rowspan="2"><a class="reference internal" href="leveller.html#gdal-gdal-formats-leveller"><em>Leveller &#8212; Daylon Leveller Heightfield</em></a></td>
+<td rowspan="2">Leveller</td>
+<td rowspan="2">Oui</td>
+<td rowspan="2">Non</td>
+<td rowspan="2">&#8211;</td>
+<td rowspan="2">Oui</td>
+</tr>
+<tr></tr>
+<tr><td rowspan="2">NADCON .los/.las Datum Grid Shift</td>
+<td rowspan="2">LOSLAS</td>
+<td rowspan="2">Non</td>
+<td rowspan="2">Oui</td>
+<td rowspan="2">&nbsp;</td>
+<td rowspan="2">Oui</td>
+</tr>
+<tr></tr>
+<tr><td rowspan="2"><a class="reference internal" href="mem.html#gdal-gdal-formats-mem"><em>MEM &#8211; In Memory Raster</em></a></td>
+<td rowspan="2">MEM</td>
+<td rowspan="2">Oui</td>
+<td rowspan="2">Oui</td>
+<td rowspan="2">2 Go</td>
+<td rowspan="2">Oui</td>
+</tr>
+<tr></tr>
+<tr><td rowspan="2"><a class="reference internal" href="divers_formats.html#gdal-gdal-formats-divers-formats-mff"><em>MFF &#8211; Vexcel MFF Raster</em></a></td>
+<td rowspan="2">MFF</td>
+<td rowspan="2">Oui</td>
+<td rowspan="2">Oui</td>
+<td rowspan="2">Pas de limites</td>
+<td rowspan="2">Oui</td>
+</tr>
+<tr></tr>
+<tr><td rowspan="2"><a class="reference internal" href="mff2.html#gdal-gdal-formats-mff2"><em>MFF2 &#8211; Vexcel MFF2 Image</em></a></td>
+<td rowspan="2">HKV</td>
+<td rowspan="2">Oui</td>
+<td rowspan="2">Oui</td>
+<td rowspan="2">Pas de limites</td>
+<td rowspan="2">Oui</td>
+</tr>
+<tr></tr>
+<tr><td rowspan="2"><a class="reference internal" href="mrsid_lidar.html#gdal-gdal-formats-mrsid-lidar"><em>Compression Lidar de MrSID/MG4 / Fichiers view de Cloud ponctuel</em></a></td>
+<td rowspan="2">MG4Lidar</td>
+<td rowspan="2">Non</td>
+<td rowspan="2">Oui</td>
+<td rowspan="2">&#8211;</td>
+<td rowspan="2">Non, nécessite le SDK LIDAR</td>
+</tr>
+<tr></tr>
+<tr><td rowspan="3"><a class="reference internal" href="mrsid.html#gdal-gdal-formats-mrsid"><em>MrSID &#8212; Multi-resolution Seamless Image Database</em></a></td>
+<td rowspan="3">MrSID</td>
+<td rowspan="3">Non</td>
+<td rowspan="3">Oui</td>
+<td rowspan="3">&#8211;</td>
+<td rowspan="3">Non, nécessite le SDK
+MrSID</td>
+</tr>
+<tr></tr>
+<tr></tr>
+<tr><td rowspan="3"><a class="reference internal" href="msg.html#gdal-gdal-formats-msg"><em>MSG &#8211; Météosat Seconde Génération</em></a></td>
+<td rowspan="3">MSG</td>
+<td rowspan="3">Non</td>
+<td rowspan="3">Oui</td>
+<td rowspan="3">&#8211;</td>
+<td rowspan="3">Non, nécessite la
+bibliothèque msg</td>
+</tr>
+<tr></tr>
+<tr></tr>
+<tr><td rowspan="2"><a class="reference internal" href="msgn.html#gdal-gdal-formats-msgn"><em>MSGN &#8211; Meteosat Second Generation (MSG) Format Natif d&#8217;Archive (.nat)</em></a></td>
+<td rowspan="2">MSGN</td>
+<td rowspan="2">Non</td>
+<td rowspan="2">Oui</td>
+<td rowspan="2">Oui</td>
+<td rowspan="2">&nbsp;</td>
+</tr>
+<tr></tr>
+<tr><td rowspan="2"><a class="reference internal" href="divers_formats.html#gdal-gdal-formats-divers-formats-ndf"><em>NDF &#8211; NLAPS Data Format</em></a></td>
+<td rowspan="2">NDF</td>
+<td rowspan="2">Non</td>
+<td rowspan="2">Oui</td>
+<td rowspan="2">Pas de limites</td>
+<td rowspan="2">Oui</td>
+</tr>
+<tr></tr>
+<tr><td rowspan="2"><a class="reference internal" href="nitf.html#gdal-gdal-formats-nitf"><em>NITF &#8211; National Imagery Transmission Format</em></a></td>
+<td rowspan="2">NITF</td>
+<td rowspan="2">Oui</td>
+<td rowspan="2">Oui</td>
+<td rowspan="2">10 Go</td>
+<td rowspan="2">Oui</td>
+</tr>
+<tr></tr>
+<tr><td rowspan="2"><a class="reference internal" href="netcdf.html#gdal-gdal-formats-netcdf"><em>NetCDF : Network Common Data Form</em></a></td>
+<td rowspan="2">netCDF</td>
+<td rowspan="2">Non</td>
+<td rowspan="2">Oui</td>
+<td rowspan="2">2 Go</td>
+<td rowspan="2">Non, nécessite libnetcdf</td>
+</tr>
+<tr></tr>
+<tr><td rowspan="2">NTv2 Datum Grid Shift</td>
+<td rowspan="2">NTv2</td>
+<td rowspan="2">Oui</td>
+<td rowspan="2">Oui</td>
+<td rowspan="2">&nbsp;</td>
+<td rowspan="2">Oui</td>
+</tr>
+<tr></tr>
+<tr><td rowspan="3">Northwood/VerticalMapper Classified Grid Format
+.grc/.tab</td>
+<td rowspan="3">NWT_GRC</td>
+<td rowspan="3">Non</td>
+<td rowspan="3">Oui</td>
+<td rowspan="3">&#8211;</td>
+<td rowspan="3">Oui</td>
+</tr>
+<tr></tr>
+<tr></tr>
+<tr><td rowspan="3">Northwood/VerticalMapper Numeric Grid Format
+.grd/.tab</td>
+<td rowspan="3">NWT_GRD</td>
+<td rowspan="3">Non</td>
+<td rowspan="3">Oui</td>
+<td rowspan="3">&#8211;</td>
+<td rowspan="3">Oui</td>
+</tr>
+<tr></tr>
+<tr></tr>
+<tr><td rowspan="3"><a class="reference internal" href="ogdi.html#gdal-gdal-formats-ogdi"><em>OGDI &#8211; Pont OGDI</em></a></td>
+<td rowspan="3">OGDI</td>
+<td rowspan="3">Non</td>
+<td rowspan="3">Oui</td>
+<td rowspan="3">&#8211;</td>
+<td rowspan="3">Non, nécessite la
+bibliothèque OGDI</td>
+</tr>
+<tr></tr>
+<tr></tr>
+<tr><td rowspan="2"><a class="reference internal" href="ozi.html#gdal-gdal-formats-ozi"><em>OZI &#8211; raster OZF2/OZFX3</em></a></td>
+<td rowspan="2">OZI</td>
+<td rowspan="2">Non</td>
+<td rowspan="2">Oui</td>
+<td rowspan="2">&#8211;</td>
+<td rowspan="2">Non</td>
+</tr>
+<tr></tr>
+<tr><td rowspan="2"><a class="reference internal" href="divers_formats.html#gdal-gdal-formats-divers-formats-paux"><em>PAux &#8211; PCI .aux Labelled Raw Format</em></a></td>
+<td rowspan="2">PAux</td>
+<td rowspan="2">Oui</td>
+<td rowspan="2">Non</td>
+<td rowspan="2">Pas de limites</td>
+<td rowspan="2">Oui</td>
+</tr>
+<tr></tr>
+<tr><td rowspan="2"><a class="reference internal" href="pcidsk.html#gdal-gdal-formats-pcidsk"><em>PCIDSK &#8212; PCI Geomatics Database File</em></a></td>
+<td rowspan="2">PCIDSK</td>
+<td rowspan="2">Oui</td>
+<td rowspan="2">Oui</td>
+<td rowspan="2">Pas de limites</td>
+<td rowspan="2">Oui</td>
+</tr>
+<tr></tr>
+<tr><td rowspan="3"><a class="reference internal" href="divers_formats.html#gdal-gdal-formats-divers-formats-pcraster"><em>PCRaster raster file format</em></a></td>
+<td rowspan="3">PCRaster</td>
+<td rowspan="3">Oui</td>
+<td rowspan="3">Oui</td>
+<td rowspan="3">&#8211;</td>
+<td rowspan="3">Oui (libcsf interne
+fournie)</td>
+</tr>
+<tr></tr>
+<tr></tr>
+<tr><td rowspan="3"><a class="reference internal" href="pdf.html#gdal-gdal-formats-pdf"><em>Geospatial PDF</em></a></td>
+<td rowspan="3">PDF</td>
+<td rowspan="3">Non</td>
+<td rowspan="3">Oui</td>
+<td rowspan="3">&#8211;</td>
+<td rowspan="3">Non nécessite libpoppler
+ou libpodofo</td>
+</tr>
+<tr></tr>
+<tr></tr>
+<tr><td rowspan="2"><a class="reference internal" href="pds.html#gdal-gdal-formats-pds"><em>PDS &#8211; Système de données planétaire</em></a></td>
+<td rowspan="2">PDS</td>
+<td rowspan="2">Non</td>
+<td rowspan="2">Oui</td>
+<td rowspan="2">&#8211;</td>
+<td rowspan="2">Oui</td>
+</tr>
+<tr></tr>
+<tr><td rowspan="3"><a class="reference internal" href="divers_formats.html#gdal-gdal-formats-divers-formats-png"><em>PNG &#8211; Portable Network Graphics</em></a></td>
+<td rowspan="3">PNG</td>
+<td rowspan="3">Oui</td>
+<td rowspan="3">Non</td>
+<td rowspan="3">&#8211;</td>
+<td rowspan="3">Oui (libpng interne
+fournie)</td>
+</tr>
+<tr></tr>
+<tr></tr>
+<tr><td rowspan="3"><a class="reference external" href="http://trac.osgeo.org/gdal/wiki/frmts_wtkraster.html">WKTRaster</a></td>
+<td rowspan="3">PostGISRaster</td>
+<td rowspan="3">Non</td>
+<td rowspan="3">Oui</td>
+<td rowspan="3">&#8211;</td>
+<td rowspan="3">Non, nécessite la
+bibliothèque PostgreSQL</td>
+</tr>
+<tr></tr>
+<tr></tr>
+<tr><td rowspan="2"><a class="reference internal" href="divers_formats.html#gdal-gdal-formats-divers-formats-pnm"><em>PNM &#8211; Netpbm (.pgm, .ppm)</em></a></td>
+<td rowspan="2">PNM</td>
+<td rowspan="2">Oui</td>
+<td rowspan="2">Non</td>
+<td rowspan="2">Pas de limites</td>
+<td rowspan="2">Oui</td>
+</tr>
+<tr></tr>
+<tr><td rowspan="2"><a class="reference internal" href="r.html#gdal-gdal-formats-r"><em>R &#8211; R Object Data Store</em></a></td>
+<td rowspan="2">R</td>
+<td rowspan="2">Oui</td>
+<td rowspan="2">Non</td>
+<td rowspan="2">&#8211;</td>
+<td rowspan="2">Oui</td>
+</tr>
+<tr></tr>
+<tr><td rowspan="2"><a class="reference internal" href="rasdaman.html#gdal-gdal-formats-rasdaman"><em>Pilote GDAL Rasdaman</em></a></td>
+<td rowspan="2">RASDAMAN</td>
+<td rowspan="2">Non</td>
+<td rowspan="2">Non</td>
+<td rowspan="2">Pas de  limites</td>
+<td rowspan="2">Non (nécessite raslib)</td>
+</tr>
+<tr></tr>
+<tr><td rowspan="3"><a class="reference internal" href="rasterlite.html#gdal-gdal-formats-rasterlite"><em>Rasterlite - Rasters in SQLite DB</em></a></td>
+<td rowspan="3">Rasterlite</td>
+<td rowspan="3">Oui</td>
+<td rowspan="3">Oui</td>
+<td rowspan="3">&#8211;</td>
+<td rowspan="3">Non (nécessite le pilote
+SQLite d&#8217;OGR)</td>
+</tr>
+<tr></tr>
+<tr></tr>
+<tr><td rowspan="3"><a class="reference internal" href="rik.html#gdal-gdal-formats-rik"><em>RIK &#8211; Swedish Grid Maps</em></a></td>
+<td rowspan="3">RIK</td>
+<td rowspan="3">Non</td>
+<td rowspan="3">Oui</td>
+<td rowspan="3">4 Go</td>
+<td rowspan="3">Oui (zlib interne est
+utilisé si nécessaire)</td>
+</tr>
+<tr></tr>
+<tr></tr>
+<tr><td rowspan="2"><a class="reference internal" href="rmf.html#gdal-gdal-formats-rmf"><em>RMF &#8212; Raster Matrix Format</em></a></td>
+<td rowspan="2">RMF</td>
+<td rowspan="2">Oui</td>
+<td rowspan="2">Oui</td>
+<td rowspan="2">4 Go</td>
+<td rowspan="2">Oui</td>
+</tr>
+<tr></tr>
+<tr><td rowspan="2"><a class="reference internal" href="divers_formats.html#gdal-gdal-formats-divers-formats-rpftoc"><em>Raster Product Format/RPF (a.toc)</em></a></td>
+<td rowspan="2">RPFTOC</td>
+<td rowspan="2">Non</td>
+<td rowspan="2">Oui</td>
+<td rowspan="2">&#8211;</td>
+<td rowspan="2">Oui</td>
+</tr>
+<tr></tr>
+<tr><td rowspan="2"><a class="reference internal" href="rs2.html#gdal-gdal-formats-rs2"><em>RS2 &#8211; RadarSat 2 XML Product</em></a></td>
+<td rowspan="2">RS2</td>
+<td rowspan="2">Non</td>
+<td rowspan="2">Oui</td>
+<td rowspan="2">4 Go</td>
+<td rowspan="2">Oui</td>
+</tr>
+<tr></tr>
+<tr><td rowspan="2"><a class="reference internal" href="idrisi.html#gdal-gdal-formats-idrisi"><em>RST &#8212; Idrisi Raster Format</em></a></td>
+<td rowspan="2">RST</td>
+<td rowspan="2">Oui</td>
+<td rowspan="2">Oui</td>
+<td rowspan="2">Pas de limites</td>
+<td rowspan="2">Oui</td>
+</tr>
+<tr></tr>
+<tr><td rowspan="2"><a class="reference internal" href="divers_formats.html#gdal-gdal-formats-divers-formats-saga"><em>SDAT &#8211; SAGA GIS Binary Grid File Format</em></a></td>
+<td rowspan="2">SAGA</td>
+<td rowspan="2">Oui</td>
+<td rowspan="2">Oui</td>
+<td rowspan="2">&#8211;</td>
+<td rowspan="2">Oui</td>
+</tr>
+<tr></tr>
+<tr><td rowspan="2"><a class="reference internal" href="divers_formats.html#gdal-gdal-formats-divers-formats-sar-ceos"><em>SAR_CEOS &#8211; CEOS SAR Image</em></a></td>
+<td rowspan="2">SAR_CEOS</td>
+<td rowspan="2">Non</td>
+<td rowspan="2">Oui</td>
+<td rowspan="2">&#8211;</td>
+<td rowspan="2">Oui</td>
+</tr>
+<tr></tr>
+<tr><td rowspan="2"><a class="reference internal" href="sde.html#gdal-gdal-formats-sde"><em>ESRI ArcSDE Raster</em></a></td>
+<td rowspan="2">SDE</td>
+<td rowspan="2">Non</td>
+<td rowspan="2">Oui</td>
+<td rowspan="2">&#8211;</td>
+<td rowspan="2">Non, nécessite SDE d&#8217;ESRI</td>
+</tr>
+<tr></tr>
+<tr><td rowspan="2"><a class="reference internal" href="divers_formats.html#gdal-gdal-formats-divers-formats-sdts"><em>SDTS &#8211; USGS SDTS DEM</em></a></td>
+<td rowspan="2">SDTS</td>
+<td rowspan="2">Non</td>
+<td rowspan="2">Oui</td>
+<td rowspan="2">&#8211;</td>
+<td rowspan="2">Oui</td>
+</tr>
+<tr></tr>
+<tr><td rowspan="2"><a class="reference internal" href="divers_formats.html#gdal-gdal-formats-divers-formats-sgi"><em>SGI - SGI Image Format</em></a></td>
+<td rowspan="2">SGI</td>
+<td rowspan="2">Non</td>
+<td rowspan="2">Oui</td>
+<td rowspan="2">&#8211;</td>
+<td rowspan="2">Oui</td>
+</tr>
+<tr></tr>
+<tr><td rowspan="2"><a class="reference internal" href="divers_formats.html#gdal-gdal-formats-divers-formats-snodas"><em>SNODAS &#8211; Snow Data Assimilation System</em></a></td>
+<td rowspan="2">SNODAS</td>
+<td rowspan="2">Non</td>
+<td rowspan="2">Oui</td>
+<td rowspan="2">&#8211;</td>
+<td rowspan="2">Oui</td>
+</tr>
+<tr></tr>
+<tr><td rowspan="2">Standard Raster Product (ASRP/USRP)</td>
+<td rowspan="2">SRP</td>
+<td rowspan="2">Non</td>
+<td rowspan="2">Oui</td>
+<td rowspan="2">2 Go</td>
+<td rowspan="2">Oui</td>
+</tr>
+<tr></tr>
+<tr><td rowspan="2"><a class="reference internal" href="divers_formats.html#gdal-gdal-formats-divers-formats-srtmhgt"><em>SRTMHGT - SRTM HGT Format</em></a></td>
+<td rowspan="2">SRTMHGT</td>
+<td rowspan="2">Oui</td>
+<td rowspan="2">Oui</td>
+<td rowspan="2">&#8211;</td>
+<td rowspan="2">Oui</td>
+</tr>
+<tr></tr>
+<tr><td rowspan="2"><a class="reference internal" href="terragen.html#gdal-gdal-formats-terragen"><em>Terragen &#8212; Terragen™ Terrain File</em></a></td>
+<td rowspan="2">TERRAGEN</td>
+<td rowspan="2">Oui</td>
+<td rowspan="2">Non</td>
+<td rowspan="2">&#8211;</td>
+<td rowspan="2">Oui</td>
+</tr>
+<tr></tr>
+<tr><td rowspan="2">EarthWatch/DigitalGlobe .TIL</td>
+<td rowspan="2">TIL</td>
+<td rowspan="2">Non</td>
+<td rowspan="2">Non</td>
+<td rowspan="2">&#8211;</td>
+<td rowspan="2">Oui</td>
+</tr>
+<tr></tr>
+<tr><td rowspan="2">TerraSAR-X Product</td>
+<td rowspan="2">TSX</td>
+<td rowspan="2">Oui</td>
+<td rowspan="2">Non</td>
+<td rowspan="2">&#8211;</td>
+<td rowspan="2">Oui</td>
+</tr>
+<tr></tr>
+<tr><td rowspan="2"><a class="reference internal" href="usgsdem.html#gdal-gdal-formats-usgsdem"><em>USGSDEM &#8211; USGS ASCII DEM (et CDED)</em></a></td>
+<td rowspan="2">USGSDEM</td>
+<td rowspan="2">Non</td>
+<td rowspan="2">Oui</td>
+<td rowspan="2">&#8211;</td>
+<td rowspan="2">Oui</td>
+</tr>
+<tr></tr>
+<tr><td rowspan="2"><a class="reference internal" href="vrt.html#gdal-gdal-formats-vrt"><em>Format virtuel de GDAL</em></a></td>
+<td rowspan="2">VRT</td>
+<td rowspan="2">Oui</td>
+<td rowspan="2">Oui</td>
+<td rowspan="2">&#8211;</td>
+<td rowspan="2">Oui</td>
+</tr>
+<tr></tr>
+<tr><td rowspan="2"><a class="reference internal" href="wcs.html#gdal-gdal-formats-wcs"><em>WCS &#8211; OGC Web Coverage Service</em></a></td>
+<td rowspan="2">WCS</td>
+<td rowspan="2">Non</td>
+<td rowspan="2">Oui</td>
+<td rowspan="2">&#8211;</td>
+<td rowspan="2">Non, nécessite libcurl</td>
+</tr>
+<tr></tr>
+<tr><td rowspan="2"><a class="reference internal" href="webp.html#gdal-gdal-formats-webp"><em>WEBP - WEBP</em></a></td>
+<td rowspan="2">WEBP</td>
+<td rowspan="2">Oui</td>
+<td rowspan="2">Non</td>
+<td rowspan="2">&#8211;</td>
+<td rowspan="2">Non, nécessite libwebp</td>
+</tr>
+<tr></tr>
+<tr><td rowspan="2"><a class="reference internal" href="wms.html#gdal-gdal-formats-wms"><em>WMS &#8211; Web Map Services</em></a></td>
+<td rowspan="2">WMS</td>
+<td rowspan="2">Non</td>
+<td rowspan="2">Oui</td>
+<td rowspan="2">&#8211;</td>
+<td rowspan="2">Non, nécessite libcurl</td>
+</tr>
+<tr></tr>
+<tr><td rowspan="2"><a class="reference internal" href="divers_formats.html#gdal-gdal-formats-divers-formats-xpm"><em>XPM - X11 Pixmap</em></a></td>
+<td rowspan="2">XPM</td>
+<td rowspan="2">Oui</td>
+<td rowspan="2">Non</td>
+<td rowspan="2">&#8211;</td>
+<td rowspan="2">Oui</td>
+</tr>
+<tr></tr>
+<tr><td rowspan="2"><a class="reference internal" href="xyz.html#gdal-gdal-formats-xyz"><em>XYZ &#8211; ASCII Gridded XYZ</em></a></td>
+<td rowspan="2">XYZ</td>
+<td rowspan="2">Oui</td>
+<td rowspan="2">Oui</td>
+<td rowspan="2">&#8211;</td>
+<td rowspan="2">Oui</td>
+</tr>
+<tr></tr>
+<tr><td rowspan="2"><a class="reference internal" href="divers_formats.html#gdal-gdal-formats-divers-formats-zmap"><em>ZMap &#8211; ZMap Plus Grid</em></a></td>
+<td rowspan="2">ZMap</td>
+<td rowspan="2">Oui</td>
+<td rowspan="2">Oui</td>
+<td rowspan="2">&nbsp;</td>
+<td rowspan="2">Oui</td>
+</tr>
+<tr></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="id3" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id1">[1]</a></td><td>La taille maximale du fichier n&#8217;est pas déterminée seulement par le
+format de fichier, mais aussi par les possibilités du système de fichier et
+le système d&#8217;opération. Lisez ceci pour plus de détails :
+<a class="reference external" href="http://www.remotesensing.org/gdal/gdal_building.html#gdal_building_lfs">http://www.remotesensing.org/gdal/gdal_building.html#gdal_building_lfs</a></td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="id4" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id2">[2]</a></td><td>ERDAS Imagine possède différent format de fichier pour les gros
+fichiers, où les pointeurs en 32-bit ne peuvent pas être utilisés. Lisez ceci
+pour plus de détails : <a class="reference external" href="http://www.remotesensing.org/gdal/frmt_hfa.html">http://www.remotesensing.org/gdal/frmt_hfa.html</a>.</td></tr>
+</tbody>
+</table>
+<div class="toctree-wrapper compound">
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+
+
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="airsar.html" title="AIRSAR – AIRSAR Polarimetric Format"
+             >suivant</a></li>
+        <li class="right" >
+          <a href="../gdal-config.html" title="gdal-config"
+             >précédent</a> |</li>
+        <li><a href="../../index.html">GDAL v1.9.0 documentation</a> &raquo;</li>
+          <li><a href="../index.html" >GDAL</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+    <a href="http://creativecommons.org/licenses/by/2.0/fr/deed.fr">Licence Creative Common BY</a>
+    <!--
+      &copy; Copyright 2011, Yves Jacolin.-->
+      Créé avec <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0.7.
+    </div>
+  </body>
+</html>

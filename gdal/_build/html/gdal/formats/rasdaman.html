@@ -1,0 +1,160 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF8" />
+    
+    <title>Pilote GDAL Rasdaman &mdash; GDAL v1.9.0 documentation</title>
+    <link rel="stylesheet" href="../../_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '1.9.0',
+        COLLAPSE_MODINDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../_static/translations.js"></script>
+    <link rel="top" title="GDAL v1.9.0 documentation" href="../../index.html" />
+    <link rel="up" title="Formats" href="index.html" />
+    <link rel="next" title="Rasterlite - Rasters in SQLite DB" href="rasterlite.html" />
+    <link rel="prev" title="R – R Object Data Store" href="r.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="rasterlite.html" title="Rasterlite - Rasters in SQLite DB"
+             accesskey="N">suivant</a></li>
+        <li class="right" >
+          <a href="r.html" title="R – R Object Data Store"
+             accesskey="P">précédent</a> |</li>
+        <li><a href="../../index.html">GDAL v1.9.0 documentation</a> &raquo;</li>
+          <li><a href="../index.html" >GDAL</a> &raquo;</li>
+          <li><a href="index.html" accesskey="U">Formats</a> &raquo;</li> 
+      </ul>
+    </div>
+
+
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <h3><a href="../../index.html">Table des matières</a></h3>
+            <ul>
+<li><a class="reference internal" href="#">Pilote GDAL Rasdaman</a><ul>
+<li><a class="reference internal" href="#voir-egalement">Voir également</a></li>
+</ul>
+</li>
+</ul>
+
+            <h4>Sujet précédent</h4>
+            <p class="topless"><a href="r.html"
+                                  title="Chapitre précédent">R &#8211; R Object Data Store</a></p>
+            <h4>Sujet suivant</h4>
+            <p class="topless"><a href="rasterlite.html"
+                                  title="Chapitre suivant">Rasterlite - Rasters in SQLite DB</a></p>
+            <h3>Cette page</h3>
+            <ul class="this-page-menu">
+              <li><a href="../../_sources/gdal/formats/rasdaman.txt"
+                     rel="nofollow">Montrer la source</a></li>
+            </ul>
+          <div id="searchbox" style="display: none">
+            <h3>Recherche rapide</h3>
+              <form class="search" action="../../search.html" method="get">
+                <input type="text" name="q" size="18" />
+                <input type="submit" value="Go" />
+                <input type="hidden" name="check_keywords" value="yes" />
+                <input type="hidden" name="area" value="default" />
+              </form>
+              <p class="searchtip" style="font-size: 90%">
+              Enter search terms or a module, class or function name.
+              </p>
+          </div>
+          <script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="pilote-gdal-rasdaman">
+<span id="gdal-gdal-formats-rasdaman"></span><h1>Pilote GDAL Rasdaman<a class="headerlink" href="#pilote-gdal-rasdaman" title="Lien permanent vers ce titre">¶</a></h1>
+<p>Rasdaman est un middleware de bases de données raster offrant un langage de
+requête de style SQL sur des tableaux multi-dimensionnels de taille illimitée,
+stockée dans une base de données relationnelle. Voir <a class="reference external" href="http://www.rasdaman.org">www.rasdaman.org</a> pour le code open-source, la documentation, etc.
+Actuellement rasdaman est en considération pour incubation à l&#8217;OSGeo.</p>
+<p>Dans notre implémentation du pilote, GDAL se connecte à rasdaman en définissant
+un modèle de requête qui est instancié avec la boîte concrète de sous-ensembles
+lors de chaque accès. Cela permet de livrer des découpes 2-D à partir de données
+n-D définie (tel que les série temporelle de données satellites hyperspectraux,
+des données de simulation climatique multi-variable, des données de modélisation
+océaniques, etc.). En particulier, l&#8217;imagerie virtuelle peut être proposés qui
+est dérivée à la demande des données de réelle du terrain. Des détails techniques
+supplémentaires sont donnés ci-dessous.</p>
+<p>La syntaxe de la chaîne de connexion suit le motif WKT du raster et se pratique
+comme cela :</p>
+<div class="highlight-python"><pre>rasdaman:
+    query='select a[$x_lo:$x_hi,$y_lo:$y_hi] from MyImages as a'
+    [tileXSize=1024] [tileYSize=1024]
+    [host='localhost'] [port=7001] [database='RASBASE']
+    [user='rasguest'] [password='rasguest']</pre>
+</div>
+<p>La chaîne de langage des requêtes rasdaman (rasql) dans ce cas s&#8217;effectue seulement
+en sous ensemble. Sur l&#8217;accès aux images par GDAL, le paramètre $ est substitués
+par la bounding box concrète calculé à partir des coordonnées des tuiles en entrée.</p>
+<p>Toutefois, la requête fournis peut inclure tout type de traitement, tant qu&#8217;il
+renvoie quelque chose en 2-D. Par exemple, ceci détermine la moyenne des
+pixels rouges et le proche infrarouge de la série chronologique la plus ancienne
+image :</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">query</span><span class="o">=</span><span class="s">&#39;select ( a.red+a.nir ) /2 [$x_lo:$x_hi,$y_lo:$y_hi, 0 ] from SatStack as a&#39;</span>
+</pre></div>
+</div>
+<p>Pour le moment il n&#8217;y a pas de gestion de lecture et d&#8217;écriture d&#8217;informations
+géoréférencement.</p>
+<div class="section" id="voir-egalement">
+<h2>Voir également<a class="headerlink" href="#voir-egalement" title="Lien permanent vers ce titre">¶</a></h2>
+<ul class="simple">
+<li><a class="reference external" href="http://www.rasdaman.org/">Project Rasdaman</a></li>
+</ul>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+
+
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="rasterlite.html" title="Rasterlite - Rasters in SQLite DB"
+             >suivant</a></li>
+        <li class="right" >
+          <a href="r.html" title="R – R Object Data Store"
+             >précédent</a> |</li>
+        <li><a href="../../index.html">GDAL v1.9.0 documentation</a> &raquo;</li>
+          <li><a href="../index.html" >GDAL</a> &raquo;</li>
+          <li><a href="index.html" >Formats</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+    <a href="http://creativecommons.org/licenses/by/2.0/fr/deed.fr">Licence Creative Common BY</a>
+    <!--
+      &copy; Copyright 2011, Yves Jacolin.-->
+      Créé avec <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0.7.
+    </div>
+  </body>
+</html>

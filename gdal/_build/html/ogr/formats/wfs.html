@@ -1,0 +1,304 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF8" />
+    
+    <title>WFS - Service WFS OGC &mdash; GDAL v1.9.0 documentation</title>
+    <link rel="stylesheet" href="../../_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '1.9.0',
+        COLLAPSE_MODINDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../_static/translations.js"></script>
+    <link rel="top" title="GDAL v1.9.0 documentation" href="../../index.html" />
+    <link rel="up" title="Formats vecteur d’OGR" href="index.html" />
+    <link rel="next" title="X-Plane/Flightgear aeronautical data" href="xplane.html" />
+    <link rel="prev" title="Virtual Format" href="vrt.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="xplane.html" title="X-Plane/Flightgear aeronautical data"
+             accesskey="N">suivant</a></li>
+        <li class="right" >
+          <a href="vrt.html" title="Virtual Format"
+             accesskey="P">précédent</a> |</li>
+        <li><a href="../../index.html">GDAL v1.9.0 documentation</a> &raquo;</li>
+          <li><a href="../index.html" >OGR</a> &raquo;</li>
+          <li><a href="index.html" accesskey="U">Formats vecteur d&#8217;OGR</a> &raquo;</li> 
+      </ul>
+    </div>
+
+
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <h3><a href="../../index.html">Table des matières</a></h3>
+            <ul>
+<li><a class="reference internal" href="#">WFS - Service WFS OGC</a><ul>
+<li><a class="reference internal" href="#syntaxe-des-noms-de-jeux-de-donnees">Syntaxe des noms de jeux de données</a></li>
+<li><a class="reference internal" href="#pagination-des-requetes">Pagination des requêtes</a></li>
+<li><a class="reference internal" href="#filtrage">Filtrage</a></li>
+<li><a class="reference internal" href="#gestion-de-l-ecriture-wfs-t">Gestion de l&#8217;écriture / WFS-T</a></li>
+<li><a class="reference internal" href="#transaction-ogr-et-gestion-de-l-ecriture">Transaction OGR et gestion de l&#8217;écriture</a></li>
+<li><a class="reference internal" href="#commandes-sql-speciales">Commandes SQL spéciales</a></li>
+<li><a class="reference internal" href="#metadonnees-des-couches">Métadonnées des couches</a></li>
+<li><a class="reference internal" href="#exemples">Exemples</a></li>
+<li><a class="reference internal" href="#voir-egalement">Voir également</a></li>
+</ul>
+</li>
+</ul>
+
+            <h4>Sujet précédent</h4>
+            <p class="topless"><a href="vrt.html"
+                                  title="Chapitre précédent">Virtual Format</a></p>
+            <h4>Sujet suivant</h4>
+            <p class="topless"><a href="xplane.html"
+                                  title="Chapitre suivant">X-Plane/Flightgear aeronautical data</a></p>
+            <h3>Cette page</h3>
+            <ul class="this-page-menu">
+              <li><a href="../../_sources/ogr/formats/wfs.txt"
+                     rel="nofollow">Montrer la source</a></li>
+            </ul>
+          <div id="searchbox" style="display: none">
+            <h3>Recherche rapide</h3>
+              <form class="search" action="../../search.html" method="get">
+                <input type="text" name="q" size="18" />
+                <input type="submit" value="Go" />
+                <input type="hidden" name="check_keywords" value="yes" />
+                <input type="hidden" name="area" value="default" />
+              </form>
+              <p class="searchtip" style="font-size: 90%">
+              Enter search terms or a module, class or function name.
+              </p>
+          </div>
+          <script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="wfs-service-wfs-ogc">
+<span id="gdal-ogr-formats-wfs"></span><h1>WFS - Service WFS OGC<a class="headerlink" href="#wfs-service-wfs-ogc" title="Lien permanent vers ce titre">¶</a></h1>
+<p>(GDAL/OGR &gt;= 1.8.0)</p>
+<p>Ce pilote peut se connecter à un service WFS de l&#8217;OGC. Il gère les protocoles WFS
+1.0.0 et WFS 1.1.0. GDAL/OGR doit être compilé avec la gestion de Curl dans le but
+de compiler le pilote WFS. Habituellement les requêtes WFS renvoie les résultats
+au format GML, le pilote GML doit donc généralement être définie pour la gestion
+de la lecture (nécessite donc que GDAL/OGR soit compilé avec la gestion de Xerces
+ou Expat). Il ets parfois possible d&#8217;utiliser un formats sous-jascent quand le
+serveur les gère (tel que OUTPUTFORMAT=json).</p>
+<p>Le pilote gère les services en lecture seul, ainsi que ceux en mode
+Transactionnel (WFS-T).</p>
+<div class="section" id="syntaxe-des-noms-de-jeux-de-donnees">
+<h2>Syntaxe des noms de jeux de données<a class="headerlink" href="#syntaxe-des-noms-de-jeux-de-donnees" title="Lien permanent vers ce titre">¶</a></h2>
+<p>La syntaxe minimale pour ouvrir une source de données WFS est :
+<em>WFS:http://path/to/WFS/service</em> ou <em>http://path/to/WFS/service?SERVICE=WFS</em></p>
+<p>Des paramètres optionnels additionnels peuvent être définie tels que <em>TYPENAME</em>,
+<em>VERSION</em>, <em>MAXFEATURES</em> comme spécifié dans la spécification WFS.</p>
+<p>Il est également possible de définir le nom d&#8217;un fichier XML dont le contenu
+correspond à la syntaxe suivante (l&#8217;élément &lt;OGRWFSDataSource&gt; doit être le premier
+octet du fichier) :</p>
+<div class="highlight-python"><pre>&lt;OGRWFSDataSource&gt;
+    &lt;URL&gt;http://path/to/WFS/service[?OPTIONAL_PARAMETER1=VALUE[&amp;amp;OPTIONNAL_PARAMETER2=VALUE]]&lt;/URL&gt;
+&lt;/OGRWFSDataSource&gt;</pre>
+</div>
+<p>At the first opening, the content of the result of the <em>GetCapabilities</em> request will be appended to the file, so that it can be cached
+for later openings of the dataset. The same applies for the <em>DescribeFeatureType</em> request issued to discover the field definition of each layer.</p>
+<p>Le fichier de description de service possède les éléments additionnels suivants
+comme enfant immédiat de l&#8217;élément <tt class="docutils literal"><span class="pre">OGRWFSDataSource</span></tt> qui peuvent être définie
+en option.</p>
+<ul class="simple">
+<li><strong>Timeout :</strong> la valeur du timeout à utiliser pour les requêtes des services
+distants. Si non définie la valeur par défaut de libcurl est utilisée.</li>
+<li><strong>UserPwd :</strong> peut fournir un couple <em>userid:password</em> pour envoyer un userid
+et un mot de passe au serveur distant.</li>
+<li><strong>HttpAuth :</strong> peut être BASIC, NTLM ou ANY pour contrôler la méthode
+d&#8217;authentification à utiliser.</li>
+<li><strong>Version :</strong>  Set a specific WFS version to use (either 1.0.0 or 1.1.0).</li>
+<li><strong>PagingAllowed :</strong> définir à ON su la pagination doit être activée. Voir la
+section <a class="reference internal" href="#gdal-ogr-formats-wfs-pagination"><em>Pagination des requêtes</em></a>.</li>
+<li><strong>PageSize :</strong> taille de la page quand la pagination est activée. Voir la
+section <a class="reference internal" href="#gdal-ogr-formats-wfs-pagination"><em>Pagination des requêtes</em></a>.</li>
+</ul>
+</div>
+<div class="section" id="pagination-des-requetes">
+<span id="gdal-ogr-formats-wfs-pagination"></span><h2>Pagination des requêtes<a class="headerlink" href="#pagination-des-requetes" title="Lien permanent vers ce titre">¶</a></h2>
+<p>Généralement, lors de la lecture de la première feature d&#8217;une couche, le contenu
+de la couche entière sera récupérée du serveur.</p>
+<p>Certains serveurs (comme MapServer &gt;= 6.0) gère une option spécifique du
+fournisseur, STARTINDEX, qui permet de faire une requête par &#8220;page&#8221;, et donc
+d&#8217;éviter le téléchargement de tout le contenu de la couche en une seule requête.
+Le client WFS d&#8217;OGR utilisera la pagination quand l&#8217;option de configuration
+<em>OGR_WFS_PAGING_ALLOWED</em> est définie à ON. La taille de la page (nombre de feature
+récupérée en une seule requête) est limité à 100 par défaut. Elle peut être changée
+en définissant l&#8217;option de configuration <em>OGR_WFS_PAGE_SIZE</em>. Ces deux options
+peuvent également être définie dans le fichier XML de description WFS.</p>
+</div>
+<div class="section" id="filtrage">
+<h2>Filtrage<a class="headerlink" href="#filtrage" title="Lien permanent vers ce titre">¶</a></h2>
+<p>Le pilote renverra n&#8217;importe quel filtre spatial avec <em>SetSpatialFilter()</em> vers
+le serveur. Il fera également sont possible pour les filtres attributaires définie
+avec <em>SetAttributeFilter()</em> (traduire le langage SQL d&#8217;OGR en description du filtre
+OGC). Quand cela n&#8217;est pas possible, il sera par défaut un filtre côté client, ce
+qui peut être une opération lente parce qu&#8217;impliquant la récupération de toutes
+les features du serveur.</p>
+</div>
+<div class="section" id="gestion-de-l-ecriture-wfs-t">
+<h2>Gestion de l&#8217;écriture / WFS-T<a class="headerlink" href="#gestion-de-l-ecriture-wfs-t" title="Lien permanent vers ce titre">¶</a></h2>
+<p>Le protocol WFS-T permette à l&#8217;utilisateur d&#8217;opérer au niveau de la feature.
+Aucune création de source de données, couche ou champs n&#8217;est pas possible.</p>
+<p>La gestion de l&#8217;écriture est seulement activé lorsque la source de données est
+ouverte en mode update.</p>
+<p>Les correspondances entre les opération du service e transaction WFS et les concepts
+OGR sont les suivantes :</p>
+<ul class="simple">
+<li>OGRFeature::CreateFeature() &lt;==&gt; opération d&#8217;insertion WFS</li>
+<li>OGRFeature::SetFeature() &lt;==&gt; opération de mise à jour WFS</li>
+<li>OGRFeature::DeleteFeature() &lt;==&gt; opération de suppression WFS</li>
+</ul>
+<p>Les opérations de locks (service LockFeature) ne sont pas disponible pour le moment.</p>
+<p>Il a quelques contraintes à garder à l&#8217;esprit. L&#8217;ID des features (FID) d&#8217;OGR est
+un entier, tandis que l&#8217;attribut gml:id du WFS/GML est une chaîne de caractères.
+Il n&#8217;est donc pas toujours possible de correspondre les deux valeurs. Le pilote
+WFS expose alors l&#8217;attribut gml:id d&#8217;une feature comme un champ &#8216;gml_id&#8217;.</p>
+<p>Lors de l&#8217;insertion d&#8217;un nouvelle feature avec <em>CreateFeature()</em>, et si la commande
+est réussie, OGR récupérera le gml:id et définira le champ &#8216;gml_id&#8217; de la feature
+en conséquence. Il tentera également de définir le FID OGR si le gml:id est de
+la forme <em>layer_name.numeric_value</em>. Sinon le FID sera laissé à sa valeur par
+défaut.</p>
+<p>Lors de la mise à jour d&#8217;une feature existante avec <em>SetFeature()</em>, le champ FID
+OGR sera ignoré. La requête renvoyée au pilote prendra seulement en compte la
+valeur du champ gml:id de la feature. La même chose s&#8217;applique pour <em>DeleteFeature()</em>.</p>
+</div>
+<div class="section" id="transaction-ogr-et-gestion-de-l-ecriture">
+<h2>Transaction OGR et gestion de l&#8217;écriture<a class="headerlink" href="#transaction-ogr-et-gestion-de-l-ecriture" title="Lien permanent vers ce titre">¶</a></h2>
+<p>Les opérations ci-dessus sont par défaut déclenchées vers le serveur en synchrone
+avec l&#8217;appel de l&#8217;API d&#8217;OGR. Cela peut cependant causer des problèmes de
+performances lorsque plusieurs commandes sont déclenchées dû à un grand nombre
+d&#8217;échanges client/serveur.</p>
+<p>Il est possible de contourner ces opérations entre <em>OGRLayer::StartTransaction()</em>
+et <em>OGRLayer::CommitTransaction()</em>. Les opérations seront stockées en mémoire et
+seulement exécuté au moment où <em>CommitTransaction()</em> est appelé.</p>
+<p>La contrainte de <em>CreateFeature()</em> est que l&#8217;utilisateur ne peut pas connaître
+quel gml:id a été assigné pour la feature insérée. Une requête spatiale SQL a été
+introduite dans le pilote WFS pour contourner ceci : en déclenchant la commande
+&#8220;<tt class="docutils literal"><span class="pre">SELECT</span> <span class="pre">_LAST_INSERTED_FIDS_</span> <span class="pre">FROM</span> <span class="pre">layer_name</span></tt>&#8221; (où <em>layer_name</em> doit être
+remplacé par le <em>layer_name</em> réel) via <em>OGRDataSource::ExecuteSQL()</em>, une couche
+sera renvoyée avec autant de ligne avec un attribut unique gml_id que de features
+insérées pendant la dernière transaction commitée.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">pour le moment, seulement <em>CreateFeature()</em> utilise le mécanisme de
+transaction d&#8217;OGR. <em>SetFeature()</em> et <em>DeleteFeature()</em> seront toujours
+déclenché immédiatement.</p>
+</div>
+</div>
+<div class="section" id="commandes-sql-speciales">
+<h2>Commandes SQL spéciales<a class="headerlink" href="#commandes-sql-speciales" title="Lien permanent vers ce titre">¶</a></h2>
+<p>Les commandes SQL et pseudo-SQL suivantes envoyées à <em>OGRDataSource::ExecuteSQL()</em>
+sont spécifiques au pilote WFS :</p>
+<ul class="simple">
+<li>&#8220;DELETE FROM layer_name WHERE expression&#8221; : cela résultera en une opération WFS
+de suppression. Cela peut être un moyen rapide de suppression d&#8217;une ou plusieurs
+features. En particulier, cela peut être un remplaçant plus rapide pour
+<em>OGRLayer::DeleteFeature()</em> quand gml:id est connu, mais la feature n&#8217;est pas
+récupéré à partir du serveur.</li>
+<li>&#8220;SELECT _LAST_INSERTED_FIDS_ FROM layer_name&#8221; : voir le paragraphe au-dessus.</li>
+</ul>
+<p>Pour le moment, toutes les autres commandes SQL sera réalisée par la couche
+générique, c&#8217;est à dire seulement réalisée côté client. Les filtres spatiaux et
+attributaires côté serveur doit être réalisé via les interfaces <em>SetSpatialFilter()</em>
+et <em>SetAttributeFilter()</em>.</p>
+</div>
+<div class="section" id="metadonnees-des-couches">
+<h2>Métadonnées des couches<a class="headerlink" href="#metadonnees-des-couches" title="Lien permanent vers ce titre">¶</a></h2>
+<p>(OGR &gt;= 1.9.0)</p>
+<p>Une couche cachée appelée &#8220;WFSLayerMetadata&#8221; est rempli avec les enregistrements
+des métadonnées pour chaque couche WFS.</p>
+<p>Chaque enregistrement contient un champ &#8220;layer_name&#8221;, &#8220;title&#8221; et &#8220;abstract&#8221;, à
+partir du document renvoyé par le GetCapabilities.</p>
+<p>Cette couche est retournée via GetLayerByName(&#8220;WFSLayerMetadata&#8221;).</p>
+</div>
+<div class="section" id="exemples">
+<h2>Exemples<a class="headerlink" href="#exemples" title="Lien permanent vers ce titre">¶</a></h2>
+<ul>
+<li><p class="first">Liste les types d&#8217;un serveur WFS :</p>
+<div class="highlight-python"><pre>ogrinfo -ro WFS:http://www2.dmsolutions.ca/cgi-bin/mswfs_gmap</pre>
+</div>
+</li>
+<li><p class="first">Liste les types d&#8217;un serveur WFS dont la structure des couches sont en cache
+dans un fichier XML :</p>
+<div class="highlight-python"><pre>ogrinfo -ro mswfs_gmap.xml</pre>
+</div>
+</li>
+<li><p class="first">Liste les features d&#8217;une couche popplace, avec un filtre spatial :</p>
+<div class="highlight-python"><pre>ogrinfo -ro WFS:http://www2.dmsolutions.ca/cgi-bin/mswfs_gmap popplace -spat 0 0 2961766.250000 3798856.750000</pre>
+</div>
+</li>
+<li><p class="first">Récupère les features de gml:id &#8220;world.2&#8221; et &#8220;world.3&#8221; à partir de la couche
+tows:world :</p>
+<div class="highlight-python"><pre>ogrinfo "WFS:http://www.tinyows.org/cgi-bin/tinyows" tows:world -ro -al -where "gml_id='world.2' or gml_id='world.3'"</pre>
+</div>
+</li>
+<li><p class="first">Affiche la couche metadata (OGR &gt;= 1.9.0):</p>
+<div class="highlight-python"><pre>ogrinfo -ro -al "WFS:http://v2.suite.opengeo.org/geoserver/ows" WFSLayerMetadata</pre>
+</div>
+</li>
+</ul>
+</div>
+<div class="section" id="voir-egalement">
+<h2>Voir également<a class="headerlink" href="#voir-egalement" title="Lien permanent vers ce titre">¶</a></h2>
+<ul class="simple">
+<li><a class="reference external" href="http://www.opengeospatial.org/standards/wfs">Standard WFS de l&#8217;OGC</a></li>
+<li><a class="reference internal" href="gml.html#gdal-ogr-formats-gml"><em>GML - Geography Markup Language</em></a></li>
+</ul>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+
+
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="xplane.html" title="X-Plane/Flightgear aeronautical data"
+             >suivant</a></li>
+        <li class="right" >
+          <a href="vrt.html" title="Virtual Format"
+             >précédent</a> |</li>
+        <li><a href="../../index.html">GDAL v1.9.0 documentation</a> &raquo;</li>
+          <li><a href="../index.html" >OGR</a> &raquo;</li>
+          <li><a href="index.html" >Formats vecteur d&#8217;OGR</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+    <a href="http://creativecommons.org/licenses/by/2.0/fr/deed.fr">Licence Creative Common BY</a>
+    <!--
+      &copy; Copyright 2011, Yves Jacolin.-->
+      Créé avec <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0.7.
+    </div>
+  </body>
+</html>

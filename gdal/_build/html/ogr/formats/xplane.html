@@ -1,0 +1,884 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF8" />
+    
+    <title>X-Plane/Flightgear aeronautical data &mdash; GDAL v1.9.0 documentation</title>
+    <link rel="stylesheet" href="../../_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '1.9.0',
+        COLLAPSE_MODINDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../_static/translations.js"></script>
+    <link rel="top" title="GDAL v1.9.0 documentation" href="../../index.html" />
+    <link rel="up" title="Formats vecteur d’OGR" href="index.html" />
+    <link rel="next" title="SQL dans OGR" href="../sql.html" />
+    <link rel="prev" title="WFS - Service WFS OGC" href="wfs.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../sql.html" title="SQL dans OGR"
+             accesskey="N">suivant</a></li>
+        <li class="right" >
+          <a href="wfs.html" title="WFS - Service WFS OGC"
+             accesskey="P">précédent</a> |</li>
+        <li><a href="../../index.html">GDAL v1.9.0 documentation</a> &raquo;</li>
+          <li><a href="../index.html" >OGR</a> &raquo;</li>
+          <li><a href="index.html" accesskey="U">Formats vecteur d&#8217;OGR</a> &raquo;</li> 
+      </ul>
+    </div>
+
+
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <h3><a href="../../index.html">Table des matières</a></h3>
+            <ul>
+<li><a class="reference internal" href="#">X-Plane/Flightgear aeronautical data</a><ul>
+<li><a class="reference internal" href="#exemples">Exemples</a></li>
+<li><a class="reference internal" href="#voir-egalement">Voir également</a></li>
+<li><a class="reference internal" href="#airport-data-apt-dat">Airport data (apt.dat)</a><ul>
+<li><a class="reference internal" href="#couche-apt">Couche APT</a><ul>
+<li><a class="reference internal" href="#couche-runwaythreshold">Couche RunwayThreshold</a></li>
+<li><a class="reference internal" href="#couche-runwaypolygon">Couche RunwayPolygon</a></li>
+<li><a class="reference internal" href="#waterrunwaythreshold-point">WaterRunwayThreshold (Point)</a></li>
+<li><a class="reference internal" href="#waterrunwaypolygon-polygone">WaterRunwayPolygon (Polygone)</a></li>
+<li><a class="reference internal" href="#stopway-layer-polygon">Stopway layer (Polygon)</a></li>
+<li><a class="reference internal" href="#helipad-point">Helipad (Point)</a></li>
+<li><a class="reference internal" href="#helipadpolygon-polygone">HelipadPolygon (Polygone)</a></li>
+<li><a class="reference internal" href="#taxiwayrectangle-polygone-enregistrement-v810">TaxiwayRectangle (Polygone) - Enregistrement V810</a></li>
+<li><a class="reference internal" href="#pavement-polygone">Pavement (Polygone)</a></li>
+<li><a class="reference internal" href="#aptboundary-polygone">APTBoundary (Polygone)</a></li>
+<li><a class="reference internal" href="#aptlinearfeature-chaine-lineaire">APTLinearFeature (Chaine linéaire)</a></li>
+<li><a class="reference internal" href="#startuplocation-point">StartupLocation (Point)</a></li>
+<li><a class="reference internal" href="#aptlightbeacon-point">APTLightBeacon (Point)</a></li>
+<li><a class="reference internal" href="#aptwindsock-point">APTWindsock (Point)</a></li>
+<li><a class="reference internal" href="#taxiwaysign-point">TaxiwaySign (Point)</a></li>
+<li><a class="reference internal" href="#vasi-papi-wigwag-point">VASI_PAPI_WIGWAG (Point)</a></li>
+<li><a class="reference internal" href="#atcfreq-none">ATCFreq (None)</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#aides-a-la-navigation-nav-dat">Aides à la navigation (nav.dat)</a><ul>
+<li><a class="reference internal" href="#ils-point">ILS (Point)</a></li>
+<li><a class="reference internal" href="#vor-point">VOR (Point)</a></li>
+<li><a class="reference internal" href="#ndb-point">NDB (Point)</a></li>
+<li><a class="reference internal" href="#gs-glideslope-point">GS - Glideslope (Point)</a></li>
+<li><a class="reference internal" href="#marker-ils-marker-beacons-point">Marker - ILS marker beacons. (Point)</a></li>
+<li><a class="reference internal" href="#dme-point">DME (Point)</a></li>
+<li><a class="reference internal" href="#dmeils-point">DMEILS (Point)</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#intersections-ifr-fix-dat">Intersections IFR (fix.dat)</a><ul>
+<li><a class="reference internal" href="#fix-point">FIX (Point)</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#airways-awy-dat">Airways (awy.dat)</a><ul>
+<li><a class="reference internal" href="#airwaysegment-line-string">AirwaySegment (Line String)</a></li>
+<li><a class="reference internal" href="#airwayintersection-point">AirwayIntersection (Point)</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+            <h4>Sujet précédent</h4>
+            <p class="topless"><a href="wfs.html"
+                                  title="Chapitre précédent">WFS - Service WFS OGC</a></p>
+            <h4>Sujet suivant</h4>
+            <p class="topless"><a href="../sql.html"
+                                  title="Chapitre suivant">SQL dans OGR</a></p>
+            <h3>Cette page</h3>
+            <ul class="this-page-menu">
+              <li><a href="../../_sources/ogr/formats/xplane.txt"
+                     rel="nofollow">Montrer la source</a></li>
+            </ul>
+          <div id="searchbox" style="display: none">
+            <h3>Recherche rapide</h3>
+              <form class="search" action="../../search.html" method="get">
+                <input type="text" name="q" size="18" />
+                <input type="submit" value="Go" />
+                <input type="hidden" name="check_keywords" value="yes" />
+                <input type="hidden" name="area" value="default" />
+              </form>
+              <p class="searchtip" style="font-size: 90%">
+              Enter search terms or a module, class or function name.
+              </p>
+          </div>
+          <script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="x-plane-flightgear-aeronautical-data">
+<span id="gdal-ogr-formats-xplane"></span><h1>X-Plane/Flightgear aeronautical data<a class="headerlink" href="#x-plane-flightgear-aeronautical-data" title="Lien permanent vers ce titre">¶</a></h1>
+<p>(disponible depuis GDAL 1.6.0)</p>
+<p>Les données aéronautique X-Plane sont gérées en lecture seule. Ces données sont
+utilisées par exemple par le logiciel Flihgear et X-Plane.</p>
+<p>Le pilote est capable de lire les fichiers suivants :</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="42%" />
+<col width="33%" />
+<col width="25%" />
+</colgroup>
+<thead valign="bottom">
+<tr><th class="head" rowspan="2">Nom du fichier</th>
+<th class="head" rowspan="2">Description</th>
+<th class="head" rowspan="2">Versions gérées</th>
+</tr>
+<tr></tr>
+</thead>
+<tbody valign="top">
+<tr><td rowspan="2">apt.dat</td>
+<td rowspan="2">Données Aéroport</td>
+<td rowspan="2">850, 810</td>
+</tr>
+<tr></tr>
+<tr><td rowspan="2">nav.dat (ou earth_nav.dat)</td>
+<td rowspan="2">Aides à la navigation</td>
+<td rowspan="2">810, 740</td>
+</tr>
+<tr></tr>
+<tr><td rowspan="2">fix.dat (ou earth_fix.dat)</td>
+<td rowspan="2">Intersections IFR</td>
+<td rowspan="2">600</td>
+</tr>
+<tr></tr>
+<tr><td rowspan="2">awy.dat (ou earth_awy.dat)</td>
+<td rowspan="2">Route de vol</td>
+<td rowspan="2">640</td>
+</tr>
+<tr></tr>
+</tbody>
+</table>
+<p>Chaque fichier sera retourné comme un ensemble de couches dont le schéma de
+données est données ci-dessous. Le schéma des données est généralement aussi
+proche que possible que les schémas des données originelles décrit dans la
+spécification X-Plane. Cependant, vous noterez s&#8217;il vous plaît que les mètres
+(ou kilomètre) sont toujours utilisés pour retourner les hauteurs, les élévations,
+les distances (largeurs et longueurs), etc., même si les données originales sont
+parfois exprimées en pied ou en miles nautiques.</p>
+<p>Les données sont retournées comme étant exprimé en datum WGS84 (latitude,
+longitude), bien que la spécification n&#8217;est pas très claire sur ce sujet).</p>
+<p>L&#8217;option de configuration OGR_XPLANE_READ_WHOLE_FILE peut être définie à FALSE
+lors de la lecture d&#8217;un gros fichier en fonction de la RAM disponible (vrai tout
+particulièrement pour apt.dat). Cette option force le pilote à ne pas mettre en
+cache les features en RAM, mais juste à les récupérer de la couche en cours. Bien
+sur, cela aura un impact négatif sur les performances.</p>
+<div class="section" id="exemples">
+<h2>Exemples<a class="headerlink" href="#exemples" title="Lien permanent vers ce titre">¶</a></h2>
+<p>convertir toutes les couches contenu dans <em>apt.dat</em> dans un ensemble de shapefiles :</p>
+<blockquote>
+<div>% ogr2ogr apt_shapes apt.dat</div></blockquote>
+<p>convertir toutes les couches contenu dans <em>apt.dat</em> dans une base de données PostgreSQL :</p>
+<blockquote>
+<div>% PG_USE_COPY=yes ogr2ogr -overwrite -f PostgreSQL PG:&#8221;dbname=apt&#8221; apt.dat</div></blockquote>
+</div>
+<div class="section" id="voir-egalement">
+<h2>Voir également<a class="headerlink" href="#voir-egalement" title="Lien permanent vers ce titre">¶</a></h2>
+<ul class="simple">
+<li><a class="reference external" href="http://data.x-plane.com/designers.html">Définition du fichier données X-Plane</a></li>
+</ul>
+</div>
+<div class="section" id="airport-data-apt-dat">
+<h2>Airport data (apt.dat)<a class="headerlink" href="#airport-data-apt-dat" title="Lien permanent vers ce titre">¶</a></h2>
+<p>Ce fichier contient la description des éléments définissant les aéroports, les
+héliports, les bases nautiques, avec leur pistes et route de taxi, les
+fréquences ATC, etc.</p>
+<p>Les couches suivantes sont retournées :</p>
+<ul class="simple">
+<li>APT (Point)</li>
+<li>RunwayThreshold (Point)</li>
+<li>RunwayPolygon (Polygone)</li>
+<li>WaterRunwayThreshold (Point)</li>
+<li>WaterRunwayPolygon (Polygone)</li>
+<li>Stopway (Polygon)</li>
+<li>Helipad (Point)</li>
+<li>HelipadPolygon (Polygone)</li>
+<li>TaxiwayRectangle (Polygone)</li>
+<li>Pavement (Polygone)</li>
+<li>APTBoundary (Polygone)</li>
+<li>APTLinearFeature (Line String)</li>
+<li>StartupLocation (Point)</li>
+<li>APTLightBeacon (Point)</li>
+<li>APTWindsock (Point)</li>
+<li>TaxiwaySign (Point)</li>
+<li>VASI_PAPI_WIGWAG (Point)</li>
+<li>ATCFreq (Aucun)</li>
+</ul>
+<p>Toutes les couches autre que APT se référeront à l&#8217;aéroport grâce à la colonne
+<em>apt_icao</em>, qui peut servir de clé étrangère.</p>
+<div class="section" id="couche-apt">
+<h3>Couche APT<a class="headerlink" href="#couche-apt" title="Lien permanent vers ce titre">¶</a></h3>
+<p>Principale description pour un aéroport. La position rapportée sera la position
+de la tour de contrôle si présente, autrement la position trouvée du premier
+seuil de la piste.</p>
+<p><strong>Champs :</strong></p>
+<ul class="simple">
+<li>apt_icao  : Chaine (4.0). Code <em>ICAO</em> de l&#8217;aéroport.</li>
+<li>apt_name  : Chaine (0.0). Nom complet de l&#8217;aéroport.</li>
+<li>type: Integer (1.0). Airport type : 0 pour les aéroport régulier, 1 pour les
+bases d&#8217;hydravion, 2 pour les héliports (ajouté dans GDAL 1.7.0)</li>
+<li>elevation_m  : Réel (8.2). Altitude de l&#8217;aéroport (en mètres).</li>
+<li>has_tower : Integer (1.0). Définie à 1 si l&#8217;aéroport a une tour de contrôle.</li>
+<li>hgt_tower_m  : Réel (8.2). Hauteur de la tour de contrôle si présente.</li>
+<li>tower_name  : Chaine (32.0). Nom de la tour de contrôle si présente.</li>
+</ul>
+<div class="section" id="couche-runwaythreshold">
+<h4>Couche RunwayThreshold<a class="headerlink" href="#couche-runwaythreshold" title="Lien permanent vers ce titre">¶</a></h4>
+<p>Cette couche contient la description d&#8217;un seuil  d&#8217;une piste.
+La piste en elle-même est complètement décrite par ces deux seuils, et la couche
+<em>RunwayPolygon</em>.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">quand une piste a un seuil déplacé, le seuil sera rapporté comme deux
+géométries : une à la position du seuil non déplacé (<em>is_displaced=0</em>), et
+l&#8217;autre à la position du seuil déplacé (<em>is_displaced=1</em>).</p>
+</div>
+<p><strong>Champs :</strong></p>
+<ul>
+<li><p class="first">apt_icao : Chaine (4.0). code <em>ICAO</em> pour l&#8217;aéroport de ce seuil de piste.</p>
+</li>
+<li><p class="first">rwy_num : Chaine (3.0). Code pourla piste, tel que18, 02L, etc. Unique pour
+chaque aéroport.</p>
+</li>
+<li><p class="first">width_m : Réel (3.0). Largeur en mètre.</p>
+</li>
+<li><p class="first">surface : Chaine (0.0). Type de la surface parmi :</p>
+<blockquote>
+<div><ul class="simple">
+<li>Asphalt</li>
+<li>Concrete</li>
+<li>Turf/grass</li>
+<li>Dirt</li>
+<li>Gravel</li>
+<li>Dry lakebed</li>
+<li>Water</li>
+<li>Snow</li>
+<li>Transparent</li>
+</ul>
+</div></blockquote>
+</li>
+<li><p class="first">shoulder : Chaine (0.0). Type d&#8217;accotement de la piste parmi :</p>
+<blockquote>
+<div><ul class="simple">
+<li>None</li>
+<li>Asphalt</li>
+<li>Concrete</li>
+</ul>
+</div></blockquote>
+</li>
+<li><p class="first">smoothness : Réel (4.2). Douceur de la piste. Pourcentage entre 0.00 et 1.00.
+1.25 est la valeur par défaut.</p>
+</li>
+<li><p class="first">centerline_lights : Entier (1.0). Définie à 1 si la piste a des lumières
+centrales</p>
+</li>
+<li><p class="first">edge_lighting : Chaine (0.0). Type de bord lumineux parmi :</p>
+<ul class="simple">
+<li>None</li>
+<li>Yes (quand importé des enregistrements V810)</li>
+<li>LIRL : Lumière de piste de faible intensité(proposé  pour V90x)</li>
+<li>MIRL : Lumière de piste de moyenne intensité</li>
+<li>HIRL : Lumière de piste de haute intensité (proposé  pour V90x)</li>
+</ul>
+</li>
+<li><p class="first">distance_remaining_signs : Entier (1.0). Définie à 1 si la piste a des
+lumières de &#8216;distance restante&#8217;.</p>
+</li>
+<li><p class="first">displaced_threshold_m : Réel (3.0). Distance entre le seuil et le seuil
+déplacé.</p>
+</li>
+<li><p class="first">is_displaced : Entier (1.0). Définie à 1 si la position est la position du
+seuil déplacé.</p>
+</li>
+<li><p class="first">stopway_length_m : Réel (3.0). Longueur de la piste d&#8217;arrêt/de la zone de
+décollage/de la zone de dépassement à la fin de l&#8217;approche de la piste en
+mètre.</p>
+</li>
+<li><p class="first">markings : Chaine (0.0). Marquage de la piste pour la fin de piste parmi :</p>
+<blockquote>
+<div><ul class="simple">
+<li>None</li>
+<li>Visual</li>
+<li>Non-precision approach</li>
+<li>Precision approach</li>
+<li>UK-style non-precision</li>
+<li>UK-style precision</li>
+</ul>
+</div></blockquote>
+</li>
+<li><p class="first">approach_lighting : Chaine (0.0). Lumière d&#8217;approche pour la fin de la piste
+parmi :</p>
+<blockquote>
+<div><ul class="simple">
+<li>None</li>
+<li>ALSF-I</li>
+<li>ALSF-II</li>
+<li>Calvert</li>
+<li>Calvert ISL Cat II and III</li>
+<li>SSALR</li>
+<li>SSALS (Enregistrements V810)</li>
+<li>SSALF</li>
+<li>SALS</li>
+<li>MALSR</li>
+<li>MALSF</li>
+<li>MALS</li>
+<li>ODALS</li>
+<li>RAIL</li>
+</ul>
+</div></blockquote>
+</li>
+<li><p class="first">touchdown_lights: Integer (1.0). Set to 1 if the runway has touchdown-zone
+lights (TDZL)</p>
+</li>
+<li><p class="first">REIL : Chaine (0.0). Lumière d&#8217;Identification de fin de piste, <em>Runway End
+Identifier Lights</em> (REIL) parmi :</p>
+<ul class="simple">
+<li>None</li>
+<li>Omni-directional</li>
+<li>Unidirectionnal</li>
+</ul>
+</li>
+<li><p class="first">length_m : Réel (5.0). (Champ calculé). Longueur en mètre entre les deux
+seuils aux deux extrémités de la piste. Les seuils déplacés ne sont pas pris
+en compte dans ce calcul.</p>
+</li>
+<li><p class="first">true_heading_deg : Réel (6.2). (Champ calculé). En-tête réel en degré à
+l&#8217;approche de la fin de la piste.</p>
+</li>
+</ul>
+</div>
+<div class="section" id="couche-runwaypolygon">
+<h4>Couche RunwayPolygon<a class="headerlink" href="#couche-runwaypolygon" title="Lien permanent vers ce titre">¶</a></h4>
+<p>Cette couche contient la forme rectangulaire de la piste. Elle est calculé à
+partir des informations de seuil de la piste. Quand cela n&#8217;est pas définie, la
+signification du champ est la même que la couche <em>RunwayThreshold</em>.</p>
+<p><strong>Champs :</strong></p>
+<ul class="simple">
+<li>apt_icao : Chaine (4.0)</li>
+<li>rwy_num1 : Chaine (3.0). Code pour le premier seuil de la piste. Par exemple <em>20L</em>.</li>
+<li>rwy_num2 : Chaine (3.0). Code pour le second seuil de la piste. Par exemple <em>02R</em>.</li>
+<li>width_m : Réel (3.0)</li>
+<li>surface : Chaine (0.0)</li>
+<li>shoulder : Chaine (0.0)</li>
+<li>smoothness : Réel (4.2)</li>
+<li>centerline_lights : Entier (1.0)</li>
+<li>edge_lighting : Chaine (0.0)</li>
+<li>distance_remaining_signs : Entier (1.0)</li>
+<li>length_m : Réel (5.0)</li>
+<li>true_heading_deg : Réel (6.2). En-tête réel de la première à la seconde piste.</li>
+</ul>
+</div>
+<div class="section" id="waterrunwaythreshold-point">
+<h4>WaterRunwayThreshold (Point)<a class="headerlink" href="#waterrunwaythreshold-point" title="Lien permanent vers ce titre">¶</a></h4>
+<p><strong>Champs :</strong></p>
+<ul class="simple">
+<li>apt_icao : Chaine (4.0)</li>
+<li>rwy_num : Chaine (3.0). Code pour la piste, parexemple 18. Unique pour chaque
+aéroport.</li>
+<li>width_m : Réel (3.0)</li>
+<li>has_buoys : Entier (1.0). Définie à 1 si la piste doit être marqué avec des
+bouées flottantes sur l&#8217;eau.</li>
+<li>length_m : Réel (5.0). (Champ calculé) Longueur entre les deux extrémités de
+la piste amerrissage.</li>
+<li>true_heading_deg : Réel (6.2). (Champ calculé). En-tête réel en degré à
+l&#8217;approche de la fin de la piste.</li>
+</ul>
+</div>
+<div class="section" id="waterrunwaypolygon-polygone">
+<h4>WaterRunwayPolygon (Polygone)<a class="headerlink" href="#waterrunwaypolygon-polygone" title="Lien permanent vers ce titre">¶</a></h4>
+<p>Cette couche contient la forme rectangulaire d&#8217;une piste d&#8217;ammerissage. Elle est
+construite à partir des informations des seuils des pistes d&#8217;atterrissage de l&#8217;eau.</p>
+<blockquote>
+<div><strong>Champs :</strong></div></blockquote>
+<ul class="simple">
+<li>apt_icao : Chaine (4.0)</li>
+<li>rwy_num1 : Chaine (3.0)</li>
+<li>rwy_num2 : Chaine (3.0)</li>
+<li>width_m : Réel (3.0)</li>
+<li>has_buoys: Integer (1.0)</li>
+<li>length_m : Réel (5.0)</li>
+<li>true_heading_deg : Réel (6.2)</li>
+</ul>
+</div>
+<div class="section" id="stopway-layer-polygon">
+<h4>Stopway layer (Polygon)<a class="headerlink" href="#stopway-layer-polygon" title="Lien permanent vers ce titre">¶</a></h4>
+<p>(À partir de GDAL 1.7.0)</p>
+<p>Cette couche contient la forme rectangulaire du prolongement d&#8217;arrêt qui peut être
+trouvé au début de la piste. C&#8217;est une partie du tarmac mais qui n&#8217;est pas censé
+être utilisée pour les opérations normales.</p>
+<p>Il est calculé à partir des informations de longueur du prolongement d&#8217;arrêt de
+la piste et seulement présent si la longueur est différente de zéro.</p>
+<p>Lorsqu&#8217;il n&#8217;est pas spécifié, la signification des champs est le même que pour
+la couche RunwayThreshold.</p>
+<p>Champs :</p>
+<ul class="simple">
+<li>apt_icao: String (4.0)</li>
+<li>rwy_num: String (3.0).</li>
+<li>width_m: Real (3.0)</li>
+<li>length_m: Real (5.0) : longueur du prolongement de l&#8217;arrêt / du blastpad / du
+dépassement à la fin de l&#8217;approche de la piste en mètre.</li>
+</ul>
+</div>
+<div class="section" id="helipad-point">
+<h4>Helipad (Point)<a class="headerlink" href="#helipad-point" title="Lien permanent vers ce titre">¶</a></h4>
+<p>Cette couche contient le centre de la piste d&#8217;atterrissage d&#8217;hélicoptères.</p>
+<p><strong>Champs :</strong></p>
+<ul>
+<li><p class="first">apt_icao : Chaine (4.0)</p>
+</li>
+<li><p class="first">helipad_name : Chaine (5.0). Nom de la piste d&#8217;atterrissage d&#8217;hélicoptères de
+la forme &#8220;Hxx&#8221;. Unique pour chaque aéroport.</p>
+</li>
+<li><p class="first">true_heading_deg : Réel (6.2)</p>
+</li>
+<li><p class="first">length_m : Réel (5.0)</p>
+</li>
+<li><p class="first">width_m : Réel (3.0)</p>
+</li>
+<li><p class="first">surface : Chaine (0.0). Voyez ci-dessus pour les codes de surfaces des pistes.</p>
+</li>
+<li><p class="first">markings : Chaine (0.0). Voyez ci-dessus pour les codes de marquage des pistes.</p>
+</li>
+<li><p class="first">shoulder : Chaine (0.0). Voyez ci-dessus pour les codes d&#8217;accotement des pistes.</p>
+</li>
+<li><p class="first">smoothness : Réel (4.2). Voyez ci-dessus pour la description simple des pistes.</p>
+</li>
+<li><p class="first">edge_lighting : Chaine (0.0). Bord de piste d&#8217;atterrissage d&#8217;hélicoptère
+lumineux parmi :</p>
+<blockquote>
+<div><ul class="simple">
+<li>None</li>
+<li>Yes (Enregistrement V810)</li>
+<li>Yellow</li>
+<li>White (proposé pour V90x)</li>
+<li>Red (Enregistrement V810)</li>
+</ul>
+</div></blockquote>
+</li>
+</ul>
+</div>
+<div class="section" id="helipadpolygon-polygone">
+<h4>HelipadPolygon (Polygone)<a class="headerlink" href="#helipadpolygon-polygone" title="Lien permanent vers ce titre">¶</a></h4>
+<p>Cette couche contient la forme rectangulaire d&#8217;une aire d&#8217;atterrissage
+d&#8217;hélicoptères. Les champs sont identique à la couche <em>Helipad</em>.</p>
+</div>
+<div class="section" id="taxiwayrectangle-polygone-enregistrement-v810">
+<h4>TaxiwayRectangle (Polygone) - Enregistrement V810<a class="headerlink" href="#taxiwayrectangle-polygone-enregistrement-v810" title="Lien permanent vers ce titre">¶</a></h4>
+<p>Cette couche content la forme rectangulaire d&#8217;une voie de taxie.</p>
+<p><strong>Champs :</strong></p>
+<ul class="simple">
+<li>apt_icao : Chaine (4.0)</li>
+<li>true_heading_deg : Réel (6.2)</li>
+<li>length_m : Réel (5.0)</li>
+<li>width_m : Réel (3.0)</li>
+<li>surface : Chaine (0.0). Voyez ci-dessus les codes des surfaces des pistes
+d&#8217;atterrissage.</li>
+<li>smoothness : Réel (4.2). Voyez ci-dessus la description douce des pistes
+d&#8217;atterrissage.</li>
+<li>edge_lighting : Entier (1.0). Définie à 1 si la piste de taxi a des bords lumineux.</li>
+</ul>
+</div>
+<div class="section" id="pavement-polygone">
+<h4>Pavement (Polygone)<a class="headerlink" href="#pavement-polygone" title="Lien permanent vers ce titre">¶</a></h4>
+<p>Cette couche contient des tronçons polygonaux de chaussée  pour les voies de
+taxi et des tabliers. Les polygones peuvent inclure des troues.</p>
+<p>Le fichier source peut contenir des courbes de Béziers comme côté de polygone.
+Dû à un manque de gestion de telle géométrie dans le modele d&#8217;Objet Simple
+(Simple Feature) d&#8217;OGR, les coubres de Bézier sont discrétisées en morceaux
+linéaires.</p>
+<p><strong>Champs :</strong></p>
+<ul class="simple">
+<li>apt_icao : Chaine (4.0)</li>
+<li>name : Chaine (0.0)</li>
+<li>surface : Chaine (0.0). Voyez ci-dessus les codes des surfaces des pistes
+d&#8217;aviation.</li>
+<li>smoothness : Réel (4.2). Voyez ci-dessus la descriptions en douceur des pistes
+d&#8217;aviations.</li>
+<li>texture_heading : Réel (6.2). Direction du grain de texture de la chaussée en
+degré réel</li>
+</ul>
+</div>
+<div class="section" id="aptboundary-polygone">
+<h4>APTBoundary (Polygone)<a class="headerlink" href="#aptboundary-polygone" title="Lien permanent vers ce titre">¶</a></h4>
+<p>Cette couche contient les limites de l&#8217;aéroport. Il y a au maximum une telle
+géométrie par aéroport. Le polygone peut inclure des troues. Les courbes de
+béziers sont discrétisées en morceaux linéaires.</p>
+<p><strong>Champs :</strong></p>
+<ul class="simple">
+<li>apt_icao : Chaine (4.0)</li>
+<li>name : Chaine (0.0)</li>
+</ul>
+</div>
+<div class="section" id="aptlinearfeature-chaine-lineaire">
+<h4>APTLinearFeature (Chaine linéaire)<a class="headerlink" href="#aptlinearfeature-chaine-lineaire" title="Lien permanent vers ce titre">¶</a></h4>
+<p>Cette couche contienr les objets linéaires. Les courbes de béziers sont d
+iscrétisées en morceaux linéaire.</p>
+<p><strong>Champs :</strong></p>
+<ul class="simple">
+<li>apt_icao : Chaine (4.0)</li>
+<li>name : Chaine (0.0)</li>
+</ul>
+</div>
+<div class="section" id="startuplocation-point">
+<h4>StartupLocation (Point)<a class="headerlink" href="#startuplocation-point" title="Lien permanent vers ce titre">¶</a></h4>
+<p>Définie les positions des portes, locations de rampe, etc.</p>
+<p><strong>Champs :</strong></p>
+<ul class="simple">
+<li>apt_icao : Chaine (4.0)</li>
+<li>name : Chaine (0.0)</li>
+<li>true_heading_deg : Réel (6.2)</li>
+</ul>
+</div>
+<div class="section" id="aptlightbeacon-point">
+<h4>APTLightBeacon (Point)<a class="headerlink" href="#aptlightbeacon-point" title="Lien permanent vers ce titre">¶</a></h4>
+<p>Définie les balises-lumières des aéroports.</p>
+<p><strong>Champs :</strong></p>
+<ul>
+<li><p class="first">apt_icao : Chaine (4.0)</p>
+</li>
+<li><p class="first">name : Chaine (0.0)</p>
+</li>
+<li><p class="first">color : Chaine (0.0). Couleur de la lumière de la balise parmi :</p>
+<blockquote>
+<div><ul class="simple">
+<li>None</li>
+<li>White-green : aérogare</li>
+<li>White-yellow : base d&#8217;hydravion</li>
+<li>Green-yellow-white : héliports</li>
+<li>White-white-green : champ militaire</li>
+</ul>
+</div></blockquote>
+</li>
+</ul>
+</div>
+<div class="section" id="aptwindsock-point">
+<h4>APTWindsock (Point)<a class="headerlink" href="#aptwindsock-point" title="Lien permanent vers ce titre">¶</a></h4>
+<p>Définie les biroutes des aéroports.</p>
+<p><strong>Champs :</strong></p>
+<ul class="simple">
+<li>apt_icao : Chaine (4.0)</li>
+<li>name : Chaine (0.0)</li>
+<li>is_illuminated: Integer (1.0)</li>
+</ul>
+</div>
+<div class="section" id="taxiwaysign-point">
+<h4>TaxiwaySign (Point)<a class="headerlink" href="#taxiwaysign-point" title="Lien permanent vers ce titre">¶</a></h4>
+<p>Définie les signes des voies de taxi des aéroports.</p>
+<p><strong>Champs :</strong></p>
+<ul class="simple">
+<li>apt_icao : Chaine (4.0)</li>
+<li>text : Chaine (0.0). C&#8217;est d&#8217;une manière ou d&#8217;une autre encodé dans un format
+spécifique. Voyez les <a class="reference external" href="http://x-plane.org/home/robinp/Apt850.htm#SignTextSpec">spécification</a>
+d&#8217;X-Plane pour plus de détails.</li>
+<li>true_heading_deg : Réel (6.2)</li>
+<li>size: Integer (1.0). De  1 à 5. Voyez les spécification d&#8217;X-Plane pour plus de détails.</li>
+</ul>
+</div>
+<div class="section" id="vasi-papi-wigwag-point">
+<h4>VASI_PAPI_WIGWAG (Point)<a class="headerlink" href="#vasi-papi-wigwag-point" title="Lien permanent vers ce titre">¶</a></h4>
+<p>Définie un <em>VASI</em>, <em>PAPI</em> ou <em>Wig-Wag</em>. Pour les valeurs <em>PAPI</em> et <em>Wig-Wags</em>,
+les coordonnées est le centre de l&#8217;affichage. Pour la valeur <em>VASI</em>, c&#8217;est le
+point central entre les deux unités de lumière des <em>VASI</em>.</p>
+<p><strong>Champs :</strong></p>
+<ul>
+<li><p class="first">apt_icao : Chaine (4.0)</p>
+</li>
+<li><p class="first">rwy_num : Chaine (3.0). Clé étrangère pour le champ <em>rwy_num</em> de la couche</p>
+</li>
+<li><p class="first">RunwayThreshold*.</p>
+</li>
+<li><p class="first">type : Chaine (0.0). Type comprenant :</p>
+<blockquote>
+<div><ul class="simple">
+<li>VASI</li>
+<li>PAPI Left</li>
+<li>PAPI Right</li>
+<li>Space Shuttle PAPI</li>
+<li>Tri-colour VASI</li>
+<li>o Wig-Wag lights</li>
+</ul>
+</div></blockquote>
+</li>
+<li><p class="first">true_heading_deg : Réel (6.2)</p>
+</li>
+<li><p class="first">visual_glide_deg : Réel (4.2)</p>
+</li>
+</ul>
+</div>
+<div class="section" id="atcfreq-none">
+<h4>ATCFreq (None)<a class="headerlink" href="#atcfreq-none" title="Lien permanent vers ce titre">¶</a></h4>
+<p>Définie une réquence ATC d&#8217;nu aéroport. Notez que cette couche n&#8217;a pas de géométrie.</p>
+<p><strong>Champs :</strong></p>
+<ul>
+<li><p class="first">apt_icao : Chaine (4.0)</p>
+</li>
+<li><p class="first">atc_type : Chaine (4.0). Type de la fréquence parmi (dérivé du numéro du type
+d&#8217;enregistrement) :</p>
+<ul>
+<li><p class="first">ATIS : AWOS (<em>Automatic Weather Observation System</em>), ASOS (<em>Automatic
+Surface Observation System</em>) ou ATIS (<em>Automated Terminal Information
+System</em>)</p>
+<blockquote>
+<div><ul class="simple">
+<li>CTAF : Unicom ou CTAF (USA), radio (UK)</li>
+<li>CLD : Clearance delivery (CLD)</li>
+<li>GND : Sol</li>
+<li>TWR : Tour</li>
+<li>APP : Approche</li>
+<li>DEP : Départ</li>
+</ul>
+</div></blockquote>
+</li>
+</ul>
+</li>
+<li><p class="first">freq_name : Chaine (0.0). Nom de la fréquence ATC. C&#8217;est souvent une
+abréviation (tel que GND pour &#8220;<em>Ground</em>&#8221;).</p>
+</li>
+<li><p class="first">freq_mhz : Réel (7.3). Fréquence en MHz.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="section" id="aides-a-la-navigation-nav-dat">
+<h2>Aides à la navigation (nav.dat)<a class="headerlink" href="#aides-a-la-navigation-nav-dat" title="Lien permanent vers ce titre">¶</a></h2>
+<p>Ce fichier contient la description de divers phare d&#8217;aides à la navigation.</p>
+<p>Les couches suivantes sont retournées :</p>
+<ul class="simple">
+<li>ILS (Point)</li>
+<li>VOR (Point)</li>
+<li>NDB (Point)</li>
+<li>GS (Point)</li>
+<li>Marker (Point)</li>
+<li>DME (Point)</li>
+<li>DMEILS (Point)</li>
+</ul>
+<div class="section" id="ils-point">
+<h3>ILS (Point)<a class="headerlink" href="#ils-point" title="Lien permanent vers ce titre">¶</a></h3>
+<p><em>Localiser</em> qui est une partie d&#8217;un ILS complet, ou un <em>localiser</em> indépendant
+(LOC) également inclut un LDA (<em>Landing Directional Aid</em>) ou un SDF (<em>Simplified
+Directional Facility</em>).</p>
+<p><strong>Champs :</strong></p>
+<ul>
+<li><p class="first">navaid_id : chaine (4.0). Identification du <em>nav-aid</em>. <em>NON</em> unique.</p>
+</li>
+<li><p class="first">apt_icao : chaine (4.0). Clé étrangère du champ <em>apt_icao</em> de la couche
+<em>RunwayThreshold</em></p>
+</li>
+<li><p class="first">rwy_num : chaine (3.0). Clé étrangère du champ <em>rwy_num</em> de la couche
+<em>RunwayThreshold</em>.</p>
+</li>
+<li><p class="first">subtype : chaine (10.0). Sous-type dont :</p>
+<blockquote>
+<div><ul class="simple">
+<li>ILS-cat-I</li>
+<li>ILS-cat-II</li>
+<li>ILS-cat-III</li>
+<li>LOC</li>
+<li>LDA</li>
+<li>SDF</li>
+<li>IGS</li>
+<li>LDA-GS</li>
+</ul>
+</div></blockquote>
+</li>
+<li><p class="first">elevation_m : réel (8.2). Élévation d&#8217;un <em>nav-aid</em> en mètres.</p>
+</li>
+<li><p class="first">freq_mhz : réel (7.3). Fréquence d&#8217;un <em>nav-aid</em> en MHz.</p>
+</li>
+<li><p class="first">range_km : réel (7.3). Largeur d&#8217;un <em>nav-aid</em> en km.</p>
+</li>
+<li><p class="first">true_heading_deg : réel (6.2). En-tête réel du <em>localiser</em> en degré.</p>
+</li>
+</ul>
+</div>
+<div class="section" id="vor-point">
+<h3>VOR (Point)<a class="headerlink" href="#vor-point" title="Lien permanent vers ce titre">¶</a></h3>
+<p><em>Navaid</em> du type <em>VOR</em>, <em>VORTAC</em> ou <em>VOR-DME</em>.</p>
+<p><strong>Champs :</strong></p>
+<ul class="simple">
+<li>navaid_id : chaine (4.0). Identification de nav-aid. <em>NON</em> unique.</li>
+<li>navaid_name : chaine (0.0)</li>
+<li>subtype : chaine (10.0). Fonction <em>VOR</em>, <em>VORTAC</em> ou <em>VOR-DME</em>.</li>
+<li>elevation_m : réel (8.2)</li>
+<li>freq_mhz : réel (7.3)</li>
+<li>range_km : réel (7.3)</li>
+<li>slaved_variation_deg : réel (6.2). Indique la variation du <em>cylindre</em> d&#8217;un
+<em>VOR/VORTAC</em> en degré.</li>
+</ul>
+</div>
+<div class="section" id="ndb-point">
+<h3>NDB (Point)<a class="headerlink" href="#ndb-point" title="Lien permanent vers ce titre">¶</a></h3>
+<p><strong>Champs :</strong></p>
+<ul class="simple">
+<li>navaid_id : chaine (4.0). Identification de nav-aid. <em>NON</em> unique.</li>
+<li>navaid_name : chaine (0.0)</li>
+<li>subtype : chaine (10.0). Fonction de NDB, LOM, NDB-DME.</li>
+<li>elevation_m : réel (8.2)</li>
+<li>freq_khz : réel (7.3). Fréquence en kHz</li>
+<li>range_km : réel (7.3)</li>
+</ul>
+</div>
+<div class="section" id="gs-glideslope-point">
+<h3>GS - Glideslope (Point)<a class="headerlink" href="#gs-glideslope-point" title="Lien permanent vers ce titre">¶</a></h3>
+<p>Glideslope nav-aid.</p>
+<p><strong>Champs :</strong></p>
+<ul class="simple">
+<li>navaid_id : chaine (4.0). Identification du nav-aid. <em>NON</em> unique.</li>
+<li>apt_icao : chaine (4.0). Clé étrangère du champ <em>apt_icao</em> de la couche <em>RunwayThreshold</em>.</li>
+<li>rwy_num : chaine (3.0). Clé étrangère du champ <em>rwy_num</em> de la couche <em>RunwayThreshold</em>.</li>
+<li>elevation_m : réel (8.2)</li>
+<li>freq_mhz : réel (7.3)</li>
+<li>range_km : réel (7.3)</li>
+<li>true_heading_deg : réel (6.2). En-tête réel du <em>glideslope</em> en degré.</li>
+<li>glide_slope : réel (6.2). Angle du <em>glide-slope</em> en degré (typiquement 3 degrés)</li>
+</ul>
+</div>
+<div class="section" id="marker-ils-marker-beacons-point">
+<h3>Marker - ILS marker beacons. (Point)<a class="headerlink" href="#marker-ils-marker-beacons-point" title="Lien permanent vers ce titre">¶</a></h3>
+<p><em>Nav-aids</em> de type <em>Outer Marker</em> (OM), <em>Middle Marker</em> (MM) ou <em>Inner Marker</em> (IM).</p>
+<p><strong>Champs :</strong></p>
+<ul class="simple">
+<li>apt_icao : chaine (4.0). Clé étrangère du champ <em>apt_icao</em> de la couche
+<em>RunwayThreshold</em>.</li>
+<li>rwy_num : chaine (3.0). Clé étrangère du champ <em>rwy_num</em> de la couche
+<em>RunwayThreshold</em>.</li>
+<li>subtype : chaine (10.0). Fonction de OM, MM ou IM.</li>
+<li>elevation_m : réel (8.2)</li>
+<li>true_heading_deg : réel (6.2). En-tête réel du <em>glideslope</em> en degré.</li>
+</ul>
+</div>
+<div class="section" id="dme-point">
+<h3>DME (Point)<a class="headerlink" href="#dme-point" title="Lien permanent vers ce titre">¶</a></h3>
+<p>DME, incluant l&#8217;élément DME d&#8217;un VORTAC, VOR-DME ou NDB-DME.</p>
+<p><strong>Champs :</strong></p>
+<ul class="simple">
+<li>navaid_id : chaine (4.0). Identification de nav-aid. <em>NON</em> unique.</li>
+<li>navaid_name : chaine (0.0)</li>
+<li>subtype : chaine (10.0). Fonction de VORTAC, VOR-DME, TACAN ou NDB-DME</li>
+<li>elevation_m : réel (8.2)</li>
+<li>freq_mhz : réel (7.3)</li>
+<li>range_km : réel (7.3)</li>
+<li>bias_km : réel (6.2). Ce biais doit être soustrait à la distance calculé au
+DME pour donner la lecture du cockpit désirée.</li>
+</ul>
+</div>
+<div class="section" id="dmeils-point">
+<h3>DMEILS (Point)<a class="headerlink" href="#dmeils-point" title="Lien permanent vers ce titre">¶</a></h3>
+<p>Élément DME d&#8217;un ILS.</p>
+<p><strong>Champs :</strong></p>
+<ul class="simple">
+<li>navaid_id : chaine (4.0). Identification du nav-aid. <em>NON</em> unique.</li>
+<li>apt_icao : chaine (4.0). Clé étrangère pour le champ <em>apt_icao</em> de la couche
+<em>RunwayThreshold</em>.</li>
+<li>rwy_num : chaine (3.0). Clé étrangère pour le champ <em>rwy_num</em> de la couche
+<em>RunwayThreshold</em>.</li>
+<li>elevation_m : réel (8.2)</li>
+<li>freq_mhz : réel (7.3)</li>
+<li>range_km : réel (7.3)</li>
+<li>bias_km : réel (6.2). Ce biais doit être soustrait de la distance calculée au
+DME pour donner la lecture du cockpit désiré.</li>
+</ul>
+</div>
+</div>
+<div class="section" id="intersections-ifr-fix-dat">
+<h2>Intersections IFR (fix.dat)<a class="headerlink" href="#intersections-ifr-fix-dat" title="Lien permanent vers ce titre">¶</a></h2>
+<p>Ce fichier contient les intersections IFR (souvent nommé <em>fixes</em>).</p>
+<p>La couche suivante est renvoyée :</p>
+<ul class="simple">
+<li>FIX (Point)</li>
+</ul>
+<div class="section" id="fix-point">
+<h3>FIX (Point)<a class="headerlink" href="#fix-point" title="Lien permanent vers ce titre">¶</a></h3>
+<p><strong>Champs :</strong></p>
+<ul class="simple">
+<li>fix_name : Chaine (5.0). Nom de l&#8217;intersection. <em>NON</em> unique.</li>
+</ul>
+</div>
+</div>
+<div class="section" id="airways-awy-dat">
+<h2>Airways (awy.dat)<a class="headerlink" href="#airways-awy-dat" title="Lien permanent vers ce titre">¶</a></h2>
+<p>Ce fichier contient la description des segments de la route de vol.</p>
+<p>Les couches suivantes sont retournées :</p>
+<ul class="simple">
+<li>AirwaySegment (chaine ligne)</li>
+<li>AirwayIntersection (point)</li>
+</ul>
+<div class="section" id="airwaysegment-line-string">
+<h3>AirwaySegment (Line String)<a class="headerlink" href="#airwaysegment-line-string" title="Lien permanent vers ce titre">¶</a></h3>
+<p><strong>Champs :</strong></p>
+<ul class="simple">
+<li>segment_name : chaine (0.0)</li>
+<li>point1_name : chaine (0.0) : Nom de l&#8217;intersection ou nav-aid au début de ce
+segment</li>
+<li>point2_name : chaine (0.0) : Nom de l&#8217;intersection ou nav-aid au début de ce
+segment</li>
+<li>is_high : entier (1.0) : Définie à 1 si c&#8217;est une route aérienne &#8220;High&#8221;</li>
+<li>base_FL : entier (3.0) : Niveau de vol (en centaine de pied) de la base de la
+route de vol.</li>
+<li>top_FL : entier (3.0) : Niveau de vol (en centaine de pied) du haut de la
+route de vol.</li>
+</ul>
+</div>
+<div class="section" id="airwayintersection-point">
+<h3>AirwayIntersection (Point)<a class="headerlink" href="#airwayintersection-point" title="Lien permanent vers ce titre">¶</a></h3>
+<p><strong>Champ :</strong></p>
+<ul class="simple">
+<li>name : Chaine (0.0) : Nom de l&#8217;intersection ou nav-aid</li>
+</ul>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+
+
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../sql.html" title="SQL dans OGR"
+             >suivant</a></li>
+        <li class="right" >
+          <a href="wfs.html" title="WFS - Service WFS OGC"
+             >précédent</a> |</li>
+        <li><a href="../../index.html">GDAL v1.9.0 documentation</a> &raquo;</li>
+          <li><a href="../index.html" >OGR</a> &raquo;</li>
+          <li><a href="index.html" >Formats vecteur d&#8217;OGR</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+    <a href="http://creativecommons.org/licenses/by/2.0/fr/deed.fr">Licence Creative Common BY</a>
+    <!--
+      &copy; Copyright 2011, Yves Jacolin.-->
+      Créé avec <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0.7.
+    </div>
+  </body>
+</html>

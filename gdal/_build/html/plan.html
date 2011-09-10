@@ -1,0 +1,1383 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF8" />
+    
+    <title>Plan du site &mdash; GDAL v1.9.0 documentation</title>
+    <link rel="stylesheet" href="_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '1.9.0',
+        COLLAPSE_MODINDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/translations.js"></script>
+    <link rel="top" title="GDAL v1.9.0 documentation" href="index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li><a href="index.html">GDAL v1.9.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+
+
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <h3>Cette page</h3>
+            <ul class="this-page-menu">
+              <li><a href="_sources/plan.txt"
+                     rel="nofollow">Montrer la source</a></li>
+            </ul>
+          <div id="searchbox" style="display: none">
+            <h3>Recherche rapide</h3>
+              <form class="search" action="search.html" method="get">
+                <input type="text" name="q" size="18" />
+                <input type="submit" value="Go" />
+                <input type="hidden" name="check_keywords" value="yes" />
+                <input type="hidden" name="area" value="default" />
+              </form>
+              <p class="searchtip" style="font-size: 90%">
+              Enter search terms or a module, class or function name.
+              </p>
+          </div>
+          <script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="plan-du-site">
+<span id="gdal-plan"></span><h1>Plan du site<a class="headerlink" href="#plan-du-site" title="Lien permanent vers ce titre">¶</a></h1>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="index.html">GDAL-OGR, le couteau suisse du géomaticien</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="index.html#historique-des-versions">Historique des versions</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="NEWS.html">Historique des versions</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#table-des-matieres">Table des matières</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="install.html">Installation</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="install.html#binaires-gdal-ogr">Binaires GDAL/OGR</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="install.html#fwtools">FWTools</a></li>
+<li class="toctree-l5"><a class="reference internal" href="install.html#linux">Linux</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="install.html#fedora">Fedora</a></li>
+<li class="toctree-l6"><a class="reference internal" href="install.html#entreprise-linux-gis-elgis">Entreprise Linux GIS (ELGIS)</a></li>
+<li class="toctree-l6"><a class="reference internal" href="install.html#opensuse">OpenSuSE</a></li>
+<li class="toctree-l6"><a class="reference internal" href="install.html#debian">Debian</a></li>
+<li class="toctree-l6"><a class="reference internal" href="install.html#ubuntu">Ubuntu</a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="install.html#macos-x">MacOS X</a></li>
+<li class="toctree-l5"><a class="reference internal" href="install.html#windows">Windows</a></li>
+<li class="toctree-l5"><a class="reference internal" href="install.html#osgeo4w">OSGeo4W</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="gdal/index.html">GDAL</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="gdal/presentation.html">Utilitaires GDAL</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="gdal/presentation.html#creer-de-nouveaux-fichiers">Créer de nouveaux fichiers</a></li>
+<li class="toctree-l5"><a class="reference internal" href="gdal/presentation.html#options-de-la-ligne-de-commande">Options de la ligne de commande</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="gdal/gdalinfo.html">gdalinfo</a></li>
+<li class="toctree-l4"><a class="reference internal" href="gdal/gdal_translate.html">gdal_translate</a></li>
+<li class="toctree-l4"><a class="reference internal" href="gdal/gdaladdo.html">gdaladdo</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="gdal/gdaladdo.html#apercus-externes-dans-le-format-geotiff">Aperçus externes dans le format GeoTIFF</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="gdal/gdalwarp.html">gdalwarp</a></li>
+<li class="toctree-l4"><a class="reference internal" href="gdal/gdaltindex.html">gdaltindex</a></li>
+<li class="toctree-l4"><a class="reference internal" href="gdal/gdalbuildvrt.html">gdalbuildvrt</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="gdal/gdalbuildvrt.html#usage">Usage</a></li>
+<li class="toctree-l5"><a class="reference internal" href="gdal/gdalbuildvrt.html#description">Description</a></li>
+<li class="toctree-l5"><a class="reference internal" href="gdal/gdalbuildvrt.html#exemple">Exemple</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="gdal/gdal_contour.html">gdal_contour</a></li>
+<li class="toctree-l4"><a class="reference internal" href="gdal/gdaldem.html">gdaldem</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="gdal/gdaldem.html#synopsis">Synopsis</a></li>
+<li class="toctree-l5"><a class="reference internal" href="gdal/gdaldem.html#modes">Modes</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="gdal/gdaldem.html#hillshade">hillshade</a></li>
+<li class="toctree-l6"><a class="reference internal" href="gdal/gdaldem.html#slope">slope</a></li>
+<li class="toctree-l6"><a class="reference internal" href="gdal/gdaldem.html#aspect">aspect</a></li>
+<li class="toctree-l6"><a class="reference internal" href="gdal/gdaldem.html#color-relief">color-relief</a></li>
+<li class="toctree-l6"><a class="reference internal" href="gdal/gdaldem.html#tri">TRI</a></li>
+<li class="toctree-l6"><a class="reference internal" href="gdal/gdaldem.html#tpi">TPI</a></li>
+<li class="toctree-l6"><a class="reference internal" href="gdal/gdaldem.html#roughness">roughness</a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="gdal/gdaldem.html#auteurs">Auteurs</a></li>
+<li class="toctree-l5"><a class="reference internal" href="gdal/gdaldem.html#voir-egalement">Voir également</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="gdal/rgb2pct.html">rgb2pct.py</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="gdal/rgb2pct.html#exemple">Exemple</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="gdal/rgb2pct.html#pct2rgb-py">pct2rgb.py</a></li>
+<li class="toctree-l4"><a class="reference internal" href="gdal/gdal_merge.html">gdal_merge.py</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="gdal/gdal_merge.html#exemple">Exemple</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="gdal/gdal2tiles.html">gdal2tiles.py</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="gdal/gdal2tiles.html#usage">Usage</a></li>
+<li class="toctree-l5"><a class="reference internal" href="gdal/gdal2tiles.html#description">Description</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="gdal/gdal_rasterize.html">gdal_rasterize</a></li>
+<li class="toctree-l4"><a class="reference internal" href="gdal/gdaltransform.html">gdaltransform</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="gdal/gdaltransform.html#description">Description</a></li>
+<li class="toctree-l5"><a class="reference internal" href="gdal/gdaltransform.html#exemple-de-reprojection">Exemple de reprojection</a></li>
+<li class="toctree-l5"><a class="reference internal" href="gdal/gdaltransform.html#exemple-d-image-rpc">Exemple d&#8217;image RPC</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="gdal/nearblack.html">nearblack</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="gdal/nearblack.html#usage">Usage</a></li>
+<li class="toctree-l5"><a class="reference internal" href="gdal/nearblack.html#description">Description</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="gdal/gdal_retile.html">gdal_retile.py</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="gdal/gdal_retile.html#usage">Usage</a></li>
+<li class="toctree-l5"><a class="reference internal" href="gdal/gdal_retile.html#description">Description</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="gdal/gdal_grid.html">gdal_grid</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="gdal/gdal_grid.html#usage">Usage</a></li>
+<li class="toctree-l5"><a class="reference internal" href="gdal/gdal_grid.html#description">Description</a></li>
+<li class="toctree-l5"><a class="reference internal" href="gdal/gdal_grid.html#algorithmes-d-interpolation">Algorithmes d&#8217;interpolation</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="gdal/gdal_grid.html#invdist">invdist</a></li>
+<li class="toctree-l6"><a class="reference internal" href="gdal/gdal_grid.html#average">average</a></li>
+<li class="toctree-l6"><a class="reference internal" href="gdal/gdal_grid.html#nearest">nearest</a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="gdal/gdal_grid.html#metriques-des-donnees">Métriques des données</a></li>
+<li class="toctree-l5"><a class="reference internal" href="gdal/gdal_grid.html#lire-des-valeurs-separees-par-des-virgules">Lire des valeurs séparées par des virgules</a></li>
+<li class="toctree-l5"><a class="reference internal" href="gdal/gdal_grid.html#exemple">Exemple</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="gdal/gdal_proximity.html">gdal_proximity</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="gdal/gdal_proximity.html#usage">Usage</a></li>
+<li class="toctree-l5"><a class="reference internal" href="gdal/gdal_proximity.html#description">Description</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="gdal/gdal_polygonize.html">gdal_polygonize</a></li>
+<li class="toctree-l4"><a class="reference internal" href="gdal/gdal_sieve.html">gdal_sieve</a></li>
+<li class="toctree-l4"><a class="reference internal" href="gdal/gdal_fillnodata.html">gdal_fillnodata</a></li>
+<li class="toctree-l4"><a class="reference internal" href="gdal/gdallocationinfo.html">gdallocationinfo</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="gdal/gdallocationinfo.html#usage">Usage</a></li>
+<li class="toctree-l5"><a class="reference internal" href="gdal/gdallocationinfo.html#description">Description</a></li>
+<li class="toctree-l5"><a class="reference internal" href="gdal/gdallocationinfo.html#exemple">Exemple</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="gdal/gdal-config.html">gdal-config</a></li>
+<li class="toctree-l4"><a class="reference internal" href="gdal/formats/index.html">Formats</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="gdal/formats/airsar.html">AIRSAR &#8211; AIRSAR Polarimetric Format</a></li>
+<li class="toctree-l5"><a class="reference internal" href="gdal/formats/blx.html">BLX &#8211; Magellan BLX Topo File Format</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="gdal/formats/blx.html#georeferencement">Géoréférencement</a></li>
+<li class="toctree-l6"><a class="reference internal" href="gdal/formats/blx.html#problemes-lors-de-la-creation">Problèmes lors de la création</a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="gdal/formats/bag.html">BAG &#8212; Bathymetry Attributed Grid</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="gdal/formats/bag.html#voir-egalement">Voir également</a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="gdal/formats/bmp.html">BMP &#8212; Microsoft Windows Device Independent Bitmap</a></li>
+<li class="toctree-l5"><a class="reference internal" href="gdal/formats/cosar.html">COSAR &#8211; TerraSAR-X Complex SAR Data Product</a></li>
+<li class="toctree-l5"><a class="reference internal" href="gdal/formats/divers_formats.html">Formats divers</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="gdal/formats/divers_formats.html#aaigrid-arc-info-ascii-grid">AAIGrid &#8211; Arc/Info ASCII Grid</a></li>
+<li class="toctree-l6"><a class="reference internal" href="gdal/formats/divers_formats.html#ace2-ace2">ACE2 &#8211; ACE2</a></li>
+<li class="toctree-l6"><a class="reference internal" href="gdal/formats/divers_formats.html#adrg-arc-digitized-raster-graphics-gen-thf">ADRG/ARC Digitized Raster Graphics (.gen/.thf)</a></li>
+<li class="toctree-l6"><a class="reference internal" href="gdal/formats/divers_formats.html#aig-arc-info-binary-grid">AIG &#8211; Arc/Info Binary Grid</a></li>
+<li class="toctree-l6"><a class="reference internal" href="gdal/formats/divers_formats.html#format-bsb-maptech-noaa-bsb-nautical-chart">Format BSB &#8211; Maptech/NOAA BSB Nautical Chart</a></li>
+<li class="toctree-l6"><a class="reference internal" href="gdal/formats/divers_formats.html#format-bt-vtp-bt-binary-terrain">Format BT &#8211; VTP .bt Binary Terrain</a></li>
+<li class="toctree-l6"><a class="reference internal" href="gdal/formats/divers_formats.html#ceos-ceos-image">CEOS &#8211; CEOS Image</a></li>
+<li class="toctree-l6"><a class="reference internal" href="gdal/formats/divers_formats.html#dods-opendap-lecture-des-rasters-a-partir-de-serveurs-dods-opendap">DODS/OPeNDAP – lecture des rasters à partir de serveurs DODS/OPeNDAP</a></li>
+<li class="toctree-l6"><a class="reference internal" href="gdal/formats/divers_formats.html#doq1-premiere-generation-usgs-doq">DOQ1 &#8211; Première génération USGS DOQ</a></li>
+<li class="toctree-l6"><a class="reference internal" href="gdal/formats/divers_formats.html#doq2-nouveau-usgs-doq-etiquete">DOQ2 – Nouveau USGS DOQ étiqueté</a></li>
+<li class="toctree-l6"><a class="reference internal" href="gdal/formats/divers_formats.html#e00grid-arc-info-export-e00-grid">E00GRID &#8211; Arc/Info Export E00 GRID</a></li>
+<li class="toctree-l6"><a class="reference internal" href="gdal/formats/divers_formats.html#ehdr-esri-hdr-labelled">EHdr &#8211; ESRI .hdr Labelled</a></li>
+<li class="toctree-l6"><a class="reference internal" href="gdal/formats/divers_formats.html#envi-envi-hdr-labelled-raster">ENVI - ENVI .hdr Labelled Raster</a></li>
+<li class="toctree-l6"><a class="reference internal" href="gdal/formats/divers_formats.html#envisat-envisat-image-product">Envisat &#8211; Envisat Image Product</a></li>
+<li class="toctree-l6"><a class="reference internal" href="gdal/formats/divers_formats.html#fits-flexible-image-transport-system">FITS &#8211; Flexible Image Transport System</a></li>
+<li class="toctree-l6"><a class="reference internal" href="gdal/formats/divers_formats.html#grassasciigrid-grass-ascii-grid">GRASSASCIIGrid &#8211; GRASS ASCII Grid</a></li>
+<li class="toctree-l6"><a class="reference internal" href="gdal/formats/divers_formats.html#gsag-golden-software-ascii-grid-file-format">GSAG &#8211; Golden Software ASCII Grid File Format</a></li>
+<li class="toctree-l6"><a class="reference internal" href="gdal/formats/divers_formats.html#gsbg-golden-software-binary-grid-file-format">GSBG &#8211; Golden Software Binary Grid File Format</a></li>
+<li class="toctree-l6"><a class="reference internal" href="gdal/formats/divers_formats.html#gs7bg-golden-software-surfer-7-binary-grid-file-format">GS7BG &#8211; Golden Software Surfer 7 Binary Grid File Format</a></li>
+<li class="toctree-l6"><a class="reference internal" href="gdal/formats/divers_formats.html#gxf-grid-exchange-file">GXF &#8211; Grid eXchange File</a></li>
+<li class="toctree-l6"><a class="reference internal" href="gdal/formats/divers_formats.html#gdal-gdal-formats-divers-formats-ida">IDA &#8211; Analyse et affichage d&#8217;image</a></li>
+<li class="toctree-l6"><a class="reference internal" href="gdal/formats/divers_formats.html#jdem-japanese-dem-mem">JDEM &#8211; Japanese DEM (.mem)</a></li>
+<li class="toctree-l6"><a class="reference internal" href="gdal/formats/divers_formats.html#lan-erdas-7-x-lan-et-gis">LAN &#8211; Erdas 7.x .LAN et .GIS</a></li>
+<li class="toctree-l6"><a class="reference internal" href="gdal/formats/divers_formats.html#mff-vexcel-mff-raster">MFF &#8211; Vexcel MFF Raster</a></li>
+<li class="toctree-l6"><a class="reference internal" href="gdal/formats/divers_formats.html#ndf-nlaps-data-format">NDF &#8211; NLAPS Data Format</a></li>
+<li class="toctree-l6"><a class="reference internal" href="gdal/formats/divers_formats.html#gmt-gmt-compatible-netcdf">GMT &#8211; GMT Compatible netCDF</a></li>
+<li class="toctree-l6"><a class="reference internal" href="gdal/formats/divers_formats.html#paux-pci-aux-labelled-raw-format">PAux &#8211; PCI .aux Labelled Raw Format</a><ul>
+<li class="toctree-l7"><a class="reference internal" href="gdal/formats/divers_formats.html#options-de-creation">Options de création</a></li>
+</ul>
+</li>
+<li class="toctree-l6"><a class="reference internal" href="gdal/formats/divers_formats.html#pcraster-raster-file-format">PCRaster raster file format</a></li>
+<li class="toctree-l6"><a class="reference internal" href="gdal/formats/divers_formats.html#png-portable-network-graphics">PNG &#8211; Portable Network Graphics</a></li>
+<li class="toctree-l6"><a class="reference internal" href="gdal/formats/divers_formats.html#pnm-netpbm-pgm-ppm">PNM &#8211; Netpbm (.pgm, .ppm)</a></li>
+<li class="toctree-l6"><a class="reference internal" href="gdal/formats/divers_formats.html#raster-product-format-rpf-a-toc">Raster Product Format/RPF (a.toc)</a></li>
+<li class="toctree-l6"><a class="reference internal" href="gdal/formats/divers_formats.html#sar-ceos-ceos-sar-image">SAR_CEOS &#8211; CEOS SAR Image</a></li>
+<li class="toctree-l6"><a class="reference internal" href="gdal/formats/divers_formats.html#ctg-usgs-lulc-composite-theme-grid">CTG &#8211; USGS LULC Composite Theme Grid</a></li>
+<li class="toctree-l6"><a class="reference internal" href="gdal/formats/divers_formats.html#dimap-spot-dimap">DIMAP &#8211; Spot DIMAP</a></li>
+<li class="toctree-l6"><a class="reference internal" href="gdal/formats/divers_formats.html#sdat-saga-gis-binary-grid-file-format">SDAT &#8211; SAGA GIS Binary Grid File Format</a></li>
+<li class="toctree-l6"><a class="reference internal" href="gdal/formats/divers_formats.html#sdts-usgs-sdts-dem">SDTS &#8211; USGS SDTS DEM</a></li>
+<li class="toctree-l6"><a class="reference internal" href="gdal/formats/divers_formats.html#sgi-sgi-image-format">SGI - SGI Image Format</a></li>
+<li class="toctree-l6"><a class="reference internal" href="gdal/formats/divers_formats.html#snodas-snow-data-assimilation-system">SNODAS &#8211; Snow Data Assimilation System</a></li>
+<li class="toctree-l6"><a class="reference internal" href="gdal/formats/divers_formats.html#standard-product-format-asrp-usrp-gen">Standard Product Format (ASRP/USRP) (.gen)</a></li>
+<li class="toctree-l6"><a class="reference internal" href="gdal/formats/divers_formats.html#srtmhgt-srtm-hgt-format">SRTMHGT - SRTM HGT Format</a></li>
+<li class="toctree-l6"><a class="reference internal" href="gdal/formats/divers_formats.html#ecrg-table-of-contents-toc-xml">ECRG Table Of Contents (TOC.xml)</a><ul>
+<li class="toctree-l7"><a class="reference internal" href="gdal/formats/divers_formats.html#voir-egalement">Voir également</a></li>
+</ul>
+</li>
+<li class="toctree-l6"><a class="reference internal" href="gdal/formats/divers_formats.html#eir-erdas-imagine-raw">EIR &#8211; Erdas Imagine Raw</a></li>
+<li class="toctree-l6"><a class="reference internal" href="gdal/formats/divers_formats.html#wld-esri-world-file">WLD &#8211; ESRI World File</a></li>
+<li class="toctree-l6"><a class="reference internal" href="gdal/formats/divers_formats.html#xpm-x11-pixmap">XPM - X11 Pixmap</a></li>
+<li class="toctree-l6"><a class="reference internal" href="gdal/formats/divers_formats.html#genbin-binaire-generique-etiquete-hdr">GenBin - Binaire Générique (étiqueté .hdr)</a></li>
+<li class="toctree-l6"><a class="reference internal" href="gdal/formats/divers_formats.html#gff-sandia-national-laboratories-gsat-file-format">GFF - Sandia National Laboratories GSAT File Format</a></li>
+<li class="toctree-l6"><a class="reference internal" href="gdal/formats/divers_formats.html#zmap-zmap-plus-grid">ZMap &#8211; ZMap Plus Grid</a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="gdal/formats/dods.html">DODS &#8211; OPeNDAP Grid Client</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="gdal/formats/dods.html#denomination-des-jeux-de-donnees">dénomination des jeux de données</a></li>
+<li class="toctree-l6"><a class="reference internal" href="gdal/formats/dods.html#meta-donnees-specialisees-ais-das">Méta-données spécialisées AIS/DAS</a><ul>
+<li class="toctree-l7"><a class="reference internal" href="gdal/formats/dods.html#jeu-de-donnees">Jeu de données</a></li>
+<li class="toctree-l7"><a class="reference internal" href="gdal/formats/dods.html#bande">Bande</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="gdal/formats/dted.html">DTED &#8211; Military Elevation Data</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="gdal/formats/dted.html#problemes-de-lecture">Problèmes de lecture</a><ul>
+<li class="toctree-l7"><a class="reference internal" href="gdal/formats/dted.html#vitesse-de-lecture">Vitesse de lecture</a></li>
+<li class="toctree-l7"><a class="reference internal" href="gdal/formats/dted.html#problemes-de-georeferencement">Problèmes de géoréférencement</a></li>
+<li class="toctree-l7"><a class="reference internal" href="gdal/formats/dted.html#problemes-de-checksum">Problèmes de checksum</a></li>
+</ul>
+</li>
+<li class="toctree-l6"><a class="reference internal" href="gdal/formats/dted.html#probleme-lors-de-la-creation">Problème lors de la création</a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="gdal/formats/ecw.html">Le format ECW - ERDAS Compress Wavelets</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="gdal/formats/ecw.html#problemes-de-creation">Problèmes de création</a></li>
+<li class="toctree-l6"><a class="reference internal" href="gdal/formats/ecw.html#options-de-configuration">Options de configuration</a></li>
+<li class="toctree-l6"><a class="reference internal" href="gdal/formats/ecw.html#voyez-egalement">Voyez également</a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="gdal/formats/elas.html">ELAS - Earth Resources Laboratory Applications Software</a></li>
+<li class="toctree-l5"><a class="reference internal" href="gdal/formats/epsilon.html">Epsilon - images compressé par ondelette</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="gdal/formats/epsilon.html#options-de-creation">Options de création</a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="gdal/formats/ers.html">ERS &#8211; ERMapper .ERS</a></li>
+<li class="toctree-l5"><a class="reference internal" href="gdal/formats/fast.html">FAST &#8211; EOSAT FAST Format</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="gdal/formats/fast.html#les-donnees">Les données</a><ul>
+<li class="toctree-l7"><a class="reference internal" href="gdal/formats/fast.html#fast-l7a">FAST-L7A</a></li>
+<li class="toctree-l7"><a class="reference internal" href="gdal/formats/fast.html#irs-1c-1d">IRS-1C/1D</a><ul>
+<li class="toctree-l8"><a class="reference internal" href="gdal/formats/fast.html#ou">ou</a></li>
+<li class="toctree-l8"><a class="reference internal" href="gdal/formats/fast.html#id1">ou</a></li>
+<li class="toctree-l8"><a class="reference internal" href="gdal/formats/fast.html#id2">ou</a></li>
+<li class="toctree-l8"><a class="reference internal" href="gdal/formats/fast.html#id3">ou</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l6"><a class="reference internal" href="gdal/formats/fast.html#georeferencement">Géoréférencement</a><ul>
+<li class="toctree-l7"><a class="reference internal" href="gdal/formats/fast.html#meta-donnees">Méta-données</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="gdal/formats/georaster.html">GeoRaster d&#8217;Oracle Spatial</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="gdal/formats/georaster.html#naviguer-dans-la-base-de-donnees-des-georasters">Naviguer dans la base de données des GeoRasters</a></li>
+<li class="toctree-l6"><a class="reference internal" href="gdal/formats/georaster.html#options-de-creation">Options de création</a></li>
+<li class="toctree-l6"><a class="reference internal" href="gdal/formats/georaster.html#importer-des-georaster">Importer des GeoRaster</a></li>
+<li class="toctree-l6"><a class="reference internal" href="gdal/formats/georaster.html#exporter-georaster">Exporter GeoRaster</a></li>
+<li class="toctree-l6"><a class="reference internal" href="gdal/formats/georaster.html#utilisation-generale-de-georaster">Utilisation générale de GeoRaster</a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="gdal/formats/gif.html">GIF &#8211; Graphics Interchange Format</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="gdal/formats/gif.html#probleme-lors-de-la-creation">Problème lors de la création</a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="gdal/formats/grass.html">Le format GRASS</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="gdal/formats/grass.html#selection-des-rasters-de-grass">Sélection des rasters de GRASS</a><ul>
+<li class="toctree-l7"><a class="reference internal" href="gdal/formats/grass.html#chemin-complet-vers-le-fichier-cellhd">Chemin complet vers le fichier cellhd</a></li>
+<li class="toctree-l7"><a class="reference internal" href="gdal/formats/grass.html#chemin-complet-vers-le-repertoire">Chemin complet vers le répertoire</a></li>
+<li class="toctree-l7"><a class="reference internal" href="gdal/formats/grass.html#fichier-de-configuration">Fichier de configuration</a></li>
+</ul>
+</li>
+<li class="toctree-l6"><a class="reference internal" href="gdal/formats/grass.html#fonctionnalites-gerees">Fonctionnalités gérées</a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="gdal/formats/grib.html">GRIB &#8211; WMO General Regularly-distributed Information sous la forme Binaire</a></li>
+<li class="toctree-l5"><a class="reference internal" href="gdal/formats/gtiff.html">Le format Gtiff</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="gdal/formats/gtiff.html#geo-referencement">Géo-référencement</a></li>
+<li class="toctree-l6"><a class="reference internal" href="gdal/formats/gtiff.html#masques-de-transparence-interne">Masques de transparence interne</a></li>
+<li class="toctree-l6"><a class="reference internal" href="gdal/formats/gtiff.html#apercus">Aperçus</a></li>
+<li class="toctree-l6"><a class="reference internal" href="gdal/formats/gtiff.html#metadonnee">Métadonnée</a></li>
+<li class="toctree-l6"><a class="reference internal" href="gdal/formats/gtiff.html#valeur-nodata">Valeur nodata</a></li>
+<li class="toctree-l6"><a class="reference internal" href="gdal/formats/gtiff.html#problemes-de-creation">Problèmes de création</a><ul>
+<li class="toctree-l7"><a class="reference internal" href="gdal/formats/gtiff.html#options-de-creation">Options de création</a></li>
+</ul>
+</li>
+<li class="toctree-l6"><a class="reference internal" href="gdal/formats/gtiff.html#a-propos-de-la-compression-d-images-rvb-au-format-jpeg">À propos de la compression d&#8217;images RVB au format JPEG</a><ul>
+<li class="toctree-l7"><a class="reference internal" href="gdal/formats/gtiff.html#options-de-configuration">Options de configuration</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="gdal/formats/hdf4.html">HDF4 &#8212; Hierarchical Data Format Version 4 (HDF4)</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="gdal/formats/hdf4.html#gestion-des-images-multiple-sous-ensemble-de-donnees">Gestion des Images Multiple (Sous-ensemble de données)</a></li>
+<li class="toctree-l6"><a class="reference internal" href="gdal/formats/hdf4.html#geo-referencement">Géo-référencement</a></li>
+<li class="toctree-l6"><a class="reference internal" href="gdal/formats/hdf4.html#problemes-de-creation">Problèmes de création</a></li>
+<li class="toctree-l6"><a class="reference internal" href="gdal/formats/hdf4.html#meta-donnees">Méta-données</a></li>
+<li class="toctree-l6"><a class="reference internal" href="gdal/formats/hdf4.html#compilation-du-pilote">Compilation du pilote</a></li>
+<li class="toctree-l6"><a class="reference internal" href="gdal/formats/hdf4.html#voir-aussi">Voir aussi</a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="gdal/formats/hdf5.html">HDF5 &#8212; Hierarchical Data Format Release 5 (HDF5)</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="gdal/formats/hdf5.html#gestion-des-images-multiples-sous-jeux-de-donnees">Gestion des images multiples (Sous jeux de données)</a></li>
+<li class="toctree-l6"><a class="reference internal" href="gdal/formats/hdf5.html#georeferencement">Géoréferencement</a></li>
+<li class="toctree-l6"><a class="reference internal" href="gdal/formats/hdf5.html#meta-donnees">Méta-données</a></li>
+<li class="toctree-l6"><a class="reference internal" href="gdal/formats/hdf5.html#compilation-du-pilote">Compilation du pilote</a></li>
+<li class="toctree-l6"><a class="reference internal" href="gdal/formats/hdf5.html#voir-egalement">Voir également</a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="gdal/formats/hf2.html">HF2 &#8211; HF2/HFZ heightfield raster</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="gdal/formats/hf2.html#options-de-creation">Options de création</a></li>
+<li class="toctree-l6"><a class="reference internal" href="gdal/formats/hf2.html#voir-egalement">Voir également</a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="gdal/formats/hfa.html">HFA &#8211; Erdas Imagine .img</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="gdal/formats/hfa.html#probleme-lors-de-la-creation">Problème lors de la création</a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="gdal/formats/idrisi.html">RST &#8212; Idrisi Raster Format</a></li>
+<li class="toctree-l5"><a class="reference internal" href="gdal/formats/ilwis.html">ILWIS &#8211; Raster Map</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="gdal/formats/ilwis.html#fonctionnalites">Fonctionnalités :</a></li>
+<li class="toctree-l6"><a class="reference internal" href="gdal/formats/ilwis.html#limitations">Limitations :</a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="gdal/formats/ingr.html">INGR &#8212; Intergraph Raster Format</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="gdal/formats/ingr.html#lecture-des-fichiers-ingr">Lecture des fichiers INGR</a></li>
+<li class="toctree-l6"><a class="reference internal" href="gdal/formats/ingr.html#ecrire-des-fichiers-ingr">Écrire des fichiers INGR</a></li>
+<li class="toctree-l6"><a class="reference internal" href="gdal/formats/ingr.html#extension-de-fichier">Extension de fichier</a></li>
+<li class="toctree-l6"><a class="reference internal" href="gdal/formats/ingr.html#georeferencement">Géoréférencement</a></li>
+<li class="toctree-l6"><a class="reference internal" href="gdal/formats/ingr.html#voir-egalement">Voir également</a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="gdal/formats/jaxapalsar.html">JAXA PALSAR Processed Products</a></li>
+<li class="toctree-l5"><a class="reference internal" href="gdal/formats/jp2ecw.html">JP2ECW &#8211; ERMapper JPEG2000 (.jp2)</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="gdal/formats/jp2ecw.html#problemes-de-creation">Problèmes de création</a></li>
+<li class="toctree-l6"><a class="reference internal" href="gdal/formats/jp2ecw.html#options-de-configuration">Options de configuration</a></li>
+<li class="toctree-l6"><a class="reference internal" href="gdal/formats/jp2ecw.html#voir-egalement">Voir également</a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="gdal/formats/jp2kak.html">JP2KAK &#8211; JPEG-2000 (basé sur Kakadu)</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="gdal/formats/jp2kak.html#problemes-de-creation">Problèmes de création</a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="gdal/formats/jp2mrsid.html">JP2MrSID &#8212; JPEG2000 via MrSID SDK</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="gdal/formats/jp2mrsid.html#options-de-creation">Options de création</a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="gdal/formats/jpeg.html">JPEG &#8211; JPEG JFIF File Format</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="gdal/formats/jpeg.html#options-de-creation">Options de création</a><ul>
+<li class="toctree-l7"><a class="reference internal" href="gdal/formats/jpeg.html#voir-egalement">Voir également</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="gdal/formats/jpeg2000.html">JPEG2000 &#8212; Implémentation du format JPEG-2000 partie 1</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="gdal/formats/jpeg2000.html#options-de-creation">Options de création</a><ul>
+<li class="toctree-l7"><a class="reference internal" href="gdal/formats/jpeg2000.html#argument-m">Argument m</a></li>
+<li class="toctree-l7"><a class="reference internal" href="gdal/formats/jpeg2000.html#argument-p">Argument P</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="gdal/formats/jp2openjpeg.html">JP2OpenJPEG &#8212; pilote JPEG2000 basé sur la bibliothèque OpenJPEG</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="gdal/formats/jp2openjpeg.html#options-de-creation">Options de création</a></li>
+<li class="toctree-l6"><a class="reference internal" href="gdal/formats/jp2openjpeg.html#patches-pour-la-bibliotheque-openjpeg">Patches pour la bibliothèque OpenJPEG</a></li>
+<li class="toctree-l6"><a class="reference internal" href="gdal/formats/jp2openjpeg.html#voir-egalement">Voir également</a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="gdal/formats/jpegls.html">JPEGLS</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="gdal/formats/jpegls.html#options-de-creation">Options de création</a></li>
+<li class="toctree-l6"><a class="reference internal" href="gdal/formats/jpegls.html#voir-egalement">Voir également</a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="gdal/formats/jpipkak.html">JPIPKAK - JPIP Streaming</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="gdal/formats/jpipkak.html#jpipkak-apercu-jpip">JPIPKAK - aperçu JPIP</a></li>
+<li class="toctree-l6"><a class="reference internal" href="gdal/formats/jpipkak.html#jpipkak-approche">JPIPKAK - approche</a></li>
+<li class="toctree-l6"><a class="reference internal" href="gdal/formats/jpipkak.html#jpipkak-implementation">JPIPKAK - implémentation</a></li>
+<li class="toctree-l6"><a class="reference internal" href="gdal/formats/jpipkak.html#jpipkak-exigences-d-installation">JPIPKAK - exigences d&#8217;installation</a></li>
+<li class="toctree-l6"><a class="reference internal" href="gdal/formats/jpipkak.html#notes">Notes</a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="gdal/formats/l1b.html">L1B &#8211; NOAA Polar Orbiter Level 1b Data Set (AVHRR)</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="gdal/formats/l1b.html#geo-referencement">Géo-référencement</a></li>
+<li class="toctree-l6"><a class="reference internal" href="gdal/formats/l1b.html#donnees">Données</a></li>
+<li class="toctree-l6"><a class="reference internal" href="gdal/formats/l1b.html#meta-donnees">Méta-données</a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="gdal/formats/lcp.html">Pilote GDAL pour le format FARSITE v.4 LCP</a></li>
+<li class="toctree-l5"><a class="reference internal" href="gdal/formats/leveller.html">Leveller &#8212; Daylon Leveller Heightfield</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="gdal/formats/leveller.html#lecture">Lecture</a></li>
+<li class="toctree-l6"><a class="reference internal" href="gdal/formats/leveller.html#ecriture">Écriture</a></li>
+<li class="toctree-l6"><a class="reference internal" href="gdal/formats/leveller.html#historique">Historique</a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="gdal/formats/mem.html">MEM &#8211; In Memory Raster</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="gdal/formats/mem.html#format-des-noms-des-jeux-de-donnees">Format des noms des jeux de données</a></li>
+<li class="toctree-l6"><a class="reference internal" href="gdal/formats/mem.html#options-de-creation">Options de création</a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="gdal/formats/mff2.html">MFF2 &#8211; Vexcel MFF2 Image</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="gdal/formats/mff2.html#details-du-format">Détails du format</a><ul>
+<li class="toctree-l7"><a class="reference internal" href="gdal/formats/mff2.html#structure-generale-du-mff2">Structure générale du MFF2</a></li>
+<li class="toctree-l7"><a class="reference internal" href="gdal/formats/mff2.html#le-fichier-attrib">Le fichier &#8220;attrib&#8221;</a></li>
+<li class="toctree-l7"><a class="reference internal" href="gdal/formats/mff2.html#le-fichier-image-data">Le fichier &#8220;image_data&#8221;</a></li>
+<li class="toctree-l7"><a class="reference internal" href="gdal/formats/mff2.html#le-fichier-georef">Le fichier &#8220;georef&#8221;</a></li>
+<li class="toctree-l7"><a class="reference internal" href="gdal/formats/mff2.html#projection-gerees">Projection gérées</a></li>
+<li class="toctree-l7"><a class="reference internal" href="gdal/formats/mff2.html#ellipsoides-reconnus">Ellipsoïdes reconnus</a></li>
+<li class="toctree-l7"><a class="reference internal" href="gdal/formats/mff2.html#explication-des-champs">Explication des champs</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="gdal/formats/mrsid.html">MrSID &#8212; Multi-resolution Seamless Image Database</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="gdal/formats/mrsid.html#meta-donnees">Méta-données</a></li>
+<li class="toctree-l6"><a class="reference internal" href="gdal/formats/mrsid.html#georeferencement">Géoréférencement</a></li>
+<li class="toctree-l6"><a class="reference internal" href="gdal/formats/mrsid.html#options-de-creation">Options de création</a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="gdal/formats/mrsid_lidar.html">Compression Lidar de MrSID/MG4 / Fichiers view de Cloud ponctuel</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="gdal/formats/mrsid_lidar.html#exemple-de-fichier-view-a-partir-de-la-specification-des-documents-view">Exemple de fichier View (à partir de la spécification des documents View)</a><ul>
+<li class="toctree-l7"><a class="reference internal" href="gdal/formats/mrsid_lidar.html#fichier-view-le-plus-simple-possible">Fichier .view le plus simple possible</a></li>
+<li class="toctree-l7"><a class="reference internal" href="gdal/formats/mrsid_lidar.html#decoupe-des-donnees">Découpe des données</a></li>
+<li class="toctree-l7"><a class="reference internal" href="gdal/formats/mrsid_lidar.html#expose-as-a-bare-earth-max-dem">Expose as a bare earth (Max) DEM</a></li>
+<li class="toctree-l7"><a class="reference internal" href="gdal/formats/mrsid_lidar.html#image-d-intensite">Image d&#8217;intensité</a></li>
+<li class="toctree-l7"><a class="reference internal" href="gdal/formats/mrsid_lidar.html#images-rvb">Images RVB</a></li>
+</ul>
+</li>
+<li class="toctree-l6"><a class="reference internal" href="gdal/formats/mrsid_lidar.html#gestion-de-l-ecriture">Gestion de l&#8217;écriture</a></li>
+<li class="toctree-l6"><a class="reference internal" href="gdal/formats/mrsid_lidar.html#limitations-de-l-implementation-actuelle">Limitations de l&#8217;implémentation actuelle</a></li>
+<li class="toctree-l6"><a class="reference internal" href="gdal/formats/mrsid_lidar.html#voir-egalement">Voir également</a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="gdal/formats/msg.html">MSG &#8211; Météosat Seconde Génération</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="gdal/formats/msg.html#id1">Instructions de compilation</a></li>
+<li class="toctree-l6"><a class="reference internal" href="gdal/formats/msg.html#specification-des-sources-des-jeux-de-donnees">Spécification des sources des jeux de données</a></li>
+<li class="toctree-l6"><a class="reference internal" href="gdal/formats/msg.html#georeferencement-et-projection">Géoréférencement et projection</a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="gdal/formats/msgn.html">MSGN &#8211; Meteosat Second Generation (MSG) Format Natif d&#8217;Archive (.nat)</a></li>
+<li class="toctree-l5"><a class="reference internal" href="gdal/formats/netcdf.html">NetCDF : Network Common Data Form</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="gdal/formats/netcdf.html#multiple-image-handling-sous-jeu-de-donnees">Multiple Image Handling (sous-jeu de données)</a></li>
+<li class="toctree-l6"><a class="reference internal" href="gdal/formats/netcdf.html#dimension">Dimension</a></li>
+<li class="toctree-l6"><a class="reference internal" href="gdal/formats/netcdf.html#georeferencement">Géoréférencement</a></li>
+<li class="toctree-l6"><a class="reference internal" href="gdal/formats/netcdf.html#problemes-de-creations">Problèmes de créations</a></li>
+<li class="toctree-l6"><a class="reference internal" href="gdal/formats/netcdf.html#meta-donnees-gdal-pour-netcdf">Méta-données GDAL pour NetCDF</a></li>
+<li class="toctree-l6"><a class="reference internal" href="gdal/formats/netcdf.html#compilation-du-pilote">Compilation du pilote</a></li>
+<li class="toctree-l6"><a class="reference internal" href="gdal/formats/netcdf.html#voir-egalement">Voir également</a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="gdal/formats/nitf.html">NITF &#8211; National Imagery Transmission Format</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="gdal/formats/nitf.html#problemes-lors-de-la-creation">Problèmes lors de la création</a></li>
+<li class="toctree-l6"><a class="reference internal" href="gdal/formats/nitf.html#liens">Liens</a></li>
+<li class="toctree-l6"><a class="reference internal" href="gdal/formats/nitf.html#credit">Crédit</a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="gdal/formats/nitf_avancee.html">NITF &#8211; Information Avancée sur le pilote</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="gdal/formats/nitf_avancee.html#segments-cgm">Segments CGM</a></li>
+<li class="toctree-l6"><a class="reference internal" href="gdal/formats/nitf_avancee.html#fichiers-nitf-multi-image">Fichiers NITF Multi-Image</a></li>
+<li class="toctree-l6"><a class="reference internal" href="gdal/formats/nitf_avancee.html#segments-texte">Segments Texte</a></li>
+<li class="toctree-l6"><a class="reference internal" href="gdal/formats/nitf_avancee.html#tre">TRE</a></li>
+<li class="toctree-l6"><a class="reference internal" href="gdal/formats/nitf_avancee.html#tres-comme-xml-tre">TREs comme xml:TRE</a></li>
+<li class="toctree-l6"><a class="reference internal" href="gdal/formats/nitf_avancee.html#fichier-brute-en-tete-d-image">Fichier brute/ En-tête d&#8217;image</a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="gdal/formats/ogdi.html">OGDI &#8211; Pont OGDI</a></li>
+<li class="toctree-l5"><a class="reference internal" href="gdal/formats/ozi.html">OZI &#8211; raster OZF2/OZFX3</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="gdal/formats/ozi.html#voir-egalement">Voir également</a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="gdal/formats/pcidsk.html">PCIDSK &#8212; PCI Geomatics Database File</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="gdal/formats/pcidsk.html#options-de-creation">Options de création</a></li>
+<li class="toctree-l6"><a class="reference internal" href="gdal/formats/pcidsk.html#lisez-egalement">Lisez également</a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="gdal/formats/pdf.html">Geospatial PDF</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="gdal/formats/pdf.html#restrictions">Restrictions</a></li>
+<li class="toctree-l6"><a class="reference internal" href="gdal/formats/pdf.html#voir-egalement">Voir également</a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="gdal/formats/pds.html">PDS &#8211; Système de données planétaire</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="gdal/formats/pds.html#voir-egalement">Voir également</a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="gdal/formats/isis2.html">ISIS2 &#8211; Cube ISIS de l&#8217;astrogéologie de l&#8217;USGS (Version 2)</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="gdal/formats/isis2.html#problemes-de-creation">Problèmes de création</a><ul>
+<li class="toctree-l7"><a class="reference internal" href="gdal/formats/isis2.html#options-de-creation">Options de création</a></li>
+</ul>
+</li>
+<li class="toctree-l6"><a class="reference internal" href="gdal/formats/isis2.html#voir-egalement">Voir également</a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="gdal/formats/isis3.html">ISIS3 &#8211; USGS Astrogeology ISIS Cube (Version 3)</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="gdal/formats/isis3.html#voir-egalement">Voir également</a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="gdal/formats/r.html">R &#8211; R Object Data Store</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="gdal/formats/r.html#options-de-creation">Options de création</a></li>
+<li class="toctree-l6"><a class="reference internal" href="gdal/formats/r.html#voir-egalement">Voir également</a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="gdal/formats/rasdaman.html">Pilote GDAL Rasdaman</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="gdal/formats/rasdaman.html#voir-egalement">Voir également</a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="gdal/formats/rasterlite.html">Rasterlite - Rasters in SQLite DB</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="gdal/formats/rasterlite.html#syntaxe-de-la-chaine-de-connexion-en-mode-lecture">Syntaxe de la chaîne de connexion en mode lecture</a></li>
+<li class="toctree-l6"><a class="reference internal" href="gdal/formats/rasterlite.html#problemes-de-creation">Problèmes  de création</a><ul>
+<li class="toctree-l7"><a class="reference internal" href="gdal/formats/rasterlite.html#options-de-creation">Options de création</a></li>
+</ul>
+</li>
+<li class="toctree-l6"><a class="reference internal" href="gdal/formats/rasterlite.html#apercues">Aperçues</a></li>
+<li class="toctree-l6"><a class="reference internal" href="gdal/formats/rasterlite.html#exemples">Exemples</a></li>
+<li class="toctree-l6"><a class="reference internal" href="gdal/formats/rasterlite.html#voir-egalement">Voir également</a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="gdal/formats/rik.html">RIK &#8211; Swedish Grid Maps</a></li>
+<li class="toctree-l5"><a class="reference internal" href="gdal/formats/rmf.html">RMF &#8212; Raster Matrix Format</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="gdal/formats/rmf.html#meta-donnees">Méta-données</a></li>
+<li class="toctree-l6"><a class="reference internal" href="gdal/formats/rmf.html#options-creation">Options création</a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="gdal/formats/rs2.html">RS2 &#8211; RadarSat 2 XML Product</a></li>
+<li class="toctree-l5"><a class="reference internal" href="gdal/formats/sde.html">ESRI ArcSDE Raster</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="gdal/formats/sde.html#fonctionnalites-du-pilote-gdal-du-raster-d-arcsde">Fonctionnalités du pilote GDAL du Raster d&#8217;ArcSDE</a></li>
+<li class="toctree-l6"><a class="reference internal" href="gdal/formats/sde.html#considerations-des-performances">Considérations des performances</a></li>
+<li class="toctree-l6"><a class="reference internal" href="gdal/formats/sde.html#specification-du-jeu-de-donnees">Spécification du jeu de données</a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="gdal/formats/terragen.html">Terragen &#8212; Terragen™ Terrain File</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="gdal/formats/terragen.html#lecture">Lecture</a></li>
+<li class="toctree-l6"><a class="reference internal" href="gdal/formats/terragen.html#ecriture">Écriture</a></li>
+<li class="toctree-l6"><a class="reference internal" href="gdal/formats/terragen.html#roundtripping">Roundtripping</a></li>
+<li class="toctree-l6"><a class="reference internal" href="gdal/formats/terragen.html#historique">Historique</a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="gdal/formats/usgsdem.html">USGSDEM &#8211; USGS ASCII DEM (et CDED)</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="gdal/formats/usgsdem.html#problemes-de-creation">Problèmes de création</a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="gdal/formats/vrt.html">Format virtuel de GDAL</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="gdal/formats/vrt.html#introduction">Introduction</a></li>
+<li class="toctree-l6"><a class="reference internal" href="gdal/formats/vrt.html#format-vrt">Format .vrt</a></li>
+<li class="toctree-l6"><a class="reference internal" href="gdal/formats/vrt.html#description-des-vrt-pour-les-fichiers-brutes">Description des .vrt pour les fichiers brutes</a></li>
+<li class="toctree-l6"><a class="reference internal" href="gdal/formats/vrt.html#creation-programmee-de-jeux-de-donnees-vrt">Création programmée de jeux de données VRT</a></li>
+<li class="toctree-l6"><a class="reference internal" href="gdal/formats/vrt.html#utilisation-des-bandes-derivees">Utilisation des bandes dérivées</a></li>
+<li class="toctree-l6"><a class="reference internal" href="gdal/formats/vrt.html#ecrire-des-fonctions-pixels">Écrire des fonctions pixels</a></li>
+<li class="toctree-l6"><a class="reference internal" href="gdal/formats/vrt.html#problemes-de-multi-threading">Problèmes de Multi-threading</a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="gdal/formats/wcs.html">WCS &#8211; OGC Web Coverage Service</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="gdal/formats/wcs.html#time">Time</a><ul>
+<li class="toctree-l7"><a class="reference internal" href="gdal/formats/wcs.html#voir-egalement">Voir également</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="gdal/formats/webp.html">WEBP - WEBP</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="gdal/formats/webp.html#options-de-creation">Options de création</a></li>
+<li class="toctree-l6"><a class="reference internal" href="gdal/formats/webp.html#voir-egalement">Voir également</a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="gdal/formats/wms.html">WMS &#8211; Web Map Services</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="gdal/formats/wms.html#minipilote">Minipilote</a><ul>
+<li class="toctree-l7"><a class="reference internal" href="gdal/formats/wms.html#wms">WMS</a></li>
+<li class="toctree-l7"><a class="reference internal" href="gdal/formats/wms.html#tileservice">TileService</a></li>
+<li class="toctree-l7"><a class="reference internal" href="gdal/formats/wms.html#worldwind">WorldWind</a></li>
+<li class="toctree-l7"><a class="reference internal" href="gdal/formats/wms.html#tms-gdal-1-7-0-et-sup">TMS (GDAL 1.7.0 et sup.)</a></li>
+<li class="toctree-l7"><a class="reference internal" href="gdal/formats/wms.html#onearth-tiled-wms-gdal-1-9-0-et-sup">OnEarth Tiled WMS (GDAL 1.9.0 et sup.)</a></li>
+<li class="toctree-l7"><a class="reference internal" href="gdal/formats/wms.html#virtualearth-gdal-1-9-0-et-sup">VirtualEarth (GDAL 1.9.0 et sup.)</a></li>
+</ul>
+</li>
+<li class="toctree-l6"><a class="reference internal" href="gdal/formats/wms.html#exemples">Exemples</a></li>
+<li class="toctree-l6"><a class="reference internal" href="gdal/formats/wms.html#syntaxe-ouverte">Syntaxe ouverte</a></li>
+<li class="toctree-l6"><a class="reference internal" href="gdal/formats/wms.html#voir-egalement">Voir également</a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="gdal/formats/xyz.html">XYZ &#8211; ASCII Gridded XYZ</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="gdal/formats/xyz.html#options-de-creation">Options de création</a></li>
+<li class="toctree-l6"><a class="reference internal" href="gdal/formats/xyz.html#voir-egalement">Voir également</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="ogr/index.html">OGR</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="ogr/presentation.html">Présentation d&#8217;OGR</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="ogr/presentation.html#ressource">Ressource</a></li>
+<li class="toctree-l5"><a class="reference internal" href="ogr/presentation.html#download">Download</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="ogr/presentation.html#executable-pret-a-etre-utilise">Exécutable prêt à être utilisé</a></li>
+<li class="toctree-l6"><a class="reference internal" href="ogr/presentation.html#source">Source</a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="ogr/presentation.html#rapport-de-bug">Rapport de Bug</a></li>
+<li class="toctree-l5"><a class="reference internal" href="ogr/presentation.html#listes-de-diffusion">Listes de diffusion</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="ogr/ogrinfo.html">ogrinfo</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ogr/ogr2ogr.html">ogr2ogr</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="ogr/ogr2ogr.html#exemples">Exemples</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="ogr/ogrtindex.html">ogrtindex</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ogr/formats/index.html">Formats vecteur d&#8217;OGR</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="ogr/formats/aeronavfaa.html">Aeronav FAA</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="ogr/formats/aeronavfaa.html#voir-egalement">Voir également</a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="ogr/formats/ao.html">ArcObjects d&#8217;ESRI</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="ogr/formats/ao.html#apercu">Aperçu</a></li>
+<li class="toctree-l6"><a class="reference internal" href="ogr/formats/ao.html#dependances">Dépendances</a></li>
+<li class="toctree-l6"><a class="reference internal" href="ogr/formats/ao.html#usage">Usage</a></li>
+<li class="toctree-l6"><a class="reference internal" href="ogr/formats/ao.html#notes-de-compilation">Notes de compilation</a></li>
+<li class="toctree-l6"><a class="reference internal" href="ogr/formats/ao.html#problemes-connus">Problèmes connus</a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="ogr/formats/avcbin.html">Arc/Info Binary Coverage</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="ogr/formats/avcbin.html#voir-egalement">Voir également</a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="ogr/formats/avce00.html">Couverture Arc/Info E00 (ASCII)</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="ogr/formats/avce00.html#voir-aussi">Voir aussi</a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="ogr/formats/bna.html">BNA - Atlas BNA</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="ogr/formats/bna.html#problemes-lors-de-la-creation">Problèmes lors de la création</a></li>
+<li class="toctree-l6"><a class="reference internal" href="ogr/formats/bna.html#exemple">Exemple</a></li>
+<li class="toctree-l6"><a class="reference internal" href="ogr/formats/bna.html#voir-egalement">Voir également</a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="ogr/formats/couchdb.html">CouchDB - CouchDB/GeoCouch</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="ogr/formats/couchdb.html#concepts-couchdb-vs-ogr">Concepts CouchDB vs OGR</a></li>
+<li class="toctree-l6"><a class="reference internal" href="ogr/formats/couchdb.html#syntaxe-du-nom-de-jeu-de-donnees">Syntaxe du nom de jeu de données</a></li>
+<li class="toctree-l6"><a class="reference internal" href="ogr/formats/couchdb.html#authentification">Authentification</a></li>
+<li class="toctree-l6"><a class="reference internal" href="ogr/formats/couchdb.html#filtrage">Filtrage</a></li>
+<li class="toctree-l6"><a class="reference internal" href="ogr/formats/couchdb.html#pagination">Pagination</a></li>
+<li class="toctree-l6"><a class="reference internal" href="ogr/formats/couchdb.html#gestion-de-l-ecriture">Gestion de l&#8217;écriture</a></li>
+<li class="toctree-l6"><a class="reference internal" href="ogr/formats/couchdb.html#gestion-de-l-ecriture-et-transactions-ogr">Gestion de l&#8217;écriture et transactions OGR</a></li>
+<li class="toctree-l6"><a class="reference internal" href="ogr/formats/couchdb.html#options-de-creation-de-couche">Options de création de couche</a></li>
+<li class="toctree-l6"><a class="reference internal" href="ogr/formats/couchdb.html#exemples">Exemples</a></li>
+<li class="toctree-l6"><a class="reference internal" href="ogr/formats/couchdb.html#voir-egalement">Voir également</a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="ogr/formats/csv.html">Comma Separated Value (.csv)</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="ogr/formats/csv.html#format">Format</a></li>
+<li class="toctree-l6"><a class="reference internal" href="ogr/formats/csv.html#lecture-de-fichier-csv-contenant-des-informations-spatiales">Lecture de fichier CSV contenant des informations spatiales</a></li>
+<li class="toctree-l6"><a class="reference internal" href="ogr/formats/csv.html#problemes-lors-de-la-creation">Problèmes lors de la création</a><ul>
+<li class="toctree-l7"><a class="reference internal" href="ogr/formats/csv.html#exemples">Exemples</a></li>
+</ul>
+</li>
+<li class="toctree-l6"><a class="reference internal" href="ogr/formats/csv.html#sources-de-donnees-particulieres">Sources de données particulières</a></li>
+<li class="toctree-l6"><a class="reference internal" href="ogr/formats/csv.html#autres-remarques">Autres remarques</a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="ogr/formats/dgn.html">Microstation DGN</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="ogr/formats/dgn.html#elements-geres">Éléments gérés</a></li>
+<li class="toctree-l6"><a class="reference internal" href="ogr/formats/dgn.html#information-de-style">Information de style</a></li>
+<li class="toctree-l6"><a class="reference internal" href="ogr/formats/dgn.html#options-de-creation">Options de création</a></li>
+<li class="toctree-l6"><a class="reference internal" href="ogr/formats/dgn.html#voir-egalement">Voir également</a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="ogr/formats/dods.html">DODS/OPeNDAP</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="ogr/formats/dods.html#avertissement">Avertissement</a></li>
+<li class="toctree-l6"><a class="reference internal" href="ogr/formats/dods.html#voir-egalement">Voir également</a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="ogr/formats/dxf.html">DXF d&#8217;AutoCAD</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="ogr/formats/dxf.html#elements-geres">Éléments gérés</a></li>
+<li class="toctree-l6"><a class="reference internal" href="ogr/formats/dxf.html#dxf-inline-blocks">DXF_INLINE_BLOCKS</a></li>
+<li class="toctree-l6"><a class="reference internal" href="ogr/formats/dxf.html#encodages-des-caracteres">Encodages des caractères</a></li>
+<li class="toctree-l6"><a class="reference internal" href="ogr/formats/dxf.html#problemes-de-creation">Problèmes de création</a><ul>
+<li class="toctree-l7"><a class="reference internal" href="ogr/formats/dxf.html#references-des-blocs">Références des blocs</a></li>
+<li class="toctree-l7"><a class="reference internal" href="ogr/formats/dxf.html#definitions-des-couches">Définitions des couches</a></li>
+<li class="toctree-l7"><a class="reference internal" href="ogr/formats/dxf.html#definitions-de-type-de-ligne">Définitions de type de ligne</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="ogr/formats/edigeo.html">EDIGEO</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="ogr/formats/edigeo.html#etiquettes">Étiquettes</a></li>
+<li class="toctree-l6"><a class="reference internal" href="ogr/formats/edigeo.html#voir-egalement">Voir également</a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="ogr/formats/filegdb.html">Pilote de l&#8217;API FileGDB</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="ogr/formats/filegdb.html#apercu">Aperçu</a></li>
+<li class="toctree-l6"><a class="reference internal" href="ogr/formats/filegdb.html#dependances">Dépendances</a></li>
+<li class="toctree-l6"><a class="reference internal" href="ogr/formats/filegdb.html#usage">Usage</a></li>
+<li class="toctree-l6"><a class="reference internal" href="ogr/formats/filegdb.html#notes-de-compilation">Notes de compilation</a></li>
+<li class="toctree-l6"><a class="reference internal" href="ogr/formats/filegdb.html#problemes-connus">Problèmes connus</a></li>
+<li class="toctree-l6"><a class="reference internal" href="ogr/formats/filegdb.html#liens">Liens</a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="ogr/formats/fmeobjects.html">FMEObjects Gateway</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="ogr/formats/fmeobjects.html#cache">Cache</a></li>
+<li class="toctree-l6"><a class="reference internal" href="ogr/formats/fmeobjects.html#avertissements">Avertissements</a></li>
+<li class="toctree-l6"><a class="reference internal" href="ogr/formats/fmeobjects.html#configuration-compilation">Configuration/compilation</a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="ogr/formats/geoconcept.html">GeoConcept Export (disponible à partir de GDAL 1.6.0)</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="ogr/formats/geoconcept.html#le-format-fichier-texte-de-geoconcept-gxt">Le format &#8220;fichier texte&#8221; de GeoConcept (GXT)</a></li>
+<li class="toctree-l6"><a class="reference internal" href="ogr/formats/geoconcept.html#problemes-de-creation">Problèmes de création</a></li>
+<li class="toctree-l6"><a class="reference internal" href="ogr/formats/geoconcept.html#options-de-creation-de-jeux-de-donnees">Options de création de jeux de données</a></li>
+<li class="toctree-l6"><a class="reference internal" href="ogr/formats/geoconcept.html#options-de-creation-de-couche">Options de création de couche</a></li>
+<li class="toctree-l6"><a class="reference internal" href="ogr/formats/geoconcept.html#exemples">Exemples</a><ul>
+<li class="toctree-l7"><a class="reference internal" href="ogr/formats/geoconcept.html#exemple-de-fichier-gct">Exemple de fichier .GCT</a></li>
+<li class="toctree-l7"><a class="reference internal" href="ogr/formats/geoconcept.html#exemple-de-fichier-gxt">Exemple de fichier .GXT</a></li>
+<li class="toctree-l7"><a class="reference internal" href="ogr/formats/geoconcept.html#exemple-d-utilisation">Exemple d&#8217;utilisation</a></li>
+</ul>
+</li>
+<li class="toctree-l6"><a class="reference internal" href="ogr/formats/geoconcept.html#voir-aussi">Voir aussi</a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="ogr/formats/geojson.html">GeoJSON</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="ogr/formats/geojson.html#source-de-donnees">Source de données</a></li>
+<li class="toctree-l6"><a class="reference internal" href="ogr/formats/geojson.html#couche">Couche</a></li>
+<li class="toctree-l6"><a class="reference internal" href="ogr/formats/geojson.html#objet">Objet</a></li>
+<li class="toctree-l6"><a class="reference internal" href="ogr/formats/geojson.html#geometrie">Géométrie</a><ul>
+<li class="toctree-l7"><a class="reference internal" href="ogr/formats/geojson.html#variables-d-environnement">Variables d&#8217;environnement</a></li>
+</ul>
+</li>
+<li class="toctree-l6"><a class="reference internal" href="ogr/formats/geojson.html#option-de-creation-de-couche">Option de création de couche</a></li>
+<li class="toctree-l6"><a class="reference internal" href="ogr/formats/geojson.html#exemple">Exemple</a></li>
+<li class="toctree-l6"><a class="reference internal" href="ogr/formats/geojson.html#lisez-egalement">Lisez également</a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="ogr/formats/geomedia.html">Base de données MDB de Geomedia</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="ogr/formats/geomedia.html#comment-utiliser-le-pilote-geomedia-avec-unixodbc-et-les-outils-mdb-sous-unix-et-linux">Comment utiliser le pilote Geomedia avec unixODBC et les outils MDB (sous Unix et Linux)</a></li>
+<li class="toctree-l6"><a class="reference internal" href="ogr/formats/geomedia.html#voir-egalement">Voir également</a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="ogr/formats/georss.html">GeoRSS : Geographically Encoded Objects pour les flux RSS</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="ogr/formats/georss.html#problemes-d-encodage">Problèmes d&#8217;encodage</a></li>
+<li class="toctree-l6"><a class="reference internal" href="ogr/formats/georss.html#definitions-des-champs">Définitions des champs</a></li>
+<li class="toctree-l6"><a class="reference internal" href="ogr/formats/georss.html#problemes-lors-de-la-creation">Problèmes lors de la création</a></li>
+<li class="toctree-l6"><a class="reference internal" href="ogr/formats/georss.html#exemple">Exemple</a></li>
+<li class="toctree-l6"><a class="reference internal" href="ogr/formats/georss.html#voir-aussi">Voir aussi</a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="ogr/formats/gft.html">GFT - Google Fusion Tables</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="ogr/formats/gft.html#syntaxe-des-noms-des-jeux-de-donnees">Syntaxe des noms des jeux de données</a></li>
+<li class="toctree-l6"><a class="reference internal" href="ogr/formats/gft.html#authentification">Authentification</a></li>
+<li class="toctree-l6"><a class="reference internal" href="ogr/formats/gft.html#geometrie">Géométrie</a></li>
+<li class="toctree-l6"><a class="reference internal" href="ogr/formats/gft.html#filtre">Filtre</a></li>
+<li class="toctree-l6"><a class="reference internal" href="ogr/formats/gft.html#pagination">Pagination</a></li>
+<li class="toctree-l6"><a class="reference internal" href="ogr/formats/gft.html#gestion-de-l-ecriture">Gestion de l&#8217;écriture</a></li>
+<li class="toctree-l6"><a class="reference internal" href="ogr/formats/gft.html#gestion-de-l-ecriture-et-transactions-ogr">Gestion de l&#8217;écriture et transactions OGR</a></li>
+<li class="toctree-l6"><a class="reference internal" href="ogr/formats/gft.html#sql">SQL</a></li>
+<li class="toctree-l6"><a class="reference internal" href="ogr/formats/gft.html#exemples">Exemples</a></li>
+<li class="toctree-l6"><a class="reference internal" href="ogr/formats/gft.html#voir-egalement">Voir également</a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="ogr/formats/gml.html">GML - Geography Markup Language</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="ogr/formats/gml.html#parseur">Parseur</a></li>
+<li class="toctree-l6"><a class="reference internal" href="ogr/formats/gml.html#lecture-des-geometries">Lecture des géométries</a></li>
+<li class="toctree-l6"><a class="reference internal" href="ogr/formats/gml.html#resolution-gml-xlink">Résolution gml:xlink</a></li>
+<li class="toctree-l6"><a class="reference internal" href="ogr/formats/gml.html#problemes-d-encodage">Problèmes d&#8217;encodage</a></li>
+<li class="toctree-l6"><a class="reference internal" href="ogr/formats/gml.html#feature-id-fid-gml-id">Feature id (fid / gml:id)</a></li>
+<li class="toctree-l6"><a class="reference internal" href="ogr/formats/gml.html#problemes-lors-de-creation">Problèmes lors de création</a></li>
+<li class="toctree-l6"><a class="reference internal" href="ogr/formats/gml.html#syntax-of-gfs-file-by-example">Syntax of .gfs file by example</a></li>
+<li class="toctree-l6"><a class="reference internal" href="ogr/formats/gml.html#exemple">Exemple</a></li>
+<li class="toctree-l6"><a class="reference internal" href="ogr/formats/gml.html#voir-aussi">Voir aussi</a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="ogr/formats/gmt.html">GMT ASCII Vectors (.gmt)</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="ogr/formats/gmt.html#probleme-de-creation">Problème de création</a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="ogr/formats/gpsbabel.html">GPSBabel</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="ogr/formats/gpsbabel.html#gestion-de-la-lecture">Gestion de la lecture</a></li>
+<li class="toctree-l6"><a class="reference internal" href="ogr/formats/gpsbabel.html#gestion-de-l-ecriture">Gestion de l&#8217;écriture</a><ul>
+<li class="toctree-l7"><a class="reference internal" href="ogr/formats/gpsbabel.html#exemples">Exemples</a></li>
+<li class="toctree-l7"><a class="reference internal" href="ogr/formats/gpsbabel.html#voir-egalement">Voir également</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="ogr/formats/gpx.html">GPX - GPS Exchange Format</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="ogr/formats/gpx.html#problemes-d-encodage">Problèmes d&#8217;encodage</a></li>
+<li class="toctree-l6"><a class="reference internal" href="ogr/formats/gpx.html#lecture-des-l-element-extensions">Lecture des l&#8217;élément extensions</a></li>
+<li class="toctree-l6"><a class="reference internal" href="ogr/formats/gpx.html#probleme-de-creation">Problème de création</a></li>
+<li class="toctree-l6"><a class="reference internal" href="ogr/formats/gpx.html#problemes-lors-de-la-traduction-en-shapefile">Problèmes lors de la traduction en Shapefile</a></li>
+<li class="toctree-l6"><a class="reference internal" href="ogr/formats/gpx.html#exemple">Exemple</a></li>
+<li class="toctree-l6"><a class="reference internal" href="ogr/formats/gpx.html#voir-egalement">Voir également</a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="ogr/formats/grass.html">GRASS</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="ogr/formats/grass.html#nom-de-la-source-de-donnees">Nom de la source de données</a></li>
+<li class="toctree-l6"><a class="reference internal" href="ogr/formats/grass.html#noms-de-la-couche">Noms de la couche</a></li>
+<li class="toctree-l6"><a class="reference internal" href="ogr/formats/grass.html#filtre-attributaire">Filtre attributaire</a></li>
+<li class="toctree-l6"><a class="reference internal" href="ogr/formats/grass.html#filtre-spatial">Filtre spatial</a></li>
+<li class="toctree-l6"><a class="reference internal" href="ogr/formats/grass.html#gisbase">GISBASE</a></li>
+<li class="toctree-l6"><a class="reference internal" href="ogr/formats/grass.html#topologie-manquante">Topologie manquante</a></li>
+<li class="toctree-l6"><a class="reference internal" href="ogr/formats/grass.html#acces-aleatoire">Accès aléatoire</a></li>
+<li class="toctree-l6"><a class="reference internal" href="ogr/formats/grass.html#problemes-connus">Problèmes connus</a></li>
+<li class="toctree-l6"><a class="reference internal" href="ogr/formats/grass.html#voir-egalement">Voir également</a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="ogr/formats/gtm.html">GTM - GPS TrackMaker</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="ogr/formats/gtm.html#exemple">Exemple</a></li>
+<li class="toctree-l6"><a class="reference internal" href="ogr/formats/gtm.html#voir-egalement">Voir également</a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="ogr/formats/htf.html">HTF - Hydrographic Transfer Format</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="ogr/formats/htf.html#voir-egalement">Voir également</a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="ogr/formats/idb.html">IDB</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="ogr/formats/idb.html#variables-d-environnement">Variables d&#8217;environnement</a></li>
+<li class="toctree-l6"><a class="reference internal" href="ogr/formats/idb.html#exemple">Exemple</a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="ogr/formats/ili.html">INTERLIS</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="ogr/formats/ili.html#modele">Modèle</a></li>
+<li class="toctree-l6"><a class="reference internal" href="ogr/formats/ili.html#interpolation-d-arc">Interpolation d&#8217;arc</a></li>
+<li class="toctree-l6"><a class="reference internal" href="ogr/formats/ili.html#autres-remarques">Autres remarques</a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="ogr/formats/ingres.html">INGRES</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="ogr/formats/ingres.html#avertissements">Avertissements</a></li>
+<li class="toctree-l6"><a class="reference internal" href="ogr/formats/ingres.html#problemes-lors-de-la-creation">Problèmes lors de la création</a></li>
+<li class="toctree-l6"><a class="reference internal" href="ogr/formats/ingres.html#options-de-creation-de-couche">Options de création de couche</a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="ogr/formats/kml.html">KML - Keyhole Markup Language</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="ogr/formats/kml.html#lecture-du-kml">Lecture du KML</a></li>
+<li class="toctree-l6"><a class="reference internal" href="ogr/formats/kml.html#ecriture-du-kml">Écriture du KML</a><ul>
+<li class="toctree-l7"><a class="reference internal" href="ogr/formats/kml.html#problemes-d-encodage">Problèmes d&#8217;encodage</a></li>
+<li class="toctree-l7"><a class="reference internal" href="ogr/formats/kml.html#options-de-creation">Options de création</a></li>
+</ul>
+</li>
+<li class="toctree-l6"><a class="reference internal" href="ogr/formats/kml.html#exemple">Exemple</a></li>
+<li class="toctree-l6"><a class="reference internal" href="ogr/formats/kml.html#avertissement">Avertissement</a></li>
+<li class="toctree-l6"><a class="reference internal" href="ogr/formats/kml.html#voir-egalement">Voir également</a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="ogr/formats/libkml.html">Pilote LIBKML (.kml .kmz)</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="ogr/formats/libkml.html#datasource">Datasource</a><ul>
+<li class="toctree-l7"><a class="reference internal" href="ogr/formats/libkml.html#styletable">StyleTable</a></li>
+</ul>
+</li>
+<li class="toctree-l6"><a class="reference internal" href="ogr/formats/libkml.html#layer">Layer</a></li>
+<li class="toctree-l6"><a class="reference internal" href="ogr/formats/libkml.html#id3">Style</a></li>
+<li class="toctree-l6"><a class="reference internal" href="ogr/formats/libkml.html#schema">Schéma</a></li>
+<li class="toctree-l6"><a class="reference internal" href="ogr/formats/libkml.html#feature">Feature</a><ul>
+<li class="toctree-l7"><a class="reference internal" href="ogr/formats/libkml.html#id8">Style</a></li>
+</ul>
+</li>
+<li class="toctree-l6"><a class="reference internal" href="ogr/formats/libkml.html#champs">Champs</a></li>
+<li class="toctree-l6"><a class="reference internal" href="ogr/formats/libkml.html#geometrie">Géométrie</a></li>
+<li class="toctree-l6"><a class="reference internal" href="ogr/formats/libkml.html#exemple">Exemple</a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="ogr/formats/mdb.html">Access MDB databases</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="ogr/formats/mdb.html#comment-compiler-le-pilote-mdb-sur-linux">Comment compiler le pilote MDB (sur Linux)</a></li>
+<li class="toctree-l6"><a class="reference internal" href="ogr/formats/mdb.html#comment-lancer-le-pilote-mdb-sur-linux">Comment lancer le pilote MDB (sur Linux)</a></li>
+<li class="toctree-l6"><a class="reference internal" href="ogr/formats/mdb.html#ressources">Ressources</a></li>
+<li class="toctree-l6"><a class="reference internal" href="ogr/formats/mdb.html#voir-egalement">Voir également</a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="ogr/formats/memory.html">Memory</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="ogr/formats/memory.html#problemes-de-creation">Problèmes de création</a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="ogr/formats/mitab.html">MapInfo TAB et MIF/MID</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="ogr/formats/mitab.html#problemes-de-creation">Problèmes de création</a></li>
+<li class="toctree-l6"><a class="reference internal" href="ogr/formats/mitab.html#options-de-creation-de-jeux-de-donnees">Options de création de jeux de données</a></li>
+<li class="toctree-l6"><a class="reference internal" href="ogr/formats/mitab.html#options-de-creation-de-couche">Options de création de couche</a><ul>
+<li class="toctree-l7"><a class="reference internal" href="ogr/formats/mitab.html#compatibilite">Compatibilité</a></li>
+</ul>
+</li>
+<li class="toctree-l6"><a class="reference internal" href="ogr/formats/mitab.html#voir-aussi">Voir aussi</a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="ogr/formats/mssqlspatial.html">MSSQLSpatial - Microsoft SQL Server Spatial Database</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="ogr/formats/mssqlspatial.html#se-connecter-a-une-base-de-donnees">Se connecter à une base de données</a></li>
+<li class="toctree-l6"><a class="reference internal" href="ogr/formats/mssqlspatial.html#requetes-sql">Requêtes SQL</a><ul>
+<li class="toctree-l7"><a class="reference internal" href="ogr/formats/mssqlspatial.html#problemes-lors-de-la-creation">Problèmes lors de la création</a></li>
+</ul>
+</li>
+<li class="toctree-l6"><a class="reference internal" href="ogr/formats/mssqlspatial.html#options-de-creation-de-couche">Options de création de couche</a></li>
+<li class="toctree-l6"><a class="reference internal" href="ogr/formats/mssqlspatial.html#creation-d-index-spatial">Création d&#8217;index spatial</a><ul>
+<li class="toctree-l7"><a class="reference internal" href="ogr/formats/mssqlspatial.html#exemples">Exemples</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="ogr/formats/mysql.html">MySQL</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="ogr/formats/mysql.html#avertissements">Avertissements</a></li>
+<li class="toctree-l6"><a class="reference internal" href="ogr/formats/mysql.html#problemes-de-creation">Problèmes de création</a></li>
+<li class="toctree-l6"><a class="reference internal" href="ogr/formats/mysql.html#options-de-creation-de-couche">Options de création de couche</a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="ogr/formats/nas.html">NAS - ALKIS</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="ogr/formats/nas.html#voir-egalement">Voir également</a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="ogr/formats/ntf.html">UK .NTF</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="ogr/formats/ntf.html#implementation-notes">Implementation Notes</a><ul>
+<li class="toctree-l7"><a class="reference internal" href="ogr/formats/ntf.html#produits-et-couches-geres">Produits (et couches) gérés</a></li>
+<li class="toctree-l7"><a class="reference internal" href="ogr/formats/ntf.html#schemas-des-produits">Schémas des produits</a></li>
+<li class="toctree-l7"><a class="reference internal" href="ogr/formats/ntf.html#attributs-speciaux">Attributs spéciaux</a></li>
+<li class="toctree-l7"><a class="reference internal" href="ogr/formats/ntf.html#produits-generiques">Produits génériques</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="ogr/formats/oci.html">Oracle Spatial</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="ogr/formats/oci.html#problemes-avec-sql">Problèmes avec SQL</a></li>
+<li class="toctree-l6"><a class="reference internal" href="ogr/formats/oci.html#avertissements">Avertissements</a></li>
+<li class="toctree-l6"><a class="reference internal" href="ogr/formats/oci.html#problemes-de-creation">Problèmes de création</a><ul>
+<li class="toctree-l7"><a class="reference internal" href="ogr/formats/oci.html#options-de-creation-de-couche">Options de création de couche</a></li>
+<li class="toctree-l7"><a class="reference internal" href="ogr/formats/oci.html#exemple">Exemple</a></li>
+</ul>
+</li>
+<li class="toctree-l6"><a class="reference internal" href="ogr/formats/oci.html#credits">Crédits</a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="ogr/formats/odbc.html">ODBC RDBMS</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="ogr/formats/odbc.html#problemes-de-creation">Problèmes de création</a></li>
+<li class="toctree-l6"><a class="reference internal" href="ogr/formats/odbc.html#lisez-egalement">Lisez également</a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="ogr/formats/ogdi.html">OGDI Vectors</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="ogr/formats/ogdi.html#exemples">Exemples</a></li>
+<li class="toctree-l6"><a class="reference internal" href="ogr/formats/ogdi.html#voir-egalement">Voir également</a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="ogr/formats/openair.html">OpenAir - OpenAir Special Use Airspace Format</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="ogr/formats/openair.html#voir-egalement">Voir également</a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="ogr/formats/pds.html">PDS - Planetary Data Systems TABLE</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="ogr/formats/pds.html#voir-egalement">Voir également</a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="ogr/formats/pg.html">PostgreSQL / PostGIS</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="ogr/formats/pg.html#connexion-a-une-base-de-donnees">Connexion à une base de données</a></li>
+<li class="toctree-l6"><a class="reference internal" href="ogr/formats/pg.html#les-colonnes-geometriques">Les colonnes géométriques</a></li>
+<li class="toctree-l6"><a class="reference internal" href="ogr/formats/pg.html#requetes-sql">Requêtes SQL</a></li>
+<li class="toctree-l6"><a class="reference internal" href="ogr/formats/pg.html#problemes-lors-de-la-creation">Problèmes lors de la création</a><ul>
+<li class="toctree-l7"><a class="reference internal" href="ogr/formats/pg.html#options-de-creation-de-jeu-de-donnees">Options de création de jeu de données</a></li>
+<li class="toctree-l7"><a class="reference internal" href="ogr/formats/pg.html#options-de-creation-de-couches">Options de création de couches</a></li>
+<li class="toctree-l7"><a class="reference internal" href="ogr/formats/pg.html#options-de-configuration">Options de configuration</a></li>
+</ul>
+</li>
+<li class="toctree-l6"><a class="reference internal" href="ogr/formats/pg.html#exemples">Exemples</a><ul>
+<li class="toctree-l7"><a class="reference internal" href="ogr/formats/pg.html#faq">FAQ</a></li>
+</ul>
+</li>
+<li class="toctree-l6"><a class="reference internal" href="ogr/formats/pg.html#lisez-egalement">Lisez également</a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="ogr/formats/pgdump.html">Dump SQL pour PostgreSQL</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="ogr/formats/pgdump.html#options-de-creation">Options de création</a><ul>
+<li class="toctree-l7"><a class="reference internal" href="ogr/formats/pgdump.html#options-de-creation-de-jeu-de-donnees">Options de création de jeu de données</a></li>
+<li class="toctree-l7"><a class="reference internal" href="ogr/formats/pgdump.html#options-de-creation-de-couche">Options de création de couche</a></li>
+<li class="toctree-l7"><a class="reference internal" href="ogr/formats/pgdump.html#variables-d-environnement">Variables d&#8217;environnement</a></li>
+<li class="toctree-l7"><a class="reference internal" href="ogr/formats/pgdump.html#exemple">Exemple</a></li>
+<li class="toctree-l7"><a class="reference internal" href="ogr/formats/pgdump.html#voir-egalement">Voir également</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="ogr/formats/pgeo.html">ESRI Personal GeoDatabase</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="ogr/formats/pgeo.html#comment-utiliser-le-pilote-pgeo-avec-unixodbc-et-mdb-tools">Comment utiliser le pilote PGeo avec unixODBC et MDB Tools</a><ul>
+<li class="toctree-l7"><a class="reference internal" href="ogr/formats/pgeo.html#pre-requis">Pré-requis</a></li>
+<li class="toctree-l7"><a class="reference internal" href="ogr/formats/pgeo.html#configuration">Configuration</a><ul>
+<li class="toctree-l8"><a class="reference internal" href="ogr/formats/pgeo.html#configuration-du-pilote-odbc">1. Configuration du pilote ODBC</a></li>
+<li class="toctree-l8"><a class="reference internal" href="ogr/formats/pgeo.html#configuration-de-la-source-de-donnees-odbc">2. Configuration de la source de données ODBC</a></li>
+</ul>
+</li>
+<li class="toctree-l7"><a class="reference internal" href="ogr/formats/pgeo.html#tester-le-pilote-pgeo-avec-ogrinfo">Tester le pilote PGeo avec ogrinfo</a></li>
+</ul>
+</li>
+<li class="toctree-l6"><a class="reference internal" href="ogr/formats/pgeo.html#ressources">Ressources</a></li>
+<li class="toctree-l6"><a class="reference internal" href="ogr/formats/pgeo.html#voir-egalement">Voir également</a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="ogr/formats/s57.html">IHO S-57 (ENC)</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="ogr/formats/s57.html#traduction-d-objet">Traduction d&#8217;objet</a></li>
+<li class="toctree-l6"><a class="reference internal" href="ogr/formats/s57.html#sondages">Sondages</a></li>
+<li class="toctree-l6"><a class="reference internal" href="ogr/formats/s57.html#options-de-controle-du-format-s-57">Options de contrôle du format S-57</a></li>
+<li class="toctree-l6"><a class="reference internal" href="ogr/formats/s57.html#export-du-formar-s-57">Export du formar S-57</a></li>
+<li class="toctree-l6"><a class="reference internal" href="ogr/formats/s57.html#voir-egalement">Voir également</a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="ogr/formats/sde.html">ESRI ArcSDE</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="ogr/formats/sde.html#options-de-creation-de-couches">Options de création de couches</a></li>
+<li class="toctree-l6"><a class="reference internal" href="ogr/formats/sde.html#variables-d-environnement">Variables d&#8217;environnement</a></li>
+<li class="toctree-l6"><a class="reference internal" href="ogr/formats/sde.html#exemples">Exemples</a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="ogr/formats/sdts.html">SDTS</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="ogr/formats/sdts.html#voir-egalement">Voir également</a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="ogr/formats/shapefile.html">ESRI Shapefile</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="ogr/formats/shapefile.html#indexe-spatiale-et-attributaire">Indexe spatiale  et attributaire</a></li>
+<li class="toctree-l6"><a class="reference internal" href="ogr/formats/shapefile.html#problemes-de-creation">Problèmes de création</a></li>
+<li class="toctree-l6"><a class="reference internal" href="ogr/formats/shapefile.html#etendue-spatiale">Étendue spatiale</a></li>
+<li class="toctree-l6"><a class="reference internal" href="ogr/formats/shapefile.html#problemes-sur-les-tailles">Problèmes sur les tailles</a></li>
+<li class="toctree-l6"><a class="reference internal" href="ogr/formats/shapefile.html#options-de-creation-de-jeu-de-donnees">Options de création de jeu de données</a></li>
+<li class="toctree-l6"><a class="reference internal" href="ogr/formats/shapefile.html#options-de-creation-de-couches">Options de création de couches</a></li>
+<li class="toctree-l6"><a class="reference internal" href="ogr/formats/shapefile.html#exemples">Exemples</a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="ogr/formats/sqlite.html">SQLite/SpatiaLite RDBMS</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="ogr/formats/sqlite.html#utiliser-la-bibliotheque-spatialite-extension-spatiale-pour-sqlite">Utiliser la bibliothèque SpatiaLite (extension spatiale pour SQLite)</a></li>
+<li class="toctree-l6"><a class="reference internal" href="ogr/formats/sqlite.html#problemes-de-creation">Problèmes de création</a><ul>
+<li class="toctree-l7"><a class="reference internal" href="ogr/formats/sqlite.html#options-de-creation-de-la-base-de-donnees">Options de création de la base de données</a></li>
+<li class="toctree-l7"><a class="reference internal" href="ogr/formats/sqlite.html#options-de-creation-de-couche">Options de création de couche</a></li>
+</ul>
+</li>
+<li class="toctree-l6"><a class="reference internal" href="ogr/formats/sqlite.html#autres-informations">Autres informations</a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="ogr/formats/sua.html">SUA - Tim Newport-Peace&#8217;s Special Use Airspace Format</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="ogr/formats/sua.html#voir-egalement">Voir également</a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="ogr/formats/svg.html">SVG - Scalable Vector Graphics</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="ogr/formats/svg.html#voir-egalement">Voir également</a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="ogr/formats/tiger.html">U.S. Census TIGER/Line</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="ogr/formats/tiger.html#representation-des-objets">Représentation des objets</a><ul>
+<li class="toctree-l7"><a class="reference internal" href="ogr/formats/tiger.html#completechain">CompleteChain</a></li>
+<li class="toctree-l7"><a class="reference internal" href="ogr/formats/tiger.html#altname">AltName</a></li>
+<li class="toctree-l7"><a class="reference internal" href="ogr/formats/tiger.html#featureids">FeatureIds</a></li>
+<li class="toctree-l7"><a class="reference internal" href="ogr/formats/tiger.html#zipcodes">ZipCodes</a></li>
+<li class="toctree-l7"><a class="reference internal" href="ogr/formats/tiger.html#landmarks">Landmarks</a></li>
+<li class="toctree-l7"><a class="reference internal" href="ogr/formats/tiger.html#arealandmarks">AreaLandmarks</a></li>
+<li class="toctree-l7"><a class="reference internal" href="ogr/formats/tiger.html#keyfeatures">KeyFeatures</a></li>
+<li class="toctree-l7"><a class="reference internal" href="ogr/formats/tiger.html#polygon">Polygon</a></li>
+<li class="toctree-l7"><a class="reference internal" href="ogr/formats/tiger.html#entitynames">EntityNames</a></li>
+<li class="toctree-l7"><a class="reference internal" href="ogr/formats/tiger.html#idhistory">IDHistory</a></li>
+<li class="toctree-l7"><a class="reference internal" href="ogr/formats/tiger.html#polychainlink">PolyChainLink</a></li>
+<li class="toctree-l7"><a class="reference internal" href="ogr/formats/tiger.html#pip">PIP</a></li>
+<li class="toctree-l7"><a class="reference internal" href="ogr/formats/tiger.html#zipplus4">ZipPlus4</a></li>
+</ul>
+</li>
+<li class="toctree-l6"><a class="reference internal" href="ogr/formats/tiger.html#voir-egalement">Voir également</a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="ogr/formats/vfk.html">VFK - format de données d&#8217;échange cadastrale Tchèque</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="ogr/formats/vfk.html#nom-de-la-source-de-donnees">Nom de la source de données</a></li>
+<li class="toctree-l6"><a class="reference internal" href="ogr/formats/vfk.html#noms-des-couches">Noms des couches</a></li>
+<li class="toctree-l6"><a class="reference internal" href="ogr/formats/vfk.html#filtre-attributaire">Filtre attributaire</a></li>
+<li class="toctree-l6"><a class="reference internal" href="ogr/formats/vfk.html#filtre-spatial">Filtre spatial</a></li>
+<li class="toctree-l6"><a class="reference internal" href="ogr/formats/vfk.html#references">Références</a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="ogr/formats/vrt.html">Virtual Format</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="ogr/formats/vrt.html#problemes-de-creation">Problèmes de création</a></li>
+<li class="toctree-l6"><a class="reference internal" href="ogr/formats/vrt.html#format-de-fichier-virtuel">Format de fichier virtuel</a></li>
+<li class="toctree-l6"><a class="reference internal" href="ogr/formats/vrt.html#exemple-couche-ponctuelle-odbc">Exemple : couche ponctuelle ODBC</a></li>
+<li class="toctree-l6"><a class="reference internal" href="ogr/formats/vrt.html#exemple-renommer-des-attributs">Exemple : renommer des attributs</a></li>
+<li class="toctree-l6"><a class="reference internal" href="ogr/formats/vrt.html#exemple-filtre-spatial-transparent-gdal-1-7-0">Exemple : Filtre spatial transparent (GDAL &gt;= 1.7.0)</a></li>
+<li class="toctree-l6"><a class="reference internal" href="ogr/formats/vrt.html#autres-remarques">Autres remarques</a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="ogr/formats/wfs.html">WFS - Service WFS OGC</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="ogr/formats/wfs.html#syntaxe-des-noms-de-jeux-de-donnees">Syntaxe des noms de jeux de données</a></li>
+<li class="toctree-l6"><a class="reference internal" href="ogr/formats/wfs.html#pagination-des-requetes">Pagination des requêtes</a></li>
+<li class="toctree-l6"><a class="reference internal" href="ogr/formats/wfs.html#filtrage">Filtrage</a></li>
+<li class="toctree-l6"><a class="reference internal" href="ogr/formats/wfs.html#gestion-de-l-ecriture-wfs-t">Gestion de l&#8217;écriture / WFS-T</a></li>
+<li class="toctree-l6"><a class="reference internal" href="ogr/formats/wfs.html#transaction-ogr-et-gestion-de-l-ecriture">Transaction OGR et gestion de l&#8217;écriture</a></li>
+<li class="toctree-l6"><a class="reference internal" href="ogr/formats/wfs.html#commandes-sql-speciales">Commandes SQL spéciales</a></li>
+<li class="toctree-l6"><a class="reference internal" href="ogr/formats/wfs.html#metadonnees-des-couches">Métadonnées des couches</a></li>
+<li class="toctree-l6"><a class="reference internal" href="ogr/formats/wfs.html#exemples">Exemples</a></li>
+<li class="toctree-l6"><a class="reference internal" href="ogr/formats/wfs.html#voir-egalement">Voir également</a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="ogr/formats/xplane.html">X-Plane/Flightgear aeronautical data</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="ogr/formats/xplane.html#exemples">Exemples</a></li>
+<li class="toctree-l6"><a class="reference internal" href="ogr/formats/xplane.html#voir-egalement">Voir également</a></li>
+<li class="toctree-l6"><a class="reference internal" href="ogr/formats/xplane.html#airport-data-apt-dat">Airport data (apt.dat)</a><ul>
+<li class="toctree-l7"><a class="reference internal" href="ogr/formats/xplane.html#couche-apt">Couche APT</a><ul>
+<li class="toctree-l8"><a class="reference internal" href="ogr/formats/xplane.html#couche-runwaythreshold">Couche RunwayThreshold</a></li>
+<li class="toctree-l8"><a class="reference internal" href="ogr/formats/xplane.html#couche-runwaypolygon">Couche RunwayPolygon</a></li>
+<li class="toctree-l8"><a class="reference internal" href="ogr/formats/xplane.html#waterrunwaythreshold-point">WaterRunwayThreshold (Point)</a></li>
+<li class="toctree-l8"><a class="reference internal" href="ogr/formats/xplane.html#waterrunwaypolygon-polygone">WaterRunwayPolygon (Polygone)</a></li>
+<li class="toctree-l8"><a class="reference internal" href="ogr/formats/xplane.html#stopway-layer-polygon">Stopway layer (Polygon)</a></li>
+<li class="toctree-l8"><a class="reference internal" href="ogr/formats/xplane.html#helipad-point">Helipad (Point)</a></li>
+<li class="toctree-l8"><a class="reference internal" href="ogr/formats/xplane.html#helipadpolygon-polygone">HelipadPolygon (Polygone)</a></li>
+<li class="toctree-l8"><a class="reference internal" href="ogr/formats/xplane.html#taxiwayrectangle-polygone-enregistrement-v810">TaxiwayRectangle (Polygone) - Enregistrement V810</a></li>
+<li class="toctree-l8"><a class="reference internal" href="ogr/formats/xplane.html#pavement-polygone">Pavement (Polygone)</a></li>
+<li class="toctree-l8"><a class="reference internal" href="ogr/formats/xplane.html#aptboundary-polygone">APTBoundary (Polygone)</a></li>
+<li class="toctree-l8"><a class="reference internal" href="ogr/formats/xplane.html#aptlinearfeature-chaine-lineaire">APTLinearFeature (Chaine linéaire)</a></li>
+<li class="toctree-l8"><a class="reference internal" href="ogr/formats/xplane.html#startuplocation-point">StartupLocation (Point)</a></li>
+<li class="toctree-l8"><a class="reference internal" href="ogr/formats/xplane.html#aptlightbeacon-point">APTLightBeacon (Point)</a></li>
+<li class="toctree-l8"><a class="reference internal" href="ogr/formats/xplane.html#aptwindsock-point">APTWindsock (Point)</a></li>
+<li class="toctree-l8"><a class="reference internal" href="ogr/formats/xplane.html#taxiwaysign-point">TaxiwaySign (Point)</a></li>
+<li class="toctree-l8"><a class="reference internal" href="ogr/formats/xplane.html#vasi-papi-wigwag-point">VASI_PAPI_WIGWAG (Point)</a></li>
+<li class="toctree-l8"><a class="reference internal" href="ogr/formats/xplane.html#atcfreq-none">ATCFreq (None)</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l6"><a class="reference internal" href="ogr/formats/xplane.html#aides-a-la-navigation-nav-dat">Aides à la navigation (nav.dat)</a><ul>
+<li class="toctree-l7"><a class="reference internal" href="ogr/formats/xplane.html#ils-point">ILS (Point)</a></li>
+<li class="toctree-l7"><a class="reference internal" href="ogr/formats/xplane.html#vor-point">VOR (Point)</a></li>
+<li class="toctree-l7"><a class="reference internal" href="ogr/formats/xplane.html#ndb-point">NDB (Point)</a></li>
+<li class="toctree-l7"><a class="reference internal" href="ogr/formats/xplane.html#gs-glideslope-point">GS - Glideslope (Point)</a></li>
+<li class="toctree-l7"><a class="reference internal" href="ogr/formats/xplane.html#marker-ils-marker-beacons-point">Marker - ILS marker beacons. (Point)</a></li>
+<li class="toctree-l7"><a class="reference internal" href="ogr/formats/xplane.html#dme-point">DME (Point)</a></li>
+<li class="toctree-l7"><a class="reference internal" href="ogr/formats/xplane.html#dmeils-point">DMEILS (Point)</a></li>
+</ul>
+</li>
+<li class="toctree-l6"><a class="reference internal" href="ogr/formats/xplane.html#intersections-ifr-fix-dat">Intersections IFR (fix.dat)</a><ul>
+<li class="toctree-l7"><a class="reference internal" href="ogr/formats/xplane.html#fix-point">FIX (Point)</a></li>
+</ul>
+</li>
+<li class="toctree-l6"><a class="reference internal" href="ogr/formats/xplane.html#airways-awy-dat">Airways (awy.dat)</a><ul>
+<li class="toctree-l7"><a class="reference internal" href="ogr/formats/xplane.html#airwaysegment-line-string">AirwaySegment (Line String)</a></li>
+<li class="toctree-l7"><a class="reference internal" href="ogr/formats/xplane.html#airwayintersection-point">AirwayIntersection (Point)</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="ogr/sql.html">SQL dans OGR</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="ogr/sql.html#syntaxe-sql-geree">Syntaxe SQL gérée</a></li>
+<li class="toctree-l5"><a class="reference internal" href="ogr/sql.html#select">SELECT</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="ogr/sql.html#operateurs-de-liste-de-champs">Opérateurs de liste de champs</a></li>
+<li class="toctree-l6"><a class="reference internal" href="ogr/sql.html#utiliser-les-alias-des-noms-de-champs">Utiliser les alias des noms de champs</a></li>
+<li class="toctree-l6"><a class="reference internal" href="ogr/sql.html#changer-le-type-des-champs">Changer le type des champs</a></li>
+<li class="toctree-l6"><a class="reference internal" href="ogr/sql.html#where">WHERE</a></li>
+<li class="toctree-l6"><a class="reference internal" href="ogr/sql.html#limitations-de-la-clause-where">Limitations de la clause WHERE</a></li>
+<li class="toctree-l6"><a class="reference internal" href="ogr/sql.html#order-by">ORDER BY</a></li>
+<li class="toctree-l6"><a class="reference internal" href="ogr/sql.html#clause-join">Clause JOIN</a></li>
+<li class="toctree-l6"><a class="reference internal" href="ogr/sql.html#limitations-de-la-clause-join">Limitations de la clause JOIN</a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="ogr/sql.html#champs-speciaux">Champs spéciaux</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="ogr/sql.html#fid">FID</a></li>
+<li class="toctree-l6"><a class="reference internal" href="ogr/sql.html#ogr-geometry">OGR_GEOMETRY</a></li>
+<li class="toctree-l6"><a class="reference internal" href="ogr/sql.html#ogr-geom-wkt">OGR_GEOM_WKT</a></li>
+<li class="toctree-l6"><a class="reference internal" href="ogr/sql.html#ogr-geom-area">OGR_GEOM_AREA</a></li>
+<li class="toctree-l6"><a class="reference internal" href="ogr/sql.html#ogr-style">OGR_STYLE</a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="ogr/sql.html#create-index">CREATE INDEX</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="ogr/sql.html#limitations-des-index">Limitations des Index</a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="ogr/sql.html#drop-index">DROP INDEX</a></li>
+<li class="toctree-l5"><a class="reference internal" href="ogr/sql.html#executesql">ExecuteSQL()</a></li>
+<li class="toctree-l5"><a class="reference internal" href="ogr/sql.html#sql-hors-ogr">SQL hors OGR</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="python/index.html">Python</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="python/introduction.html">Introduction</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="python/introduction.html#installation">Installation</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="python/introduction.html#systeme">Système</a></li>
+<li class="toctree-l6"><a class="reference internal" href="python/introduction.html#environnement-virtuel">Environnement virtuel</a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="python/introduction.html#api">API</a></li>
+<li class="toctree-l5"><a class="reference internal" href="python/introduction.html#utiliser-la-bibliotheque-python">Utiliser la bibliothèque Python</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="python/introduction.html#la-classe-gdal">La classe GDAL</a></li>
+<li class="toctree-l6"><a class="reference internal" href="python/introduction.html#la-classe-ogr">La classe OGR</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="python/intro_vecteur.html">Vecteurs</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="python/intro_vecteur.html#lire-un-fichier-vecteur">Lire un fichier vecteur</a></li>
+<li class="toctree-l5"><a class="reference internal" href="python/intro_vecteur.html#ecrire-un-fichier-vecteur">Écrire un fichier vecteur</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="python/intro_vecteur.html#creation-de-shapefile-a-partir-de-coordonnees">Création de shapefile à partir de coordonnées</a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="python/intro_vecteur.html#projections">Projections</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="python/intro_vecteur.html#comment-reprojeter-des-donnees">Comment Reprojeter des données</a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="python/intro_vecteur.html#requetes-spatiales">Requêtes spatiales</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="python/intro_vecteur.html#par-bbox">Par bbox</a></li>
+<li class="toctree-l6"><a class="reference internal" href="python/intro_vecteur.html#par-objet-geometrique">Par objet géométrique</a></li>
+<li class="toctree-l6"><a class="reference internal" href="python/intro_vecteur.html#par-requete-sql">Par requête SQL</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="python/intro_raster.html">Raster</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="python/intro_raster.html#lire-un-fichier-raster">Lire un fichier Raster</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="python/intro_raster.html#les-drivers">Les drivers</a></li>
+<li class="toctree-l6"><a class="reference internal" href="python/intro_raster.html#id1">Lire un fichier raster</a></li>
+<li class="toctree-l6"><a class="reference internal" href="python/intro_raster.html#bande">Bande</a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="python/intro_raster.html#ecrire-un-fichier-raster">Écrire un fichier Raster</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="python/bibliographie.html">Bibliographie</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="faq/index.html">FAQ</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="faq/general.html">FAQ Générale</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="faq/general.html#qu-est-ce-qu-est-gdal">Qu&#8217;est ce qu&#8217;est GDAL ?</a></li>
+<li class="toctree-l5"><a class="reference internal" href="faq/general.html#que-signifie-gdal">Que signifie GDAL ?</a></li>
+<li class="toctree-l5"><a class="reference internal" href="faq/general.html#a-quoi-sert-ogr">À quoi sert OGR ?</a></li>
+<li class="toctree-l5"><a class="reference internal" href="faq/general.html#que-signifie-ogr">Que signifie OGR ?</a></li>
+<li class="toctree-l5"><a class="reference internal" href="faq/general.html#quand-le-projet-gdal-a-t-il-demarre">Quand le projet GDAL a t-il démarré ?</a></li>
+<li class="toctree-l5"><a class="reference internal" href="faq/general.html#est-ce-que-gdal-ogr-est-un-logiciel-proprietaire">Est ce que GDAL/OGR est un logiciel propriétaire ?</a></li>
+<li class="toctree-l5"><a class="reference internal" href="faq/general.html#quelle-licence-utilise-gdal-ogr">Quelle licence utilise GDAL/OGR ?</a></li>
+<li class="toctree-l5"><a class="reference internal" href="faq/general.html#sur-quels-systemes-fonctionne-gdal-ogr">Sur quels systèmes fonctionne GDAL-OGR ?</a></li>
+<li class="toctree-l5"><a class="reference internal" href="faq/general.html#y-a-t-il-des-interfaces-graphiques-pour-gdal-ogr">Y a t-il des interfaces graphiques pour GDAL/OGR ?</a></li>
+<li class="toctree-l5"><a class="reference internal" href="faq/general.html#quel-compilateur-puis-je-utiliser-pour-compiler-gdal-ogr">Quel compilateur puis je utiliser pour compiler GDAL/OGR ?</a></li>
+<li class="toctree-l5"><a class="reference internal" href="faq/general.html#j-ai-une-question-ou-puis-je-trouver-plus-d-informations">J&#8217;ai une question. Où puis je trouver plus d&#8217;informations ?</a></li>
+<li class="toctree-l5"><a class="reference internal" href="faq/general.html#quand-est-prevue-la-prochaine-version">Quand est prévue la prochaine version ?</a></li>
+<li class="toctree-l5"><a class="reference internal" href="faq/general.html#comment-puis-je-ajouter-un-nouveau-format-a-gerer">Comment puis je ajouter un nouveau format à gérer ?</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="faq/install.html">FAQ installation et compilation</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="faq/install.html#ou-est-ce-que-je-peux-trouver-une-version-de-developpement-de-gdal">Où est ce que je peux trouver une version de développement de GDAL ?</a></li>
+<li class="toctree-l5"><a class="reference internal" href="faq/install.html#puis-je-avoir-un-fichier-de-projet-pour-ms-visual-studio-pour-gdal">Puis je avoir un fichier de projet pour MS Visual Studio pour GDAL ?</a></li>
+<li class="toctree-l5"><a class="reference internal" href="faq/install.html#puis-je-compiler-gdal-avec-ms-visual-c-2008-edition-express">Puis je compiler GDAL avec MS Visual C++ 2008 Édition Express ?</a></li>
+<li class="toctree-l5"><a class="reference internal" href="faq/install.html#puis-je-compiler-gdal-avec-ms-visual-c-2005-express-edition">Puis je compiler GDAL avec MS Visual C++ 2005 Express Edition ?</a></li>
+<li class="toctree-l5"><a class="reference internal" href="faq/install.html#puis-je-compiler-gdal-avec-cygwin-ou-mingw">Puis je compiler GDAL avec Cygwin ou MinGW ?</a></li>
+<li class="toctree-l5"><a class="reference internal" href="faq/install.html#puis-je-compiler-gdal-avec-borland-c-ou-d-autres-compilateurs-c">Puis je compiler GDAL avec Borland C ou d&#8217;autres compilateurs C ?</a></li>
+<li class="toctree-l5"><a class="reference internal" href="faq/install.html#pourquoi-visual-c-8-0-plante-avec-une-erreur-c2894-dans-wspiapi-h-lors-de-la-compilation-de-gdal">Pourquoi Visual C++ 8.0 plante avec une erreur C2894 dans wspiapi.h lors de la compilation de GDAL ...</a></li>
+<li class="toctree-l5"><a class="reference internal" href="faq/install.html#comment-puis-je-ajouter-des-ldflags-particulier-avec-gdal-1-5">Comment puis je ajouter des LDFLAGS particulier avec GDAL &lt; 1.5 ?</a></li>
+<li class="toctree-l5"><a class="reference internal" href="faq/install.html#j-ai-des-soucis-lors-de-la-compilation-avec-des-bibliotheques-externes-que-puis-je-faire">J&#8217;ai des soucis lors de la compilation avec des bibliothèques externes, que puis je faire ?</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="faq/raster.html">F.A.Q. Raster</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="faq/raster.html#pourquoi-gdalwarp-ou-gdal-merge-n-ecrit-pas-la-plupart-des-formats">Pourquoi gdalwarp ou gdal_merge n&#8217;écrit pas la plupart des formats ?</a></li>
+<li class="toctree-l5"><a class="reference internal" href="faq/raster.html#comment-ameliorer-les-performances-de-gdalwarp">Comment améliorer les performances de gdalwarp ?</a></li>
+<li class="toctree-l5"><a class="reference internal" href="faq/raster.html#comment-convertir-un-raster-en-une-couche-de-polygones">Comment convertir un raster en une couche de polygones ?</a></li>
+<li class="toctree-l5"><a class="reference internal" href="faq/raster.html#comment-puis-je-creer-un-raster-blanc-base-sur-l-etendue-de-fichiers-vecteurs-pour-utiliser-avec-gdal-rasterize">Comment puis je créer un raster blanc basé sur l&#8217;étendue de fichiers vecteurs pour utiliser avec gdal_rasterize ?</a></li>
+<li class="toctree-l5"><a class="reference internal" href="faq/raster.html#comment-utiliser-gdal-translate-pour-extraire-une-sous-partie-d-un-raster">Comment utiliser gdal_translate pour extraire une sous partie d&#8217;un raster ?</a></li>
+<li class="toctree-l5"><a class="reference internal" href="faq/raster.html#comment-retrouver-la-liste-des-formats-supportes-par-ma-version-de-gdal">Comment retrouver la liste des formats supportés par ma version de GDAL ?</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="faq/vecteur.html">FAQ vecteur</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="faq/vecteur.html#comment-puis-je-fusionner-des-100e-de-shapefiles">Comment puis je fusionner des 100e de shapefiles ?</a></li>
+<li class="toctree-l5"><a class="reference internal" href="faq/vecteur.html#comment-traduire-un-fichier-de-geometrie-melangee-vers-le-format-shapfile">Comment traduire un fichier de géométrie mélangée vers le format shapfile ?</a></li>
+<li class="toctree-l5"><a class="reference internal" href="faq/vecteur.html#comment-proteger-les-parametres-des-commandes-gdal-ogr-sous-la-console-microsoft-windows">Comment protéger les paramètres des commandes GDAL/OGR sous la console Microsoft Windows ?</a></li>
+<li class="toctree-l5"><a class="reference internal" href="faq/vecteur.html#comment-recuperer-les-formats-geres-par-ogr">Comment récupérer les formats gérés par ogr ?</a></li>
+<li class="toctree-l5"><a class="reference internal" href="faq/vecteur.html#comment-recuperer-des-informations-sur-la-couche-vectorielle">Comment récupérer des informations sur la couche vectorielle ?</a></li>
+<li class="toctree-l5"><a class="reference internal" href="faq/vecteur.html#comment-ecrire-dans-une-base-de-donnees-postgis">Comment écrire dans une base de données POSTGIS ?</a></li>
+<li class="toctree-l5"><a class="reference internal" href="faq/vecteur.html#comment-lire-une-base-de-donnees-au-format-vmap0">Comment lire une base de données au format VMAP0 ?</a></li>
+<li class="toctree-l5"><a class="reference internal" href="faq/vecteur.html#comment-recuperer-une-zone-geographique-precise-dans-une-jeu-de-donnees">Comment récupérer une zone géographique précise dans une jeu de données ?</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="faq/proj.html">FAQ Projection et système de coordonnées</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="faq/proj.html#que-sont-les-projections-well-known-text-et-comment-les-utiliser">Que sont les projections Well Known Text, et comment les utiliser ?</a></li>
+<li class="toctree-l5"><a class="reference internal" href="faq/proj.html#puis-je-reprojeter-des-rasters-avec-gdal">Puis je reprojeter des rasters avec GDAL?</a></li>
+<li class="toctree-l5"><a class="reference internal" href="faq/proj.html#pourquoi-gdal-ne-choisit-pas-automatiquement-la-transformation-de-datum">Pourquoi GDAL ne choisit pas automatiquement la transformation de datum ?</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="faq/divers.html">FAQ divers</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="faq/divers.html#est-ce-que-la-bibliotheque-gdal-est-thread-safe">Est ce que la bibliothèque GDAL est thread-safe ?</a></li>
+<li class="toctree-l5"><a class="reference internal" href="faq/divers.html#est-ce-que-gdal-fonctionne-avec-differents-locales-internationales-pour-les-chiffres-numerique">Est ce que GDAL fonctionne avec différents locales internationales pour les chiffres numérique ?</a></li>
+<li class="toctree-l5"><a class="reference internal" href="faq/divers.html#comment-debuguer-gdal">Comment débuguer GDAL ?</a></li>
+<li class="toctree-l5"><a class="reference internal" href="faq/divers.html#comment-dois-je-supprimer-les-ressources-decouvertes-a-partir-de-gdal-sous-windows">Comment dois je supprimer les ressources découvertes à partir de GDAL sous windows ?</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="logicielutilisantgdal.html">Logiciel utilisant GDAL</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utils/index.html">Utilitaires</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="utils/index.html#listes-des-commandes">Listes des commandes</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="utils/shapelib.html">ShapeLib</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="utils/shapelib.html#description">Description</a></li>
+<li class="toctree-l6"><a class="reference internal" href="utils/shapelib.html#outils">Outils</a><ul>
+<li class="toctree-l7"><a class="reference internal" href="utils/shapelib.html#dbfcreate">dbfcreate</a></li>
+<li class="toctree-l7"><a class="reference internal" href="utils/shapelib.html#dbfadd">dbfadd</a></li>
+<li class="toctree-l7"><a class="reference internal" href="utils/shapelib.html#dbfdump">dbfdump</a></li>
+<li class="toctree-l7"><a class="reference internal" href="utils/shapelib.html#shpcreate">shpcreate</a></li>
+<li class="toctree-l7"><a class="reference internal" href="utils/shapelib.html#shpadd">shpadd</a></li>
+<li class="toctree-l7"><a class="reference internal" href="utils/shapelib.html#shpdump">shpdump</a></li>
+<li class="toctree-l7"><a class="reference internal" href="utils/shapelib.html#shprewind">shprewind</a></li>
+<li class="toctree-l7"><a class="reference internal" href="utils/shapelib.html#dbfinfo">dbfinfo</a></li>
+<li class="toctree-l7"><a class="reference internal" href="utils/shapelib.html#dbfcat">dbfcat</a></li>
+<li class="toctree-l7"><a class="reference internal" href="utils/shapelib.html#shpinfo">shpinfo</a></li>
+<li class="toctree-l7"><a class="reference internal" href="utils/shapelib.html#shpcat">shpcat</a></li>
+<li class="toctree-l7"><a class="reference internal" href="utils/shapelib.html#shpcentrd">shpcentrd</a></li>
+<li class="toctree-l7"><a class="reference internal" href="utils/shapelib.html#shpdxf">shpdxf</a></li>
+<li class="toctree-l7"><a class="reference internal" href="utils/shapelib.html#shpfix">shpfix</a></li>
+<li class="toctree-l7"><a class="reference internal" href="utils/shapelib.html#shpproj">shpproj</a><ul>
+<li class="toctree-l8"><a class="reference internal" href="utils/shapelib.html#entre">Entré</a></li>
+<li class="toctree-l8"><a class="reference internal" href="utils/shapelib.html#sortie">Sortie</a></li>
+<li class="toctree-l8"><a class="reference internal" href="utils/shapelib.html#fichier-de-parametres-de-projection">Fichier de paramètres de projection</a></li>
+<li class="toctree-l8"><a class="reference internal" href="utils/shapelib.html#parametres-de-projection">Paramètres de projection</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="utils/ecwhed.html">ecwhed</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+
+
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li><a href="index.html">GDAL v1.9.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+    <a href="http://creativecommons.org/licenses/by/2.0/fr/deed.fr">Licence Creative Common BY</a>
+    <!--
+      &copy; Copyright 2011, Yves Jacolin.-->
+      Créé avec <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0.7.
+    </div>
+  </body>
+</html>

@@ -1,0 +1,165 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF8" />
+    
+    <title>gdal2tiles.py &mdash; GDAL v1.9.0 documentation</title>
+    <link rel="stylesheet" href="../_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.9.0',
+        COLLAPSE_MODINDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/translations.js"></script>
+    <link rel="top" title="GDAL v1.9.0 documentation" href="../index.html" />
+    <link rel="up" title="GDAL" href="index.html" />
+    <link rel="next" title="gdal_rasterize" href="gdal_rasterize.html" />
+    <link rel="prev" title="gdal_merge.py" href="gdal_merge.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="gdal_rasterize.html" title="gdal_rasterize"
+             accesskey="N">suivant</a></li>
+        <li class="right" >
+          <a href="gdal_merge.html" title="gdal_merge.py"
+             accesskey="P">précédent</a> |</li>
+        <li><a href="../index.html">GDAL v1.9.0 documentation</a> &raquo;</li>
+          <li><a href="index.html" accesskey="U">GDAL</a> &raquo;</li> 
+      </ul>
+    </div>
+
+
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <h3><a href="../index.html">Table des matières</a></h3>
+            <ul>
+<li><a class="reference internal" href="#">gdal2tiles.py</a><ul>
+<li><a class="reference internal" href="#usage">Usage</a></li>
+<li><a class="reference internal" href="#description">Description</a></li>
+</ul>
+</li>
+</ul>
+
+            <h4>Sujet précédent</h4>
+            <p class="topless"><a href="gdal_merge.html"
+                                  title="Chapitre précédent">gdal_merge.py</a></p>
+            <h4>Sujet suivant</h4>
+            <p class="topless"><a href="gdal_rasterize.html"
+                                  title="Chapitre suivant">gdal_rasterize</a></p>
+            <h3>Cette page</h3>
+            <ul class="this-page-menu">
+              <li><a href="../_sources/gdal/gdal2tiles.txt"
+                     rel="nofollow">Montrer la source</a></li>
+            </ul>
+          <div id="searchbox" style="display: none">
+            <h3>Recherche rapide</h3>
+              <form class="search" action="../search.html" method="get">
+                <input type="text" name="q" size="18" />
+                <input type="submit" value="Go" />
+                <input type="hidden" name="check_keywords" value="yes" />
+                <input type="hidden" name="area" value="default" />
+              </form>
+              <p class="searchtip" style="font-size: 90%">
+              Enter search terms or a module, class or function name.
+              </p>
+          </div>
+          <script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="gdal2tiles-py">
+<span id="gdal-gdal-gdal2tiles"></span><h1>gdal2tiles.py<a class="headerlink" href="#gdal2tiles-py" title="Lien permanent vers ce titre">¶</a></h1>
+<p>génère un répertoire avec des tuiles TMS, un KML et des visualisateurs web simples.</p>
+<div class="section" id="usage">
+<h2>Usage<a class="headerlink" href="#usage" title="Lien permanent vers ce titre">¶</a></h2>
+<div class="highlight-python"><pre>gdal2tiles.py [-title "Title"] [-publishurl http:*yourserver/dir/]
+            [-nogooglemaps] [-noopenlayers] [-nokml]
+            [-googlemapskey KEY] [-forcekml] [-v]
+            input_file [output_dir]</pre>
+</div>
+</div>
+<div class="section" id="description">
+<h2>Description<a class="headerlink" href="#description" title="Lien permanent vers ce titre">¶</a></h2>
+<p>La commande génère un répertoire avec de petites tuiles et métadonnées, suivant
+la spécification du Service de Tuilage de carte de l&#8217;OSGeo. Des pages web
+simples avec des visualiseurs basés sur Google Map et OpenLayers sont générés
+également - tout le monde peut confortablement explorer vos cartes en ligne et
+vous n&#8217;avez pas besoin d&#8217;installer ou de configurer un logiciel spécial (comme
+Mapserver) et la carte s&#8217;affiche très rapidement dans le navigateur web. Vous
+avez seulement besoin de télécharger votre répertoire généré dans un serveur web.</p>
+<p><tt class="docutils literal"><span class="pre">GDAL2Tiles</span></tt> créé également les métadonnées nécessaires pour Google Earth
+(<em>SuperOverlay</em> KML), dans le cas où la carte fournie utilise une projection
+<em>EPSG:4326</em>.</p>
+<p>Les fichiers world et les références spatiales incluses sont utilisés durant la
+génération des tuiles, mais vous pouvez publier également une image sans le
+géoréférencement.</p>
+<ul class="simple">
+<li><strong>-title &#8220;Title&#8221; :</strong> titre utilisé pour les métadonnées générées, les
+visualisateurs web et les fichiers KML.</li>
+<li><strong>-publishurl http:*yourserver/dir/ :</strong> adresse du répertoire dans lequel
+vous allez télécharger le résultat. Il doit se terminer par un slash.</li>
+<li><strong>-nogooglemaps :</strong> ne génère pas de page HTML de base pour Google Maps.</li>
+<li><strong>-noopenlayers :</strong> ne génère pas de page HTML de base pour OpenLayers.</li>
+<li><strong>-nokml :</strong> ne génère pas de fichier KML pour Google Earth.</li>
+<li><strong>-googlemapskey KEY :</strong> clé pour votre domaine généré sur la page web de
+l&#8217;API de Google Maps (<a class="reference external" href="http://www.google.com/apis/maps/signup.html">http://www.google.com/apis/maps/signup.html</a>).</li>
+<li><strong>-forcekml :</strong> force la régénération des fichiers KML. Le fichier en entrée
+doit utiliser des coordonnées <em>EPSG:4326</em> !</li>
+<li><strong>-v :</strong> génère une sortie verbeuse lors de la génération des tuiles.</li>
+</ul>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">gdal2tiles.py est un script Python qui nécessite la compilation avec la
+liaison python de nouvelle génération.</p>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+
+
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="gdal_rasterize.html" title="gdal_rasterize"
+             >suivant</a></li>
+        <li class="right" >
+          <a href="gdal_merge.html" title="gdal_merge.py"
+             >précédent</a> |</li>
+        <li><a href="../index.html">GDAL v1.9.0 documentation</a> &raquo;</li>
+          <li><a href="index.html" >GDAL</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+    <a href="http://creativecommons.org/licenses/by/2.0/fr/deed.fr">Licence Creative Common BY</a>
+    <!--
+      &copy; Copyright 2011, Yves Jacolin.-->
+      Créé avec <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0.7.
+    </div>
+  </body>
+</html>

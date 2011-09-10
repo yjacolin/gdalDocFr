@@ -1,0 +1,395 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF8" />
+    
+    <title>GML - Geography Markup Language &mdash; GDAL v1.9.0 documentation</title>
+    <link rel="stylesheet" href="../../_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '1.9.0',
+        COLLAPSE_MODINDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../_static/translations.js"></script>
+    <link rel="top" title="GDAL v1.9.0 documentation" href="../../index.html" />
+    <link rel="up" title="Formats vecteur d’OGR" href="index.html" />
+    <link rel="next" title="GMT ASCII Vectors (.gmt)" href="gmt.html" />
+    <link rel="prev" title="GFT - Google Fusion Tables" href="gft.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="gmt.html" title="GMT ASCII Vectors (.gmt)"
+             accesskey="N">suivant</a></li>
+        <li class="right" >
+          <a href="gft.html" title="GFT - Google Fusion Tables"
+             accesskey="P">précédent</a> |</li>
+        <li><a href="../../index.html">GDAL v1.9.0 documentation</a> &raquo;</li>
+          <li><a href="../index.html" >OGR</a> &raquo;</li>
+          <li><a href="index.html" accesskey="U">Formats vecteur d&#8217;OGR</a> &raquo;</li> 
+      </ul>
+    </div>
+
+
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <h3><a href="../../index.html">Table des matières</a></h3>
+            <ul>
+<li><a class="reference internal" href="#">GML - Geography Markup Language</a><ul>
+<li><a class="reference internal" href="#parseur">Parseur</a></li>
+<li><a class="reference internal" href="#lecture-des-geometries">Lecture des géométries</a></li>
+<li><a class="reference internal" href="#resolution-gml-xlink">Résolution gml:xlink</a></li>
+<li><a class="reference internal" href="#problemes-d-encodage">Problèmes d&#8217;encodage</a></li>
+<li><a class="reference internal" href="#feature-id-fid-gml-id">Feature id (fid / gml:id)</a></li>
+<li><a class="reference internal" href="#problemes-lors-de-creation">Problèmes lors de création</a></li>
+<li><a class="reference internal" href="#syntax-of-gfs-file-by-example">Syntax of .gfs file by example</a></li>
+<li><a class="reference internal" href="#exemple">Exemple</a></li>
+<li><a class="reference internal" href="#voir-aussi">Voir aussi</a></li>
+</ul>
+</li>
+</ul>
+
+            <h4>Sujet précédent</h4>
+            <p class="topless"><a href="gft.html"
+                                  title="Chapitre précédent">GFT - Google Fusion Tables</a></p>
+            <h4>Sujet suivant</h4>
+            <p class="topless"><a href="gmt.html"
+                                  title="Chapitre suivant">GMT ASCII Vectors (.gmt)</a></p>
+            <h3>Cette page</h3>
+            <ul class="this-page-menu">
+              <li><a href="../../_sources/ogr/formats/gml.txt"
+                     rel="nofollow">Montrer la source</a></li>
+            </ul>
+          <div id="searchbox" style="display: none">
+            <h3>Recherche rapide</h3>
+              <form class="search" action="../../search.html" method="get">
+                <input type="text" name="q" size="18" />
+                <input type="submit" value="Go" />
+                <input type="hidden" name="check_keywords" value="yes" />
+                <input type="hidden" name="area" value="default" />
+              </form>
+              <p class="searchtip" style="font-size: 90%">
+              Enter search terms or a module, class or function name.
+              </p>
+          </div>
+          <script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="gml-geography-markup-language">
+<span id="gdal-ogr-formats-gml"></span><h1>GML - Geography Markup Language<a class="headerlink" href="#gml-geography-markup-language" title="Lien permanent vers ce titre">¶</a></h1>
+<p>OGR a une gestion limité pour la lecture et l&#8217;écriture du GML. La mise à jour
+de fichier existant n&#8217;est pas géré.</p>
+<p>Version de GML gérées :</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="36%" />
+<col width="36%" />
+<col width="28%" />
+</colgroup>
+<thead valign="bottom">
+<tr><th class="head" rowspan="2">OGR version</th>
+<th class="head" rowspan="2">Read</th>
+<th class="head" rowspan="2">Write</th>
+</tr>
+<tr></tr>
+</thead>
+<tbody valign="top">
+<tr><td rowspan="5">OGR &gt;= 1.8.0</td>
+<td rowspan="5">GML2 et GML3 qui
+peut être traduit
+en modèle simple
+feature</td>
+<td rowspan="5">GML 2.1.2 ou GML
+3 SF-0 (GML 3.1.1
+Compliance
+level SF-0)</td>
+</tr>
+<tr></tr>
+<tr></tr>
+<tr></tr>
+<tr></tr>
+<tr><td rowspan="2">OGR &lt; 1.8.0</td>
+<td rowspan="2">GML2 et GML3 limité</td>
+<td rowspan="2">GML 2.1.2</td>
+</tr>
+<tr></tr>
+</tbody>
+</table>
+<div class="section" id="parseur">
+<h2>Parseur<a class="headerlink" href="#parseur" title="Lien permanent vers ce titre">¶</a></h2>
+<p>La première fois qu&#8217;un fichier GML est ouvert il est complètement scanné dans le
+but d&#8217;obtenir l&#8217;ensemble des <em>featuretypes</em>, les attributs associés pour
+chacun d&#8217;eux et d&#8217;autres informations au niveau du jeu de données. Ces
+informations sont stockées dans un fichier .gfs avec le même nom que le fichier
+GML cible. Un accès ultérieur au même fichier GML utilisera ce fichier .gfs pour
+prédéfinir les informations de niveau du jeu de données accélérant son accès.
+Pour une étendues limité le fichier .gfs peut être édité manuellement pour
+modifier la manière dont le fichier GML sera parsé. Soyez avertie que le fichier
+.gfs sera automatiquement régénéré si le .gml associé a un timestamp supérieur.</p>
+<p>Lors du pré-scan du fichier GML pour déterminer la liste des types d&#8217;objets, et
+les champs, les contenus des champs sont scannée pour tenter de déterminer le
+type du champ. Dans certaines applications cela est plus facile si tous les champs
+sont traité comme des champs de chaines de caractères. Cela peut être réalisé
+en définissant l&#8217;option de configuration <em>GML_FIELDTYPES</em> à la valeur
+<em>ALWAYS_STRING</em>.</p>
+<p>OGR 1.8.0 ajoute la gestion pour détecter les attributs des feature dans les
+éléments GML imbriqués (hiérarchie d&#8217;attribut non plat) qui peut être trouvé dans
+certains profiles GML tels que ceux MasterMap de l&#8217;Ordnance Survey UK. OGR 1.8.0
+apporte également la gestion de la lecture des champs de types IntegerList,
+RealList et StringList  quand un élément GML a plusieurs occurrences.</p>
+<p>Depuis OGR 1.8.0, un pilote GML spécialisé - pilote <a class="reference internal" href="nas.html#gdal-ogr-formats-nas"><em>NAS - ALKIS</em></a>
+- est disponible pour lire le format d&#8217;échange GML AAA allemand (NAS/ALKIS).</p>
+<p>Les options de configuration peuvent être définie via la fonction
+<em>CPLSetConfigOption()</em> ou comme variables d&#8217;environnement.</p>
+</div>
+<div class="section" id="lecture-des-geometries">
+<h2>Lecture des géométries<a class="headerlink" href="#lecture-des-geometries" title="Lien permanent vers ce titre">¶</a></h2>
+<p>Lors de la lecture d&#8217;une feature, le pilote prendra par défaut seulement en compte
+la dernière géométrie GML reconnu trouvée (dans le cas où il y en a plusieurs)
+dans le sous arbre XML décrivant la feature.</p>
+<p>À partir de OGR 1.8.0, l&#8217;utilisateur peut changer le fichier .gfs pour
+sélectionner la géométrie appropriée en spécifiant son chemin avec l&#8217;élément
+&lt;GeometryElementPath&gt;. Voyez la description de la syntaxe .gfs plus bas.</p>
+<p>OGR 1.8.0 ajoute la gestion de plusieurs géométries GML incluant TopoCurve,
+TopoSurface, MultiCurve. Le type géométrie GML TopoCurve peut être interprété
+comme l&#8217;un des deux types de géométries. Les éléments Edge interne contiennent
+des courbes et leurs noeuds correspondants. Par défaut seules les courbes, la
+géométrie principale, sont retournées comme OGRMultiLineString. Pour récupérer
+les noeuds, sous forme de OGRMultiPoint, l&#8217;option de configuration
+<strong>GML_GET_SECONDARY_GEOM</strong> doit être définie à la valeur <strong>YES</strong>. Lorsque cela est
+fait seul les géométries secondaires sont renvoyées.</p>
+</div>
+<div class="section" id="resolution-gml-xlink">
+<h2>Résolution gml:xlink<a class="headerlink" href="#resolution-gml-xlink" title="Lien permanent vers ce titre">¶</a></h2>
+<p>OGR 1.8.0 ajoute la gestion de la résolution des gml:xlink. Quand le <em>résolveur</em>
+trouve un élément contenant une balise xlink:href, il tente de trouver l&#8217;élément
+correspondant avec le gml:id dans le même fichier gml, d&#8217;autre fichier gml dans le
+système de fichier ou sur le web en utilisant cURL. Définissez l&#8217;option de
+configuration <strong>GML_SKIP_RESOLVE_ELEMS</strong> à <strong>NONE</strong> pour activer la résolution.</p>
+<p>Par défaut le fichier résolu sera sauvé dans le même répertoire que le fichier
+originel avec l&#8217;extension &#8221;.resolved.gml&#8221;, s&#8217;il n&#8217;existe pas déjà. Ce
+comportement peut être changé en utilisant l&#8217;option de configuration
+<strong>GML_SAVE_RESOLVED_TO</strong>. Définie le à <strong>SAME</strong> pour écraser le fichier original.
+Définissez le à <strong>un nom de fichier finissant par .gml</strong> pour le sauver à cet
+endroit. Toutes autres valeurs seront ignorées. Si le <em>résolveur</em> ne peut pas
+écrire dans le fichier pour n&#8217;importe quel raison, il tentera de le sauver dans
+un fichier temporaire généré par <em>CPLGenerateTempFilename(&#8220;ResolvedGML&#8221;);</em> sinon
+la résolution échouera.</p>
+<p>Notez que l&#8217;algorithme de résolution n&#8217;est pas optimisé pour les gros fichiers.
+Pour les fichiers avec plus de 2000 balises xlink:href, le process peut durer plus
+que quelques minutes. Une progression approximative est affichée grâce à
+<em>CPLDebug()</em>  tous les 256 liens. Il peut être vue en définissant la variable
+d&#8217;environnement CPL_DEBUG. Le temps de résolution peut être réduit si vous
+connaissez les éléments qui ne sont pas nécessaire. Mentionnez une liste de noms
+séparés par des virgules des éléments avec l&#8217;option de configuration
+<strong>GML_SKIP_RESOLVE_ELEMS</strong>. Définissez à <strong>ALL</strong> pour ne pas réaliser la
+résolution en même temps (défaut). Définissez à <strong>NONE</strong> pour résoudre tous les
+xlinks.</p>
+</div>
+<div class="section" id="problemes-d-encodage">
+<h2>Problèmes d&#8217;encodage<a class="headerlink" href="#problemes-d-encodage" title="Lien permanent vers ce titre">¶</a></h2>
+<p>La bibliothèque Expat gère la lecture des encodages internes suivants :</p>
+<ul class="simple">
+<li>US-ASCII</li>
+<li>UTF-8</li>
+<li>UTF-16</li>
+<li>ISO-8859-1</li>
+</ul>
+<p>Lorsqu&#8217;il est utilisé avec la bibliothèque Expat, OGR 1.8.0 ajoute la gestion de
+l&#8217;encodage Windows-1252 (pour les versions précédentes, modifier l&#8217;encodage
+mentionnée dans l&#8217;en-tête XML à ISO-8859-1 peut fonctionner dans certain cas).</p>
+<p>Le contenu renvoyé par OGR sera encodé en UTF-8, après la conversion à partir de
+l&#8217;encodage mentionné dans l&#8217;en-tête du fichier.</p>
+<p>Si le fichier GML n&#8217;est pas encodé dans l&#8217;un des encodages précédents et que le
+seul parseur disponible est Expat, il ne sera pas parsé par le pilote GML. Vous
+pouvez le convertir dans l&#8217;un des encodages gérés avec la commande <em>iconv</em> par
+exemple et changer la valeur du paramètre <em>encoding</em> dans l&#8217;en-tête XML en
+conséquence.</p>
+</div>
+<div class="section" id="feature-id-fid-gml-id">
+<h2>Feature id (fid / gml:id)<a class="headerlink" href="#feature-id-fid-gml-id" title="Lien permanent vers ce titre">¶</a></h2>
+<p>À partir de OGR 1.9.0, le pilote expose le contenu de l&#8217;attribut <em>gml:id</em> comme
+champ de chaîne de caractères appelé <em>gml_id</em>, lors de la lecture des documents
+GML des WFS. Lors de la création d&#8217;un document GML3, si un champ est appelé
+<em>gml_id</em>, son contenu sera également utilisé pour écrire le contenue de l&#8217;attribut
+<em>gml:id</em> de la feature créée.</p>
+<p>À partir de OGR 1.9.0, le pilote auto-détecte la présence d&#8217;un attribut fid
+(GML2) (resp. gml:id (GML3)) au début du fichier, et, si présent, l&#8217;expose par
+défaut en tant que champ <em>fid</em> (resp. <em>gml_id</em>). L&#8217;auto-détection peut être
+écrasée en spécifiant l&#8217;option de configuration <strong>GML_EXPOSE_FID</strong> ou
+<strong>GML_EXPOSE_GML_ID</strong> à <strong>YES</strong> ou <strong>NO</strong>.</p>
+<p>À partir de OGR 1.9.0, lors de la création d&#8217;un document GML2, si un champ est
+appelé <em>fid</em>, son contenu sera également utilisé pour écrire le contenu de
+l&#8217;attribut fid de la feature créée.</p>
+</div>
+<div class="section" id="problemes-lors-de-creation">
+<h2>Problèmes lors de création<a class="headerlink" href="#problemes-lors-de-creation" title="Lien permanent vers ce titre">¶</a></h2>
+<p>Lors de l&#8217;export, toutes les couches sont écrites dans un seul fichier GML dans
+une seule collection d&#8217;objet. Chaque nom de couche est utilisé comme nom
+d&#8217;élément pour les objets à partir de cette couche. Les géométries sont toujours
+écrites comme un élément <em>ogr:geometryProperty</em> dans l&#8217;objet.</p>
+<p>Le pilote GML gère  en écriture les options de création de jeu de données
+suivantes :</p>
+<ul class="simple">
+<li><strong>XSISCHEMAURI :</strong> si fournit, l&#8217;uri sera inséré comme location du schéma.
+Notez que le fichier schéma n&#8217;est pas réellement accédé par OGR, il est du
+ressort de l&#8217;utilisateur de s&#8217;assurer que le schéma correspond au fichier
+données GML produit par GML.</li>
+<li><strong>XSISCHEMA :</strong> peut être <em>EXTERNAL</em>, <em>INTERNAL</em> ou <em>OFF</em> et par
+défaut à <em>EXTERNAL</em>. Cela écrit un fichier schéma GML vers un fichier .xsd
+correspondant (avec le même nom). Si <em>INTERNAL</em> est utilisé le schéma est écrit
+dans le fichier GML, mais cela est expérimental et probablement pas valide
+XML. <em>OFF</em> désactive la génération du schéma (et est implicite si
+<em>XSISCHEMAURI</em> est utilisé).</li>
+<li><strong>FORMAT :</strong> (OGR &gt;= 1.8.0) peut être définie à GML3 pour écrire des fichiers
+GML qui suivent le profile GML3 SF-0. Autrement GML2 sera utilisé.</li>
+<li><strong>GML3_LONGSRS=YES/NO :</strong> (OGR &gt;= 1.8.0, seulement valide quand FORMAT=GML3) YES
+par défaut. Si YES, SRS avec l&#8217;autorité EPSG sera écrit avec le préfixe
+&#8220;<a class="reference external" href="urn:ogc:def:crs:EPSG">urn:ogc:def:crs:EPSG</a>::&#8221;. Dans ce cas, si la projection est une projection
+géographique sans ordre d&#8217;axe explicite, mais avec ce même code d&#8217;autorité de
+la projection importé avec <em>ImportFromEPSGA()</em> doit être traité comme lat/long,
+alors la fonction prendra soin d&#8217;échanger l&#8217;ordre des coordonnées. Si définie
+à NO, la projection avec l&#8217;autorité EPSG sera écrit avec le préfixe &#8220;EPSG:&#8221;, même
+s&#8217;ils sont dans l&#8217;ordre lat/long.</li>
+<li><strong>SPACE_INDENTATION=YES/NO :</strong> (OGR &gt;= 1.8.0) YES par défaut. Si YES, la sortie
+sera indentée avec des espaces pour une meilleure lisibilité, mais avec une
+augmentation de la taille.</li>
+</ul>
+</div>
+<div class="section" id="syntax-of-gfs-file-by-example">
+<h2>Syntax of .gfs file by example<a class="headerlink" href="#syntax-of-gfs-file-by-example" title="Lien permanent vers ce titre">¶</a></h2>
+<p>Considérons le fichier test.gml suivant :</p>
+<div class="highlight-python"><pre>&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;gml:FeatureCollection xmlns:gml="http://www.opengis.net/gml"&gt;
+    &lt;gml:featureMember&gt;
+        &lt;LAYER&gt;
+            &lt;attrib1&gt;attrib1_value&lt;/attrib1&gt;
+            &lt;attrib2container&gt;
+                &lt;attrib2&gt;attrib2_value&lt;/attrib2&gt;
+            &lt;/attrib2container&gt;
+            &lt;location1container&gt;
+                &lt;location1&gt;
+                    &lt;gml:Point&gt;&lt;gml:coordinates&gt;3,50&lt;/gml:coordinates&gt;&lt;/gml:Point&gt;
+                &lt;/location1&gt;
+            &lt;/location1container&gt;
+            &lt;location2&gt;
+                &lt;gml:Point&gt;&lt;gml:coordinates&gt;2,49&lt;/gml:coordinates&gt;&lt;/gml:Point&gt;
+            &lt;/location2&gt;
+        &lt;/LAYER&gt;
+    &lt;/gml:featureMember&gt;
+&lt;/gml:FeatureCollection&gt;</pre>
+</div>
+<p>et le fichier associé .gfs suivant :</p>
+<div class="highlight-python"><pre>&lt;GMLFeatureClassList&gt;
+    &lt;GMLFeatureClass&gt;
+        &lt;Name&gt;LAYER&lt;/Name&gt;
+        &lt;ElementPath&gt;LAYER&lt;/ElementPath&gt;
+        &lt;GeometryElementPath&gt;location1container|location1&lt;/GeometryElementPath&gt;
+        &lt;PropertyDefn&gt;
+            &lt;Name&gt;attrib1&lt;/Name&gt;
+            &lt;ElementPath&gt;attrib1&lt;/ElementPath&gt;
+            &lt;Type&gt;String&lt;/Type&gt;
+            &lt;Width&gt;13&lt;/Width&gt;
+        &lt;/PropertyDefn&gt;
+        &lt;PropertyDefn&gt;
+            &lt;Name&gt;attrib2&lt;/Name&gt;
+            &lt;ElementPath&gt;attrib2container|attrib2&lt;/ElementPath&gt;
+            &lt;Type&gt;String&lt;/Type&gt;
+            &lt;Width&gt;13&lt;/Width&gt;
+        &lt;/PropertyDefn&gt;
+    &lt;/GMLFeatureClass&gt;
+&lt;/GMLFeatureClassList&gt;</pre>
+</div>
+<p>Notez la présence du caractère &#8216;|&#8217; dans les éléments &lt;ElementPath&gt; et
+&lt;GeometryElementPath&gt; pour définir l&#8217;élément géométrie/champ désiré qui est
+l&#8217;élément XML imbriqué. Les éléments champs imbriqués sont seulement géré à partir
+d&#8217;OGR 1.8.0, ainsi que spécifier &lt;GeometryElementPath&gt;. Si GeometryElementPath
+n&#8217;est pas définie, le pilote GML utilisera le dernier élément géométrie reconnu.</p>
+<p>La sortie de <em>ogrinfo test.gml -ro -al</em> est :</p>
+<div class="highlight-python"><pre>Layer name: LAYER
+Geometry: Unknown (any)
+Feature Count: 1
+Extent: (3.000000, 50.000000) - (3.000000, 50.000000)
+Layer SRS WKT:
+(unknown)
+Geometry Column = location1container|location1
+attrib1: String (13.0)
+attrib2: String (13.0)
+OGRFeature(LAYER):0
+    attrib1 (String) = attrib1_value
+    attrib2 (String) = attrib2_value
+    POINT (3 50)</pre>
+</div>
+</div>
+<div class="section" id="exemple">
+<h2>Exemple<a class="headerlink" href="#exemple" title="Lien permanent vers ce titre">¶</a></h2>
+<p>La commande ogr2ogr peut être utilisé pour faire un dump des résultats d&#8217;une
+requête Oracle en GML :</p>
+<div class="highlight-python"><pre>ogr2ogr -f GML output.gml OCI:usr/pwd@db my_feature -where "id = 0"</pre>
+</div>
+<p>La commande ogr2ogr peut être utilisé pour faire un dump des résultats d&#8217;une
+requête PostGIS en GML :</p>
+<div class="highlight-python"><pre>ogr2ogr -f GML output.gml PG:'host=myserver dbname=warmerda' -sql
+    "SELECT pop_1994 from canada where province_name = 'Alberta'"</pre>
+</div>
+</div>
+<div class="section" id="voir-aussi">
+<h2>Voir aussi<a class="headerlink" href="#voir-aussi" title="Lien permanent vers ce titre">¶</a></h2>
+<ul class="simple">
+<li><a class="reference external" href="http://www.opengeospatial.org/standards/gml">Spécifications du GML</a></li>
+<li><a class="reference external" href="http://portal.opengeospatial.org/files/?artifact_id=15201">Profile GML 3.1.1 simple features</a></li>
+<li><a class="reference external" href="http://xml.apache.org/xerces2-j/index.html">Xerces</a></li>
+<li><em class="xref std std-ref">gdal.ogr.format.nas</em></li>
+</ul>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+
+
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="gmt.html" title="GMT ASCII Vectors (.gmt)"
+             >suivant</a></li>
+        <li class="right" >
+          <a href="gft.html" title="GFT - Google Fusion Tables"
+             >précédent</a> |</li>
+        <li><a href="../../index.html">GDAL v1.9.0 documentation</a> &raquo;</li>
+          <li><a href="../index.html" >OGR</a> &raquo;</li>
+          <li><a href="index.html" >Formats vecteur d&#8217;OGR</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+    <a href="http://creativecommons.org/licenses/by/2.0/fr/deed.fr">Licence Creative Common BY</a>
+    <!--
+      &copy; Copyright 2011, Yves Jacolin.-->
+      Créé avec <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0.7.
+    </div>
+  </body>
+</html>

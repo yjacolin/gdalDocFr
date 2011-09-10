@@ -1,0 +1,180 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF8" />
+    
+    <title>OGDI – Pont OGDI &mdash; GDAL v1.9.0 documentation</title>
+    <link rel="stylesheet" href="../../_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '1.9.0',
+        COLLAPSE_MODINDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../_static/translations.js"></script>
+    <link rel="top" title="GDAL v1.9.0 documentation" href="../../index.html" />
+    <link rel="up" title="Formats" href="index.html" />
+    <link rel="next" title="OZI – raster OZF2/OZFX3" href="ozi.html" />
+    <link rel="prev" title="NITF – Information Avancée sur le pilote" href="nitf_avancee.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="ozi.html" title="OZI – raster OZF2/OZFX3"
+             accesskey="N">suivant</a></li>
+        <li class="right" >
+          <a href="nitf_avancee.html" title="NITF – Information Avancée sur le pilote"
+             accesskey="P">précédent</a> |</li>
+        <li><a href="../../index.html">GDAL v1.9.0 documentation</a> &raquo;</li>
+          <li><a href="../index.html" >GDAL</a> &raquo;</li>
+          <li><a href="index.html" accesskey="U">Formats</a> &raquo;</li> 
+      </ul>
+    </div>
+
+
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <h4>Sujet précédent</h4>
+            <p class="topless"><a href="nitf_avancee.html"
+                                  title="Chapitre précédent">NITF &#8211; Information Avancée sur le pilote</a></p>
+            <h4>Sujet suivant</h4>
+            <p class="topless"><a href="ozi.html"
+                                  title="Chapitre suivant">OZI &#8211; raster OZF2/OZFX3</a></p>
+            <h3>Cette page</h3>
+            <ul class="this-page-menu">
+              <li><a href="../../_sources/gdal/formats/ogdi.txt"
+                     rel="nofollow">Montrer la source</a></li>
+            </ul>
+          <div id="searchbox" style="display: none">
+            <h3>Recherche rapide</h3>
+              <form class="search" action="../../search.html" method="get">
+                <input type="text" name="q" size="18" />
+                <input type="submit" value="Go" />
+                <input type="hidden" name="check_keywords" value="yes" />
+                <input type="hidden" name="area" value="default" />
+              </form>
+              <p class="searchtip" style="font-size: 90%">
+              Enter search terms or a module, class or function name.
+              </p>
+          </div>
+          <script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="ogdi-pont-ogdi">
+<span id="gdal-gdal-formats-ogdi"></span><h1>OGDI &#8211; Pont OGDI<a class="headerlink" href="#ogdi-pont-ogdi" title="Lien permanent vers ce titre">¶</a></h1>
+<p>Les sources de données raster OGDI sont géré par GDAL en lecture. À la fois les
+matrices et les familles devraient être géré, ainsi que la lecture des cartes de
+couleurs et les méta-données des projections. Le lecteur GDAL a pour but d&#8217;être
+utilisé avec le pilote OGDI 3.1, mais les pilotes OGDI 3.0 devrait aussi
+fonctionner.</p>
+<p>Les jeux de données OGDI sont ouvert dans GDAL par la sélection de l&#8217;url GLTP.
+Par exemple, <em>gltp://gdal.velocet.ca/adrg/usr4/mpp1/adrg/TPSUS0101</em> ouvrira le
+jeu de données ADRG stocké dans /usr4/mpp1/adrg/TPSUS0101 sur la machine
+gdal.velocet.ca (en assumant qu&#8217;il y ait un serveur OGDI en fonctionnement) en
+utilisant le pilote &#8216;adrg&#8217;. Cet accès par défaut à l&#8217;ensemble du serveur de
+données tentera de représenter toutes les couches (et tous les types de famille)
+comme des bandes, toutes à la résolution et à la région rapporté par le serveur
+de données lors de l&#8217;accès initial.</p>
+<p>Il est également possible desélectionner une couche particulière et d&#8217;accéder à
+la famille d&#8217;un serveur de données OGDI en indiquant le nom de la couche dans le
+nom. Le nom du jeu de données GDAL
+<tt class="docutils literal"><span class="pre">gltp:/adrg/usr4/mpp1/adrg/TPUS0101:&quot;TPUS0102.IMG&quot;</span></tt> : la matrice sélectionnera
+la couche nommée TPUS0102.IMG du jeu de données /usr4/mpp1/adrg/TPUS0101 sur le
+système local en utilisant le pilote ADRG, et accèdera à la famille de la
+matrice. Quand on accède à une couche spécifique decette manière, GDAL tentera
+de déterminer la région et la résolution à partir du document capabilities OGDI
+3.1. Notez que les serveurs de données OGDI 3.0 doivent avoir la couche et la
+famille définie dans le nom du jeu de données puisqu&#8217;ils ne peuvent pas être
+déterminer automatiquement.</p>
+<p>Par exemple :</p>
+<div class="highlight-python"><pre>gltp://gdal.velocet.ca/adrg/usr4/mpp1/adrg/TPUS0101
+gltp:/adrg/usr4/mpp1/adrg/TPUS0101
+gltp:/adrg/usr4/mpp1/adrg/TPUS0101:"TPUS0102.IMG":Matrix</pre>
+</div>
+<p>Les couches de famille Matrix OGDI (couches d&#8217;entier pseudo-couleur) sont
+représentées comme une simple bande de raster avec une table de couleur. Bien
+que les couches Matrix contiennent des valeurs entières de 32 bits, elles sont
+représentées dans GDAL comme 8 couches. Toutes les valeurs au-dessus de 255 sont
+tronqué à 255, et seulement les 256 entrées de la table de couleur sont
+capturées. Puisque cela fonctionne bien pour les couches Matrix, il est espéré
+que les couches Matrix avec un domaine plus dynamique soient représenté dans un
+futur proche sous forme d&#8217;un autre type de données.</p>
+<p>Les couches de famille d&#8217;Image OGDI peuvent en interne avoir un type RVB (1) qui
+est représenté sous forme de trois bandes dans GDAL, ou en Byte (2), UInt16 (3),
+Int16 (4) ou Int32 (5). Il n&#8217;y a pas de gestion pour les bandes de virgules
+flottantes dans OGDI 3.1.</p>
+<p>Le pilote OGDI de GDAL représentera les sources de données OGDI comme ayant des
+aperçues <em>arbitraires</em>. N&#8217;importe quel raster de GDAL lu par des requêtes à
+une résolution réduite sera passé au pilote OGDI avec cette résolution réduite ;
+permettant potentiellement une efficacité dans la lecture des informations des
+aperçues à partir d&#8217;un serveur de données OGDI.</p>
+<p>Si un serveur de données OGDI est ouvert sans avoir sélectionner le nom d&#8217;une
+couche dans le nom du jeu de données, et si le serveur de données a les
+capacités des styles OGDI 3.1, la liste des couches sera rendu disponible comme
+des méta-données de sous-jeu de données. Par exemple, la commande <tt class="docutils literal"><span class="pre">gdalinfo</span></tt>
+pourra renvoyer ce qui suit. Ces informations peuvent être utilisé pour établir
+les couches disponibles pour un accès direct.</p>
+<div class="highlight-python"><pre>Subdatasets:
+    SUBDATASET_1_NAME=gltp:/adrg/usr4/mpp1/adrg/TPUS0101:"TPUS0101.IMG":Matrix
+    SUBDATASET_1_DESC=TPUS0101.IMG as Matrix
+    SUBDATASET_2_NAME=gltp:/adrg/usr4/mpp1/adrg/TPUS0101:"TPUS0102.IMG":Matrix
+    SUBDATASET_2_DESC=TPUS0102.IMG as Matrix
+    SUBDATASET_3_NAME=gltp:/adrg/usr4/mpp1/adrg/TPUS0101:"TPUS0101.IMG":Image
+    SUBDATASET_3_DESC=TPUS0101.IMG as Image
+    SUBDATASET_4_NAME=gltp:/adrg/usr4/mpp1/adrg/TPUS0101:"TPUS0102.IMG":Image
+    SUBDATASET_4_DESC=TPUS0102.IMG as Image</pre>
+</div>
+<p><strong>Lisez également :</strong></p>
+<ul class="simple">
+<li><a class="reference external" href="http://ogdi.sourceforge.net/">ogdi.sourceforge.net</a></li>
+</ul>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+
+
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="ozi.html" title="OZI – raster OZF2/OZFX3"
+             >suivant</a></li>
+        <li class="right" >
+          <a href="nitf_avancee.html" title="NITF – Information Avancée sur le pilote"
+             >précédent</a> |</li>
+        <li><a href="../../index.html">GDAL v1.9.0 documentation</a> &raquo;</li>
+          <li><a href="../index.html" >GDAL</a> &raquo;</li>
+          <li><a href="index.html" >Formats</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+    <a href="http://creativecommons.org/licenses/by/2.0/fr/deed.fr">Licence Creative Common BY</a>
+    <!--
+      &copy; Copyright 2011, Yves Jacolin.-->
+      Créé avec <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0.7.
+    </div>
+  </body>
+</html>

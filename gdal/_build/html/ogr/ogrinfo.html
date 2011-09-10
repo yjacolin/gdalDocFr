@@ -1,0 +1,242 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF8" />
+    
+    <title>ogrinfo &mdash; GDAL v1.9.0 documentation</title>
+    <link rel="stylesheet" href="../_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.9.0',
+        COLLAPSE_MODINDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/translations.js"></script>
+    <link rel="top" title="GDAL v1.9.0 documentation" href="../index.html" />
+    <link rel="up" title="OGR" href="index.html" />
+    <link rel="next" title="ogr2ogr" href="ogr2ogr.html" />
+    <link rel="prev" title="Présentation d’OGR" href="presentation.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="ogr2ogr.html" title="ogr2ogr"
+             accesskey="N">suivant</a></li>
+        <li class="right" >
+          <a href="presentation.html" title="Présentation d’OGR"
+             accesskey="P">précédent</a> |</li>
+        <li><a href="../index.html">GDAL v1.9.0 documentation</a> &raquo;</li>
+          <li><a href="index.html" accesskey="U">OGR</a> &raquo;</li> 
+      </ul>
+    </div>
+
+
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <h4>Sujet précédent</h4>
+            <p class="topless"><a href="presentation.html"
+                                  title="Chapitre précédent">Présentation d&#8217;OGR</a></p>
+            <h4>Sujet suivant</h4>
+            <p class="topless"><a href="ogr2ogr.html"
+                                  title="Chapitre suivant">ogr2ogr</a></p>
+            <h3>Cette page</h3>
+            <ul class="this-page-menu">
+              <li><a href="../_sources/ogr/ogrinfo.txt"
+                     rel="nofollow">Montrer la source</a></li>
+            </ul>
+          <div id="searchbox" style="display: none">
+            <h3>Recherche rapide</h3>
+              <form class="search" action="../search.html" method="get">
+                <input type="text" name="q" size="18" />
+                <input type="submit" value="Go" />
+                <input type="hidden" name="check_keywords" value="yes" />
+                <input type="hidden" name="area" value="default" />
+              </form>
+              <p class="searchtip" style="font-size: 90%">
+              Enter search terms or a module, class or function name.
+              </p>
+          </div>
+          <script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="ogrinfo">
+<span id="gdal-ogr-ogrinfo"></span><h1>ogrinfo<a class="headerlink" href="#ogrinfo" title="Lien permanent vers ce titre">¶</a></h1>
+<p>Listes des informations sur une source de données géré par OGR.</p>
+<p>Utilisation :</p>
+<div class="highlight-python"><pre>ogrinfo [--help-general] [-ro] [-q] [-where restricted_where]
+      [-spat xmin ymin xmax ymax] [-fid fid]
+      [-sql statement] [-dialect dialect] [-al] [-so] [-fields={YES/NO}]
+      [-geom={YES/NO/SUMMARY}][--formats]
+      datasource_name [layer [layer ...]]</pre>
+</div>
+<p>Le programme <tt class="docutils literal"><span class="pre">ogrinfo</span></tt> liste diverses informations sur la source de données
+gérée par OGR vers la sortie standard (le terminal).</p>
+<ul>
+<li><p class="first"><strong>-ro :</strong> ouvre la source de données en lecture seule.</p>
+</li>
+<li><p class="first"><strong>-al :</strong> liste tous les objets de toutes les couches (utilisé à la place de
+fournir des noms de couche comme arguments).</p>
+</li>
+<li><p class="first"><strong>-so`` / ``Summary Only :</strong> supprime la liste des objets, affiche seulement
+les informations comme la projection, le schéma, le nombre d&#8217;objets et l&#8217;étendue.</p>
+</li>
+<li><p class="first"><strong>-q :</strong> Rapport d&#8217;informations diverses en mode silence, incluant le système
+de coordonnées, le schéma de la couche, l&#8217;étendue et le nombre d&#8217;objets.</p>
+</li>
+<li><p class="first"><strong>-where restricted_where :</strong> un requête attributaire dans une forme
+restreinte sous la forme de requête SQL WHERE. Seulement les objets
+correspondant à la requête attributaire seront renvoyés.</p>
+</li>
+<li><p class="first"><strong>-sql statement :</strong> exécute la requête SQL indiquée et retourne le résultat.</p>
+</li>
+<li><p class="first"><strong>-spat xmin ymin xmax ymax :</strong> la zone d&#8217;intérêt. Seulement les objets à
+l&#8217;intérieur du rectangle seront renvoyés.</p>
+</li>
+<li><p class="first"><strong>-fid fid :</strong> si fournit, seulement les objets avec cet identifiant seront
+renvoyés. Fonctionnement exclusif aux requêtes attributaire ou SQL.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">si vous voulez sélectionner plusieurs features basées sur leur feature_id,
+vous pouvez également utilisé le fait que le &#8216;fid&#8217; est un champ spécial
+reconnu par .  le SQL d&#8217;OGR. Donc, &#8216;-where &#8220;fid in (1,3,5)&#8221;&#8217; sélectionnera
+les features 1, 3 et 5.</p>
+</div>
+</li>
+<li><p class="first"><strong>-fields={YES/NO} :</strong> (à partir de GDAL 1.6.0) Si définie à <em>NO</em>, le dump
+des feature n&#8217;affichera pas les valeurs des champs. La valeur par défaut est
+<em>YES</em>.</p>
+</li>
+<li><p class="first"><strong>-geom={YES/NO/SUMMARY} :</strong> (à partir de GDAL 1.6.0) Si définie à <em>NO</em>, le
+dump des feature n&#8217;affichera pas les géométries. Si définie à <em>SUMMARY</em>, seul
+le résumé des géométries sera affiché. Si définie à <em>YES</em>, la géométrie sera
+rapporté au format WKT complet de l&#8217;OGC. La valeur par défaut est <em>YES</em>.</p>
+</li>
+<li><p class="first"><strong>&#8211;formats :</strong> liste les pilotes des formats qui sont activés.</p>
+</li>
+<li><p class="first"><strong>datasource_name :</strong> La source de données à ouvrir. Peut être un nom de
+fichier, un répertoire ou un autre nom virtuel. Regardez la liste des formats
+vecteurs OGR pour les sources de données gérées.</p>
+</li>
+<li><p class="first"><strong>layer :</strong> une ou plusieurs noms de couches peuvent être reportés.</p>
+</li>
+</ul>
+<p>Si aucun nom de couches n&#8217;est passé, alors <tt class="docutils literal"><span class="pre">ogrinfo</span></tt> renverra une liste de
+couches disponibles (et leur type géométrique). Si le(s) nom(s) des couches est
+passé alors leurs étendues, système de coordonnées, le nombre d&#8217;objet ; le type
+géométrique, le schéma et toutes les géométries correspondant aux requêtes des
+paramètres seront renvoyés vers le terminal. Si aucun paramètre de requête n&#8217;est
+fourni, toutes les géométries seront renvoyées.</p>
+<p>Les géométries sont renvoyées au format WKT de l&#8217;OGC.</p>
+<p>Exemple retournant toutes les couches d&#8217;un fichier NTF :</p>
+<div class="highlight-python"><pre>% ogrinfo wrk/SHETLAND_ISLANDS.NTF
+INFO: Open of `wrk/SHETLAND_ISLANDS.NTF'
+using driver `UK .NTF' successful.
+1: BL2000_LINK (Line String)
+2: BL2000_POLY (None)
+3: BL2000_COLLECTIONS (None)
+4: FEATURE_CLASSES (None)</pre>
+</div>
+<p>Exemple en utilisant une requête pour restreindre la sortie des objets d&#8217;une
+couche :</p>
+<div class="highlight-python"><pre>% ogrinfo -ro -where 'GLOBAL_LINK_ID=185878' wrk/SHETLAND_ISLANDS.NTF BL2000_LINK
+INFO: Open of `wrk/SHETLAND_ISLANDS.NTF'
+using driver `UK .NTF' successful.
+
+Layer name: BL2000_LINK
+Geometry: Line String
+Feature Count: 1
+Extent: (419794.100000, 1069031.000000) - (419927.900000, 1069153.500000)
+Layer SRS WKT:
+PROJCS["OSGB 1936 / British National Grid",
+    GEOGCS["OSGB 1936",
+        DATUM["OSGB_1936",
+            SPHEROID["Airy 1830",6377563.396,299.3249646]],
+        PRIMEM["Greenwich",0],
+        UNIT["degree",0.0174532925199433]],
+    PROJECTION["Transverse_Mercator"],
+    PARAMETER["latitude_of_origin",49],
+    PARAMETER["central_meridian",-2],
+    PARAMETER["scale_factor",0.999601272],
+    PARAMETER["false_easting",400000],
+    PARAMETER["false_northing",-100000],
+    UNIT["metre",1]]
+LINE_ID: Integer (6.0)
+GEOM_ID: Integer (6.0)
+FEAT_CODE: String (4.0)
+GLOBAL_LINK_ID: Integer (10.0)
+TILE_REF: String (10.0)
+OGRFeature(BL2000_LINK):2
+    LINE_ID (Integer) = 2
+    GEOM_ID (Integer) = 2
+    FEAT_CODE (String) = (null)
+    GLOBAL_LINK_ID (Integer) = 185878
+    TILE_REF (String) = SHETLAND I
+    LINESTRING (419832.100 1069046.300,419820.100 1069043.800,419808.300
+    1069048.800,419805.100 1069046.000,419805.000 1069040.600,419809.400
+    1069037.400,419827.400 1069035.600,419842 1069031,419859.000
+    1069032.800,419879.500 1069049.500,419886.700 1069061.400,419890.100
+    1069070.500,419890.900 1069081.800,419896.500 1069086.800,419898.400
+    1069092.900,419896.700 1069094.800,419892.500 1069094.300,419878.100
+    1069085.600,419875.400 1069087.300,419875.100 1069091.100,419872.200
+    1069094.600,419890.400 1069106.400,419907.600 1069112.800,419924.600
+    1069133.800,419927.900 1069146.300,419927.600 1069152.400,419922.600
+    1069153.500,419917.100 1069153.500,419911.500 1069153.000,419908.700
+    1069152.500,419903.400 1069150.800,419898.800 1069149.400,419894.800
+    1069149.300,419890.700 1069149.400,419890.600 1069149.400,419880.800
+    1069149.800,419876.900 1069148.900,419873.100 1069147.500,419870.200
+    1069146.400,419862.100 1069143.000,419860 1069142,419854.900
+    1069138.600,419850 1069135,419848.800 1069134.100,419843
+    1069130,419836.200 1069127.600,419824.600 1069123.800,419820.200
+    1069126.900,419815.500 1069126.900,419808.200 1069116.500,419798.700
+    1069117.600,419794.100 1069115.100,419796.300 1069109.100,419801.800
+    1069106.800,419805.000  1069107.300)</pre>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+
+
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="ogr2ogr.html" title="ogr2ogr"
+             >suivant</a></li>
+        <li class="right" >
+          <a href="presentation.html" title="Présentation d’OGR"
+             >précédent</a> |</li>
+        <li><a href="../index.html">GDAL v1.9.0 documentation</a> &raquo;</li>
+          <li><a href="index.html" >OGR</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+    <a href="http://creativecommons.org/licenses/by/2.0/fr/deed.fr">Licence Creative Common BY</a>
+    <!--
+      &copy; Copyright 2011, Yves Jacolin.-->
+      Créé avec <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0.7.
+    </div>
+  </body>
+</html>

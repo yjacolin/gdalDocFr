@@ -1,0 +1,221 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF8" />
+    
+    <title>GPSBabel &mdash; GDAL v1.9.0 documentation</title>
+    <link rel="stylesheet" href="../../_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '1.9.0',
+        COLLAPSE_MODINDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../_static/translations.js"></script>
+    <link rel="top" title="GDAL v1.9.0 documentation" href="../../index.html" />
+    <link rel="up" title="Formats vecteur d’OGR" href="index.html" />
+    <link rel="next" title="GPX - GPS Exchange Format" href="gpx.html" />
+    <link rel="prev" title="GMT ASCII Vectors (.gmt)" href="gmt.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="gpx.html" title="GPX - GPS Exchange Format"
+             accesskey="N">suivant</a></li>
+        <li class="right" >
+          <a href="gmt.html" title="GMT ASCII Vectors (.gmt)"
+             accesskey="P">précédent</a> |</li>
+        <li><a href="../../index.html">GDAL v1.9.0 documentation</a> &raquo;</li>
+          <li><a href="../index.html" >OGR</a> &raquo;</li>
+          <li><a href="index.html" accesskey="U">Formats vecteur d&#8217;OGR</a> &raquo;</li> 
+      </ul>
+    </div>
+
+
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <h3><a href="../../index.html">Table des matières</a></h3>
+            <ul>
+<li><a class="reference internal" href="#">GPSBabel</a><ul>
+<li><a class="reference internal" href="#gestion-de-la-lecture">Gestion de la lecture</a></li>
+<li><a class="reference internal" href="#gestion-de-l-ecriture">Gestion de l&#8217;écriture</a><ul>
+<li><a class="reference internal" href="#exemples">Exemples</a></li>
+<li><a class="reference internal" href="#voir-egalement">Voir également</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+            <h4>Sujet précédent</h4>
+            <p class="topless"><a href="gmt.html"
+                                  title="Chapitre précédent">GMT ASCII Vectors (.gmt)</a></p>
+            <h4>Sujet suivant</h4>
+            <p class="topless"><a href="gpx.html"
+                                  title="Chapitre suivant">GPX - GPS Exchange Format</a></p>
+            <h3>Cette page</h3>
+            <ul class="this-page-menu">
+              <li><a href="../../_sources/ogr/formats/gpsbabel.txt"
+                     rel="nofollow">Montrer la source</a></li>
+            </ul>
+          <div id="searchbox" style="display: none">
+            <h3>Recherche rapide</h3>
+              <form class="search" action="../../search.html" method="get">
+                <input type="text" name="q" size="18" />
+                <input type="submit" value="Go" />
+                <input type="hidden" name="check_keywords" value="yes" />
+                <input type="hidden" name="area" value="default" />
+              </form>
+              <p class="searchtip" style="font-size: 90%">
+              Enter search terms or a module, class or function name.
+              </p>
+          </div>
+          <script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="gpsbabel">
+<span id="gdal-ogr-formats-gpsbabel"></span><h1>GPSBabel<a class="headerlink" href="#gpsbabel" title="Lien permanent vers ce titre">¶</a></h1>
+<p>(GDAL/OGR &gt;= 1.8.0)</p>
+<p>Le pilote GPSBabel repose sur la commande <a class="reference external" href="http://www.gpsbabel.org">GPSBabel</a>
+pour accéder aux différents formats de fichier GPS.</p>
+<p>L&#8217;exécutable GPSBabel doit être accessible à travers le PATH.</p>
+<div class="section" id="gestion-de-la-lecture">
+<h2>Gestion de la lecture<a class="headerlink" href="#gestion-de-la-lecture" title="Lien permanent vers ce titre">¶</a></h2>
+<p>Le pilote nécessite le pilote <a class="reference internal" href="gpx.html#gdal-ogr-formats-gpx"><em>GPX - GPS Exchange Format</em></a> pour gérer entièrement
+la lecture (via la bibliothèque Expat) et être capable de parser la sortie de
+GPSBabel, puisque GPX est utilisé comme format intermédiaire.</p>
+<p>Les couches renvoyées peuvent être des waypoints, routes, route_points, tracks,
+track_points en fonction des données en entrée.</p>
+<p>La synthaxe pour définir une source de données en entrée est :
+<em>GPSBabel:gpsbabel_file_format[,gpsbabel_format_option]</em>:[features=[waypoints,][tracks,][routes]:]filename*
+où :</p>
+<ul class="simple">
+<li><em>gpsbabel_file_format</em> est un des <a class="reference external" href="http://www.gpsbabel.org/capabilities.shtml">formats de fichier</a>
+pris en charge par GPSBabel.</li>
+<li><em>gpsbabel_format_option</em> est n&#8217;importe quelles options pris en charge par le
+format spécifié par GPSBabel (référez vous au document de chaque format de
+GPSBabel)</li>
+<li><em>features=</em> peut être utilisé pour modifier le type de feature que GPSBabel
+importera. waypoints correspond à l&#8217;option -w de la ligne de commande de
+gpsbabel, tracks correspond à -t et routes correspond à -r. Cette option peut
+être utilisé pour nécessité un import de donnée complet à partir du recepteur
+GPS qui sont lent et pour lesquels GPSBabel pourrait ne récupérer que les
+waypoints par défaut. Voyez la documentation sur
+<a class="reference external" href="http://www.gpsbabel.org/htmldoc-1.3.6/Route_And_Track_Modes.html">Route and Track modes</a>
+pour plus de détails.</li>
+<li><em>filename</em> peut être un fichier réel sur disque, un fichier via l&#8217;API des
+fichiers virtuels de GDAL, ou un matériel spécial pris en charge par GPSBabel
+tel que &#8220;usb:&#8221;, &#8220;/dev/ttyS0&#8221;, &#8220;COM1:&#8221;, etc.. Ce qui est réellement géré dépend
+du format de GPSBabel utilisé.</li>
+</ul>
+<p>Alternativement, pour quelques formats de GPSBabel sélectionné, spécifier simplement
+le nom du fichier peut être suffisant. La liste pour l&#8217;instant est :</p>
+<ul class="simple">
+<li>garmin_txt</li>
+<li>gdb</li>
+<li>magellan</li>
+<li>mapsend</li>
+<li>mapsource</li>
+<li>nmea</li>
+<li>osm</li>
+<li>ozi</li>
+</ul>
+<p>L&#8217;option de configuration <em>USE_TEMPFILE=YES</em> peut être utilisé pour créer un fichier
+GPX temporaire sur disque au lieu d&#8217;un en mémoire, lors de la lecture d&#8217;un gros
+volume de données.</p>
+</div>
+<div class="section" id="gestion-de-l-ecriture">
+<h2>Gestion de l&#8217;écriture<a class="headerlink" href="#gestion-de-l-ecriture" title="Lien permanent vers ce titre">¶</a></h2>
+<p>Le pilote repose sur le pilote GPX pour créer un fichier intermédiaire qui sera
+finalement traduit par GPSBabel vers le format de GPSBabel désiré (le pilote GPX
+ne nécessite pas d&#8217;être configuré pour la gestion de la lecture pour la gestion
+de l&#8217;écriture de GPSBabel).</p>
+<p>Les géométries gérées, options et autres problèmes de création sont ceux du pilote
+GPX. Référez vous à la page <a class="reference internal" href="gpx.html#gdal-ogr-formats-gpx"><em>GPX - GPS Exchange Format</em></a> pour plus de détails.</p>
+<p>La syntaxe pour définir une source de données en sortie est :
+<em>GPSBabel:gpsbabel_file_format[,gpsbabel_format_option]*:filename</em> où :</p>
+<ul class="simple">
+<li><em>gpsbabel_file_format</em> est un des
+<a class="reference external" href="http://www.gpsbabel.org/capabilities.shtml">formats de fichier</a> pris en
+charge par GPSBabel.</li>
+<li><em>gpsbabel_format_option</em> est une des options pris en charge par le format de
+GPSBabel définie (référez vous à la documentation des formats de GPSBabel)</li>
+</ul>
+<p>Alternativement, vous pouvez juste passer un nom de fichier comme nom de source
+de données en sortie et définir l&#8217;option de création du jeu de données
+GPSBABEL_DRIVER=gpsbabel_file_format[,gpsbabel_format_option]*</p>
+<p>L&#8217;option de configuration <em>USE_TEMPFILE=YES</em> peut être utilisé pour créer un fichier
+GPX temporaire sur disque au lieu d&#8217;un en mémoire, lors de l&#8217;écriture d&#8217;un gros
+volume de données.</p>
+<div class="section" id="exemples">
+<h3>Exemples<a class="headerlink" href="#exemples" title="Lien permanent vers ce titre">¶</a></h3>
+<ul>
+<li><p class="first">Lire les waypoints à partir d&#8217;un récepteur USB Garmin :</p>
+<div class="highlight-python"><pre>ogrinfo -ro -al GPSBabel:garmin:usb:</pre>
+</div>
+</li>
+<li><p class="first">Convertir un shapefile vers un format Magellan Mapsend :</p>
+<div class="highlight-python"><pre>ogr2ogr -f GPSBabel GPSBabel:mapsend:out.mapsend in.shp</pre>
+</div>
+</li>
+</ul>
+</div>
+<div class="section" id="voir-egalement">
+<h3>Voir également<a class="headerlink" href="#voir-egalement" title="Lien permanent vers ce titre">¶</a></h3>
+<ul class="simple">
+<li><a class="reference external" href="http://www.gpsbabel.org">Home page de GPSBabel</a></li>
+<li><a class="reference external" href="http://www.gpsbabel.org/capabilities.shtml">Formats de fichier de GPSBabel</a></li>
+<li><a class="reference internal" href="gpx.html#gdal-ogr-formats-gpx"><em>GPX - GPS Exchange Format</em></a></li>
+</ul>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+
+
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="gpx.html" title="GPX - GPS Exchange Format"
+             >suivant</a></li>
+        <li class="right" >
+          <a href="gmt.html" title="GMT ASCII Vectors (.gmt)"
+             >précédent</a> |</li>
+        <li><a href="../../index.html">GDAL v1.9.0 documentation</a> &raquo;</li>
+          <li><a href="../index.html" >OGR</a> &raquo;</li>
+          <li><a href="index.html" >Formats vecteur d&#8217;OGR</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+    <a href="http://creativecommons.org/licenses/by/2.0/fr/deed.fr">Licence Creative Common BY</a>
+    <!--
+      &copy; Copyright 2011, Yves Jacolin.-->
+      Créé avec <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0.7.
+    </div>
+  </body>
+</html>

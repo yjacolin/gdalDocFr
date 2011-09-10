@@ -1,0 +1,195 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF8" />
+    
+    <title>FMEObjects Gateway &mdash; GDAL v1.9.0 documentation</title>
+    <link rel="stylesheet" href="../../_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '1.9.0',
+        COLLAPSE_MODINDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../_static/translations.js"></script>
+    <link rel="top" title="GDAL v1.9.0 documentation" href="../../index.html" />
+    <link rel="up" title="Formats vecteur d’OGR" href="index.html" />
+    <link rel="next" title="GeoConcept Export (disponible à partir de GDAL 1.6.0)" href="geoconcept.html" />
+    <link rel="prev" title="Pilote de l’API FileGDB" href="filegdb.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="geoconcept.html" title="GeoConcept Export (disponible à partir de GDAL 1.6.0)"
+             accesskey="N">suivant</a></li>
+        <li class="right" >
+          <a href="filegdb.html" title="Pilote de l’API FileGDB"
+             accesskey="P">précédent</a> |</li>
+        <li><a href="../../index.html">GDAL v1.9.0 documentation</a> &raquo;</li>
+          <li><a href="../index.html" >OGR</a> &raquo;</li>
+          <li><a href="index.html" accesskey="U">Formats vecteur d&#8217;OGR</a> &raquo;</li> 
+      </ul>
+    </div>
+
+
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <h3><a href="../../index.html">Table des matières</a></h3>
+            <ul>
+<li><a class="reference internal" href="#">FMEObjects Gateway</a><ul>
+<li><a class="reference internal" href="#cache">Cache</a></li>
+<li><a class="reference internal" href="#avertissements">Avertissements</a></li>
+<li><a class="reference internal" href="#configuration-compilation">Configuration/compilation</a></li>
+</ul>
+</li>
+</ul>
+
+            <h4>Sujet précédent</h4>
+            <p class="topless"><a href="filegdb.html"
+                                  title="Chapitre précédent">Pilote de l&#8217;API FileGDB</a></p>
+            <h4>Sujet suivant</h4>
+            <p class="topless"><a href="geoconcept.html"
+                                  title="Chapitre suivant">GeoConcept Export (disponible à partir de GDAL 1.6.0)</a></p>
+            <h3>Cette page</h3>
+            <ul class="this-page-menu">
+              <li><a href="../../_sources/ogr/formats/fmeobjects.txt"
+                     rel="nofollow">Montrer la source</a></li>
+            </ul>
+          <div id="searchbox" style="display: none">
+            <h3>Recherche rapide</h3>
+              <form class="search" action="../../search.html" method="get">
+                <input type="text" name="q" size="18" />
+                <input type="submit" value="Go" />
+                <input type="hidden" name="check_keywords" value="yes" />
+                <input type="hidden" name="area" value="default" />
+              </form>
+              <p class="searchtip" style="font-size: 90%">
+              Enter search terms or a module, class or function name.
+              </p>
+          </div>
+          <script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="fmeobjects-gateway">
+<span id="gdal-ogr-formats-fmeobjects"></span><h1>FMEObjects Gateway<a class="headerlink" href="#fmeobjects-gateway" title="Lien permanent vers ce titre">¶</a></h1>
+<p>Les sources d&#8217;objet gérées par FMEObjects sont gérés en lecture par OGR si le
+pont FMEObjects est configuré, et si une copie d&#8217;une licence de FMEObject est
+installée et accessible.</p>
+<p>Pour utiliser les lecteurs basés sur FMEObjects le nom de la source de données
+passé doit être le nom du lecteur de FME à utiliser, deux points (:) puis le
+véritable nom de la source de donnés (c&#8217;est à dire le nom du fichier). Par
+exemple <em>NTF:F:DATANTF2144.NTF</em> indiquera que le lecteur NTF doit être
+utilisé pour lire le fichier. Il y a un certain  nombre de cas spéciaux.</p>
+<ul class="simple">
+<li>une source de données se terminant par .fdd sera supposée être un fichier
+d&#8217;une &lt;&lt;Définition de source de données FME&gt;&gt; (<em>FME Datasource Definition</em>)
+qui contiendra le nom du lecteur, le nom de la source de données puis une
+définition de paire de ligne  nom/valeur pour les macros qui conviennent pour
+passer l&#8217;appel à <em>createReader()</em>.</li>
+<li>Une source de données nommée <em>PROMPT</em> résultera à demander à l&#8217;utilisateur
+les informations en utilisant une boite de dialogue FME. Cela ne fonctionne
+que sous Windows.</li>
+<li>Une source de données nommée &lt;&lt;<em>PROMPT:filename</em>&gt;&gt; résultera à demander, puis
+d&#8217;avoir la définition résultante sauvée dans le fichier au format .fdd indiqué.
+L&#8217;extension .fdd sera ajouté au nom du fichier. Cela ne fonctionne que sous
+Windows.</li>
+</ul>
+<p>Chaque objet FME sera traité comme une couche à traver OGR, nommé par le type de
+l&#8217;objet. Avec certaines limitations les systèmes de coordonnées FME sont gérés.
+Toutes les types de géométries de FME devraient être proprement gérés. Les
+attributs graphiques de FME (couleur, largeur de ligne, etc) ne sont pas
+convertie dans les informations de Style des objets d&#8217;OGR (OGR Feature Style).</p>
+<div class="section" id="cache">
+<h2>Cache<a class="headerlink" href="#cache" title="Lien permanent vers ce titre">¶</a></h2>
+<p>Dans le but d&#8217;activer l&#8217;accès rapide à de large jeux de données sans avoir à
+les traduire à chaque fois qu&#8217;ils sont accédés, le pont FMEObjects gère un
+mécanisme de cache d&#8217;objet lu à partir du lecteur FME dans un &#8220;Fast Feature
+Stores&#8221;, un format vectoriel natif pour FME avec un index spatial pour la
+recherche spatiale rapide. Ces fichiers en cache sont gardés dans le répertoire
+indiqué par la variable d&#8217;environnement <em>OGRFME_TMPDIR</em> (ou <em>TMPDIR</em> ou <em>/tmp</em>
+ou <em>C:\</em> si cela n&#8217;est pas disponible).</p>
+<p>Le fichiers d&#8217;objet en cache aura un préfixe <em>FME_OLEDB_</em> et un index maitre est
+laissé dans le fichier <em>ogrfmeds.ind</em>. Pour enlever l&#8217;index supprimez tout ces
+fichiers. N&#8217;en enlevez pas juste quelques-uns.</p>
+<p>Par défaut les objets dans le cache sont relus après 3 600 s (60 minutes). Le
+temps de rétention du cache est altéré au moment de la compilation en modifiant
+le fichier d&#8217;include <em>fme2ogr.h</em>.</p>
+<p>Les entrées à partir des lecteurs de SDE et d&#8217;ORACLE ne sont pas en cache. Ces
+sources sont traitées spécialement de différentes manières également.</p>
+</div>
+<div class="section" id="avertissements">
+<h2>Avertissements<a class="headerlink" href="#avertissements" title="Lien permanent vers ce titre">¶</a></h2>
+<ul class="simple">
+<li>Établir une session FME est une opération assez dispendieuse sur un système
+Linux à 350Mhz, cela peut excéder 10 s.</li>
+<li>Les anciens fichiers dans le cache des objets sont nettoyés, mais seulement
+lors de visite ultérieure au code du pont de FMEObjects dans OGR. Cela signifie
+que même non utilisé, le pont FMEObjects laissera les anciens objets en cache
+indéfiniment.</li>
+</ul>
+</div>
+<div class="section" id="configuration-compilation">
+<h2>Configuration/compilation<a class="headerlink" href="#configuration-compilation" title="Lien permanent vers ce titre">¶</a></h2>
+<p>Pour inclure un pont avec FMEObjects dans une compilation OGR il est nécessaire
+d&#8217;avoir chargé FME sur le système. Le paramètre de configuration
+<em>&#8211;with-fme=$FME_HOME</em> doit être fournie pour la configuration. Le pont
+FMEObjects n&#8217;est pas explicitement lié (il est chargé plus tard quand cela est
+nécessaire) il est donc pratique de distribuer un binaire compilé d&#8217;OGR avec la
+gestion de FMEObjects sans distribuer FMEObjects. Il fonctionnera seulement pour
+les personnes qui possèdent FMEObjects dans leur <em>path</em>.</p>
+<p>Le pont FMEObjects a été testé sur Linux et Windows.</p>
+<p>Plus d&#8217;information sur le produit FME et comment acheté une licence pour le
+logiciel FME (permettant la gestion de FMEObjects) peut être trouvé sur le site
+Internet de Safe Software à <a class="reference external" href="http://www.safe.com">http://www.safe.com</a>. Le développement de ce
+pilote a été financé par Safe Software.</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+
+
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="geoconcept.html" title="GeoConcept Export (disponible à partir de GDAL 1.6.0)"
+             >suivant</a></li>
+        <li class="right" >
+          <a href="filegdb.html" title="Pilote de l’API FileGDB"
+             >précédent</a> |</li>
+        <li><a href="../../index.html">GDAL v1.9.0 documentation</a> &raquo;</li>
+          <li><a href="../index.html" >OGR</a> &raquo;</li>
+          <li><a href="index.html" >Formats vecteur d&#8217;OGR</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+    <a href="http://creativecommons.org/licenses/by/2.0/fr/deed.fr">Licence Creative Common BY</a>
+    <!--
+      &copy; Copyright 2011, Yves Jacolin.-->
+      Créé avec <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0.7.
+    </div>
+  </body>
+</html>

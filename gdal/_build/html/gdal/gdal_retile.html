@@ -1,0 +1,200 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF8" />
+    
+    <title>gdal_retile.py &mdash; GDAL v1.9.0 documentation</title>
+    <link rel="stylesheet" href="../_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.9.0',
+        COLLAPSE_MODINDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/translations.js"></script>
+    <link rel="top" title="GDAL v1.9.0 documentation" href="../index.html" />
+    <link rel="up" title="GDAL" href="index.html" />
+    <link rel="next" title="gdal_grid" href="gdal_grid.html" />
+    <link rel="prev" title="nearblack" href="nearblack.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="gdal_grid.html" title="gdal_grid"
+             accesskey="N">suivant</a></li>
+        <li class="right" >
+          <a href="nearblack.html" title="nearblack"
+             accesskey="P">précédent</a> |</li>
+        <li><a href="../index.html">GDAL v1.9.0 documentation</a> &raquo;</li>
+          <li><a href="index.html" accesskey="U">GDAL</a> &raquo;</li> 
+      </ul>
+    </div>
+
+
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <h3><a href="../index.html">Table des matières</a></h3>
+            <ul>
+<li><a class="reference internal" href="#">gdal_retile.py</a><ul>
+<li><a class="reference internal" href="#usage">Usage</a></li>
+<li><a class="reference internal" href="#description">Description</a></li>
+</ul>
+</li>
+</ul>
+
+            <h4>Sujet précédent</h4>
+            <p class="topless"><a href="nearblack.html"
+                                  title="Chapitre précédent">nearblack</a></p>
+            <h4>Sujet suivant</h4>
+            <p class="topless"><a href="gdal_grid.html"
+                                  title="Chapitre suivant">gdal_grid</a></p>
+            <h3>Cette page</h3>
+            <ul class="this-page-menu">
+              <li><a href="../_sources/gdal/gdal_retile.txt"
+                     rel="nofollow">Montrer la source</a></li>
+            </ul>
+          <div id="searchbox" style="display: none">
+            <h3>Recherche rapide</h3>
+              <form class="search" action="../search.html" method="get">
+                <input type="text" name="q" size="18" />
+                <input type="submit" value="Go" />
+                <input type="hidden" name="check_keywords" value="yes" />
+                <input type="hidden" name="area" value="default" />
+              </form>
+              <p class="searchtip" style="font-size: 90%">
+              Enter search terms or a module, class or function name.
+              </p>
+          </div>
+          <script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="gdal-retile-py">
+<span id="gdal-gdal-gdal-retile"></span><h1>gdal_retile.py<a class="headerlink" href="#gdal-retile-py" title="Lien permanent vers ce titre">¶</a></h1>
+<p><tt class="docutils literal"><span class="pre">gdal_retile</span></tt> - <tt class="docutils literal"><span class="pre">gdal_retile.py</span></tt> recréé un ensemble de tuiles et/ou
+construit les niveaux de la pyramide tuilée.</p>
+<div class="section" id="usage">
+<h2>Usage<a class="headerlink" href="#usage" title="Lien permanent vers ce titre">¶</a></h2>
+<p>Usage :</p>
+<div class="highlight-python"><pre>gdal_retile.py [-v] [-co NAME=VALUE]* [-of out_format] [-ps pixelWidth pixelHeight]
+           [-ot  {Byte/Int16/UInt16/UInt32/Int32/Float32/Float64/
+                  CInt16/CInt32/CFloat32/CFloat64}]'
+           [ -tileIndex tileIndexName [-tileIndexField tileIndexFieldName]]
+           [ -csv fileName [-csvDelim delimiter]]
+           [-s_srs srs_def]  [-pyramidOnly]
+           [-r {near/bilinear/cubic/cubicspline/lanczos}]
+           -levels numberoflevels
+           [-useDirForEachRow]
+           -targetDir TileDirectory input_files</pre>
+</div>
+</div>
+<div class="section" id="description">
+<h2>Description<a class="headerlink" href="#description" title="Lien permanent vers ce titre">¶</a></h2>
+<p>La commande recréera les tuiles d&#8217;un ensemble de tuiles en entrée. Toutes les
+tuiles en entrée doivent être géoréférencées dans le même système de coordonnées
+et avoir un nombre de bandes correspondant. En option les niveaux de pyramide
+sont générés. Il est possible de générer des fichiers shape pour la sortie
+tuilés.</p>
+<p>Si votre nombre de fichiers d&#8217;entrée dépasse le buffer de la ligne de commande,
+utilise l&#8217;option générale <tt class="docutils literal"><span class="pre">--optfile</span></tt>.</p>
+<ul class="simple">
+<li><strong>-targetDir directory :</strong> le répertoire dans lequel les tuiles résultantes
+seront créées. Les pyramides sont rangées dans des sous-répertoires numérotés
+à partir de 1. Les tuiles créées ont un schéma de numérotation et contienne
+le nom de(s) tuile(s) source ;</li>
+<li><strong>-of format :</strong> format de sortie, GeoTIFF par défaut (GTiff).</li>
+<li><strong>-co NAME=VALUE :</strong> option de création pour le fichier de sortie. Des options
+multiples peuvent être définies.</li>
+<li><strong>-ot datatype :</strong> force les bandes d&#8217;images en sortie à un type spécifique.
+Utilisez le nom du type (c&#8217;est-à-dire Byte, Int16...)</li>
+<li><strong>-ps pixelsize_x pixelsize_y :</strong> taille du pixel à utiliser pour le fichier
+de sortie. S&#8217;il n&#8217;est pas défini, un pixel de 256 x 256 est choisi par défaut ;</li>
+<li><strong>-levels numberOfLevels :</strong> nombre de niveaux de pyramide à construire ;</li>
+<li><strong>-v :</strong> génère une sortie verbeuse des opérations de tuilage lors de leur
+génération ;</li>
+<li><strong>-pyramidOnly :</strong> pas de retuilage, construire seulement les pyramides ;</li>
+<li><strong>-r algorithm :</strong> algorithme d&#8217;échantillonnage, <em>near</em> par défaut ;</li>
+<li><strong>-s_srs srs_def :</strong> référence spatiale source à utiliser. Le système de
+coordonnées qui doit être envoyé peut avoir n&#8217;importe quel format géré par
+l&#8217;appel de <em>OGRSpatialReference.SetFro‐mUserInput()</em>, ce qui inclut les
+EPSG PCS et GCSes (par exemple  EPSG:4296),, les déclarations PROJ4 (comme
+ci-dessus), ou le nom d&#8217;un fichier .prj contenant une projection au format
+Well Known Text. Si aucun <em>srs_def</em> n&#8217;est donné, le <em>srs_def</em> des tuiles
+sources est utilisé (s&#8217;il en a un). Le <em>srs_def</em> sera propagé pour créer les
+tuiles (si possible) et au(x) fichier(s) optionnel(s) ;</li>
+<li><strong>-tileIndex tileIndexName :</strong> le nom du fichier shape contenant l&#8217;index des
+tuiles résultantes ;</li>
+<li><strong>-tileIndexField tileIndexFieldName :</strong> le nom de l&#8217;attribut contenant le
+nom des tuiles ;</li>
+<li><strong>-csv csvFileName :</strong> le nom du fichier csv contenant les informations de
+géoréférencement des tuiles. Le fichier contient 5 colonnes : <em>tilename,minx,maxx,miny,maxy</em></li>
+<li><strong>-csvDelim column delimiter :</strong> le délimiteur de colonne utilisé dans le
+fichier csv, la valeur par défaut est le point-virgule &#8221;;&#8221;.</li>
+<li><strong>-useDirForEachRow :</strong> normalement les tuiles de l&#8217;image de base sont
+stockées comme décrites dans l&#8217;option <em>-targetDir</em>. Pour de grandes images,
+certains systèmes de fichier ont des problèmes de performances si le nombre de
+fichier dans un répertoire est trop important, ne permettant pas à
+<tt class="docutils literal"><span class="pre">gdal_retile.py</span></tt> de finir dans un temps raisonnable. Utiliser ce paramètre
+permet de créer une structure différente en sortie. Les tuiles de l&#8217;image de
+base sont stockées dans un sous-répertoire nommé 0, les pyramides dans les
+sous-répertoires sont numérotés 1,2,... Dans chacun des ces répertoires un
+autre niveau de sous-répertoire est créé, numéroté de 0 à n, en fonction du
+nombre de ligne de tuile qui sont nécessaire pour chaque niveau. Enfin, un
+répertoire contient seulement les tuiles pour une ligne d&#8217;un niveau
+spécifique. Pour les grandes images une amélioration de la performance d&#8217;un
+facteur N est réalisée.</li>
+</ul>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last"><tt class="docutils literal"><span class="pre">gdal_merge.py</span></tt> est un script Python, et ne fonctionnera seulement si
+GDAL a été compilé avec la gestion de Python.</p>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+
+
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="gdal_grid.html" title="gdal_grid"
+             >suivant</a></li>
+        <li class="right" >
+          <a href="nearblack.html" title="nearblack"
+             >précédent</a> |</li>
+        <li><a href="../index.html">GDAL v1.9.0 documentation</a> &raquo;</li>
+          <li><a href="index.html" >GDAL</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+    <a href="http://creativecommons.org/licenses/by/2.0/fr/deed.fr">Licence Creative Common BY</a>
+    <!--
+      &copy; Copyright 2011, Yves Jacolin.-->
+      Créé avec <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0.7.
+    </div>
+  </body>
+</html>

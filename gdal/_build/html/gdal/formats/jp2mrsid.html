@@ -1,0 +1,180 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF8" />
+    
+    <title>JP2MrSID — JPEG2000 via MrSID SDK &mdash; GDAL v1.9.0 documentation</title>
+    <link rel="stylesheet" href="../../_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '1.9.0',
+        COLLAPSE_MODINDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../_static/translations.js"></script>
+    <link rel="top" title="GDAL v1.9.0 documentation" href="../../index.html" />
+    <link rel="up" title="Formats" href="index.html" />
+    <link rel="next" title="JPEG – JPEG JFIF File Format" href="jpeg.html" />
+    <link rel="prev" title="JP2KAK – JPEG-2000 (basé sur Kakadu)" href="jp2kak.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="jpeg.html" title="JPEG – JPEG JFIF File Format"
+             accesskey="N">suivant</a></li>
+        <li class="right" >
+          <a href="jp2kak.html" title="JP2KAK – JPEG-2000 (basé sur Kakadu)"
+             accesskey="P">précédent</a> |</li>
+        <li><a href="../../index.html">GDAL v1.9.0 documentation</a> &raquo;</li>
+          <li><a href="../index.html" >GDAL</a> &raquo;</li>
+          <li><a href="index.html" accesskey="U">Formats</a> &raquo;</li> 
+      </ul>
+    </div>
+
+
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <h3><a href="../../index.html">Table des matières</a></h3>
+            <ul>
+<li><a class="reference internal" href="#">JP2MrSID &#8212; JPEG2000 via MrSID SDK</a><ul>
+<li><a class="reference internal" href="#options-de-creation">Options de création</a></li>
+</ul>
+</li>
+</ul>
+
+            <h4>Sujet précédent</h4>
+            <p class="topless"><a href="jp2kak.html"
+                                  title="Chapitre précédent">JP2KAK &#8211; JPEG-2000 (basé sur Kakadu)</a></p>
+            <h4>Sujet suivant</h4>
+            <p class="topless"><a href="jpeg.html"
+                                  title="Chapitre suivant">JPEG &#8211; JPEG JFIF File Format</a></p>
+            <h3>Cette page</h3>
+            <ul class="this-page-menu">
+              <li><a href="../../_sources/gdal/formats/jp2mrsid.txt"
+                     rel="nofollow">Montrer la source</a></li>
+            </ul>
+          <div id="searchbox" style="display: none">
+            <h3>Recherche rapide</h3>
+              <form class="search" action="../../search.html" method="get">
+                <input type="text" name="q" size="18" />
+                <input type="submit" value="Go" />
+                <input type="hidden" name="check_keywords" value="yes" />
+                <input type="hidden" name="area" value="default" />
+              </form>
+              <p class="searchtip" style="font-size: 90%">
+              Enter search terms or a module, class or function name.
+              </p>
+          </div>
+          <script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="jp2mrsid-jpeg2000-via-mrsid-sdk">
+<span id="gdal-gdal-formats-jp2mrsid"></span><h1>JP2MrSID &#8212; JPEG2000 via MrSID SDK<a class="headerlink" href="#jp2mrsid-jpeg2000-via-mrsid-sdk" title="Lien permanent vers ce titre">¶</a></h1>
+<p>Le format de fichier JPEG2000 est géré en lecture avec le DSDK MrSID. Il gère
+également l&#8217;écriture avec l&#8217;ESDK MrSID.</p>
+<p>La gestion du JPEG2000 de MrSID est seulement disponible avec la version 5.X ou
+plus récente du DSDK et du EDSK.</p>
+<div class="section" id="options-de-creation">
+<h2>Options de création<a class="headerlink" href="#options-de-creation" title="Lien permanent vers ce titre">¶</a></h2>
+<p>Si vous avez l&#8217;ESDK de MrSID (5.X ou plus récent), il peut être utilisé pour
+écrire des fichiers JPEG2000. Les options de création suivantes sont gérées :</p>
+<ul class="simple">
+<li><strong>WORLDFILE=YES</strong> : pour écrire un fichier world ESRI (avec l&#8217;extension .j2w).</li>
+<li><strong>COMPRESSION=n</strong> : indique le taux de compression désiré. Zéro indique un
+taux de compression de 20:1 (l&#8217;image sera compressée au 1/20 de la taille
+originale).</li>
+<li><strong>XMLPROFILE=[chemin vers le fichier]</strong> : indique un chemin au profile XML
+spécifique de LizardTech qui peut être utilisé pour paramétrer l&#8217;encodage en
+JPEG2000. Ils peuvent être créer en utilisant l&#8217;ESDK de MrSID, ou avec
+GeoExpress, ou à la main en utilisant l&#8217;exemple suivant comme modèle :</li>
+</ul>
+<div class="highlight-python"><pre>&lt;?xml version="1.0"?&gt;
+&lt;Jp2Profile version="1.0"&gt;
+    &lt;Header&gt;
+        &lt;name&gt;Default&lt;/name&gt;
+        &lt;description&gt;LizardTech preferred settings (20051216)&lt;/description&gt;
+    &lt;/Header&gt;
+    &lt;Codestream&gt;
+        &lt;layers&gt;
+            8
+        &lt;/layers&gt;
+        &lt;levels&gt;
+            99
+        &lt;/levels&gt;
+        &lt;tileSize&gt;
+            0 0
+        &lt;/tileSize&gt;
+        &lt;progressionOrder&gt;
+            RPCL
+        &lt;/progressionOrder&gt;
+        &lt;codeblockSize&gt;
+            64 64
+        &lt;/codeblockSize&gt;
+        &lt;pltMarkers&gt;
+            true
+        &lt;/pltMarkers&gt;
+        &lt;wavelet97&gt;
+            false
+        &lt;/wavelet97&gt;
+        &lt;precinctSize&gt;
+            256 256
+        &lt;/precinctSize&gt;
+    &lt;/Codestream&gt;
+&lt;/Jp2Profile&gt;</pre>
+</div>
+<p><strong>Lire également :</strong></p>
+<ul class="simple">
+<li>Implémenté dans <em>gdal/frmts/mrsid/mrsiddataset.cpp</em>.</li>
+<li>Site de LizardTech : <a class="reference external" href="http://www.lizardtech.com/">http://www.lizardtech.com/</a></li>
+</ul>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+
+
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="jpeg.html" title="JPEG – JPEG JFIF File Format"
+             >suivant</a></li>
+        <li class="right" >
+          <a href="jp2kak.html" title="JP2KAK – JPEG-2000 (basé sur Kakadu)"
+             >précédent</a> |</li>
+        <li><a href="../../index.html">GDAL v1.9.0 documentation</a> &raquo;</li>
+          <li><a href="../index.html" >GDAL</a> &raquo;</li>
+          <li><a href="index.html" >Formats</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+    <a href="http://creativecommons.org/licenses/by/2.0/fr/deed.fr">Licence Creative Common BY</a>
+    <!--
+      &copy; Copyright 2011, Yves Jacolin.-->
+      Créé avec <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0.7.
+    </div>
+  </body>
+</html>

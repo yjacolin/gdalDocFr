@@ -1,0 +1,174 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF8" />
+    
+    <title>FAQ &mdash; GDAL v1.9.0 documentation</title>
+    <link rel="stylesheet" href="../_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.9.0',
+        COLLAPSE_MODINDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/translations.js"></script>
+    <link rel="top" title="GDAL v1.9.0 documentation" href="../index.html" />
+    <link rel="next" title="FAQ Générale" href="general.html" />
+    <link rel="prev" title="Bibliographie" href="../python/bibliographie.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="general.html" title="FAQ Générale"
+             accesskey="N">suivant</a></li>
+        <li class="right" >
+          <a href="../python/bibliographie.html" title="Bibliographie"
+             accesskey="P">précédent</a> |</li>
+        <li><a href="../index.html">GDAL v1.9.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+
+
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <h4>Sujet précédent</h4>
+            <p class="topless"><a href="../python/bibliographie.html"
+                                  title="Chapitre précédent">Bibliographie</a></p>
+            <h4>Sujet suivant</h4>
+            <p class="topless"><a href="general.html"
+                                  title="Chapitre suivant">FAQ Générale</a></p>
+            <h3>Cette page</h3>
+            <ul class="this-page-menu">
+              <li><a href="../_sources/faq/index.txt"
+                     rel="nofollow">Montrer la source</a></li>
+            </ul>
+          <div id="searchbox" style="display: none">
+            <h3>Recherche rapide</h3>
+              <form class="search" action="../search.html" method="get">
+                <input type="text" name="q" size="18" />
+                <input type="submit" value="Go" />
+                <input type="hidden" name="check_keywords" value="yes" />
+                <input type="hidden" name="area" value="default" />
+              </form>
+              <p class="searchtip" style="font-size: 90%">
+              Enter search terms or a module, class or function name.
+              </p>
+          </div>
+          <script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="faq">
+<span id="gdal-faq-index"></span><h1>FAQ<a class="headerlink" href="#faq" title="Lien permanent vers ce titre">¶</a></h1>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="general.html">FAQ Générale</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="general.html#qu-est-ce-qu-est-gdal">Qu&#8217;est ce qu&#8217;est GDAL ?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="general.html#que-signifie-gdal">Que signifie GDAL ?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="general.html#a-quoi-sert-ogr">À quoi sert OGR ?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="general.html#que-signifie-ogr">Que signifie OGR ?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="general.html#quand-le-projet-gdal-a-t-il-demarre">Quand le projet GDAL a t-il démarré ?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="general.html#est-ce-que-gdal-ogr-est-un-logiciel-proprietaire">Est ce que GDAL/OGR est un logiciel propriétaire ?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="general.html#quelle-licence-utilise-gdal-ogr">Quelle licence utilise GDAL/OGR ?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="general.html#sur-quels-systemes-fonctionne-gdal-ogr">Sur quels systèmes fonctionne GDAL-OGR ?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="general.html#y-a-t-il-des-interfaces-graphiques-pour-gdal-ogr">Y a t-il des interfaces graphiques pour GDAL/OGR ?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="general.html#quel-compilateur-puis-je-utiliser-pour-compiler-gdal-ogr">Quel compilateur puis je utiliser pour compiler GDAL/OGR ?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="general.html#j-ai-une-question-ou-puis-je-trouver-plus-d-informations">J&#8217;ai une question. Où puis je trouver plus d&#8217;informations ?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="general.html#quand-est-prevue-la-prochaine-version">Quand est prévue la prochaine version ?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="general.html#comment-puis-je-ajouter-un-nouveau-format-a-gerer">Comment puis je ajouter un nouveau format à gérer ?</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="install.html">FAQ installation et compilation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="install.html#ou-est-ce-que-je-peux-trouver-une-version-de-developpement-de-gdal">Où est ce que je peux trouver une version de développement de GDAL ?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="install.html#puis-je-avoir-un-fichier-de-projet-pour-ms-visual-studio-pour-gdal">Puis je avoir un fichier de projet pour MS Visual Studio pour GDAL ?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="install.html#puis-je-compiler-gdal-avec-ms-visual-c-2008-edition-express">Puis je compiler GDAL avec MS Visual C++ 2008 Édition Express ?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="install.html#puis-je-compiler-gdal-avec-ms-visual-c-2005-express-edition">Puis je compiler GDAL avec MS Visual C++ 2005 Express Edition ?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="install.html#puis-je-compiler-gdal-avec-cygwin-ou-mingw">Puis je compiler GDAL avec Cygwin ou MinGW ?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="install.html#puis-je-compiler-gdal-avec-borland-c-ou-d-autres-compilateurs-c">Puis je compiler GDAL avec Borland C ou d&#8217;autres compilateurs C ?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="install.html#pourquoi-visual-c-8-0-plante-avec-une-erreur-c2894-dans-wspiapi-h-lors-de-la-compilation-de-gdal">Pourquoi Visual C++ 8.0 plante avec une erreur C2894 dans wspiapi.h lors de la compilation de GDAL ...</a></li>
+<li class="toctree-l2"><a class="reference internal" href="install.html#comment-puis-je-ajouter-des-ldflags-particulier-avec-gdal-1-5">Comment puis je ajouter des LDFLAGS particulier avec GDAL &lt; 1.5 ?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="install.html#j-ai-des-soucis-lors-de-la-compilation-avec-des-bibliotheques-externes-que-puis-je-faire">J&#8217;ai des soucis lors de la compilation avec des bibliothèques externes, que puis je faire ?</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="raster.html">F.A.Q. Raster</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="raster.html#pourquoi-gdalwarp-ou-gdal-merge-n-ecrit-pas-la-plupart-des-formats">Pourquoi gdalwarp ou gdal_merge n&#8217;écrit pas la plupart des formats ?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="raster.html#comment-ameliorer-les-performances-de-gdalwarp">Comment améliorer les performances de gdalwarp ?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="raster.html#comment-convertir-un-raster-en-une-couche-de-polygones">Comment convertir un raster en une couche de polygones ?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="raster.html#comment-puis-je-creer-un-raster-blanc-base-sur-l-etendue-de-fichiers-vecteurs-pour-utiliser-avec-gdal-rasterize">Comment puis je créer un raster blanc basé sur l&#8217;étendue de fichiers vecteurs pour utiliser avec gdal_rasterize ?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="raster.html#comment-utiliser-gdal-translate-pour-extraire-une-sous-partie-d-un-raster">Comment utiliser gdal_translate pour extraire une sous partie d&#8217;un raster ?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="raster.html#comment-retrouver-la-liste-des-formats-supportes-par-ma-version-de-gdal">Comment retrouver la liste des formats supportés par ma version de GDAL ?</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="vecteur.html">FAQ vecteur</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="vecteur.html#comment-puis-je-fusionner-des-100e-de-shapefiles">Comment puis je fusionner des 100e de shapefiles ?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vecteur.html#comment-traduire-un-fichier-de-geometrie-melangee-vers-le-format-shapfile">Comment traduire un fichier de géométrie mélangée vers le format shapfile ?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vecteur.html#comment-proteger-les-parametres-des-commandes-gdal-ogr-sous-la-console-microsoft-windows">Comment protéger les paramètres des commandes GDAL/OGR sous la console Microsoft Windows ?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vecteur.html#comment-recuperer-les-formats-geres-par-ogr">Comment récupérer les formats gérés par ogr ?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vecteur.html#comment-recuperer-des-informations-sur-la-couche-vectorielle">Comment récupérer des informations sur la couche vectorielle ?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vecteur.html#comment-ecrire-dans-une-base-de-donnees-postgis">Comment écrire dans une base de données POSTGIS ?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vecteur.html#comment-lire-une-base-de-donnees-au-format-vmap0">Comment lire une base de données au format VMAP0 ?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vecteur.html#comment-recuperer-une-zone-geographique-precise-dans-une-jeu-de-donnees">Comment récupérer une zone géographique précise dans une jeu de données ?</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="proj.html">FAQ Projection et système de coordonnées</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="proj.html#que-sont-les-projections-well-known-text-et-comment-les-utiliser">Que sont les projections Well Known Text, et comment les utiliser ?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="proj.html#puis-je-reprojeter-des-rasters-avec-gdal">Puis je reprojeter des rasters avec GDAL?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="proj.html#pourquoi-gdal-ne-choisit-pas-automatiquement-la-transformation-de-datum">Pourquoi GDAL ne choisit pas automatiquement la transformation de datum ?</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="divers.html">FAQ divers</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="divers.html#est-ce-que-la-bibliotheque-gdal-est-thread-safe">Est ce que la bibliothèque GDAL est thread-safe ?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="divers.html#est-ce-que-gdal-fonctionne-avec-differents-locales-internationales-pour-les-chiffres-numerique">Est ce que GDAL fonctionne avec différents locales internationales pour les chiffres numérique ?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="divers.html#comment-debuguer-gdal">Comment débuguer GDAL ?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="divers.html#comment-dois-je-supprimer-les-ressources-decouvertes-a-partir-de-gdal-sous-windows">Comment dois je supprimer les ressources découvertes à partir de GDAL sous windows ?</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+
+
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="general.html" title="FAQ Générale"
+             >suivant</a></li>
+        <li class="right" >
+          <a href="../python/bibliographie.html" title="Bibliographie"
+             >précédent</a> |</li>
+        <li><a href="../index.html">GDAL v1.9.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+    <a href="http://creativecommons.org/licenses/by/2.0/fr/deed.fr">Licence Creative Common BY</a>
+    <!--
+      &copy; Copyright 2011, Yves Jacolin.-->
+      Créé avec <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0.7.
+    </div>
+  </body>
+</html>

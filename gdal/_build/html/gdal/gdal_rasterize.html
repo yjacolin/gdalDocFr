@@ -1,0 +1,210 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF8" />
+    
+    <title>gdal_rasterize &mdash; GDAL v1.9.0 documentation</title>
+    <link rel="stylesheet" href="../_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.9.0',
+        COLLAPSE_MODINDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/translations.js"></script>
+    <link rel="top" title="GDAL v1.9.0 documentation" href="../index.html" />
+    <link rel="up" title="GDAL" href="index.html" />
+    <link rel="next" title="gdaltransform" href="gdaltransform.html" />
+    <link rel="prev" title="gdal2tiles.py" href="gdal2tiles.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="gdaltransform.html" title="gdaltransform"
+             accesskey="N">suivant</a></li>
+        <li class="right" >
+          <a href="gdal2tiles.html" title="gdal2tiles.py"
+             accesskey="P">précédent</a> |</li>
+        <li><a href="../index.html">GDAL v1.9.0 documentation</a> &raquo;</li>
+          <li><a href="index.html" accesskey="U">GDAL</a> &raquo;</li> 
+      </ul>
+    </div>
+
+
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <h4>Sujet précédent</h4>
+            <p class="topless"><a href="gdal2tiles.html"
+                                  title="Chapitre précédent">gdal2tiles.py</a></p>
+            <h4>Sujet suivant</h4>
+            <p class="topless"><a href="gdaltransform.html"
+                                  title="Chapitre suivant">gdaltransform</a></p>
+            <h3>Cette page</h3>
+            <ul class="this-page-menu">
+              <li><a href="../_sources/gdal/gdal_rasterize.txt"
+                     rel="nofollow">Montrer la source</a></li>
+            </ul>
+          <div id="searchbox" style="display: none">
+            <h3>Recherche rapide</h3>
+              <form class="search" action="../search.html" method="get">
+                <input type="text" name="q" size="18" />
+                <input type="submit" value="Go" />
+                <input type="hidden" name="check_keywords" value="yes" />
+                <input type="hidden" name="area" value="default" />
+              </form>
+              <p class="searchtip" style="font-size: 90%">
+              Enter search terms or a module, class or function name.
+              </p>
+          </div>
+          <script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="gdal-rasterize">
+<span id="gdal-gdal-gdal-rasterize"></span><h1>gdal_rasterize<a class="headerlink" href="#gdal-rasterize" title="Lien permanent vers ce titre">¶</a></h1>
+<p>Rastérise un vecteur polygone dans un raster.</p>
+<p><strong>Usage :</strong></p>
+<div class="highlight-python"><pre>Usage: gdal_rasterize [-b band]* [-i] [-at]
+   [-burn value]* | [-a attribute_name] [-3d]
+   [-l layername]* [-where expression] [-sql select_statement]
+   [-of format] [-a_srs srs_def] [-co "NAME=VALUE"]*
+   [-a_nodata value] [-init value]*
+   [-te xmin ymin xmax ymax] [-tr xres yres] [-tap] [-ts width height]
+   [-ot {Byte/Int16/UInt16/UInt32/Int32/Float32/Float64/
+         CInt16/CInt32/CFloat32/CFloat64}] [-q]
+   &lt;src_datasource&gt; &lt;dst_filename&gt;</pre>
+</div>
+<p>Ce programme transforme des géométries vectorielles (points, lignes et
+polygones) dans des bande(s) raster d&#8217;une image raster. Les fichiers vecteurs
+sont lus à partir des formats vectoriels gérés par OGR.</p>
+<p>Notez que les données vecteur doivent être dans le même système de coordonnées
+que les données raster ; la reprojection à la volée n&#8217;est pas possible.</p>
+<p>Depuis GDAL 1.8.0, le fichier cible de GDAL peut être créé par
+<tt class="docutils literal"><span class="pre">gdal_rasterize</span></tt>. Une des options <em>-tr</em> ou <em>-ts</em> doit être utilisé dans ce cas.</p>
+<ul class="simple">
+<li><strong>-b band :</strong> la bande dans laquelle placer les valeurs. Plusieurs arguments
+<em>-b</em> peuvent être utilisés pour transformer une liste de bandes. Par défaut,
+une seule bande est transformée.</li>
+<li><strong>-i :</strong> inverse la rastérisation.  Imposer la valeur de la brulure fixée ou
+la valeur de la brulure associée avec le premier objet dans toute l&#8217;image en
+dehors du polygone fournie.</li>
+<li><strong>-at :</strong> active l&#8217;option de rasterisation ALL_TOUCHED afin que tous les
+pixels touchés par des lignes ou des polygones seront mis à jour et pas
+seulement ceux sur le chemin de la ligne ou dont le point centrale est dans
+le polygone. les règles de rendu normal sont désactivé par défaut.</li>
+<li><strong>-burn value :</strong> une valeur fixe à créer dans la bande pour tous les objets.
+Une liste d&#8217;options -burn peut être fournit, un par bande à écrire.</li>
+<li><strong>-a attribute_name :</strong> définit un champ d&#8217;attribut à utiliser sur l&#8217;objet
+comme valeur finale. Cette valeur sera utilisée dans toutes les bandes en sortie.</li>
+<li><strong>-3d :</strong> indique que la valeur finale doit être extraite à partir de la
+valeur « Z » de l&#8217;objet (pas encore implémenté). Ces valeurs sont ajustées
+par la valeur de rasterisation donnée par les options &#8220;-burn value&#8221; ou &#8220;-a
+attribute_name&#8221; si ceux-ci ont été fournie. Pour l&#8217;instant seuls les points
+et les lignes sont dessinés en 3D.</li>
+<li><strong>-l layername :</strong> la ou les couche(s) de la source de données qui sera
+utilisée pour les objets en entrées. Peut être définie plusieurs fois, mais
+au moins une couche ou une option -sql doit être définie.</li>
+<li><strong>-where expression :</strong> une requête SQL de style WHERE optionnel doit être
+appliqué pour sélectionner les objets à rastériser à partir d&#8217;une ou plusieurs
+couche(s).</li>
+<li><strong>-sql select_statement :</strong>  requête SQL à utilisée sur la source de données
+pour produire une couche virtuelle d&#8217;objets à rastériser.</li>
+<li><strong>-of format :</strong> (GDAL &gt;= 1.8.0) sélectionne le format en sortie. GeoTIFF
+(GTiff) par défaut. Utilisez le nom de format court.</li>
+<li><strong>-a_nodata value :</strong> (GDAL &gt;= 1.8.0) assigne une valeur <em>nodata</em> définie aux
+bandes en sortie.</li>
+<li><strong>-init value :</strong> (GDAL &gt;= 1.8.0) Pré-initialise les bandes d&#8217;image en sortie
+avec ces valeurs. Cependant, elles ne sont pas noté comme valeur <em>nodata</em> dans
+le fichier en sortie. Si seulement une valeur est données, la même valeur est
+utilisée pour toutes les bandes.</li>
+<li><strong>-a_srs srs_def :</strong> (GDAL &gt;= 1.8.0) écrase la projection des fichiers en
+sortie. Si non spécifié, la projection du fichier vecteur en entrée sera
+utilisée si elle est disponible. Si les projections sont incompatible entre
+les fichiers en entrée et en sorties, aucune tentative de reprojection ne sera
+effectuée. La valeur de <em>srs_def</em> peut être n&#8217;importe quelle valeur sous la
+forme gérée par GDAL/OGR, WKT complet, PROJ.4, EPSG:n ou un fichier contenant
+le WKT.</li>
+<li><strong>-co &#8220;NAME=VALUE&#8221; :</strong> (GDAL &gt;= 1.8.0) passe une option de création au pilote
+du format de sortie. De multiples options <em>-co</em> peuvent être listées. Voyez la
+documentation spécifique du format pour les options de création légales pour
+chaque format.</li>
+<li><strong>-te xmin ymin xmax ymax :</strong> (GDAL &gt;= 1.8.0) définie les étendues
+géoréférencées. Les valeurs doivent être exprimées en unité du
+géoréférencement. Si aucun n&#8217;est définie, l&#8217;étendue du fichier en sortie
+sera l&#8217;étendue des couches vecteurs.</li>
+<li><strong>-tr xres yres :</strong> (GDAL &gt;= 1.8.0) définie la résolution cible. Les valeurs
+doivent être exprimées en unité de géoréférencement. Les deux valeurs doivent
+être positives.</li>
+<li><strong>-tap :</strong> (GDAL &gt;= 1.8.0) (<em>target aligned pixels</em>) aligne les coordonnées
+de l&#8217;étendue du fichier en sortie aux valeurs de l&#8217;option <em>-tr</em>, tel que
+l&#8217;étendue aligné inclue l&#8217;étendue minimale.</li>
+<li><strong>-ts width height :</strong> (GDAL &gt;= 1.8.0) définie la taille du fichier en sortie
+en pixels et lignes. Notez que l&#8217;option <em>-ts</em> ne peut pas être utilisé avec
+l&#8217;option <em>-tr</em>.</li>
+<li><strong>-ot type :</strong> (GDAL &gt;= 1.8.0) pour que les bandes en sortie soient du type
+de données indiqué. Float64 par défaut.</li>
+<li><strong>-q :</strong> (GDAL &gt;= 1.8.0) supprime la barre de progression et autre affichage
+d&#8217;information.</li>
+<li><strong>src_datasource :</strong> n&#8217;importe quelle source de données supportée par OGR en
+lecture.</li>
+<li><strong>dst_filename :</strong> le fichier de sortie supporté par GDAL. Doit supporter le
+mode d&#8217;accès de mise à jour. Avant la version 1.8.0 de GDAL,
+<tt class="docutils literal"><span class="pre">gdal_rasterize</span></tt> ne pouvait pas créer de nouveau fichier de sortie.</li>
+</ul>
+<p><strong>Exemples :</strong></p>
+<p>La commande suivante rastérisera tous les polygones à partir de mask.shp en un
+fichier RGB TIFF work.tif avec la couleur rouge (RGB = 255,0,0) :</p>
+<div class="highlight-python"><pre>gdal_rasterize -b 1 -b 2 -b 3 -burn 255 -burn 0 -burn 0 -l mask mask.shp work.tif</pre>
+</div>
+<p>La commande suivante rastérisera tout les bâtiments « class A » dans le fichier
+d&#8217;élévation en sortie, en prenant l&#8217;élévation à partir de l&#8217;attribut ROOF_H :</p>
+<div class="highlight-python"><pre>gdal_rasterize -a ROOF_H -where 'class="A"' -l footprints footprints.shp city_dem.tif</pre>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+
+
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="gdaltransform.html" title="gdaltransform"
+             >suivant</a></li>
+        <li class="right" >
+          <a href="gdal2tiles.html" title="gdal2tiles.py"
+             >précédent</a> |</li>
+        <li><a href="../index.html">GDAL v1.9.0 documentation</a> &raquo;</li>
+          <li><a href="index.html" >GDAL</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+    <a href="http://creativecommons.org/licenses/by/2.0/fr/deed.fr">Licence Creative Common BY</a>
+    <!--
+      &copy; Copyright 2011, Yves Jacolin.-->
+      Créé avec <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0.7.
+    </div>
+  </body>
+</html>

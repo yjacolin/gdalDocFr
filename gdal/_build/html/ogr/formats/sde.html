@@ -1,0 +1,224 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF8" />
+    
+    <title>ESRI ArcSDE &mdash; GDAL v1.9.0 documentation</title>
+    <link rel="stylesheet" href="../../_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '1.9.0',
+        COLLAPSE_MODINDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../_static/translations.js"></script>
+    <link rel="top" title="GDAL v1.9.0 documentation" href="../../index.html" />
+    <link rel="up" title="Formats vecteur d’OGR" href="index.html" />
+    <link rel="next" title="SDTS" href="sdts.html" />
+    <link rel="prev" title="IHO S-57 (ENC)" href="s57.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="sdts.html" title="SDTS"
+             accesskey="N">suivant</a></li>
+        <li class="right" >
+          <a href="s57.html" title="IHO S-57 (ENC)"
+             accesskey="P">précédent</a> |</li>
+        <li><a href="../../index.html">GDAL v1.9.0 documentation</a> &raquo;</li>
+          <li><a href="../index.html" >OGR</a> &raquo;</li>
+          <li><a href="index.html" accesskey="U">Formats vecteur d&#8217;OGR</a> &raquo;</li> 
+      </ul>
+    </div>
+
+
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <h3><a href="../../index.html">Table des matières</a></h3>
+            <ul>
+<li><a class="reference internal" href="#">ESRI ArcSDE</a><ul>
+<li><a class="reference internal" href="#options-de-creation-de-couches">Options de création de couches</a></li>
+<li><a class="reference internal" href="#variables-d-environnement">Variables d&#8217;environnement</a></li>
+<li><a class="reference internal" href="#exemples">Exemples</a></li>
+</ul>
+</li>
+</ul>
+
+            <h4>Sujet précédent</h4>
+            <p class="topless"><a href="s57.html"
+                                  title="Chapitre précédent">IHO S-57 (ENC)</a></p>
+            <h4>Sujet suivant</h4>
+            <p class="topless"><a href="sdts.html"
+                                  title="Chapitre suivant">SDTS</a></p>
+            <h3>Cette page</h3>
+            <ul class="this-page-menu">
+              <li><a href="../../_sources/ogr/formats/sde.txt"
+                     rel="nofollow">Montrer la source</a></li>
+            </ul>
+          <div id="searchbox" style="display: none">
+            <h3>Recherche rapide</h3>
+              <form class="search" action="../../search.html" method="get">
+                <input type="text" name="q" size="18" />
+                <input type="submit" value="Go" />
+                <input type="hidden" name="check_keywords" value="yes" />
+                <input type="hidden" name="area" value="default" />
+              </form>
+              <p class="searchtip" style="font-size: 90%">
+              Enter search terms or a module, class or function name.
+              </p>
+          </div>
+          <script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="esri-arcsde">
+<span id="gdal-ogr-formats-sde"></span><h1>ESRI ArcSDE<a class="headerlink" href="#esri-arcsde" title="Lien permanent vers ce titre">¶</a></h1>
+<p>OGR gère en option la lecture des instances de bases de données ArcSDE d&#8217;ESRI.
+ArcSDE est une solution spatiale de type middleware pour le stockage de données
+spatiales pour diverses bases de données relationnelles en arrière. Le pilote
+ArcSDE d&#8217;OGR dépend de sa compilation avec les bibliothèques cliente d&#8217;ArcSDE
+fournit par ESRI.</p>
+<p>Les instances ArcSDE sont accédées avec un nom de source de données de la forme
+suivante. Les champs serveur, instance, nom d&#8217;utilisateur et mot de passe sont
+nécessaire. L&#8217;instance est le numéro de port du serveur SDE, qui est par défaut
+à 5151. Si le paramètre couche est définie alors le pilote SDE est capable de
+sauter la lecture des méta-données pour chaque couche ; échapper cette étape
+est un moyen d&#8217;aller plus vite.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Seulement GDAL 1.6+ gère la requête d&#8217;opération d&#8217;écriture et de version.
+Les versions plus anciennes ne gère que les requêtes sur la version de la
+base (<em>SDE.DEFAULT</em>) et aucune opération d&#8217;écriture.</p>
+</div>
+<div class="highlight-python"><pre>SDE:server,instance,database,username,password[,layer]</pre>
+</div>
+<p>Pour définir une version sur laquelle réaliser une requête , vous <strong>devez</strong>
+définir une couche. La version <em>SDE.DEFAULT</em> sera utilisé lorsqu&#8217;aucune nom de
+version n&#8217;est définie.</p>
+<div class="highlight-python"><pre>SDE:server,instance,database,username,password,layer,[version]</pre>
+</div>
+<p>Vous pouvez également faire une requête pour créer une nouvelle version si elle
+n&#8217;existe pas déjà. Si la version enfant existe déjà, elle sera utilisé à moins
+que la variable d&#8217;environnement <em>SDE_VERSIONOVERWRITE</em> est définie à <em>TRUE</em>.
+Dans ce cas, la version sera supprimée et recrée.</p>
+<div class="highlight-python"><pre>SDE:server,instance,database,username,password,layer,[parentversion],[childversion]</pre>
+</div>
+<p>Le pilote ArcSDE d&#8217;OGR ne gère pas la lecture des données CAD (traité comme
+attribut BLOB), les propriétés annotation, les valeurs de mesure au sommet, ou
+les données raster. La méthode <em>ExecuteSQL()</em> n&#8217;est pas passé à la base de
+données sous-jacente. Pour l&#8217;instant il est interprété par le parseur SQL
+limité d&#8217;OGR. Les indexes spatiaux sont utilisés pour accélérer les requêtes
+spatiales.</p>
+<p>Le pilote a été testé avec ArcSDE 9.x, et devrait fonctionner avec les versions
+plus récentes, ainsi que les version ArcSDE 8.2 ou 8.3. À la fois les géométries
+2D et 3D sont gérées. Les géométries Courbe sont approximées comme des lignes
+(en réalité encore à faire).</p>
+<p>ArcSDE est généralement sensible à la casse, et les noms de tables entièrement
+qualifiés. Bien que vous pouvez utiliser les noms courts pour certaines
+opérations, d&#8217;autres (notamment la suppression) nécessitera un nom entièrement
+qualifié. À cause de cela, il est généralement préférable de toujours utiliser
+des noms entièrement qualifiés.</p>
+<div class="section" id="options-de-creation-de-couches">
+<h2>Options de création de couches<a class="headerlink" href="#options-de-creation-de-couches" title="Lien permanent vers ce titre">¶</a></h2>
+<ul class="simple">
+<li><strong>OVERWRITE :</strong> peut être définie pour permettre l&#8217;écrasement d&#8217;une
+couche existante pendant le processus de création de couche. Si définie, et
+que la valeur n&#8217;est pas <em>NO</em>, la couche sera d&#8217;abord effacée avant d&#8217;être
+créé avec le même nom que celle existante. Définie à <em>NO</em> explicitement, ou
+ne pas inclure l&#8217;option pour traiter les tentatives de créer de nouvelles
+couches qui entrent en collision avec une couche existante de même nom comme
+une erreur. <em>Off</em> par défaut.</li>
+<li><strong>GEOMETRY_NAME :</strong> par défaut OGR crée de nouvelles couches avec la
+colonne géométrique (<em>feature</em>) nommé &#8216;SHAPE&#8217;. si vous désirez utiliser un
+nom différent, celui-ci peut être fournit par l&#8217;option de création d couche
+<em>GEOMETRY_NAME</em>.</li>
+<li><strong>SDE_FID :</strong> peut être définie pour écraser le nom par défaut de la colonne
+ID des objets. <em>OBJECTID</em> par défaut.</li>
+<li><strong>SDE_KEYWORD :</strong> le mot-clé <em>DBTUNE</em> avec lequel créer la couche. Par
+défaut à <em>DEFAULTS</em>.</li>
+<li><strong>SDE_DESCRIPTION :</strong> La description textuelle de la couche. Par défaut à
+&lt;&lt;Created by GDAL/OGR 1.6&gt;&gt; (également utilisé comme la description de la
+version lors de la création d&#8217;une nouvelle création de version enfant à
+partir d&#8217;une version parent).</li>
+<li><strong>SDE_MULTIVERSION :</strong> si cette option de création est définie à <em>FALSE</em>,
+le multi-versioning sera désactivé pour la couche au moment de la création.
+Par défaut, les tables multi-version sont créées quand des couches sont
+créées dans une source de données SDE.</li>
+<li><strong>USE_NSTRING :</strong> si cette option est définie à &#8220;TRUE&#8221; alors les champs
+chaînes seront créé sous le type NSTRING. Cette option a été ajouté pour
+GDAL/OGR 1.9.0.</li>
+</ul>
+</div>
+<div class="section" id="variables-d-environnement">
+<h2>Variables d&#8217;environnement<a class="headerlink" href="#variables-d-environnement" title="Lien permanent vers ce titre">¶</a></h2>
+<ul class="simple">
+<li><strong>OGR_SDE_GETLAYERTYPE :</strong> peut être à <em>TRUE</em> pour déterminer le type
+de géométrie à partir de la base de données. Autrement, le pilote SDE
+retournera toujours un type de géométrie <em>Unknown</em>.</li>
+<li><strong>OGR_SDE_SEARCHORDER :</strong> peut être à <em>ATTRIBUTE_FIRST</em> pour informer
+ArcSDE de filtrer sur un attribut <strong>avant</strong> d&#8217;utiliser un filtre spatial ou
+<em>SPATIAL_FIRST</em> pour utiliser un filtre spatial. Par défaut, il utilise un
+filtre spatial d&#8217;abord.</li>
+<li><strong>SDE_VERSIONOVERWRITE :</strong> si définie à <em>TRUE</em>, la version enfant
+définie sera supprimée avant d&#8217;être recréée. Notez que cette action ne fait
+rien pour concilier n&#8217;importe quelle édition qui existait sur cette version
+avant de faire cela et les rejette essentiellement.</li>
+<li><strong>GR_SDE_USE_NSTRING :</strong> si cette option est définie à &#8220;TRUE&#8221; alors les champs
+chaînes seront créé sous le type NSTRING. Cette option a été ajouté pour
+GDAL/OGR 1.9.0.</li>
+</ul>
+</div>
+<div class="section" id="exemples">
+<h2>Exemples<a class="headerlink" href="#exemples" title="Lien permanent vers ce titre">¶</a></h2>
+<p>Voyez le script test <tt class="docutils literal"><span class="pre">ogr_sde.py</span></tt> pour des exemples de chaîne de
+connections et des usages de ce pilote.</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+
+
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="sdts.html" title="SDTS"
+             >suivant</a></li>
+        <li class="right" >
+          <a href="s57.html" title="IHO S-57 (ENC)"
+             >précédent</a> |</li>
+        <li><a href="../../index.html">GDAL v1.9.0 documentation</a> &raquo;</li>
+          <li><a href="../index.html" >OGR</a> &raquo;</li>
+          <li><a href="index.html" >Formats vecteur d&#8217;OGR</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+    <a href="http://creativecommons.org/licenses/by/2.0/fr/deed.fr">Licence Creative Common BY</a>
+    <!--
+      &copy; Copyright 2011, Yves Jacolin.-->
+      Créé avec <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0.7.
+    </div>
+  </body>
+</html>

@@ -1,0 +1,324 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF8" />
+    
+    <title>NITF – Information Avancée sur le pilote &mdash; GDAL v1.9.0 documentation</title>
+    <link rel="stylesheet" href="../../_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '1.9.0',
+        COLLAPSE_MODINDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../_static/translations.js"></script>
+    <link rel="top" title="GDAL v1.9.0 documentation" href="../../index.html" />
+    <link rel="up" title="Formats" href="index.html" />
+    <link rel="next" title="OGDI – Pont OGDI" href="ogdi.html" />
+    <link rel="prev" title="NITF – National Imagery Transmission Format" href="nitf.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="ogdi.html" title="OGDI – Pont OGDI"
+             accesskey="N">suivant</a></li>
+        <li class="right" >
+          <a href="nitf.html" title="NITF – National Imagery Transmission Format"
+             accesskey="P">précédent</a> |</li>
+        <li><a href="../../index.html">GDAL v1.9.0 documentation</a> &raquo;</li>
+          <li><a href="../index.html" >GDAL</a> &raquo;</li>
+          <li><a href="index.html" accesskey="U">Formats</a> &raquo;</li> 
+      </ul>
+    </div>
+
+
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <h3><a href="../../index.html">Table des matières</a></h3>
+            <ul>
+<li><a class="reference internal" href="#">NITF &#8211; Information Avancée sur le pilote</a><ul>
+<li><a class="reference internal" href="#segments-cgm">Segments CGM</a></li>
+<li><a class="reference internal" href="#fichiers-nitf-multi-image">Fichiers NITF Multi-Image</a></li>
+<li><a class="reference internal" href="#segments-texte">Segments Texte</a></li>
+<li><a class="reference internal" href="#tre">TRE</a></li>
+<li><a class="reference internal" href="#tres-comme-xml-tre">TREs comme xml:TRE</a></li>
+<li><a class="reference internal" href="#fichier-brute-en-tete-d-image">Fichier brute/ En-tête d&#8217;image</a></li>
+</ul>
+</li>
+</ul>
+
+            <h4>Sujet précédent</h4>
+            <p class="topless"><a href="nitf.html"
+                                  title="Chapitre précédent">NITF &#8211; National Imagery Transmission Format</a></p>
+            <h4>Sujet suivant</h4>
+            <p class="topless"><a href="ogdi.html"
+                                  title="Chapitre suivant">OGDI &#8211; Pont OGDI</a></p>
+            <h3>Cette page</h3>
+            <ul class="this-page-menu">
+              <li><a href="../../_sources/gdal/formats/nitf_avancee.txt"
+                     rel="nofollow">Montrer la source</a></li>
+            </ul>
+          <div id="searchbox" style="display: none">
+            <h3>Recherche rapide</h3>
+              <form class="search" action="../../search.html" method="get">
+                <input type="text" name="q" size="18" />
+                <input type="submit" value="Go" />
+                <input type="hidden" name="check_keywords" value="yes" />
+                <input type="hidden" name="area" value="default" />
+              </form>
+              <p class="searchtip" style="font-size: 90%">
+              Enter search terms or a module, class or function name.
+              </p>
+          </div>
+          <script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="nitf-information-avancee-sur-le-pilote">
+<span id="gdal-gdal-formats-nitf-avancee"></span><h1>NITF &#8211; Information Avancée sur le pilote<a class="headerlink" href="#nitf-information-avancee-sur-le-pilote" title="Lien permanent vers ce titre">¶</a></h1>
+<p>Le pilote NITF (<em>National Imagery Transmission Format</em>) dans GDAL inclue un
+nombre d&#8217;options avancée et plus ou moins ésotérique ne convient pas à la
+<a class="reference external" href="http://www.gdal.org/frmt_nitf.html">documentation générale de l&#8217;utilisation</a>
+pour le pilote. Cette information est collecté ici et est surtout utilisable
+pour les développeurs et les utilisateurs avancés.</p>
+<div class="section" id="segments-cgm">
+<h2>Segments CGM<a class="headerlink" href="#segments-cgm" title="Lien permanent vers ce titre">¶</a></h2>
+<p>Les fichiers NITF qui ont des données CGM (qui sont un segment de type GR -
+graphique, ou SY avec un STYPE de valeur &#8216;C&#8217;) rendront cette information
+disponible comme méta-données dans le domaine CGM. Les méta-données renvoyées
+ressemblera à cela :</p>
+<div class="highlight-python"><pre>SEGMENT_COUNT=1
+SEGMENT_0_SLOC_ROW=25
+SEGMENT_0_SLOC_COL=25
+SEGMENT_0_SDLVL=2
+SEGMENT_0_SALVL=1
+SEGMENT_0_SLOC_ROW=25
+SEGMENT_0_SLOC_COL=25
+SEGMENT_0_SDLVL=2
+SEGMENT_0_SALVL=1
+SEGMENT_0_CCS_ROW=00025
+SEGMENT_0_CCS_COL=00025
+SEGMENT_0_DATA= \0!\0...</pre>
+</div>
+<p>Les valeurs SLOC_ROW et SLOC_COL sont l&#8217;emplacement de l&#8217;objet CGM relatif à
+l&#8217;image de base (SALVL). Les valeurs CCS_ROW/COL sont relatives au système de
+coordonnées commun. _SDLVL est le niveau d&#8217;affichage. DATA est les données brutes
+CGM avec une protection par des appliquées. Toutes les occurrence de zéro ASCII
+sera traduit en &#8220;0&#8221;, et tous les symboles et &#8221; seront protégés avec . La
+fonction <tt class="docutils literal"><span class="pre">CPLUnescapeString()</span></tt> peut être utilisé pour protégé les données avec /
+en format binaire en utilisant le schéma <em>CPLES_BackslashQuotable</em>.</p>
+<p>À partir de 1.8.0, pour ajouter des données CGM à une image NITF, vous pouvez
+passer des options de création dans le format suivant :</p>
+<div class="highlight-python"><pre>CGM=SEGMENT_COUNT=1
+CGM=SEGMENT_0_SLOC_ROW=25
+CGM=SEGMENT_0_SLOC_COL=25
+CGM=SEGMENT_0_SDLVL=2
+CGM=SEGMENT_0_SALVL=1
+CGM=SEGMENT_0_DATA=\0!\0...</pre>
+</div>
+<p>Notez que passer CGM comme options de création écrasera le segment CGM lu dans le
+domaine de métadonnées CGM.</p>
+<p>Bien que GDAL ne gère pas le parsage ou le rendu de données CGM, au moins un
+utilisateur a trouvé la bibliothèque  <a class="reference external" href="http://sk1project.org/modules.php?name=Products&amp;product=uniconvertor">UniConverter</a>
+utile pour cela.</p>
+</div>
+<div class="section" id="fichiers-nitf-multi-image">
+<h2>Fichiers NITF Multi-Image<a class="headerlink" href="#fichiers-nitf-multi-image" title="Lien permanent vers ce titre">¶</a></h2>
+<p>Les fichiers NITF avec plus d&#8217;un segment d&#8217;image (IM) présentera les segments
+d&#8217;image comme des sous jeux de données. L&#8217;ouverture de multiple fichiers NITF
+par noms de fichier fournira un accès au premier segment d&#8217;image. Les
+méta-données des sous jeux de données pour les trois fichiers NITF images
+ressemblera à cela :</p>
+<div class="highlight-python"><pre>Subdatasets:
+    SUBDATASET_1_NAME=NITF_IM:0:multi_image_jpeg_2.0.ntf
+    SUBDATASET_1_DESC=Image 1 of multi_image_jpeg_2.0.ntf
+    SUBDATASET_2_NAME=NITF_IM:1:multi_image_jpeg_2.0.ntf
+    SUBDATASET_2_DESC=Image 2 of multi_image_jpeg_2.0.ntf
+    SUBDATASET_3_NAME=NITF_IM:2:multi_image_jpeg_2.0.ntf
+    SUBDATASET_3_DESC=Image 3 of multi_image_jpeg_2.0.ntf</pre>
+</div>
+<p>Dans ce cas l&#8217;ouverture de <em>multi_image_jpeg_2.0.ntf</em> directement donnera un
+accès à <em>NITF_IM:0:multi_image_jpeg_2.0.ntf</em>. Pour ouvrir les autres utilisez
+les noms des sous jeux de données correspondant. Le mécanisme de sous jeu de
+données est un concept GDAL générique  discuté dans le
+<a class="reference external" href="http://www.gdal.org/gdal_datamodel.html">document Modèle de données</a>.</p>
+</div>
+<div class="section" id="segments-texte">
+<h2>Segments Texte<a class="headerlink" href="#segments-texte" title="Lien permanent vers ce titre">¶</a></h2>
+<p>Les fichiers NITF qui ont des segments textes (qui est un segment de type TX)
+rendra cette information disponible comme méta-données dans le domaine TEXT.
+La méta-données renvoyée ressemblera à :</p>
+<div class="highlight-python"><pre>EADER_0=TE       00020021216151629xxxxxxxxxxxxxxxxxxxxxxxxxxx
+DATA_0=This is test text file 01.
+
+HEADER_1=TE       00020021216151629xxxxxxxxxxxxxxxxxxxxxxxxxxx
+DATA_1=This is test text file 02.
+
+HEADER_2=TE       00020021216151629xxxxxxxxxxxxxxxxxxxxxxxxxxx
+DATA_2=This is test text file 03.
+
+HEADER_3=TE       00020021216151629xxxxxxxxxxxxxxxxxxxxxxxxxxx
+DATA_3=This is test text file 04.
+
+HEADER_4=TE       00020021216151629xxxxxxxxxxxxxxxxxxxxxxxxxxx
+DATA_4=This is test text file 05.</pre>
+</div>
+<p>L&#8217;argument à DATA_n est le texte brute du n <sup>ième</sup> (à partir de 0) segment
+texte avec aucune protection de quelque forme que ce soit appliquée.</p>
+<p>À partir de GDAL 1.8.0, les données d&#8217;en-tête du segment TEXT sont préservé dans
+l&#8217;item des métadonnées HEADER_n.</p>
+<p>La méthode <tt class="docutils literal"><span class="pre">CreateCopy()</span></tt> sur le pilote NITF gère également la création de
+segments texte sur le fichier de sortie aussi longtemps que le fichier en entré
+possède des méta-données dans le domaine TEXT comme définie ci-dessus.</p>
+<p>À partir de GDAL 1.8.0, pour ajouter des données TEXT à une image NITF, vous pouvez
+aussi passer les options de création dans le format suivant :</p>
+<div class="highlight-python"><pre>TEXT=HEADER_0=TE       00020021216151629xxxxxxxxxxxxxxxxxxxxxxxxxxx
+TEXT=DATA_0=This is test text file 01.
+TEXT=HEADER_1=TE       00020021216151629xxxxxxxxxxxxxxxxxxxxxxxxxxx
+TEXT=DATA_1=This is test text file 02.</pre>
+</div>
+<p>Notez que passer TEXT comme option de création écrasera le texte existant lu dans
+le domaine de métadonnées TEXT.</p>
+</div>
+<div class="section" id="tre">
+<h2>TRE<a class="headerlink" href="#tre" title="Lien permanent vers ce titre">¶</a></h2>
+<p>Les fichiers NITF avec des extensions enregistrées (ou non enregistrées ?) sur
+l&#8217;en-tête du fichier, ou l&#8217;en-tête de l&#8217;image géoréférencée les rendront
+disponible sous une forme brute dans les méta-données via le domaine TRE. Le
+domaine TRE contiendra une méta-données par TRE qui aura le nom du TRE comme
+nom, et la données du TRE comme contenu. La donnée contenue sera protégé par
+comme les données CGM ci-dessus.</p>
+<p>Dans le cas d’occurrences multiples du même TRE, la seconde occurrence sera
+nommée &#8220;TRENAME_2&#8221;, le troisième &#8220;TRENAME_3&#8221; où TRENAME est le <em>nom TRE</em>.</p>
+<div class="highlight-python"><pre>Metadata (TRE):
+    GEOPSB=MAPM  World Geodetic System 1984
+           WGE World Geodetic System 1984
+               WE Geodetic
+                  GEODMean Sea
+                      MSL 000000000000000
+                                            0000
+PRJPSB=Polar Stereographic
+     PG2-00090.00000250000039.99999884000000000000000000000000000000
+MAPLOB=M  0598005958-000003067885.8-000002163353.8</pre>
+</div>
+</div>
+<div class="section" id="tres-comme-xml-tre">
+<h2>TREs comme xml:TRE<a class="headerlink" href="#tres-comme-xml-tre" title="Lien permanent vers ce titre">¶</a></h2>
+<p>À partir de GDAL 1.9.0, tous les TRE trouvé dans le fichier et correspondant à
+l&#8217;une des descriptions de TRE du fichier <a class="reference external" href="http://trac.osgeo.org/gdal/browser/trunk/gdal/data/nitf_spec.xml">nitf_spec.xml</a>
+dans le répertoire données de GDAL seront reporté comme contenu XML dans le
+domaine de métadonnées xml:TRE.</p>
+<div class="highlight-python"><pre>Metadata (xml:TRE):
+&lt;tres&gt;
+&lt;tre name="RSMDCA" location="des TRE_OVERFLOW"&gt;
+    &lt;field name="IID" value="2_8" /&gt;
+    &lt;field name="EDITION" value="1101222272-2" /&gt;
+    &lt;field name="TID" value="1101222272-1" /&gt;
+    &lt;field name="NPAR" value="06" /&gt;
+    &lt;field name="NIMGE" value="001" /&gt;
+    &lt;field name="NPART" value="00006" /&gt;
+    &lt;repeated name="IMAGE" number="1"&gt;
+    &lt;group index="0"&gt;
+        &lt;field name="IID" value="2_8" /&gt;
+        &lt;field name="NPARI" value="06" /&gt;
+    &lt;/group&gt;
+    &lt;/repeated&gt;
+    &lt;field name="XUOL" value="-2.42965895449297E+06" /&gt;
+    &lt;field name="YUOL" value="-4.76049894293300E+06" /&gt;
+    &lt;field name="ZUOL" value="+3.46898407315533E+06" /&gt;
+    &lt;field name="XUXL" value="+8.90698769551156E-01" /&gt;
+    &lt;field name="XUYL" value="+2.48664813021570E-01" /&gt;
+    &lt;field name="XUZL" value="-3.80554217799520E-01" /&gt;
+    &lt;field name="YUXL" value="-4.54593996792805E-01" /&gt;
+    &lt;field name="YUYL" value="+4.87215943350720E-01" /&gt;
+    &lt;field name="YUZL" value="-7.45630553709282E-01" /&gt;
+    &lt;field name="ZUXL" value="+0.00000000000000E+00" /&gt;
+    &lt;field name="ZUYL" value="+8.37129879594448E-01" /&gt;
+    &lt;field name="ZUZL" value="+5.47004172461403E-01" /&gt;
+[...]
+    &lt;repeated name="DERCOV" number="21"&gt;
+    &lt;group index="0"&gt;
+        &lt;field name="DERCOV" value="+5.77388827727787E+04" /&gt;
+    &lt;/group&gt;
+[...]
+    &lt;group index="20"&gt;
+        &lt;field name="DERCOV" value="+1.14369570920252E-02" /&gt;
+    &lt;/group&gt;
+    &lt;/repeated&gt;
+&lt;/tre&gt;
+&lt;tre name="RSMECA" location="des TRE_OVERFLOW"&gt;
+[...]
+&lt;/tre&gt;
+&lt;tre name="RSMIDA" location="des TRE_OVERFLOW"&gt;
+[...]
+&lt;/tre&gt;
+&lt;tre name="RSMPCA" location="des TRE_OVERFLOW"&gt;
+[...]
+&lt;/tre&gt;
+&lt;/tres&gt;</pre>
+</div>
+</div>
+<div class="section" id="fichier-brute-en-tete-d-image">
+<h2>Fichier brute/ En-tête d&#8217;image<a class="headerlink" href="#fichier-brute-en-tete-d-image" title="Lien permanent vers ce titre">¶</a></h2>
+<p>Dans certains cas l&#8217;application peut avoir besoin de récupérer des informations
+très spécifique à partir de l&#8217;image ou de l&#8217;en-tête du fichier qui n&#8217;est pas
+disponible normalement comme métadonnées. Dans ce cas il est possible d&#8217;interroger
+le domaine de métadonnées &#8220;NITF_METADATA&#8221;. Le fichier complet et les en-têtes
+d&#8217;image seront renvoyés comme métadonnées au format encodé en base64. Quelque
+chose comme :</p>
+<div class="highlight-python"><pre>Metadata (NITF_METADATA):
+    NITFFileHeader=002213 TklURjAyLjAwMDEgICAgVTIxN0cwSjA...
+    NITFImageSubheader=439 SU1NaXNzaW5nIElEMjUxNTI1NTlaTU...</pre>
+</div>
+<p>Notez que les valeurs numériques encodées en ascii préfixant l&#8217;en-tête encodé en
+base64 est la longueur (décodé) en octets, suivit d&#8217;une espace.</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+
+
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="ogdi.html" title="OGDI – Pont OGDI"
+             >suivant</a></li>
+        <li class="right" >
+          <a href="nitf.html" title="NITF – National Imagery Transmission Format"
+             >précédent</a> |</li>
+        <li><a href="../../index.html">GDAL v1.9.0 documentation</a> &raquo;</li>
+          <li><a href="../index.html" >GDAL</a> &raquo;</li>
+          <li><a href="index.html" >Formats</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+    <a href="http://creativecommons.org/licenses/by/2.0/fr/deed.fr">Licence Creative Common BY</a>
+    <!--
+      &copy; Copyright 2011, Yves Jacolin.-->
+      Créé avec <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0.7.
+    </div>
+  </body>
+</html>

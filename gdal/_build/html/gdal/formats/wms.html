@@ -1,0 +1,630 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF8" />
+    
+    <title>WMS – Web Map Services &mdash; GDAL v1.9.0 documentation</title>
+    <link rel="stylesheet" href="../../_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '1.9.0',
+        COLLAPSE_MODINDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../_static/translations.js"></script>
+    <link rel="top" title="GDAL v1.9.0 documentation" href="../../index.html" />
+    <link rel="up" title="Formats" href="index.html" />
+    <link rel="next" title="XYZ – ASCII Gridded XYZ" href="xyz.html" />
+    <link rel="prev" title="WEBP - WEBP" href="webp.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="xyz.html" title="XYZ – ASCII Gridded XYZ"
+             accesskey="N">suivant</a></li>
+        <li class="right" >
+          <a href="webp.html" title="WEBP - WEBP"
+             accesskey="P">précédent</a> |</li>
+        <li><a href="../../index.html">GDAL v1.9.0 documentation</a> &raquo;</li>
+          <li><a href="../index.html" >GDAL</a> &raquo;</li>
+          <li><a href="index.html" accesskey="U">Formats</a> &raquo;</li> 
+      </ul>
+    </div>
+
+
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <h3><a href="../../index.html">Table des matières</a></h3>
+            <ul>
+<li><a class="reference internal" href="#">WMS &#8211; Web Map Services</a><ul>
+<li><a class="reference internal" href="#minipilote">Minipilote</a><ul>
+<li><a class="reference internal" href="#wms">WMS</a></li>
+<li><a class="reference internal" href="#tileservice">TileService</a></li>
+<li><a class="reference internal" href="#worldwind">WorldWind</a></li>
+<li><a class="reference internal" href="#tms-gdal-1-7-0-et-sup">TMS (GDAL 1.7.0 et sup.)</a></li>
+<li><a class="reference internal" href="#onearth-tiled-wms-gdal-1-9-0-et-sup">OnEarth Tiled WMS (GDAL 1.9.0 et sup.)</a></li>
+<li><a class="reference internal" href="#virtualearth-gdal-1-9-0-et-sup">VirtualEarth (GDAL 1.9.0 et sup.)</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#exemples">Exemples</a></li>
+<li><a class="reference internal" href="#syntaxe-ouverte">Syntaxe ouverte</a></li>
+<li><a class="reference internal" href="#voir-egalement">Voir également</a></li>
+</ul>
+</li>
+</ul>
+
+            <h4>Sujet précédent</h4>
+            <p class="topless"><a href="webp.html"
+                                  title="Chapitre précédent">WEBP - WEBP</a></p>
+            <h4>Sujet suivant</h4>
+            <p class="topless"><a href="xyz.html"
+                                  title="Chapitre suivant">XYZ &#8211; ASCII Gridded XYZ</a></p>
+            <h3>Cette page</h3>
+            <ul class="this-page-menu">
+              <li><a href="../../_sources/gdal/formats/wms.txt"
+                     rel="nofollow">Montrer la source</a></li>
+            </ul>
+          <div id="searchbox" style="display: none">
+            <h3>Recherche rapide</h3>
+              <form class="search" action="../../search.html" method="get">
+                <input type="text" name="q" size="18" />
+                <input type="submit" value="Go" />
+                <input type="hidden" name="check_keywords" value="yes" />
+                <input type="hidden" name="area" value="default" />
+              </form>
+              <p class="searchtip" style="font-size: 90%">
+              Enter search terms or a module, class or function name.
+              </p>
+          </div>
+          <script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="wms-web-map-services">
+<span id="gdal-gdal-formats-wms"></span><h1>WMS &#8211; Web Map Services<a class="headerlink" href="#wms-web-map-services" title="Lien permanent vers ce titre">¶</a></h1>
+<p>Accéder à plusieurs différents types  de service d&#8217;image est possible en
+utilisant le format WMS dans GDAL. Les services sont accédé en créant un fichier
+XML de description de service local - il y a des exemples ci-dessous pour chacun
+des services d&#8217;image gérée.</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="37%" />
+<col width="63%" />
+</colgroup>
+<thead valign="bottom">
+<tr><th class="head" rowspan="2">&lt;GDAL_WMS&gt;</th>
+<th class="head" rowspan="2">&nbsp;</th>
+</tr>
+<tr></tr>
+</thead>
+<tbody valign="top">
+<tr><td rowspan="3">&lt;Service name=&#8221;WMS&#8221;&gt;</td>
+<td rowspan="3">Définie quel mini-pilote utiliser, géré actuellement : WMS, WorldWind,
+TileService, TMS, TiledWMS or VirtualEarth. (nécessaire)</td>
+</tr>
+<tr></tr>
+<tr></tr>
+<tr><td rowspan="2">&lt;Version&gt;1.1.1&lt;/Version&gt;</td>
+<td rowspan="2">Version du WMS. (optionnel, par défaut à 1.1.1)</td>
+</tr>
+<tr></tr>
+<tr><td rowspan="3"><dl class="first last docutils">
+<dt>&lt;ServerURL&gt;http://onearth.jpl.nasa.gov/</dt>
+<dd>wms.cgi?&lt;/ServerUrl&gt;</dd>
+</dl>
+</td>
+<td rowspan="3">URL du serveur WMS (nécessaire)</td>
+</tr>
+<tr></tr>
+<tr></tr>
+<tr><td rowspan="3">&lt;SRS&gt;EPSG:4326&lt;/SRS&gt;</td>
+<td rowspan="3">Projection de l&#8217;image (optionnel, par défaut à EPSG:4326, WMS version 1.1.1
+ou inférieur seulement)</td>
+</tr>
+<tr></tr>
+<tr></tr>
+<tr><td rowspan="3">&lt;CRS&gt;CRS:83&lt;/CRS&gt;</td>
+<td rowspan="3">Projection de l&#8217;image (optionnel, défaut à EPSG:4326, WMS version 1.3.0 ou
+supérieur seulement)</td>
+</tr>
+<tr></tr>
+<tr></tr>
+<tr><td rowspan="4">&lt;ImageFormat&gt;image/jpeg&lt;/ImageFormat&gt;</td>
+<td rowspan="4">Format dans lequel on doit demander les données. Les formats avec des
+palettes comme image/gif seront converti en RVB. (optionnel, défaut à
+image/jpeg)</td>
+</tr>
+<tr></tr>
+<tr></tr>
+<tr></tr>
+<tr><td rowspan="4">&lt;Transparent&gt;FALSE&lt;/Transparent&gt;</td>
+<td rowspan="4">Définie à TRUE pour inclure &#8220;transparent=TRUE&#8221; dans la requête GetMap du WMS
+(optionnel FALSE par défaut). Le format de requête et BandsCount nécessite la
+gestion de l&#8217;alpha.</td>
+</tr>
+<tr></tr>
+<tr></tr>
+<tr></tr>
+<tr><td rowspan="2">&lt;Layers&gt;modis,global_mosaic&lt;/Layers&gt;</td>
+<td rowspan="2">Liste de couches séparés par des virgules (nécessaire sauf pour TiledWMS).</td>
+</tr>
+<tr></tr>
+<tr><td rowspan="2">&lt;TiledGroupName&gt;Clementine&lt;/TiledGroupName&gt;</td>
+<td rowspan="2">Liste de couches séparée par une virgule (nécessaire pour TiledWMS).</td>
+</tr>
+<tr></tr>
+<tr><td rowspan="2">&lt;Styles&gt;&lt;/Styles&gt;</td>
+<td rowspan="2">Liste de styles séparés par des virgules. (optionnel)</td>
+</tr>
+<tr></tr>
+<tr><td rowspan="4">&lt;BBoxOrder&gt;xyXY&lt;/BBoxOrder&gt;</td>
+<td rowspan="4">Ordonne les coordonnées de la bbox arbitrairement. Peut être nécessaire pour
+les serveurs à la version 1.3. (optionnel) x – coordonnée X basse, y –
+coordonnée Y basse, X -  coordonnée X haute, Y - coordonnée Y haute</td>
+</tr>
+<tr></tr>
+<tr></tr>
+<tr></tr>
+<tr><td rowspan="2">&lt;/Service&gt;</td>
+<td rowspan="2">&nbsp;</td>
+</tr>
+<tr></tr>
+<tr><td rowspan="3">&lt;DataWindow&gt;</td>
+<td rowspan="3">Définie la taille et l&#8217;étendue des données. (nécessaire sauf pour TiledWMS et
+VirtualEarth)</td>
+</tr>
+<tr></tr>
+<tr></tr>
+<tr><td rowspan="3">&lt;UpperLeftX&gt;-180.0&lt;/UpperLeftX&gt;</td>
+<td rowspan="3">X (longitude) coordonnée du coin haut-gauche. (optionnel, défaut à -180.0,
+sauf pour VirtualEarth)</td>
+</tr>
+<tr></tr>
+<tr></tr>
+<tr><td rowspan="3">&lt;UpperLeftY&gt;90.0&lt;/UpperLeftY&gt;</td>
+<td rowspan="3">Y (latitude) coordonnée du coin haut -gauche. (optionnel, défaut à 90.0,
+sauf pour VirtualEarth)</td>
+</tr>
+<tr></tr>
+<tr></tr>
+<tr><td rowspan="3">&lt;LowerRightX&gt;180.0&lt;/LowerRightX&gt;</td>
+<td rowspan="3">X (longitude) coordonnée du coin bas-droit. (optionnel, défaut  à 180.0,
+sauf pour VirtualEarth)</td>
+</tr>
+<tr></tr>
+<tr></tr>
+<tr><td rowspan="3">&lt;LowerRightY&gt;-90.0&lt;/LowerRightY&gt;</td>
+<td rowspan="3">Y (latitude) coordonnée du coin bas-droit (optionnel, défaut à -90.0,
+sauf pour VirtualEarth)</td>
+</tr>
+<tr></tr>
+<tr></tr>
+<tr><td rowspan="2">&lt;SizeX&gt;2666666&lt;/SizeX&gt;</td>
+<td rowspan="2">Taille de l&#8217;image en pixels.</td>
+</tr>
+<tr></tr>
+<tr><td rowspan="2">&lt;SizeY&gt;1333333&lt;/SizeY&gt;</td>
+<td rowspan="2">Taille de l&#8217;image en pixels.</td>
+</tr>
+<tr></tr>
+<tr><td rowspan="3">&lt;TileX&gt;0&lt;/TileX&gt;</td>
+<td rowspan="3">Ajouter aux tuiles une valeur X à plus haute résolution. (ignoré pour WMS,
+source d&#8217;image tuilée seulement, optionnel, défaut à 0)</td>
+</tr>
+<tr></tr>
+<tr></tr>
+<tr><td rowspan="3">&lt;TileY&gt;0&lt;/TileY&gt;</td>
+<td rowspan="3">Ajouter aux tuiles une valeur Y à plus haute résolution. (ignoré pour WMS,
+source d&#8217;image tuilée seulement, optionnel, défaut à 0)</td>
+</tr>
+<tr></tr>
+<tr></tr>
+<tr><td rowspan="3">&lt;TileLevel&gt;0&lt;/TileLevel&gt;</td>
+<td rowspan="3">Niveau des tuiles à la plus haute résolution. (ignoré pour WMS, source
+d&#8217;image tuilée seulement, optionnel, défaut à 0)</td>
+</tr>
+<tr></tr>
+<tr></tr>
+<tr><td rowspan="4">&lt;TileCountX&gt;0&lt;/TileCountX&gt;</td>
+<td rowspan="4">Peut être utilisé pour définir la taille de l&#8217;image, SizeX = TileCountX *
+BlockSizeX * 2TileLevel. (source d&#8217;image tuilée seulement, optionnel, défaut
+à 0)</td>
+</tr>
+<tr></tr>
+<tr></tr>
+<tr></tr>
+<tr><td rowspan="4">&lt;TileCountY&gt;0&lt;/TileCountY&gt;</td>
+<td rowspan="4">Peut être utilisé pour définir la taille de l&#8217;image, SizeY = TileCountY *
+BlockSizeY * 2TileLevel (source d&#8217;image tuilée seulement, optionnel, défaut
+à 0).</td>
+</tr>
+<tr></tr>
+<tr></tr>
+<tr></tr>
+<tr><td rowspan="5">&lt;YOrigin&gt;top&lt;/YOrigin&gt;</td>
+<td rowspan="5">Peut être utilisé pour définir la position de l&#8217;origine Y en fonction de la
+grille de la tuile. Les valeurs possibles sont &#8216;top&#8217;, &#8216;bottom&#8217;, et &#8216;default&#8217;,
+pour lesquels le comportement est spécifique au mini-pilote (seulement le mini
+-pilote TMS, optionnel, &#8216;bottom&#8217; par défaut pour TMS).</td>
+</tr>
+<tr></tr>
+<tr></tr>
+<tr></tr>
+<tr></tr>
+<tr><td rowspan="2">&lt;/DataWindow&gt;</td>
+<td rowspan="2">&nbsp;</td>
+</tr>
+<tr></tr>
+<tr><td rowspan="3">&lt;Projection&gt;EPSG:4326&lt;/Projection&gt;</td>
+<td rowspan="3">Projection de l&#8217;image (optionnel, défaut à la valeur rapporté par le mini-
+pilote ou EPSG:4326)</td>
+</tr>
+<tr></tr>
+<tr></tr>
+<tr><td rowspan="3">&lt;BandsCount&gt;3&lt;/BandsCount&gt;</td>
+<td rowspan="3">Nombre de bandes/canaux, 1 pour des données en nuance de gris, 3 pour RVB.
+(optionnel, défaut à 3)</td>
+</tr>
+<tr></tr>
+<tr></tr>
+<tr><td rowspan="2">&lt;BlockSizeX&gt;1024&lt;/BlockSizeX&gt;</td>
+<td rowspan="2">Taille du bloc en pixels. (optionnel, défaut à 1024, sauf pour VirtualEarth)</td>
+</tr>
+<tr></tr>
+<tr><td rowspan="2">&lt;BlockSizeY&gt;1024&lt;/BlockSizeY&gt;</td>
+<td rowspan="2">Taille du bloc en pixels. (optionnel, défaut à 1024, sauf pour VirtualEarth)</td>
+</tr>
+<tr></tr>
+<tr><td rowspan="4">&lt;OverviewCount&gt;10&lt;/OverviewCount&gt;</td>
+<td rowspan="4">compte des couches à résolution réduite chacune ayant des résolutions deux
+fois plus petites. (optionnel, la valeur par défaut est calculé lors du
+lancement)</td>
+</tr>
+<tr></tr>
+<tr></tr>
+<tr></tr>
+<tr><td rowspan="3">&lt;Cache&gt;</td>
+<td rowspan="3">Active le cache disque local. Permet les opérations offline. (optionnel, par
+défaut sans cache)</td>
+</tr>
+<tr></tr>
+<tr></tr>
+<tr><td rowspan="4">&lt;Path&gt;./gdalwmscache&lt;/Path&gt;</td>
+<td rowspan="4">Endroit où stocker les fichiers du cache. Il est sain d&#8217;utiliser le même
+chemin de cache pour différentes sources de données. (optionnel, défaut à
+./gdalwmscache)</td>
+</tr>
+<tr></tr>
+<tr></tr>
+<tr></tr>
+<tr><td rowspan="3">&lt;Depth&gt;2&lt;/Depth&gt;</td>
+<td rowspan="3">Nombre de répertoire de couches. 2 résultera à des fichiers écrit sous la
+forme  cache_path/A/B/ABCDEF... (optionnel, défauts à 2)</td>
+</tr>
+<tr></tr>
+<tr></tr>
+<tr><td rowspan="2">&lt;Extension&gt;.jpg&lt;/Extension&gt;</td>
+<td rowspan="2">Ajout aux fichiers de cache. (optionnel, défaut à none)</td>
+</tr>
+<tr></tr>
+<tr><td rowspan="2">&lt;/Cache&gt;</td>
+<td rowspan="2">&nbsp;</td>
+</tr>
+<tr></tr>
+<tr><td rowspan="2">&lt;MaxConnections&gt;2&lt;/MaxConnections&gt;</td>
+<td rowspan="2">nombre maximal de connections simultanée. (optionnel, 2 par défaut)</td>
+</tr>
+<tr></tr>
+<tr><td rowspan="2">&lt;Timeout&gt;300&lt;/Timeout&gt;</td>
+<td rowspan="2">timeout de la connection en secondes (optionnel, 300 par défauts).</td>
+</tr>
+<tr></tr>
+<tr><td rowspan="3">&lt;OfflineMode&gt;true&lt;/OfflineMode&gt;</td>
+<td rowspan="3">Ne télécharge aucune nouvelles images, utilise seulement celle du cache.
+Utile seulement quand le cache est activé (optionnel, défaut à <em>false</em>).</td>
+</tr>
+<tr></tr>
+<tr></tr>
+<tr><td rowspan="3">&lt;AdviseRead&gt;true&lt;/AdviseRead&gt;</td>
+<td rowspan="3">Active l&#8217;appel à l&#8217;API AdviseRead – télécharge les images dans le cache
+(optionnel, défaut à <em>false</em>).</td>
+</tr>
+<tr></tr>
+<tr></tr>
+<tr><td rowspan="5">&lt;VerifyAdviseRead&gt;true&lt;/VerifyAdviseRead&gt;</td>
+<td rowspan="5">Ouvre chaque image et fait des opérations de vérifications basiques avant
+d&#8217;écrire dans le cache. La désactivation peut avoir  des  cycles de CPU si le
+serveur est reconnus comme toujours renvoyer des images correctes. (optionnel,
+défaut à <em>true</em>)</td>
+</tr>
+<tr></tr>
+<tr></tr>
+<tr></tr>
+<tr></tr>
+<tr><td rowspan="5">&lt;VerifyAdviseRead&gt;true&lt;/VerifyAdviseRead&gt;</td>
+<td rowspan="5">ouvre chaque image téléchargée et réalise des vérifications basiques avant
+l&#8217;écriture dans le cache. Désactivé, cela peut sauver des cycles CPU si le
+serveur est reconnu comme retournant toujours des images correctes (optionnel,
+<em>true</em> par défaut).</td>
+</tr>
+<tr></tr>
+<tr></tr>
+<tr></tr>
+<tr></tr>
+<tr><td rowspan="4">&lt;ClampRequests&gt;false&lt;/ClampRequests&gt;</td>
+<td rowspan="4">Est ce que la requête, qui autrement serait partiellement en dehors de la
+fenêtre de données définie, être découpé résultant en une image plus petite
+que la taille du bloc demandée (optionnel, <em>true</em> par défaut).</td>
+</tr>
+<tr></tr>
+<tr></tr>
+<tr></tr>
+<tr><td rowspan="4">&lt;UserAgent&gt;GDAL WMS driver
+(<a class="reference external" href="http://www.gdal.org/frmt_wms.html">http://www.gdal.org/frmt_wms.html</a>)
+&lt;/UserAgent&gt;</td>
+<td rowspan="4">Chaîne User-agent HTTP. Certains serveurs peuvent nécessiter un user-agent
+connus tel que &#8220;Mozilla/5.0&#8221; (optionnel, &#8220;GDAL WMS driver
+(<a class="reference external" href="http://www.gdal.org/frmt_wms.html">http://www.gdal.org/frmt_wms.html</a>)&#8221; par défaut). Ajouté à GDAL 1.8.0</td>
+</tr>
+<tr></tr>
+<tr></tr>
+<tr></tr>
+<tr><td rowspan="3">&lt;Referer&gt;http://example.foo/&lt;/Referer&gt;</td>
+<td rowspan="3">Chaîne de <em>Referer</em> HTTP. Certains serveurs peuvent le nécessiter (optionnel).
+Ajouter à GDAL  1.9.0</td>
+</tr>
+<tr></tr>
+<tr></tr>
+<tr><td rowspan="2">&lt;/GDAL_WMS&gt;</td>
+<td rowspan="2">&nbsp;</td>
+</tr>
+<tr></tr>
+</tbody>
+</table>
+<div class="section" id="minipilote">
+<h2>Minipilote<a class="headerlink" href="#minipilote" title="Lien permanent vers ce titre">¶</a></h2>
+<p>Le pilote WMS de GDAL gère plusieurs &#8216;minipilote&#8217; interne, qui permettent des accès
+à différents services de cartographiques web. Chacun de ces services peuvent gérer
+un ensemble différent d&#8217;options dans le bloc <em>Service</em>.</p>
+<div class="section" id="wms">
+<h3>WMS<a class="headerlink" href="#wms" title="Lien permanent vers ce titre">¶</a></h3>
+<p>Communications avec un serveur WMS OGS. Possède la gestion pour les requêtes
+tuilées et non tuilées.</p>
+</div>
+<div class="section" id="tileservice">
+<h3>TileService<a class="headerlink" href="#tileservice" title="Lien permanent vers ce titre">¶</a></h3>
+<p>Service pour gérer la communication avec un <a class="reference external" href="http://www.worldwindcentral.com/wiki/TileService">service</a>
+WorldWind. L&#8217;accès est toujours basé sur les tuiles.</p>
+</div>
+<div class="section" id="worldwind">
+<h3>WorldWind<a class="headerlink" href="#worldwind" title="Lien permanent vers ce titre">¶</a></h3>
+<p>Accès aux services web tuilé de WorldWind. L&#8217;accès est toujours basé sur les tuiles.</p>
+</div>
+<div class="section" id="tms-gdal-1-7-0-et-sup">
+<h3>TMS (GDAL 1.7.0 et sup.)<a class="headerlink" href="#tms-gdal-1-7-0-et-sup" title="Lien permanent vers ce titre">¶</a></h3>
+<p>Le mini-pilote TMS est structuré d&#8217;abord pour gérer l&#8217;utilisation des
+<a class="reference external" href="http://wiki.osgeo.org/wiki/Tile_Map_Service_Specification">spécifications TMS</a>.
+Ce service gère seulement l&#8217;accès aux tuiles.</p>
+<p>Parce que le TMS est similaire à beaucoup d&#8217;autres faveurs de services &#8216;x/y/z&#8217;
+sur le web, ce service peut également être utilisé pour accéder à ces services.
+Pour l&#8217;utiliser de cette façon, vous pouvez utiliser des variables de remplacement,
+de la forme ${x}, ${y}, etc.</p>
+<p>Les variables gérées (le nom est sensible à la casse) sont :</p>
+<ul class="simple">
+<li>${x} &#8211; position x de la tuile</li>
+<li>${y} &#8211; position y de la tuile. Cela peut être soit le haut ou le bas de l&#8217;
+ensemble des tuile, basé sur le fait que le paramètre <em>YOrigin</em> est basé sur
+true ou false.</li>
+<li>${z} &#8211; position z de la tuile &#8211; niveau de zoom</li>
+<li>${version} &#8211; paramètre de version, définie dans le fichier de config. 1.0.0 par défaut.</li>
+<li>${format} &#8211; format parameter, set in the config file. Defaults to &#8216;jpg&#8217;.</li>
+<li>${layer} &#8211; layer parameter, set in the config file. Defaults to nothing.</li>
+</ul>
+<p>Un <em>ServerURL</em> typique ressemblerait à cela :</p>
+<p><tt class="docutils literal"><span class="pre">http://labs.metacarta.com/wms-c/Basic.py/${version}/${layer}/${z}/${x}/${y}.${format}</span></tt></p>
+<p>Dans le but de mieux convenir aux utilisateurs du TMS, n&#8217;importe quel URL qui ne
+contient pas &#8220;${&#8221; aura automatiquement la chaîne ci-dessus (après &#8220;Basic.py/&#8221;)
+rajoutée à leur URL.</p>
+<p>Le service TMS a trois éléments de configuration XML qui sont différent des autres
+services : <tt class="docutils literal"><span class="pre">Format</span></tt> qui est définie par défaut à <tt class="docutils literal"><span class="pre">jpg</span></tt>, <tt class="docutils literal"><span class="pre">Layer</span></tt> qui n&#8217;as
+pas de valeur par défaut, et <tt class="docutils literal"><span class="pre">Version</span></tt> dont la valeur par défaut est <tt class="docutils literal"><span class="pre">1.0.0</span></tt>.</p>
+<p>De plus, le service TMS respecte un paramètre supplémentaire, au niveau du
+<em>DataWindow</em>,qui est l&#8217;élément <em>YOrigin</em>. Cet élément doit être l&#8217;un parmi
+<tt class="docutils literal"><span class="pre">bottom</span></tt> (par défaut dans le TMS) ou <tt class="docutils literal"><span class="pre">top</span></tt>, qui correspond aux services
+OpenStreetMap et plus autres très populaires.</p>
+<p>Deux exemples d&#8217;usage de service TMS sont présentés plus bas.</p>
+</div>
+<div class="section" id="onearth-tiled-wms-gdal-1-9-0-et-sup">
+<h3>OnEarth Tiled WMS (GDAL 1.9.0 et sup.)<a class="headerlink" href="#onearth-tiled-wms-gdal-1-9-0-et-sup" title="Lien permanent vers ce titre">¶</a></h3>
+<p>Le mini-pilote WMS tuilé d&#8217;OnEarth gère les spécifications WMS tuilés implémentées
+pour le pilote JPL d&#8217;OnEarth suivant la spécification
+<a class="reference external" href="http://onearth.jpl.nasa.gov/tiled.html">http://onearth.jpl.nasa.gov/tiled.html</a>.</p>
+<p>Un fichier typique de configuration WMS tuilé d&#8217;OnEarth devrait ressembler à cela :</p>
+<div class="highlight-python"><pre>&lt;GDAL_WMS&gt;
+    &lt;Service name="TiledWMS"&gt;
+    &lt;ServerUrl&gt;http://onmoon.jpl.nasa.gov/wms.cgi?&lt;/ServerUrl&gt;
+    &lt;TiledGroupName&gt;Clementine&lt;/TiledGroupName&gt;
+    &lt;/Service&gt;
+&lt;/GDAL_WMS&gt;</pre>
+</div>
+<p>La plupart des autres informations sont automatiquement récupérées du serveur
+distant en utilisant la méthode <em>GetTileService</em> au moment de l&#8217;ouverture.</p>
+</div>
+<div class="section" id="virtualearth-gdal-1-9-0-et-sup">
+<h3>VirtualEarth (GDAL 1.9.0 et sup.)<a class="headerlink" href="#virtualearth-gdal-1-9-0-et-sup" title="Lien permanent vers ce titre">¶</a></h3>
+<p>Accès au service de tuile par le web de Virtual Earth. L&#8217;accès est toujours basé
+sur les tuiles.</p>
+<p>La variable <em>${quadkey}</em> doit être trouvé dans l&#8217;élément <em>ServerUrl</em>.</p>
+<p>L&#8217;élément <em>DataWindow</em> peut être omis. Les valeurs par défaut sont :</p>
+<ul class="simple">
+<li>UpperLeftX = -20037508.34</li>
+<li>UpperLeftY = 20037508.34</li>
+<li>LowerRightX = 20037508.34</li>
+<li>LowerRightY = -20037508.34</li>
+<li>TileLevel = 19</li>
+<li>OverviewCount = 18</li>
+<li>SRS = EPSG:900913</li>
+<li>BlockSizeX = 256</li>
+<li>BlockSizeY = 256</li>
+</ul>
+</div>
+</div>
+<div class="section" id="exemples">
+<h2>Exemples<a class="headerlink" href="#exemples" title="Lien permanent vers ce titre">¶</a></h2>
+<ul>
+<li><p class="first"><a class="reference external" href="http://www.gdal.org/frmt_wms_onearth_global_mosaic.xml">onearth_global_mosaic.xml</a> -
+mosaic Landsat à partir du serveur WMS <a class="reference external" href="http://onearth.jpl.nasa.gov/">OnEarth</a></p>
+<div class="highlight-python"><pre>gdal_translate -of JPEG -outsize 500 250 onearth_global_mosaic.xml onearth_global_mosaic.jpg</pre>
+</div>
+<img alt="../../_images/onearth_global_mosaic.jpg" src="../../_images/onearth_global_mosaic.jpg" />
+<div class="highlight-python"><pre>gdal_translate -of JPEG -projwin -10 55 30 35 -outsize 500 250 onearth_global_mosaic.xml onearth_global_mosaic2.jpg</pre>
+</div>
+<img alt="../../_images/onearth_global_mosaic2.jpg" src="../../_images/onearth_global_mosaic2.jpg" />
+</li>
+<li><p class="first"><a class="reference external" href="http://www.gdal.org/frmt_wms_metacarta_wmsc.xml">metacarta_wmsc.xml</a> - il
+est possible de configurer un service WMS se conformant à un cache WMS-C en
+définissant un nombre d&#8217;aperçue et la &#8220;taille du bloc&#8221; comme la taille de la
+tuile du cache. L&#8217;exemple suivant est un échantillon définie pour une cache
+WMS-C avec un &#8220;profile Global&#8221; de 19 niveau :</p>
+<div class="highlight-python"><pre>gdal_translate -of PNG -outsize 500 250 metacarta_wmsc.xml metacarta_wmsc.png</pre>
+</div>
+<img alt="../../_images/metacarta_wmsc.png" src="../../_images/metacarta_wmsc.png" />
+</li>
+<li><p class="first"><a class="reference external" href="http://www.gdal.org/frmt_wms_tileservice_bmng.xml">tileservice_bmng.xml</a> - TileService, Blue Marble NG (Janvier)</p>
+<div class="highlight-python"><pre>gdal_translate -of JPEG -outsize 500 250 tileservice_bmng.xml tileservice_bmng.jpg</pre>
+</div>
+<img alt="../../_images/tileservice_bmng.jpg" src="../../_images/tileservice_bmng.jpg" />
+</li>
+<li><p class="first"><a class="reference external" href="http://www.gdal.org/frmt_wms_tileservice_nysdop2004.xml">tileservice_nysdop2004.xml</a> - TileService, NYSDOP 2004</p>
+<div class="highlight-python"><pre>gdal_translate -of JPEG -projwin -73.687030 41.262680 -73.686359 41.262345 -outsize 500 250 *
+tileservice_nysdop2004.xml tileservice_nysdop2004.jpg</pre>
+</div>
+<img alt="../../_images/tileservice_nysdop2004.jpg" src="../../_images/tileservice_nysdop2004.jpg" />
+</li>
+<li><p class="first"><a class="reference external" href="http://www.gdal.org/frmt_wms_openstreetmap_tms.xml">Exemple du service TMS d&#8217;OpenStreetMap</a> :
+se connecte au service de tuile d&#8217;OpenStreetMap. Notez que ce fichier permet
+l&#8217;utilisation du cache de tuile : plus d&#8217;information sur la configuration des
+paramètres du cache de tuile est disponible ci-dessus.</p>
+<div class="highlight-python"><pre>gdal_translate -of PNG -outsize 512 512 frmt_wms_openstreetmap_tms.xml openstreetmap.png&lt;/tt&gt;</pre>
+</div>
+</li>
+<li><p class="first"><a class="reference external" href="http://www.gdal.org/frmt_wms_metacarta_tms.xml&quot;">Exemple de la couche TMS de MetaCarta</a>,
+accède à la couche par défaut du TMS de TMS.</p>
+<div class="highlight-python"><pre>gdal_translate -of PNG -outsize 512 256 frmt_wms_metacarta_tms.xml metacarta.png&lt;/tt&gt;</pre>
+</div>
+</li>
+<li><p class="first"><a class="reference external" href="http://www.gdal.org/frmt_wms_bluemarble_s3_tms.xml">Exemple BlueMarble sur Amazon S3</a>
+accédé avec le minipilote TMS.</p>
+</li>
+<li><p class="first"><a class="reference external" href="http://www.gdal.org/frmt_wms_googlemaps_tms.xml">Google Maps</a> accédé avec le
+minipilote TMS.</p>
+</li>
+<li><p class="first"><a class="reference external" href="http://www.gdal.org/frmt_wms_arcgis_mapserver_tms.xml">Serveur carto de tuiles d&#8217;ArcGIS</a>
+accédé avec le minipilote TMS.</p>
+</li>
+<li><p class="first"><a class="reference external" href="http://www.gdal.org/frmt_wms_swissgeo_tms.xml">Cartes du géoportail Suisse</a>
+accédé avec le minipilote TMS (nécessite GDAL &gt;= 1.9.0)</p>
+</li>
+<li><p class="first">Exemples du WMS tuilé de OnEarth <a class="reference external" href="http://www.gdal.org/frmt_twms_Clementine.xml">Clementine</a>,
+<a class="reference external" href="http://www.gdal.org/frmt_twms_daily.xml">journalier</a>, et
+<a class="reference external" href="http://www.gdal.org/frmt_twms_srtm.xml">srtm</a>.</p>
+</li>
+<li><p class="first"><a class="reference external" href="http://www.gdal.org/frmt_wms_virtualearth.xml">Couche Aerial de VirtualEarth</a> accédé avec le minipilote VirtualEarth.</p>
+</li>
+</ul>
+</div>
+<div class="section" id="syntaxe-ouverte">
+<h2>Syntaxe ouverte<a class="headerlink" href="#syntaxe-ouverte" title="Lien permanent vers ce titre">¶</a></h2>
+<p>Le pilote WMS peut ouvrir :</p>
+<ul>
+<li><p class="first">un fichier XML de description de service local : <tt class="docutils literal"><span class="pre">gdalinfo</span> <span class="pre">description_file.xml</span></tt></p>
+</li>
+<li><p class="first">le contenu d&#8217;un fichier XML de description fournie comme nom de fichier :</p>
+<div class="highlight-python"><pre>gdalinfo "&lt;GDAL_WMS&gt;&lt;Service name=\"TiledWMS\"&gt;&lt;ServerUrl&gt;http://onearth.jpl.nasa.gov/wms.cgi? \
+    &lt;/ServerUrl&gt;&lt;TiledGroupName&gt;Global SRTM Elevation&lt;/TiledGroupName&gt;&lt;/Service&gt;&lt;/GDAL_WMS&gt;"</pre>
+</div>
+</li>
+<li><p class="first">(GDAL &gt;= 1.9.0) une URL d&#8217;un service WMS, préfixé avec <em>WMS:</em> :</p>
+<div class="highlight-python"><pre>gdalinfo "WMS:http://wms.geobase.ca/wms-bin/cubeserv.cgi"</pre>
+</div>
+<p>Une liste de sous jeu de données sera retournée, résultant de la lecture de la
+requête GetCapabilities sur ce serveur.</p>
+</li>
+<li><p class="first">(GDAL &gt;= 1.9.0) une pseudo requête GetMap, telle que le nom du sous jeu de données
+l&#8217;a retournée par la syntaxe précédente :</p>
+<div class="highlight-python"><pre>gdalinfo "WMS:http://wms.geobase.ca/wms-bin/cubeserv.cgi?SERVICE=WMS&amp;amp;VERSION=1.1.1&amp;amp; \
+REQUEST=GetMap&amp;amp;LAYERS=DNEC_250K:ELEVATION/ELEVATION&amp;amp;SRS=EPSG:42304&amp;amp;BBOX=-3000000,-1500000,6000000,4500000"</pre>
+</div>
+</li>
+<li><p class="first">(GDAL &gt;= 1.9.0) l&#8217;URL de base d&#8217;un service WMS tuilé, préfixé avec <em>WMS:</em> et
+avec l&#8217;argument GET <em>request=GetTileService</em> :</p>
+<div class="highlight-python"><pre>gdalinfo "WMS:http://onearth.jpl.nasa.gov/wms.cgi?request=GetTileService"</pre>
+</div>
+<p>Une liste de sous jeu de données sera renvoyée, résultant de la lecture de la
+requête du GetTileService sur ce serveur.</p>
+</li>
+<li><p class="first">(GDAL &gt;= 1.9.0) l&#8217;URL d&#8217;un service REST pour un serveur carto ArcGIS :</p>
+<div class="highlight-python"><pre>gdalinfo "http://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer?f=json&amp;amp;pretty=true"</pre>
+</div>
+</li>
+</ul>
+</div>
+<div class="section" id="voir-egalement">
+<h2>Voir également<a class="headerlink" href="#voir-egalement" title="Lien permanent vers ce titre">¶</a></h2>
+<ul class="simple">
+<li>OGC WMS Standards : <a class="reference external" href="http://www.opengeospatial.org/standards/wms">http://www.opengeospatial.org/standards/wms</a></li>
+<li>Recommandation du WMS Tiling Client (WMS-C) : <a class="reference external" href="http://wiki.osgeo.org/index.php/WMS_Tiling_Client_Recommendation">http://wiki.osgeo.org/index.php/WMS_Tiling_Client_Recommendation</a></li>
+<li>TileService WorldWind : <a class="reference external" href="http://www.worldwindcentral.com/wiki/TileService">http://www.worldwindcentral.com/wiki/TileService</a></li>
+<li><a class="reference external" href="http://wiki.osgeo.org/wiki/Tile_Map_Service_Specification">Spécification TMS</a></li>
+<li><a class="reference external" href="http://onearth.jpl.nasa.gov/tiled.html">Spécification WMS Tuilé OnEarth</a></li>
+</ul>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+
+
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="xyz.html" title="XYZ – ASCII Gridded XYZ"
+             >suivant</a></li>
+        <li class="right" >
+          <a href="webp.html" title="WEBP - WEBP"
+             >précédent</a> |</li>
+        <li><a href="../../index.html">GDAL v1.9.0 documentation</a> &raquo;</li>
+          <li><a href="../index.html" >GDAL</a> &raquo;</li>
+          <li><a href="index.html" >Formats</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+    <a href="http://creativecommons.org/licenses/by/2.0/fr/deed.fr">Licence Creative Common BY</a>
+    <!--
+      &copy; Copyright 2011, Yves Jacolin.-->
+      Créé avec <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0.7.
+    </div>
+  </body>
+</html>

@@ -1,0 +1,210 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF8" />
+    
+    <title>FAQ divers &mdash; GDAL v1.9.0 documentation</title>
+    <link rel="stylesheet" href="../_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.9.0',
+        COLLAPSE_MODINDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/translations.js"></script>
+    <link rel="top" title="GDAL v1.9.0 documentation" href="../index.html" />
+    <link rel="up" title="FAQ" href="index.html" />
+    <link rel="next" title="Logiciel utilisant GDAL" href="../logicielutilisantgdal.html" />
+    <link rel="prev" title="FAQ Projection et système de coordonnées" href="proj.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../logicielutilisantgdal.html" title="Logiciel utilisant GDAL"
+             accesskey="N">suivant</a></li>
+        <li class="right" >
+          <a href="proj.html" title="FAQ Projection et système de coordonnées"
+             accesskey="P">précédent</a> |</li>
+        <li><a href="../index.html">GDAL v1.9.0 documentation</a> &raquo;</li>
+          <li><a href="index.html" accesskey="U">FAQ</a> &raquo;</li> 
+      </ul>
+    </div>
+
+
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <h3><a href="../index.html">Table des matières</a></h3>
+            <ul>
+<li><a class="reference internal" href="#">FAQ divers</a><ul>
+<li><a class="reference internal" href="#est-ce-que-la-bibliotheque-gdal-est-thread-safe">Est ce que la bibliothèque GDAL est thread-safe ?</a></li>
+<li><a class="reference internal" href="#est-ce-que-gdal-fonctionne-avec-differents-locales-internationales-pour-les-chiffres-numerique">Est ce que GDAL fonctionne avec différents locales internationales pour les chiffres numérique ?</a></li>
+<li><a class="reference internal" href="#comment-debuguer-gdal">Comment débuguer GDAL ?</a></li>
+<li><a class="reference internal" href="#comment-dois-je-supprimer-les-ressources-decouvertes-a-partir-de-gdal-sous-windows">Comment dois je supprimer les ressources découvertes à partir de GDAL sous windows ?</a></li>
+</ul>
+</li>
+</ul>
+
+            <h4>Sujet précédent</h4>
+            <p class="topless"><a href="proj.html"
+                                  title="Chapitre précédent">FAQ Projection et système de coordonnées</a></p>
+            <h4>Sujet suivant</h4>
+            <p class="topless"><a href="../logicielutilisantgdal.html"
+                                  title="Chapitre suivant">Logiciel utilisant GDAL</a></p>
+            <h3>Cette page</h3>
+            <ul class="this-page-menu">
+              <li><a href="../_sources/faq/divers.txt"
+                     rel="nofollow">Montrer la source</a></li>
+            </ul>
+          <div id="searchbox" style="display: none">
+            <h3>Recherche rapide</h3>
+              <form class="search" action="../search.html" method="get">
+                <input type="text" name="q" size="18" />
+                <input type="submit" value="Go" />
+                <input type="hidden" name="check_keywords" value="yes" />
+                <input type="hidden" name="area" value="default" />
+              </form>
+              <p class="searchtip" style="font-size: 90%">
+              Enter search terms or a module, class or function name.
+              </p>
+          </div>
+          <script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="faq-divers">
+<span id="gdal-faq-divers"></span><h1>FAQ divers<a class="headerlink" href="#faq-divers" title="Lien permanent vers ce titre">¶</a></h1>
+<div class="section" id="est-ce-que-la-bibliotheque-gdal-est-thread-safe">
+<h2>Est ce que la bibliothèque GDAL est thread-safe ?<a class="headerlink" href="#est-ce-que-la-bibliotheque-gdal-est-thread-safe" title="Lien permanent vers ce titre">¶</a></h2>
+<p>Non, GDAL n&#8217;est pas complètement <em>thread safe</em>.</p>
+<p>Cependant pour GDAL 1.3.0 beaucoup de travail a été réalisé pour réaliser des
+scénarios thread safe. En particulier pour des situations où plusieurs threads
+sont lu à partir de jeux de données GDAL en même temps cela devrait fonctionner
+tant que deux threads n&#8217;accèdent pas le même objet <em>GDALDataset</em> en même temps.
+Cependant, dans ce scénario, aucun thread ne peut être écrit vers GDAL tant que
+les autres sont lu où cela entrainera un jolie chaos.</p>
+<p>Aussi, bien que l&#8217;infrastructure cœur de GDAL est maintenant trhead-safe pour
+ce cas spécifique, seulement quelques pilotes ont été examiner pour être
+<em>thread safe</em>.</p>
+<p>Il est convenue de travailler encore sur l&#8217;amélioration de la protection des
+thread de GDAL dans les futures versions.</p>
+</div>
+<div class="section" id="est-ce-que-gdal-fonctionne-avec-differents-locales-internationales-pour-les-chiffres-numerique">
+<h2>Est ce que GDAL fonctionne avec différents locales internationales pour les chiffres numérique ?<a class="headerlink" href="#est-ce-que-gdal-fonctionne-avec-differents-locales-internationales-pour-les-chiffres-numerique" title="Lien permanent vers ce titre">¶</a></h2>
+<p>Non, GDAL se sert d&#8217;une manière intensive de <em>sprintf()</em> et de <em>atof()</em> pour
+traduire les valeurs numériques. Si une locale affecte le formatage des nombres,
+altérant le rôle de la virgule et des périodes dans les chiffres, alors PROJ.4
+ne fonctionnera pas. Ce problème est commun dans certaines locales européennes.</p>
+<p>Sur les plateformes de type-Unix, ce problème peut être évité en forçant
+l&#8217;utilisation de la locale des chiffres par défaut en définissant la variable
+d&#8217;environnement <em>LC_NUMERIC</em> à <em>C</em>, par exemple :</p>
+<div class="highlight-python"><pre>$ export LC_NUMERIC=C
+$ gdalinfo abc.tif</pre>
+</div>
+</div>
+<div class="section" id="comment-debuguer-gdal">
+<h2>Comment débuguer GDAL ?<a class="headerlink" href="#comment-debuguer-gdal" title="Lien permanent vers ce titre">¶</a></h2>
+<p>Différente information de débugage utile sera produit par GDAL et OGR si la
+variable d&#8217;environnement <em>CPL_DEBUG</em> est définie à la valeur <em>ON</em>. Lisez la
+documentation pour la fonction <em>CPLDebug()</em> pour plus d&#8217;information sur les
+messages de débugages interne.</p>
+<p>Pour les versions plus vielles que GDAL 1.5, sur les systèmes Unix GDAL peut
+être compilé avec la variable d&#8217;environnement <em>CFG</em> définie pour activer la
+gestion du débugage avec l&#8217;option de compilation <em>-g</em>. Pour GDAL supérieur à
+la version 1.5, vous pouvez activer les symboles de débugages avec l&#8217;option de
+configuration <em>&#8211;enable-debug</em>.</p>
+<p>Sous Windows éditez le fichier <em>make.opt</em> et assurez vous que /ZI apparaisse
+dans la variable OPTFLAGS.</p>
+</div>
+<div class="section" id="comment-dois-je-supprimer-les-ressources-decouvertes-a-partir-de-gdal-sous-windows">
+<h2>Comment dois je supprimer les ressources découvertes à partir de GDAL sous windows ?<a class="headerlink" href="#comment-dois-je-supprimer-les-ressources-decouvertes-a-partir-de-gdal-sous-windows" title="Lien permanent vers ce titre">¶</a></h2>
+<p>La manière la plus saine pour libérer les ressources réservées et renvoyées
+(avec le propriétaire transféré à l&#8217;appel) à partir de la bibliothèque GDAL est
+d&#8217;utiliser la fonction dédiée de suppression. La suppression permet de libérer
+les ressources sur le bon module, sans traverser les limites des modules ce qui
+cause des erreurs de violation d&#8217;accès à la mémoire.</p>
+<blockquote>
+<div><ul class="simple">
+<li>Exemple correct de suppression de ressource :</li>
+</ul>
+<div class="highlight-python"><pre>OGRDataSource\* poDS = NULL;
+
+// OGRDataSource aquisition made on side of the GDAL module
+poDS = OGRSFDriverRegistrar::Open( "point.shp", FALSE );
+
+// ...
+
+// Properly resource release using deallocator function
+OGRDataSource::DestroyDataSource( poDS );</pre>
+</div>
+</div></blockquote>
+<ul>
+<li><p class="first">Exemple incorrect de suppression de ressource :</p>
+<div class="highlight-python"><pre>OGRDataSource\* poDS = NULL;
+
+// OGRDataSource aquisition made on side of the GDAL module
+poDS = OGRSFDriverRegistrar::Open( "point.shp", FALSE );
+
+// ...
+
+// Deallocation across modules boundaries.
+// Here, the deallocation crosses GDAL DLL library and client's module (ie. executable module)
+delete poDS;</pre>
+</div>
+</li>
+</ul>
+<p>Des explications plus détaillées du problème peuvent être trouvé dans les
+articles suivants :</p>
+<ul class="simple">
+<li><a class="reference external" href="http://vcfaq.mvps.org/lang/9.htm">1ère cause possible</a> d&#8217;erreur
+<em>segmentation fault</em> dans une dll</li>
+<li><a class="reference external" href="http://blogs.msdn.com/oldnewthing/archive/2006/09/15/755966.aspx">Utiliser et libérer des la mémoire à travers des limites de modules</a></li>
+</ul>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+
+
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../logicielutilisantgdal.html" title="Logiciel utilisant GDAL"
+             >suivant</a></li>
+        <li class="right" >
+          <a href="proj.html" title="FAQ Projection et système de coordonnées"
+             >précédent</a> |</li>
+        <li><a href="../index.html">GDAL v1.9.0 documentation</a> &raquo;</li>
+          <li><a href="index.html" >FAQ</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+    <a href="http://creativecommons.org/licenses/by/2.0/fr/deed.fr">Licence Creative Common BY</a>
+    <!--
+      &copy; Copyright 2011, Yves Jacolin.-->
+      Créé avec <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0.7.
+    </div>
+  </body>
+</html>

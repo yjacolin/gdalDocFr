@@ -1,0 +1,299 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF8" />
+    
+    <title>ESRI Personal GeoDatabase &mdash; GDAL v1.9.0 documentation</title>
+    <link rel="stylesheet" href="../../_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '1.9.0',
+        COLLAPSE_MODINDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../_static/translations.js"></script>
+    <link rel="top" title="GDAL v1.9.0 documentation" href="../../index.html" />
+    <link rel="up" title="Formats vecteur d’OGR" href="index.html" />
+    <link rel="next" title="IHO S-57 (ENC)" href="s57.html" />
+    <link rel="prev" title="Dump SQL pour PostgreSQL" href="pgdump.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="s57.html" title="IHO S-57 (ENC)"
+             accesskey="N">suivant</a></li>
+        <li class="right" >
+          <a href="pgdump.html" title="Dump SQL pour PostgreSQL"
+             accesskey="P">précédent</a> |</li>
+        <li><a href="../../index.html">GDAL v1.9.0 documentation</a> &raquo;</li>
+          <li><a href="../index.html" >OGR</a> &raquo;</li>
+          <li><a href="index.html" accesskey="U">Formats vecteur d&#8217;OGR</a> &raquo;</li> 
+      </ul>
+    </div>
+
+
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <h3><a href="../../index.html">Table des matières</a></h3>
+            <ul>
+<li><a class="reference internal" href="#">ESRI Personal GeoDatabase</a><ul>
+<li><a class="reference internal" href="#comment-utiliser-le-pilote-pgeo-avec-unixodbc-et-mdb-tools">Comment utiliser le pilote PGeo avec unixODBC et MDB Tools</a><ul>
+<li><a class="reference internal" href="#pre-requis">Pré-requis</a></li>
+<li><a class="reference internal" href="#configuration">Configuration</a><ul>
+<li><a class="reference internal" href="#configuration-du-pilote-odbc">1. Configuration du pilote ODBC</a></li>
+<li><a class="reference internal" href="#configuration-de-la-source-de-donnees-odbc">2. Configuration de la source de données ODBC</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#tester-le-pilote-pgeo-avec-ogrinfo">Tester le pilote PGeo avec ogrinfo</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#ressources">Ressources</a></li>
+<li><a class="reference internal" href="#voir-egalement">Voir également</a></li>
+</ul>
+</li>
+</ul>
+
+            <h4>Sujet précédent</h4>
+            <p class="topless"><a href="pgdump.html"
+                                  title="Chapitre précédent">Dump SQL pour PostgreSQL</a></p>
+            <h4>Sujet suivant</h4>
+            <p class="topless"><a href="s57.html"
+                                  title="Chapitre suivant">IHO S-57 (ENC)</a></p>
+            <h3>Cette page</h3>
+            <ul class="this-page-menu">
+              <li><a href="../../_sources/ogr/formats/pgeo.txt"
+                     rel="nofollow">Montrer la source</a></li>
+            </ul>
+          <div id="searchbox" style="display: none">
+            <h3>Recherche rapide</h3>
+              <form class="search" action="../../search.html" method="get">
+                <input type="text" name="q" size="18" />
+                <input type="submit" value="Go" />
+                <input type="hidden" name="check_keywords" value="yes" />
+                <input type="hidden" name="area" value="default" />
+              </form>
+              <p class="searchtip" style="font-size: 90%">
+              Enter search terms or a module, class or function name.
+              </p>
+          </div>
+          <script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="esri-personal-geodatabase">
+<span id="gdal-ogr-formats-pgeo"></span><h1>ESRI Personal GeoDatabase<a class="headerlink" href="#esri-personal-geodatabase" title="Lien permanent vers ce titre">¶</a></h1>
+<p>OGR gère en option la lecture de fichier .mdb des Géodatabases Personnelles via
+ODBC. Les Géodatabases Personnelles sont une base de données Microsoft Access(r)
+avec un ensemble de tables définies par ESRI pour prendre en compte les
+méta-données de la géodatabase, et avec des géométries pour les objets contenu
+dans une colonne BLOB dans un format personnalisé (essentiellement des fragments
+de géométries de Shapefile). Ces pilotes accèdent aux géodatabases personnelles
+via ODBC, mais ne dépend d&#8217;aucuns middleware d&#8217;ESRI.</p>
+<p>Les Géodatabases Personnelles sont accédées en passant le nom du fichier .mdb
+pour être accédé comme source de données. Sous Windows, aucun DSN d&#8217;ODBC n&#8217;est
+nécessaire. Sous Linux, il y a un problème avec des connexions sans DSN dû à une
+implémentation incomplète ou bugguée de cette fonctionnalité dans le paquet MDB
+Tools. Il est donc nécessaire de configurer un Data Source Name (DSN) si le
+pilote <a class="reference external" href="http://mdbtools.sourceforge.net">MDB Tools</a> est utilisé (vérifiez les
+instructions ci-dessous).</p>
+<p>Dans le but de faciliter la compatibilité avec différentes configurations, l&#8217;option
+de configuration PGEO_DRIVER_TEMPLATE a été ajouté pour fournir une façon pour
+définir par programmation le DSN avec le nom du fichier comme argument. Dans le
+cas où le nom du pilote est connu, cela permet la construction de DSN basé sur
+cette information d&#8217;une manière identique à celle par défaut (utilisé pour
+Windows access pour le pilote Microsoft Access).</p>
+<p>OGR traite toutes les tables de géométrie comme des couches. La plupart des
+géométries devraient être gérée, données 3D incluses. Les informations de
+mesure seront ignorées. Les informations du système de coordonnées devraient
+être proprement associées aux couches.</p>
+<p>Pour l&#8217;instant, le pilote de Géodatabase Personnelle d&#8217;OGR ne se sert pas des
+index spatiaux pour accélérer les requêtes spatiales, bien que cela puisse être
+ajouté dans le futur.</p>
+<p>Par défaut, les commandes SQL sont envoyées directement au moteur de base de
+données MDB. Il est également possible de demander au pilote de prendre en charge
+les commandes SQL avec le moteur <a class="reference internal" href="../sql.html#gdal-ogr-sql"><em>SQL dans OGR</em></a>, en définissant la chaine
+<em>OGRSQL</em> à la méthode <em>ExecuteSQL()</em>, comme nom du dialecte SQL.</p>
+<div class="section" id="comment-utiliser-le-pilote-pgeo-avec-unixodbc-et-mdb-tools">
+<h2>Comment utiliser le pilote PGeo avec unixODBC et MDB Tools<a class="headerlink" href="#comment-utiliser-le-pilote-pgeo-avec-unixodbc-et-mdb-tools" title="Lien permanent vers ce titre">¶</a></h2>
+<p>À partir de GDAL/OGR 1.9.0, le pilote <a class="reference internal" href="mdb.html#gdal-ogr-formats-mdb"><em>Access MDB databases</em></a> est une autre
+façon de lire les fichiers .mdb géodatabase personnelle d&#8217;ESRI sans nécessité
+unixODBC et les outils MDB.</p>
+<p>Cet article donne les explications étape par étape pour utiliser OGR avec le
+paquet unixODBC et pour accéder aux Géodatabases Personnelles avec le pilote
+PGeo.</p>
+<div class="section" id="pre-requis">
+<h3>Pré-requis<a class="headerlink" href="#pre-requis" title="Lien permanent vers ce titre">¶</a></h3>
+<ul class="simple">
+<li>Installez <a class="reference external" href="http://www.unixodbc.org/">unixODBC</a> &gt;= 2.2.11</li>
+<li>Installez <a class="reference external" href="http://mdbtools.sourceforge.net">MDB Tools</a> &gt;= 0.6. La version
+0.5.99 a également été testée par le développeur (pré-version 0.6).</li>
+</ul>
+<p>(sur Ubuntu 8.04 : <tt class="docutils literal"><span class="pre">sudo</span> <span class="pre">apt-get</span> <span class="pre">install</span> <span class="pre">unixodbc</span> <span class="pre">libmdbodbc</span></tt>)</p>
+</div>
+<div class="section" id="configuration">
+<h3>Configuration<a class="headerlink" href="#configuration" title="Lien permanent vers ce titre">¶</a></h3>
+<p>Il y a deux fichiers de configuration pour unixODBC :</p>
+<ul class="simple">
+<li><em>odbcinst.ini</em> - ce fichier contient la définition des pilotes ODBC
+disponibles à tous les utilisateurs ; ce fichier peut être trouvé dans le
+répertoire <em>/etc</em> ou la localisation donnée par <em>/&#8211;sysconfdir</em> SI
+VOUS COMPILEZ <tt class="docutils literal"><span class="pre">unixODBC</span></tt> vous-même.</li>
+<li><em>odbc.ini</em> - ce fichier contient la définition des sources de données ODBC
+(entré DSN) disponibles à tous les utilisateurs.</li>
+<li><em>~/.odbc.ini</em> - le fichier privé où les utilisateurs peuvent placer leurs
+propres sources de données ODBC.</li>
+</ul>
+<p>Le format des fichiers de configuration est très simple :</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="p">[</span><span class="n">section_name</span><span class="p">]</span>
+<span class="n">entry1</span> <span class="o">=</span> <span class="n">value</span>
+<span class="n">entry2</span> <span class="o">=</span> <span class="n">value</span>
+</pre></div>
+</div>
+<p>Pour plus de détails, référez-vous au <a class="reference external" href="http://www.unixodbc.org/doc/">manuel d&#8217;unixODBC</a>.</p>
+<div class="section" id="configuration-du-pilote-odbc">
+<h4>1. Configuration du pilote ODBC<a class="headerlink" href="#configuration-du-pilote-odbc" title="Lien permanent vers ce titre">¶</a></h4>
+<p>D&#8217;abord , vous devez configurer le pilote ODBC pour accéder aux bases de données
+Microsoft Access(r) avec MDB Tools. Ajoutez la définition suivante à votre
+fichier <em>odbcinst.ini</em>.</p>
+<div class="highlight-python"><pre>[Microsoft Access Driver (*.mdb)]
+Description = MDB Tools ODBC drivers
+Driver     = /usr/lib/libmdbodbc.so.0
+Setup      =
+FileUsage  = 1
+CPTimeout  =
+CPReuse    =</pre>
+</div>
+<ul class="simple">
+<li><em>[Microsoft Access Driver (</em>.mdb)]* - souvenez-vous d&#8217;utiliser &#8220;Microsoft
+Access Driver (<em>.mdb)&#8221; comme nom de la section parce que le pilote PGeo créé
+la chaine de connections ODBC pour les Géodatabases Personnelles en utilisant
+la chaine &#8220;DRIVER=Microsoft Access Driver (</em>.mdb);&#8221;.</li>
+<li><em>Description</em> - courte description de cette définition du pilote.</li>
+<li><em>Driver</em> - chemin complet de pilote ODBC pour MDB Tools.</li>
+</ul>
+</div>
+<div class="section" id="configuration-de-la-source-de-donnees-odbc">
+<h4>2. Configuration de la source de données ODBC<a class="headerlink" href="#configuration-de-la-source-de-donnees-odbc" title="Lien permanent vers ce titre">¶</a></h4>
+<p>Dans cette section, on utilise &#8216;sample.mdb&#8217; comme nom de la géodatabase
+personnelle, remplacez la avec le nom de votre propre base de données.</p>
+<p>Créez un fichier <em>.odbc.ini</em> dans votre répertoire <em>HOME</em> :</p>
+<div class="highlight-python"><pre>$ touch ~/.odbc.ini</pre>
+</div>
+<p>Placez-y la définition de la source de données ODBC suivante dans ce fichier :</p>
+<div class="highlight-python"><pre>[sample_pgeo]
+Description = Sample PGeo Database
+Driver      = Microsoft Access Driver (*.mdb)
+Database    = /home/mloskot/data/sample.mdb
+Host        = localhost
+Port        = 1360
+User        = mloskot
+Password    =
+Trace       = Yes
+TraceFile   = /home/mloskot/odbc.log</pre>
+</div>
+<p>Explication étape par étape d&#8217;une entrée DSN :</p>
+<ul class="simple">
+<li><em>[sample_pgeo]</em> - c&#8217;est le nom de la source de données ODBC (DSN). Vous vous
+référez à votre Géodatabase personnelle en utilisant ce nom. Vous pouvez
+utiliser votre propre nom ici.</li>
+<li><em>Description</em> - courte description de l&#8217;entrée DSN.</li>
+<li><em>Driver</em> - nom complet du pilote défini à l&#8217;étape 1, au-dessus.</li>
+<li><em>Database</em> - chemin complet vers le fichier <em>.mdb</em> de votre Géodatabase
+Personnelle.</li>
+<li>entré <em>Host</em>, <em>Port</em>, <em>User</em> et <em>Password</em> ne sont pas utilisé par le pilote
+MDB Tools.</li>
+</ul>
+</div>
+</div>
+<div class="section" id="tester-le-pilote-pgeo-avec-ogrinfo">
+<h3>Tester le pilote PGeo avec ogrinfo<a class="headerlink" href="#tester-le-pilote-pgeo-avec-ogrinfo" title="Lien permanent vers ce titre">¶</a></h3>
+<p>Maintenant vous pouvez tester l&#8217;accès à une source de données PGeo avec <tt class="docutils literal"><span class="pre">ogrinfo</span></tt>.</p>
+<p>D&#8217;abord, vérifiez que vous avez le pilote PGeo compilé dans OGR :</p>
+<div class="highlight-python"><pre>$ ogrinfo --formats
+Supported Formats:
+    ESRI Shapefile
+    ...
+    PGeo
+    ...</pre>
+</div>
+<p>Maintenant vous pouvez accéder à votre Géodatabase personnelle. Comme source de
+données utilisez <em>PGeo:&lt;DSN&gt;</em> où <em>&lt;DSN&gt;</em> est un nom d&#8217;une entré DSN que vous
+avez placé dans votre fichier <em>.odbc.ini</em>.</p>
+<div class="highlight-python"><pre>ogrinfo PGeo:sample_pgeo
+INFO: Open of `PGeo:sample_pgeo'
+using driver `PGeo' successful.
+1. ...</pre>
+</div>
+<p>Après avoir lancé la commande ci-dessous, vous devez obtenir la liste des
+couches stockée dans votre géodatabase.</p>
+<p>Maintenant, vous pouvez réaliser une requête pour détailler une couche particulière :</p>
+<div class="highlight-python"><pre>ogrinfo PGeo:sample_pgeo &lt;layer name&gt;
+INFO: Open of `PGeo:sample_pgeo'
+using driver `PGeo' successful.
+
+Layer name: ...</pre>
+</div>
+</div>
+</div>
+<div class="section" id="ressources">
+<h2>Ressources<a class="headerlink" href="#ressources" title="Lien permanent vers ce titre">¶</a></h2>
+<ul class="simple">
+<li><a class="reference external" href="http://www.esri.com/software/arcgis/geodatabase/index.html">À propos des geodatabase d&#8217;ESRI</a></li>
+<li><a class="reference external" href="http://sourceforge.net/mailarchive/forum.php?thread_id=10463538&amp;forum_id=5183">[mdbtools-dev] les connexions sans DSN non géré ?</a></li>
+</ul>
+</div>
+<div class="section" id="voir-egalement">
+<h2>Voir également<a class="headerlink" href="#voir-egalement" title="Lien permanent vers ce titre">¶</a></h2>
+<ul class="simple">
+<li><a class="reference internal" href="mdb.html#gdal-ogr-formats-mdb"><em>Access MDB databases</em></a></li>
+</ul>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+
+
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="s57.html" title="IHO S-57 (ENC)"
+             >suivant</a></li>
+        <li class="right" >
+          <a href="pgdump.html" title="Dump SQL pour PostgreSQL"
+             >précédent</a> |</li>
+        <li><a href="../../index.html">GDAL v1.9.0 documentation</a> &raquo;</li>
+          <li><a href="../index.html" >OGR</a> &raquo;</li>
+          <li><a href="index.html" >Formats vecteur d&#8217;OGR</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+    <a href="http://creativecommons.org/licenses/by/2.0/fr/deed.fr">Licence Creative Common BY</a>
+    <!--
+      &copy; Copyright 2011, Yves Jacolin.-->
+      Créé avec <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0.7.
+    </div>
+  </body>
+</html>

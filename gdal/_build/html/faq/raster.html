@@ -1,0 +1,360 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF8" />
+    
+    <title>F.A.Q. Raster &mdash; GDAL v1.9.0 documentation</title>
+    <link rel="stylesheet" href="../_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.9.0',
+        COLLAPSE_MODINDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/translations.js"></script>
+    <link rel="top" title="GDAL v1.9.0 documentation" href="../index.html" />
+    <link rel="up" title="FAQ" href="index.html" />
+    <link rel="next" title="FAQ vecteur" href="vecteur.html" />
+    <link rel="prev" title="FAQ installation et compilation" href="install.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="vecteur.html" title="FAQ vecteur"
+             accesskey="N">suivant</a></li>
+        <li class="right" >
+          <a href="install.html" title="FAQ installation et compilation"
+             accesskey="P">précédent</a> |</li>
+        <li><a href="../index.html">GDAL v1.9.0 documentation</a> &raquo;</li>
+          <li><a href="index.html" accesskey="U">FAQ</a> &raquo;</li> 
+      </ul>
+    </div>
+
+
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <h3><a href="../index.html">Table des matières</a></h3>
+            <ul>
+<li><a class="reference internal" href="#">F.A.Q. Raster</a><ul>
+<li><a class="reference internal" href="#pourquoi-gdalwarp-ou-gdal-merge-n-ecrit-pas-la-plupart-des-formats">Pourquoi gdalwarp ou gdal_merge n&#8217;écrit pas la plupart des formats ?</a></li>
+<li><a class="reference internal" href="#comment-ameliorer-les-performances-de-gdalwarp">Comment améliorer les performances de gdalwarp ?</a></li>
+<li><a class="reference internal" href="#comment-convertir-un-raster-en-une-couche-de-polygones">Comment convertir un raster en une couche de polygones ?</a></li>
+<li><a class="reference internal" href="#comment-puis-je-creer-un-raster-blanc-base-sur-l-etendue-de-fichiers-vecteurs-pour-utiliser-avec-gdal-rasterize">Comment puis je créer un raster blanc basé sur l&#8217;étendue de fichiers vecteurs pour utiliser avec gdal_rasterize ?</a></li>
+<li><a class="reference internal" href="#comment-utiliser-gdal-translate-pour-extraire-une-sous-partie-d-un-raster">Comment utiliser gdal_translate pour extraire une sous partie d&#8217;un raster ?</a></li>
+<li><a class="reference internal" href="#comment-retrouver-la-liste-des-formats-supportes-par-ma-version-de-gdal">Comment retrouver la liste des formats supportés par ma version de GDAL ?</a></li>
+</ul>
+</li>
+</ul>
+
+            <h4>Sujet précédent</h4>
+            <p class="topless"><a href="install.html"
+                                  title="Chapitre précédent">FAQ installation et compilation</a></p>
+            <h4>Sujet suivant</h4>
+            <p class="topless"><a href="vecteur.html"
+                                  title="Chapitre suivant">FAQ vecteur</a></p>
+            <h3>Cette page</h3>
+            <ul class="this-page-menu">
+              <li><a href="../_sources/faq/raster.txt"
+                     rel="nofollow">Montrer la source</a></li>
+            </ul>
+          <div id="searchbox" style="display: none">
+            <h3>Recherche rapide</h3>
+              <form class="search" action="../search.html" method="get">
+                <input type="text" name="q" size="18" />
+                <input type="submit" value="Go" />
+                <input type="hidden" name="check_keywords" value="yes" />
+                <input type="hidden" name="area" value="default" />
+              </form>
+              <p class="searchtip" style="font-size: 90%">
+              Enter search terms or a module, class or function name.
+              </p>
+          </div>
+          <script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="f-a-q-raster">
+<span id="gdal-faq-gdal"></span><h1>F.A.Q. Raster<a class="headerlink" href="#f-a-q-raster" title="Lien permanent vers ce titre">¶</a></h1>
+<div class="section" id="pourquoi-gdalwarp-ou-gdal-merge-n-ecrit-pas-la-plupart-des-formats">
+<h2>Pourquoi gdalwarp ou gdal_merge n&#8217;écrit pas la plupart des formats ?<a class="headerlink" href="#pourquoi-gdalwarp-ou-gdal-merge-n-ecrit-pas-la-plupart-des-formats" title="Lien permanent vers ce titre">¶</a></h2>
+<p>GDAL gère beaucoup de formats raster en lecture, mais beaucoup moins de formats
+en écriture. Parmi ceux gérés en écriture la plupart ne sont gérés seulement en
+mode <em>create copy</em>. Essentiellement cela signifie qu&#8217;ils doivent être écrits
+séquentiellement à partir d&#8217;une copie en entrée fournie de l&#8217;image à écrire.
+Les programmes tels que <tt class="docutils literal"><span class="pre">gdal_merge.py</span></tt> ou <tt class="docutils literal"><span class="pre">gdalwarp</span></tt> qui écrit des morceaux
+d&#8217;image non séquentiellement ne peuvent pas écrire facilement vers ces formats
+écrit séquentiellement. D&#8217;une manière générale les formats qui sont compressés,
+tel que PNG, JPEG et GIF sont à écriture séquentielle. Aussi certains formats
+nécessitent que des informations telles que le système de coordonnées, et la
+table de couleur soient connues au moment de la création et donc ceux-ci sont
+aussi des formats à écriture séquentielle.</p>
+<p>Quand vous rencontrez ce problème il est généralement pas une bonne idée
+d&#8217;écrite d&#8217;abord le résultat au format GeoTIFF puis de traduire vers le format
+cible.</p>
+<p>Pour déterminer quels formats gèrent quelles possibilités, utilisez l&#8217;option
+<em>&#8211;formats</em> avec à peu près toutes les commandes GDAL. Chaque pilote inclura
+soit r (lecture seule), rx (lecture et écriture séquentielle) ou rw+ (lecture,
+écriture séquentielle ou aléatoire).</p>
+</div>
+<div class="section" id="comment-ameliorer-les-performances-de-gdalwarp">
+<h2>Comment améliorer les performances de gdalwarp ?<a class="headerlink" href="#comment-ameliorer-les-performances-de-gdalwarp" title="Lien permanent vers ce titre">¶</a></h2>
+<p>Brièvement : utilisez la mémoire déformée et configurez le paramètre <em>cachemax</em>.
+Par exemple <tt class="docutils literal"><span class="pre">gdalwarp</span> <span class="pre">--config</span> <span class="pre">GDAL_CACHEMAX</span> <span class="pre">500</span> <span class="pre">-wm</span> <span class="pre">500</span></tt> utilise 500MB de RAM
+pour lire/écrire le cache, et 500 MB de RAM pour les buffers de travail pendant
+la déformation.</p>
+<p>Pour plus de détails, lisez <a class="reference external" href="http://trac.osgeo.org/gdal/wiki/UserDocs/GdalWarp">UserDocs/GdalWarp</a>.</p>
+</div>
+<div class="section" id="comment-convertir-un-raster-en-une-couche-de-polygones">
+<h2>Comment convertir un raster en une couche de polygones ?<a class="headerlink" href="#comment-convertir-un-raster-en-une-couche-de-polygones" title="Lien permanent vers ce titre">¶</a></h2>
+<p>TBD</p>
+</div>
+<div class="section" id="comment-puis-je-creer-un-raster-blanc-base-sur-l-etendue-de-fichiers-vecteurs-pour-utiliser-avec-gdal-rasterize">
+<h2>Comment puis je créer un raster blanc basé sur l&#8217;étendue de fichiers vecteurs pour utiliser avec gdal_rasterize ?<a class="headerlink" href="#comment-puis-je-creer-un-raster-blanc-base-sur-l-etendue-de-fichiers-vecteurs-pour-utiliser-avec-gdal-rasterize" title="Lien permanent vers ce titre">¶</a></h2>
+<p>Aujourd&#8217;hui la commande <tt class="docutils literal"><span class="pre">gdal_rasterize</span></tt> ne peut pas créer de raster blanc
+basé sur une source de données vecteur bien que cette fonctionnalité ait été
+considérée ([[<a class="reference external" href="http://trac.osgeo.org/gdal/ticket">http://trac.osgeo.org/gdal/ticket</a>/1599|Ticket #1599]]). Jusqu&#8217;à
+ce que cette fonctionnalité soit ajouté, vous devrez trouver un moyen de générer
+un raster qui correspond à l&#8217;étendue de votre couche vectorielle. Vous pouvez
+alors utiliser ce raster blanc à partir de votre couche vectorielle.</p>
+<p>Une approche est d&#8217;utiliser <tt class="docutils literal"><span class="pre">gdal_translate</span></tt> pour découper et aplanir un
+fichier raster existant qui couvre votre zone d&#8217;intérêt. Lisez cet
+<a class="reference external" href="http://lists.osgeo.org/pipermail/gdal-dev/2008-February/016061.html">exemple de syntaxe</a>.</p>
+<p>Une autre approche est d&#8217;utiliser un des langages de GDAL pour créer un raster
+blanc à partir de rien. La part la plus difficile est la compréhension de la
+syntaxe de <em>GeoTransform</em>. Cet extrait en Python montre comment lire un
+shapefile et sortir un tiff qui correspond à l&#8217;étendue du shapefile.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Vous devez modifier la variable <em>px</em> basée sur la résolution désirée et la
+dimension du raster.</p>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">#!/usr/bin/env python</span>
+
+<span class="kn">from</span> <span class="nn">osgeo</span> <span class="kn">import</span> <span class="n">gdal</span>
+<span class="kn">from</span> <span class="nn">osgeo</span> <span class="kn">import</span> <span class="n">osr</span>
+<span class="kn">from</span> <span class="nn">osgeo</span> <span class="kn">import</span> <span class="n">ogr</span>
+<span class="kn">import</span> <span class="nn">numpy</span>
+
+<span class="n">shp</span> <span class="o">=</span> <span class="s">&#39;test.shp&#39;</span>
+<span class="n">tiff</span> <span class="o">=</span> <span class="s">&#39;test.tif&#39;</span>
+<span class="n">px</span> <span class="o">=</span> <span class="o">.</span><span class="mo">001</span>
+<span class="n">tiff_width</span> <span class="o">=</span> <span class="mi">7850</span>
+<span class="n">tiff_height</span> <span class="o">=</span> <span class="mi">3500</span>
+
+<span class="c"># Import vector shapefile</span>
+<span class="n">vector</span> <span class="o">=</span> <span class="n">ogr</span><span class="o">.</span><span class="n">GetDriverByName</span><span class="p">(</span><span class="s">&#39;ESRI Shapefile&#39;</span><span class="p">)</span>
+<span class="n">src_ds</span> <span class="o">=</span> <span class="n">vector</span><span class="o">.</span><span class="n">Open</span><span class="p">(</span><span class="n">shp</span><span class="p">)</span>
+<span class="n">src_lyr</span> <span class="o">=</span> <span class="n">src_ds</span><span class="o">.</span><span class="n">GetLayerByIndex</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">src_extent</span> <span class="o">=</span> <span class="n">src_lyr</span><span class="o">.</span><span class="n">GetExtent</span><span class="p">()</span>
+
+<span class="c"># Create new raster layer with 4 bands</span>
+<span class="n">raster</span> <span class="o">=</span> <span class="n">gdal</span><span class="o">.</span><span class="n">GetDriverByName</span><span class="p">(</span><span class="s">&#39;GTiff&#39;</span><span class="p">)</span>
+<span class="n">dst_ds</span> <span class="o">=</span> <span class="n">raster</span><span class="o">.</span><span class="n">Create</span><span class="p">(</span> <span class="n">tiff</span><span class="p">,</span> <span class="n">tiff_width</span><span class="p">,</span> <span class="n">tiff_height</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="n">gdal</span><span class="o">.</span><span class="n">GDT_Byte</span><span class="p">)</span>
+
+<span class="c"># Create raster GeoTransform based on upper left corner and pixel resolution</span>
+<span class="n">raster_transform</span> <span class="o">=</span> <span class="p">[</span><span class="n">src_extent</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">px</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="n">src_extent</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span> <span class="mf">0.0</span><span class="p">,</span> <span class="o">-</span><span class="n">px</span><span class="p">]</span>
+<span class="n">dst_ds</span><span class="o">.</span><span class="n">SetGeoTransform</span><span class="p">(</span> <span class="n">raster_transform</span> <span class="p">)</span>
+
+<span class="c"># Get projection of shapefile and assigned to raster</span>
+<span class="n">srs</span> <span class="o">=</span> <span class="n">osr</span><span class="o">.</span><span class="n">SpatialReference</span><span class="p">()</span>
+<span class="n">srs</span><span class="o">.</span><span class="n">ImportFromWkt</span><span class="p">(</span><span class="n">src_lyr</span><span class="o">.</span><span class="n">GetSpatialRef</span><span class="p">()</span><span class="o">.</span><span class="n">__str__</span><span class="p">())</span>
+<span class="n">dst_ds</span><span class="o">.</span><span class="n">SetProjection</span><span class="p">(</span> <span class="n">srs</span><span class="o">.</span><span class="n">ExportToWkt</span><span class="p">()</span> <span class="p">)</span>
+
+<span class="c"># Create blank raster with fully opaque alpha band</span>
+<span class="n">zeros</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span> <span class="p">(</span><span class="n">tiff_height</span><span class="p">,</span> <span class="n">tiff_width</span><span class="p">),</span> <span class="n">numpy</span><span class="o">.</span><span class="n">uint8</span> <span class="p">)</span>
+<span class="n">dst_ds</span><span class="o">.</span><span class="n">GetRasterBand</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">WriteArray</span><span class="p">(</span> <span class="n">zeros</span> <span class="p">)</span>
+<span class="n">dst_ds</span><span class="o">.</span><span class="n">GetRasterBand</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">WriteArray</span><span class="p">(</span> <span class="n">zeros</span> <span class="p">)</span>
+<span class="n">dst_ds</span><span class="o">.</span><span class="n">GetRasterBand</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span><span class="o">.</span><span class="n">WriteArray</span><span class="p">(</span> <span class="n">zeros</span> <span class="p">)</span>
+<span class="n">opaque</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">ones</span><span class="p">((</span><span class="n">tiff_height</span><span class="p">,</span><span class="n">tiff_width</span><span class="p">),</span> <span class="n">numpy</span><span class="o">.</span><span class="n">uint8</span> <span class="p">)</span><span class="o">*</span><span class="mi">255</span>
+<span class="n">dst_ds</span><span class="o">.</span><span class="n">GetRasterBand</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span><span class="o">.</span><span class="n">WriteArray</span><span class="p">(</span> <span class="n">opaque</span> <span class="p">)</span>
+</pre></div>
+</div>
+<p>===== Puis je utiliser gdal_rasterize pour générer des polygones &#8220;non solides &#8221; ? =====</p>
+<dl class="docutils">
+<dt>Lisez la page <a class="reference external" href="htttp://lists.maptools.org/pipermail/gdal-dev/2006-June/009294.html">How gdal_rasterize works</a></dt>
+<dd>dans les archives de gdal-dev.</dd>
+</dl>
+<p>Comme Chris Barker le suggère, les possibilités de rastérisation deGDAL sont
+assez limitées d&#8217;un point de vue du style du rendu. D&#8217;autres outils peuvent être
+plus appropriés si vous voulez faire quelque chose de plus sophistiqué que
+rastériser des polygones dans une seule couleur.</p>
+<p>Exemples d&#8217;autres outils : <a class="reference external" href="http://www.osgeo.org/qgis/">Quantum GIS</a>,
+<a class="reference external" href="http://www.osgeo.org/grass/">GRASS</a>, <a class="reference external" href="http://www.osgeo.org/mapserver/">MapServer</a>,
+<a class="reference external" href="http://gmt.soest.hawaii.edu/">GMT</a>, <a class="reference external" href="http://www.saga-gis.uni-goettingen.de/">SAGA GIS</a>.</p>
+<p>Cependant, si votre raster gère la transparence dans la bande alpha (RGBA),
+alors vous pouvez utiliser <tt class="docutils literal"><span class="pre">gdal_rasterize</span></tt> pour &#8220;brûler&#8221; complètement les
+zones transparentes dans votre image avec :</p>
+<div class="highlight-python"><pre>$ gdal_rasterize -b 4 -burn 0 -where your_field=some_value -l your_layer your_vector_file.shp your_raster</pre>
+</div>
+</div>
+<div class="section" id="comment-utiliser-gdal-translate-pour-extraire-une-sous-partie-d-un-raster">
+<h2>Comment utiliser gdal_translate pour extraire une sous partie d&#8217;un raster ?<a class="headerlink" href="#comment-utiliser-gdal-translate-pour-extraire-une-sous-partie-d-un-raster" title="Lien permanent vers ce titre">¶</a></h2>
+<p><tt class="docutils literal"><span class="pre">Gdal_translate</span></tt> a été désigné pour convertir à partir et vers divers formats
+raster, mais il peut aussi réaliser des opérations de géotraitement utile durant
+la conversion.</p>
+<p>Si vous désirez extraire une sous partie d&#8217;un raster vous pouvez utiliser les
+options <em>-srcwin</em> ou <em>-projwin</em>. Dans la terminologie GDAL, ce sont des
+opérations de &#8220;subsetting&#8221; qui permet de sélectionner une sous fenêtre
+&#8220;subwindows&#8221; pour copier à partir d&#8217;un jeu de données sources dans un jeu de
+données de destination.</p>
+<p>Voici un exemple de l&#8217;utilisation de <tt class="docutils literal"><span class="pre">gdal_translate</span></tt> sur une orthophographie
+NAIP au format sid pour sélectionner une petite zone qui montre l&#8217;île Blakely,
+WA :</p>
+<div class="highlight-python"><pre>$ gdal_translate -projwin 510286 5385025 518708 5373405 ortho_1-1_1n_s_wa055_2006_1.sid naip_ortho_blakely_island.tif</pre>
+</div>
+<p>Cet exemple utilise l&#8217;option <em>-projwin</em> qui accepte les coordonnées des limites
+dans les coordonnés projetées plutôt qu&#8217;en pixel (<em>-srcwin</em>). <em>-projwin</em> de
+<tt class="docutils literal"><span class="pre">Gdal_translate</span></tt> nécessite les coordonnées X et Y du coin en haut à gauche,
+les coordonnées X et Y du coin le plus à droite. L&#8217;image NAIP dans cet exemple
+est en NAD 83 Utm 10, pour obtenir les coordonnées des limites j&#8217;ai simplement
+chargé l&#8217;inde shapfile qui est fournie avec l&#8217;image NAIP dans Quantum GIS et lu
+les coordonnées sur l&#8217;écran pour former mon étendue.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Aujourdh&#8217;ui le découpage d&#8217;un raster en utilisant une étendue vectorielle
+polygonale n&#8217;est pas gérée, mais est en discussion (lisez <a class="reference external" href="http://trac.osgeo.org/gdal/ticket/1599">http://trac.osgeo.org/gdal/ticket/1599</a>).
+Cependant, il est assez facile d&#8217;obtenir l&#8217;étendue d&#8217;un shapefile donné et
+de convertir ses coordonnées dans la forme utilisable par <tt class="docutils literal"><span class="pre">gdal_translate</span></tt>
+sans lire manuellement l&#8217;étendue dans une autre application comme QGIS.</p>
+</div>
+<p>Disons que vous avez un shapefile nommé <em>clipping_mask.shp</em> utiliser <tt class="docutils literal"><span class="pre">ogrinfo</span></tt> pour obtenir l&#8217;étendue :</p>
+<blockquote>
+<div><ul class="simple">
+<li>notez que l&#8217;utilisation d&#8217;une pipe (|) et de la commande <tt class="docutils literal"><span class="pre">grep</span></tt> est
+optionnelle (<em>| grep Extent</em>), mais une manière habile de limiter
+l&#8217;information renvoyée par <tt class="docutils literal"><span class="pre">ogrinfo</span></tt> pour obtenir juste ce dont vous avez
+besoin :</li>
+</ul>
+</div></blockquote>
+<div class="highlight-python"><pre>$ ogrinfo clipping_mask.shp -so -al | grep Extent
+# which gives the extent as xMin,yMin, xMax, yMax:
+Extent: (268596, 5362330) - (278396, 5376592)
+# which is (xMin,yMin) - (xMax,yMax)</pre>
+</div>
+<p>Puis copier et coller ce texte pour créer votre commande de découpe avec <tt class="docutils literal"><span class="pre">gdal_translate</span></tt> :</p>
+<div class="highlight-python"><pre># -projwin's ulx uly lrx lry is equivalent to xMin, yMax, xMax, yMin so just switch the Y coordinates
+# For the above Extent that would turn into:
+$ gdal_translate -projwin 268596 5376592 278396 5362330 src_dataset dst_dataset</pre>
+</div>
+</div>
+<div class="section" id="comment-retrouver-la-liste-des-formats-supportes-par-ma-version-de-gdal">
+<h2>Comment retrouver la liste des formats supportés par ma version de GDAL ?<a class="headerlink" href="#comment-retrouver-la-liste-des-formats-supportes-par-ma-version-de-gdal" title="Lien permanent vers ce titre">¶</a></h2>
+<p>Utilisez la commande :</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">gdalinfo</span> <span class="o">--</span><span class="n">formats</span>
+</pre></div>
+</div>
+<p>Celle-ci vous renvoie :</p>
+<div class="highlight-python"><pre>$ gdalinfo --formats
+Supported Formats:
+    GRASS (ro): GRASS Database Rasters (5.7+)
+    VRT (rw+): Virtual Raster
+    GTiff (rw+): GeoTIFF
+    NITF (rw+): National Imagery Transmission Format
+    HFA (rw+): Erdas Imagine Images (.img)
+    SAR_CEOS (ro): CEOS SAR Image
+    CEOS (ro): CEOS Image
+    ELAS (rw+): ELAS
+    AIG (ro): Arc/Info Binary Grid
+    AAIGrid (rw): Arc/Info ASCII Grid
+    SDTS (ro): SDTS Raster
+    OGDI (ro): OGDI Bridge
+    DTED (rw): DTED Elevation Raster
+    PNG (rw): Portable Network Graphics
+    JPEG (rw): JPEG JFIF
+    MEM (rw+): In Memory Raster
+    JDEM (ro): Japanese DEM (.mem)
+    GIF (rw): Graphics Interchange Format (.gif)
+    ESAT (ro): Envisat Image Format
+    FITS (rw+): Flexible Image Transport System
+    BSB (ro): Maptech BSB Nautical Charts
+    XPM (rw): X11 PixMap Format
+    BMP (rw+): MS Windows Device Independent Bitmap
+    AirSAR (ro): AirSAR Polarimetric Image
+    RS2 (ro): RadarSat 2 XML Product
+    PCIDSK (rw+): PCIDSK Database File
+    PCRaster (rw): PCRaster Raster File
+    ILWIS (rw+): ILWIS Raster Map
+    SGI (ro): SGI Image File Format 1.0
+    Leveller (ro): Leveller heightfield
+    GMT (rw): GMT NetCDF Grid Format
+    netCDF (rw): Network Common Data Format
+    PNM (rw+): Portable Pixmap Format (netpbm)
+    DOQ1 (ro): USGS DOQ (Old Style)
+    DOQ2 (ro): USGS DOQ (New Style)
+    ENVI (rw+): ENVI .hdr Labelled
+    EHdr (rw+): ESRI .hdr Labelled
+    PAux (rw+): PCI .aux Labelled
+    MFF (rw+): Vexcel MFF Raster
+    MFF2 (rw+): Vexcel MFF2 (HKV) Raster
+    FujiBAS (ro): Fuji BAS Scanner Image
+    GSC (ro): GSC Geogrid
+    FAST (ro): EOSAT FAST Format
+    BT (rw+): VTP .bt (Binary Terrain) 1.3 Format
+    LAN (ro): Erdas .LAN/.GIS
+    CPG (ro): Convair PolGASP
+    IDA (rw+): Image Data and Analysis
+    NDF (ro): NLAPS Data Format
+    DIPEx (ro): DIPEx
+    ISIS2 (ro): USGS Astrogeology ISIS cube (Version 2)
+    PDS (ro): NASA Planetary Data System
+    JPEG2000 (rw): JPEG-2000 part 1 (ISO/IEC 15444-1)
+    ECW (rw): ERMapper Compressed Wavelets
+    JP2ECW (rw+): ERMapper JPEG2000
+    L1B (ro): NOAA Polar Orbiter Level 1b Data Set
+    FIT (rw): FIT Image
+    RMF (rw+): Raster Matrix Format
+    WCS (ro): OGC Web Coverage Service
+    RST (rw+): Idrisi Raster A.1
+    RIK (ro): Swedish Grid RIK (.rik)
+    USGSDEM (rw): USGS Optional ASCII DEM (and CDED)
+    GXF (ro): GeoSoft Grid Exchange Format</pre>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+
+
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="vecteur.html" title="FAQ vecteur"
+             >suivant</a></li>
+        <li class="right" >
+          <a href="install.html" title="FAQ installation et compilation"
+             >précédent</a> |</li>
+        <li><a href="../index.html">GDAL v1.9.0 documentation</a> &raquo;</li>
+          <li><a href="index.html" >FAQ</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+    <a href="http://creativecommons.org/licenses/by/2.0/fr/deed.fr">Licence Creative Common BY</a>
+    <!--
+      &copy; Copyright 2011, Yves Jacolin.-->
+      Créé avec <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0.7.
+    </div>
+  </body>
+</html>

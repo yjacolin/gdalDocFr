@@ -1,0 +1,179 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF8" />
+    
+    <title>Terragen — Terragen™ Terrain File &mdash; GDAL v1.9.0 documentation</title>
+    <link rel="stylesheet" href="../../_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '1.9.0',
+        COLLAPSE_MODINDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../_static/translations.js"></script>
+    <link rel="top" title="GDAL v1.9.0 documentation" href="../../index.html" />
+    <link rel="up" title="Formats" href="index.html" />
+    <link rel="next" title="USGSDEM – USGS ASCII DEM (et CDED)" href="usgsdem.html" />
+    <link rel="prev" title="ESRI ArcSDE Raster" href="sde.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="usgsdem.html" title="USGSDEM – USGS ASCII DEM (et CDED)"
+             accesskey="N">suivant</a></li>
+        <li class="right" >
+          <a href="sde.html" title="ESRI ArcSDE Raster"
+             accesskey="P">précédent</a> |</li>
+        <li><a href="../../index.html">GDAL v1.9.0 documentation</a> &raquo;</li>
+          <li><a href="../index.html" >GDAL</a> &raquo;</li>
+          <li><a href="index.html" accesskey="U">Formats</a> &raquo;</li> 
+      </ul>
+    </div>
+
+
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <h3><a href="../../index.html">Table des matières</a></h3>
+            <ul>
+<li><a class="reference internal" href="#">Terragen &#8212; Terragen™ Terrain File</a><ul>
+<li><a class="reference internal" href="#lecture">Lecture</a></li>
+<li><a class="reference internal" href="#ecriture">Écriture</a></li>
+<li><a class="reference internal" href="#roundtripping">Roundtripping</a></li>
+<li><a class="reference internal" href="#historique">Historique</a></li>
+</ul>
+</li>
+</ul>
+
+            <h4>Sujet précédent</h4>
+            <p class="topless"><a href="sde.html"
+                                  title="Chapitre précédent">ESRI ArcSDE Raster</a></p>
+            <h4>Sujet suivant</h4>
+            <p class="topless"><a href="usgsdem.html"
+                                  title="Chapitre suivant">USGSDEM &#8211; USGS ASCII DEM (et CDED)</a></p>
+            <h3>Cette page</h3>
+            <ul class="this-page-menu">
+              <li><a href="../../_sources/gdal/formats/terragen.txt"
+                     rel="nofollow">Montrer la source</a></li>
+            </ul>
+          <div id="searchbox" style="display: none">
+            <h3>Recherche rapide</h3>
+              <form class="search" action="../../search.html" method="get">
+                <input type="text" name="q" size="18" />
+                <input type="submit" value="Go" />
+                <input type="hidden" name="check_keywords" value="yes" />
+                <input type="hidden" name="area" value="default" />
+              </form>
+              <p class="searchtip" style="font-size: 90%">
+              Enter search terms or a module, class or function name.
+              </p>
+          </div>
+          <script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="terragen-terragen-terrain-file">
+<span id="gdal-gdal-formats-terragen"></span><h1>Terragen &#8212; Terragen™ Terrain File<a class="headerlink" href="#terragen-terragen-terrain-file" title="Lien permanent vers ce titre">¶</a></h1>
+<p>Les fichiers Terragen terrain stockent des valeurs d&#8217;élévations sur 16 bites
+avec une grille d&#8217;espacement optionnelle (mais pas de positionnement).
+L&#8217;extension du fichier pour les heightfields de Terragen est &#8220;TER&#8221; ou &#8220;TERRAIN&#8221;
+(qui dans le cas précédent est le même que Leveller, mais le pilote ne
+reconnait que les fichiers Terragen). L&#8217;ID du pilote est &#8220;Terragen&#8221;. Le jeu de
+données est basé sur des fichiers et possède seulement une bande d&#8217;élévation.
+Les élévations vides ne sont pas gérées. Les pixels sont considéré comme des
+points.</p>
+<div class="section" id="lecture">
+<h2>Lecture<a class="headerlink" href="#lecture" title="Lien permanent vers ce titre">¶</a></h2>
+<p><tt class="docutils literal"><span class="pre">dataset::GetProjectionRef()</span></tt> renvoie un système de coordonnées local en
+utilisant des mètres.</p>
+<p><tt class="docutils literal"><span class="pre">band::GetUnitType()</span></tt> renvoie des mètres.</p>
+<p>Les élévations sont en <em>Int16</em>. Vous devez utiliser <tt class="docutils literal"><span class="pre">band::GetScale()</span></tt> et
+<tt class="docutils literal"><span class="pre">band::GetOffset()</span></tt> pour les convertir en mètres.</p>
+</div>
+<div class="section" id="ecriture">
+<h2>Écriture<a class="headerlink" href="#ecriture" title="Lien permanent vers ce titre">¶</a></h2>
+<p>Utilisez l&#8217;appel <em>Create</em>. Définissez l&#8217;option <em>MINUSERPIXELVALUE</em> (de type
+<em>float</em>) pour l&#8217;élévation la plus basse de vos données élévation, et
+<em>MAXUSERPIXELVALUE</em> à la plus haute. L&#8217;unité doit correspondre à l&#8217;unité de
+l&#8217;élévation que vous donnerez à <tt class="docutils literal"><span class="pre">band::SetUnitType()</span></tt>.</p>
+<p>Appelez <tt class="docutils literal"><span class="pre">dataset::SetProjection()</span></tt> et <tt class="docutils literal"><span class="pre">dataset::SetGeoTransform()</span></tt> avec les
+détails du système de coordonnées. Autrement, le pilote n&#8217;encodera pas les
+élévations physique proprement. Les systèmes de coordonnées géographique (basé
+sur des degrés) seront  convertie en système local basé sur des mètres.</p>
+<p>Pour garder la précision, les meilleures hauteur de base et d&#8217;échelle seront
+utilisé pour utiliser au mieux le domaine sur 16 bit.</p>
+<p>Les élévations sont en <em>Float32</em>.</p>
+</div>
+<div class="section" id="roundtripping">
+<h2>Roundtripping<a class="headerlink" href="#roundtripping" title="Lien permanent vers ce titre">¶</a></h2>
+<p>Les erreurs par trip tendent à quelques centimètres pour les élévations et
+jusqu&#8217;à un ou deux mètres pour l&#8217;étendue au sol si des systèmes de coordonnées
+basé sur les degrés sont écrit. Les gros MNT en degré implique des distorsions
+inévitable depuis que le pilote utilise seulement des mètres.</p>
+</div>
+<div class="section" id="historique">
+<h2>Historique<a class="headerlink" href="#historique" title="Lien permanent vers ce titre">¶</a></h2>
+<ul class="simple">
+<li><strong>v1.0 (Mar 26/06) :</strong> Création ;</li>
+<li><strong>v1.1 (Apr 20/06) :</strong> Ajout des corrections de la lecture de SIZE et de la
+gestion de <tt class="docutils literal"><span class="pre">Create()</span></tt> ;</li>
+<li><strong>v1.2 (Jun 6/07) :</strong> Amélioration de la détermination de l&#8217;échelle et de la
+hauteur de base lors de l&#8217;écriture.</li>
+</ul>
+<p><strong>Lisez également :</strong></p>
+<ul class="simple">
+<li>Implémenté dans <em>gdal/frmts/terragen/terragendataset.cpp</em>.</li>
+<li>Lisez le fichier <a class="reference external" href="http://gdal.org/readme.txt">readme.txt</a> pour l&#8217;installation
+et la gestion des informations.</li>
+<li><a class="reference external" href="http://www.planetside.co.uk/terragen/dev/tgterrain.html">Spécification des fichiers</a> Terragen Terrain.</li>
+</ul>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+
+
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="usgsdem.html" title="USGSDEM – USGS ASCII DEM (et CDED)"
+             >suivant</a></li>
+        <li class="right" >
+          <a href="sde.html" title="ESRI ArcSDE Raster"
+             >précédent</a> |</li>
+        <li><a href="../../index.html">GDAL v1.9.0 documentation</a> &raquo;</li>
+          <li><a href="../index.html" >GDAL</a> &raquo;</li>
+          <li><a href="index.html" >Formats</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+    <a href="http://creativecommons.org/licenses/by/2.0/fr/deed.fr">Licence Creative Common BY</a>
+    <!--
+      &copy; Copyright 2011, Yves Jacolin.-->
+      Créé avec <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0.7.
+    </div>
+  </body>
+</html>

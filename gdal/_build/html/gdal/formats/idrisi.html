@@ -1,0 +1,154 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF8" />
+    
+    <title>RST — Idrisi Raster Format &mdash; GDAL v1.9.0 documentation</title>
+    <link rel="stylesheet" href="../../_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '1.9.0',
+        COLLAPSE_MODINDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../_static/translations.js"></script>
+    <link rel="top" title="GDAL v1.9.0 documentation" href="../../index.html" />
+    <link rel="up" title="Formats" href="index.html" />
+    <link rel="next" title="ILWIS – Raster Map" href="ilwis.html" />
+    <link rel="prev" title="HFA – Erdas Imagine .img" href="hfa.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="ilwis.html" title="ILWIS – Raster Map"
+             accesskey="N">suivant</a></li>
+        <li class="right" >
+          <a href="hfa.html" title="HFA – Erdas Imagine .img"
+             accesskey="P">précédent</a> |</li>
+        <li><a href="../../index.html">GDAL v1.9.0 documentation</a> &raquo;</li>
+          <li><a href="../index.html" >GDAL</a> &raquo;</li>
+          <li><a href="index.html" accesskey="U">Formats</a> &raquo;</li> 
+      </ul>
+    </div>
+
+
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <h4>Sujet précédent</h4>
+            <p class="topless"><a href="hfa.html"
+                                  title="Chapitre précédent">HFA &#8211; Erdas Imagine .img</a></p>
+            <h4>Sujet suivant</h4>
+            <p class="topless"><a href="ilwis.html"
+                                  title="Chapitre suivant">ILWIS &#8211; Raster Map</a></p>
+            <h3>Cette page</h3>
+            <ul class="this-page-menu">
+              <li><a href="../../_sources/gdal/formats/idrisi.txt"
+                     rel="nofollow">Montrer la source</a></li>
+            </ul>
+          <div id="searchbox" style="display: none">
+            <h3>Recherche rapide</h3>
+              <form class="search" action="../../search.html" method="get">
+                <input type="text" name="q" size="18" />
+                <input type="submit" value="Go" />
+                <input type="hidden" name="check_keywords" value="yes" />
+                <input type="hidden" name="area" value="default" />
+              </form>
+              <p class="searchtip" style="font-size: 90%">
+              Enter search terms or a module, class or function name.
+              </p>
+          </div>
+          <script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="rst-idrisi-raster-format">
+<span id="gdal-gdal-formats-idrisi"></span><h1>RST &#8212; Idrisi Raster Format<a class="headerlink" href="#rst-idrisi-raster-format" title="Lien permanent vers ce titre">¶</a></h1>
+<p>Ce format est typiquement un format brute. Il y a juste une bande par fichier,
+sauf dans les types de données RGB24 où les bandes rouges, vertes et bleues sont
+stockées entrelacées par pixel dans l&#8217;ordre Bleu, Vert et Rouge. Les autres
+types de données sont des entiers non signés sur 8 bits avec des valeurs de 0 à
+255 ou des entiers signés sous 16 bits avec des valeurs de -32.768 à 32.767 ou
+des points à précisions flottantes de 32 bits. La description du fichier est
+stockée dans un fichier texte d&#8217;accompagnement, avec une extension RDC.</p>
+<p>Le fichier RDC de description de l&#8217;image n&#8217;inclut pas de table de couleur, ou
+d&#8217;informations détaillées sur le géoréférencement. La table de couleurs présente
+peut être obtenu par un autre fichier d&#8217;accompagnement en utilisant le même nom
+que le fichier RST et l&#8217;extension SMP.</p>
+<p>Pour l&#8217;identification des référencements géographiques, le fichier RDC contient
+des informations qui renvoient vers un fichier qui détient les détails des
+références géographiques. Ces fichiers utilisent l&#8217;extension REF et résident
+dans le même répertoire que l&#8217;image RST ou plus probablement dans les
+répertoires d&#8217;installation d&#8217;Idrisi.</p>
+<p>Par conséquent la présence ou l&#8217;absence du logiciel Idrisi dans le système
+d&#8217;exploitation déterminera la manière dont ce pilote fonctionnera. En définissant
+la variable d&#8217;environnement IDRISIDIR pour pointer vers le répertoire
+d&#8217;installation principale d&#8217;Idrisi cela permettra à GDAL de trouver plus
+d&#8217;informations plus détaillées sur les références géographiques et les
+projections dans les fichiers REF.</p>
+<p>Notez que le pilote RST reconnaît les conventions de nom utilisés dans Idrisi
+pour les références géographique UTM et Plate carré (State Plane), il n&#8217;a donc
+pas besoin d&#8217;accéder aux fichiers REF. C&#8217;est le cas pour le fichier RDC qui
+définie « utm-30n » et « spc87ma1 » dans le champ « ref. system ». Notez que
+l&#8217;export vers le format RST de n&#8217;importe quel système de référence géographique
+générera une suggestion pour le contenu du fichier REF dans la section
+commentaire du fihcier RDC.</p>
+<ul class="simple">
+<li>« .rst » le fichier image brute</li>
+<li>« .rdc » le fichier descriptif</li>
+<li>« .smp » le fichier de la table de couleur</li>
+<li>« .ref » le fichier de référence géographiques</li>
+</ul>
+<p><strong>Voir également :</strong></p>
+<ul class="simple">
+<li>Implémenté dans <em>gdal/frmts/idrisi/idrisiraster.cpp</em>.</li>
+<li>www.idrisi.com</li>
+</ul>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+
+
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="ilwis.html" title="ILWIS – Raster Map"
+             >suivant</a></li>
+        <li class="right" >
+          <a href="hfa.html" title="HFA – Erdas Imagine .img"
+             >précédent</a> |</li>
+        <li><a href="../../index.html">GDAL v1.9.0 documentation</a> &raquo;</li>
+          <li><a href="../index.html" >GDAL</a> &raquo;</li>
+          <li><a href="index.html" >Formats</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+    <a href="http://creativecommons.org/licenses/by/2.0/fr/deed.fr">Licence Creative Common BY</a>
+    <!--
+      &copy; Copyright 2011, Yves Jacolin.-->
+      Créé avec <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0.7.
+    </div>
+  </body>
+</html>

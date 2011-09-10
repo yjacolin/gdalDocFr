@@ -1,0 +1,410 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF8" />
+    
+    <title>gdaldem &mdash; GDAL v1.9.0 documentation</title>
+    <link rel="stylesheet" href="../_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.9.0',
+        COLLAPSE_MODINDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/translations.js"></script>
+    <link rel="top" title="GDAL v1.9.0 documentation" href="../index.html" />
+    <link rel="up" title="GDAL" href="index.html" />
+    <link rel="next" title="rgb2pct.py" href="rgb2pct.html" />
+    <link rel="prev" title="gdal_contour" href="gdal_contour.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="rgb2pct.html" title="rgb2pct.py"
+             accesskey="N">suivant</a></li>
+        <li class="right" >
+          <a href="gdal_contour.html" title="gdal_contour"
+             accesskey="P">précédent</a> |</li>
+        <li><a href="../index.html">GDAL v1.9.0 documentation</a> &raquo;</li>
+          <li><a href="index.html" accesskey="U">GDAL</a> &raquo;</li> 
+      </ul>
+    </div>
+
+
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <h3><a href="../index.html">Table des matières</a></h3>
+            <ul>
+<li><a class="reference internal" href="#">gdaldem</a><ul>
+<li><a class="reference internal" href="#synopsis">Synopsis</a></li>
+<li><a class="reference internal" href="#modes">Modes</a><ul>
+<li><a class="reference internal" href="#hillshade">hillshade</a></li>
+<li><a class="reference internal" href="#slope">slope</a></li>
+<li><a class="reference internal" href="#aspect">aspect</a></li>
+<li><a class="reference internal" href="#color-relief">color-relief</a></li>
+<li><a class="reference internal" href="#tri">TRI</a></li>
+<li><a class="reference internal" href="#tpi">TPI</a></li>
+<li><a class="reference internal" href="#roughness">roughness</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#auteurs">Auteurs</a></li>
+<li><a class="reference internal" href="#voir-egalement">Voir également</a></li>
+</ul>
+</li>
+</ul>
+
+            <h4>Sujet précédent</h4>
+            <p class="topless"><a href="gdal_contour.html"
+                                  title="Chapitre précédent">gdal_contour</a></p>
+            <h4>Sujet suivant</h4>
+            <p class="topless"><a href="rgb2pct.html"
+                                  title="Chapitre suivant">rgb2pct.py</a></p>
+            <h3>Cette page</h3>
+            <ul class="this-page-menu">
+              <li><a href="../_sources/gdal/gdaldem.txt"
+                     rel="nofollow">Montrer la source</a></li>
+            </ul>
+          <div id="searchbox" style="display: none">
+            <h3>Recherche rapide</h3>
+              <form class="search" action="../search.html" method="get">
+                <input type="text" name="q" size="18" />
+                <input type="submit" value="Go" />
+                <input type="hidden" name="check_keywords" value="yes" />
+                <input type="hidden" name="area" value="default" />
+              </form>
+              <p class="searchtip" style="font-size: 90%">
+              Enter search terms or a module, class or function name.
+              </p>
+          </div>
+          <script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="gdaldem">
+<span id="gdal-gdal-gdaldem"></span><h1>gdaldem<a class="headerlink" href="#gdaldem" title="Lien permanent vers ce titre">¶</a></h1>
+<p>Outils pour analyser et visualiser des MNT, (à partir de GDAL 1.7.0)</p>
+<div class="section" id="synopsis">
+<h2>Synopsis<a class="headerlink" href="#synopsis" title="Lien permanent vers ce titre">¶</a></h2>
+<p>Usage :</p>
+<ul>
+<li><p class="first">Pour générer une carte de reliefs ombragés à partir de n&#8217;importe quel raster
+d&#8217;élévation géré par GDAL :</p>
+<div class="highlight-python"><pre>gdaldem hillshade input_dem output_hillshade
+        [-z ZFactor (défaut=1)] [-s scale* (défaut=1)]"
+        [-az Azimuth (défaut=315)] [-alt Altitude (défaut=45)]
+        [-alg ZevenbergenThorne]
+        [-compute_edges] [-b Band (défaut=1)] [-of format] [-co "NAME=VALUE"]* [-q]</pre>
+</div>
+</li>
+<li><p class="first">Pour générer une carte des pentes à partir de n&#8217;importe quel raster
+d&#8217;élévation géré par GDAL :</p>
+<div class="highlight-python"><pre>gdaldem slope input_dem output_slope_map"
+        [-p use percent slope (défaut=degrees)] [-s scale* (défaut=1)]
+        [-alg ZevenbergenThorne]
+        [-compute_edges] [-b Band (défaut=1)] [-of format] [-co "NAME=VALUE"]* [-q]</pre>
+</div>
+</li>
+<li><p class="first">Pour générer une carte d&#8217;aspect à partir de n&#8217;importe quel raster d&#8217;élévation
+géré par GDAL. Créé en sortie un raster en float de 32 bit avec des valeurs de
+pixels de 0 à 360 indiquant l&#8217;azymuth :</p>
+<div class="highlight-python"><pre>gdaldem aspect input_dem output_aspect_map"
+        [-trigonometric] [-zero_for_flat]
+        [-alg ZevenbergenThorne]
+        [-compute_edges] [-b Band (défaut=1)] [-of format] [-co "NAME=VALUE"]* [-q]</pre>
+</div>
+</li>
+<li><p class="first">Pour générer une carte de relief en couleur à partir de n&#8217;importe quel raster
+d&#8217;élévation géré par GDAL où <em>color_text_file</em> contient les lignes au format
+&#8220;elevation_value rouge vert bleu&#8221; :</p>
+<div class="highlight-python"><pre>gdaldem color-relief input_dem color_text_file output_color_relief_map
+        [-alpha] [-exact_color_entry | -nearest_color_entry]
+        [-b Band (défaut=1)] [-of format] [-co "NAME=VALUE"]* [-q]</pre>
+</div>
+</li>
+<li><p class="first">Pour générer une carte d&#8217;Index de Rugosité du Terrain (<em>Terrain Ruggedness
+Index</em> (TRI)) à partir de n&#8217;importe quel raster d&#8217;élévation géré par GDAL :</p>
+<div class="highlight-python"><pre>gdaldem TRI input_dem output_TRI_map
+        [-compute_edges] [-b Band (défaut=1)] [-of format] [-q]</pre>
+</div>
+</li>
+<li><p class="first">Pour générer une carte d&#8217;Index de Position Topographique (<em>Topographic
+Position Index</em> (TPI)) à partir de n&#8217;importe quel raster d&#8217;élévation géré par
+GDAL :</p>
+<div class="highlight-python"><pre>gdaldem TPI input_dem output_TPI_map
+        [-compute_edges] [-b Band (défaut=1)] [-of format] [-q]</pre>
+</div>
+</li>
+<li><p class="first">Pour générer une carte de rugosité à partir de n&#8217;importe quel raster
+d&#8217;élévation géré par GDAL :</p>
+<div class="highlight-python"><pre>gdaldem roughness input_dem output_roughness_map
+        [-compute_edges] [-b Band (défaut=1)] [-of format] [-q]</pre>
+</div>
+</li>
+</ul>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Scale est le rapport des unités verticales sur celles horizontales pour
+<em>Feet:Latlong</em> utilisez <em>scale=370400</em>, pour <em>Meters:LatLong</em> utilisez
+<em>scale=111120</em></p>
+</div>
+<p>Cette commande possède 7 modes différents :</p>
+<ul class="simple">
+<li><strong>hillshade :</strong> pour générer une carte de relief ombragé à partir de
+n&#8217;importe quel raster d&#8217;élévation géré par GDAL.</li>
+<li><strong>slope :</strong> pour générer une carte des pentes à partir de n&#8217;importe quel
+raster d&#8217;élévation géré par GDAL.</li>
+<li><strong>aspect :</strong> pour générer une carte d&#8217;aspect à partir de n&#8217;importe quel
+raster d&#8217;élévation géré par GDAL.</li>
+<li><strong>color-relief :</strong> pour générer une carte des reliefs en couleur à partir de
+n&#8217;importe quel raster d&#8217;élévation géré par GDAL.</li>
+<li><strong>TRI :</strong> pour générer une carte d&#8217;Index de Rugosité du Terrain à partir de
+n&#8217;importe quel raster d&#8217;élévation géré par GDAL.</li>
+<li><strong>TPI :</strong> pour générer une carte d&#8217;Index de Position Topographique à partir
+de n&#8217;importe quel raster d&#8217;élévation géré par GDAL.</li>
+<li><strong>roughness :</strong> pour générer une carte de rugosité à partir de n&#8217;importe quel
+raster d&#8217;élévation géré par GDAL.</li>
+</ul>
+<p>Les options générales suivantes sont disponibles :</p>
+<ul class="simple">
+<li><strong>input_dem :</strong> le raster MNT en entrée à traiter.</li>
+<li><strong>output_xxx_map :</strong> le raster en sortie produit.</li>
+<li><strong>-of format :</strong> sélectionne le format de sortie. La valeur par défaut est
+GeoTIFF (GTiff). Utiliser le nom court du format.</li>
+<li><strong>-compute_edges :</strong> (GDAL &gt;= 1.8.0) réalise le calcul au bord du raster et
+proche des valeurs <em>nodata</em></li>
+<li><strong>-alg ZevenbergenThorne :</strong> (GDAL &gt;= 1.8.0) utilise les formules de
+Zevenbergen &amp; Thorne au lieu de celle de Horn pour calculer les pentes et
+les aspects. La littérature suggère que celle de Zevenbergen &amp; Thorne est plus
+adaptée aux paysages doux, tandis que celle de Horn a de meilleurs résultats
+sur les terrains plus rudes.</li>
+<li><strong>-b band :</strong> sélectionne une bande en entrée à traiter. Les bandes sont
+numérotées à partir de 1.</li>
+<li><strong>-co &#8220;NAME=VALUE&#8221; :</strong> passe une option de création au pilote du format de
+sortie. Plusieurs options <em>-co</em> peuvent être listées. Voyez la documentation
+spécifique du format pour les options de création légales pour chaque format.</li>
+<li><strong>-q :</strong> supprime la barre de progression et les autres informations.</li>
+</ul>
+<p>Pour tous les algorithme, sauf <em>color-relief</em>, une valeur <em>nodata</em> dans le jeu
+de données cible sera émise si au moins un pixel définie dans la valeur <em>nodata</em>
+est trouvé dans une fenêtre 3x3 centrée autour du pixel source. La conséquence
+de cela est qu&#8217;il y aura un bord d&#8217;un pixel autour de chaque image définie à la
+valeur <em>nodata</em>. À partir de GDAL 1.8.0, si l&#8217;option <em>-compute_edges</em> est
+définie, &#8216;&#8217;gdaldem&#8217;&#8217; calculera les valeurs au bord de l&#8217;image ou si une valeur
+<em>nodata</em> est trouvée dans la fenêtre 3x3, en interpolant les valeurs manquantes.</p>
+</div>
+<div class="section" id="modes">
+<h2>Modes<a class="headerlink" href="#modes" title="Lien permanent vers ce titre">¶</a></h2>
+<div class="section" id="hillshade">
+<h3>hillshade<a class="headerlink" href="#hillshade" title="Lien permanent vers ce titre">¶</a></h3>
+<p>Cette commande renvoie un raster de 8 bit avec un bel effet de relief ombragé.
+Cela est très utile pour visualiser le terrain. Vous pouvez en option définir
+l&#8217;azymuth et l&#8217;altitude la source de lumière, un facteur d&#8217;exagération vertical
+et un facteur d&#8217;échelle à tenir compte pour les différences entre les unités
+verticales et horizontales.</p>
+<p>La valeur 0 est utilisée comme valeur <em>nodata</em> en sortie.</p>
+<p>Les options spécifiques suivantes sont disponibles :</p>
+<ul class="simple">
+<li><strong>-z zFactor :</strong> exagération verticale utilisé pour multiplier les élévations.</li>
+<li><strong>-s scale :</strong> rapport des unités verticales et horizontale. Si l&#8217;unité
+horizontale du MNT source est le degrés (par exemple la projection Lat/Long
+WGS84), vous pouvez utiliser <em>scale=111120</em> si l&#8217;unité vertical sont les
+mètres (ou <em>scale=370400</em> si elles sont en pied).</li>
+<li><strong>-az azimuth :</strong> azymuth de la lumière, en degrés. 0 si elle arrive d&#8217;en haut
+du raster, 90 de l&#8217;est, ... La valeur par défaut, 315, devrait rarement être
+changée puisque c&#8217;est la valeur généralement utilisé pour générer des cartes
+de relief.</li>
+<li><strong>-alt altitude :</strong> altitude de la lumière, en degrés. 90 si la lumière
+arrive au dessus du MNT. 0 si c&#8217;est une lumière rasante.</li>
+</ul>
+</div>
+<div class="section" id="slope">
+<h3>slope<a class="headerlink" href="#slope" title="Lien permanent vers ce titre">¶</a></h3>
+<p>Cette commande utilise un raster MNT et renvoie un raster en float 32 bit avec
+des valeurs de pente. Vous avez la possibilité de définir le type de pente que
+vous voulez : degrés ou pourcentage. Dans le cas où les unités horizontales
+diffèrent des unités verticales vous pouvez également fournie un facteur
+d&#8217;échelle.</p>
+<p>La valeur -9999 est utilisé comme valeur <em>nodata</em> en sortie.</p>
+<p>Les options spécifiques suivantes sont disponibles :</p>
+<ul class="simple">
+<li><strong>-p :</strong> si définie, la pente sera exprimée en pourcent. Autrement, elle sera
+exprimée en degrés.</li>
+<li><strong>-s scale :</strong> rapport des unités verticale et horizontale. Si l&#8217;unité
+horizontal du MNT source est le degrés (par exemple une projection WGS84
+Lat/Long), vous pouvez utiliser <em>scale=111120</em> si l&#8217;unité vertical est le
+mètre (ou <em>scale=370400</em> si elles sont en pied).</li>
+</ul>
+</div>
+<div class="section" id="aspect">
+<h3>aspect<a class="headerlink" href="#aspect" title="Lien permanent vers ce titre">¶</a></h3>
+<p>Cette commande renvoie un raster float 32 bit avec des valeurs entre 0° et 360°
+représentant l&#8217;azymuth dont les pentes font face. La définition de l&#8217;azymuth
+est : 0° signifie que la pente est face au Nord, 90° face à l&#8217;Est, 180° face au
+sud et 270° face à l&#8217;Ouest (en supposant que le haut du raster en entrée est
+orienté au Nord). La valeur -9999 de l&#8217;aspect est utilisé comme valeur <em>nodata</em>
+pour indiquer un aspect indéfinie dans les zones plates avec la pente = 0.</p>
+<p>Les options spécifiques suivantes sont disponibles :</p>
+<ul class="simple">
+<li><strong>-trigonometric :</strong> renvoie un angle trigonométrique au lieu de l&#8217;azymuth.
+Donc 0° signifie l&#8217;Est, 90° le Nord, 180° l&#8217;Ouest et 270° le Sud.</li>
+<li><strong>-zero_for_flat :</strong> renvoie 0 pour les zones plates avec <em>slope=0</em> au lieu
+de -9999.</li>
+</ul>
+<p>En utilisant ces deux options, l&#8217;aspect renvoyé par &#8216;&#8217;gdaldem aspect&#8217;&#8217; doit être
+identique à celui de la commande &#8216;&#8217;r.slope.aspect&#8217;&#8217; de GRASS. Autrement il est
+identique à celui de la commande <em>aspect.cpp</em> de Matthew Perry.</p>
+</div>
+<div class="section" id="color-relief">
+<h3>color-relief<a class="headerlink" href="#color-relief" title="Lien permanent vers ce titre">¶</a></h3>
+<p>Cette commande renvoie un raster à 3 bande (RVB) ou à 4 bandes (RVBA) avec des
+valeurs calculées à partir de l&#8217;élévation et d&#8217;un fichier de configuration de
+couleur au format texte, contenant l&#8217;association entre les différentes valeurs
+d&#8217;élévation et la couleur désirée correspondante. Par défaut, les couleurs entre
+les valeurs d&#8217;élévation données sont mélangées en douceur et le résultat est un
+beau MNT coloré. Les options <em>-exact_color_entry</em> ou <em>-nearest_color_entry</em>
+peuvent être utilisées pour éviter cette interpolation linéaire pour les valeurs
+qui n&#8217;ont pas de correspondance avec un index de couleur du fichier de
+configuration.</p>
+<p>Les options spécifiques suivantes sont disponibles :</p>
+<ul class="simple">
+<li><strong>color_text_file :</strong> fichier de configuration des couleurs au format texte.</li>
+<li><strong>-alpha :</strong> ajoute un canal alpha au raster en sortie.</li>
+<li><strong>-exact_color_entry :</strong> utilise une stricte correspondance lors de la
+recherche dans le fichier de configuration des couleurs. Si aucun couleur
+correspondante n&#8217;est trouvée, le quadruplet RVBA &#8220;0,0,0,0&#8221;sera utilisé.</li>
+<li><strong>-nearest_color_entry :</strong> utilise le quadruplet RVBA correspondant à l&#8217;entrée
+le plus proche dans le fichier de configuration des couleurs.</li>
+</ul>
+<p>Le mode <em>color-relief</em> est le seul mode gérant le format VRT en sortie. Dans ce
+cas, il traduira le fichier de configuration des couleurs en éléments &lt;LUT&gt;
+appropriés. Notez que les élévations définie en pourcentage seront traduit en
+valeur absolue, ce qui doit être pris en compte lorsque les statistiques du
+raster source diffère de celui qui a été utilisé lors de la construction du VRT.</p>
+<p>Le fichier de configuration des couleurs au format texte contient généralement
+4 colonnes par ligne : la valeur de l&#8217;élévation et les composants correspondants
+de Rouge, Vert, Bleu (entre 0 et 255). La valeur de l&#8217;élévation peut être une
+valeur en virgule flottante, ou le mot-clé <em>nv</em> pour la valeur <em>nodata</em>.
+L&#8217;élévation peut aussi être exprimée en pourcentage : 0 % étant la valeur
+minimale trouvé dans le raster, 100 % la valeur maximale.</p>
+<p>Une colonne supplémentaire peut être ajouté optionnellement pour le composant
+alpha. S&#8217;il n&#8217;est pas définie, l&#8217;opacité complète (255) est supposée.</p>
+<p>Différents séparateurs de champs sont acceptés : virgule, tabulation, espaces,
+&#8216;:&#8217;.</p>
+<p>Les couleurs communes utilisées par GRASS peuvent également être spécifiées en
+utilisant leur nom, au lieu du triplet RVB. La liste des noms gérés est :
+<em>white</em>, <em>black</em>, <em>red</em>, <em>green</em>, <em>blue</em>, <em>yellow</em>, <em>magenta</em>, <em>cyan</em>, <em>aqua</em>,
+<em>grey/gray</em>, <em>orange</em>, <em>brown</em>, <em>purple/violet</em> et <em>indigo</em>.</p>
+<p>Depuis GDAL 1.8.0, les fichiers de palette .cpt GMT sont également géré
+(COLOR_MODEL = RGB suelement).</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">La syntaxe du fichier de configuration de couleur est dérivé de celui géré par
+la commande r.colors de GRASS. Les fichiers (.clr) de table de couleur HDR
+d&#8217;ESRI correspondent également à cette syntaxe. Le composent alpha et la gestion
+des tabulations et virgules comme séparateurs sont des extensions spécifiques
+à GDAL.</p>
+</div>
+<p>Par exemple :</p>
+<div class="highlight-python"><pre>3500   white
+2500   235:220:175
+50%   190 185 135
+700    240 250 150
+0      50  180  50
+nv     0   0   0   0</pre>
+</div>
+</div>
+<div class="section" id="tri">
+<h3>TRI<a class="headerlink" href="#tri" title="Lien permanent vers ce titre">¶</a></h3>
+<p>Cette commande renvoie un raster à une seule bande avec des valeurs calculées à
+partir de l&#8217;élévation. TRI signifie <em>Terrain Ruggedness Index</em>, qui est définie
+comme la différence moyenne entre un pixel central et ses cellules l&#8217;entourant
+(voir <em>Wilson et al 2007, Marine Geodesy 30:3-35</em>).</p>
+<p>La valeur -9999 est utilisé comme valeur <em>nodata</em> en sortie.</p>
+<p>Il n&#8217;y a pas d&#8217;options spécifiques.</p>
+</div>
+<div class="section" id="tpi">
+<h3>TPI<a class="headerlink" href="#tpi" title="Lien permanent vers ce titre">¶</a></h3>
+<p>Cette commande renvoie un raste à une seule bande avec des valeurs calculées à
+partir de l&#8217;élévation. TPI signifie <em>Topographic Position Index</em>, qui est
+définie comme la différence entre un pixel central et la moyenne des cellules
+l&#8217;entourant (voir <em>Wilson et al 2007, Marine Geodesy 30:3-35</em>).</p>
+<p>La valeur -9999 est utilisé comme valeur <em>nodata</em> en sortie.</p>
+<p>Il n&#8217;y a pas d&#8217;options spécifiques.</p>
+</div>
+<div class="section" id="roughness">
+<h3>roughness<a class="headerlink" href="#roughness" title="Lien permanent vers ce titre">¶</a></h3>
+<p>Cette commande renvoie un raster à une seule bande calculé à partir de
+l&#8217;élévation. La rugosité est la plus grande différence inter-cellule d&#8217;un pixel
+central et ses cellules l&#8217;entourant, comme définie dans <em>Wilson et al (2007,
+Marine Geodesy 30:3-35)</em>.</p>
+<p>La valeur -9999 est utilisé comme valeur <em>nodata</em> en sortie.</p>
+<p>Il n&#8217;y a pas d&#8217;options spécifiques.</p>
+</div>
+</div>
+<div class="section" id="auteurs">
+<h2>Auteurs<a class="headerlink" href="#auteurs" title="Lien permanent vers ce titre">¶</a></h2>
+<p>Matthew Perry &lt;<a class="reference external" href="mailto:perrygeo&#37;&#52;&#48;gmail&#46;com">perrygeo<span>&#64;</span>gmail<span>&#46;</span>com</a>&gt;, Even Rouault
+&lt;<a class="reference external" href="mailto:even&#46;rouault&#37;&#52;&#48;mines-paris&#46;org">even<span>&#46;</span>rouault<span>&#64;</span>mines-paris<span>&#46;</span>org</a>&gt;, Howard Butler &lt;<a class="reference external" href="mailto:hobu&#46;inc&#37;&#52;&#48;gmail&#46;com">hobu<span>&#46;</span>inc<span>&#64;</span>gmail<span>&#46;</span>com</a>&gt;,
+Chris Yesson &lt;<a class="reference external" href="mailto:chris&#46;yesson&#37;&#52;&#48;ioz&#46;ac&#46;uk">chris<span>&#46;</span>yesson<span>&#64;</span>ioz<span>&#46;</span>ac<span>&#46;</span>uk</a>&gt;</p>
+<p>Derived from code by Michael Shapiro, Olga Waupotitsch, Marjorie Larson,
+Jim Westervelt : U.S. Army CERL, 1993. GRASS 4.1 Reference Manual. U.S. Army
+Corps of Engineers, Construction Engineering Research Laboratories, Champaign,
+Illinois, 1-425.</p>
+</div>
+<div class="section" id="voir-egalement">
+<h2>Voir également<a class="headerlink" href="#voir-egalement" title="Lien permanent vers ce titre">¶</a></h2>
+<p>Documentation des commandes GRASS connexes :</p>
+<ul class="simple">
+<li><a class="reference external" href="http://grass.osgeo.org/grass64/manuals/html64_user/r.slope.aspect.html">http://grass.osgeo.org/grass64/manuals/html64_user/r.slope.aspect.html</a></li>
+<li><a class="reference external" href="http://grass.osgeo.org/grass64/manuals/html64_user/r.shaded.relief.html">http://grass.osgeo.org/grass64/manuals/html64_user/r.shaded.relief.html</a></li>
+<li><a class="reference external" href="http://grass.osgeo.org/grass64/manuals/html64_user/r.colors.html">http://grass.osgeo.org/grass64/manuals/html64_user/r.colors.html</a></li>
+</ul>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+
+
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="rgb2pct.html" title="rgb2pct.py"
+             >suivant</a></li>
+        <li class="right" >
+          <a href="gdal_contour.html" title="gdal_contour"
+             >précédent</a> |</li>
+        <li><a href="../index.html">GDAL v1.9.0 documentation</a> &raquo;</li>
+          <li><a href="index.html" >GDAL</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+    <a href="http://creativecommons.org/licenses/by/2.0/fr/deed.fr">Licence Creative Common BY</a>
+    <!--
+      &copy; Copyright 2011, Yves Jacolin.-->
+      Créé avec <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0.7.
+    </div>
+  </body>
+</html>

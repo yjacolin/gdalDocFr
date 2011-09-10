@@ -1,0 +1,326 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF8" />
+    
+    <title>ESRI Shapefile &mdash; GDAL v1.9.0 documentation</title>
+    <link rel="stylesheet" href="../../_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '1.9.0',
+        COLLAPSE_MODINDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../_static/translations.js"></script>
+    <link rel="top" title="GDAL v1.9.0 documentation" href="../../index.html" />
+    <link rel="up" title="Formats vecteur d’OGR" href="index.html" />
+    <link rel="next" title="SQLite/SpatiaLite RDBMS" href="sqlite.html" />
+    <link rel="prev" title="SDTS" href="sdts.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="sqlite.html" title="SQLite/SpatiaLite RDBMS"
+             accesskey="N">suivant</a></li>
+        <li class="right" >
+          <a href="sdts.html" title="SDTS"
+             accesskey="P">précédent</a> |</li>
+        <li><a href="../../index.html">GDAL v1.9.0 documentation</a> &raquo;</li>
+          <li><a href="../index.html" >OGR</a> &raquo;</li>
+          <li><a href="index.html" accesskey="U">Formats vecteur d&#8217;OGR</a> &raquo;</li> 
+      </ul>
+    </div>
+
+
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <h3><a href="../../index.html">Table des matières</a></h3>
+            <ul>
+<li><a class="reference internal" href="#">ESRI Shapefile</a><ul>
+<li><a class="reference internal" href="#indexe-spatiale-et-attributaire">Indexe spatiale  et attributaire</a></li>
+<li><a class="reference internal" href="#problemes-de-creation">Problèmes de création</a></li>
+<li><a class="reference internal" href="#etendue-spatiale">Étendue spatiale</a></li>
+<li><a class="reference internal" href="#problemes-sur-les-tailles">Problèmes sur les tailles</a></li>
+<li><a class="reference internal" href="#options-de-creation-de-jeu-de-donnees">Options de création de jeu de données</a></li>
+<li><a class="reference internal" href="#options-de-creation-de-couches">Options de création de couches</a></li>
+<li><a class="reference internal" href="#exemples">Exemples</a></li>
+</ul>
+</li>
+</ul>
+
+            <h4>Sujet précédent</h4>
+            <p class="topless"><a href="sdts.html"
+                                  title="Chapitre précédent">SDTS</a></p>
+            <h4>Sujet suivant</h4>
+            <p class="topless"><a href="sqlite.html"
+                                  title="Chapitre suivant">SQLite/SpatiaLite RDBMS</a></p>
+            <h3>Cette page</h3>
+            <ul class="this-page-menu">
+              <li><a href="../../_sources/ogr/formats/shapefile.txt"
+                     rel="nofollow">Montrer la source</a></li>
+            </ul>
+          <div id="searchbox" style="display: none">
+            <h3>Recherche rapide</h3>
+              <form class="search" action="../../search.html" method="get">
+                <input type="text" name="q" size="18" />
+                <input type="submit" value="Go" />
+                <input type="hidden" name="check_keywords" value="yes" />
+                <input type="hidden" name="area" value="default" />
+              </form>
+              <p class="searchtip" style="font-size: 90%">
+              Enter search terms or a module, class or function name.
+              </p>
+          </div>
+          <script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="esri-shapefile">
+<span id="gdal-ogr-formats-shapefile"></span><h1>ESRI Shapefile<a class="headerlink" href="#esri-shapefile" title="Lien permanent vers ce titre">¶</a></h1>
+<p>Toutes les variétés de Shapefiles d&#8217;ESRI devraient être disponibles en lecture
+et les fichiers 3D simple peuvent être créés.</p>
+<p>Normalement le pilote OGR Shapefile traite un ensemble de répertoire contenant
+des shapefiles comme source de données, et un shapefile dans ce répertoire comme
+couche. Dans ce cas le nom du répertoire doit être utilisé comme nom de la
+source de données. Cependant, il est également possible un seul des fichiers
+(.shp, .shx or .dbf) dans le jeu du shapefile comme nom du jeu de données, et
+il sera alors traité comme un jeu de données avec une couche;</p>
+<p>Notez que lors de la lecture d&#8217;un Shapefile de type <em>SHPT_ARC</em>, la couche
+correspondante sera reportée comme de type <em>wkbLineString</em> mais en fonction
+du nombre de parts de chaque géométrie, le type réel de la géométrie pour chaque
+objet peut être soit <em>OGRLineString</em> soit <em>OGRMultiLineString</em>. La même
+chose s&#8217;applique pour les Shapefiles <em>SHPT_POLYGON</em>, reporté comme couches de
+type <em>wkbPolygon</em> mais en fonction du nombre de parts de chaque géométrie,
+le type réel peut être soit <em>OGRPolygon</em> ou <em>OGRMultiPolygon</em>.</p>
+<p>Les nouvelles valeurs de mesures d&#8217;ESRI seront ignorées si rencontrées. Les
+fichiers multipatch sont lu et chaque patch de la géométrie est retourné dans une
+représentation multipolygone avec un polygone par triangle dans les mailles et
+les fans du triangle.</p>
+<p>Si des fichiers .prj dans l&#8217;ancien style Arc/Info ou le nouveau style ESRI en
+WKT de l&#8217;OGC sont présent, ils seront lus et utilisés pour associer une
+projection avec les géométries.</p>
+<p>Le pilote de lecture suppose que les polygones multipart suivent la
+spécification, c&#8217;est-à-dire que les sommets des anneaux externes doivent être
+orientés dans le sens des aiguilles d&#8217;une montre sur le plan x/y, et ceux de
+l&#8217;anneau intérieur en sens inverse. Si un Shapefile est cassé, il est possible
+de définir l&#8217;option de configuration <em>OGR_ORGANIZE_POLYGONS=DEFAULT</em> afin de
+procéder à une analyse complète basée sur les relations topologiques des
+parties des polygones afin que les polygones résultants soient correctement
+définie selon la convention OGC Simple Feature.</p>
+<p>Une tentative est faite pour lire la définition du LDID/codepage à partir du
+fichier .dbf et l&#8217;utiliser pour traduire les champs de chaîne en UTF-8 lors de
+la lecture, puis vers l&#8217;écriture. LDID &#8220;87 / 0x57&#8221; est considéré comme ISO8859_1
+qui peut ne pas être approprié.</p>
+<p>L&#8217;<a class="reference external" href="http://trac.osgeo.org/gdal/wiki/ConfigOptions">option de configuration</a>
+SHAPE_ENCODING peut être utilisé pour écraser l&#8217;interprétation de l&#8217;encodage du
+shapefile par n&#8217;importe quel encodage géré par CPLRecode ou par &#8220;&#8221; pour éviter
+n&#8217;importe quel enregistrement (la gestion de l&#8217;enregistrement est nouveau dans
+GDAL/OGR 1.9.0).</p>
+<div class="section" id="indexe-spatiale-et-attributaire">
+<h2>Indexe spatiale  et attributaire<a class="headerlink" href="#indexe-spatiale-et-attributaire" title="Lien permanent vers ce titre">¶</a></h2>
+<p>Le pilote OGR shapefile gère l&#8217;indexage spatial et une forme limitée d&#8217;indexage
+attributaire.</p>
+<p>L&#8217;indexage spatial utilise les mêmes fichiers d&#8217;index spatial <em>quadtree</em> .qix
+qui sont utilisés par MapServer. !il ne gère pas les fichiers d&#8217;inde spatiale
+d&#8217;ESRI (.sbn / .sbx). L&#8217;index spatial peut accélérer les parsages avec des
+filtres spatiaux pour d&#8217;importants jeux de données pour récupérer une portion
+d&#8217;une zone rapidement.</p>
+<p>Pour créer un index spatial, envoyer une commande SQL de la forme :</p>
+<div class="highlight-python"><pre>CREATE SPATIAL INDEX ON nomTable [DEPTH N]</pre>
+</div>
+<p>où le paramètre optionnel &#8216;&#8217;DEPTH&#8217;&#8217; peut être utilisé pour contrôler le nombre
+de niveaux de l&#8217;arbre d&#8217;index généré. Si &#8216;&#8217;DEPTH&#8217;&#8217; est omis, la profondeur de
+l&#8217;arbre est estimée sur la base de nombre de géométrie dans un shapefile et son
+domaine de valeur de 1 à 12.</p>
+<p>Pour effacer un index spatial, envoyez une commande de la forme :</p>
+<div class="highlight-python"><pre>DROP SPATIAL INDEX ON nomTable</pre>
+</div>
+<p>Autrement, la commande shptree de <a class="reference external" href="http://mapserver.org">MapServer</a> peut être
+utilisée.</p>
+<div class="highlight-python"><pre>shptree &lt;shpfile&gt; [&lt;depth&gt;] [&lt;index_format&gt;]</pre>
+</div>
+<p>Plus d&#8217;information est disponible sur cette commande sur la page
+<a class="reference external" href="http://mapserver.org/utilities/shptree.html">shptree de MapServer</a>.</p>
+<p>Pour l&#8217;instant le pilote OGR shapefile gère seulement les indexes d&#8217;attribut
+pour rechercher des valeurs spécifiques dans une colonne de clé unique. Pour
+créer un index d&#8217;attribut pour une colonne, envoyez une commande SQL de la
+forme <em>CREATE INDEX ON nomTable USING nomchamp</em>. Pour supprimer des index
+d&#8217;attribut envoyez une commande de la forme <em>DROP INDEX ON nomTable</em>. L&#8217;index
+d&#8217;attribut accélèrera les recherches des clauses <em>WHERE</em> de la forme <em>nomChamp
+= valeur</em>. L&#8217;index d&#8217;attribut est en réalité stocké comme un index au format
+mapinfo et n&#8217;est pas compatible avec toute autre application shapefile.</p>
+</div>
+<div class="section" id="problemes-de-creation">
+<h2>Problèmes de création<a class="headerlink" href="#problemes-de-creation" title="Lien permanent vers ce titre">¶</a></h2>
+<p>Le pilote shapefile traite un répertoire comme un jeu de données, et chaque
+ensemble Shapefile (.shp, .shx, and .dbf) comme une couche. Le nom du jeu de
+données sera créé comme un nom de répertoire. Si le répertoire existe déjà il
+est utilisé et les fichiers existants dans le répertoire sont ignorés. Si le
+répertoire n&#8217;existe pas, celui-ci sera créé.</p>
+<p>Une tentative de création d&#8217;un nouveau jeu de données avec une extension .shp
+résultera en un ensemble de fichiers crée à la place d&#8217;un répertoire.</p>
+<p>Les shapefile d&#8217;ESRI peuvent seulement stocker un type de géométrie par couche
+(shapefile). En création cela peut être basé sur le fichier source (si un type
+de géométrie uniforme est connu par le pilote source), ou il peut être défini
+directement par l&#8217;utilisateur avec l&#8217;option de création SHPT (indiqué plus bas).
+S&#8217;il n&#8217;est pas connu, la création de la couche échouera. Si des géométries d&#8217;un
+type incompatible sont écrites vers la couche, l&#8217;envoi en sortie échouera avec
+un message d&#8217;erreur.</p>
+<p>Notez qu&#8217;il peut rendre plus difficile la translation d&#8217;une couche de géométrie
+mixte d&#8217;un format vers un format Shapefile en utilisant <tt class="docutils literal"><span class="pre">ogr2ogr</span></tt>, puisque
+<tt class="docutils literal"><span class="pre">ogr2ogr</span></tt> ne gère pas la séparation des géométries d&#8217;une couche source.
+Lisez la FAQ pour une solution.</p>
+<p>Les attributs des géométries du Shapefile sont stockés dans un fichier .dbf
+associé, et donc les attributs souffrent d&#8217;un certain nombre de limitations :</p>
+<ul>
+<li><p class="first">les noms des attributs ne peuvent avoir qu&#8217;au maximum 10 caractères. Les noms
+plus longs seront tronqués. Cela peut entraîner des noms de colonnes qui ne
+sont pas uniques, qui sans aucun doute poseront problème plus tard.</p>
+</li>
+<li><p class="first">À partir de la version 1.7, le pilote Shapefile d&#8217;OGR tente de générer des noms
+de champs uniques. Des noms de champs dupliqués successifs, incluant ceux créés
+par troncation à 10 caractères, seront tronqué à 8 caractères et un numéro
+ajouté de 1 à 99.</p>
+<p>Par exemple :</p>
+<ul class="simple">
+<li>a -&gt; a, a -&gt; a_1, A -&gt; A_2;</li>
+<li>abcdefghijk -&gt; abcdefghij, abcdefghijkl -&gt; abcdefgh_1</li>
+</ul>
+</li>
+<li><p class="first">Seul des champs de type <em>entier</em>, <em>réel</em> et <em>chaine de caractère</em> sont gérés
+(pas DateTime, juste year/month/day). Les champs de types <em>liste diverse</em> et
+<em>binaire</em> ne peuvent pas être crée.</p>
+</li>
+<li><p class="first">La largeur du champ et la précision sont directement utilisées pour établir
+la taille de stockage dans le fichier .dbf. Cela signifie que les chaines plus
+longues que la largeur du champ, ou les nombres qui ne remplissent pas les
+conditions du format du champ seront tronquées.</p>
+</li>
+<li><p class="first">les champs d&#8217;<em>entier</em> sans une largeur explicite sont traité avec une largeur
+de 11.</p>
+</li>
+<li><p class="first">les champs <em>réel</em> (point flottant) sans une largeur explicite sont traité avec
+une largeur de 24 avec 15 chiffres pour les décimales.</p>
+</li>
+<li><p class="first">les champs <em>caractères</em> sans une largeur assignée sont traité avec une largeur
+de 80 caractères.</p>
+</li>
+</ul>
+<p>Également, les fichiers .dbf doivent avoir au moins un champ. Si aucun n&#8217;est
+créé par l&#8217;application, un champ &#8220;FID&#8221; sera automatiquement créé et remplit des
+numéros d&#8217;enregistrement.</p>
+<p>Le pilote shapefile d&#8217;OGR gère la réécriture des shapes existant dans un
+shapefile ainsi que la suppression des shapes. La suppression des shapes est
+notée comme supprimé dans le fichier .dbf, et seront ainsi ignoré par OGR. Pour
+les supprimer réellement (entrainant une renumérotation des FID) appeler la
+fonction SQL &#8216;REPACK&#8217; par la méthode <em>ExecuteSQL()</em> de la source de données.</p>
+</div>
+<div class="section" id="etendue-spatiale">
+<h2>Étendue spatiale<a class="headerlink" href="#etendue-spatiale" title="Lien permanent vers ce titre">¶</a></h2>
+<p>Shapefiles stocke l&#8217;étendue spatiale de al couche dans le fichier .SHP. L&#8217;étendue
+spatiale de la couche est automatiquement mis à jour lors de l&#8217;insertion d&#8217;une
+nouvelle feature dans le shapefile. Cependant lors de la mise à jour d&#8217;une feature
+existante, si la forme précédente a touché la bounding box de l&#8217;étendue spatiale
+mais la forme mise à jour ne touche pas le nouvelle étendue, l&#8217;étendue calculée
+ne sera pas correcte. Il sera alors nécessaire de forcer le calcul en invoquant
+la commande SQL &#8216;RECOMPUTE EXTENT ON &lt;tablename&gt;&#8217; via la méthode <em>ExecuteSQL()</em>
+de la source de données. La même chose s&#8217;applique pour la suppression d&#8217;une shape.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">RECOMPUTE EXTENT ON est disponible à partir d&#8217;OGR &gt;= 1.9.0.</p>
+</div>
+</div>
+<div class="section" id="problemes-sur-les-tailles">
+<h2>Problèmes sur les tailles<a class="headerlink" href="#problemes-sur-les-tailles" title="Lien permanent vers ce titre">¶</a></h2>
+<ul class="simple">
+<li>Geometry : le format Shapefile utilise explicitement des offsets de 32 bits et
+ne put donc pas dépasser 8 Go (il utilise en réalité des offsets de 32 bit vers
+des mots de 16 bits). Par conséquent il n&#8217;est pas recommendé d&#8217;utiliser un
+fichier de plus de 4 Go.</li>
+<li>Attributs : le format dbf ne contient aucun offsets, il peut donc être
+arbitrairement large.</li>
+</ul>
+</div>
+<div class="section" id="options-de-creation-de-jeu-de-donnees">
+<h2>Options de création de jeu de données<a class="headerlink" href="#options-de-creation-de-jeu-de-donnees" title="Lien permanent vers ce titre">¶</a></h2>
+<p>Aucune option.</p>
+</div>
+<div class="section" id="options-de-creation-de-couches">
+<h2>Options de création de couches<a class="headerlink" href="#options-de-creation-de-couches" title="Lien permanent vers ce titre">¶</a></h2>
+<ul class="simple">
+<li><strong>SHPT=type :</strong> écrase le type de shapefile crée. Peut être une parmi NULL
+pour un simple fichier .dbf. avec aucun fichier .shp, <em>POINT</em>, <em>ARC</em>,
+<em>POLYGON</em> ou <em>MULTIPOINT</em> pour la 2D, ou <em>POINTZ</em>, <em>ARCZ</em>, <em>POLYGONZ</em> ou
+<em>MULTIPOINTZ</em> pour la 3D. Les shapefiles avec des valeurs de mesure ne sont
+pas gérés, ni les fichiers <em>MULTIPATCH</em>.</li>
+<li><strong>ENCODING=value :</strong> définie la valeur de l&#8217;encodage dans le fichier DBF. La
+valeur par défaut est &#8220;LDID/87&#8221;. Il n&#8217;est pas clair quelles autres valeurs
+peuvent être appropriées.</li>
+</ul>
+</div>
+<div class="section" id="exemples">
+<h2>Exemples<a class="headerlink" href="#exemples" title="Lien permanent vers ce titre">¶</a></h2>
+<p>Un merge de deux shapefile <em>file1.shp</em> et <em>file2.shp</em> dans un nouveau fichier
+<em>file_merged.shp</em> est réalisée de cette manière :</p>
+<div class="highlight-python"><pre>% ogr2ogr file_merged.shp file1.shp
+% ogr2ogr -update -append file_merged.shp file2.shp -nln file_merged</pre>
+</div>
+<p>La seconde commande ouvre le fichier file_merged.shp en mode &#8216;mise à jour&#8217; et
+tente de trouver des couches existantes et d&#8217;ajouter des géométries en copie.</p>
+<p>L&#8217;option <em>-nln</em> définie le nom de la couche à copier.</p>
+<p>Lisez également :</p>
+<ul class="simple">
+<li><a class="reference external" href="http:*shapelib.maptools.org/">Shapelib Page</a></li>
+<li><a class="reference external" href="http://www.esri.com/library/whitepapers/pdfs/shapefile.pdf">ESRI Shapefile Technical Description</a></li>
+<li>Notes utilisateurs sur le pilote Shapefile d&#8217;OGR &lt;<a class="reference external" href="http://trac.osgeo.org/gdal/wiki/UserDocs/Shapefiles">http://trac.osgeo.org/gdal/wiki/UserDocs/Shapefiles</a>&gt;`_</li>
+</ul>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+
+
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="sqlite.html" title="SQLite/SpatiaLite RDBMS"
+             >suivant</a></li>
+        <li class="right" >
+          <a href="sdts.html" title="SDTS"
+             >précédent</a> |</li>
+        <li><a href="../../index.html">GDAL v1.9.0 documentation</a> &raquo;</li>
+          <li><a href="../index.html" >OGR</a> &raquo;</li>
+          <li><a href="index.html" >Formats vecteur d&#8217;OGR</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+    <a href="http://creativecommons.org/licenses/by/2.0/fr/deed.fr">Licence Creative Common BY</a>
+    <!--
+      &copy; Copyright 2011, Yves Jacolin.-->
+      Créé avec <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0.7.
+    </div>
+  </body>
+</html>

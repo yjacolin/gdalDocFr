@@ -1,0 +1,166 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF8" />
+    
+    <title>Base de données MDB de Geomedia &mdash; GDAL v1.9.0 documentation</title>
+    <link rel="stylesheet" href="../../_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '1.9.0',
+        COLLAPSE_MODINDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../_static/translations.js"></script>
+    <link rel="top" title="GDAL v1.9.0 documentation" href="../../index.html" />
+    <link rel="up" title="Formats vecteur d’OGR" href="index.html" />
+    <link rel="next" title="GeoRSS : Geographically Encoded Objects pour les flux RSS" href="georss.html" />
+    <link rel="prev" title="GeoJSON" href="geojson.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="georss.html" title="GeoRSS : Geographically Encoded Objects pour les flux RSS"
+             accesskey="N">suivant</a></li>
+        <li class="right" >
+          <a href="geojson.html" title="GeoJSON"
+             accesskey="P">précédent</a> |</li>
+        <li><a href="../../index.html">GDAL v1.9.0 documentation</a> &raquo;</li>
+          <li><a href="../index.html" >OGR</a> &raquo;</li>
+          <li><a href="index.html" accesskey="U">Formats vecteur d&#8217;OGR</a> &raquo;</li> 
+      </ul>
+    </div>
+
+
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <h3><a href="../../index.html">Table des matières</a></h3>
+            <ul>
+<li><a class="reference internal" href="#">Base de données MDB de Geomedia</a><ul>
+<li><a class="reference internal" href="#comment-utiliser-le-pilote-geomedia-avec-unixodbc-et-les-outils-mdb-sous-unix-et-linux">Comment utiliser le pilote Geomedia avec unixODBC et les outils MDB (sous Unix et Linux)</a></li>
+<li><a class="reference internal" href="#voir-egalement">Voir également</a></li>
+</ul>
+</li>
+</ul>
+
+            <h4>Sujet précédent</h4>
+            <p class="topless"><a href="geojson.html"
+                                  title="Chapitre précédent">GeoJSON</a></p>
+            <h4>Sujet suivant</h4>
+            <p class="topless"><a href="georss.html"
+                                  title="Chapitre suivant">GeoRSS : Geographically Encoded Objects pour les flux RSS</a></p>
+            <h3>Cette page</h3>
+            <ul class="this-page-menu">
+              <li><a href="../../_sources/ogr/formats/geomedia.txt"
+                     rel="nofollow">Montrer la source</a></li>
+            </ul>
+          <div id="searchbox" style="display: none">
+            <h3>Recherche rapide</h3>
+              <form class="search" action="../../search.html" method="get">
+                <input type="text" name="q" size="18" />
+                <input type="submit" value="Go" />
+                <input type="hidden" name="check_keywords" value="yes" />
+                <input type="hidden" name="area" value="default" />
+              </form>
+              <p class="searchtip" style="font-size: 90%">
+              Enter search terms or a module, class or function name.
+              </p>
+          </div>
+          <script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="base-de-donnees-mdb-de-geomedia">
+<span id="gdal-ogr-formats-geomedia"></span><h1>Base de données MDB de Geomedia<a class="headerlink" href="#base-de-donnees-mdb-de-geomedia" title="Lien permanent vers ce titre">¶</a></h1>
+<p>GDAL/OGR &gt;= 1.9.0</p>
+<p>OGR gère en option la lecture des fichiers .mdp de Geomedia via ODBC. Geomedia
+est une base de données Microsoft Access avec un ensemble de tables définies par
+Intergraph pour prendre en charge les métadonnées de la géodatabase, et des
+géométries pour la gestion des features dans une colonne BLOB dans un format
+particulier. Ce pilote accède à la base de données via ODBC mais ne dépend d&#8217;aucune
+couche middleware d&#8217;Intergraph.</p>
+<p>Les fichiers .mdb de Geomedia sont accéder en passant le nom du fichier .mdb que
+l&#8217;on veut lire comme source de données. Sur Windows, aucun DSN ODBC n&#8217;est requis.
+Sous linux, il y a des problèmes avec les connexions sans DSN dû à une
+implémentation de cette fonctionnalité buguée ou incomplète dans
+l&#8217;<a class="reference external" href="http://mdbtools.sourceforge.net/">outils MDB</a>, il est donc nécessaire de
+configurer le Data Source Name (DSN) si le pilote de l&#8217;outil MDB est utilisé
+(vérifiez les instructions ci-dessous).</p>
+<p>Dans le but de faciliter la compatibilité avec différentes configurations, l&#8217;option
+de configuration <em>GEOMEDIA_DRIVER_TEMPLATE</em> a été ajoutée pour fournir un moyen
+pour définir le DSN automatiquement avec le nom du fichier comme argument. Dans
+les cas où le nom du pilote est connu, cela permet la construction du DSN basé
+sur cette information d&#8217;une manière similaire à la valeur par défaut (utilisé
+pour l&#8217;accès Windows au pilote Microsoft Access).</p>
+<p>OGR traite toutes les tables de features comme des couches. La plupart des types
+de géométries devrait être gérées (arcs ne l&#8217;est pas encore). Les informations
+du système de projection n&#8217;est pas géré pour l&#8217;instant.</p>
+<p>Pour le moment le pilote de géodatabase Personnelle d&#8217;OGR ne tire aucun avantage
+des indexes spatiaux pour les requêtes spatiales rapides.</p>
+<p>Par défaut, les commandes SQL sont envoyées directement au moteur de base de
+données MDB. Il est également possible d&#8217;interroger le pilote pour prendre en
+charge les commandes SQL avec le moteur <a class="reference internal" href="../sql.html#gdal-ogr-sql"><em>SQL dans OGR</em></a>,  en passant la chaîne
+<strong>&#8220;OGRSQL&#8221;</strong> à la méthode <em>ExecuteSQL()</em> comme nom du dialect SQL.</p>
+<div class="section" id="comment-utiliser-le-pilote-geomedia-avec-unixodbc-et-les-outils-mdb-sous-unix-et-linux">
+<h2>Comment utiliser le pilote Geomedia avec unixODBC et les outils MDB (sous Unix et Linux)<a class="headerlink" href="#comment-utiliser-le-pilote-geomedia-avec-unixodbc-et-les-outils-mdb-sous-unix-et-linux" title="Lien permanent vers ce titre">¶</a></h2>
+<p>À partir de  GDAL/OGR 1.9.0, le pilote <a class="reference internal" href="mdb.html#gdal-ogr-formats-mdb"><em>Access MDB databases</em></a> est une
+alternative pour la lecture des fichiers .mdb de Geomedia sans nécessité
+unixODBC et les outils MDB.</p>
+<p>Référez vous à la section similaire du pilote <a class="reference internal" href="pgeo.html#gdal-ogr-formats-pgeo"><em>ESRI Personal GeoDatabase</em></a>. Le
+préfixe à utiliser pour ce pilote est <em>Geomedia:</em>.</p>
+</div>
+<div class="section" id="voir-egalement">
+<h2>Voir également<a class="headerlink" href="#voir-egalement" title="Lien permanent vers ce titre">¶</a></h2>
+<ul class="simple">
+<li><a class="reference internal" href="mdb.html#gdal-ogr-formats-mdb"><em>Access MDB databases</em></a></li>
+</ul>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+
+
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="georss.html" title="GeoRSS : Geographically Encoded Objects pour les flux RSS"
+             >suivant</a></li>
+        <li class="right" >
+          <a href="geojson.html" title="GeoJSON"
+             >précédent</a> |</li>
+        <li><a href="../../index.html">GDAL v1.9.0 documentation</a> &raquo;</li>
+          <li><a href="../index.html" >OGR</a> &raquo;</li>
+          <li><a href="index.html" >Formats vecteur d&#8217;OGR</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+    <a href="http://creativecommons.org/licenses/by/2.0/fr/deed.fr">Licence Creative Common BY</a>
+    <!--
+      &copy; Copyright 2011, Yves Jacolin.-->
+      Créé avec <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0.7.
+    </div>
+  </body>
+</html>

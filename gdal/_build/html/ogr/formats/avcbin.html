@@ -1,0 +1,164 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF8" />
+    
+    <title>Arc/Info Binary Coverage &mdash; GDAL v1.9.0 documentation</title>
+    <link rel="stylesheet" href="../../_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '1.9.0',
+        COLLAPSE_MODINDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../_static/translations.js"></script>
+    <link rel="top" title="GDAL v1.9.0 documentation" href="../../index.html" />
+    <link rel="up" title="Formats vecteur d’OGR" href="index.html" />
+    <link rel="next" title="Couverture Arc/Info E00 (ASCII)" href="avce00.html" />
+    <link rel="prev" title="ArcObjects d’ESRI" href="ao.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="avce00.html" title="Couverture Arc/Info E00 (ASCII)"
+             accesskey="N">suivant</a></li>
+        <li class="right" >
+          <a href="ao.html" title="ArcObjects d’ESRI"
+             accesskey="P">précédent</a> |</li>
+        <li><a href="../../index.html">GDAL v1.9.0 documentation</a> &raquo;</li>
+          <li><a href="../index.html" >OGR</a> &raquo;</li>
+          <li><a href="index.html" accesskey="U">Formats vecteur d&#8217;OGR</a> &raquo;</li> 
+      </ul>
+    </div>
+
+
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <h3><a href="../../index.html">Table des matières</a></h3>
+            <ul>
+<li><a class="reference internal" href="#">Arc/Info Binary Coverage</a><ul>
+<li><a class="reference internal" href="#voir-egalement">Voir également</a></li>
+</ul>
+</li>
+</ul>
+
+            <h4>Sujet précédent</h4>
+            <p class="topless"><a href="ao.html"
+                                  title="Chapitre précédent">ArcObjects d&#8217;ESRI</a></p>
+            <h4>Sujet suivant</h4>
+            <p class="topless"><a href="avce00.html"
+                                  title="Chapitre suivant">Couverture Arc/Info E00 (ASCII)</a></p>
+            <h3>Cette page</h3>
+            <ul class="this-page-menu">
+              <li><a href="../../_sources/ogr/formats/avcbin.txt"
+                     rel="nofollow">Montrer la source</a></li>
+            </ul>
+          <div id="searchbox" style="display: none">
+            <h3>Recherche rapide</h3>
+              <form class="search" action="../../search.html" method="get">
+                <input type="text" name="q" size="18" />
+                <input type="submit" value="Go" />
+                <input type="hidden" name="check_keywords" value="yes" />
+                <input type="hidden" name="area" value="default" />
+              </form>
+              <p class="searchtip" style="font-size: 90%">
+              Enter search terms or a module, class or function name.
+              </p>
+          </div>
+          <script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="arc-info-binary-coverage">
+<span id="gdal-ogr-formats-avcbin"></span><h1>Arc/Info Binary Coverage<a class="headerlink" href="#arc-info-binary-coverage" title="Lien permanent vers ce titre">¶</a></h1>
+<p>Les couvertures Arc/Info Binary (par exemple Arc/Info V7 et plus récente) sont
+gérées par OGR en lecture.</p>
+<p>Les sections <em>label</em>, <em>arc</em>, <em>polygone</em>, <em>centroide</em>, <em>région</em> et <em>texte</em> d&#8217;une
+couverture sont toutes gérées comme couches. Les attributs provenant d&#8217;INFO sont
+ajoutés aux <em>labels</em>, <em>arc</em>, <em>polygones</em> ou <em>région</em> aux endroits appropriés.
+Lorsqu&#8217;elles sont disponibles, les informations de projections sont lu et
+traduit. Les géométries polygonales sont collectées pour les couches polygones
+et région à partir des arcs les composants.</p>
+<p>Les sections textes sont représentées comme des couches ponctuelles. La hauteur
+d&#8217;affichage est préservée dans le champ attributaire <em>HEIGHT</em> ; cependant,
+d&#8217;autre information sur l&#8217;orientation du texte est ignorée.</p>
+<p>Les tables attributaires associées avec une couverture, mais pas nommément
+désignés, qui doit être attachée à l&#8217;une des couches géométriques n&#8217;est pas
+accessible par OGR. Notez que les tables attributaires sont stockées dans un
+répertoire <em>info</em>/ au même niveau que le répertoire de couverture. Si cela est
+inaccessible ou corrompue aucune information d&#8217;attributs ne sera ajoutée aux
+couches de couverture, mais la géométrie doit être encore accessible.</p>
+<p>Si le répertoire contient des fichiers avec des noms comme w001001.adf alors la
+couverture est une <em class="xref std std-ref">gdal.gdal.divers_formats.aig</em> qui peut être lu par GDAL,
+et n&#8217;est pas une couche vecteur gérée par OGR.</p>
+<p>Les couches sont nommées comme suit :</p>
+<ul class="simple">
+<li>une couche label (label de polygone, ou des points libres) est nommée <em>LAB</em>
+si présente.</li>
+<li>une couche centroide (centroide de polygone) est nommée <em>CNT</em> si présente.</li>
+<li>une couche arc (ligne) est nommée <em>ARC</em> si présente.</li>
+<li>une couche polygone est nommée <em>PAL</em> si présente.</li>
+<li>une section texte est nommé selon la sous-classe de la section.</li>
+<li>une sous-classe de région est nommé selon le nom de la sous-classe.</li>
+</ul>
+<p>Le pilote des couvertures binaire d&#8217;Arc/Info tente d&#8217;optimiser les requêtes
+spatiales mais dû à l&#8217;absence d&#8217;index spatial cela est juste réalisé en
+minimisant les traitements pour les objets en dehors de la fenêtre spatiale.</p>
+<p>La lecture aléatoire (par FID) des arcs, et des polygones est gérée, il peut ne
+pas être géré pour les autres types d&#8217;objets.</p>
+<div class="section" id="voir-egalement">
+<h2>Voir également<a class="headerlink" href="#voir-egalement" title="Lien permanent vers ce titre">¶</a></h2>
+<ul class="simple">
+<li><a class="reference external" href="http://avce00.maptools.org/">Page de la bibliothèque AVCE00</a></li>
+<li><a class="reference external" href="http://gdal.org/ogr/ogr_avce00.html">Pilote d&#8217;OGR pour AVCE00 (.E00)</a></li>
+</ul>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+
+
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="avce00.html" title="Couverture Arc/Info E00 (ASCII)"
+             >suivant</a></li>
+        <li class="right" >
+          <a href="ao.html" title="ArcObjects d’ESRI"
+             >précédent</a> |</li>
+        <li><a href="../../index.html">GDAL v1.9.0 documentation</a> &raquo;</li>
+          <li><a href="../index.html" >OGR</a> &raquo;</li>
+          <li><a href="index.html" >Formats vecteur d&#8217;OGR</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+    <a href="http://creativecommons.org/licenses/by/2.0/fr/deed.fr">Licence Creative Common BY</a>
+    <!--
+      &copy; Copyright 2011, Yves Jacolin.-->
+      Créé avec <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0.7.
+    </div>
+  </body>
+</html>

@@ -1,0 +1,306 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF8" />
+    
+    <title>Virtual Format &mdash; GDAL v1.9.0 documentation</title>
+    <link rel="stylesheet" href="../../_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '1.9.0',
+        COLLAPSE_MODINDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../_static/translations.js"></script>
+    <link rel="top" title="GDAL v1.9.0 documentation" href="../../index.html" />
+    <link rel="up" title="Formats vecteur d’OGR" href="index.html" />
+    <link rel="next" title="WFS - Service WFS OGC" href="wfs.html" />
+    <link rel="prev" title="VFK - format de données d’échange cadastrale Tchèque" href="vfk.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="wfs.html" title="WFS - Service WFS OGC"
+             accesskey="N">suivant</a></li>
+        <li class="right" >
+          <a href="vfk.html" title="VFK - format de données d’échange cadastrale Tchèque"
+             accesskey="P">précédent</a> |</li>
+        <li><a href="../../index.html">GDAL v1.9.0 documentation</a> &raquo;</li>
+          <li><a href="../index.html" >OGR</a> &raquo;</li>
+          <li><a href="index.html" accesskey="U">Formats vecteur d&#8217;OGR</a> &raquo;</li> 
+      </ul>
+    </div>
+
+
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <h3><a href="../../index.html">Table des matières</a></h3>
+            <ul>
+<li><a class="reference internal" href="#">Virtual Format</a><ul>
+<li><a class="reference internal" href="#problemes-de-creation">Problèmes de création</a></li>
+<li><a class="reference internal" href="#format-de-fichier-virtuel">Format de fichier virtuel</a></li>
+<li><a class="reference internal" href="#exemple-couche-ponctuelle-odbc">Exemple : couche ponctuelle ODBC</a></li>
+<li><a class="reference internal" href="#exemple-renommer-des-attributs">Exemple : renommer des attributs</a></li>
+<li><a class="reference internal" href="#exemple-filtre-spatial-transparent-gdal-1-7-0">Exemple : Filtre spatial transparent (GDAL &gt;= 1.7.0)</a></li>
+<li><a class="reference internal" href="#autres-remarques">Autres remarques</a></li>
+</ul>
+</li>
+</ul>
+
+            <h4>Sujet précédent</h4>
+            <p class="topless"><a href="vfk.html"
+                                  title="Chapitre précédent">VFK - format de données d&#8217;échange cadastrale Tchèque</a></p>
+            <h4>Sujet suivant</h4>
+            <p class="topless"><a href="wfs.html"
+                                  title="Chapitre suivant">WFS - Service WFS OGC</a></p>
+            <h3>Cette page</h3>
+            <ul class="this-page-menu">
+              <li><a href="../../_sources/ogr/formats/vrt.txt"
+                     rel="nofollow">Montrer la source</a></li>
+            </ul>
+          <div id="searchbox" style="display: none">
+            <h3>Recherche rapide</h3>
+              <form class="search" action="../../search.html" method="get">
+                <input type="text" name="q" size="18" />
+                <input type="submit" value="Go" />
+                <input type="hidden" name="check_keywords" value="yes" />
+                <input type="hidden" name="area" value="default" />
+              </form>
+              <p class="searchtip" style="font-size: 90%">
+              Enter search terms or a module, class or function name.
+              </p>
+          </div>
+          <script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="virtual-format">
+<span id="gdal-ogr-formats-vrt"></span><h1>Virtual Format<a class="headerlink" href="#virtual-format" title="Lien permanent vers ce titre">¶</a></h1>
+<p>Le format Virtuel d&#8217;OGR est un pilote qui transforme les objets lu à partir
+d&#8217;autres pilotes sur des critères définie dans un fichier de contrôle XML. Il
+est d&#8217;abord utilisé pour profiter des couches spatiales provenant de tables à
+plat avec des informations spatiales dans des colonnes attributaires. Il peut
+être également utilisé pour associer des information de système de coordonnées
+avec une source de données, merger des couches de sources de données différentes
+dans une seule source de données, ou même juste fournir un fichier de soutient
+pour l&#8217;accès à une source de données pas sous forme de fichier.</p>
+<p>Les fichiers virtuel sont pour l&#8217;instant normalement préparés à la main.</p>
+<div class="section" id="problemes-de-creation">
+<h2>Problèmes de création<a class="headerlink" href="#problemes-de-creation" title="Lien permanent vers ce titre">¶</a></h2>
+<p>Avant GDAL 1.7.0, le pilote VRT d&#8217;OGR était en lecture seule.</p>
+<p>Depuis GDAL 1.7.0, les opération <em>CreateFeature()</em>, <em>SetFeature()</em> et <em>DeleteFeature()</em>
+sont gérées sur la couche d&#8217;un jeu de données VRT, si les conditions suivantes
+sont remplies :</p>
+<ul class="simple">
+<li>le jeu de données VRT est ouvert en mode update ;</li>
+<li>la couche source sous-jascente gère ces opérations ;</li>
+<li>l&#8217;élément <em>SrcLayer</em> est utilisé (en opposition à l&#8217;élément <em>SrcSQL</em>) ;</li>
+<li>le FID des features VRT est le même que le FID des features sources, c&#8217;est à dire,
+l&#8217;élément <em>FID</em> n&#8217;est pas définie.</li>
+</ul>
+</div>
+<div class="section" id="format-de-fichier-virtuel">
+<h2>Format de fichier virtuel<a class="headerlink" href="#format-de-fichier-virtuel" title="Lien permanent vers ce titre">¶</a></h2>
+<p>L&#8217;élément racine d&#8217;un fichier de contrôle XML est <em>OGRVRTDataSource</em>. il a un
+enfant <em>OGRVRTLayer</em> pour chaque couche dans la source de données virtuelle. Cet
+élément doit avoir un attribut <strong>name</strong> avec le nom de la couche, et peut avoir
+les sous-éléments suivants :</p>
+<ul class="simple">
+<li><strong>SrcDataSource (obligatoire) :</strong> La valeur est le nom de la source de
+données dont cette couche sera dérivée. L&#8217;élément peut en option avoir un
+attribut <em>relativeToVRT</em> dont la valeur par défaut est &#8220;0&#8221;, mais &#8220;1&#8221; indique
+que la source  de données doit être interprétée comme relative au fichier
+virtuel. Cela peut être un jeu de données géré par OGR, incluant ODBC, CSV,
+etc. L&#8217;élément peut également avoir un attribut partagé pour contrôler si la
+source de données doit être ouverte en mode partagé. OFF par défaut pour
+l&#8217;utilisation de <em>SrcLayer</em> et ON pour l&#8217;utilisation de <em>SrcSQL</em>.</li>
+<li><strong>SrcLayer (optionnel) :</strong> la valeur est le nom de la couche dans la source
+de données dont cette couche virtuelle sera dérivée. Si cet élément n&#8217;est pas
+fournit, alors l&#8217;élément <em>SrcSQL</em> doit être fournit.</li>
+<li><strong>SrcSQL* (optionnel) :</strong> une requête SQL pour exécuter la génération de la
+couche désirée résultante. Ceci doit être fournie à la place de <em>StcLayer</em> pour
+les résultats dérivés de requêtes. certaines limitations peuvent s&#8217;appliquer
+pour les couches dérivées du SQL.</li>
+<li><strong>FID (optionnel) :</strong> nom de la colonne attributaire à partir duquel le FID .
+des objets doivent être dérivés. S&#8217;il n&#8217;est pas fourni, le FID des objets
+sources sera utilisé directement.</li>
+<li><strong>Style (optionnelle) :</strong> nom de la colonne attributaire à partir duquel le
+style des features doit être dérivé. Si non fournie, le style de la feature
+source sera utilisé directement.</li>
+<li><strong>GeometryType (optionnel) :</strong> le type de la géométrie à assigner à la couche.
+S&#8217;il n&#8217;est pas fournie il sera récupéré à partir de la couche source. La
+valeur doit être un parmi <em>wkbNone</em>, <em>wkbUnknown</em>, <em>wkbPoint</em>,
+<em>wkbLineString</em>, <em>wkbPolygon</em>, <em>wkbMultiPoint</em>, <em>wkbMultiLineString</em>,
+<em>wkbMultiPolygon, ou *wkbGeometryCollection&#8221;</em>. En option <em>25D</em> peut ajouté
+pour marquer l&#8217;utilisation des coordonnées Z. Par défaut <em>wkbUnknown</em> indique
+que n&#8217;importe quelle géométrie est autorisée.</li>
+<li><strong>LayerSRS (optionnel) :</strong> la valeur de cet élément est la référence
+spatiale à utiliser pour la couche. Si elle n&#8217;est pas fournie, elle est
+héritée de la couche source. La valeur peut être en WKT ou dans n&#8217;importe
+quel autre format accepté par la méthode <em>OGRSpatialReference::SetUserInput()</em>.
+Si la valeur est NULL, alors aucun SRS ne sera utilisé pour la couche.</li>
+<li><strong>GeometryField (optionnel) :</strong> cet élément est utilisé pour définir comment
+la géométrie pour les objets doit être dérivée. Si elle n&#8217;est pas fournie la
+géométrie de l&#8217;objet source est copié directement. Le type de l&#8217;encodage de la
+géométrie est indiqué avec l&#8217;attribut d&#8217;encodage qui peut avoir les valeurs
+<em>WKT</em>, <em>WKB</em> ou <em>PointFromColumns</em>. Si l&#8217;encodage est <em>WKT</em> ou <em>WKB</em> alors le
+champ attributaire aura le nom du champ contenu la géométrie WKT ou le WKB. Si
+l&#8217;encodage est <em>PointFromColumns</em> alors les attributs x, y et z aura les noms
+des colonnes à utilisées pour les coordonnées X, Y et Z. L&#8217;attribut z est
+optionnel. À partir de GDAL 1.7.0, l&#8217;attribut optionnel <strong>reportSrcColumn</strong>
+peut être utilisé pour définir si les champs géométriques sources (l&#8217;ensemble
+des champs dans les attributs <strong>field</strong>, <strong>x</strong>, <strong>y</strong> ou <strong>z</strong>) doivent être
+reporté comme champs de la couche vrt. TRUE par défaut.
+Si définie à FALSE, les champs géométriques sources seront utilisé seulement
+pour construire la géométrie de la feature de la couche VRT.</li>
+<li><strong>SrcRegion (optionnel, à partir de GDAL 1.7.0) :</strong> Cet élément est utilisé
+pour définir un filtre spatial initial pour les features sources. Ce filtre
+spatial sera combiné avec n&#8217;importe quel filtre spatial explicitement définie
+sur la couche VRT avec la méthode <em>SetSpatialFilter()</em>. La valeur de l&#8217;élément
+doit être une chaîne WKT valide définissant un polygone. Un attribut <em>clip</em>
+optionnel peut être définie à &#8220;TRUE&#8221; pour découper les géométries à la région
+source, sinon les géométries sources ne sont pas modifiées.</li>
+<li><strong>Field (optionnel, à partir de GDAL 1.7.0) :</strong> un ou plusieurs champs
+attributaires peuvent être définie avec les éléments Field. Si aucun élément
+Field ne sont définie, les champs de ma couche/sql source sera définie sur la
+couche vrt. L&#8217;élément Field peut avoir les attributs suivants :<ul>
+<li><strong>name (nécessaire) :</strong> le nom du champs.</li>
+<li><strong>type :</strong> le type du champs, un parmi &#8220;Integer&#8221;, &#8220;IntegerList&#8221;, &#8220;Real&#8221;,
+&#8220;RealList&#8221;, &#8220;String&#8221;, &#8220;StringList&#8221;, &#8220;Binary&#8221;, &#8220;Date&#8221;, &#8220;Time&#8221;, ou &#8220;DateTime&#8221;
+- &#8220;String&#8221; par défaut.</li>
+<li><strong>width :</strong> la largeur du champ, inconnus par défaut.</li>
+<li><strong>precision :</strong> la précision du champs, 0 par défaut.</li>
+<li><strong>src :</strong> le nom du champ source qui doit être copié dans celui-ci. par
+défaut, la valeur de &#8220;name&#8221;.</li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="exemple-couche-ponctuelle-odbc">
+<h2>Exemple : couche ponctuelle ODBC<a class="headerlink" href="#exemple-couche-ponctuelle-odbc" title="Lien permanent vers ce titre">¶</a></h2>
+<p>Dans l&#8217;exemple suivant (disease.ovf) la mauvaise table à partir de la base de
+données ODBC DISEASE est utilisée pour créer une couche spatiale. Le fichier
+virtuel utilise les colonnes &#8220;x&#8221; et &#8220;y&#8221; pour obtenir la localisation spatiale.
+La couche est également définie comme une couche point, et comme étant dans le
+système de coordonnées WGS84.</p>
+<div class="highlight-python"><pre>&lt;OGRVRTDataSource&gt;
+
+    &lt;OGRVRTLayer name="worms"&gt;
+        &lt;SrcDataSource&gt;ODBC:DISEASE,worms&lt;/SrcDataSource&gt;
+        &lt;SrcLayer&gt;worms&lt;/SrcLayer&gt;
+        &lt;GeometryType&gt;wkbPoint&lt;/GeometryType&gt;
+        &lt;LayerSRS&gt;WGS84&lt;/LayerSRS&gt;
+        &lt;GeometryField encoding="PointFromColumns" x="x" y="y"/&gt;
+    &lt;/OGRVRTLayer&gt;
+
+&lt;/OGRVRTDataSource&gt;</pre>
+</div>
+</div>
+<div class="section" id="exemple-renommer-des-attributs">
+<h2>Exemple : renommer des attributs<a class="headerlink" href="#exemple-renommer-des-attributs" title="Lien permanent vers ce titre">¶</a></h2>
+<p>Il peut être utile dans certaines circonstance de pouvoir renommer les noms des
+champs à partir d&#8217;une couche source en un nom différent. Cela est
+particulièrement vrai quand on veut traduire vers un format dont les schéma est
+imposé, tel que le format GPX (&lt;name&gt;, &lt;desc&gt;, etc.). Cela peut être accomplit
+en utilisant SQL de cette manière :</p>
+<div class="highlight-python"><pre>&lt;OGRVRTDataSource&gt;
+    &lt;OGRVRTLayer name="remapped_layer"&gt;
+        &lt;SrcDataSource&gt;your_source.shp&lt;/SrcDataSource&gt;
+        &lt;SrcSQL&gt;SELECT src_field_1 AS name, src_field_2 AS desc FROM your_source_layer_name&lt;/SrcSQL&gt;
+    &lt;/OGRVRTLayer&gt;
+&lt;/OGRVRTDataSource&gt;</pre>
+</div>
+<p>Cela peut aussi être accomplie (à partir de GDAL 1.7.0) en utilisant des
+définitions de champs explicites :</p>
+<div class="highlight-python"><pre>&lt;OGRVRTDataSource&gt;
+    &lt;OGRVRTLayer name="remapped_layer"&gt;
+        &lt;SrcDataSource&gt;your_source.shp&lt;/SrcDataSource&gt;
+        &lt;SrcLayer&gt;your_source&lt;/SrcSQL&gt;
+        &lt;Field name="name" src="src_field_1" /&gt;
+        &lt;Field name="desc" src="src_field_2" type="String" width="45" /&gt;
+    &lt;/OGRVRTLayer&gt;
+&lt;/OGRVRTDataSource&gt;</pre>
+</div>
+</div>
+<div class="section" id="exemple-filtre-spatial-transparent-gdal-1-7-0">
+<h2>Exemple : Filtre spatial transparent (GDAL &gt;= 1.7.0)<a class="headerlink" href="#exemple-filtre-spatial-transparent-gdal-1-7-0" title="Lien permanent vers ce titre">¶</a></h2>
+<p>L&#8217;exemple suivant retournera seulement les features à partir de la couche source
+qui intersecte la région (0,40)-(10,50). De plus, les géométries retournées seront
+découpées pour correspondre à cette région.</p>
+<div class="highlight-python"><pre>&lt;OGRVRTDataSource&gt;
+    &lt;OGRVRTLayer name="source"&gt;
+        &lt;SrcDataSource&gt;source.shp&lt;/SrcDataSource&gt;
+        &lt;SrcRegion clip="true"&gt;POLYGON((0 40,10 40,10 50,0 50,0 40))&lt;/SrcRegion&gt;
+    &lt;/OGRVRTLayer&gt;
+&lt;/OGRVRTDataSource&gt;</pre>
+</div>
+</div>
+<div class="section" id="autres-remarques">
+<h2>Autres remarques<a class="headerlink" href="#autres-remarques" title="Lien permanent vers ce titre">¶</a></h2>
+<ul class="simple">
+<li>Quand <em>GeometryField</em> est <em>WKT</em>, les filtres spatiaux sont appliqués après
+extractions de toutes les lignes à partir de la source de données.
+Essentiellement, cela signifie qu&#8217;il n&#8217;y a pas de filtre spatial rapide sur
+les géométries dérivées WKT.</li>
+<li>Quand <em>GeometryField</em> est <em>PointFromColumns</em>, et qu&#8217;un <em>SrcLayer</em> (en
+opposition à <em>SrcSQL</em>) est utilisé, et qu&#8217;un filtre spatial est effectif sur
+la couche virtuelle alors le filtre spatial sera traduit en interne en un
+filtre attribut sur les colonnes X et Y dans <em>SrcLayer</em>. Au cas où des filtres
+spatiaux rapide soient importants, il peut être utile d&#8217;indexer les colonnes
+X et Y dans le stockage des données source, si cela est possible. Par exemple
+si la source est un RDBMS. Vous pouvez désactiver cette fonctionnalité en
+définissant l&#8217;attribut <em>useSpatialSubquery</em> de l&#8217;élément GeometryField à FALSE.</li>
+<li>Normalement la <em>SrcDataSource</em> est au format tabulaire non-spatial (tel que
+MySQL, SQLite, CSV, OCI, ou ODBC) mais il peut être également une base de
+données spatiales auquel cas la géométrie peut être directement copiée.</li>
+</ul>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+
+
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="wfs.html" title="WFS - Service WFS OGC"
+             >suivant</a></li>
+        <li class="right" >
+          <a href="vfk.html" title="VFK - format de données d’échange cadastrale Tchèque"
+             >précédent</a> |</li>
+        <li><a href="../../index.html">GDAL v1.9.0 documentation</a> &raquo;</li>
+          <li><a href="../index.html" >OGR</a> &raquo;</li>
+          <li><a href="index.html" >Formats vecteur d&#8217;OGR</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+    <a href="http://creativecommons.org/licenses/by/2.0/fr/deed.fr">Licence Creative Common BY</a>
+    <!--
+      &copy; Copyright 2011, Yves Jacolin.-->
+      Créé avec <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0.7.
+    </div>
+  </body>
+</html>

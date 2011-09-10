@@ -1,0 +1,154 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF8" />
+    
+    <title>BLX – Magellan BLX Topo File Format &mdash; GDAL v1.9.0 documentation</title>
+    <link rel="stylesheet" href="../../_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '1.9.0',
+        COLLAPSE_MODINDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../_static/translations.js"></script>
+    <link rel="top" title="GDAL v1.9.0 documentation" href="../../index.html" />
+    <link rel="up" title="Formats" href="index.html" />
+    <link rel="next" title="BAG — Bathymetry Attributed Grid" href="bag.html" />
+    <link rel="prev" title="AIRSAR – AIRSAR Polarimetric Format" href="airsar.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="bag.html" title="BAG — Bathymetry Attributed Grid"
+             accesskey="N">suivant</a></li>
+        <li class="right" >
+          <a href="airsar.html" title="AIRSAR – AIRSAR Polarimetric Format"
+             accesskey="P">précédent</a> |</li>
+        <li><a href="../../index.html">GDAL v1.9.0 documentation</a> &raquo;</li>
+          <li><a href="../index.html" >GDAL</a> &raquo;</li>
+          <li><a href="index.html" accesskey="U">Formats</a> &raquo;</li> 
+      </ul>
+    </div>
+
+
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <h3><a href="../../index.html">Table des matières</a></h3>
+            <ul>
+<li><a class="reference internal" href="#">BLX &#8211; Magellan BLX Topo File Format</a><ul>
+<li><a class="reference internal" href="#georeferencement">Géoréférencement</a></li>
+<li><a class="reference internal" href="#problemes-lors-de-la-creation">Problèmes lors de la création</a></li>
+</ul>
+</li>
+</ul>
+
+            <h4>Sujet précédent</h4>
+            <p class="topless"><a href="airsar.html"
+                                  title="Chapitre précédent">AIRSAR &#8211; AIRSAR Polarimetric Format</a></p>
+            <h4>Sujet suivant</h4>
+            <p class="topless"><a href="bag.html"
+                                  title="Chapitre suivant">BAG &#8212; Bathymetry Attributed Grid</a></p>
+            <h3>Cette page</h3>
+            <ul class="this-page-menu">
+              <li><a href="../../_sources/gdal/formats/blx.txt"
+                     rel="nofollow">Montrer la source</a></li>
+            </ul>
+          <div id="searchbox" style="display: none">
+            <h3>Recherche rapide</h3>
+              <form class="search" action="../../search.html" method="get">
+                <input type="text" name="q" size="18" />
+                <input type="submit" value="Go" />
+                <input type="hidden" name="check_keywords" value="yes" />
+                <input type="hidden" name="area" value="default" />
+              </form>
+              <p class="searchtip" style="font-size: 90%">
+              Enter search terms or a module, class or function name.
+              </p>
+          </div>
+          <script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="blx-magellan-blx-topo-file-format">
+<span id="gdal-gdal-formats-blx"></span><h1>BLX &#8211; Magellan BLX Topo File Format<a class="headerlink" href="#blx-magellan-blx-topo-file-format" title="Lien permanent vers ce titre">¶</a></h1>
+<p>BLX est le format pour le stockage de données topographique dans les GPS
+Magellan. Ce pilote gère à la fois la lecture et l&#8217;écriture. De plus les 4
+niveaux d&#8217;aperçus inhérent au format BLX peut être utilisé avec le pilote.</p>
+<p>Le format BLX est basé sur des tuiles pour le moment la taille des tuiles est
+fixée à une taille de 128x128. De plus les dimensions doivent être un multiple
+de la taille de la tuile.</p>
+<p>Le type de données est fixé à Int6 et la valeur pour les valeurs non définie est
+définie à -32768. Dans le format BLX les valeurs non définies sont seulement
+gérées au niveau de la tuile. Pour les pixels non définie dans des tuiles non
+vides voyez les options <strong>FILLUNDEF/FILLUNDEFVAL</strong>.</p>
+<div class="section" id="georeferencement">
+<h2>Géoréférencement<a class="headerlink" href="#georeferencement" title="Lien permanent vers ce titre">¶</a></h2>
+<p>La projection BLX est fixée à WGS84 et le géoréférencement à partir des BLX est
+géré sous la forme de tiepoint et de taille de pixel.</p>
+</div>
+<div class="section" id="problemes-lors-de-la-creation">
+<h2>Problèmes lors de la création<a class="headerlink" href="#problemes-lors-de-la-creation" title="Lien permanent vers ce titre">¶</a></h2>
+<p><strong>Options de création  :</strong></p>
+<ul class="simple">
+<li><strong>ZSCALE=1 :</strong> définie l&#8217;incrémentation de le quantisation désirée pour
+l&#8217;accès en écriture. Une valeur plus importante résultera en une meilleure
+compression et une moins bonne résolution verticale.</li>
+<li><strong>BIGENDIAN=YES :</strong> si <strong>BIGENDIAN</strong> est définie, le fichier en sortie sera
+au format XLB (big endian blx).</li>
+<li><strong>FILLUNDEF=YES :</strong> si <strong>FILLUNDEF</strong> est définie à <strong>yes</strong> la valeur de
+<strong>FILLUNDEFVAL</strong> sera utilisé à la place de -32768 pour les tuiles vides.
+Ceci est nécessaire puisque le format BLX ne gère que les valeurs indéfinie
+pour les tuiles complètes, pas pour les pixels individuels.</li>
+<li><strong>FILLUNDEFVAL=0 :</strong> Voir FILLUNDEF</li>
+</ul>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+
+
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="bag.html" title="BAG — Bathymetry Attributed Grid"
+             >suivant</a></li>
+        <li class="right" >
+          <a href="airsar.html" title="AIRSAR – AIRSAR Polarimetric Format"
+             >précédent</a> |</li>
+        <li><a href="../../index.html">GDAL v1.9.0 documentation</a> &raquo;</li>
+          <li><a href="../index.html" >GDAL</a> &raquo;</li>
+          <li><a href="index.html" >Formats</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+    <a href="http://creativecommons.org/licenses/by/2.0/fr/deed.fr">Licence Creative Common BY</a>
+    <!--
+      &copy; Copyright 2011, Yves Jacolin.-->
+      Créé avec <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0.7.
+    </div>
+  </body>
+</html>

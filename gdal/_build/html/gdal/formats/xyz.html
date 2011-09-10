@@ -1,0 +1,160 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF8" />
+    
+    <title>XYZ – ASCII Gridded XYZ &mdash; GDAL v1.9.0 documentation</title>
+    <link rel="stylesheet" href="../../_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '1.9.0',
+        COLLAPSE_MODINDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../_static/translations.js"></script>
+    <link rel="top" title="GDAL v1.9.0 documentation" href="../../index.html" />
+    <link rel="up" title="Formats" href="index.html" />
+    <link rel="next" title="OGR" href="../../ogr/index.html" />
+    <link rel="prev" title="WMS – Web Map Services" href="wms.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../ogr/index.html" title="OGR"
+             accesskey="N">suivant</a></li>
+        <li class="right" >
+          <a href="wms.html" title="WMS – Web Map Services"
+             accesskey="P">précédent</a> |</li>
+        <li><a href="../../index.html">GDAL v1.9.0 documentation</a> &raquo;</li>
+          <li><a href="../index.html" >GDAL</a> &raquo;</li>
+          <li><a href="index.html" accesskey="U">Formats</a> &raquo;</li> 
+      </ul>
+    </div>
+
+
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <h3><a href="../../index.html">Table des matières</a></h3>
+            <ul>
+<li><a class="reference internal" href="#">XYZ &#8211; ASCII Gridded XYZ</a><ul>
+<li><a class="reference internal" href="#options-de-creation">Options de création</a></li>
+<li><a class="reference internal" href="#voir-egalement">Voir également</a></li>
+</ul>
+</li>
+</ul>
+
+            <h4>Sujet précédent</h4>
+            <p class="topless"><a href="wms.html"
+                                  title="Chapitre précédent">WMS &#8211; Web Map Services</a></p>
+            <h4>Sujet suivant</h4>
+            <p class="topless"><a href="../../ogr/index.html"
+                                  title="Chapitre suivant">OGR</a></p>
+            <h3>Cette page</h3>
+            <ul class="this-page-menu">
+              <li><a href="../../_sources/gdal/formats/xyz.txt"
+                     rel="nofollow">Montrer la source</a></li>
+            </ul>
+          <div id="searchbox" style="display: none">
+            <h3>Recherche rapide</h3>
+              <form class="search" action="../../search.html" method="get">
+                <input type="text" name="q" size="18" />
+                <input type="submit" value="Go" />
+                <input type="hidden" name="check_keywords" value="yes" />
+                <input type="hidden" name="area" value="default" />
+              </form>
+              <p class="searchtip" style="font-size: 90%">
+              Enter search terms or a module, class or function name.
+              </p>
+          </div>
+          <script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="xyz-ascii-gridded-xyz">
+<span id="gdal-gdal-formats-xyz"></span><h1>XYZ &#8211; ASCII Gridded XYZ<a class="headerlink" href="#xyz-ascii-gridded-xyz" title="Lien permanent vers ce titre">¶</a></h1>
+<p>(Disponible à partir de GDAL &gt;= 1.8.0)</p>
+<p>GDAL gère la lecture et l&#8217;écritue de jeux de données raster XYZ <strong>quadrillées</strong>
+ASCII (ie. les XYZ non quadrillé, XYZ LIDAR, etc. doivent être ouvert par d&#8217;autres
+moyens. Voir la documentation de la commande <a class="reference internal" href="../gdal_grid.html#gdal-gdal-gdal-grid"><em>gdal_grid</em></a>).</p>
+<p>Ces jeux de données sont des fichiers ASCII avec (au moins) 3 colonnes, chaque
+lignes contenant les coordonnées X et Y du centre de la cellule et sa valeur.</p>
+<p>L&#8217;espace entre chaque cellule doit être constante et aucune valeur manquante n&#8217;est
+gérée. Les cellules avec les mêmes coordonnées doivent être placées sur des
+lignes consécutives. Pour une même valeur de coordonnées Y, les lignes dans le
+jeu de données doit être organisé en augmentant les valeurs de X. La valeur des
+coordonnées Y peut augmenter ou diminuer cependant. Les séparateurs de colonnes
+gérés sont l&#8217;espace, les virgules, le point-virgule et les tabulations.</p>
+<p>Le pilote tente de détecter une ligne d&#8217;en-tête et cherchera les noms &#8216;x&#8217;, &#8216;lon&#8217;
+ou &#8216;east&#8217; pour détecter l&#8217;index de la colonne X, &#8216;y&#8217;, &#8216;lat&#8217; ou &#8216;north&#8217; pour la
+colonne Y et &#8216;z&#8217;, &#8216;alt&#8217; ou &#8216;height&#8217; pour la colonne Z.  Si aucun en-tête n&#8217;est
+présent ou une des colonnes ne peuvent être identifié dans l&#8217;en-tête, les colonnes
+X, Y et Z (dans cet ordre) sont supposé d&#8217;être les trois premières colonnes de
+chaque ligne.</p>
+<p>L&#8217;ouverture d&#8217;un gros jeu de données peut être lente puisque le pilote doit scanner
+l&#8217;ensemble du fichier pour déterminer la taille du jeu de donnes et la résolution
+spatiale. Le pilote autodétectera le type de données parmi Byte, Int16, Int32 ou
+Float32.</p>
+<div class="section" id="options-de-creation">
+<h2>Options de création<a class="headerlink" href="#options-de-creation" title="Lien permanent vers ce titre">¶</a></h2>
+<ul class="simple">
+<li><strong>COLUMN_SEPARATOR=a_value :</strong> où a_value est une chaîne utilisée pour séparer
+la valeur des colonnes X,Y et Z. Par défaut à un espace</li>
+<li><strong>ADD_HEADER_LINE=YES/NO :</strong> si une ligne d&#8217;en-tête doit être écrite (le
+contenu est X &lt;col_sep&gt; Y &lt;col_sep&gt; Z). NO par défaut</li>
+</ul>
+</div>
+<div class="section" id="voir-egalement">
+<h2>Voir également<a class="headerlink" href="#voir-egalement" title="Lien permanent vers ce titre">¶</a></h2>
+<ul class="simple">
+<li>Documentation de la commande <a class="reference internal" href="../gdal_grid.html#gdal-gdal-gdal-grid"><em>gdal_grid</em></a></li>
+</ul>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+
+
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../ogr/index.html" title="OGR"
+             >suivant</a></li>
+        <li class="right" >
+          <a href="wms.html" title="WMS – Web Map Services"
+             >précédent</a> |</li>
+        <li><a href="../../index.html">GDAL v1.9.0 documentation</a> &raquo;</li>
+          <li><a href="../index.html" >GDAL</a> &raquo;</li>
+          <li><a href="index.html" >Formats</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+    <a href="http://creativecommons.org/licenses/by/2.0/fr/deed.fr">Licence Creative Common BY</a>
+    <!--
+      &copy; Copyright 2011, Yves Jacolin.-->
+      Créé avec <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0.7.
+    </div>
+  </body>
+</html>

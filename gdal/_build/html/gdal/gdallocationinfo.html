@@ -1,0 +1,206 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF8" />
+    
+    <title>gdallocationinfo &mdash; GDAL v1.9.0 documentation</title>
+    <link rel="stylesheet" href="../_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.9.0',
+        COLLAPSE_MODINDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/translations.js"></script>
+    <link rel="top" title="GDAL v1.9.0 documentation" href="../index.html" />
+    <link rel="up" title="GDAL" href="index.html" />
+    <link rel="next" title="gdal-config" href="gdal-config.html" />
+    <link rel="prev" title="gdal_fillnodata" href="gdal_fillnodata.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="gdal-config.html" title="gdal-config"
+             accesskey="N">suivant</a></li>
+        <li class="right" >
+          <a href="gdal_fillnodata.html" title="gdal_fillnodata"
+             accesskey="P">précédent</a> |</li>
+        <li><a href="../index.html">GDAL v1.9.0 documentation</a> &raquo;</li>
+          <li><a href="index.html" accesskey="U">GDAL</a> &raquo;</li> 
+      </ul>
+    </div>
+
+
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <h3><a href="../index.html">Table des matières</a></h3>
+            <ul>
+<li><a class="reference internal" href="#">gdallocationinfo</a><ul>
+<li><a class="reference internal" href="#usage">Usage</a></li>
+<li><a class="reference internal" href="#description">Description</a></li>
+<li><a class="reference internal" href="#exemple">Exemple</a></li>
+</ul>
+</li>
+</ul>
+
+            <h4>Sujet précédent</h4>
+            <p class="topless"><a href="gdal_fillnodata.html"
+                                  title="Chapitre précédent">gdal_fillnodata</a></p>
+            <h4>Sujet suivant</h4>
+            <p class="topless"><a href="gdal-config.html"
+                                  title="Chapitre suivant">gdal-config</a></p>
+            <h3>Cette page</h3>
+            <ul class="this-page-menu">
+              <li><a href="../_sources/gdal/gdallocationinfo.txt"
+                     rel="nofollow">Montrer la source</a></li>
+            </ul>
+          <div id="searchbox" style="display: none">
+            <h3>Recherche rapide</h3>
+              <form class="search" action="../search.html" method="get">
+                <input type="text" name="q" size="18" />
+                <input type="submit" value="Go" />
+                <input type="hidden" name="check_keywords" value="yes" />
+                <input type="hidden" name="area" value="default" />
+              </form>
+              <p class="searchtip" style="font-size: 90%">
+              Enter search terms or a module, class or function name.
+              </p>
+          </div>
+          <script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="gdallocationinfo">
+<span id="gdal-gdal-gdallocationinfo"></span><h1>gdallocationinfo<a class="headerlink" href="#gdallocationinfo" title="Lien permanent vers ce titre">¶</a></h1>
+<p>Outil de requête raster</p>
+<div class="section" id="usage">
+<h2>Usage<a class="headerlink" href="#usage" title="Lien permanent vers ce titre">¶</a></h2>
+<p>Usage :</p>
+<div class="highlight-python"><pre>gdallocationinfo [--help-general] [-xml] [-lifonly] [-valonly]
+               [-b band]* [-l_srs srs_def] [-geoloc] [-wgs84]
+               srcfile [x y]</pre>
+</div>
+</div>
+<div class="section" id="description">
+<h2>Description<a class="headerlink" href="#description" title="Lien permanent vers ce titre">¶</a></h2>
+<p>La commande <tt class="docutils literal"><span class="pre">gdallocationinfo</span></tt> fournie un mécanisme pour demander des
+informations sur un pixel pour une localisation donnée dans l&#8217;un des différents
+systèmes de coordonnées gérés. Plusieurs options de rapport sont proposés.</p>
+<ul class="simple">
+<li><strong>-xml :</strong> le rapport en sortie sera formaté en XML pour facilité le
+post-traitement.</li>
+<li><strong>-lifonly :</strong> le seul retour est la production des noms de fichier à partir
+de la demande de LocationInfo en fonction de la base de données (ie pour
+identifier le fichier impacté à partir des VRT).</li>
+<li><strong>-valonly :</strong> le seul retour sont les valeurs du pixel sélectionné sur
+chaque bandes sélectionnées.</li>
+<li><strong>-b band :</strong> sélectionne une bande à interroger. Plusieurs bandes peuvent
+être listées. Par défaut toutes les bandes sont interrogées.</li>
+<li><strong>-l_srs srs def :</strong> Le système de coordonnées de la localisation x et y en
+entrée.</li>
+<li><strong>-geoloc :</strong> indique que les points x et y en entrée sont dans le système de
+géoréférencement de l&#8217;image.</li>
+<li><strong>-wgs84 :</strong> indique que les points x et y  en entrée sont en lat, long WGS84.</li>
+<li><strong>srcfile :</strong> le nom de la source de données raster GDAL.</li>
+<li><strong>x :</strong> localisation X du pixel cible. Par défaut le système de coordonnées
+est pixel/ligne sauf si <em>-l_srs</em>, <em>-wgs84</em> ou <em>-geoloc</em> sont fournie.</li>
+<li><strong>y :</strong> localisation Y du pixel cible. Par défaut le système de coordonnées
+est pixel/ligne sauf si <em>-l_srs</em>, <em>-wgs84</em> ou <em>-geoloc</em> sont fournie.</li>
+</ul>
+<p>Cette commande a pour objectif de fournir diverses informations d&#8217;un pixel. Pour
+l&#8217;instant il rapporte trois choses :</p>
+<ul class="simple">
+<li>la localisation du pixel dans l&#8217;espace pixel/ligne.</li>
+<li>le résultat d&#8217;une requête de méta-données LocationInfo en fonction de la
+source de données - pour l&#8217;instant cela est seulement implémenté pour les
+fichiers VRT qui rapportera le(s) fichier(s) utilisé(s) pour satisfaire les
+requêtes pour ce pixel.</li>
+<li>la valeur du pixel du raster pour ce pixel pour toutes ou un sous-ensemble de
+bande(s).</li>
+<li>la valeur du pixel non ajusté si une échelle et/ou un décalage est appliqué à
+la bande.</li>
+</ul>
+<p>Le pixel sélectionné est interrogé par les coordonnées x/y sur la ligne de
+commande, ou lu par l&#8217;entrée standard (stdin). Plus d&#8217;une paire de coordonnées
+peut être fournies lors de la lecture des coordonnées par l&#8217;entrée standard. Par
+défaut, les coordonnées pixel/ligne sont attendue. Cependant lors de
+l&#8217;utilisation des options <em>-geoloc</em>, <em>-wgs84</em>, ou <em>-l_srs</em> il est possible de
+définir la localisation dans d&#8217;autres système de coordonnées.</p>
+<p>Le rapport par défaut est au format texte lisible. Il est possible de récupérer
+une sortie en xml avec l&#8217;option <em>-xml</em>.</p>
+<p>Afin de pouvoir utiliser des scripts, les options <em>-valonly</em> et <em>-lifonly</em> sont
+fournie pour restreindre la sortie aux valeurs de pixels réels, ou les fichiers
+LocationInfo identifiés pour le pixel.</p>
+<p>Il est prévue que des possibilités de rapport supplémentaire seront ajouté à
+<tt class="docutils literal"><span class="pre">gdallocationinfo</span></tt> dans le futur.</p>
+</div>
+<div class="section" id="exemple">
+<h2>Exemple<a class="headerlink" href="#exemple" title="Lien permanent vers ce titre">¶</a></h2>
+<p>Exemple simple reportant un pixel (256,256) sur le fichier <em>utm.tif</em>.</p>
+<div class="highlight-python"><pre>$ gdallocationinfo utm.tif 256 256
+Report:
+    Location: (256P,256L)
+    Band 1:
+    Value: 115</pre>
+</div>
+<p>Requêter un fichier VRT fournissant la localisation en WGS84 et récupérant le
+résultat en xml :</p>
+<div class="highlight-python"><pre>$ gdallocationinfo -xml -wgs84 utm.vrt -117.5 33.75
+&lt;Report pixel="217" line="282"&gt;
+    &lt;BandReport band="1"&gt;
+    &lt;LocationInfo&gt;
+        &lt;File&gt;utm.tif&lt;/File&gt;
+    &lt;/LocationInfo&gt;
+    &lt;Value&gt;16&lt;/Value&gt;
+    &lt;/BandReport&gt;
+&lt;/Report&gt;</pre>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+
+
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="gdal-config.html" title="gdal-config"
+             >suivant</a></li>
+        <li class="right" >
+          <a href="gdal_fillnodata.html" title="gdal_fillnodata"
+             >précédent</a> |</li>
+        <li><a href="../index.html">GDAL v1.9.0 documentation</a> &raquo;</li>
+          <li><a href="index.html" >GDAL</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+    <a href="http://creativecommons.org/licenses/by/2.0/fr/deed.fr">Licence Creative Common BY</a>
+    <!--
+      &copy; Copyright 2011, Yves Jacolin.-->
+      Créé avec <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0.7.
+    </div>
+  </body>
+</html>

@@ -1,0 +1,346 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF8" />
+    
+    <title>GeoRSS : Geographically Encoded Objects pour les flux RSS &mdash; GDAL v1.9.0 documentation</title>
+    <link rel="stylesheet" href="../../_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '1.9.0',
+        COLLAPSE_MODINDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../_static/translations.js"></script>
+    <link rel="top" title="GDAL v1.9.0 documentation" href="../../index.html" />
+    <link rel="up" title="Formats vecteur d’OGR" href="index.html" />
+    <link rel="next" title="GFT - Google Fusion Tables" href="gft.html" />
+    <link rel="prev" title="Base de données MDB de Geomedia" href="geomedia.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="gft.html" title="GFT - Google Fusion Tables"
+             accesskey="N">suivant</a></li>
+        <li class="right" >
+          <a href="geomedia.html" title="Base de données MDB de Geomedia"
+             accesskey="P">précédent</a> |</li>
+        <li><a href="../../index.html">GDAL v1.9.0 documentation</a> &raquo;</li>
+          <li><a href="../index.html" >OGR</a> &raquo;</li>
+          <li><a href="index.html" accesskey="U">Formats vecteur d&#8217;OGR</a> &raquo;</li> 
+      </ul>
+    </div>
+
+
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <h3><a href="../../index.html">Table des matières</a></h3>
+            <ul>
+<li><a class="reference internal" href="#">GeoRSS : Geographically Encoded Objects pour les flux RSS</a><ul>
+<li><a class="reference internal" href="#problemes-d-encodage">Problèmes d&#8217;encodage</a></li>
+<li><a class="reference internal" href="#definitions-des-champs">Définitions des champs</a></li>
+<li><a class="reference internal" href="#problemes-lors-de-la-creation">Problèmes lors de la création</a></li>
+<li><a class="reference internal" href="#exemple">Exemple</a></li>
+<li><a class="reference internal" href="#voir-aussi">Voir aussi</a></li>
+</ul>
+</li>
+</ul>
+
+            <h4>Sujet précédent</h4>
+            <p class="topless"><a href="geomedia.html"
+                                  title="Chapitre précédent">Base de données MDB de Geomedia</a></p>
+            <h4>Sujet suivant</h4>
+            <p class="topless"><a href="gft.html"
+                                  title="Chapitre suivant">GFT - Google Fusion Tables</a></p>
+            <h3>Cette page</h3>
+            <ul class="this-page-menu">
+              <li><a href="../../_sources/ogr/formats/georss.txt"
+                     rel="nofollow">Montrer la source</a></li>
+            </ul>
+          <div id="searchbox" style="display: none">
+            <h3>Recherche rapide</h3>
+              <form class="search" action="../../search.html" method="get">
+                <input type="text" name="q" size="18" />
+                <input type="submit" value="Go" />
+                <input type="hidden" name="check_keywords" value="yes" />
+                <input type="hidden" name="area" value="default" />
+              </form>
+              <p class="searchtip" style="font-size: 90%">
+              Enter search terms or a module, class or function name.
+              </p>
+          </div>
+          <script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="georss-geographically-encoded-objects-pour-les-flux-rss">
+<span id="gdal-ogr-formats-georss"></span><h1>GeoRSS : Geographically Encoded Objects pour les flux RSS<a class="headerlink" href="#georss-geographically-encoded-objects-pour-les-flux-rss" title="Lien permanent vers ce titre">¶</a></h1>
+<p>(Pilote disponible à partir de GDAL 1.7.0)</p>
+<p>GeoRSS est une manière d&#8217;encoder une localisation dans des flux RSS ou Atom.</p>
+<p>OGR gère la lecture et l&#8217;écriture du GeoRSS. La gestion de la lecture est
+seulement disponilbe si GDAL a été compilé avec la gestion de la bibliothèque
+expat.</p>
+<p>Le pilote gère les documents RSS au format RSS 2.0 ou Atom 1.0.</p>
+<p>Il gère également les
+<a class="reference external" href="http://georss.org/model">3 manières d&#8217;encoder la localisation</a> : GeoRSS
+simple, GeoRSS GML et W3C Geo (ce dernier étant obsolète).</p>
+<p>Le pilote peut lire et écrire des documents sans information de localisation également.</p>
+<p>Le datum par défaut pour les documents GeoRSS est le datum WGS84 (EPSG:4326)
+bien que les localisations GeoRSS soit encodé dans l&#8217;ordre latitude-longitude
+dans le fichier XML, toutes les coordonnées reportées ou attendus par le pilote
+sont dans l&#8217;ordre longitude-latitude. L&#8217;ordre longitude/latitude utilisé par
+OGR est voulu pour compatibilité avec la plupart des autres pilotes et commandes
+OGR. Pour les localisations encodées dans GML, le pilote gérera l&#8217;attribut
+<em>srsName</em> pour la description des autres SRS.</p>
+<p>L&#8217;encodage Simple et GML gèrent la notion de boîte comme une géométrie. Cela
+sera décodé comme un rectangle (géométrie polygonale) dans le modèle Simple
+Feature d&#8217;OGR.</p>
+<p>Une couche seule est renvoyée pendant la lecture du document RSS. Les objets
+sont récupérés à partir du contenu des éléments <em>&lt;item&gt;</em> (document RSS) ou
+<em>&lt;entry&gt;</em> (document Atom).</p>
+<div class="section" id="problemes-d-encodage">
+<h2>Problèmes d&#8217;encodage<a class="headerlink" href="#problemes-d-encodage" title="Lien permanent vers ce titre">¶</a></h2>
+<p>La bibliothèque Expat gère la lecture des encodages internes suivants :</p>
+<ul class="simple">
+<li>US-ASCII</li>
+<li>UTF-8</li>
+<li>UTF-16</li>
+<li>ISO-8859-1</li>
+</ul>
+<p>OGR 1.8.0 ajoute la gestion pour l&#8217;encodage Windows-1252 (pour les versions
+antérieures, la modification de l&#8217;encodage mentionné dans l&#8217;en-tête XML à
+ISO-8859-1 peut fonctionner dans certain cas).</p>
+<p>Le contenu retourné par OGR sera encodé en UTF-8, après la conversion à partir de
+l&#8217;encodage mentionné par le fichier d&#8217;en-tête.</p>
+<p>Si votre fichier GeoRSS n&#8217;est pas encodé dans un de ces encodages, il ne sera
+pas parsé par le pilote GeoRSS. Vous pouvez le convertir dans l&#8217;un des encodages
+gérés avec la commande <em>iconv</em> par exemple et changer en fonction la valeur
+du paramètre encodage dans l&#8217;en-tête XML.</p>
+<p>Lors de l&#8217;écriture du fichier GeoRSS, le pilote s&#8217;attend à ce que du contenu en
+UTF-8 lui soit passé.</p>
+</div>
+<div class="section" id="definitions-des-champs">
+<h2>Définitions des champs<a class="headerlink" href="#definitions-des-champs" title="Lien permanent vers ce titre">¶</a></h2>
+<p>Lors de la lecture d&#8217;un document, le pilote réalisera d&#8217;abord une lecture
+complète du document pour obtenir les définitions du champ.</p>
+<p>Le pilote renverra les éléments trouvés dans le schéma de base d&#8217;un canal RSS ou
+d&#8217;un flux Atom. Il renverra également les éléments d&#8217;extension qui sont
+autorisés dans les espaces de nom.</p>
+<p>Les attributs des éléments de premier niveau seront exposés comme champs.</p>
+<p>Les contenus complexes (élément dans des éléments de premier niveau) seront
+renvoyé comme blob XML.</p>
+<p>Quand un même élément est répété, un nombre apparaîtra à la fin du nom de
+l&#8217;attribut pour les répétitions. Cela est utile pour l&#8217;élément <em>&lt;category&gt;</em>
+dans les documents RSS et Atom par exemple.</p>
+<p>Le contenu suivant :</p>
+<div class="highlight-python"><pre>&lt;item&gt;
+    &lt;title&gt;Mon titre&lt;/title&gt;
+    &lt;link&gt;http://www.mylink.org&lt;/link&gt;
+    &lt;description&gt;Cool description !&lt;/description&gt;
+    &lt;pubDate&gt;Wed, 11 Jul 2007 15:39:21 GMT&lt;/pubDate&gt;
+    &lt;guid&gt;http://www.mylink.org/2007/07/11&lt;/guid&gt;
+    &lt;category&gt;Computer Science&lt;/category&gt;
+    &lt;category&gt;Logiciel Open Source&lt;/category&gt;
+    &lt;georss:point&gt;49 2&lt;/georss:point&gt;
+    &lt;myns:name type="mon_type"&gt;Mon Nom&lt;/myns:name&gt;
+    &lt;myns:complexcontent&gt;
+        &lt;myns:subelement&gt;Subelement&lt;/myns:subelement&gt;
+    &lt;/myns:complexcontent&gt;
+&lt;/item&gt;</pre>
+</div>
+<p>Sera interprété dans le modèle SF d&#8217;OGR comme :</p>
+<div class="highlight-python"><pre>title (String) = Mon titre
+link (String) = http://www.mylink.org
+description (String) = Cool description !
+pubDate (DateTime) = 2007/07/11 15:39:21+00
+guid (String) = http://www.mylink.org/2007/07/11
+category (String) = Computer Science
+category2 (String) = Logiciel Open Source
+myns_name (String) = Mon Nom
+myns_name_type (String) = mon_type
+myns_complexcontent (String) = &lt;myns:subelement&gt;Subelement&lt;/myns:subelement&gt;
+POINT (2 49)</pre>
+</div>
+</div>
+<div class="section" id="problemes-lors-de-la-creation">
+<h2>Problèmes lors de la création<a class="headerlink" href="#problemes-lors-de-la-creation" title="Lien permanent vers ce titre">¶</a></h2>
+<p>À l&#8217;export, toutes les couches sont écrites en un seul fichier. La mise à jour
+de fichiers existant n&#8217;est pas gérée.</p>
+<p>Si le fichier en sortie existe déjà, l&#8217;écriture n&#8217;aura pas lieu. Vous devez
+d&#8217;abord effacer le fichier existant.</p>
+<p>Une couche qui est créé ne peut pas être immédiatement lu sans fermeture et
+réouverture du fichier. Ceci afin de dire qu&#8217;un jeu de données est en écriture
+seul ou en lecture seul au cours de la session.</p>
+<p>Géométries gérées :</p>
+<ul class="simple">
+<li>Objets de type wkbPoint/wkbPoint25D.</li>
+<li>Objets de type wkbLineString/wkbLineString25D.</li>
+<li>Objets de type wkbPolygon/wkbPolygon25D.</li>
+</ul>
+<p>Les autres types de géométrie ne sont pas gérés et seront ignoré silencieusement.</p>
+<p>Le pilote GeoRSS gère ces options de création de jeux de données suivantes :</p>
+<ul class="simple">
+<li><strong>FORMAT=RSS|ATOM :</strong> si le document doit être au format RSS 2.0 ou Atom
+1.0 format. Valeur par défaut : RSS</li>
+<li><strong>GEOM_DIALECT=SIMPLE|GML|W3C_GEO (RSS or ATOM document) :</strong> l&#8217;encodage des
+informations de localisation. Valeur par défaut : SIMPLE W3C_GEO ne gère que
+les géométries ponctuelles. SIMPLE ou W3C_GEO ne gère que les géométries avec
+des coordonnées WGS84.</li>
+<li><strong>USE_EXTENSIONS=YES|NO.*</strong> valeur par défaut : <em>NO</em>. Si définie à <em>YES</em>,
+les champs étendus (c&#8217;est à dire le champs qui ne ont pas dans le schéma de
+base des documents RSS ou Atom) seront écrit. si le nom du champ non trouvé
+dans le schéma de base correspond au motif <em>foo_bar</em>, <em>foo</em> sera considéré
+comme le namespace de l&#8217;élément et un élément <em>&lt;foo:bar&gt;*sera écrit autrement
+les éléments seront écrit dans le namespace *&lt;ogr:&gt;</em>.</li>
+<li><strong>WRITE_HEADER_AND_FOOTER=YES|NO.*</strong> valeur par défaut : <em>YES</em>. Si définie à
+<em>NO</em>, seul les éléments <em>&lt;entry&gt;</em> ou <em>&lt;item&gt;</em> seront écrit. L&#8217;utilisateur
+devra fournir les en-têtes et pieds de page appropriés du document. Les
+options suivantes ne sont pas utile dans ce cas.</li>
+<li><strong>HEADER (RSS ou document Atom) :</strong> contenu XML qui sera placé entre
+l&#8217;élément <em>&lt;channel&gt;</em> et le premier élément <em>&lt;item&gt;*pour un document RSS, ou
+entre la balise xml et le premier élément *&lt;entry&gt;</em> pour un document Atom.
+Si cela est définie, cela écrasera les options qui suivent.</li>
+<li><strong>TITLE (RSS ou document Atom) :</strong> les valeurs placées entre l&#8217;élément
+<em>&lt;title&gt;</em> dans l&#8217;en-tête. Si elle n&#8217;est pas fournie, une valeur factice sera
+utilisée puisque cet élément est obligatoire.</li>
+<li><strong>DESCRIPTION (document RSS) :</strong> les valeurs placées entre l&#8217;élément
+<em>&lt;description&gt;</em> dans l&#8217;en-tête. Si elle n&#8217;est pas fournie, une valeur factice
+sera utilisée puisque cet élément est obligatoire.</li>
+<li><strong>LINK (RSS document) :</strong> les valeurs placées entre l&#8217;élément <em>&lt;link&gt;</em> dans
+l&#8217;en-tête. Si elle n&#8217;est pas fournie, une valeur factice sera utilisée puisque
+cet élément est obligatoire.</li>
+<li><strong>UPDATED (document Atom) :</strong> les valeurs placées entre l&#8217;élément
+<em>&lt;updated&gt;</em> dans l&#8217;en-tête. Elle doit être formatée comme une datetime xml.
+Si elle n&#8217;est pas fournie, une valeur factice sera utilisée puisque cet
+élément est obligatoire.</li>
+<li><strong>AUTHOR_NAME (document Atom) :</strong> les valeurs placées entre l&#8217;élément
+<em>&lt;author&gt;&lt;name&gt;</em> dans l&#8217;en-tête. Si elle n&#8217;est pas fournie, une valeur
+factice sera utilisée puisque cet élément est obligatoire.</li>
+<li><strong>ID (document Atom) :</strong> les valeurs placées entre l&#8217;élément <em>&lt;id&gt;</em> dans
+l&#8217;en-tête. Si elle n&#8217;est pas fournie, une valeur factice sera utilisée puisque
+cet élément est obligatoire.</li>
+</ul>
+<p>Lors de la translation d&#8217;un de jeu de données source, il peut être nécessaire
+de renommer les noms du champ à partir du jeu de données source dans les noms
+d&#8217;attributs RSS ou ATOM attendu, tels que <em>&lt;title&gt;</em>, <em>&lt;description&gt;</em>, etc. Cela
+peut être réalisé avec un <a class="reference internal" href="vrt.html#gdal-ogr-formats-vrt"><em>Virtual Format</em></a>, ou en utilisant
+l&#8217;option <em>-sql</em> de la commande ogr2ogr (voir RFC21 :
+<a class="reference external" href="http://trac.osgeo.org/gdal/wiki/rfc21_ogrsqlcast">cast des types SQL d&#8217;OGR et alias des noms de champ</a>)</p>
+</div>
+<div class="section" id="exemple">
+<h2>Exemple<a class="headerlink" href="#exemple" title="Lien permanent vers ce titre">¶</a></h2>
+<ul>
+<li><p class="first">la commande &#8216;&#8217;ogrinfo&#8217;&#8217; peut être utilisé pour dumper le contenu d&#8217;un fichier
+de données GeoRSS :</p>
+<div class="highlight-python"><pre>ogrinfo -ro -al input.xml</pre>
+</div>
+</li>
+<li><p class="first">la commande &#8216;&#8217;ogr2ogr&#8217;&#8217; peut être utilisé pour réaliser une translation de
+GeoRSS vers GeoRSS. Par exemple un document Atom dans un document RSS.</p>
+<div class="highlight-python"><pre>ogr2ogr -f GeoRSS output.xml input.xml "select link_href as link, title,
+  content as description, author_name as author, id as guid from georss"</pre>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Dans cet exemple nous faisons une correspondance entre des champs
+équivalents à partir du nom source vers le nom attentdu du format de
+destination.</p>
+</div>
+</li>
+<li><p class="first">Le script Python suivant montre comment lire le contenu d&#8217;un flux GeoRSS en
+ligne :</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">#!/usr/bin/python</span>
+<span class="kn">import</span> <span class="nn">gdal</span>
+<span class="kn">import</span> <span class="nn">ogr</span>
+<span class="kn">import</span> <span class="nn">urllib2</span>
+
+<span class="n">url</span> <span class="o">=</span> <span class="s">&#39;http://earthquake.usgs.gov/eqcenter/catalogs/eqs7day-M5.xml&#39;</span>
+<span class="n">content</span> <span class="o">=</span> <span class="bp">None</span>
+<span class="k">try</span><span class="p">:</span>
+    <span class="n">handle</span> <span class="o">=</span> <span class="n">urllib2</span><span class="o">.</span><span class="n">urlopen</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+    <span class="n">content</span> <span class="o">=</span> <span class="n">handle</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+<span class="k">except</span> <span class="n">urllib2</span><span class="o">.</span><span class="n">HTTPError</span><span class="p">,</span> <span class="n">e</span><span class="p">:</span>
+    <span class="k">print</span> <span class="s">&#39;HTTP service for </span><span class="si">%s</span><span class="s"> is down (HTTP Error: </span><span class="si">%d</span><span class="s">)&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">e</span><span class="o">.</span><span class="n">code</span><span class="p">)</span>
+<span class="k">except</span><span class="p">:</span>
+    <span class="k">print</span> <span class="s">&#39;HTTP service for </span><span class="si">%s</span><span class="s"> is down.&#39;</span> <span class="o">%</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+
+<span class="c"># Créé un fichier en mémoire à partir du contenu téléchargé</span>
+<span class="n">gdal</span><span class="o">.</span><span class="n">FileFromMemBuffer</span><span class="p">(</span><span class="s">&#39;/vsimem/temp&#39;</span><span class="p">,</span> <span class="n">content</span><span class="p">)</span>
+
+<span class="n">ds</span> <span class="o">=</span> <span class="n">ogr</span><span class="o">.</span><span class="n">Open</span><span class="p">(</span><span class="s">&#39;/vsimem/temp&#39;</span><span class="p">)</span>
+<span class="n">lyr</span> <span class="o">=</span> <span class="n">ds</span><span class="o">.</span><span class="n">GetLayer</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">feat</span> <span class="o">=</span> <span class="n">lyr</span><span class="o">.</span><span class="n">GetNextFeature</span><span class="p">()</span>
+<span class="k">while</span> <span class="n">feat</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+    <span class="k">print</span> <span class="n">feat</span><span class="o">.</span><span class="n">GetFieldAsString</span><span class="p">(</span><span class="s">&#39;title&#39;</span><span class="p">)</span> <span class="o">+</span> <span class="s">&#39; &#39;</span> <span class="o">+</span> <span class="n">feat</span><span class="o">.</span><span class="n">GetGeometryRef</span><span class="p">()</span><span class="o">.</span><span class="n">ExportToWkt</span><span class="p">()</span>
+    <span class="n">feat</span><span class="o">.</span><span class="n">Destroy</span><span class="p">()</span>
+    <span class="n">feat</span> <span class="o">=</span> <span class="n">lyr</span><span class="o">.</span><span class="n">GetNextFeature</span><span class="p">()</span>
+
+<span class="n">ds</span><span class="o">.</span><span class="n">Destroy</span><span class="p">()</span>
+
+<span class="c"># Libère la mémoire associé avec le fichier en mémoire</span>
+<span class="n">gdal</span><span class="o">.</span><span class="n">Unlink</span><span class="p">(</span><span class="s">&#39;/vsimem/temp&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</div>
+<div class="section" id="voir-aussi">
+<h2>Voir aussi<a class="headerlink" href="#voir-aussi" title="Lien permanent vers ce titre">¶</a></h2>
+<ul class="simple">
+<li><a class="reference external" href="http://georss.org/">Page pour le format GeoRSS</a></li>
+<li><a class="reference external" href="http://fr.wikipedia.org/wiki/GeoRSS">Page Wikipedia pour le format GeoRSS</a></li>
+<li><a class="reference external" href="http://fr.wikipedia.org/wiki/RSS_(format)">Page Wikipedia pour le format RSS</a></li>
+<li><a class="reference external" href="http://www.rssboard.org/rss-specification">Spécification RSS 2.0</a></li>
+<li><a class="reference external" href="http://fr.wikipedia.org/wiki/Atom_(standard)">Page Wikipedia pour le format Atom</a></li>
+<li><a class="reference external" href="http://www.ietf.org/rfc/rfc4287.txt">Spécification Atom 1.0</a></li>
+</ul>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+
+
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="gft.html" title="GFT - Google Fusion Tables"
+             >suivant</a></li>
+        <li class="right" >
+          <a href="geomedia.html" title="Base de données MDB de Geomedia"
+             >précédent</a> |</li>
+        <li><a href="../../index.html">GDAL v1.9.0 documentation</a> &raquo;</li>
+          <li><a href="../index.html" >OGR</a> &raquo;</li>
+          <li><a href="index.html" >Formats vecteur d&#8217;OGR</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+    <a href="http://creativecommons.org/licenses/by/2.0/fr/deed.fr">Licence Creative Common BY</a>
+    <!--
+      &copy; Copyright 2011, Yves Jacolin.-->
+      Créé avec <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0.7.
+    </div>
+  </body>
+</html>

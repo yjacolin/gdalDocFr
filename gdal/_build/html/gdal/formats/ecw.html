@@ -1,0 +1,227 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF8" />
+    
+    <title>Le format ECW - ERDAS Compress Wavelets &mdash; GDAL v1.9.0 documentation</title>
+    <link rel="stylesheet" href="../../_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '1.9.0',
+        COLLAPSE_MODINDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../_static/translations.js"></script>
+    <link rel="top" title="GDAL v1.9.0 documentation" href="../../index.html" />
+    <link rel="up" title="Formats" href="index.html" />
+    <link rel="next" title="ELAS - Earth Resources Laboratory Applications Software" href="elas.html" />
+    <link rel="prev" title="DTED – Military Elevation Data" href="dted.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="elas.html" title="ELAS - Earth Resources Laboratory Applications Software"
+             accesskey="N">suivant</a></li>
+        <li class="right" >
+          <a href="dted.html" title="DTED – Military Elevation Data"
+             accesskey="P">précédent</a> |</li>
+        <li><a href="../../index.html">GDAL v1.9.0 documentation</a> &raquo;</li>
+          <li><a href="../index.html" >GDAL</a> &raquo;</li>
+          <li><a href="index.html" accesskey="U">Formats</a> &raquo;</li> 
+      </ul>
+    </div>
+
+
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <h3><a href="../../index.html">Table des matières</a></h3>
+            <ul>
+<li><a class="reference internal" href="#">Le format ECW - ERDAS Compress Wavelets</a><ul>
+<li><a class="reference internal" href="#problemes-de-creation">Problèmes de création</a></li>
+<li><a class="reference internal" href="#options-de-configuration">Options de configuration</a></li>
+<li><a class="reference internal" href="#voyez-egalement">Voyez également</a></li>
+</ul>
+</li>
+</ul>
+
+            <h4>Sujet précédent</h4>
+            <p class="topless"><a href="dted.html"
+                                  title="Chapitre précédent">DTED &#8211; Military Elevation Data</a></p>
+            <h4>Sujet suivant</h4>
+            <p class="topless"><a href="elas.html"
+                                  title="Chapitre suivant">ELAS - Earth Resources Laboratory Applications Software</a></p>
+            <h3>Cette page</h3>
+            <ul class="this-page-menu">
+              <li><a href="../../_sources/gdal/formats/ecw.txt"
+                     rel="nofollow">Montrer la source</a></li>
+            </ul>
+          <div id="searchbox" style="display: none">
+            <h3>Recherche rapide</h3>
+              <form class="search" action="../../search.html" method="get">
+                <input type="text" name="q" size="18" />
+                <input type="submit" value="Go" />
+                <input type="hidden" name="check_keywords" value="yes" />
+                <input type="hidden" name="area" value="default" />
+              </form>
+              <p class="searchtip" style="font-size: 90%">
+              Enter search terms or a module, class or function name.
+              </p>
+          </div>
+          <script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="le-format-ecw-erdas-compress-wavelets">
+<span id="gdal-gdal-formats-ecw"></span><h1>Le format ECW - ERDAS Compress Wavelets<a class="headerlink" href="#le-format-ecw-erdas-compress-wavelets" title="Lien permanent vers ce titre">¶</a></h1>
+<p>GDAL supporte le format .ecw en lecture et en écriture. L&#8217;implémentation
+actuelle lit n&#8217;importe quel nombre de bande mais renvoi seulement des images
+en 8 bit. Les systèmes de coordonnées et les transformations du géo-référencement
+sont lu, mais dans certains cas les systèmes de coordonnées ne seront pas traduit.</p>
+<p>Le support du pilote ECW dans GDAL est optionnel, et nécessite le lien avec la
+bibliothèque SDK ECW externe fournit par ERDAS.</p>
+<p>Le kit de compression gratuit (Licence de type public) ECW supporte la
+compression des images jusqu&#8217;à 500 Mo. Pour compresser de très grosses images,
+il est nécessaire d&#8217;avoir une licence de la technologie ECW d&#8217;ERMapper. Les
+fichiers à compresser au format ECW doivent également être d&#8217;au moins 128 × 128.
+Les sources qui ne sont pas en 8 bites seront re-échantillonnées par la
+bibliothèque SDK ECW d&#8217;une manière un peu incompréhensible. Le résultat est une
+image en 8 bites.</p>
+<p>Lors de l&#8217;écriture des informations du système de coordonnées dans les fichiers
+ECW, la plupart des systèmes de coordonnées courants ne sont pas intégrés
+proprement. Si vous connaissez le nom du système de coordonnées au format
+ERMapper, vous pouvez l&#8217;obliger à le définir au moment de la création avec les
+options de création du PROJ et du DATUM.</p>
+<div class="section" id="problemes-de-creation">
+<h2>Problèmes de création<a class="headerlink" href="#problemes-de-creation" title="Lien permanent vers ce titre">¶</a></h2>
+<p>En plus des fichiers ECW, ce pilote gère aussi l&#8217;accès au service de réseau
+d&#8217;image en utilisant le protocole &#8220;ECWP&#8221;. Utilisez l&#8217;url complète <em>ecwp://</em> du
+service comme nom de jeu de données. Lorsqu&#8217;il compilé avec le SDK 4.1 ou plus
+récent il est aussi possible de tirer avantage des accès asynchrone des services
+ECWP de la <a class="reference external" href="http://trac.osgeo.org/gdal/wiki/rfc24_progressive_data_support">RFC 24</a>.</p>
+<p>À partir de GDAL 1.9.0, les métadonnées XMP peuvent être extraite à partir des
+fichiers JPEG2000, et seront stockés comme contenu brute XML dans le domaine de
+métadonnées xml:XMP.</p>
+<p><strong>Options de création :</strong></p>
+<ul class="simple">
+<li><strong>TARGET=pourcentage :</strong> définit la taille de réduction cible comme un
+pourcentage de l&#8217;originale. S&#8217;il n&#8217;est pas définit, la valeur par défaut est
+de 90 pour les images en nuances de gris et de 95 pour les images RVB.</li>
+<li><strong>PROJ=nom :</strong> Nom au format ECW de la chaîne de projection à utiliser.
+Des exemples courants sont NUTM11, ou GEODETIC.</li>
+<li><strong>DATUM=nom :</strong> nom du datum au format d&#8217;ECW à utiliser. Des exemples
+courants sont WGS84 ou NAD83.</li>
+<li><strong>LARGE_OK=YES :</strong> lorsque compilé avec le SDK ECW 3.x cette option peut être
+définie  pour autoriser la compression des fichiers supérieur à 500 Mo. Il est
+de la responsabilité de l&#8217;utilisateur de s&#8217;assurer que les nécessités de licence
+pour la compression des gros fichiers a été suivit.</li>
+<li><strong>ECW_ENCODE_KEY=key :</strong> fournie la clé d&#8217;encodage OEM acheté chez Erdas qui
+permet l&#8217;encodage des images. La clé a une longueur approximative de 129 hex.
+Il peut aussi être fournie comme option de configuration.</li>
+<li><strong>ECW_ENCODE_COMPANY=name :</strong> fournie le nom de la société qui possède la clé
+d&#8217;encodage OEM d&#8217;ERDAS (voir ECW_ENCODE_KEY). Cela doit correspondre exactement
+au nom utilisé par ERDAS lors de la fourniture de la clé OEM. Il peut aussi être
+fournie comme option de configuration.</li>
+</ul>
+<p>Le format ECW ne supporte pas la création d&#8217;aperçu puisque le format ECW est
+déjà censé être optimisé pour les « aperçues arbitraires ».</p>
+</div>
+<div class="section" id="options-de-configuration">
+<h2>Options de configuration<a class="headerlink" href="#options-de-configuration" title="Lien permanent vers ce titre">¶</a></h2>
+<p>Le SDK ECW d&#8217;ERDAS gère une grande variété d&#8217;<a class="reference external" href="http://trac.osgeo.org/gdal/wiki/ConfigOptions">options de configuration</a> pour contrôler différentes
+fonctionnalités. La plupart de celles-ci sont exposée par les options de
+configuration de GDAL. Voyez la documentation du SDK ECW pour plus de détails
+sur la signification de ces options.</p>
+<ul class="simple">
+<li><strong>ECW_CACHE_MAXMEM=bytes :</strong> octets maximal de RAM utilisé pour la mise en cache
+mémoire. S&#8217;il n&#8217;est pas définie, jusqu&#8217;à 1/4 de la RAM physique sera utilisé par
+le SDK pour la mise en cache en mémoire.</li>
+<li>SDK ECW disponible sur <a class="reference external" href="http://www.ermapper.com/">www.ermapper.com</a>.</li>
+<li><strong>ECWP_CACHE_LOCATION=path :</strong> chemin vers le répertoire à utiliser pour la mise
+en cache des résultats de ECWP. Si non définie, la mise en ache ECWP ne sera
+pas activée.</li>
+<li><strong>ECWP_CACHE_SIZE_MB=number_of_megabytes :</strong> le nombre maximal de Mo d&#8217;espace
+dans ECWP_CACHE_LOCATION à utilisé pour la mise en cache des résultats ECWP.</li>
+<li><strong>ECWP_BLOCKING_TIME_MS :</strong> temps de lecture qu&#8217;un ecwp:// bloquera avant de
+revenir - 10 000 ms par défaut.</li>
+<li><strong>ECWP_REFRESH_TIME_MS :</strong> délais entre l&#8217;arrivé des blocs et la prochaine
+demande de rafraîchissement - 10 000 ms par défaut. Dans le cas de GDAL ceci
+est le temps que le pilote attendra pour plus de données d&#8217;une connexion ecwp
+pour laquelle le résultat finale n&#8217;a pas été renvoyé. Si définie trop petit
+alors les requêtes <em>RasterIO()</em> produiront souvent des résultats de faibles</li>
+</ul>
+<blockquote>
+<div>résolutions.</div></blockquote>
+<ul class="simple">
+<li><strong>ECW_TEXTURE_DITHER=TRUE/FALSE :</strong> cela peut être définie à FALSE pour
+désactiver le tramage lors de la décompression des fichiers ECW. TRUE par défaut.</li>
+<li><strong>ECW_FORCE_FILE_REOPEN=TRUE/FALSE :</strong> cela peut être définie à TRUE pour forcer
+à ouvrir un fichier pris en charge pour chaque fichier pour chaque connexion
+réalisée. FALSE par défaut.</li>
+<li><strong>ECW_CACHE_MAXOPEN=number :</strong> le nombre maximal de fichier à garder ouvert
+pour que le fichier ECW prenne en charge la mise en cache. Illimité par défaut.</li>
+<li><strong>ECW_RESILIENT_DECODING=TRUE/FALSE :</strong> contrôle si le lecteur doit oublier les
+erreurs dans un fichier et essayer de renvoyer autant de données que possible.
+TRUE par défaut. Si définie à FALSE un fichier invalide résultera en une erreur.</li>
+<li><strong>ECW_ENCODE_KEY, ECW_ENCODE_COMPANY :</strong> ces valeurs, comme décrite dans les
+options de création, peuvent aussi être définir comme options de configuration.
+voir plus haut.</li>
+</ul>
+</div>
+<div class="section" id="voyez-egalement">
+<h2>Voyez également<a class="headerlink" href="#voyez-egalement" title="Lien permanent vers ce titre">¶</a></h2>
+<ul class="simple">
+<li>Implementé dans <em>gdal/frmts/ecw/</em>.</li>
+<li>La page ECW (<a class="reference external" href="http://www.erdas.com/products/ERDASECWJPEG2000SDK/Details.aspx">http://www.erdas.com/products/ERDASECWJPEG2000SDK/Details.aspx</a>) chez
+<a class="reference external" href="http://www.erdas.com">http://www.erdas.com</a>.</li>
+<li><a class="reference external" href="http://trac.osgeo.org/gdal/wiki/ECW">Astuces de compilation de l&#8217;ECW pour GDAL</a></li>
+</ul>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+
+
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="elas.html" title="ELAS - Earth Resources Laboratory Applications Software"
+             >suivant</a></li>
+        <li class="right" >
+          <a href="dted.html" title="DTED – Military Elevation Data"
+             >précédent</a> |</li>
+        <li><a href="../../index.html">GDAL v1.9.0 documentation</a> &raquo;</li>
+          <li><a href="../index.html" >GDAL</a> &raquo;</li>
+          <li><a href="index.html" >Formats</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+    <a href="http://creativecommons.org/licenses/by/2.0/fr/deed.fr">Licence Creative Common BY</a>
+    <!--
+      &copy; Copyright 2011, Yves Jacolin.-->
+      Créé avec <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0.7.
+    </div>
+  </body>
+</html>

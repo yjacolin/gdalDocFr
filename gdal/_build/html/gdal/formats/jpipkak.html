@@ -1,0 +1,349 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF8" />
+    
+    <title>JPIPKAK - JPIP Streaming &mdash; GDAL v1.9.0 documentation</title>
+    <link rel="stylesheet" href="../../_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '1.9.0',
+        COLLAPSE_MODINDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../_static/translations.js"></script>
+    <link rel="top" title="GDAL v1.9.0 documentation" href="../../index.html" />
+    <link rel="up" title="Formats" href="index.html" />
+    <link rel="next" title="L1B – NOAA Polar Orbiter Level 1b Data Set (AVHRR)" href="l1b.html" />
+    <link rel="prev" title="JPEGLS" href="jpegls.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="l1b.html" title="L1B – NOAA Polar Orbiter Level 1b Data Set (AVHRR)"
+             accesskey="N">suivant</a></li>
+        <li class="right" >
+          <a href="jpegls.html" title="JPEGLS"
+             accesskey="P">précédent</a> |</li>
+        <li><a href="../../index.html">GDAL v1.9.0 documentation</a> &raquo;</li>
+          <li><a href="../index.html" >GDAL</a> &raquo;</li>
+          <li><a href="index.html" accesskey="U">Formats</a> &raquo;</li> 
+      </ul>
+    </div>
+
+
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <h3><a href="../../index.html">Table des matières</a></h3>
+            <ul>
+<li><a class="reference internal" href="#">JPIPKAK - JPIP Streaming</a><ul>
+<li><a class="reference internal" href="#jpipkak-apercu-jpip">JPIPKAK - aperçu JPIP</a></li>
+<li><a class="reference internal" href="#jpipkak-approche">JPIPKAK - approche</a></li>
+<li><a class="reference internal" href="#jpipkak-implementation">JPIPKAK - implémentation</a></li>
+<li><a class="reference internal" href="#jpipkak-exigences-d-installation">JPIPKAK - exigences d&#8217;installation</a></li>
+<li><a class="reference internal" href="#notes">Notes</a></li>
+</ul>
+</li>
+</ul>
+
+            <h4>Sujet précédent</h4>
+            <p class="topless"><a href="jpegls.html"
+                                  title="Chapitre précédent">JPEGLS</a></p>
+            <h4>Sujet suivant</h4>
+            <p class="topless"><a href="l1b.html"
+                                  title="Chapitre suivant">L1B &#8211; NOAA Polar Orbiter Level 1b Data Set (AVHRR)</a></p>
+            <h3>Cette page</h3>
+            <ul class="this-page-menu">
+              <li><a href="../../_sources/gdal/formats/jpipkak.txt"
+                     rel="nofollow">Montrer la source</a></li>
+            </ul>
+          <div id="searchbox" style="display: none">
+            <h3>Recherche rapide</h3>
+              <form class="search" action="../../search.html" method="get">
+                <input type="text" name="q" size="18" />
+                <input type="submit" value="Go" />
+                <input type="hidden" name="check_keywords" value="yes" />
+                <input type="hidden" name="area" value="default" />
+              </form>
+              <p class="searchtip" style="font-size: 90%">
+              Enter search terms or a module, class or function name.
+              </p>
+          </div>
+          <script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="jpipkak-jpip-streaming">
+<span id="gdal-gdal-formats-jpipkak"></span><h1>JPIPKAK - JPIP Streaming<a class="headerlink" href="#jpipkak-jpip-streaming" title="Lien permanent vers ce titre">¶</a></h1>
+<p>JPEG 2000 Interactive Protocol (JPIP) flexibilité en ce qui concerne l&#8217;accès
+aléatoire, ordonnancement du flux du code et décodage incrémental est hautement
+exploitable dans un environnement réseau permettant l&#8217;accès aux gros fichiers
+distants avec une bande passante des connexions limitée ou des réseaux à haute
+concurrence.</p>
+<div class="section" id="jpipkak-apercu-jpip">
+<h2>JPIPKAK - aperçu JPIP<a class="headerlink" href="#jpipkak-apercu-jpip" title="Lien permanent vers ce titre">¶</a></h2>
+<p>Un bref aperçu de la séquence des événements JPIP  est présenté dans cette section,
+plus d&#8217;information peut être trouvé dans <a class="reference external" href="http://www.jpeg.org/jpeg2000/j2kpart9.html">JPEG 2000 Interactive Protocol (Part
+9 - JPIP)</a> et la spécification
+peut (et doit) être acheté à partir du site de l&#8217;<a class="reference external" href="http://www.iso.org">ISO</a>.</p>
+<p>Une version antérieure du JPEG 2000 partie 9 est disponible ici
+<a class="reference external" href="http://www.jpeg.org/public/fcd15444-9v2.pdf">http://www.jpeg.org/public/fcd15444-9v2.pdf</a>,
+notez le copyright ISO, les diagrammes ne sont pas répliqués dans cette documentation.</p>
+<p>Une abstraction du protocole JPIP a été réalisé dans ce pilote de format, les
+requêtes ont été réalisé à une niveau de résolution 1:1.</p>
+<img alt="../../_images/jpipsequence.png" src="../../_images/jpipsequence.png" />
+<ol class="arabic simple">
+<li>la demande JPIP  initiale pour une image cible, un id cible, un session sur
+http, les données devant être renvoyées comme jpp-stream sont demandé et une
+longueur maximale est placé dans la réponse. Dans ce cas aucune fenêtre initiale
+est demandée, bien que cela peut l&#8217;être.
+Le serveur répond avec un identifiant cible qui peut être utilisé pour identifier
+l&#8217;image sur le serveur et en-tête de réponse JPIP-Cnew qui inclut le chemin
+vers le serveur JPIP qui va traiter toutes les demandes à venir et l&#8217;identifiant
+cid de la session. Une session est nécessaire afin que que le serveur puisse
+modéliser l&#8217;état de la connexion du client, envoi seulement les données nécessaire.</li>
+<li>Le client demande des fenêtres de vue particulière sur l&#8217;image cible avec une
+longueur de réponse maximale et comprend l&#8217;identifiant de session établie
+dans la communication précédente .
+&#8216;fsiz&#8217; est utilisé pour identifier la résolution associée avec la demande de
+la fenêtre de vue. Les valeurs &#8216;fx&#8217; et &#8216;fy&#8217; définissent les dimensions de
+la résolution de l&#8217;image désirée.
+&#8216;roff&#8217; est utilisé pour identifier le coin supérieur gauche en dehors de la
+région spatiale associée à la fenêtre de vue demandée.
+&#8216;rsiz&#8217; est utilisé pour identifier l&#8217;étendue horizontal et vertical de la
+région spatiale associée à la fenêtre de vue demandée.</li>
+</ol>
+</div>
+<div class="section" id="jpipkak-approche">
+<h2>JPIPKAK - approche<a class="headerlink" href="#jpipkak-approche" title="Lien permanent vers ce titre">¶</a></h2>
+<p>Le pilote JPIPKAK utilise une approche qui a d&#8217;abord été démontré ici,
+<a class="reference external" href="http://www.drc-dev.ohiolink.edu/browser/J2KViewer">J2KViewer</a>, par Juan Pablo
+Garcia Ortiz en séparant la couche de communication (socket / http) à partir de
+l&#8217;objet kdu_cache Kakadu. Séparer la couche de communication de l&#8217;objet données
+est désirable puiqu&#8217;elle permet l&#8217;utilisation de bibliothèques client http
+optimisée tels que libcurl, Apache HttpClient (notez que jportiz utilise un
+Java complet) et permet la communication SSL entre le client et le serveur.</p>
+<p>L&#8217;implémentation Kakadu de la communication du client avec un serveur JPIP utilise
+un socket, et cette connexion du socket détient l&#8217;état de cette session du client.
+Une session client avec Kakadu peut être recréer en utilisant les opérations de
+cache de JPIP entre le client et le serveur, mais aucune utilisation des cookies
+HTTP traditionnel est géré puisque JPIP est neutre pour la couche transport.</p>
+<p>Le pilote JPIPKAK est écrit en utilisant une bibliothèque client HTTP avec l&#8217;objet
+cache de Kakadu et la gestion de la communication optimisée ave un serveur JPIP
+(qui peut ou non gérer les sessions HTTP) et le kdu_region_decompressor haute
+performance de Kakadu.</p>
+<img alt="../../_images/components.png" src="../../_images/components.png" />
+</div>
+<div class="section" id="jpipkak-implementation">
+<h2>JPIPKAK - implémentation<a class="headerlink" href="#jpipkak-implementation" title="Lien permanent vers ce titre">¶</a></h2>
+<p>L&#8217;implémentation gère les API C et C++ de GDAL et fournie un wrapper SWIG initial
+pour ce pilote avec un exemple ImageIO Java (<strong>TODO</strong> - Exemple qGIS).</p>
+<p>Le pilote utilise un modèle simple de threading pour gérer les requêtes de lecture
+des données et la récupération distance. Ce modèle de threading gère deux fenêtres
+clientes séparées, avec juste une connexion sur le serveur. Les requêtes vers le
+serveur sont multiplexées pour utiliser la bande passant disponible efficacement.
+Le client identifie ces fenêtres en utilisant les valeurs &#8220;0&#8221; (faible) ou &#8220;1&#8221;
+(haut) pour une option de la requête de métadonnées &#8220;PRIORITY&#8221;.</p>
+<p><strong>Note : gestion SSL</strong></p>
+<p>Si le client est compilé avec la gestion de SSL, alors le pilote détermine s&#8217;il
+utilise SSL si la requête est un protocole jpips:// en opposition à jpip://. Notez
+que le pilote ne vérifie pas les certificats des serveurs en utilisant le bundle
+du certificat de Curl et il est pour le moment définir pour accepter tous les
+certificats du serveur SSL.</p>
+<p><strong>Note : libCurl</strong></p>
+<p>JPIP définie des valeurs client/serveur en utilisant les en-têtes HTTP, les
+modifications ont été faire dans la bibliothèque de portabilité HTTP de GDAL pour
+gérer cela.</p>
+<div class="figure" id="gdal-gdal-formats-jpip-sequence">
+<img alt="../../_images/gdalsequence.png" src="../../_images/gdalsequence.png" />
+<p class="caption">Le diagramme de séquence de JPIP</p>
+</div>
+<ol class="arabic">
+<li><p class="first"><em>GDALGetDatasetDriver</em></p>
+<p>récupère le pilote auquel ce jeu de données est lié.</p>
+</li>
+<li><p class="first"><em>Open</em></p>
+<p>Si le nom du fichier contenu dans l&#8217;objet <tt class="docutils literal"><span class="pre">GDALOpenInfo</span></tt> a un schéma d&#8217;URI
+insensible à la casse de jpip ou jpips le <tt class="docutils literal"><span class="pre">JPIPKAKDataset</span></tt> est créé et
+initialisé, autrement NULL est retourné.</p>
+</li>
+<li><p class="first"><em>Initialize</em></p>
+<p>L&#8217;initialisation implique de faire une connexion initiale au serveur JPIP pour
+établir une session et pour récupérer les métadonnées initiales sur l&#8217;image
+(ref. <a class="reference internal" href="#gdal-gdal-formats-jpip-sequence"><em>Le diagramme de séquence de JPIP</em></a>).</p>
+<p>si la connexion échoue, la fonction renvoie false et la fonction <tt class="docutils literal"><span class="pre">Open</span></tt>
+retourne NULL indiquant que l&#8217;ouverture du jeu de données avec ce pilote a
+échouée.</p>
+<p>Si la connexion est réussie, alors les demandes suivantes au serveur JPIP sont
+réalisé pour récupérer toutes les métadonnées disponibles des images. Les
+items des métadonnées sont définie en utilisant
+<tt class="docutils literal"><span class="pre">GDALMajorObject-&gt;SetMetadataItem</span></tt> dans le domanie &#8220;JPIP&#8221;.</p>
+<p>Si la métadonnée renvoyée du serveur inclus la boîte GeoJP2 UUID, ou une boîte
+XML GMLJP2 alors cette métadonnées est parsée et définie la métadonnées
+géographique de ce jeu de données.</p>
+</li>
+<li><p class="first"><em>GDALGetMetadata</em></p>
+<p>API C vers <tt class="docutils literal"><span class="pre">JPIPKAKDataset-&gt;GetMetadata</span></tt></p>
+</li>
+<li><p class="first"><em>GetMetadata</em></p>
+<p>retourne les métadonnées pour le domaine &#8220;JPIP&#8221;, les clés sont &#8220;JPIP_NQUALITYLAYERS&#8221;,
+&#8220;JPIP_NRESOLUTIONLEVELS&#8221;, &#8220;JPIP_NCOMPS&#8221; et &#8220;JPIP_SPRECISION&#8221;</p>
+</li>
+<li><p class="first"><em>GDALEndAsyncRasterIO</em></p>
+<p>si le raster IO asynchrone est actif et pas nécessaire, l&#8217;API C appelle
+<tt class="docutils literal"><span class="pre">JPIPKAKDataset-&gt;EndAsyncRasterIO</span></tt></p>
+</li>
+<li><p class="first"><em>EndAsyncRasterIO</em></p>
+<p>L&#8217;objet JPIPKAKAsyncRasterIO est supprimé</p>
+</li>
+<li><p class="first"><em>delete</em></p>
+</li>
+<li><p class="first"><em>GDALBeginAsyncRasterIO</em></p>
+<p>API C vers <tt class="docutils literal"><span class="pre">JPIPKAKDataset-&gt;BeginAsyncRasterIO</span></tt></p>
+</li>
+<li><p class="first"><em>BeginAsyncRasterIO</em></p>
+<p>le client a définie la fenêtre de visualisation demandée à 1:1 et à définie
+optionnellement les items des métadonnées du niveau d&#8217;annulation, la qualité
+des couches et la priorité des threads.</p>
+</li>
+<li><p class="first"><em>Create</em></p>
+<p>créé un objet JPIPKAKAsyncRasterIO</p>
+</li>
+<li><p class="first"><em>Start</em></p>
+<p>Configure la machinerie de kakadu et démarre un thread d&#8217;arrière-plan (s&#8217;il
+ne fonctionne pas déjà) pour communiquer au serveur la demande de la fenêtre
+de visualisation acutelle.
+Le thread d&#8217;arrière-plan résulte dans la mise à jour de l&#8217;objet <tt class="docutils literal"><span class="pre">kdu_cache</span></tt>
+tant que le serveur JPIP envoie un message &#8220;End Of Response&#8221; (EOR) pour la
+demande de fenêtre de visualisation actuelle.</p>
+</li>
+<li><p class="first"><em>API C vers LockBuffer</em></p>
+</li>
+<li><p class="first"><em>LockBuffer</em></p>
+<p>Non implémented dans <tt class="docutils literal"><span class="pre">JPIPKAKAsyncRasterIO</span></tt>, un blocage est nécessaire dans
+<tt class="docutils literal"><span class="pre">JPIPKAKAsyncRasterIO-&gt;GetNextUpdatedRegion</span></tt></p>
+</li>
+<li><p class="first"><em>GDALGetNextUpdatedRegion</em></p>
+<p>C API to GetNextUpdatedRegion</p>
+</li>
+<li><p class="first"><em>GetNextUpdatedRegion</em></p>
+<p>La fonction décompresse les données disponibles pour générer une image (en
+fonction du type de buffer du jeu de données définie dans
+<tt class="docutils literal"><span class="pre">JPIPKAKDataset-&gt;BeginAsyncRasterIO</span></tt>). La largeur et la hauteur de la fenêtre
+(au niveau de rejet demandée) décompressée est renvoyée dans la pointeur de
+la région et peut être affichée par le client. Le statut de l&#8217;opération de
+rendue est une parmi <tt class="docutils literal"><span class="pre">GARIO_PENDING,</span> <span class="pre">GARIO_UPDATE,</span> <span class="pre">GARIO_ERROR,</span>
+<span class="pre">GARIO_COMPLETE</span></tt> à partir de la structure <tt class="docutils literal"><span class="pre">GDALAsyncStatusType</span></tt>.
+<tt class="docutils literal"><span class="pre">GARIO_UPDATE,</span> <span class="pre">GARIO_PENDING</span></tt> nécessite plusieurs lectures de GetNextUpdatedRegion
+pour obtenir les données image complète, ceci est le rendu progressif de JPIP.
+<tt class="docutils literal"><span class="pre">GARIO_COMPLETE</span></tt> indique que la fenêtre est complète.</p>
+<p><tt class="docutils literal"><span class="pre">GDALAsyncStatusType</span></tt> est une structure utilisée par <tt class="docutils literal"><span class="pre">GetNextUpdatedRegion</span></tt>
+pour indiquer si la fonction doit être appelée encore lorsque soit kakadu a
+plus de données dans son cache à décompresser, ou le serveur n&#8217;a pas envoyé
+un message End Of Response (EOR) pour indiquer que la fenêtre demandée est
+complète.</p>
+<p>La région passée dans cette fonction est envoyée par référence, et <em>l&#8217;appelleur
+peut lire cette région quand le résultat renvoie pour trouver la région qui
+a été décompressée ([NdT] phrase en anglais peu clair)</em>. Les données images
+sont placées dans le buffer, par exemple RGB si la région demandée possède 3
+composants.</p>
+</li>
+<li><p class="first"><em>GDALUnlockBuffer</em></p>
+<p>Api C vers UnlockBuffer</p>
+</li>
+<li><p class="first"><em>UnlockBuffer</em></p>
+<p>Non implémenté dans <tt class="docutils literal"><span class="pre">JPIPKAKAsyncRasterIO</span></tt>, un blocage est acquis dans
+<tt class="docutils literal"><span class="pre">JPIPKAKAsyncRasterIO-&gt;GetNextUpdatedRegion</span></tt></p>
+</li>
+<li><p class="first"><em>Draw</em></p>
+<p>Client réalise le rendu des données image</p>
+</li>
+<li><p class="first"><em>GDALLockBuffer</em></p>
+</li>
+<li><p class="first"><em>LockBuffer</em></p>
+</li>
+<li><p class="first"><em>GDALGetNextUpdatedRegion</em></p>
+</li>
+<li><p class="first"><em>GetNextUpdatedRegion</em></p>
+</li>
+<li><p class="first"><em>GDALUnlockBuffer</em></p>
+</li>
+<li><p class="first"><em>UnlockBuffer</em></p>
+</li>
+<li><p class="first"><em>Draw</em></p>
+</li>
+</ol>
+</div>
+<div class="section" id="jpipkak-exigences-d-installation">
+<h2>JPIPKAK - exigences d&#8217;installation<a class="headerlink" href="#jpipkak-exigences-d-installation" title="Lien permanent vers ce titre">¶</a></h2>
+<ul class="simple">
+<li><a class="reference external" href="http://curl.haxx.se/">Libcurl 7.9.4</a></li>
+<li><a class="reference external" href="http://www.openssl.org/">OpenSSL 0.9.8K</a> (si SSL est nécessaire, une
+connexion JPIPS)</li>
+<li><a class="reference external" href="http://www.kakadusoftware.com">Kakadu</a> (testé avec v5.2.6 et v6)</li>
+</ul>
+<p>Pour le moment seulement un makefile Windows est fournie, cependant cela devrait
+compiler sous Linux également puisqu&#8217;il n&#8217;y a pas de dépendances Windows.</p>
+<p>Voir également :</p>
+<ul class="simple">
+<li><a class="reference external" href="http://www.jpeg.org/jpeg2000/j2kpart9.html">JPEG 2000 Interactive Protocol (Part 9 - JPIP)</a></li>
+<li><a class="reference external" href="http://www.opengeospatial.org/standards/gmljp2">http://www.opengeospatial.org/standards/gmljp2</a></li>
+<li><a class="reference external" href="http://www.kakadusoftware.com">Kakadu Software</a></li>
+<li><a class="reference external" href="http://iasdemo.ittvis.com/">IAS demo (example JPIP(S) streams)</a></li>
+</ul>
+</div>
+<div class="section" id="notes">
+<h2>Notes<a class="headerlink" href="#notes" title="Lien permanent vers ce titre">¶</a></h2>
+<p>Pilote développé originellement par &lt;<a class="reference external" href="http://www.ittvis.com">http://www.ittvis.com</a>&#8220;&gt;ITT VIS&lt;/a&gt; et donné
+à GDAL pour permettre le flux de jeux de données JPEG 2000 de client JPIP avec
+le SSL activé .</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+
+
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="l1b.html" title="L1B – NOAA Polar Orbiter Level 1b Data Set (AVHRR)"
+             >suivant</a></li>
+        <li class="right" >
+          <a href="jpegls.html" title="JPEGLS"
+             >précédent</a> |</li>
+        <li><a href="../../index.html">GDAL v1.9.0 documentation</a> &raquo;</li>
+          <li><a href="../index.html" >GDAL</a> &raquo;</li>
+          <li><a href="index.html" >Formats</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+    <a href="http://creativecommons.org/licenses/by/2.0/fr/deed.fr">Licence Creative Common BY</a>
+    <!--
+      &copy; Copyright 2011, Yves Jacolin.-->
+      Créé avec <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0.7.
+    </div>
+  </body>
+</html>

@@ -1,0 +1,152 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF8" />
+    
+    <title>FAQ Projection et système de coordonnées &mdash; GDAL v1.9.0 documentation</title>
+    <link rel="stylesheet" href="../_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.9.0',
+        COLLAPSE_MODINDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/translations.js"></script>
+    <link rel="top" title="GDAL v1.9.0 documentation" href="../index.html" />
+    <link rel="up" title="FAQ" href="index.html" />
+    <link rel="next" title="FAQ divers" href="divers.html" />
+    <link rel="prev" title="FAQ vecteur" href="vecteur.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="divers.html" title="FAQ divers"
+             accesskey="N">suivant</a></li>
+        <li class="right" >
+          <a href="vecteur.html" title="FAQ vecteur"
+             accesskey="P">précédent</a> |</li>
+        <li><a href="../index.html">GDAL v1.9.0 documentation</a> &raquo;</li>
+          <li><a href="index.html" accesskey="U">FAQ</a> &raquo;</li> 
+      </ul>
+    </div>
+
+
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <h3><a href="../index.html">Table des matières</a></h3>
+            <ul>
+<li><a class="reference internal" href="#">FAQ Projection et système de coordonnées</a><ul>
+<li><a class="reference internal" href="#que-sont-les-projections-well-known-text-et-comment-les-utiliser">Que sont les projections Well Known Text, et comment les utiliser ?</a></li>
+<li><a class="reference internal" href="#puis-je-reprojeter-des-rasters-avec-gdal">Puis je reprojeter des rasters avec GDAL?</a></li>
+<li><a class="reference internal" href="#pourquoi-gdal-ne-choisit-pas-automatiquement-la-transformation-de-datum">Pourquoi GDAL ne choisit pas automatiquement la transformation de datum ?</a></li>
+</ul>
+</li>
+</ul>
+
+            <h4>Sujet précédent</h4>
+            <p class="topless"><a href="vecteur.html"
+                                  title="Chapitre précédent">FAQ vecteur</a></p>
+            <h4>Sujet suivant</h4>
+            <p class="topless"><a href="divers.html"
+                                  title="Chapitre suivant">FAQ divers</a></p>
+            <h3>Cette page</h3>
+            <ul class="this-page-menu">
+              <li><a href="../_sources/faq/proj.txt"
+                     rel="nofollow">Montrer la source</a></li>
+            </ul>
+          <div id="searchbox" style="display: none">
+            <h3>Recherche rapide</h3>
+              <form class="search" action="../search.html" method="get">
+                <input type="text" name="q" size="18" />
+                <input type="submit" value="Go" />
+                <input type="hidden" name="check_keywords" value="yes" />
+                <input type="hidden" name="area" value="default" />
+              </form>
+              <p class="searchtip" style="font-size: 90%">
+              Enter search terms or a module, class or function name.
+              </p>
+          </div>
+          <script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="faq-projection-et-systeme-de-coordonnees">
+<span id="gdal-faq-proj"></span><h1>FAQ Projection et système de coordonnées<a class="headerlink" href="#faq-projection-et-systeme-de-coordonnees" title="Lien permanent vers ce titre">¶</a></h1>
+<div class="section" id="que-sont-les-projections-well-known-text-et-comment-les-utiliser">
+<h2>Que sont les projections Well Known Text, et comment les utiliser ?<a class="headerlink" href="#que-sont-les-projections-well-known-text-et-comment-les-utiliser" title="Lien permanent vers ce titre">¶</a></h2>
+<p><em>Well Known Texte</em> d&#8217;OpenGIS est un format textuel pour définir les systèmes de
+coordonnées. Il est assez librement basé sur le modèle de système de coordonnées
+de l&#8217;[[http:<em>www.epsg.org/|EPSG]]. Bien que GDAL lui-même envoie juste ces
+définitions comme des chaines textuels, il y a également une classe `OGRSpatialReference &lt;http:*www.gdal.org/ogr/classOGRSpatialReference.html&gt;`_ dans GDAL/OGR pour
+les manipuler et un lien vers `PROJ.4 &lt;http:*proj.maptools.org/&gt;`_ pour la
+transformation entre les systèmes de coordonnées. La classe *OGRSpatialReference</em>,
+et le lien avec PROJ.4 (mais pas PROJ.4 lui-même) sont liés dans la bibliothèque
+GDAL par défaut. Plus d&#8217;informations sur WKT et <em>OGRSpatialReference</em> peuvent être
+trouvé dans le <a class="reference external" href="http:*www.gdal.org/ogr/osr_tutorial.html">tutorial sur les projections dans OGR</a>.</p>
+</div>
+<div class="section" id="puis-je-reprojeter-des-rasters-avec-gdal">
+<h2>Puis je reprojeter des rasters avec GDAL?<a class="headerlink" href="#puis-je-reprojeter-des-rasters-avec-gdal" title="Lien permanent vers ce titre">¶</a></h2>
+<p>Oui, vous pouvez utiliser le programme &#8216;&#8217;gdalwarp&#8217;&#8217; ou développer un programme
+qui utilise la classe <a class="reference external" href="http://www.gdal.org/classGDALWarpOperation.html">GDALWarpOperation</a>
+décrite dans le tutorial de l&#8217;<a class="reference external" href="http://www.gdal.org/warptut.html">API Warp de GDAL</a>.</p>
+</div>
+<div class="section" id="pourquoi-gdal-ne-choisit-pas-automatiquement-la-transformation-de-datum">
+<h2>Pourquoi GDAL ne choisit pas automatiquement la transformation de datum ?<a class="headerlink" href="#pourquoi-gdal-ne-choisit-pas-automatiquement-la-transformation-de-datum" title="Lien permanent vers ce titre">¶</a></h2>
+<p>Il n&#8217;existe pas de chose comme un ensemble par défaut et précis de paramètres
+de transformation de datum pour un datum. OGR utilise (NADCON) par défaut, qui
+est le plus précis qui existe pour l&#8217;Amérique du Nord, mais dans le cas général
+(le monde) cela est très dur à déterminer et il n&#8217;y normalement pas de telle
+chose par défaut. La transformation qui doit être utilisée dépend de la zone
+couverte exacte, précision requise, etc. En d&#8217;autres mots, les utilisateurs
+doivent faire attention et faire leur boulot. Quelques liens :
+<a class="reference external" href="http://proj.maptools.org/faq.html">FAQ de proj4</a>, <a class="reference external" href="http://casoilresource.lawr.ucdavis.edu/drupal/node/259">Site</a>,
+<a class="reference external" href="http://www.nabble.com/issue-warning-to-user-when-performing-datum-shift-%28OGR%2C-GDAL%29-t2029971.html">Message sur la liste de diffusion</a>.</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+
+
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="divers.html" title="FAQ divers"
+             >suivant</a></li>
+        <li class="right" >
+          <a href="vecteur.html" title="FAQ vecteur"
+             >précédent</a> |</li>
+        <li><a href="../index.html">GDAL v1.9.0 documentation</a> &raquo;</li>
+          <li><a href="index.html" >FAQ</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+    <a href="http://creativecommons.org/licenses/by/2.0/fr/deed.fr">Licence Creative Common BY</a>
+    <!--
+      &copy; Copyright 2011, Yves Jacolin.-->
+      Créé avec <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0.7.
+    </div>
+  </body>
+</html>

@@ -1,0 +1,178 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF8" />
+    
+    <title>Geospatial PDF &mdash; GDAL v1.9.0 documentation</title>
+    <link rel="stylesheet" href="../../_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '1.9.0',
+        COLLAPSE_MODINDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../_static/translations.js"></script>
+    <link rel="top" title="GDAL v1.9.0 documentation" href="../../index.html" />
+    <link rel="up" title="Formats" href="index.html" />
+    <link rel="next" title="PDS – Système de données planétaire" href="pds.html" />
+    <link rel="prev" title="PCIDSK — PCI Geomatics Database File" href="pcidsk.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="pds.html" title="PDS – Système de données planétaire"
+             accesskey="N">suivant</a></li>
+        <li class="right" >
+          <a href="pcidsk.html" title="PCIDSK — PCI Geomatics Database File"
+             accesskey="P">précédent</a> |</li>
+        <li><a href="../../index.html">GDAL v1.9.0 documentation</a> &raquo;</li>
+          <li><a href="../index.html" >GDAL</a> &raquo;</li>
+          <li><a href="index.html" accesskey="U">Formats</a> &raquo;</li> 
+      </ul>
+    </div>
+
+
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <h3><a href="../../index.html">Table des matières</a></h3>
+            <ul>
+<li><a class="reference internal" href="#">Geospatial PDF</a><ul>
+<li><a class="reference internal" href="#restrictions">Restrictions</a></li>
+<li><a class="reference internal" href="#voir-egalement">Voir également</a></li>
+</ul>
+</li>
+</ul>
+
+            <h4>Sujet précédent</h4>
+            <p class="topless"><a href="pcidsk.html"
+                                  title="Chapitre précédent">PCIDSK &#8212; PCI Geomatics Database File</a></p>
+            <h4>Sujet suivant</h4>
+            <p class="topless"><a href="pds.html"
+                                  title="Chapitre suivant">PDS &#8211; Système de données planétaire</a></p>
+            <h3>Cette page</h3>
+            <ul class="this-page-menu">
+              <li><a href="../../_sources/gdal/formats/pdf.txt"
+                     rel="nofollow">Montrer la source</a></li>
+            </ul>
+          <div id="searchbox" style="display: none">
+            <h3>Recherche rapide</h3>
+              <form class="search" action="../../search.html" method="get">
+                <input type="text" name="q" size="18" />
+                <input type="submit" value="Go" />
+                <input type="hidden" name="check_keywords" value="yes" />
+                <input type="hidden" name="area" value="default" />
+              </form>
+              <p class="searchtip" style="font-size: 90%">
+              Enter search terms or a module, class or function name.
+              </p>
+          </div>
+          <script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="geospatial-pdf">
+<span id="gdal-gdal-formats-pdf"></span><h1>Geospatial PDF<a class="headerlink" href="#geospatial-pdf" title="Lien permanent vers ce titre">¶</a></h1>
+<p>(Disponible à partir de GDAL &gt;= 1.8.0)</p>
+<p>GDAL gère la lecture des documents PDF géospatial, en extrayant les informations
+géoréférencement et rasterise les données. Les documents PDF non géospatial seront
+aussi reconnu par le pilote.</p>
+<p>GDAL doit compiler avec la gestion de libpoppler (licencé en GPL), et libpoppler
+lui même doit avoir été configuré avec <tt class="docutils literal"><span class="pre">--enable-xpdf-headers</span></tt> afin que les
+en têtes xpdf C++ soient disponibles. Note : l&#8217;API C++ poppler n&#8217;est pas stable,
+la compilation du pilote peut donc échouer avec des versions trop ancienne ou
+trop récente. Les versions testés avec succès sont poppler &gt;= 0.12.X and &lt;= 0.16.0.</p>
+<p>À partir de GDAL 1.9.0, comme une alternative, le pilote PDF peut être compilé
+avec libpodofo (sous licence LGPL) pour éviter la dépendance avec libpoppler.
+Cela est suffisant pour obtenir les informations de géoréférencement. Cependant, pour
+obtenir l&#8217;imagerie, l&#8217;utilitaire pdftoppm qui vient avec la distribution poppler
+doit être disponible dans le PATH du système. Un fichier temporaire sera généré
+dans un répertoire déterminé par les options de configuration suivantes : <em>CPL_TMPDIR</em>,
+<em>TMPDIR</em> ou <em>TEMP</em> (dans cet ordre). Si aucun n&#8217;est définie, le répertoire courant
+sera utilisé. Testé avec succès avec les versions 0.8.4 et 0.9.1 de libpodofo.</p>
+<p>Le pilote gère la lecture de géoréférencement encodées dans l&#8217;un des deux moyens
+existants acutellemnt : en fonction des meilleures pratiques d&#8217;encodage de l&#8217;OGC,
+ou selon le supplément d&#8217;Adobe de la norme ISO 32000.</p>
+<p>Les dimensions des raster peuvent être contrôlé en définissant le DPI de la
+rasterisation avec l&#8217;option de configuration <em>GDAL_PDF_DPI</em>. Sa valeur par défaut
+est 150.</p>
+<p>Les documents de plusieurs pages sont exposés comme sous jeux de données, un
+sous jeu de données par page du document.</p>
+<p>Les encarts (pour les meilleurs pratiques de l&#8217;OGC) ou les bounding box (style
+Adobe) seront reportés comme des items de métadonnées NEATLINE, afin qu&#8217;il
+puisse être utilisé plus tard comme une ligne de découpe pour l&#8217;algorithme de
+déformation.</p>
+<p>À partir de GDAL 1.9.0, les métadonnées XMP peuvent être extraites du fichier,
+et seront stockées comme contenu brute XML dans le domaine de métadonnées xml:XMP.</p>
+<div class="section" id="restrictions">
+<h2>Restrictions<a class="headerlink" href="#restrictions" title="Lien permanent vers ce titre">¶</a></h2>
+<p>L&#8217;ouverture d&#8217;un document PDF (pour obtenir le géoréférencement) est rapide, mais
+au premier accès à un bloc raster, la page entière sera rasterisée, ce qui peut
+être une opération lente.</p>
+<p>Seuls quelques-uns des systèmes de référence possibles disponibles dans les
+spécifications des meilleures pratiques de l&#8217;OGC ont été actuellement mappée
+dans le pilote. Les systèmes de référence non reconnus seront considérés comme
+étant basé sur l&#8217;ellipsoïde WGS84.</p>
+<p>Pour les documents qui contiennent plusieurs lignes ordonnées dans une page
+(encart), le géoréférencement sera extrait de l&#8217;encart qui aura la plus grande
+superficie (en terme de points sur l&#8217;écran).</p>
+<p>Il n&#8217;y a pour l&#8217;instant aucune gestion de sélection du rendu de couche.</p>
+</div>
+<div class="section" id="voir-egalement">
+<h2>Voir également<a class="headerlink" href="#voir-egalement" title="Lien permanent vers ce titre">¶</a></h2>
+<ul class="simple">
+<li><a class="reference external" href="http://portal.opengeospatial.org/files/?artifact_id=33332">Bonne pratique de l&#8217;encodage GeoPDF de l&#8217;OGC version 2.2</a></li>
+<li><a class="reference external" href="http://www.adobe.com/devnet/acrobat/pdfs/adobe_supplement_iso32000.pdf">Supplément  d&#8217;Adobe pour l&#8217;ISO 32000</a></li>
+<li><a class="reference external" href="http://poppler.freedesktop.org/">Homepage de Poppler</a></li>
+<li><a class="reference external" href="http://acrobatusers.com/gallery/geospatial">Quelques échantillons PDF Geospatial</a></li>
+<li><a class="reference external" href="http://www.agc.army.mil/geopdf_gallery.html">D&#8217;autres échantillon PDF Geospatial</a></li>
+</ul>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+
+
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="pds.html" title="PDS – Système de données planétaire"
+             >suivant</a></li>
+        <li class="right" >
+          <a href="pcidsk.html" title="PCIDSK — PCI Geomatics Database File"
+             >précédent</a> |</li>
+        <li><a href="../../index.html">GDAL v1.9.0 documentation</a> &raquo;</li>
+          <li><a href="../index.html" >GDAL</a> &raquo;</li>
+          <li><a href="index.html" >Formats</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+    <a href="http://creativecommons.org/licenses/by/2.0/fr/deed.fr">Licence Creative Common BY</a>
+    <!--
+      &copy; Copyright 2011, Yves Jacolin.-->
+      Créé avec <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0.7.
+    </div>
+  </body>
+</html>

@@ -1,0 +1,191 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF8" />
+    
+    <title>OGDI Vectors &mdash; GDAL v1.9.0 documentation</title>
+    <link rel="stylesheet" href="../../_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '1.9.0',
+        COLLAPSE_MODINDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../_static/translations.js"></script>
+    <link rel="top" title="GDAL v1.9.0 documentation" href="../../index.html" />
+    <link rel="up" title="Formats vecteur d’OGR" href="index.html" />
+    <link rel="next" title="OpenAir - OpenAir Special Use Airspace Format" href="openair.html" />
+    <link rel="prev" title="ODBC RDBMS" href="odbc.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="openair.html" title="OpenAir - OpenAir Special Use Airspace Format"
+             accesskey="N">suivant</a></li>
+        <li class="right" >
+          <a href="odbc.html" title="ODBC RDBMS"
+             accesskey="P">précédent</a> |</li>
+        <li><a href="../../index.html">GDAL v1.9.0 documentation</a> &raquo;</li>
+          <li><a href="../index.html" >OGR</a> &raquo;</li>
+          <li><a href="index.html" accesskey="U">Formats vecteur d&#8217;OGR</a> &raquo;</li> 
+      </ul>
+    </div>
+
+
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <h3><a href="../../index.html">Table des matières</a></h3>
+            <ul>
+<li><a class="reference internal" href="#">OGDI Vectors</a><ul>
+<li><a class="reference internal" href="#exemples">Exemples</a></li>
+<li><a class="reference internal" href="#voir-egalement">Voir également</a></li>
+</ul>
+</li>
+</ul>
+
+            <h4>Sujet précédent</h4>
+            <p class="topless"><a href="odbc.html"
+                                  title="Chapitre précédent">ODBC RDBMS</a></p>
+            <h4>Sujet suivant</h4>
+            <p class="topless"><a href="openair.html"
+                                  title="Chapitre suivant">OpenAir - OpenAir Special Use Airspace Format</a></p>
+            <h3>Cette page</h3>
+            <ul class="this-page-menu">
+              <li><a href="../../_sources/ogr/formats/ogdi.txt"
+                     rel="nofollow">Montrer la source</a></li>
+            </ul>
+          <div id="searchbox" style="display: none">
+            <h3>Recherche rapide</h3>
+              <form class="search" action="../../search.html" method="get">
+                <input type="text" name="q" size="18" />
+                <input type="submit" value="Go" />
+                <input type="hidden" name="check_keywords" value="yes" />
+                <input type="hidden" name="area" value="default" />
+              </form>
+              <p class="searchtip" style="font-size: 90%">
+              Enter search terms or a module, class or function name.
+              </p>
+          </div>
+          <script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="ogdi-vectors">
+<span id="gdal-ogr-formats-ogdi"></span><h1>OGDI Vectors<a class="headerlink" href="#ogdi-vectors" title="Lien permanent vers ce titre">¶</a></h1>
+<p>La gestion des vecteurs OGDI est optionnel dans OGR, et est normalement
+seulement configuré si OGDI est installé sur le système de compilation. S&#8217;il est
+disponible les vecteurs OGDI sont gérés pour l&#8217;accès en lecture pour les types
+de familles suivantes :</p>
+<blockquote>
+<div><ul class="simple">
+<li><em>Point</em></li>
+<li><em>Line</em></li>
+<li><em>Area</em></li>
+<li><em>Text</em> (pour l&#8217;instant renvoie des points avec le texte dans l&#8217;attribut &#8220;texte&#8221;)</li>
+</ul>
+</div></blockquote>
+<p>OGDI peut (en autre formats) lire les produits VPF, tels que DCW et VMAP.</p>
+<p>Si une URL GLTP d&#8217;OGDI est ouverte directement les possibilités OGDI 3.1 pour le
+pilote/serveur sont nécessaire pour obtenir une liste des couches. Une couche
+OGR est crée pour chaque famille OGDI disponible pour chaque couche dans le
+stockage de données. Pour les pilotes tel que VRF cela peut entrainer de
+nombreuses couches. Chacune des couches possède un nom sous OGR basé sur le nom
+sous OGDI plus un underscore et le nom de la famille. Par exemple une couche
+peut être appelée <strong>watrcrsl&#64;hydro(*)_line</strong> si elle provient du pilote VRF.</p>
+<p>À partir de GDAL/OGR 1.8.0, définir l&#8217;option de configuration
+<em>OGR_OGDI_LAUNDER_LAYER_NAMES</em> (ou la variable d&#8217;environnement) à YES entraînera
+la simplification des noms de couche. Par exemple : <em>watrcrsl_hydro</em> au lieu de
+&#8216;watrcrsl&#64;hydro(*)_line&#8217;.</p>
+<p>Autrement pour accéder à toutes les couches du stockage de données,  il est
+possible d&#8217;ouvrir une couche particulière en utilisant un nom de fichier
+personnalisé consistant à une URL GLTP correcte à laquelle vous ajoutez le nom
+de la couche suivit du type de la famille (séparé par une virgule). Ce mécanisme
+doit être utilisé pour accéder aux couches des pilotes Pre-OGDI 3.1 puisque
+avant OGDI 3.1 il n&#8217;y avait pas de manière correcte de découvrir les couches
+disponibles dans OGDI.</p>
+<blockquote>
+<div>gltp:[//&lt;hostname&gt;]/&lt;driver_name&gt;/&lt;dataset_name&gt;:&lt;layer_name&gt;:&lt;family&gt;</div></blockquote>
+<p>où &lt;layer_name&gt; est le nom de la couche OGDI, et &lt;family&gt; est choisit parmi :
+&#8220;line&#8221;, &#8220;area&#8221;, &#8220;point&#8221;, ou &#8220;text&#8221;.</p>
+<p>Les informations du système de coordonnées sont gérées pour la plupart des
+systèmes de coordonnées. Un message sera produit quand une couche est ouverte et
+si le système de coordonnées ne peut être traduite.</p>
+<p>Il n&#8217;y a pas de gestion de création ou de mise à jour dans le pilote OGDI.</p>
+<p>Les couches Raster ne peuvent pas être lu avec ce pilote mais peut être récupéré
+avec le pilote Raster OGDI de GDAL.</p>
+<div class="section" id="exemples">
+<h2>Exemples<a class="headerlink" href="#exemples" title="Lien permanent vers ce titre">¶</a></h2>
+<p>Exemple d&#8217;usage d&#8217;<tt class="docutils literal"><span class="pre">ogrinfo</span></tt> :</p>
+<div class="highlight-python"><pre>ogrinfo gltp:/vrf/usr4/mpp1/v0eur/vmaplv0/eurnasia 'watrcrsl@hydro(*)_line'</pre>
+</div>
+<p>Dans le nom du jeu de données <em>gltp:/vrf/usr4/mpp1/v0eur/vmaplv0/eurnasia</em> la
+partie <em>gltp:/vrf</em> n&#8217;est pas réellement dans le système de fichier, mais doit
+être ajouté. Les données VPF était à <em>/usr4/mpp1/v0eur</em>/. Le répertoire
+<em>eurnasia</em> doit être au même niveau que les fichiers dht. et lat.. La référence
+<em>hydro</em> est un sous-répertoire de <em>eurnasia</em>/ où <em>watrcrsl.*</em> est trouvé.</p>
+<p>Exemple d&#8217;utilisation de conversion VMAP0 en SHAPE avec &#8216;&#8217;ogr2ogr&#8217;&#8217; :</p>
+<div class="highlight-python"><pre>ogr2ogr watrcrsl.shp gltp:/vrf/usr4/mpp1/v0eur/vmaplv0/eurnasia 'watrcrsl@hydro(*)_line'
+ogr2ogr polbnda.shp  gltp:/vrf/usr4/mpp1/v0eur/vmaplv0/eurnasia 'polbnda@bnd(*)_area'</pre>
+</div>
+<p>Une requête SQL d&#8217;OGR sur un jeu de données VMAP. Là encore, notez soigneusement
+les guillemets du nom de la couche :</p>
+<div class="highlight-python"><pre>ogrinfo -ro gltp:/vrf/usr4/mpp1/v0noa/vmaplv0/noamer \
+       -sql 'select * from "polbndl@bnd(*)_line" where use=26'</pre>
+</div>
+</div>
+<div class="section" id="voir-egalement">
+<h2>Voir également<a class="headerlink" href="#voir-egalement" title="Lien permanent vers ce titre">¶</a></h2>
+<ul class="simple">
+<li><a class="reference external" href="http://ogdi.sourceforge.net/">OGDI.SourceForge.Net</a></li>
+<li><a class="reference external" href="http://www.terragear.org/docs/vmap0/coverage.html">Couvertures VMap0</a></li>
+</ul>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+
+
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="openair.html" title="OpenAir - OpenAir Special Use Airspace Format"
+             >suivant</a></li>
+        <li class="right" >
+          <a href="odbc.html" title="ODBC RDBMS"
+             >précédent</a> |</li>
+        <li><a href="../../index.html">GDAL v1.9.0 documentation</a> &raquo;</li>
+          <li><a href="../index.html" >OGR</a> &raquo;</li>
+          <li><a href="index.html" >Formats vecteur d&#8217;OGR</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+    <a href="http://creativecommons.org/licenses/by/2.0/fr/deed.fr">Licence Creative Common BY</a>
+    <!--
+      &copy; Copyright 2011, Yves Jacolin.-->
+      Créé avec <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0.7.
+    </div>
+  </body>
+</html>

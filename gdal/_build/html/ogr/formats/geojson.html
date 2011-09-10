@@ -1,0 +1,253 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF8" />
+    
+    <title>GeoJSON &mdash; GDAL v1.9.0 documentation</title>
+    <link rel="stylesheet" href="../../_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '1.9.0',
+        COLLAPSE_MODINDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../_static/translations.js"></script>
+    <link rel="top" title="GDAL v1.9.0 documentation" href="../../index.html" />
+    <link rel="up" title="Formats vecteur d’OGR" href="index.html" />
+    <link rel="next" title="Base de données MDB de Geomedia" href="geomedia.html" />
+    <link rel="prev" title="GeoConcept Export (disponible à partir de GDAL 1.6.0)" href="geoconcept.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="geomedia.html" title="Base de données MDB de Geomedia"
+             accesskey="N">suivant</a></li>
+        <li class="right" >
+          <a href="geoconcept.html" title="GeoConcept Export (disponible à partir de GDAL 1.6.0)"
+             accesskey="P">précédent</a> |</li>
+        <li><a href="../../index.html">GDAL v1.9.0 documentation</a> &raquo;</li>
+          <li><a href="../index.html" >OGR</a> &raquo;</li>
+          <li><a href="index.html" accesskey="U">Formats vecteur d&#8217;OGR</a> &raquo;</li> 
+      </ul>
+    </div>
+
+
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <h3><a href="../../index.html">Table des matières</a></h3>
+            <ul>
+<li><a class="reference internal" href="#">GeoJSON</a><ul>
+<li><a class="reference internal" href="#source-de-donnees">Source de données</a></li>
+<li><a class="reference internal" href="#couche">Couche</a></li>
+<li><a class="reference internal" href="#objet">Objet</a></li>
+<li><a class="reference internal" href="#geometrie">Géométrie</a><ul>
+<li><a class="reference internal" href="#variables-d-environnement">Variables d&#8217;environnement</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#option-de-creation-de-couche">Option de création de couche</a></li>
+<li><a class="reference internal" href="#exemple">Exemple</a></li>
+<li><a class="reference internal" href="#lisez-egalement">Lisez également</a></li>
+</ul>
+</li>
+</ul>
+
+            <h4>Sujet précédent</h4>
+            <p class="topless"><a href="geoconcept.html"
+                                  title="Chapitre précédent">GeoConcept Export (disponible à partir de GDAL 1.6.0)</a></p>
+            <h4>Sujet suivant</h4>
+            <p class="topless"><a href="geomedia.html"
+                                  title="Chapitre suivant">Base de données MDB de Geomedia</a></p>
+            <h3>Cette page</h3>
+            <ul class="this-page-menu">
+              <li><a href="../../_sources/ogr/formats/geojson.txt"
+                     rel="nofollow">Montrer la source</a></li>
+            </ul>
+          <div id="searchbox" style="display: none">
+            <h3>Recherche rapide</h3>
+              <form class="search" action="../../search.html" method="get">
+                <input type="text" name="q" size="18" />
+                <input type="submit" value="Go" />
+                <input type="hidden" name="check_keywords" value="yes" />
+                <input type="hidden" name="area" value="default" />
+              </form>
+              <p class="searchtip" style="font-size: 90%">
+              Enter search terms or a module, class or function name.
+              </p>
+          </div>
+          <script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="geojson">
+<span id="gdal-ogr-formats-geojson"></span><h1>GeoJSON<a class="headerlink" href="#geojson" title="Lien permanent vers ce titre">¶</a></h1>
+<p>Ce pilote implémente la gestion en lecture et écriture pour l&#8217;accès aux géométries encodé au format <a class="reference external" href="http://geojson.org/">GeoJSON</a>. Le GeoJSON est un langage basé sur <a class="reference external" href="http://json.org/">JavaScript Object Notation (JSON)</a>. Le JSON est un format léger textuel pour l&#8217;échange de données et GeoJSON n&#8217;est rien d&#8217;autre que sa spécialisation pour le contenu géographique.</p>
+<p>Au moment d&#8217;écrire ce texte, GeoJSON est géré comme format de sortie de services implémenté par <a class="reference external" href="http://featureserver.org/">FeatureServer</a>,
+<a class="reference external" href="http://docs.codehaus.org/display/GEOSDOC/GeoJSON+Output+Format">GeoServer</a> et
+<a class="reference external" href="http://exportgge.sourceforge.net/kml/">CartoWeb</a>.</p>
+<p>Le pilote GeoJSON d&#8217;OGR traduit une donnée encodée en GeoJSON vers des objets
+du <a class="reference external" href="http://gdal.org/ogr/ogr_arch.html">model Simple Feature d&#8217;OGR</a> : jeu de
+données, couche, objet, géométrie. L&#8217;implémentation est basée sur le
+<a class="reference external" href="http://wiki.geojson.org/GeoJSON_draft_version_5">brouillon de spécification de GeoJSON, v5.0</a>.</p>
+<p>À partir de OGR 1.8.0, le pilote GeoJSON peut lire les sorties JSON des requêtes
+de services de Feature qui suivent les <a class="reference external" href="http://www.esri.com/industries/landing-pages/geoservices/geoservices.html">spécifications REST des GeoServices</a>, comme
+implémenté par l&#8217;<a class="reference external" href="http://help.arcgis.com/en/arcgisserver/10.0/apis/rest/index.html">API du serveur REST d&#8217;ArcGIS</a>.</p>
+<div class="section" id="source-de-donnees">
+<h2>Source de données<a class="headerlink" href="#source-de-donnees" title="Lien permanent vers ce titre">¶</a></h2>
+<p>Le pilote GeoJSON d&#8217;OGR accepte trois types de sources de données :</p>
+<ul class="simple">
+<li><em>Uniform Resource Locator</em> (<a class="reference external" href="http://en.wikipedia.org/wiki/URL">URL</a>) - une
+adresse web pour réaliser des requêtes
+<a class="reference external" href="http://en.wikipedia.org/wiki/HTTP">HTTP</a></li>
+<li>des fichiers textuels avec des données GeoJSON - identifié à partir de
+l&#8217;extension du fichier .geojson ou .json</li>
+<li>du texte passé directement et encodé en GeoJSON</li>
+</ul>
+</div>
+<div class="section" id="couche">
+<h2>Couche<a class="headerlink" href="#couche" title="Lien permanent vers ce titre">¶</a></h2>
+<p>Un jeu de données GeoJSON est traduit à un objet <em>OGRLayer</em> simple avec un nom prédéfinie <em>OGRGeoJson</em> :</p>
+<div class="highlight-python"><pre>ogrinfo -ro http://featureserver/data/.geojson OGRGeoJSON</pre>
+</div>
+<p>Il est également valide de faire l&#8217;hypothèse que
+<em>OGRDataSource::GetLayerCount()</em> pour la source de données GeoJSON retourne
+toujours 1.</p>
+<p>Accéder un service Web comme source de données (par exemple FeatureServer),
+chaque requête produira une nouvelle couche. Ce comportement se conforme à la
+nature <em>stateless</em> des transactions HTTP et est similaire à la façon dont opère
+les navigateurs : une requête = une page.</p>
+<p>Si un membre de plus haut niveau des données GeoJSON est d&#8217;un autre type que
+FeatureCollection,le pilote produira une couche avec seulement un objet.
+Autrement, une couche consistera d&#8217;un ensemble d&#8217;objets.</p>
+</div>
+<div class="section" id="objet">
+<h2>Objet<a class="headerlink" href="#objet" title="Lien permanent vers ce titre">¶</a></h2>
+<p>Le pilote GeoJSON d&#8217;OGR relie chaque objet des types suivants aux nouveaux
+objets <em>OGRFeature</em> : Point, LineString, Polygon, GeometryCollection, Feature.</p>
+<p>Selon les spécification GeoJSON, seul l&#8217;objet <em>Feature</em> doit avoir un
+membre avec un nom de propriété. Chaque membre des propriétés est traduit
+vers un objet OGR du type de <em>OGRField</em> et ajouté à l&#8217;objet <em>OGRFeature</em>
+correspondant.</p>
+<p>La spécification GeoJSON ne nécessite pas que tous les objets géométriques dans
+une colection doivent avoir le même schéma de propriétés. Si les objets
+géométriques dans un ensemble définie par un objet FeatureCollection ont
+différents schéma de propriétés, il en résulte alors un schéma de champs dans
+<em>OGRFeatureDefn</em> est généré comme
+l&#8217;<a class="reference external" href="http://en.wikipedia.org/wiki/Union_(set_theory)">union</a> de toutes les
+propriétés géométriques.</p>
+<p>Il est possible de dire au pilote de ne pas traiter les attributs en définissant
+la variable d&#8217;environnement <em>ATTRIBUTES_SKIP=YES</em>. Le comportement par défaut
+est de préserver tous les attributs (comme une union, voir paragraphe précédent),
+ce qui est équivalent à définir <em>ATTRIBUTES_SKIP=NO</em>.</p>
+</div>
+<div class="section" id="geometrie">
+<h2>Géométrie<a class="headerlink" href="#geometrie" title="Lien permanent vers ce titre">¶</a></h2>
+<p>Comme pour le problème des objets avec des propriétés mixtes, le brouillon de
+la spécification GeoJSON ne nécessite pas que tous les objets géométriques dans
+une collection doivent avoir une géométrie de même type. Heureusement le modèle
+objet d&#8217;OGR permet d&#8217;avoir des géométries de plusieurs types dans une seule
+couche - un couche hétérogène. Par défaut, le pilote GeoJSON préserve le type
+de la géométrie.</p>
+<p>Cependant, parfois il nécessite de générer une couche hétérogène à partir d&#8217;un
+ensemble d&#8217;objet géométrique hétérogène. Pour cela, il est possible de dire au
+pilote d&#8217;englober toutes les géométries avec un type <em>OGRGeometryCollection</em>
+comme un dénominateur commun. Ce comportement peut être contrôler par la
+variable d&#8217;environnement <em>GEOMETRY_AS_COLLECTION=YES</em> (NO par défaut).</p>
+<div class="section" id="variables-d-environnement">
+<h3>Variables d&#8217;environnement<a class="headerlink" href="#variables-d-environnement" title="Lien permanent vers ce titre">¶</a></h3>
+<ul class="simple">
+<li><em>GEOMETRY_AS_COLLECTION</em> - utilisé pour contrôler la traduction des
+géométries : YES - englobe les géométries avec le type <em>OGRGeometryCollection</em></li>
+<li><em>ATTRIBUTES_SKIP</em> - contrôle la traduction des attributs : YES - ignore les
+attributs</li>
+</ul>
+</div>
+</div>
+<div class="section" id="option-de-creation-de-couche">
+<h2>Option de création de couche<a class="headerlink" href="#option-de-creation-de-couche" title="Lien permanent vers ce titre">¶</a></h2>
+<ul class="simple">
+<li><strong>WRITE_BBOX = YES/NO :</strong> (OGR &gt;= 1.9.0) définie à YES pour écrire une propriété
+bbox avec la bounding box des géométries au niveau de la feature et de la
+collection de feature. NO par défaut.</li>
+<li><strong>COORDINATE_PRECISION = int_number :</strong> (OGR &gt;= 1.9.0) nombre maximal de
+chiffre à écrire après la virgule pour les coordonnées. 15 par défaut. Une
+coupure intelligente permettra de supprimer les zéros en trop.</li>
+</ul>
+</div>
+<div class="section" id="exemple">
+<h2>Exemple<a class="headerlink" href="#exemple" title="Lien permanent vers ce titre">¶</a></h2>
+<p>Comment faire un dump du contenu d&#8217;un fichier .geojson :</p>
+<div class="highlight-python"><pre>ogrinfo -ro point.geojson</pre>
+</div>
+<p>Comment réaliser une requête sur les objets à partir un service distant avec un
+filtre sur un attribut :</p>
+<div class="highlight-python"><pre>ogrinfo -ro http://featureserver/cities/.geojson OGRGeoJSON -where "name=Warsaw"</pre>
+</div>
+<p>Comment traduire un certain nombre d&#8217;objets à partir d&#8217;une requête d&#8217;un
+FeatureServer vers un shapefile d&#8217;ESRI :</p>
+<div class="highlight-python"><pre>ogr2ogr -f "ESRI Shapefile" cities.shp http://featureserver/cities/.geojson OGRGeoJSON</pre>
+</div>
+<p>Lire le résultat d&#8217;une requête FeatureService en fonction d&#8217;un serveur GeoServices
+REST :</p>
+<div class="highlight-python"><pre>ogrinfo -ro -al
+  "http://sampleserver3.arcgisonline.com/ArcGIS/rest/services/Hydrography/Watershed173811/FeatureServer/0/query?where=objectid+%3D+objectid&amp;amp;outfields=*&amp;amp;f=json"</pre>
+</div>
+</div>
+<div class="section" id="lisez-egalement">
+<h2>Lisez également<a class="headerlink" href="#lisez-egalement" title="Lien permanent vers ce titre">¶</a></h2>
+<ul class="simple">
+<li><a class="reference external" href="http://geojson.org/">GeoJSON</a> - encoding geographic content in JSON</li>
+<li><a class="reference external" href="http://json.org/">JSON</a> - JavaScript Object Notation</li>
+<li><a class="reference external" href="http://oss.metaparadigm.com/json-c/">JSON-C</a> - Une implémentation JSON en C</li>
+<li><a class="reference external" href="http://lists.osgeo.org/pipermail/gdal-dev/2007-November/014746.html">[Gdal-dev] OGR GeoJSON Driver</a> - driver announcement</li>
+<li><a class="reference external" href="http://www.esri.com/industries/landing-pages/geoservices/geoservices.html">Spécification REST des GeoServices</a></li>
+</ul>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+
+
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="geomedia.html" title="Base de données MDB de Geomedia"
+             >suivant</a></li>
+        <li class="right" >
+          <a href="geoconcept.html" title="GeoConcept Export (disponible à partir de GDAL 1.6.0)"
+             >précédent</a> |</li>
+        <li><a href="../../index.html">GDAL v1.9.0 documentation</a> &raquo;</li>
+          <li><a href="../index.html" >OGR</a> &raquo;</li>
+          <li><a href="index.html" >Formats vecteur d&#8217;OGR</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+    <a href="http://creativecommons.org/licenses/by/2.0/fr/deed.fr">Licence Creative Common BY</a>
+    <!--
+      &copy; Copyright 2011, Yves Jacolin.-->
+      Créé avec <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0.7.
+    </div>
+  </body>
+</html>

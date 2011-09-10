@@ -1,0 +1,245 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF8" />
+    
+    <title>KML - Keyhole Markup Language &mdash; GDAL v1.9.0 documentation</title>
+    <link rel="stylesheet" href="../../_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '1.9.0',
+        COLLAPSE_MODINDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../_static/translations.js"></script>
+    <link rel="top" title="GDAL v1.9.0 documentation" href="../../index.html" />
+    <link rel="up" title="Formats vecteur d’OGR" href="index.html" />
+    <link rel="next" title="Pilote LIBKML (.kml .kmz)" href="libkml.html" />
+    <link rel="prev" title="INGRES" href="ingres.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="libkml.html" title="Pilote LIBKML (.kml .kmz)"
+             accesskey="N">suivant</a></li>
+        <li class="right" >
+          <a href="ingres.html" title="INGRES"
+             accesskey="P">précédent</a> |</li>
+        <li><a href="../../index.html">GDAL v1.9.0 documentation</a> &raquo;</li>
+          <li><a href="../index.html" >OGR</a> &raquo;</li>
+          <li><a href="index.html" accesskey="U">Formats vecteur d&#8217;OGR</a> &raquo;</li> 
+      </ul>
+    </div>
+
+
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <h3><a href="../../index.html">Table des matières</a></h3>
+            <ul>
+<li><a class="reference internal" href="#">KML - Keyhole Markup Language</a><ul>
+<li><a class="reference internal" href="#lecture-du-kml">Lecture du KML</a></li>
+<li><a class="reference internal" href="#ecriture-du-kml">Écriture du KML</a><ul>
+<li><a class="reference internal" href="#problemes-d-encodage">Problèmes d&#8217;encodage</a></li>
+<li><a class="reference internal" href="#options-de-creation">Options de création</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#exemple">Exemple</a></li>
+<li><a class="reference internal" href="#avertissement">Avertissement</a></li>
+<li><a class="reference internal" href="#voir-egalement">Voir également</a></li>
+</ul>
+</li>
+</ul>
+
+            <h4>Sujet précédent</h4>
+            <p class="topless"><a href="ingres.html"
+                                  title="Chapitre précédent">INGRES</a></p>
+            <h4>Sujet suivant</h4>
+            <p class="topless"><a href="libkml.html"
+                                  title="Chapitre suivant">Pilote LIBKML (.kml .kmz)</a></p>
+            <h3>Cette page</h3>
+            <ul class="this-page-menu">
+              <li><a href="../../_sources/ogr/formats/kml.txt"
+                     rel="nofollow">Montrer la source</a></li>
+            </ul>
+          <div id="searchbox" style="display: none">
+            <h3>Recherche rapide</h3>
+              <form class="search" action="../../search.html" method="get">
+                <input type="text" name="q" size="18" />
+                <input type="submit" value="Go" />
+                <input type="hidden" name="check_keywords" value="yes" />
+                <input type="hidden" name="area" value="default" />
+              </form>
+              <p class="searchtip" style="font-size: 90%">
+              Enter search terms or a module, class or function name.
+              </p>
+          </div>
+          <script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="kml-keyhole-markup-language">
+<span id="gdal-ogr-formats-kml"></span><h1>KML - Keyhole Markup Language<a class="headerlink" href="#kml-keyhole-markup-language" title="Lien permanent vers ce titre">¶</a></h1>
+<p>Keyhole Markup Language (KML) est un langage basé sur XML pour la gestion de
+l&#8217;affichage des données géospatiales 3D. KML a été accepté comme standard OGC,
+et est géré d&#8217;une manière ou d&#8217;une autre par les navigateurs spatiaux majeurs.
+Remarquez que KML par définition utilise seulement une seule projection,
+<em>EPSG:4326</em>. Tous les exports KML d&#8217;OGR se présenteront en <em>EPSG:4326</em>. Par
+conséquent, OGR créera toutes les couches dans le système de coordonnées
+correcte et transformera toutes les géométries.</p>
+<p>Pour l&#8217;instant, seulement les couches vectorielles sont prises en charge par
+le pilote KML <em>(il existe des scripts supplémentaires fournies avec le projet
+GDAL qui peuvent construire des export d&#8217;autres sortes)</em>.</p>
+<div class="section" id="lecture-du-kml">
+<h2>Lecture du KML<a class="headerlink" href="#lecture-du-kml" title="Lien permanent vers ce titre">¶</a></h2>
+<p>La lecture du KML est seulement disponible si GDAL/OGR est compilé avec le
+parser XML Expat, autrement seule l&#8217;écriture du KML sera gérée.</p>
+<p>Les types de géométrie gérés sont Point, Linestring, Polygon, MultiPoint,
+MultiLineString, MultiPolygon et MultiGeometry.
+Il y a des limitations également, par exemple : les répertoires inclus dans
+un fichier KML source sont perdus ; les balises &lt;description&gt; des répertoires
+ne sera pas transmit à la sortie. Depuis GDAL 1.6.1, les répertoires contenant des
+types de géométries multiples, comme les points et les polygones, sont gérés.</p>
+</div>
+<div class="section" id="ecriture-du-kml">
+<h2>Écriture du KML<a class="headerlink" href="#ecriture-du-kml" title="Lien permanent vers ce titre">¶</a></h2>
+<p>Puisque toutes les géométries du KML ne sont pas représenté dans le modèle de
+géométrie <em>Features</em>, vous ne pourrez pas générer plusieurs attributs
+spécifiques au KML à partir de GDAL/OGR. Testez quelques fichiers pour voir ce
+qui est possible.</p>
+<p>Lors de l&#8217;export du KML, le pilote KML d&#8217;OGR traduira chaque couche OGR dans un
+répertoire KML, vous pouvez rencontrer des comportements inattendus si vous
+tentez de mélanger les types de géométries d&#8217;éléments dans une couche, par
+exemple des données <em>LINESTRING</em> et <em>POINT</em>.</p>
+<p>Le pilote KML renommera certaines couches, ou des noms de répertoires du KML
+source, par des noms qu&#8217;il considère valide, par exemple &#8216;Layer #0&#8217;, le nom par
+défaut de la première couche non nommée, deviendra &#8216;Layer__0&#8217;.</p>
+<p>KML est un mélange de mise en forme et de données géométriques. La balise
+&lt;description&gt; d&#8217;un <em>Placemark</em> sera affiché dans la plupart des navigateurs
+spatiaux comme une bulle contenant du html. Lors de l&#8217;écriture du KML, les
+attributs de l&#8217;élément <em>Layer</em> sont ajoutés  comme de simples champs schéma.
+Cela préserve au mieux l&#8217;information du type de l&#8217;objet.</p>
+<p>Une gestion limitée est disponible pour le remplissage (fill), couleur des
+lignes et autres attributs de styles. Essayez sur des échantillons pour avoir
+une meilleure vision des possibilités.</p>
+<div class="section" id="problemes-d-encodage">
+<h3>Problèmes d&#8217;encodage<a class="headerlink" href="#problemes-d-encodage" title="Lien permanent vers ce titre">¶</a></h3>
+<p>La bibliothèque Expat gère la lecture des encodages internes suivants :</p>
+<ul class="simple">
+<li>US-ASCII</li>
+<li>UTF-8</li>
+<li>UTF-16</li>
+<li>ISO-8859-1</li>
+</ul>
+<p>OGR 1.8.0 ajoute la gestion des encodages pour Windows-1252 (pour les versions
+précédentes, modifier l&#8217;encodage mentionné dans l&#8217;en-tête XML en ISO-8859-1 peut
+fonctionner dans certains cas).</p>
+<p>Le contenu retourné par OGR sera encodé en UTF-8, après la conversion de l&#8217;encodage
+mentionné dans l&#8217;en-tête du fichier.</p>
+<p>Si votre fichier KML n&#8217;est pas encodé dans l&#8217;un des encodages précédents, il ne
+sera pas parsé par le pilote KML. Vous devrez le convertir dans l&#8217;un des encodages
+gérés par la commande <em>iconv</em> par exemple et changer la valeur du paramètre
+<em>encoding</em> dans l&#8217;en-tête XML.</p>
+<p>Lors de l&#8217;écriture du fichier KML, le pilote s&#8217;attend à du contenu en UTF-8.</p>
+</div>
+<div class="section" id="options-de-creation">
+<h3>Options de création<a class="headerlink" href="#options-de-creation" title="Lien permanent vers ce titre">¶</a></h3>
+<p>Les options de création suivantes sont gérées :</p>
+<ul>
+<li><p class="first"><strong>NameField :</strong> permet de définir le champ à utiliser pour l&#8217;élément
+&lt;name&gt; du KML. La valeur par défaut est &#8216;Name&#8217;.</p>
+<div class="highlight-python"><pre>ogr2ogr -f KML output.kml input.shp -dsco NameField=RegionName</pre>
+</div>
+</li>
+<li><p class="first"><strong>DescriptionField :</strong> permet de définir le champ à utiliser pour l&#8217;élément
+&lt;description&gt; du KML. La valeur par défaut est &#8216;Description&#8217;</p>
+</li>
+<li><p class="first"><strong>AltitudeMode :</strong> permet de définir <em>AltitudeMode</em> à utiliser pour les
+géométries du KML. Cela affectera seulement les géoémtries 3D et doit être
+une des options KML valide. Lisez la
+<a class="reference external" href="http://code.google.com/apis/kml/documentation/kml_tags_21.html#altitudemode">documentation de référence du KML</a>
+pour plus de détails.</p>
+<div class="highlight-python"><pre>ogr2ogr -f KML output.kml input.shp -dsco AltitudeMode=absolute</pre>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="exemple">
+<h2>Exemple<a class="headerlink" href="#exemple" title="Lien permanent vers ce titre">¶</a></h2>
+<p>La commande <tt class="docutils literal"><span class="pre">ogr2ogr</span></tt> peut être utilisé pur faire un dump d&#8217;une requête PostGIS
+vers le format KML :</p>
+<div class="highlight-python"><pre>ogr2ogr -f KML output.kml PG:'host=myserver dbname=warmerda' -sql "SELECT pop_1994 from canada where province_name = 'Alberta'"</pre>
+</div>
+<p>Pour faire un dump d&#8217;un fichier .kml comme OGR le voit :</p>
+<div class="highlight-python"><pre>ogrinfo -ro somedisplay.kml</pre>
+</div>
+</div>
+<div class="section" id="avertissement">
+<h2>Avertissement<a class="headerlink" href="#avertissement" title="Lien permanent vers ce titre">¶</a></h2>
+<p>Google Earth semble avoir quelques limites avec le nombre de coordonnées dans
+des géométries complexes comme les polygone. Si le problème apparait, les
+géométries problématiques sont affichées complètement ou partiellement couvert
+par des rayures verticales. malheureusement, il n&#8217;y a pas de nombre exact donné
+dans la spécification KML à propos de cette limitation, le pilote KML ne
+préviendra pas sur des problèmes potentiels. Un des solutions testées possibles
+est de simplifier les lignes ou les polygones pour enlever quelques coordonnées.
+Voici la discussion sur ce problème sur le
+<a class="reference external" href="http://groups.google.com/group/kml-support">Forum développeur de Google KML</a>,
+dans le thread <a class="reference external" href="http://groups.google.com/group/kml-support-getting-started/browse_thread/thread/e6995b8073e69c41">polygone affiché avec des rayures verticales</a>.</p>
+</div>
+<div class="section" id="voir-egalement">
+<h2>Voir également<a class="headerlink" href="#voir-egalement" title="Lien permanent vers ce titre">¶</a></h2>
+<ul class="simple">
+<li><a class="reference external" href="http://earth.google.com/kml/kml_intro.html">Spécification KML</a></li>
+<li><a class="reference external" href="http://www.keyhole.com/kml/kml_tut.html">Cours KML</a></li>
+</ul>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+
+
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="libkml.html" title="Pilote LIBKML (.kml .kmz)"
+             >suivant</a></li>
+        <li class="right" >
+          <a href="ingres.html" title="INGRES"
+             >précédent</a> |</li>
+        <li><a href="../../index.html">GDAL v1.9.0 documentation</a> &raquo;</li>
+          <li><a href="../index.html" >OGR</a> &raquo;</li>
+          <li><a href="index.html" >Formats vecteur d&#8217;OGR</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+    <a href="http://creativecommons.org/licenses/by/2.0/fr/deed.fr">Licence Creative Common BY</a>
+    <!--
+      &copy; Copyright 2011, Yves Jacolin.-->
+      Créé avec <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0.7.
+    </div>
+  </body>
+</html>

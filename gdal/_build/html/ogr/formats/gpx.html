@@ -1,0 +1,372 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF8" />
+    
+    <title>GPX - GPS Exchange Format &mdash; GDAL v1.9.0 documentation</title>
+    <link rel="stylesheet" href="../../_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '1.9.0',
+        COLLAPSE_MODINDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../_static/translations.js"></script>
+    <link rel="top" title="GDAL v1.9.0 documentation" href="../../index.html" />
+    <link rel="up" title="Formats vecteur d’OGR" href="index.html" />
+    <link rel="next" title="GRASS" href="grass.html" />
+    <link rel="prev" title="GPSBabel" href="gpsbabel.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="grass.html" title="GRASS"
+             accesskey="N">suivant</a></li>
+        <li class="right" >
+          <a href="gpsbabel.html" title="GPSBabel"
+             accesskey="P">précédent</a> |</li>
+        <li><a href="../../index.html">GDAL v1.9.0 documentation</a> &raquo;</li>
+          <li><a href="../index.html" >OGR</a> &raquo;</li>
+          <li><a href="index.html" accesskey="U">Formats vecteur d&#8217;OGR</a> &raquo;</li> 
+      </ul>
+    </div>
+
+
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <h3><a href="../../index.html">Table des matières</a></h3>
+            <ul>
+<li><a class="reference internal" href="#">GPX - GPS Exchange Format</a><ul>
+<li><a class="reference internal" href="#problemes-d-encodage">Problèmes d&#8217;encodage</a></li>
+<li><a class="reference internal" href="#lecture-des-l-element-extensions">Lecture des l&#8217;élément extensions</a></li>
+<li><a class="reference internal" href="#probleme-de-creation">Problème de création</a></li>
+<li><a class="reference internal" href="#problemes-lors-de-la-traduction-en-shapefile">Problèmes lors de la traduction en Shapefile</a></li>
+<li><a class="reference internal" href="#exemple">Exemple</a></li>
+<li><a class="reference internal" href="#voir-egalement">Voir également</a></li>
+</ul>
+</li>
+</ul>
+
+            <h4>Sujet précédent</h4>
+            <p class="topless"><a href="gpsbabel.html"
+                                  title="Chapitre précédent">GPSBabel</a></p>
+            <h4>Sujet suivant</h4>
+            <p class="topless"><a href="grass.html"
+                                  title="Chapitre suivant">GRASS</a></p>
+            <h3>Cette page</h3>
+            <ul class="this-page-menu">
+              <li><a href="../../_sources/ogr/formats/gpx.txt"
+                     rel="nofollow">Montrer la source</a></li>
+            </ul>
+          <div id="searchbox" style="display: none">
+            <h3>Recherche rapide</h3>
+              <form class="search" action="../../search.html" method="get">
+                <input type="text" name="q" size="18" />
+                <input type="submit" value="Go" />
+                <input type="hidden" name="check_keywords" value="yes" />
+                <input type="hidden" name="area" value="default" />
+              </form>
+              <p class="searchtip" style="font-size: 90%">
+              Enter search terms or a module, class or function name.
+              </p>
+          </div>
+          <script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="gpx-gps-exchange-format">
+<span id="gdal-ogr-formats-gpx"></span><h1>GPX - GPS Exchange Format<a class="headerlink" href="#gpx-gps-exchange-format" title="Lien permanent vers ce titre">¶</a></h1>
+<p>(à partir de GDAL 1.5.0)</p>
+<p>Le format GPX (format d&#8217;échange de GPS) est un format de données en XML léger
+pour l&#8217;échange de données GPS (waypoints, routes et tracks) entre des
+applications et des webservices sur Internet.</p>
+<p>OGR gère la lecture et l&#8217;écriture du GPX (si GDAL est compilé avec la gestion
+de la bibliothèque <em>expat</em>).</p>
+<p>Les versions gérées sont GPX 1.0 et 1.1 en lecture, GPX 1.1 en écriture.</p>
+<p>Le pilote OGR gère la lecture et l&#8217;écriture de tous les types de géométrie GPX :</p>
+<ul class="simple">
+<li><strong>waypoints :</strong> couche d&#8217;objet de type <em>wbbpoint</em> d&#8217;OGR ;</li>
+<li><strong>routes :</strong> couche d&#8217;objet de type <em>wkbLineString</em> d&#8217;OGR ;</li>
+<li><strong>tracks :</strong> couche d&#8217;objet de type <em>wkbMultiLineString</em> d&#8217;OGR.</li>
+</ul>
+<p>Il gère également la lecture des points routes et des points tracks dans des
+couches indépendantes (route_points et track_points), ainsi leurs propres
+attributs peuvent être utilisé par OGR.</p>
+<p>En plus de ses attributs GPX, chaque point route d&#8217;une route a un <em>route_fid</em>
+(clé étrangère au FID de sa route dont il fait partie) et un <em>route_point_id</em>
+qui est le numéro de séquence dans la route.</p>
+<p>La même chose s&#8217;applique pour les points tracks avec <em>track_fid</em>, <em>track_seg_id</em>
+et <em>track_seg_point_id</em>. Toutes les coordonnées sont relatives au datum WGS84
+(EPSG:4326).</p>
+<p>Si la variable d&#8217;environnement <em>GPX_ELE_AS_25D</em> est définie à <em>YES</em>, l&#8217;élément
+d&#8217;élévation sera utilisé pour définir la coordonnée Z des waypoints, des points
+routes et des points tracks.</p>
+<p>OGR/GPX lit et écrite les attributs GPX pour les waypoints, routes et tracks.</p>
+<p>Par défaut, jusqu&#8217;à 2 éléments &lt;link&gt; peuvent être pris en compte par objet
+géométrique. Le nombre par défaut peut être changé par la variable
+d&#8217;environnement <em>GPX_N_MAX_LINKS</em>.</p>
+<div class="section" id="problemes-d-encodage">
+<h2>Problèmes d&#8217;encodage<a class="headerlink" href="#problemes-d-encodage" title="Lien permanent vers ce titre">¶</a></h2>
+<p>La bibliothèque Expat gère la lecture des encodages internes suivants :</p>
+<ul class="simple">
+<li>US-ASCII</li>
+<li>UTF-8</li>
+<li>UTF-16</li>
+<li>ISO-8859-1</li>
+</ul>
+<p>OGR 1.8.0 ajoute la gestion des encodages Windows-1252 (pour les versions
+antérieures, modifier l&#8217;encodage mentionné dans l&#8217;en-tête XML à ISO-8859-1 peut
+fonctionner dans certains cas).</p>
+<p>Le contenu retourné par OGR sera encodé en UTF-8, après la conversion à partir de
+l&#8217;encodage mentionné dans l&#8217;en-tête du fichier.</p>
+<p>Si votre fichier GPX n&#8217;est pas encodé dans un de ces encodages précédents, il
+ne sera pas parsé par le pilote GPX. Vous devrez le convertir dans un des
+encodages gérés avec la commande &#8216;&#8217;iconv&#8217;&#8217; par exemple et changer en fonction de
+la valeur du paramètre d&#8217;encodage dans l&#8217;en-tête du XML.</p>
+<p>Lors de l&#8217;écriture d&#8217;un fichier GPX, le pilote s&#8217;attend à du contenu en UTF-8.</p>
+</div>
+<div class="section" id="lecture-des-l-element-extensions">
+<h2>Lecture des l&#8217;élément extensions<a class="headerlink" href="#lecture-des-l-element-extensions" title="Lien permanent vers ce titre">¶</a></h2>
+<p>Si l&#8217;élément &lt;extensions&gt; est détecté dans le fichier GPX, OGR exposera le
+contenu de ses sous-éléments comme champs. Un contenu complexe des sous-éléments
+sera exposé comme un blob XML.</p>
+<p>Le contenu GPX de la séquence suivante :</p>
+<div class="highlight-python"><pre>&lt;extensions&gt;
+    &lt;navaid:name&gt;TOTAL RF&lt;/navaid:name&gt;
+    &lt;navaid:address&gt;BENSALEM&lt;/navaid:address&gt;
+    &lt;navaid:state&gt;PA&lt;/navaid:state&gt;
+    &lt;navaid:country&gt;US&lt;/navaid:country&gt;
+    &lt;navaid:frequencies&gt;
+    &lt;navaid:frequency type="CTAF" frequency="122.900" name="CTAF"/&gt;
+    &lt;/navaid:frequencies&gt;
+    &lt;navaid:runways&gt;
+    &lt;navaid:runway designation="H1" length="80" width="80" surface="ASPH-G"&gt;
+    &lt;/navaid:runway&gt;
+    &lt;/navaid:runways&gt;
+    &lt;navaid:magvar&gt;12&lt;/navaid:magvar&gt;
+&lt;/extensions&gt;</pre>
+</div>
+<p>sera interprété dans un modèle <em>Simple Feature</em> d&#8217;OGR comme :</p>
+<div class="highlight-python"><pre>navaid_name (String) = TOTAL RF
+navaid_address (String) = BENSALEM
+navaid_state (String) = PA
+navaid_country (String) = US
+navaid_frequencies (String) = &lt;navaid:frequency type="CTAF" frequency="122.900" name="CTAF" &gt;&lt;/navaid:frequency&gt;
+navaid_runways (String) = &lt;navaid:runway designation="H1" length="80" width="80" surface="ASPH-G" &gt;&lt;/navaid:runway&gt;
+navaid_magvar (Integer) = 12</pre>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Le pilote GPX affichera le contenu de l&#8217;élément extension seulement s&#8217;il est
+trouvé dans les premiers enregistrements du fichier GPX. Si les extensions
+apparaissent plus tard, vous pouvez forcer le parsage explicite de
+l&#8217;ensemble du fichier avec la variable d&#8217;environnement <em>GPX_USE_EXTENSIONS</em>.</p>
+</div>
+</div>
+<div class="section" id="probleme-de-creation">
+<h2>Problème de création<a class="headerlink" href="#probleme-de-creation" title="Lien permanent vers ce titre">¶</a></h2>
+<p>Lors de l&#8217;export, toutes les couches sont écrites dans un seul fichier GPX. La
+mise à jour de fichier existant n&#8217;est pas pour l&#8217;instant gérée.</p>
+<p>Si le fichier en sortie existe déjà, l&#8217;écriture ne se fera pas. Vous devez
+effacer le fichier existant d&#8217;abord.</p>
+<p>Géométries gérées :</p>
+<ul class="simple">
+<li>les objets géométriques de type <em>wkbPoint/wkbPoint25D</em> sont écrits dans
+l&#8217;élément wpt.</li>
+<li>les objets géométriques de type <em>wkbLineString/wkbLineString25D</em> sont écrits
+dans l&#8217;élément rte.</li>
+<li>les objets géométriques de type <em>wkbMultiLineString/wkbMultiLineString25D</em>
+sont écrit dans l&#8217;élément trk.</li>
+<li>les autres types de géométrie ne sont pas gérés.</li>
+</ul>
+<p>Pour les points des routes et les points de trace, s&#8217;il y a une coordonnée Z,
+celui-ci est utilisé pour remplir l&#8217;élément élévation des points correspondants.</p>
+<p>À partir de GDAL/OGR 1.8.0, si une couche est nommée &#8220;track_points&#8221; avec des
+géométries wkbPoint/wkbPoint25D, le tracks dans le fichier GPX sera construit à
+partir de la séquence de features dans cette couche. C&#8217;est la manière de définir
+les attributs GPX pour chaque point d&#8217;une trace, en plus des coordonnées brutes. Les
+points appartenant au même trace sont identifiés grâce à la même valeur du champ
+&#8216;track_fid&#8217; field  (et sera découpé en segments de trace en fonction de la valeur
+du champ &#8216;track_seg_id&#8217;). Ils doivent être écrits en séquence afin que les objets
+trace soient correctement reconstruit. Le champ &#8216;track_name&#8217; peut être définie sur
+le premier point de la trace pour remplir l&#8217;élément &lt;name&gt; de la trace.</p>
+<p>De la même manière, si une couche est nommée &#8220;route_points&#8221; avec des géométries
+wkbPoint/wkbPoint25D, les routes dans le fichiers GPX sera construit à partir de
+la séquence de points avec la même valeur du champ &#8216;route_fid&#8217;. Le champ
+&#8216;route_name&#8217; peut être définie au premier point trace pour remplir l&#8217;élément
+&lt;name&gt; sur la route.</p>
+<p>Le pilote GPX gère en écriture les options de création suivantes pour les
+couches :</p>
+<ul>
+<li><p class="first"><strong>FORCE_GPX_TRACK :</strong> par défaut lors de l&#8217;écriture d&#8217;une couche dont les
+objets géométriques sont de type <em>wkbLineString</em>, le pilote GPX choisit de
+les écrire comme routes.</p>
+<p>Si <em>FORCE_GPX_TRACK=YES</em> est définie, ils seront écrits comme tracks.</p>
+</li>
+<li><p class="first"><strong>FORCE_GPX_ROUTE :</strong> par défaut lors de l&#8217;écriture d&#8217;une couche dont les
+objets sont de type <em>wkbMultiLineString</em>, le pilote GPX choisit de les écrire
+comme tracks.</p>
+<p>Si <em>FORCE_GPX_ROUTE=YES</em> est définie, ils seront écrits comme routes,
+seulement si les multilignes ne sont composées que de ligne simple.</p>
+</li>
+</ul>
+<p>Le pilote GPX gère en écriture les options de création suivantes pour les jeux
+de données :</p>
+<ul class="simple">
+<li><strong>GPX_USE_EXTENSIONS :</strong> Par défaut, le pilote GPX ignorera les champs
+attributaires qui ne correspondront pas à la définition du schéma XML du GPX
+(name, cmt, etc...).
+Si <em>GPX_USE_EXTENSIONS=YES</em>  est définie, des champs supplémentaires seront
+écrits dans la balise &lt;extension&gt;.</li>
+<li><strong>GPX_EXTENSIONS_NS :</strong> Seulement utilisé si <em>GPX_USE_EXTENSIONS=YES</em> et
+<em>GPX_EXTENSIONS_NS_URL</em> sont définies.
+La valeur de l&#8217;espace de nom utilisée pour les balises extension. Par
+défaut, &#8220;ogr&#8221;.</li>
+<li><strong>GPX_EXTENSIONS_NS_URL :</strong> Seulement utilisé si <em>GPX_USE_EXTENSIONS=YES</em> et
+<em>GPX_EXTENSIONS_NS</em> sont définies.
+Le chemin de l&#8217;espace de nom est par défaut &#8220;<a class="reference external" href="http://osgeo.org/gdal">http://osgeo.org/gdal</a>&#8221;.</li>
+<li><strong>LINEFORMAT :</strong> (GDAL/OGR &gt;= 1.8.0) Par défaut les fichiers sont créés avec la
+convetion de fin de ligne de la plateforme locale (CR/LF sur win32 ou LF sur
+tous les autres systèmes). Cela peut être écrasé par l&#8217;utilisation de l&#8217;option
+de création de couche LINEFORMAT  qui accepte les valeurs <strong>CRLF</strong>
+(format DOS) ou <strong>LF</strong> (format Unix).</li>
+</ul>
+<p>Waypoints, routes et tracks doivent être écrit dans cet ordre en fonction du
+schéma XML.</p>
+<p>Lors de la traduction à partir d&#8217;une source de jeu de données, il peut être
+nécessaire de renommer les noms des champs à partir de la source du jeu de
+données par les noms des attributs GPX attendus, tels que &lt;name&gt;, &lt;desc&gt;, etc.
+Cela peut être réalisé avec un jeu de données <a class="reference internal" href="vrt.html#gdal-ogr-formats-vrt"><em>Virtual Format</em></a>, ou en
+utilisant l&#8217;option &#8220;-sql&#8221; de la commande <tt class="docutils literal"><span class="pre">ogr2ogr</span></tt>.</p>
+</div>
+<div class="section" id="problemes-lors-de-la-traduction-en-shapefile">
+<h2>Problèmes lors de la traduction en Shapefile<a class="headerlink" href="#problemes-lors-de-la-traduction-en-shapefile" title="Lien permanent vers ce titre">¶</a></h2>
+<ul>
+<li><p class="first">Lors de la traduction de la couche <em>track_points</em> vers un Shapefile, les noms
+des champs &#8220;track_seg_id&#8221; et &#8220;track_seg_point_id&#8221; sont tronqué en 10 caractères
+dans le fichier .DBF, entraînant une duplication du nom. Pour éviter cela à
+partir de GDAL 1.6.1, vous pouvez définir l&#8217;option de configuration GPX_SHORT_NAMES
+à TRUE pour les définir respectivement à &#8220;trksegid&#8221; et &#8220;trksegptid&#8221;, ce qui leur
+permet d&#8217;être unique une fois traduit en DBF. Le champ &#8220;route_point_id&#8221; de la
+couche <em>route_points</em> sera également renommé en &#8220;rteptid&#8221;.
+Mais notez qu&#8217;aucun traitement particulier ne sera réalisé pour n&#8217;importe quelle
+extension de noms de champ.</p>
+<p>Pour traduire la couche track_points d&#8217;un fichier GPX à un ensemble de
+shapefiles :</p>
+<div class="highlight-python"><pre>ogr2ogr --config GPX_SHORT_NAMES YES out input.gpx track_points</pre>
+</div>
+</li>
+<li><p class="first">Shapefile ne gère pas les champs de type DateTime. Il gère seulement les champs
+de type Date. Par défaut, vous perdrez donc la partie hour:minute:second de
+l&#8217;élément <em>Time</em> d&#8217;un fichier GPX.
+À partir de GDAL 1.6.0, vous pouvez utiliser l&#8217;opérateur CAST du SQL d&#8217;OGR pour
+convertir le champ <em>time</em> en string :</p>
+<div class="highlight-python"><pre>ogr2ogr out input.gpx -sql "SELECT ele, CAST(time AS character(32)) FROM waypoints"</pre>
+</div>
+<p>À partir de GDAL 1.7.0, il y a des façons plus aisées pour sélectionner tous les
+champs et demander la conversion d&#8217;un type donné en strings :</p>
+<div class="highlight-python"><pre>ogr2ogr out input.gpx -fieldTypeToString DateTime</pre>
+</div>
+</li>
+</ul>
+</div>
+<div class="section" id="exemple">
+<h2>Exemple<a class="headerlink" href="#exemple" title="Lien permanent vers ce titre">¶</a></h2>
+<p>La commande ogrinfo peut être utilisée pour faire un dump du contenu d&#8217;un
+fichier de données GPX :</p>
+<div class="highlight-python"><pre>ogrinfo -ro -al input.gpx</pre>
+</div>
+<p>La commande ogr2ogr peut être utilisé pour une traduction du format GPX au
+format GPX :</p>
+<div class="highlight-python"><pre>ogr2ogr -f GPX output.gpx input.gpx waypoints routes tracks</pre>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Dans le cas de la traduction du format GPX au format GPX, vous devez
+définir le nom des couches, dans le but d&#8217;éviter les couches route_points
+et track_points.</p>
+</div>
+<p>Utilisez la baliser &lt;extensions&gt; pour la sortie :</p>
+<div class="highlight-python"><pre>ogr2ogr -f GPX  -dsco GPX_USE_EXTENSIONS=YES output.gpx input</pre>
+</div>
+<p>qui renverra ce qui suit :</p>
+<div class="highlight-python"><pre>&lt;?xml version="1.0"?&gt;
+&lt;gpx version="1.1" creator="GDAL 1.5dev"
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xmlns:ogr="http://osgeo.org/gdal"
+xmlns="http://www.topografix.com/GPX/1/1"
+xsi:schemaLocation="http://www.topografix.com/GPX/1/1 http://www.topografix.com/GPX/1/1/gpx.xsd"&gt;
+&lt;wpt lat="1" lon="2"&gt;
+&lt;extensions&gt;
+    &lt;ogr:Primary_ID&gt;PID5&lt;/ogr:Primary_ID&gt;
+    &lt;ogr:Secondary_ID&gt;SID5&lt;/ogr:Secondary_ID&gt;
+&lt;/extensions&gt;
+&lt;/wpt&gt;
+&lt;wpt lat="3" lon="4"&gt;
+&lt;extensions&gt;
+    &lt;ogr:Primary_ID&gt;PID4&lt;/ogr:Primary_ID&gt;
+    &lt;ogr:Secondary_ID&gt;SID4&lt;/ogr:Secondary_ID&gt;
+&lt;/extensions&gt;
+&lt;/wpt&gt;
+&lt;/gpx&gt;</pre>
+</div>
+<p>Utilisez l&#8217;option -sql pour remaper les noms des champs par un permis par le schéma GPX !</p>
+<div class="highlight-python"><pre>ogr2ogr -f GPX output.gpx input.shp -sql "SELECT field1 AS name, field2 AS desc FROM source_layer"</pre>
+</div>
+</div>
+<div class="section" id="voir-egalement">
+<h2>Voir également<a class="headerlink" href="#voir-egalement" title="Lien permanent vers ce titre">¶</a></h2>
+<ul class="simple">
+<li><a class="reference external" href="http://www.topografix.com/gpx.asp">Page web pour le format GPX format</a></li>
+<li><a class="reference external" href="http://www.topografix.com/GPX/1/1/">Documenation du format GPX 1.1</a></li>
+</ul>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+
+
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="grass.html" title="GRASS"
+             >suivant</a></li>
+        <li class="right" >
+          <a href="gpsbabel.html" title="GPSBabel"
+             >précédent</a> |</li>
+        <li><a href="../../index.html">GDAL v1.9.0 documentation</a> &raquo;</li>
+          <li><a href="../index.html" >OGR</a> &raquo;</li>
+          <li><a href="index.html" >Formats vecteur d&#8217;OGR</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+    <a href="http://creativecommons.org/licenses/by/2.0/fr/deed.fr">Licence Creative Common BY</a>
+    <!--
+      &copy; Copyright 2011, Yves Jacolin.-->
+      Créé avec <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0.7.
+    </div>
+  </body>
+</html>

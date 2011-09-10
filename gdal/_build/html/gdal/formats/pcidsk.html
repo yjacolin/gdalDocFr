@@ -1,0 +1,161 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF8" />
+    
+    <title>PCIDSK — PCI Geomatics Database File &mdash; GDAL v1.9.0 documentation</title>
+    <link rel="stylesheet" href="../../_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '1.9.0',
+        COLLAPSE_MODINDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../_static/translations.js"></script>
+    <link rel="top" title="GDAL v1.9.0 documentation" href="../../index.html" />
+    <link rel="up" title="Formats" href="index.html" />
+    <link rel="next" title="Geospatial PDF" href="pdf.html" />
+    <link rel="prev" title="OZI – raster OZF2/OZFX3" href="ozi.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="pdf.html" title="Geospatial PDF"
+             accesskey="N">suivant</a></li>
+        <li class="right" >
+          <a href="ozi.html" title="OZI – raster OZF2/OZFX3"
+             accesskey="P">précédent</a> |</li>
+        <li><a href="../../index.html">GDAL v1.9.0 documentation</a> &raquo;</li>
+          <li><a href="../index.html" >GDAL</a> &raquo;</li>
+          <li><a href="index.html" accesskey="U">Formats</a> &raquo;</li> 
+      </ul>
+    </div>
+
+
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <h3><a href="../../index.html">Table des matières</a></h3>
+            <ul>
+<li><a class="reference internal" href="#">PCIDSK &#8212; PCI Geomatics Database File</a><ul>
+<li><a class="reference internal" href="#options-de-creation">Options de création</a></li>
+<li><a class="reference internal" href="#lisez-egalement">Lisez également</a></li>
+</ul>
+</li>
+</ul>
+
+            <h4>Sujet précédent</h4>
+            <p class="topless"><a href="ozi.html"
+                                  title="Chapitre précédent">OZI &#8211; raster OZF2/OZFX3</a></p>
+            <h4>Sujet suivant</h4>
+            <p class="topless"><a href="pdf.html"
+                                  title="Chapitre suivant">Geospatial PDF</a></p>
+            <h3>Cette page</h3>
+            <ul class="this-page-menu">
+              <li><a href="../../_sources/gdal/formats/pcidsk.txt"
+                     rel="nofollow">Montrer la source</a></li>
+            </ul>
+          <div id="searchbox" style="display: none">
+            <h3>Recherche rapide</h3>
+              <form class="search" action="../../search.html" method="get">
+                <input type="text" name="q" size="18" />
+                <input type="submit" value="Go" />
+                <input type="hidden" name="check_keywords" value="yes" />
+                <input type="hidden" name="area" value="default" />
+              </form>
+              <p class="searchtip" style="font-size: 90%">
+              Enter search terms or a module, class or function name.
+              </p>
+          </div>
+          <script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="pcidsk-pci-geomatics-database-file">
+<span id="gdal-gdal-formats-pcidsk"></span><h1>PCIDSK &#8212; PCI Geomatics Database File<a class="headerlink" href="#pcidsk-pci-geomatics-database-file" title="Lien permanent vers ce titre">¶</a></h1>
+<p>Fichiers de base de données PCIDSK utilisé par les logiciels PCI EASI/PACE pour
+l&#8217;analyse d&#8217;image. Il est géré en lecture et écriture par GDAL. Tous les types
+de données de pixel, et d&#8217;organisation des donnés (pixel entrelacé, bande
+entrelacée, fichier entrelacé et tuile) doivent être gérés.</p>
+<p>Pour l&#8217;instant, les segments LUT et PCT sont ignorés, mais les segments PCT
+doivent être traité comme associé avec les bandes. Les fichiers d&#8217;ensemble et
+les méta-données spécifique aux bandes doivent être correctement associés avec
+l&#8217;image ou les bandes.</p>
+<p>Le géoréférencement est géré bien qu&#8217;il peut y avoir certaines limitations dans
+la gestion des <em>datums</em> et des ellipsoïdes. Les segments des points d&#8217;amer
+sont ignorés. les segments RPC seront renvoyés comme métadonnées RPC dans le style
+de GDAL</p>
+<p>Les aperçues internes d&#8217;images (pyramide) seront également lu correctement bien
+que les nouveaux aperçues demandés seront construit en externe comme un fichier
+.ovr.</p>
+<p>Les segments vectoriels sont géré par le pilote OGR PCIDSK.</p>
+<div class="section" id="options-de-creation">
+<h2>Options de création<a class="headerlink" href="#options-de-creation" title="Lien permanent vers ce titre">¶</a></h2>
+<p>Notez que les fichiers PCIDSK ont toujours produit des pixels entrelacés, même
+si d&#8217;autres organisations sont géré en lecture.</p>
+<ul class="simple">
+<li><strong>INTERLEAVING=PIXEL/BAND/FILE/TILED :</strong> définie l&#8217;entrelacement pour les données
+des fichiers raster.</li>
+<li><strong>COMPRESSION=NONE/RLE/JPEG :</strong> définie la compression à utiliser. Les valeurs
+autre que NONE (celle par défaut) peut être seulement utilisé avec l&#8217;entrelacement TILED.
+Si JPEG est sélectionné il peut inclure une valeur de qualité comprise entre 1
+et 100 - par exemple COMPRESSION=JPEG40.</li>
+<li><strong>TILESIZE=n :</strong> quand INTERLEAVING est TILED, la taille des tuiles peut être
+sélectionné avec ce paramètre - par défaut 127 pour 127x127.</li>
+</ul>
+</div>
+<div class="section" id="lisez-egalement">
+<h2>Lisez également<a class="headerlink" href="#lisez-egalement" title="Lien permanent vers ce titre">¶</a></h2>
+<ul class="simple">
+<li>Implémenté dans <em>gdal/frmts/pcidsk/pcidskdataset2.cpp</em>.</li>
+<li><a class="reference external" href="http://home.gdal.org/projects/pcidsk/index.html">SDK PCIDSK</a>.</li>
+</ul>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+
+
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="pdf.html" title="Geospatial PDF"
+             >suivant</a></li>
+        <li class="right" >
+          <a href="ozi.html" title="OZI – raster OZF2/OZFX3"
+             >précédent</a> |</li>
+        <li><a href="../../index.html">GDAL v1.9.0 documentation</a> &raquo;</li>
+          <li><a href="../index.html" >GDAL</a> &raquo;</li>
+          <li><a href="index.html" >Formats</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+    <a href="http://creativecommons.org/licenses/by/2.0/fr/deed.fr">Licence Creative Common BY</a>
+    <!--
+      &copy; Copyright 2011, Yves Jacolin.-->
+      Créé avec <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0.7.
+    </div>
+  </body>
+</html>

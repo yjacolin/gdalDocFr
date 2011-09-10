@@ -1,0 +1,178 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF8" />
+    
+    <title>nearblack &mdash; GDAL v1.9.0 documentation</title>
+    <link rel="stylesheet" href="../_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.9.0',
+        COLLAPSE_MODINDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/translations.js"></script>
+    <link rel="top" title="GDAL v1.9.0 documentation" href="../index.html" />
+    <link rel="up" title="GDAL" href="index.html" />
+    <link rel="next" title="gdal_retile.py" href="gdal_retile.html" />
+    <link rel="prev" title="gdaltransform" href="gdaltransform.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="gdal_retile.html" title="gdal_retile.py"
+             accesskey="N">suivant</a></li>
+        <li class="right" >
+          <a href="gdaltransform.html" title="gdaltransform"
+             accesskey="P">précédent</a> |</li>
+        <li><a href="../index.html">GDAL v1.9.0 documentation</a> &raquo;</li>
+          <li><a href="index.html" accesskey="U">GDAL</a> &raquo;</li> 
+      </ul>
+    </div>
+
+
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <h3><a href="../index.html">Table des matières</a></h3>
+            <ul>
+<li><a class="reference internal" href="#">nearblack</a><ul>
+<li><a class="reference internal" href="#usage">Usage</a></li>
+<li><a class="reference internal" href="#description">Description</a></li>
+</ul>
+</li>
+</ul>
+
+            <h4>Sujet précédent</h4>
+            <p class="topless"><a href="gdaltransform.html"
+                                  title="Chapitre précédent">gdaltransform</a></p>
+            <h4>Sujet suivant</h4>
+            <p class="topless"><a href="gdal_retile.html"
+                                  title="Chapitre suivant">gdal_retile.py</a></p>
+            <h3>Cette page</h3>
+            <ul class="this-page-menu">
+              <li><a href="../_sources/gdal/nearblack.txt"
+                     rel="nofollow">Montrer la source</a></li>
+            </ul>
+          <div id="searchbox" style="display: none">
+            <h3>Recherche rapide</h3>
+              <form class="search" action="../search.html" method="get">
+                <input type="text" name="q" size="18" />
+                <input type="submit" value="Go" />
+                <input type="hidden" name="check_keywords" value="yes" />
+                <input type="hidden" name="area" value="default" />
+              </form>
+              <p class="searchtip" style="font-size: 90%">
+              Enter search terms or a module, class or function name.
+              </p>
+          </div>
+          <script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="nearblack">
+<span id="gdal-gdal-nearblack"></span><h1>nearblack<a class="headerlink" href="#nearblack" title="Lien permanent vers ce titre">¶</a></h1>
+<p>Convertie des bords plus ou moins en noirs/blanc en noir.</p>
+<div class="section" id="usage">
+<h2>Usage<a class="headerlink" href="#usage" title="Lien permanent vers ce titre">¶</a></h2>
+<div class="highlight-python"><pre>nearblack [-of format] [-white] [-near dist] [-nb non_black_pixels]
+      [-setalpha] [-setmask] [-o outfile] [-q]  [-co "NAME=VALUE"]* infile</pre>
+</div>
+</div>
+<div class="section" id="description">
+<h2>Description<a class="headerlink" href="#description" title="Lien permanent vers ce titre">¶</a></h2>
+<p>La commande va scanner une image et tenter de définir tous les pixels qui sont
+proches du noir (ou proche du blanc) autour du bord en noir (ou blanc) exact.
+Cela est souvent utilisé pour corriger les photos aériennes compressées avec
+perte afin que les pixels de couleur puissent être traités comme transparents
+lors du mosaïquage.</p>
+<ul class="simple">
+<li><strong>-o outfile :</strong> le nom du fichier en sortie à créer. Les fichiers
+nouvellement créés sont toujours créés avec le pilote HFA (Erdas Imagine -
+.img) par défaut.</li>
+<li><strong>-of format :</strong> (GDAL 1.8.0 ou supérieur) sélectionne le format en sortie.
+Utilisez le nom de format court (GTiff pour GeoTIFF par exemple).</li>
+<li><strong>-co &#8220;NAME=VALUE&#8221; :</strong> (GDAL 1.8.0 ou supérieur) passe une option de création
+au pilote du format en sortie. Plusieurs options <em>-co</em> peuvent être listées.
+Voyez la documentation spécifique au format pour les options de création
+légales pour chaque format. Seulement valide lors de la création d&#8217;un nouveau
+fichier.</li>
+<li><strong>-white :</strong> recherche pour les pixels proche du blanc (255) au lieu des
+pixels proche du noir.</li>
+<li><strong>-near dist :</strong> sélectionne la distance du noir (ou du blanc) les valeurs
+du pixel peuvent être encore considéré comme noir (ou blanc). 15 par défaut.</li>
+<li>** -nb non_black_pixels :** nombre de pixels différent du noir qui peut être
+rencontré avant d&#8217;abandonner la recherche à l&#8217;intérieur. 2 par défaut.</li>
+<li><strong>-setalpha :</strong> (GDAL 1.8.0 ou supérieur) ajoute une bande alpha si le fichier
+en sortie est définie et si le fichier en entrée possède trois bandes, ou
+définie la bande alpha du fichier en sortie s&#8217;il est définie et le fichier
+en entrée possède quatre bandes, ou bien définie la bande alpha du fichier
+en entrée s&#8217;il possède 4 bandes et aucun fichier en sortie n&#8217;est définie.
+La bande alpha est définie à 0 dans le collier de l&#8217;image et à 255 partout
+ailleurs.</li>
+<li><strong>-setmask :</strong> (GDAL 1.8.0 ou supérieur)  ajoute une bande de masque au
+fichier en sortie ou ajoute une bande de masque au fichier en entrée s&#8217;il
+n&#8217;en a pas un déjà et aucun fichier n&#8217;est définie. La bande de masque est
+définie à 0 dans le collier de l&#8217;image et à 255 partout ailleurs.</li>
+<li><strong>-q :</strong> (GDAL 1.8.0 ou supérieur) supprime la barre de progression et les
+autres informations affichées.</li>
+<li><strong>infile :</strong> le fichier en entrée. N&#8217;importe quel format géré par GDAL, de
+n&#8217;importe quel nombre de bandes, normalement des bandes sous 8 bytes.</li>
+</ul>
+<p>L&#8217;algorithme traite l&#8217;image une ligne à la foi. Un scan intérieur est réalisé
+à partir du pixel défini à la fin à noir (blanc) jusqu&#8217;à au moins
+<em>&#8220;non_black_pixels&#8221;</em> pixels qui sont éloignés d&#8217;au moins <em>dist</em> niveaux de noir
+(blanc) rencontré avant l&#8217;arrêt du scan. Les pixels proches du noir (blanc)
+sont définis à noir(blanc). L&#8217;algorithme scan également du haut vers le bas
+puis du bas vers le haut pour identifier les indentations dans le haut ou le bas.</p>
+<p>Le traitement est entièrement réalisé en 8 bits (Bytes).</p>
+<p>Si le fichier en sortie est omis, le résultat calculé sera écrit dans le fichier
+en entrée - qui doit gérer la mise à jour.</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+
+
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="gdal_retile.html" title="gdal_retile.py"
+             >suivant</a></li>
+        <li class="right" >
+          <a href="gdaltransform.html" title="gdaltransform"
+             >précédent</a> |</li>
+        <li><a href="../index.html">GDAL v1.9.0 documentation</a> &raquo;</li>
+          <li><a href="index.html" >GDAL</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+    <a href="http://creativecommons.org/licenses/by/2.0/fr/deed.fr">Licence Creative Common BY</a>
+    <!--
+      &copy; Copyright 2011, Yves Jacolin.-->
+      Créé avec <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0.7.
+    </div>
+  </body>
+</html>

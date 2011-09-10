@@ -1,0 +1,156 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF8" />
+    
+    <title>RMF — Raster Matrix Format &mdash; GDAL v1.9.0 documentation</title>
+    <link rel="stylesheet" href="../../_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '1.9.0',
+        COLLAPSE_MODINDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../_static/translations.js"></script>
+    <link rel="top" title="GDAL v1.9.0 documentation" href="../../index.html" />
+    <link rel="up" title="Formats" href="index.html" />
+    <link rel="next" title="RS2 – RadarSat 2 XML Product" href="rs2.html" />
+    <link rel="prev" title="RIK – Swedish Grid Maps" href="rik.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="rs2.html" title="RS2 – RadarSat 2 XML Product"
+             accesskey="N">suivant</a></li>
+        <li class="right" >
+          <a href="rik.html" title="RIK – Swedish Grid Maps"
+             accesskey="P">précédent</a> |</li>
+        <li><a href="../../index.html">GDAL v1.9.0 documentation</a> &raquo;</li>
+          <li><a href="../index.html" >GDAL</a> &raquo;</li>
+          <li><a href="index.html" accesskey="U">Formats</a> &raquo;</li> 
+      </ul>
+    </div>
+
+
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <h3><a href="../../index.html">Table des matières</a></h3>
+            <ul>
+<li><a class="reference internal" href="#">RMF &#8212; Raster Matrix Format</a><ul>
+<li><a class="reference internal" href="#meta-donnees">Méta-données</a></li>
+<li><a class="reference internal" href="#options-creation">Options création</a></li>
+</ul>
+</li>
+</ul>
+
+            <h4>Sujet précédent</h4>
+            <p class="topless"><a href="rik.html"
+                                  title="Chapitre précédent">RIK &#8211; Swedish Grid Maps</a></p>
+            <h4>Sujet suivant</h4>
+            <p class="topless"><a href="rs2.html"
+                                  title="Chapitre suivant">RS2 &#8211; RadarSat 2 XML Product</a></p>
+            <h3>Cette page</h3>
+            <ul class="this-page-menu">
+              <li><a href="../../_sources/gdal/formats/rmf.txt"
+                     rel="nofollow">Montrer la source</a></li>
+            </ul>
+          <div id="searchbox" style="display: none">
+            <h3>Recherche rapide</h3>
+              <form class="search" action="../../search.html" method="get">
+                <input type="text" name="q" size="18" />
+                <input type="submit" value="Go" />
+                <input type="hidden" name="check_keywords" value="yes" />
+                <input type="hidden" name="area" value="default" />
+              </form>
+              <p class="searchtip" style="font-size: 90%">
+              Enter search terms or a module, class or function name.
+              </p>
+          </div>
+          <script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="rmf-raster-matrix-format">
+<span id="gdal-gdal-formats-rmf"></span><h1>RMF &#8212; Raster Matrix Format<a class="headerlink" href="#rmf-raster-matrix-format" title="Lien permanent vers ce titre">¶</a></h1>
+<p>RMF est un format simple raster tuilé utilisé dans les SIG &#8220;Integration&#8221; et
+&#8220;Panorama&#8221;. Le format lui-même a très peu de possibilité.</p>
+<p>Il y a deux types de RMF appelé MTW et RSW. MTW gère les données entières 16
+bites et les points flottant 32/64 bites dans un seul canal et a pour objectif
+de stocké les données MNT. RSW est un raster avec un objectif plus général, il
+gère un canal simple avec une carte de couleur ou trois canaux d&#8217;image RVB. Seul
+les données 8 bits peuvent être rangé dans un RSW. Un géoréférencement simple
+peut être fournit pour les deux types d&#8217;image.</p>
+<div class="section" id="meta-donnees">
+<h2>Méta-données<a class="headerlink" href="#meta-donnees" title="Lien permanent vers ce titre">¶</a></h2>
+<ul class="simple">
+<li><strong>ELEVATION_MINIMUM :</strong> valeur d&#8217;élévation minimum (seulement MTW).</li>
+<li><strong>ELEVATION_MAXIMUM :</strong> valeur d&#8217;élévation maximum (seulement MTW).</li>
+<li><strong>ELEVATION_UNITS :</strong> nom de l&#8217;unité pour les valeurs raster (seulement
+MTW). Peut être &#8220;m&#8221; (mètres), &#8220;cm&#8221; (centimètres), &#8220;dm&#8221; (décimètres), &#8220;mm&#8221;
+(millimètres).</li>
+<li><strong>ELEVATION_TYPE :</strong> peut être soit (élévation absolue) soit 1 (élévation
+totale). Seulement MTW.</li>
+</ul>
+</div>
+<div class="section" id="options-creation">
+<h2>Options création<a class="headerlink" href="#options-creation" title="Lien permanent vers ce titre">¶</a></h2>
+<ul class="simple">
+<li><strong>MTW=ON :</strong> force la génération de matrice MTW (RSW sera crée par défaut).</li>
+<li><strong>BLOCKXSIZE=n :</strong> définie la largeur de la tuile, par défaut, définie à 256.</li>
+<li><strong>BLOCKYSIZE=n :</strong> définie la hauteur de la tuile, par défaut, définie à 256.</li>
+</ul>
+<p><strong>Lisez également :</strong></p>
+<ul class="simple">
+<li>Implémenté dans <em>gdal/frmts/rmf/rmfdataset.cpp</em>.</li>
+<li>Page principale de &#8220;Panorama&#8221; GIS : <a class="reference external" href="http://www.gisinfo.ru/index_en.htm">http://www.gisinfo.ru/index_en.htm</a></li>
+</ul>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+
+
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="rs2.html" title="RS2 – RadarSat 2 XML Product"
+             >suivant</a></li>
+        <li class="right" >
+          <a href="rik.html" title="RIK – Swedish Grid Maps"
+             >précédent</a> |</li>
+        <li><a href="../../index.html">GDAL v1.9.0 documentation</a> &raquo;</li>
+          <li><a href="../index.html" >GDAL</a> &raquo;</li>
+          <li><a href="index.html" >Formats</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+    <a href="http://creativecommons.org/licenses/by/2.0/fr/deed.fr">Licence Creative Common BY</a>
+    <!--
+      &copy; Copyright 2011, Yves Jacolin.-->
+      Créé avec <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0.7.
+    </div>
+  </body>
+</html>

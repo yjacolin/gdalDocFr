@@ -1,0 +1,208 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF8" />
+    
+    <title>JP2KAK – JPEG-2000 (basé sur Kakadu) &mdash; GDAL v1.9.0 documentation</title>
+    <link rel="stylesheet" href="../../_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '1.9.0',
+        COLLAPSE_MODINDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../_static/translations.js"></script>
+    <link rel="top" title="GDAL v1.9.0 documentation" href="../../index.html" />
+    <link rel="up" title="Formats" href="index.html" />
+    <link rel="next" title="JP2MrSID — JPEG2000 via MrSID SDK" href="jp2mrsid.html" />
+    <link rel="prev" title="JP2ECW – ERMapper JPEG2000 (.jp2)" href="jp2ecw.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="jp2mrsid.html" title="JP2MrSID — JPEG2000 via MrSID SDK"
+             accesskey="N">suivant</a></li>
+        <li class="right" >
+          <a href="jp2ecw.html" title="JP2ECW – ERMapper JPEG2000 (.jp2)"
+             accesskey="P">précédent</a> |</li>
+        <li><a href="../../index.html">GDAL v1.9.0 documentation</a> &raquo;</li>
+          <li><a href="../index.html" >GDAL</a> &raquo;</li>
+          <li><a href="index.html" accesskey="U">Formats</a> &raquo;</li> 
+      </ul>
+    </div>
+
+
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <h3><a href="../../index.html">Table des matières</a></h3>
+            <ul>
+<li><a class="reference internal" href="#">JP2KAK &#8211; JPEG-2000 (basé sur Kakadu)</a><ul>
+<li><a class="reference internal" href="#problemes-de-creation">Problèmes de création</a></li>
+</ul>
+</li>
+</ul>
+
+            <h4>Sujet précédent</h4>
+            <p class="topless"><a href="jp2ecw.html"
+                                  title="Chapitre précédent">JP2ECW &#8211; ERMapper JPEG2000 (.jp2)</a></p>
+            <h4>Sujet suivant</h4>
+            <p class="topless"><a href="jp2mrsid.html"
+                                  title="Chapitre suivant">JP2MrSID &#8212; JPEG2000 via MrSID SDK</a></p>
+            <h3>Cette page</h3>
+            <ul class="this-page-menu">
+              <li><a href="../../_sources/gdal/formats/jp2kak.txt"
+                     rel="nofollow">Montrer la source</a></li>
+            </ul>
+          <div id="searchbox" style="display: none">
+            <h3>Recherche rapide</h3>
+              <form class="search" action="../../search.html" method="get">
+                <input type="text" name="q" size="18" />
+                <input type="submit" value="Go" />
+                <input type="hidden" name="check_keywords" value="yes" />
+                <input type="hidden" name="area" value="default" />
+              </form>
+              <p class="searchtip" style="font-size: 90%">
+              Enter search terms or a module, class or function name.
+              </p>
+          </div>
+          <script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="jp2kak-jpeg-2000-base-sur-kakadu">
+<span id="gdal-gdal-formats-jp2kak"></span><h1>JP2KAK &#8211; JPEG-2000 (basé sur Kakadu)<a class="headerlink" href="#jp2kak-jpeg-2000-base-sur-kakadu" title="Lien permanent vers ce titre">¶</a></h1>
+<p>La plupart des formes des images compressées  JPEG2000 JP2 et JPC (ISO/IEC
+15444-1) peuvent être lu avec GDAL utilisant le pilote basé sur la bibliothèque
+Kakadu. De même, de nouvelles images peuvent être écrites. Les images existantes
+ne peuvent pas être mises à jour.</p>
+<p>Le format de fichier JPEG2000 gère les compressions avec et sans perte d&#8217;image
+8 et 16 bits avec une ou plusieurs bandes (composants). Via le mécanisme GeoJP2
+(<a class="reference external" href="http://www.mappingscience.com/msi.html">http://www.mappingscience.com/msi.html</a>), le système de coordonnées et les
+informations de géoréférencement style GeoTIFF peuvent être inclus dans le
+fichier JP2. Les fichiers JPEG2000 utilisent un format et un mécanisme de
+compression substantiellement différent de la compression JPEG traditionnelle
+et du format JPEG JFIF. Il y a des mécanismes de compressions distincts produit
+par le même groupe. JPEG2000 est basé sur la compression par ondelette.</p>
+<p>Le pilote JPEG200 documenté sur cette page (le pilote JP2KAK) est implémenté
+par-dessus de la bibliothèque commerciale Kakadu (<a class="reference external" href="http://www.kakadusoftware.com/">http://www.kakadusoftware.com/</a>).
+C&#8217;est une bibliothèque JPEG200 de grande qualité et hautement performante,
+largement utilisée dans la communauté géomatique et dans l&#8217;imagerie générale.
+Cependant, elle n&#8217;est pas libre et donc une compilation normale de GDAL à partir
+des sources n&#8217;inclura pas un support pour ce pilote à moins que le compilateur
+achète une licence pour la bibliothèque et configure en conséquence. GDAL inclut
+un autre pilote JPEG200 basé sur la bibliothèque libre JasPer
+(<a class="reference external" href="http://www.gdal.org/frmt_jpeg2000.html">http://www.gdal.org/frmt_jpeg2000.html</a>).</p>
+<p>Lors de la lecture d&#8217;une image ce pilote représentera les bandes en byte (8 bits
+non signés), 16 bite signé ou 16 bits non signé. Les informations du système de
+coordonnées et de géoréférencement seront disponibles si le fichier est un fichier
+GeoJP2 (tm). Les fichiers couleurs encodés dans l&#8217;espace de couleur YCbCr seront
+automatiquement traduit en RVB. Les images avec une palette sont également gérées.</p>
+<p>À partir de GDAL 1.9.0, les métadonnées XMP peuvent être extraite des fichiers
+JPEG2000, et seront stockées comme contenu brute XML dans le domaine de métadonnées
+xml:XMP.</p>
+<div class="section" id="problemes-de-creation">
+<h2>Problèmes de création<a class="headerlink" href="#problemes-de-creation" title="Lien permanent vers ce titre">¶</a></h2>
+<p>Les fichiers JPEG2000 peuvent seulement être crée en utilisant le mécanisme
+<em>CreateCopy</em> pour les copier dans un jeu de donnée existant.</p>
+<p>Les aperçues JPEG2000 sont maintenu comme partie de la description mathématique
+de l&#8217;image. Les aperçues ne peuvent pas être construit comme un traitement
+séparé, mais en lecture l&#8217;image sera généralement représenté comme ayant des
+niveaux d&#8217;aperçus à différentes puissances de deux facteurs.</p>
+<p><strong>Options de création :</strong></p>
+<ul class="simple">
+<li><strong>QUALITY=n</strong> : Définie le taux de la taille compressée comme un pourcentage
+de la taille de l&#8217;image non compressée. Par défaut elle est de 20 et indique
+que l&#8217;image doit avoir une taille de 20 % de celle de l&#8217;image non compressée.
+La taille de l&#8217;image finale réelle peut ne pas correspondre exactement celle
+demandée en fonction de différents facteurs. Une valeur de 100 entraînera
+l&#8217;utilisation d&#8217;un algorithme de compression sans perte. Sur les données images
+typique, si vous définissez une valeur plus grande que 65, il peut être
+intéressant de tester avec <em>QUALITY=100</em> puisque la compression sans perte peut
+produire une meilleure compression qu&#8217;une compression sans perte.</li>
+<li><strong>BLOCKXSIZE=n</strong> : Définie la largeur de la tuile à utiliser. Par défaut elle
+est de 20000.</li>
+<li><strong>BLOCKYSIZE=n</strong> : Définie la hauteur de la tuile à utiliser. Par défaut elle
+est de la hauteur de l&#8217;image.</li>
+<li><strong>GMLJP2=YES/NO</strong> : Indique si une boîte GML conforme au GML de l&#8217;OGC dans les
+spécification JPEG2000 doit être inclus dans le fichier. Oui par défaut.</li>
+<li><strong>GeoJP2=YES/NO</strong> : Indique si une boîte GML conforme aux spécifications GeoJP2
+(GeoTIFF dans JPEG2000) doit être inclus dans le fichier. Oui par défaut.</li>
+<li><strong>LAYERS=n</strong> : Contrôle le nombre de couche produite. C&#8217;est une sorte de
+résolution de couches, mais pas tout à fait. La valeur par défaut est de 12
+et cela fonctionne bine dans la plupart des cas.
+ROI=xoff,yoff,xsize,ysize : Sélectionne une région pour être une région
+d&#8217;intérêt pour faire des traitements avec des données de meilleurs qualités.
+Les différents options « R » ci-dessous peuvent être utilisé pour mieux
+contrôler le taux. Par exemple, les définitions &#8220;ROI=0,0,100,100&#8221;, &#8220;Rweight=7&#8221;
+encoderaient la zone de 100x100 en haut à gauche de l&#8217;image avec une qualité
+considérablement plus élevée comparée au reste de l&#8217;image.
+Les options de création suivantes sont hautement lié à la bibliothèque Kakadu,
+et sont donnée pour une utilisation avancée seulement. Consultez la
+documentation de Kakadu pour une meilleur compréhension de leur signification.</li>
+<li><strong>Corder</strong> : Défaut à &#8220;PRCL&#8221;.</li>
+<li><strong>Cprecincts</strong> : défaut à &#8220;{512,512},{256,512},{128,512},{64,512},{32,512},
+{16,512},{8,512},{4,512},{2,512}&#8221;.</li>
+<li><strong>ORGgen_plt</strong> : défaut à &#8220;yes&#8221;.</li>
+<li><strong>Cmodes</strong> : défaut de la bibliothèque Kakadu utilisé.</li>
+<li><strong>Clevels</strong> : défaut de la bibliothèque Kakadu utilisé.</li>
+<li><strong>Rshift</strong> : défaut de la bibliothèque Kakadu utilisé.</li>
+<li><strong>Rlevels</strong> : défaut de la bibliothèque Kakadu utilisé.</li>
+<li><strong>Rweight</strong> : défaut de la bibliothèque Kakadu utilisé.</li>
+</ul>
+<p><strong>Lire également :</strong></p>
+<ul class="simple">
+<li>Implémenté dans <em>gdal/frmts/jp2kak/jp2kakdataset.cpp</em>.</li>
+<li>JPEG2000 pour la pag Applications Geospatial, inclus la discussion GeoJP2(tm)
+: <a class="reference external" href="http://www.remotesensing.org/jpeg2000/">http://www.remotesensing.org/jpeg2000/</a>.</li>
+<li>Pilote JPEG200 alternatif : <a class="reference external" href="http://www.gdal.org/frmt_jpeg2000.html">http://www.gdal.org/frmt_jpeg2000.html</a>.</li>
+</ul>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+
+
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="jp2mrsid.html" title="JP2MrSID — JPEG2000 via MrSID SDK"
+             >suivant</a></li>
+        <li class="right" >
+          <a href="jp2ecw.html" title="JP2ECW – ERMapper JPEG2000 (.jp2)"
+             >précédent</a> |</li>
+        <li><a href="../../index.html">GDAL v1.9.0 documentation</a> &raquo;</li>
+          <li><a href="../index.html" >GDAL</a> &raquo;</li>
+          <li><a href="index.html" >Formats</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+    <a href="http://creativecommons.org/licenses/by/2.0/fr/deed.fr">Licence Creative Common BY</a>
+    <!--
+      &copy; Copyright 2011, Yves Jacolin.-->
+      Créé avec <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0.7.
+    </div>
+  </body>
+</html>

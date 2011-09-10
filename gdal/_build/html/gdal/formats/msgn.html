@@ -1,0 +1,126 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF8" />
+    
+    <title>MSGN – Meteosat Second Generation (MSG) Format Natif d’Archive (.nat) &mdash; GDAL v1.9.0 documentation</title>
+    <link rel="stylesheet" href="../../_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '1.9.0',
+        COLLAPSE_MODINDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../_static/translations.js"></script>
+    <link rel="top" title="GDAL v1.9.0 documentation" href="../../index.html" />
+    <link rel="up" title="Formats" href="index.html" />
+    <link rel="next" title="NetCDF : Network Common Data Form" href="netcdf.html" />
+    <link rel="prev" title="MSG – Météosat Seconde Génération" href="msg.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="netcdf.html" title="NetCDF : Network Common Data Form"
+             accesskey="N">suivant</a></li>
+        <li class="right" >
+          <a href="msg.html" title="MSG – Météosat Seconde Génération"
+             accesskey="P">précédent</a> |</li>
+        <li><a href="../../index.html">GDAL v1.9.0 documentation</a> &raquo;</li>
+          <li><a href="../index.html" >GDAL</a> &raquo;</li>
+          <li><a href="index.html" accesskey="U">Formats</a> &raquo;</li> 
+      </ul>
+    </div>
+
+
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <h4>Sujet précédent</h4>
+            <p class="topless"><a href="msg.html"
+                                  title="Chapitre précédent">MSG &#8211; Météosat Seconde Génération</a></p>
+            <h4>Sujet suivant</h4>
+            <p class="topless"><a href="netcdf.html"
+                                  title="Chapitre suivant">NetCDF : Network Common Data Form</a></p>
+            <h3>Cette page</h3>
+            <ul class="this-page-menu">
+              <li><a href="../../_sources/gdal/formats/msgn.txt"
+                     rel="nofollow">Montrer la source</a></li>
+            </ul>
+          <div id="searchbox" style="display: none">
+            <h3>Recherche rapide</h3>
+              <form class="search" action="../../search.html" method="get">
+                <input type="text" name="q" size="18" />
+                <input type="submit" value="Go" />
+                <input type="hidden" name="check_keywords" value="yes" />
+                <input type="hidden" name="area" value="default" />
+              </form>
+              <p class="searchtip" style="font-size: 90%">
+              Enter search terms or a module, class or function name.
+              </p>
+          </div>
+          <script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="msgn-meteosat-second-generation-msg-format-natif-d-archive-nat">
+<span id="gdal-gdal-formats-msgn"></span><h1>MSGN &#8211; Meteosat Second Generation (MSG) Format Natif d&#8217;Archive (.nat)<a class="headerlink" href="#msgn-meteosat-second-generation-msg-format-natif-d-archive-nat" title="Lien permanent vers ce titre">¶</a></h1>
+<p>GDAL gère la lecture seulement des fichiers natifs MSG. Ces fichiers peuvent
+avoir entre 1 et 12 bandes, toutes à une résolutions de 10 bits.</p>
+<p>La gestion pour la 12e bande (HRV - High Resolution Visible) incluse. Cela est
+implémenté dans un sous jeu, c&#8217;est à dire, il est nécessaire de préfixer le nom
+du fichier avec la balise &#8220;HRV:&#8221;.</p>
+<p>De même, il est possible d&#8217;obtenir des valeurs de radiance de virgule flottante
+à la place des nombres numériques de 10 bit (DNs). Ce sous jeu est accédé en
+préfixant le nom du fichier avec la balise &#8220;RAD:&#8221;.</p>
+<p>Le géoréférencement est actuellement géré mais les résultats ne sont pas
+acceptable (pas assez précis) en fonction de vos besoins. L&#8217;astuce actuelle est
+d&#8217;implémenter la projection géostationnaire CGMS directement, en utilisant le
+code disponible sur EUMETSAT.</p>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+
+
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="netcdf.html" title="NetCDF : Network Common Data Form"
+             >suivant</a></li>
+        <li class="right" >
+          <a href="msg.html" title="MSG – Météosat Seconde Génération"
+             >précédent</a> |</li>
+        <li><a href="../../index.html">GDAL v1.9.0 documentation</a> &raquo;</li>
+          <li><a href="../index.html" >GDAL</a> &raquo;</li>
+          <li><a href="index.html" >Formats</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+    <a href="http://creativecommons.org/licenses/by/2.0/fr/deed.fr">Licence Creative Common BY</a>
+    <!--
+      &copy; Copyright 2011, Yves Jacolin.-->
+      Créé avec <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0.7.
+    </div>
+  </body>
+</html>

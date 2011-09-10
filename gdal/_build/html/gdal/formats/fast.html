@@ -1,0 +1,275 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF8" />
+    
+    <title>FAST – EOSAT FAST Format &mdash; GDAL v1.9.0 documentation</title>
+    <link rel="stylesheet" href="../../_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '1.9.0',
+        COLLAPSE_MODINDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../_static/translations.js"></script>
+    <link rel="top" title="GDAL v1.9.0 documentation" href="../../index.html" />
+    <link rel="up" title="Formats" href="index.html" />
+    <link rel="next" title="GeoRaster d’Oracle Spatial" href="georaster.html" />
+    <link rel="prev" title="ERS – ERMapper .ERS" href="ers.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="georaster.html" title="GeoRaster d’Oracle Spatial"
+             accesskey="N">suivant</a></li>
+        <li class="right" >
+          <a href="ers.html" title="ERS – ERMapper .ERS"
+             accesskey="P">précédent</a> |</li>
+        <li><a href="../../index.html">GDAL v1.9.0 documentation</a> &raquo;</li>
+          <li><a href="../index.html" >GDAL</a> &raquo;</li>
+          <li><a href="index.html" accesskey="U">Formats</a> &raquo;</li> 
+      </ul>
+    </div>
+
+
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <h3><a href="../../index.html">Table des matières</a></h3>
+            <ul>
+<li><a class="reference internal" href="#">FAST &#8211; EOSAT FAST Format</a><ul>
+<li><a class="reference internal" href="#les-donnees">Les données</a><ul>
+<li><a class="reference internal" href="#fast-l7a">FAST-L7A</a></li>
+<li><a class="reference internal" href="#irs-1c-1d">IRS-1C/1D</a><ul>
+<li><a class="reference internal" href="#ou">ou</a></li>
+<li><a class="reference internal" href="#id1">ou</a></li>
+<li><a class="reference internal" href="#id2">ou</a></li>
+<li><a class="reference internal" href="#id3">ou</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#georeferencement">Géoréférencement</a><ul>
+<li><a class="reference internal" href="#meta-donnees">Méta-données</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+            <h4>Sujet précédent</h4>
+            <p class="topless"><a href="ers.html"
+                                  title="Chapitre précédent">ERS &#8211; ERMapper .ERS</a></p>
+            <h4>Sujet suivant</h4>
+            <p class="topless"><a href="georaster.html"
+                                  title="Chapitre suivant">GeoRaster d&#8217;Oracle Spatial</a></p>
+            <h3>Cette page</h3>
+            <ul class="this-page-menu">
+              <li><a href="../../_sources/gdal/formats/fast.txt"
+                     rel="nofollow">Montrer la source</a></li>
+            </ul>
+          <div id="searchbox" style="display: none">
+            <h3>Recherche rapide</h3>
+              <form class="search" action="../../search.html" method="get">
+                <input type="text" name="q" size="18" />
+                <input type="submit" value="Go" />
+                <input type="hidden" name="check_keywords" value="yes" />
+                <input type="hidden" name="area" value="default" />
+              </form>
+              <p class="searchtip" style="font-size: 90%">
+              Enter search terms or a module, class or function name.
+              </p>
+          </div>
+          <script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="fast-eosat-fast-format">
+<span id="gdal-gdal-formats-fast"></span><h1>FAST &#8211; EOSAT FAST Format<a class="headerlink" href="#fast-eosat-fast-format" title="Lien permanent vers ce titre">¶</a></h1>
+<p>Lecture gérée à partir des formats FAST-L7A (Landsat TM data) et EOSAT Fast
+Format Rev. C (IRS-1C/1D data).  Si vous voulez lire d&#8217;autre jeu de de données
+dans ce format (SPOT), écrivez-moi (Andrey Kiselev, <a class="reference external" href="mailto:dron&#37;&#52;&#48;ak4719&#46;spb&#46;edu">dron<span>&#64;</span>ak4719<span>&#46;</span>spb<span>&#46;</span>edu</a>). Vous
+pouvez partager des échantillons de données avec moi.</p>
+<p>Les jeux de données au format FAST sont représentés par plusieurs fichiers : un
+ou plusieurs en-têtes administratifs et un ou plusieurs fichiers avec les
+véritables données des images dans un format brute. Les fichiers administratifs
+contiennent différentes informations sur les paramètres de scène incluant les
+noms des fichiers des images. Vous pouvez lire les fichiers avec les en-têtes
+administratifs avec n&#8217;importe quel éditeur de texte, ce sont juste des fichiers
+textes ASCII.</p>
+<p>Ce pilote recherche les fichiers administratifs pour les fichiers en entrée.
+Les noms des fichiers des images seront extraits et les données seront importés,
+chaque fichier sera interprété comme une bande.</p>
+<div class="section" id="les-donnees">
+<h2>Les données<a class="headerlink" href="#les-donnees" title="Lien permanent vers ce titre">¶</a></h2>
+<div class="section" id="fast-l7a">
+<h3>FAST-L7A<a class="headerlink" href="#fast-l7a" title="Lien permanent vers ce titre">¶</a></h3>
+<p>FAST-L7A consiste en plusieurs fichiers : un gros avec les données de l&#8217;image et
+trois petits fichiers avec des informations d&#8217;administration. Vous devez donner
+au pilote un des fichiers d&#8217;administration :</p>
+<ul class="simple">
+<li><strong>L7fppprrr_rrrYYYYMMDD_HPN.FST :</strong> ficher d&#8217;en-tête des bandes panchromatique
+avec 1 bande</li>
+<li><strong>L7fppprrr_rrrYYYYMMDD_HRF.FST :</strong> fichier d&#8217;en-tête des bandes VNIR/ SWIR
+avec 6 bandes</li>
+<li><strong>L7fppprrr_rrrYYYYMMDD_HTM.FST :</strong> fichier d&#8217;en-tête des bandes thermal avec
+2 bandes</li>
+</ul>
+<p>Toutes les images brutes et leur fichiers administratif correspondants seront
+importés comme des bandes GDAL.</p>
+<p>À partir du document «  Level 1 Product Output Files Data Format Control Book »
+(<a class="reference external" href="http://ltpwww.gsfc.nasa.gov/IAS/pdfs/DFCB_V5_B2_R4.pdf">http://ltpwww.gsfc.nasa.gov/IAS/pdfs/DFCB_V5_B2_R4.pdf</a>) :</p>
+<div class="highlight-python"><pre>The file naming convention for the FAST-L7A product files is
+L7fppprrr_rrrYYYYMMDD_AAA.FST
+
+where
+L7 = Landsat 7 mission
+f = ETM+ format (1 or 2) (data not pertaining to a specific format defaults to 1)
+ppp = starting path of the product
+rrr_rrr = starting and ending rows of the product
+YYYYMMDD = acquisition date of the image
+AAA = file type:
+HPN = panchromatic band header file
+HRF = VNIR/ SWIR bands header file
+HTM = thermal bands header file
+B10 = band 1
+B20 = band 2
+B30 = band 3
+B40 = band 4
+B50 = band 5
+B61 = band 6L
+B62 = band 6H
+B70 = band 7
+B80 = band 8
+FST = FAST file extension</pre>
+</div>
+<p>Vous devez donc donner au pilote un des fichiers parmi
+L7fppprrr_rrrYYYYMMDD_HPN.FST, L7fppprrr_rrrYYYYMMDD_HRF.FST ou
+L7fppprrr_rrrYYYYMMDD_HTM.FST.</p>
+</div>
+<div class="section" id="irs-1c-1d">
+<h3>IRS-1C/1D<a class="headerlink" href="#irs-1c-1d" title="Lien permanent vers ce titre">¶</a></h3>
+<p>Le format Fast Rev. C ne contient pas les noms des fichiers des bandes dans les
+en-têtes administratifs. Nous devons donc deviner les noms des fichiers des
+bandes, parce que les différents distributeurs nomment leurs fichiers
+différemment. Plusieurs schémas de nommage sont codé dans le pilote FAST de
+GDAL. Ceux-ci sont :</p>
+<div class="highlight-python"><pre>&lt;header&gt;.&lt;ext&gt;
+&lt;header&gt;.1.&lt;ext&gt;
+&lt;header&gt;.2.&lt;ext&gt;
+...</pre>
+</div>
+<div class="section" id="ou">
+<h4>ou<a class="headerlink" href="#ou" title="Lien permanent vers ce titre">¶</a></h4>
+<blockquote>
+<div>&lt;header&gt;.&lt;ext&gt;
+band1.&lt;ext&gt;
+band2.&lt;ext&gt;
+...</div></blockquote>
+</div>
+<div class="section" id="id1">
+<h4>ou<a class="headerlink" href="#id1" title="Lien permanent vers ce titre">¶</a></h4>
+<blockquote>
+<div>&lt;header&gt;.&lt;ext&gt;
+band1.dat
+band2.dat
+...</div></blockquote>
+</div>
+<div class="section" id="id2">
+<h4>ou<a class="headerlink" href="#id2" title="Lien permanent vers ce titre">¶</a></h4>
+<blockquote>
+<div>&lt;header&gt;.&lt;ext&gt;
+imagery1.&lt;ext&gt;
+imagery2.&lt;ext&gt;
+...</div></blockquote>
+</div>
+<div class="section" id="id3">
+<h4>ou<a class="headerlink" href="#id3" title="Lien permanent vers ce titre">¶</a></h4>
+<blockquote>
+<div>&lt;header&gt;.&lt;ext&gt;
+imagery1.dat
+imagery2.dat
+...</div></blockquote>
+<p>en majuscule ou minuscule. Le fichiers d&#8217;en-tête peut être nommé arbitrairement.
+Cela devrait couvrir la fantaisie de nommage des fichiers de la majorité des
+distributeurs. mais si vous n&#8217;avez pas de chance et votre jeu de données est
+nommé différemment vous devez les renommer manuellement avant l&#8217;importation des
+données avec GDAL.</p>
+</div>
+</div>
+</div>
+<div class="section" id="georeferencement">
+<h2>Géoréférencement<a class="headerlink" href="#georeferencement" title="Lien permanent vers ce titre">¶</a></h2>
+<p>Toutes les projections USGS doivent être gérées (pour ne pas les nommer UTM,
+LCC, PS, PC, TM, OM, SOM). Contactez-moi si vous avez des problèmes avec
+l&#8217;extraction de la projection appropriée.</p>
+<div class="section" id="meta-donnees">
+<h3>Méta-données<a class="headerlink" href="#meta-donnees" title="Lien permanent vers ce titre">¶</a></h3>
+<p>Les coefficients de calibration pour chaque bande signalée comme des objets de
+méta-données.</p>
+<ul class="simple">
+<li>ACQUISITION_DATE : date d&#8217;acquisition de la première scène au format yyyyddmm.</li>
+<li>SATELLITE : nom du satellite de la première scène.</li>
+<li>SENSOR : nom du capteur de la première scène.</li>
+<li>BIASn : valeur du biais pour le canal n.</li>
+<li>GAINn : valeur du gain pour le canal n.</li>
+</ul>
+<p><strong>Voir aussi :</strong></p>
+<ul class="simple">
+<li>Implémenté dans <em>gdal/frmts/fast/fastdataset.cpp</em>.</li>
+<li>Description du format Landsat FAST L7A est disponible sur
+<a class="reference external" href="http://ltpwww.gsfc.nasa.gov/IAS/htmls/l7_review.html">http://ltpwww.gsfc.nasa.gov/IAS/htmls/l7_review.html</a> (Lisez ESDIS Level 1
+Product Generation System (LPGS) Output Files DFCB, Vol. 5, Book 2 disponible sur <a class="reference external" href="http://ltpwww.gsfc.nasa.gov/IAS/pdfs/DFCB_V5_B2_R4.pdf">http://ltpwww.gsfc.nasa.gov/IAS/pdfs/DFCB_V5_B2_R4.pdf</a>)</li>
+<li>Description du format EOSAT Fast Format REV. C disponible sur
+<a class="reference external" href="http://www.euromap.de/docs/doc_001.html">http://www.euromap.de/docs/doc_001.html</a></li>
+</ul>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+
+
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="georaster.html" title="GeoRaster d’Oracle Spatial"
+             >suivant</a></li>
+        <li class="right" >
+          <a href="ers.html" title="ERS – ERMapper .ERS"
+             >précédent</a> |</li>
+        <li><a href="../../index.html">GDAL v1.9.0 documentation</a> &raquo;</li>
+          <li><a href="../index.html" >GDAL</a> &raquo;</li>
+          <li><a href="index.html" >Formats</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+    <a href="http://creativecommons.org/licenses/by/2.0/fr/deed.fr">Licence Creative Common BY</a>
+    <!--
+      &copy; Copyright 2011, Yves Jacolin.-->
+      Créé avec <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0.7.
+    </div>
+  </body>
+</html>

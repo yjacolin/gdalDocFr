@@ -1,0 +1,252 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF8" />
+    
+    <title>Compression Lidar de MrSID/MG4 / Fichiers view de Cloud ponctuel &mdash; GDAL v1.9.0 documentation</title>
+    <link rel="stylesheet" href="../../_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '1.9.0',
+        COLLAPSE_MODINDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../_static/translations.js"></script>
+    <link rel="top" title="GDAL v1.9.0 documentation" href="../../index.html" />
+    <link rel="up" title="Formats" href="index.html" />
+    <link rel="next" title="MSG – Météosat Seconde Génération" href="msg.html" />
+    <link rel="prev" title="MrSID — Multi-resolution Seamless Image Database" href="mrsid.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="msg.html" title="MSG – Météosat Seconde Génération"
+             accesskey="N">suivant</a></li>
+        <li class="right" >
+          <a href="mrsid.html" title="MrSID — Multi-resolution Seamless Image Database"
+             accesskey="P">précédent</a> |</li>
+        <li><a href="../../index.html">GDAL v1.9.0 documentation</a> &raquo;</li>
+          <li><a href="../index.html" >GDAL</a> &raquo;</li>
+          <li><a href="index.html" accesskey="U">Formats</a> &raquo;</li> 
+      </ul>
+    </div>
+
+
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <h3><a href="../../index.html">Table des matières</a></h3>
+            <ul>
+<li><a class="reference internal" href="#">Compression Lidar de MrSID/MG4 / Fichiers view de Cloud ponctuel</a><ul>
+<li><a class="reference internal" href="#exemple-de-fichier-view-a-partir-de-la-specification-des-documents-view">Exemple de fichier View (à partir de la spécification des documents View)</a><ul>
+<li><a class="reference internal" href="#fichier-view-le-plus-simple-possible">Fichier .view le plus simple possible</a></li>
+<li><a class="reference internal" href="#decoupe-des-donnees">Découpe des données</a></li>
+<li><a class="reference internal" href="#expose-as-a-bare-earth-max-dem">Expose as a bare earth (Max) DEM</a></li>
+<li><a class="reference internal" href="#image-d-intensite">Image d&#8217;intensité</a></li>
+<li><a class="reference internal" href="#images-rvb">Images RVB</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#gestion-de-l-ecriture">Gestion de l&#8217;écriture</a></li>
+<li><a class="reference internal" href="#limitations-de-l-implementation-actuelle">Limitations de l&#8217;implémentation actuelle</a></li>
+<li><a class="reference internal" href="#voir-egalement">Voir également</a></li>
+</ul>
+</li>
+</ul>
+
+            <h4>Sujet précédent</h4>
+            <p class="topless"><a href="mrsid.html"
+                                  title="Chapitre précédent">MrSID &#8212; Multi-resolution Seamless Image Database</a></p>
+            <h4>Sujet suivant</h4>
+            <p class="topless"><a href="msg.html"
+                                  title="Chapitre suivant">MSG &#8211; Météosat Seconde Génération</a></p>
+            <h3>Cette page</h3>
+            <ul class="this-page-menu">
+              <li><a href="../../_sources/gdal/formats/mrsid_lidar.txt"
+                     rel="nofollow">Montrer la source</a></li>
+            </ul>
+          <div id="searchbox" style="display: none">
+            <h3>Recherche rapide</h3>
+              <form class="search" action="../../search.html" method="get">
+                <input type="text" name="q" size="18" />
+                <input type="submit" value="Go" />
+                <input type="hidden" name="check_keywords" value="yes" />
+                <input type="hidden" name="area" value="default" />
+              </form>
+              <p class="searchtip" style="font-size: 90%">
+              Enter search terms or a module, class or function name.
+              </p>
+          </div>
+          <script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="compression-lidar-de-mrsid-mg4-fichiers-view-de-cloud-ponctuel">
+<span id="gdal-gdal-formats-mrsid-lidar"></span><h1>Compression Lidar de MrSID/MG4 / Fichiers view de Cloud ponctuel<a class="headerlink" href="#compression-lidar-de-mrsid-mg4-fichiers-view-de-cloud-ponctuel" title="Lien permanent vers ce titre">¶</a></h1>
+<p>Ce pilote fournie un moyen de visualiser un fichier LiDAR compressé en MrSID/MG4
+comme un MNT raster. Les spécificités de la conversion dépend de la taille de la
+cellule désirée, des critères de filtre, des méthodes d&#8217;agrégation et éventuellement
+d&#8217;autres paramètres. Pour cette raison, <strong>le meilleur moyen de lire un fichier
+LiDAR compressé en MrSID/MG4 est en le référençant dans un fichier View (.view),
+qui paramétrise sa conversion en raster. Le pilote lira un fichier MG4 directement,
+cependant il utilise des paramètres de rasterisation par défaut qui peuvent ne pas
+produire un rendu correcte</strong>. Le contenu d&#8217;un fichier View est décrit dans la spécification
+<a class="reference external" href="http://www.gdal.org/frmt_mrsid_lidar_view_point_cloud.html">documents de visualisation de MrSID/MG4 LiDAR</a>.</p>
+<p>MrSID/MG4 est une technologie de compression de cloud ponctuel à base d&#8217;ondelettes.
+Vous pouvez y penser comme un fichier LAS, seulement plus petit et avec un index
+spatial interne. Il a été développé et est distribué par LizardTech. Ce pilote
+gère la lecture de fichier LiDAR MG4 en utilisant le kit de développement de
+décodage (DSDK). <strong>Ce DSDK est gratuitement distribué ; mais il n&#8217;est pas un
+logiciel open source. Vous devez contacter LizardTech pour l&#8217;obtenir (voyez le
+lien en bas de ce chapitre).</strong></p>
+<div class="section" id="exemple-de-fichier-view-a-partir-de-la-specification-des-documents-view">
+<h2>Exemple de fichier View (à partir de la spécification des documents View)<a class="headerlink" href="#exemple-de-fichier-view-a-partir-de-la-specification-des-documents-view" title="Lien permanent vers ce titre">¶</a></h2>
+<div class="section" id="fichier-view-le-plus-simple-possible">
+<h3>Fichier .view le plus simple possible<a class="headerlink" href="#fichier-view-le-plus-simple-possible" title="Lien permanent vers ce titre">¶</a></h3>
+<p>Le plus simple moyen pour afficher un fichier MG4 est de l&#8217;envelopper dans un
+fichier View (.view) comme cela. Ici, la référence relative au fichier MG4
+signifie que le fichier doit exister dans le même répertoire que le fichier .view.
+Puisque nous ne mappons pas les bandes de façon explicite, nous obtenons la
+valeur par défaut, qui est uniquement l&#8217;élévation. Par défaut, nous agrégeons
+basé sur la moyenne. Autrement dit, si deux points (ou plus) land sur une seule
+cellule, nous allons exposer la moyenne des deux. Il n&#8217;y a aucun filtrage ici,
+donc nous aurons tous les points indépendamment du code de classification ou du
+numéro de retour. Puisque le type de données natif d&#8217;élévation est &#8220;Float64&#8221;,
+qui est le type de données de la bande que nous allons exposer.</p>
+<div class="highlight-python"><pre>&lt;PointCloudView&gt;
+    &lt;InputFile&gt;Tetons.sid&lt;/InputFile&gt;
+&lt;/PointCloudView&gt;</pre>
+</div>
+</div>
+<div class="section" id="decoupe-des-donnees">
+<h3>Découpe des données<a class="headerlink" href="#decoupe-des-donnees" title="Lien permanent vers ce titre">¶</a></h3>
+<p>Ceci est similaire à l&#8217;exemple ci-dessus, mais nous utilisons la balise
+optionnelle ClipBox pour sélectionner une étendue de 300 mètres nord-sud via le
+cloud. Si nous voulions découper dans les directions Est-Ouest, nous aurions pu
+spécifier ceci explicitement au lieu d&#8217;utiliser NOFITLER pour ceux-ci. De même,
+nous pourrions aussi découper dans la direction Z.</p>
+<div class="highlight-python"><pre>&lt;PointCloudView&gt;
+    &lt;InputFile&gt;Tetons.sid&lt;/InputFile&gt;
+    &lt;ClipBox&gt;505500 505800 NOFILTER NOFILTER&lt;/ClipBox&gt;
+&lt;/PointCloudView&gt;</pre>
+</div>
+</div>
+<div class="section" id="expose-as-a-bare-earth-max-dem">
+<h3>Expose as a bare earth (Max) DEM<a class="headerlink" href="#expose-as-a-bare-earth-max-dem" title="Lien permanent vers ce titre">¶</a></h3>
+<p>Ici, nous exposons une seule bande (élévation) mais désirons seulement les points
+qui ont été classifié comme &#8220;Ground&#8221;. <em>ClassificationFitler</em> définie une valeur de
+2 - Le code ASPRS Point Class qui stipule les points &#8220;Ground&#8221;. De plus, au lieu
+de la méthode d’agrégation &#8220;Moyen&#8221; par défaut, nous spécifiions &#8220;Max&#8221;. Cela
+signifie que si deux points (ou plus) se situe dans une seule cellule, nous exposons
+la plus grande des deux valeurs d&#8217;élévation.</p>
+<div class="highlight-python"><pre>&lt;PointCloudView&gt;
+    &lt;InputFile&gt;E:\ESRIDevSummit2010\Tetons.sid&lt;/InputFile&gt;
+    &lt;Band&gt; &lt;!-- Max Bare Earth--&gt;
+        &lt;Channel&gt;Z&lt;/Channel&gt;
+        &lt;AggregationMethod&gt;Max&lt;/AggregationMethod&gt;
+        &lt;ClassificationFilter&gt;2&lt;/ClassificationFilter&gt;
+    &lt;/Band&gt;
+&lt;/PointCloudView&gt;</pre>
+</div>
+</div>
+<div class="section" id="image-d-intensite">
+<h3>Image d&#8217;intensité<a class="headerlink" href="#image-d-intensite" title="Lien permanent vers ce titre">¶</a></h3>
+<p>Ici nous exposons une image d&#8217;intensité à partir du cloud ponctuel.</p>
+<div class="highlight-python"><pre>&lt;PointCloudView&gt;
+    &lt;InputFile&gt;Tetons.sid&lt;/InputFile&gt;
+    &lt;Band&gt;
+        &lt;!-- All intensities --&gt;
+        &lt;Channel&gt;Intensity&lt;/Channel&gt;
+    &lt;/Band&gt;
+&lt;/PointCloudView&gt;</pre>
+</div>
+</div>
+<div class="section" id="images-rvb">
+<h3>Images RVB<a class="headerlink" href="#images-rvb" title="Lien permanent vers ce titre">¶</a></h3>
+<p>Certaines images cloud ponctuelle inclut des données RVB. Si c&#8217;est le cas, vous
+pouvez utiliser un fichier .view comme celui-ci pour exposer ces données.</p>
+<div class="highlight-python"><pre>&lt;PointCloudView&gt;
+    &lt;InputFile&gt;Grass Lake Small.xyzRGB.sid&lt;/InputFile&gt;
+    &lt;Band&gt;
+        &lt;Channel&gt;Red&lt;/Channel&gt;
+    &lt;/Band&gt;
+    &lt;Band&gt;
+        &lt;Channel&gt;Green&lt;/Channel&gt;
+    &lt;/Band&gt;
+    &lt;Band&gt;
+        &lt;Channel&gt;Blue&lt;/Channel&gt;
+    &lt;/Band&gt;
+&lt;/PointCloudView&gt;</pre>
+</div>
+</div>
+</div>
+<div class="section" id="gestion-de-l-ecriture">
+<h2>Gestion de l&#8217;écriture<a class="headerlink" href="#gestion-de-l-ecriture" title="Lien permanent vers ce titre">¶</a></h2>
+<p>Ce pilote ne gère pas l&#8217;écriture de fichiers MG4.</p>
+</div>
+<div class="section" id="limitations-de-l-implementation-actuelle">
+<h2>Limitations de l&#8217;implémentation actuelle<a class="headerlink" href="#limitations-de-l-implementation-actuelle" title="Lien permanent vers ce titre">¶</a></h2>
+<p>Seulement une balise <em>&lt;InputFile&gt;</em> est gérée. Elle doit référencer un fichier MG4.</p>
+<p>La seule <em>&lt;InterpolationMethod&gt;</em> qui est gérée est <em>&lt;None&gt;</em> (défaut). Utilisez
+cela pour définir une valeur NODATA si la valeur par défaut (valeur maximale de
+ce type de données) n&#8217;est pas ce que vous souhaitez. Voyez la spécification
+&#8220;document View&#8221; pour plus de détails.</p>
+<p>Il y a une insuffisance dans la vérification des erreurs pour les erreurs de format
+et les paramètres invalides. Plusieurs entrées invalides échoueront probablement
+silencieusement.</p>
+</div>
+<div class="section" id="voir-egalement">
+<h2>Voir également<a class="headerlink" href="#voir-egalement" title="Lien permanent vers ce titre">¶</a></h2>
+<ul class="simple">
+<li>Implémenté dans <em>gdal/frmts/mrsid_lidar/gdal_MG4Lidar.cpp</em></li>
+<li>Spécification des <a class="reference external" href="http://www.gdal.org/frmt_mrsid_lidar_view_point_cloud.html">documents de visualisation de MrSID/MG4 LiDAR</a></li>
+<li><a class="reference external" href="http://www.lizardtech.com">Site web de LizardTech</a></li>
+</ul>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+
+
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="msg.html" title="MSG – Météosat Seconde Génération"
+             >suivant</a></li>
+        <li class="right" >
+          <a href="mrsid.html" title="MrSID — Multi-resolution Seamless Image Database"
+             >précédent</a> |</li>
+        <li><a href="../../index.html">GDAL v1.9.0 documentation</a> &raquo;</li>
+          <li><a href="../index.html" >GDAL</a> &raquo;</li>
+          <li><a href="index.html" >Formats</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+    <a href="http://creativecommons.org/licenses/by/2.0/fr/deed.fr">Licence Creative Common BY</a>
+    <!--
+      &copy; Copyright 2011, Yves Jacolin.-->
+      Créé avec <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0.7.
+    </div>
+  </body>
+</html>

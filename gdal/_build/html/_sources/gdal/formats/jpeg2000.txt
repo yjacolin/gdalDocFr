@@ -1,0 +1,149 @@
+.. _`gdal.gdal.formats.jpeg2000`:
+
+=========================================================
+JPEG2000 --- Implémentation du format JPEG-2000 partie 1
+=========================================================
+
+Cette implémentation est basé sur le logiciel JasPer (voir ci-dessous).
+
+À partir de GDAL 1.9.0, les métadonnées XMP peuvent être extraite des fichiers, 
+et seront stockées comme contenu brute XML dans le domaine de métadonnées 
+xml:XMP.
+
+Options de création
+====================
+
+* **WORLDFILE=ON** : Force la génération d'un fichier world associé (.wld).
+* **FORMAT=JP2|JPC** : Définie le format du fichier en sortie.
+* Paramètres d'encodage, directement distribué à la bibliothèque JasPer décrit 
+  dans la documentation JasPer. 
+
+**Citation de la documentation :**
+
+Les options suivantes sont gérées par l'encodeur :
+
++-----------------------+-------------------------------------------------------------------------------+
++ imgareatlx=x          + Définie les coordonnées x du coin haut gauche de la zone d'image à x.         +
++-----------------------+-------------------------------------------------------------------------------+
++ imgareatly=y          + Définie les coordonnées y du coin haut gauche de la zone d'image à y.         +
++-----------------------+-------------------------------------------------------------------------------+
++ tilegrdtlx=x          + Définie les coordonnées x du coin haut gauche de la  grille de tuile à x.     +
++-----------------------+-------------------------------------------------------------------------------+
++ tilegrdtly=y          + Définie les coordonnées y du coin haut gauche de la grille de tuile à y.      +
++-----------------------+-------------------------------------------------------------------------------+
++ tilewidth=w           + Définie la largeur de la tuile nominale à w.                                  +
++-----------------------+-------------------------------------------------------------------------------+
++ tileheight=h          + Définie la hauteur de la tuile nominale à h.                                  +
++-----------------------+-------------------------------------------------------------------------------+
++ prcwidth=w            + Définie la largeur du pourtour à w. L'argument w doit être un entier de       +
++                       + puissance deux. La valeur par défaut est de 32768.                            +
++-----------------------+-------------------------------------------------------------------------------+
++ prcheight=h           + Définie la hauteur du pourtour à h. L'argument h doit être un entier de       +
++                       + puissance deux. La valeur par défaut est de 32768.                            +
++-----------------------+-------------------------------------------------------------------------------+
++ cblkwidth=w           + Définie la largeur du bloque de code nominale à w. L'argument w doit être un  +
++                       + entier de puissance de deux. La valeur par défaut est de 64.                  +
++-----------------------+-------------------------------------------------------------------------------+
++ cblkheight=h          + Définie la hauteur du bloque de code nominale à h. L'argument h doit être un  +
++                       + entier de puissance de deux. La valeur par défaut est de 64.                  +
++-----------------------+-------------------------------------------------------------------------------+
++ mode=m                + Définie le mode de codage à m. L'argument m doit avoir une des valeurs        +
++                       + :ref:`gdal.gdal.formats.jpeg2000.argument_m`. Si un codage sans perte est     +
++                       + désirée, le mode entier doit être utilisé. Par défaut, le mode entier est     +
++                       + utilisé. Le choix du mode détermine également quel multicomposant et          +
++                       + transformation par ondelette  (si existante) sont employé.                    +
++-----------------------+-------------------------------------------------------------------------------+
++ rate=r                + Définie le taux cible. L'argument r est un nombre réel positif. Puisque un    +
++                       + taux de un correspond à aucune compression, vous ne devez pas définir         +
++                       + explicitement un taux plus grand que un. Par défaut, le taux cible est        +
++                       + considéré comme étant infinie.                                                +
++-----------------------+-------------------------------------------------------------------------------+
++ilyrrates=[, ,. . . , ]+ Définie les taux pour n'importe quelles couches intermédiaires. L'argument de +
++                       + cette option est une liste séparé par des virgules de N taux. Chaque taux est +
++                       + un nombre réel positif. Les taux doivent augmenter graduellement. Le dernier  +
++                       + taux dans la liste doit être inférieure ou égale à le taux d'ensemble (comme  +
++                       + définie avec l'option rate).                                                  +
++-----------------------+-------------------------------------------------------------------------------+
++ prg=p                 + Définie l'ordre de progression à p. L'argument p doit avoir une des valeurs   +
++                       + :ref:`gdal.gdal.formats.jpeg2000.argument_p`. Par défaut, l'ordre progressif  +
++                       + LRCP est employé. Remarquez que les progressions RPCL et PCRL ne sont pas     +
++                       + valide pour toute les géométries des images possibles (Lisez les standards    +
++                       + pour plus de détails).                                                        +
++-----------------------+-------------------------------------------------------------------------------+
++ nomct                 + Désactive l'utilisation de n'importe quelle transformation multicomponent.    +
++-----------------------+-------------------------------------------------------------------------------+
++ numrlvls=n            + Définie le nombre de niveaux de résolution à n. L'argument n doit être un     +
++                       + entier qui est plus grand ou égale à un. La valeur par défaut est 6.          +
++-----------------------+-------------------------------------------------------------------------------+
++ sop                   + Génère des segments de marqueurs SOP.                                         +
++-----------------------+-------------------------------------------------------------------------------+
++ eph                   + Génère des segments de marqueurs EPH.                                         +
++-----------------------+-------------------------------------------------------------------------------+
++ lazy                  + Active le mode de codage fainéant (autrement dit dérivation de codage         +
++                       + arithmétique).                                                                +
++-----------------------+-------------------------------------------------------------------------------+
++ termall               + Termine toutes les passes de codage.                                          +
++-----------------------+-------------------------------------------------------------------------------+
++ segsym                + Utilise les symboles de segmentation.                                         +
++-----------------------+-------------------------------------------------------------------------------+
++ vcausal               + Utilise les contextes de causalité de bande vertical.                         +
++-----------------------+-------------------------------------------------------------------------------+
++ pterm                 + Utilise les terminaisons prédictifs.                                          +
++-----------------------+-------------------------------------------------------------------------------+
++ resetprob             + Réinitialise les modèles de probabilité après chaque passage de codage.       +
++-----------------------+-------------------------------------------------------------------------------+
++ numgbits=n            + Définie le nombre de bits de garde à n.                                       +
++-----------------------+-------------------------------------------------------------------------------+
+
+.. _`gdal.gdal.formats.jpeg2000.argument_m`:
+
+Argument m
+-----------
+
++---------------+--------------+
++ Valeur        + Description  +
++===============+==============+
++ int           + mode entier  +
++---------------+--------------+
++ real          + mode réel    +
++---------------+--------------+
+
+.. _`gdal.gdal.formats.jpeg2000.argument_p`:
+
+Argument P
+----------
+
++---------------+-----------------------------------------------------------------------+
++  Valeur       +  Description                                                          +
++===============+=======================================================================+
++ lrcp          + layer-resolution-component-position (LRCP) progressive (c'est à dire, +
++               + évolution du taux)                                                    +
++---------------+-----------------------------------------------------------------------+
++ rlcp          + resolution-layer-component-position (RLCP) progressive (c'est à dire, +
++               + évolution de la résolution)                                           +
++---------------+-----------------------------------------------------------------------+
++ rpcl          + resolution-position-component-layer (RPCL) progressive                +
++---------------+-----------------------------------------------------------------------+
++ pcrl          + position-component-resolution-layer (PCRL) progressive                +
++---------------+-----------------------------------------------------------------------+
++ cprl          + component-position-resolution-layer (CPRL) progressive                +
++---------------+-----------------------------------------------------------------------+
+
+**Voir également :**
+
+* Implémenté dans *gdal/frmts/jpeg2000/jpeg2000dataset.cpp*.
+* Vous avez besoin de la bibliothèque JasPer pour compiler ce pilote avec la 
+  gestion du format GeoJP2 activé. La version modifiée peut être téléchargée 
+  sur ftp://ftp.remotesensing.org/gdal/jasper-1.900.1.uuid.tar.gz
+* Page officielle du format JPEG-2000 : http://www.jpeg.org/JPEG2000.html
+* La page du projet JasPer : http://www.ece.uvic.ca/~mdadams/jasper/
+
+**Autre pilote GDAL JPEG2000 :**
+
+* :ref:`gdal.gdal.formats.jp2openjpeg`
+* :ref:`gdal.gdal.formats.jp2ecw`
+* :ref:`gdal.gdal.formats.jp2mrsid`
+* :ref:`gdal.gdal.formats.jp2kak`
+
+
+.. yjacolin at free.fr, Yves Jacolin - 2011/08/08 (trunk 22678)

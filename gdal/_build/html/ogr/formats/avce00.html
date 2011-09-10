@@ -1,0 +1,161 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF8" />
+    
+    <title>Couverture Arc/Info E00 (ASCII) &mdash; GDAL v1.9.0 documentation</title>
+    <link rel="stylesheet" href="../../_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '1.9.0',
+        COLLAPSE_MODINDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../_static/translations.js"></script>
+    <link rel="top" title="GDAL v1.9.0 documentation" href="../../index.html" />
+    <link rel="up" title="Formats vecteur d’OGR" href="index.html" />
+    <link rel="next" title="BNA - Atlas BNA" href="bna.html" />
+    <link rel="prev" title="Arc/Info Binary Coverage" href="avcbin.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="bna.html" title="BNA - Atlas BNA"
+             accesskey="N">suivant</a></li>
+        <li class="right" >
+          <a href="avcbin.html" title="Arc/Info Binary Coverage"
+             accesskey="P">précédent</a> |</li>
+        <li><a href="../../index.html">GDAL v1.9.0 documentation</a> &raquo;</li>
+          <li><a href="../index.html" >OGR</a> &raquo;</li>
+          <li><a href="index.html" accesskey="U">Formats vecteur d&#8217;OGR</a> &raquo;</li> 
+      </ul>
+    </div>
+
+
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <h3><a href="../../index.html">Table des matières</a></h3>
+            <ul>
+<li><a class="reference internal" href="#">Couverture Arc/Info E00 (ASCII)</a><ul>
+<li><a class="reference internal" href="#voir-aussi">Voir aussi</a></li>
+</ul>
+</li>
+</ul>
+
+            <h4>Sujet précédent</h4>
+            <p class="topless"><a href="avcbin.html"
+                                  title="Chapitre précédent">Arc/Info Binary Coverage</a></p>
+            <h4>Sujet suivant</h4>
+            <p class="topless"><a href="bna.html"
+                                  title="Chapitre suivant">BNA - Atlas BNA</a></p>
+            <h3>Cette page</h3>
+            <ul class="this-page-menu">
+              <li><a href="../../_sources/ogr/formats/avce00.txt"
+                     rel="nofollow">Montrer la source</a></li>
+            </ul>
+          <div id="searchbox" style="display: none">
+            <h3>Recherche rapide</h3>
+              <form class="search" action="../../search.html" method="get">
+                <input type="text" name="q" size="18" />
+                <input type="submit" value="Go" />
+                <input type="hidden" name="check_keywords" value="yes" />
+                <input type="hidden" name="area" value="default" />
+              </form>
+              <p class="searchtip" style="font-size: 90%">
+              Enter search terms or a module, class or function name.
+              </p>
+          </div>
+          <script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="couverture-arc-info-e00-ascii">
+<span id="gdal-ogr-formats-avce00"></span><h1>Couverture Arc/Info E00 (ASCII)<a class="headerlink" href="#couverture-arc-info-e00-ascii" title="Lien permanent vers ce titre">¶</a></h1>
+<p>Les couvertures Arc/Info E00 (par exemple Arc/Info V7 et plus récent) sont
+gérées par OGR en lecture.</p>
+<p>Les sections label, arc, polygone, centroïde, région et texte d&#8217;une couverture
+sont toutes gérées comme couches. Les attributs d&#8217;INFO sont ajoutés aux labels,
+arcs, polygones ou régions à l&#8217;endroit approprié. Lorsque cela est disponible
+les informations de projection sont lu et traduite. Les géométries polygonales
+sont collectées pour les couches polygonales et régions à partir des arcs de
+compositions.</p>
+<p>Les sections textes sont représentées comme des couches de points. La hauteur
+d&#8217;affichage est préservée dans le champ attributaire HEIGHT ; cependant, les
+autres informations sur l&#8217;orientation du texte sont ignorées.</p>
+<p>Les tables info associées à une couverture mais pas spécialement nommé pour être
+reliée à une des couches géométriques existantes n&#8217;est pas actuellement
+accessible par OGR. Notez que les tables info sont stockées dans un répertoire
+&#8216;info&#8217; au même niveau que le répertoire de couverture. Si cela est inaccessible
+ou corrompue aucun attribut info ne seront ajoutés aux couches de couverture,
+mais la géométrie devrait toujours être accessible.</p>
+<p>Les couches sont nommé comme suit :</p>
+<ul class="simple">
+<li>une couche label (labels polygonaux, ou points libres) est nommée LAB si
+présente.</li>
+<li>une couche centroïde (centroïde de polygone) est nommée CNT si présente.</li>
+<li>une couche arc (ligne) est nommée ARC si présente.</li>
+<li>une couche polygone est nommée &#8220;PAL&#8221; si présente.</li>
+<li>une section texte est nommée en fonction de la sous-classe de la section.</li>
+<li>une sous-classe d&#8217;une région est nommée en fonction du nom de la sous-classe.</li>
+</ul>
+<p>La lecture aléatoire (par FID) d&#8217;arcs ou de polygone est gérée, elle peut ne pas
+être gérée pour d&#8217;autres types d&#8217;objets. L&#8217;accès aléatoire aux fichiers E00 est
+généralement lente.</p>
+<div class="section" id="voir-aussi">
+<h2>Voir aussi<a class="headerlink" href="#voir-aussi" title="Lien permanent vers ce titre">¶</a></h2>
+<blockquote>
+<div><ul class="simple">
+<li><a class="reference external" href="http://avce00.maptools.org/">Page de la bibliothèque AVCE00</a></li>
+<li><a class="reference external" href="http://www.gdal.org/ogr/ogr_avcbin.html">Pilote OGR pour AVCBin (Couverture binaire)</a></li>
+</ul>
+</div></blockquote>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+
+
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="bna.html" title="BNA - Atlas BNA"
+             >suivant</a></li>
+        <li class="right" >
+          <a href="avcbin.html" title="Arc/Info Binary Coverage"
+             >précédent</a> |</li>
+        <li><a href="../../index.html">GDAL v1.9.0 documentation</a> &raquo;</li>
+          <li><a href="../index.html" >OGR</a> &raquo;</li>
+          <li><a href="index.html" >Formats vecteur d&#8217;OGR</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+    <a href="http://creativecommons.org/licenses/by/2.0/fr/deed.fr">Licence Creative Common BY</a>
+    <!--
+      &copy; Copyright 2011, Yves Jacolin.-->
+      Créé avec <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0.7.
+    </div>
+  </body>
+</html>

@@ -1,0 +1,237 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF8" />
+    
+    <title>GRASS &mdash; GDAL v1.9.0 documentation</title>
+    <link rel="stylesheet" href="../../_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '1.9.0',
+        COLLAPSE_MODINDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../_static/translations.js"></script>
+    <link rel="top" title="GDAL v1.9.0 documentation" href="../../index.html" />
+    <link rel="up" title="Formats vecteur d’OGR" href="index.html" />
+    <link rel="next" title="GTM - GPS TrackMaker" href="gtm.html" />
+    <link rel="prev" title="GPX - GPS Exchange Format" href="gpx.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="gtm.html" title="GTM - GPS TrackMaker"
+             accesskey="N">suivant</a></li>
+        <li class="right" >
+          <a href="gpx.html" title="GPX - GPS Exchange Format"
+             accesskey="P">précédent</a> |</li>
+        <li><a href="../../index.html">GDAL v1.9.0 documentation</a> &raquo;</li>
+          <li><a href="../index.html" >OGR</a> &raquo;</li>
+          <li><a href="index.html" accesskey="U">Formats vecteur d&#8217;OGR</a> &raquo;</li> 
+      </ul>
+    </div>
+
+
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <h3><a href="../../index.html">Table des matières</a></h3>
+            <ul>
+<li><a class="reference internal" href="#">GRASS</a><ul>
+<li><a class="reference internal" href="#nom-de-la-source-de-donnees">Nom de la source de données</a></li>
+<li><a class="reference internal" href="#noms-de-la-couche">Noms de la couche</a></li>
+<li><a class="reference internal" href="#filtre-attributaire">Filtre attributaire</a></li>
+<li><a class="reference internal" href="#filtre-spatial">Filtre spatial</a></li>
+<li><a class="reference internal" href="#gisbase">GISBASE</a></li>
+<li><a class="reference internal" href="#topologie-manquante">Topologie manquante</a></li>
+<li><a class="reference internal" href="#acces-aleatoire">Accès aléatoire</a></li>
+<li><a class="reference internal" href="#problemes-connus">Problèmes connus</a></li>
+<li><a class="reference internal" href="#voir-egalement">Voir également</a></li>
+</ul>
+</li>
+</ul>
+
+            <h4>Sujet précédent</h4>
+            <p class="topless"><a href="gpx.html"
+                                  title="Chapitre précédent">GPX - GPS Exchange Format</a></p>
+            <h4>Sujet suivant</h4>
+            <p class="topless"><a href="gtm.html"
+                                  title="Chapitre suivant">GTM - GPS TrackMaker</a></p>
+            <h3>Cette page</h3>
+            <ul class="this-page-menu">
+              <li><a href="../../_sources/ogr/formats/grass.txt"
+                     rel="nofollow">Montrer la source</a></li>
+            </ul>
+          <div id="searchbox" style="display: none">
+            <h3>Recherche rapide</h3>
+              <form class="search" action="../../search.html" method="get">
+                <input type="text" name="q" size="18" />
+                <input type="submit" value="Go" />
+                <input type="hidden" name="check_keywords" value="yes" />
+                <input type="hidden" name="area" value="default" />
+              </form>
+              <p class="searchtip" style="font-size: 90%">
+              Enter search terms or a module, class or function name.
+              </p>
+          </div>
+          <script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="grass">
+<span id="gdal-ogr-formats-grass"></span><h1>GRASS<a class="headerlink" href="#grass" title="Lien permanent vers ce titre">¶</a></h1>
+<p>Le pilote GRASS peut lire les cartes vectorielles GRASS (version 6.0 et au
+delà). Chaque carte vectorielle GRASS est représentée comme une source de
+données. Une carte vectorielle de GRASS peut avoir 0, 1 ou plusieurs couches.</p>
+<p>Les points de GRASS sont représenté comme <em>wkbPoint</em>, les lignes et limites
+comme <em>wkbLineString</em> et les surfaces comme <em>wkbPolygon</em>. <em>wkbMulti*</em> et
+<em>wkbGeometryCollection</em> nesont utilisé. Des objets géométriques peuvent être
+mélangé dans une couche. Si une couche contient seulement des objets d&#8217;un seul
+type, il est définie par le type approprié et peut être récupéré par
+<em>OGRLayer::GetLayerDefn();</em></p>
+<p>Si une géométrie a plus de catégories de la même couche lié, il est représenté
+en autant d&#8217;objet (une pour chaque catégorie).</p>
+<p>À la fois les cartes 2D et 3D sont gérées.</p>
+<div class="section" id="nom-de-la-source-de-donnees">
+<h2>Nom de la source de données<a class="headerlink" href="#nom-de-la-source-de-donnees" title="Lien permanent vers ce titre">¶</a></h2>
+<p>Le nom de la source de données est le chemin complet vers le fichier &#8216;head&#8217;
+dans le répertoire vector/ de GRASS. En utilisant les noms des variables
+d&#8217;environnement de GRASS, cela peut être exprimé par :</p>
+<div class="highlight-python"><pre>$GISDBASE/$LOCATION_NAME/$MAPSET/vector/mymap/head</pre>
+</div>
+<p>où &#8216;mymap&#8217; est le nom d ela carte vectorielle. Par exemple :</p>
+<div class="highlight-python"><pre>/home/cimrman/grass_data/jizerky/jara/vector/liptakov/head</pre>
+</div>
+</div>
+<div class="section" id="noms-de-la-couche">
+<h2>Noms de la couche<a class="headerlink" href="#noms-de-la-couche" title="Lien permanent vers ce titre">¶</a></h2>
+<p>Habituellement les numéros de la couche sont utilisé comme noms de couche. Le
+numéro 0 d&#8217;une couche est utilisé pour tous les objets sans catégorie. Il est
+possible de donner en option le nom de la couche GRASS lié à la base de données
+cependant ce n&#8217;est pas encore géré par les modules GRASS. Un nom de couche peut
+être ajouté dans le fichier vecteur &#8216;dln&#8217; comme &#8216;/name&#8217; après le numéro de
+couche, par exemple à l&#8217;enregistrement original :</p>
+<div class="highlight-python"><pre>1 rivers cat $GISDBASE/$LOCATION_NAME/$MAPSET/dbf/ dbf</pre>
+</div>
+<p>il est possible d&#8217;assigner le nom &#8216;rivers&#8217;</p>
+<div class="highlight-python"><pre>1/rivers rivers cat $GISDBASE/$LOCATION_NAME/$MAPSET/dbf/ dbf</pre>
+</div>
+<p>la couche 1 qui sera listée est la couche &#8216;rivers&#8217;.</p>
+</div>
+<div class="section" id="filtre-attributaire">
+<h2>Filtre attributaire<a class="headerlink" href="#filtre-attributaire" title="Lien permanent vers ce titre">¶</a></h2>
+<p>Si une couche a des attributs stockés dans une base de données, la requête est
+passée au pilote de la base de données sous-jacente. Ce qui signifie que les
+conditions SQL qui peuvent être utilisées dépendent des pilotes et de la base
+de données à laquelle la couche est liée. Par exemple, le pilote DBF a pour
+l&#8217;instant que très peu d&#8217;expressions SQL et PostgreSQL offrent un ensemble
+d&#8217;expression très riche.</p>
+<p>Si une couche n&#8217;a pas d&#8217;attributs liés et n&#8217;a que des catégories, le moteur SQL
+interne à OGR est utilisé pour évaluer l&#8217;expression. Les catégories sont des
+nombres entiers attaché à une géométrie, c&#8217;est une sorte d&#8217;identifiant, mais
+ce n&#8217;est pas un FID puisque plusieurs objets géométriques dans une couche
+peuvent avoir la même catégorie.</p>
+<p>L&#8217;évaluation est réalisée lorsque le filtre des attributs est défini.</p>
+</div>
+<div class="section" id="filtre-spatial">
+<h2>Filtre spatial<a class="headerlink" href="#filtre-spatial" title="Lien permanent vers ce titre">¶</a></h2>
+<p>Les boites englobantes des objets géométriques stockées dans une structure
+topologique sont utilisées pour évaluer si des géométries correspondent au
+filtre spatial en cours.</p>
+<p>L&#8217;évaluation est réalisée une fois que le filtre spatial est défini.</p>
+</div>
+<div class="section" id="gisbase">
+<h2>GISBASE<a class="headerlink" href="#gisbase" title="Lien permanent vers ce titre">¶</a></h2>
+<p><em>GISBASE</em> est le chemin complet vers le répertoire où GRASS est installé. Par
+défaut, le pilote GRASS utilise le chemin donné par le script de configuration
+de GDAL. Un répertoire différent peut être forcé en définissant la variable
+d&#8217;environnement <em>GISBASE</em>. <em>GISBASE</em> est utilisé pour trouver les pilotes des
+bases de données GRASS.</p>
+</div>
+<div class="section" id="topologie-manquante">
+<h2>Topologie manquante<a class="headerlink" href="#topologie-manquante" title="Lien permanent vers ce titre">¶</a></h2>
+<p>Le pilote GRASS peut lire les fichiers vecteurs de GRASS si la topologie est
+disponible (aka niveau 2). Si une erreur est retournée, disant que la topologie
+n&#8217;est pas disponible, il est nécessaire de construire la topologie avec
+le module <tt class="docutils literal"><span class="pre">v.build</span></tt> de GRASS.</p>
+</div>
+<div class="section" id="acces-aleatoire">
+<h2>Accès aléatoire<a class="headerlink" href="#acces-aleatoire" title="Lien permanent vers ce titre">¶</a></h2>
+<p>Si un accès aléatoire (<em>GetFeature</em> au lieu de <em>GetNextFeature</em>) est utilisé
+sur une couche avec des attributs, la lecture des géométries peut être assez
+lente. Cela est dû au fait que le pilote doit faire une requête sur les
+attributs par catégorie pour chaque objet géométrique (pour éviter d&#8217;utiliser
+beaucoup de mémoire) et l&#8217;accès aléatoire à une base de données est
+habituellement lent. Cela peut être amélioré du côté  de GRASS  lors de
+l&#8217;optimisation et de l&#8217;écriture des fichiers basés sur des pilotes (DBF, SQLite).</p>
+</div>
+<div class="section" id="problemes-connus">
+<h2>Problèmes connus<a class="headerlink" href="#problemes-connus" title="Lien permanent vers ce titre">¶</a></h2>
+<p>À cause d&#8217;un bug dans la bibliothèque de GRASS, il est impossible de
+démarrer/arrêter les pilotes des bases de données dans l&#8217;ordre FIFO et l&#8217;ordre
+FILO doit être utilisé. Le pilote GRASS pour OGR est écrit avec cette
+limitation à l&#8217;esprit et les pilotes sont toujours fermés s&#8217;ils ne sont pas
+utilisés et si nu pilote reste ouvert, la commande <em>kill()</em> est utilisée pour
+l&#8217;arrêter. Il peut arriver cependant dans certains cas que le pilote tente
+d&#8217;arrêter un pilote de base de données qui n&#8217;est pas le dernier ouvert et
+l&#8217;application se termine. Cela peut arriver si la lecture séquentielle
+(<em>GetNextFeature</em>) d&#8217;une couche n&#8217;est pas terminée (la lecture est arrêtée
+avant que la dernière géométrie disponible ne soit atteinte), les objets d&#8217;une
+autre couche sont lu puis la lecture de la première couche est terminée, parce
+que dans ce cas-là la commande <em>kill()</em> n&#8217;est pas utilisée.</p>
+</div>
+<div class="section" id="voir-egalement">
+<h2>Voir également<a class="headerlink" href="#voir-egalement" title="Lien permanent vers ce titre">¶</a></h2>
+<ul class="simple">
+<li><a class="reference external" href="http:*grass.itc.it/">Page principale de GRASS</a></li>
+</ul>
+<p>Le développement de ce pilote a été financé par Faunalia (<a class="reference external" href="http://www.faunalia.it">http://www.faunalia.it</a>).</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+
+
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="gtm.html" title="GTM - GPS TrackMaker"
+             >suivant</a></li>
+        <li class="right" >
+          <a href="gpx.html" title="GPX - GPS Exchange Format"
+             >précédent</a> |</li>
+        <li><a href="../../index.html">GDAL v1.9.0 documentation</a> &raquo;</li>
+          <li><a href="../index.html" >OGR</a> &raquo;</li>
+          <li><a href="index.html" >Formats vecteur d&#8217;OGR</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+    <a href="http://creativecommons.org/licenses/by/2.0/fr/deed.fr">Licence Creative Common BY</a>
+    <!--
+      &copy; Copyright 2011, Yves Jacolin.-->
+      Créé avec <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0.7.
+    </div>
+  </body>
+</html>

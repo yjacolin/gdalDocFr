@@ -1,0 +1,334 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF8" />
+    
+    <title>GeoConcept Export (disponible à partir de GDAL 1.6.0) &mdash; GDAL v1.9.0 documentation</title>
+    <link rel="stylesheet" href="../../_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '1.9.0',
+        COLLAPSE_MODINDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../_static/translations.js"></script>
+    <link rel="top" title="GDAL v1.9.0 documentation" href="../../index.html" />
+    <link rel="up" title="Formats vecteur d’OGR" href="index.html" />
+    <link rel="next" title="GeoJSON" href="geojson.html" />
+    <link rel="prev" title="FMEObjects Gateway" href="fmeobjects.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="geojson.html" title="GeoJSON"
+             accesskey="N">suivant</a></li>
+        <li class="right" >
+          <a href="fmeobjects.html" title="FMEObjects Gateway"
+             accesskey="P">précédent</a> |</li>
+        <li><a href="../../index.html">GDAL v1.9.0 documentation</a> &raquo;</li>
+          <li><a href="../index.html" >OGR</a> &raquo;</li>
+          <li><a href="index.html" accesskey="U">Formats vecteur d&#8217;OGR</a> &raquo;</li> 
+      </ul>
+    </div>
+
+
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <h3><a href="../../index.html">Table des matières</a></h3>
+            <ul>
+<li><a class="reference internal" href="#">GeoConcept Export (disponible à partir de GDAL 1.6.0)</a><ul>
+<li><a class="reference internal" href="#le-format-fichier-texte-de-geoconcept-gxt">Le format &#8220;fichier texte&#8221; de GeoConcept (GXT)</a></li>
+<li><a class="reference internal" href="#problemes-de-creation">Problèmes de création</a></li>
+<li><a class="reference internal" href="#options-de-creation-de-jeux-de-donnees">Options de création de jeux de données</a></li>
+<li><a class="reference internal" href="#options-de-creation-de-couche">Options de création de couche</a></li>
+<li><a class="reference internal" href="#exemples">Exemples</a><ul>
+<li><a class="reference internal" href="#exemple-de-fichier-gct">Exemple de fichier .GCT</a></li>
+<li><a class="reference internal" href="#exemple-de-fichier-gxt">Exemple de fichier .GXT</a></li>
+<li><a class="reference internal" href="#exemple-d-utilisation">Exemple d&#8217;utilisation</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#voir-aussi">Voir aussi</a></li>
+</ul>
+</li>
+</ul>
+
+            <h4>Sujet précédent</h4>
+            <p class="topless"><a href="fmeobjects.html"
+                                  title="Chapitre précédent">FMEObjects Gateway</a></p>
+            <h4>Sujet suivant</h4>
+            <p class="topless"><a href="geojson.html"
+                                  title="Chapitre suivant">GeoJSON</a></p>
+            <h3>Cette page</h3>
+            <ul class="this-page-menu">
+              <li><a href="../../_sources/ogr/formats/geoconcept.txt"
+                     rel="nofollow">Montrer la source</a></li>
+            </ul>
+          <div id="searchbox" style="display: none">
+            <h3>Recherche rapide</h3>
+              <form class="search" action="../../search.html" method="get">
+                <input type="text" name="q" size="18" />
+                <input type="submit" value="Go" />
+                <input type="hidden" name="check_keywords" value="yes" />
+                <input type="hidden" name="area" value="default" />
+              </form>
+              <p class="searchtip" style="font-size: 90%">
+              Enter search terms or a module, class or function name.
+              </p>
+          </div>
+          <script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="geoconcept-export-disponible-a-partir-de-gdal-1-6-0">
+<span id="gdal-ogr-formats-geoconcept"></span><h1>GeoConcept Export (disponible à partir de GDAL 1.6.0)<a class="headerlink" href="#geoconcept-export-disponible-a-partir-de-gdal-1-6-0" title="Lien permanent vers ce titre">¶</a></h1>
+<p>Geoconcept est un SIG développé par la société GeoConcept SA. Il s&#8217;agit d&#8217;un
+SIG orienté-objet, dont les éléments sont nommés &#8220;objets&#8221;, et le type d&#8217;éléments
+&#8220;type/sous-type&#8221; (les attributs sont transmissibles).</p>
+<p>Le pilote OGR GeoConcept traite un fichier GeoConcept simple dans un dossier
+comme un jeu de données comprenant plusieurs couches. Actuellement, le pilote
+ne gère que les multi-polygones, les lignes et les points.</p>
+<div class="section" id="le-format-fichier-texte-de-geoconcept-gxt">
+<h2>Le format &#8220;fichier texte&#8221; de GeoConcept (GXT)<a class="headerlink" href="#le-format-fichier-texte-de-geoconcept-gxt" title="Lien permanent vers ce titre">¶</a></h2>
+<p>Parmi ses formats d&#8217;import/export, GeoConcept propose un format texte simple
+nommé .GXT (auparavant .TXT), qui peut contenir des objets de différents
+types/sous-types.</p>
+<p>Les fichiers textes d&#8217;export GeoConcept devraient être disponibles en lecture et
+en écriture.</p>
+<p>Les définitions de champs sont stockés dans un fichier .GCT associé, qui n&#8217;est
+utilisé que pour la création.</p>
+</div>
+<div class="section" id="problemes-de-creation">
+<h2>Problèmes de création<a class="headerlink" href="#problemes-de-creation" title="Lien permanent vers ce titre">¶</a></h2>
+<p>Les fichiers GeoConcept peuvent contenir différentes sortes de géométrie (une
+par couche). Ceci rend très difficile la traduction d&#8217;une géométrie multiple
+d&#8217;un autre format vers GéoConcept avec ogr2ogr, car ce dernier ne permet pas
+de séparer les différents types de géométrie d&#8217;un fichier source.</p>
+<p>Les sous-types sont considérés comme des éléments OGR. Le nom d&#8217;une couche est
+donc l&#8217;agrégation du <strong>nom du type</strong> de la couche, d&#8217;un <strong>&#8221;.&#8221;</strong> et du <strong>nom du
+sous-type</strong> de la couche.</p>
+<p>Les champs (fichier .GCT) connaissent un certain nombre de contraintes (TODO) :</p>
+<ul class="simple">
+<li>Les noms des attributs ne sont pas limités en longueur.</li>
+<li>Seuls les champs de types entier, réel et chaîne de caractère sont gérés.
+Les autres types ne peuvent pas être créés pour le moment, même s&#8217;ils existent
+dans le modèle GeoConcept.</li>
+</ul>
+<p>Le pilote OGR pour GeoConcept ne gère pas les fonctions de suppression.</p>
+</div>
+<div class="section" id="options-de-creation-de-jeux-de-donnees">
+<h2>Options de création de jeux de données<a class="headerlink" href="#options-de-creation-de-jeux-de-donnees" title="Lien permanent vers ce titre">¶</a></h2>
+<p><em>EXTENSION=TXT|GXT</em> : indique l&#8217;extension de l&#8217;export GeoConcept.</p>
+<p><em>CONFIG=chemin_du_GCT</em> : Dans le fichier GCT, chaque ligne doit commencer avec
+%%//#%% suivi par un mot-clé. Les lignes commençant par %%//%% sont des commentaires.</p>
+<ul class="simple">
+<li>Section de configuration : le fichier GCT commence avec %%//#SECTION CONFIG%%
+et finit avec %%//#ENDSECTION CONFIG%%. L&#8217;ensemble de la configuration est
+contenue entre ces marqueurs.</li>
+<li>Section Carte : uniquement pour documentation au moment de l&#8217;écriture de ce
+document. Cette section commence avec %%//#SECTION MAP%% et finit avec
+%%//#ENDSECTION MAP%%.</li>
+<li>Section Type : définit une classe de caractéristiques. Un type a un nom (Name)
+et un identifiant (ID). Un type contient des sous-types et des champs.
+Marqueurs : %%//#SECTION TYPE%% en début et %%//#ENDSECTION%% TYPE en fin.</li>
+<li>Section Sous-type : cette sous-section définit un type de caractéristique dans
+une classe. Un sous-type a un nom (Name), un identifiant (ID), un type de
+géométrie (Kind) et une dimension. Les types suivants de géométrie sont gérés :
+POINT, LINE et POLYGON. La version actuelle du pilote ne gère pas la géométrie
+TEXT. Les dimensions peuvent être 2D, 3DM ou 3D. Un sous-type contient les
+champs. Marqueurs : %%//#SECTION SUBTYPE%% et %%//#ENDSECTION SUBTYPE%%.</li>
+<li>Section Champs : Définit les champs de l&#8217;utilisateur. Un champ a un nom
+(Name), un identifiant (ID), un type (Kind). Les types suivants sont gérés :
+Entier, (INT), Réel (REAL), MEMO, Choix (CHOICE), Date, Heure (TIME), Longueur
+(LENGHT), Aire (AREA). Marqueurs : %%//#SECTION FIELD%% et %%//#ENDSECTION FIELD%%.</li>
+</ul>
+<p>Les règles suivantes s&#8217;appliquent dans la section &#8220;champs&#8221; :</p>
+<ul class="simple">
+<li>Les champs aux noms privés commencent avec un &#64; (&#8216;&#8217;Identifier, Class,
+Subclass, Name, NbFields, X, Y, XP, YP, Graphics, Angle&#8217;&#8216;).</li>
+<li>Quelques champs privés sont obligatoires (ils doivent apparaître dans la
+configuration) : <em>Identifier</em>, <em>Class</em>, <em>Subclass</em>, <em>Name</em>, <em>X</em>,
+<em>Y</em>.</li>
+<li>Si le sous-type est linéaire (LINE), les champs suivants doivent être déclarés
+XP, YP.</li>
+<li>Si le sous-type est linéaire ou polygonal (LINE, POLYGON), &#8216;&#8217;Graphics&#8217;&#8217; doit
+être déclaré.</li>
+<li>Si le sous-type est ponctuel ou textuel (POINT, TEXT), &#8216;&#8217;Angle&#8217;&#8217; doit être
+déclaré.
+Quand cette option n&#8217;est pas utilisée,le pilote gère les types et sous-types
+soit sur la base du nom de la couche, soit en utilisant l&#8217;option &#8216;&#8217;-nln&#8217;&#8216;.</li>
+</ul>
+</div>
+<div class="section" id="options-de-creation-de-couche">
+<h2>Options de création de couche<a class="headerlink" href="#options-de-creation-de-couche" title="Lien permanent vers ce titre">¶</a></h2>
+<p>FEATURETYPE=TYPE.SUBTYPE : définit les éléments à créer. TYPE correspond à un
+des noms (Name) présents dans le fichier .GCT pour une section &#8220;type&#8221;. SUBTYPE
+correspond au nom (Name) présent dans la section sous-type de la section type
+concernée.</p>
+<p>At the present moment, coordinates are written with 2 decimales for cartesian
++spatial reference systems (including height) or with 9 decimales for
++geographical spatial reference systems.</p>
+</div>
+<div class="section" id="exemples">
+<h2>Exemples<a class="headerlink" href="#exemples" title="Lien permanent vers ce titre">¶</a></h2>
+<div class="section" id="exemple-de-fichier-gct">
+<h3>Exemple de fichier .GCT<a class="headerlink" href="#exemple-de-fichier-gct" title="Lien permanent vers ce titre">¶</a></h3>
+<blockquote>
+<div><div class="highlight-python"><pre>//#SECTION CONFIG
+//#SECTION MAP
+//# Name=SCAN1000-TILES-LAMB93
+//# Unit=m
+//# Precision=1000
+//#ENDSECTION MAP
+//#SECTION TYPE
+//# Name=TILE
+//# ID=10
+//#SECTION SUBTYPE
+//# Name=TILE
+//# ID=100
+//# Kind=POLYGON
+//# 3D=2D
+//#SECTION FIELD
+//# Name=IDSEL
+//# ID=101
+//# Kind=TEXT
+//#ENDSECTION FIELD
+//#SECTION FIELD
+//# Name=NOM
+//# ID=102
+//# Kind=TEXT
+//#ENDSECTION FIELD
+//#SECTION FIELD
+//# Name=WITHDATA
+//# ID=103
+//# Kind=INT
+//#ENDSECTION FIELD
+//#ENDSECTION SUBTYPE
+//#ENDSECTION TYPE
+//#SECTION FIELD
+//# Name=@Identifier
+//# ID=-1
+//# Kind=INT
+//#ENDSECTION FIELD
+//#SECTION FIELD
+//# Name=@Class
+//# ID=-2
+//# Kind=CHOICE
+//#ENDSECTION FIELD
+//#SECTION FIELD
+//# Name=@Subclass
+//# ID=-3
+//# Kind=CHOICE
+//#ENDSECTION FIELD
+//#SECTION FIELD
+//# Name=@Name
+//# ID=-4
+//# Kind=TEXT
+//#ENDSECTION FIELD
+//#SECTION FIELD
+//# Name=@X
+//# ID=-5
+//# Kind=REAL
+//#ENDSECTION FIELD
+//#SECTION FIELD
+//# Name=@Y
+//# ID=-6
+//# Kind=REAL
+//#ENDSECTION FIELD
+//#SECTION FIELD
+//# Name=@Graphics
+//# ID=-7
+//# Kind=REAL
+//#ENDSECTION FIELD
+//#ENDSECTION CONFIG</pre>
+</div>
+</div></blockquote>
+</div>
+<div class="section" id="exemple-de-fichier-gxt">
+<h3>Exemple de fichier .GXT<a class="headerlink" href="#exemple-de-fichier-gxt" title="Lien permanent vers ce titre">¶</a></h3>
+<blockquote>
+<div><div class="highlight-python"><pre>//$DELIMITER "      "
+//$QUOTED-TEXT "no"
+//$CHARSET ANSI
+//$UNIT Distance=m
+//$FORMAT 2
+//$SYSCOORD {Type: 2001}
+//$FIELDS Class=TILE;Subclass=TILE;Kind=4;Fields=Private#Identifier Private#Class   Private#Subclass        Private#Name    Private#NbFields        IDSEL   NOM     WITHDATA        Private#X       Private#Y       Private#Graphics
+-1      TILE    TILE    TILE    3       000-2007-0050-7130-LAMB93               0       50000.00        7130000.00      4       600000.00       7130000.00      600000.00       6580000.00      50000.00        6580000.00      50000.00        7130000.00
++-1     TILE    TILE    TILE    3       000-2007-0595-7130-LAMB93               0       595000.00       7130000.00      4       1145000.00      7130000.00      1145000.00      6580000.00      595000.00       6580000.00      595000.00       7130000.00
++-1     TILE    TILE    TILE    3       000-2007-0595-6585-LAMB93               0       595000.00       6585000.00      4       1145000.00      6585000.00      1145000.00      6035000.00      595000.00       6035000.00      595000.00       6585000.00
++-1     TILE    TILE    TILE    3       000-2007-1145-6250-LAMB93               0       1145000.00      6250000.00      4       1265000.00      6250000.00      1265000.00      6030000.00      1145000.00      6030000.00      1145000.00      6250000.00
++-1     TILE    TILE    TILE    3       000-2007-0050-6585-LAMB93               0       50000.00        6585000.00      4       600000.00       6585000.00      600000.00       6035000.00      50000.00        6035000.00      50000.00        6585000.00</pre>
+</div>
+</div></blockquote>
+</div>
+<div class="section" id="exemple-d-utilisation">
+<h3>Exemple d&#8217;utilisation<a class="headerlink" href="#exemple-d-utilisation" title="Lien permanent vers ce titre">¶</a></h3>
+<blockquote>
+<div><p>Création d&#8217;un GXT :</p>
+<div class="highlight-python"><pre>ogr2ogr -f "Geoconcept" -a_srs "+init=IGNF:LAMB93" -dsco EXTENSION=txt
+-dsco CONFIG=tile_schema.gct tile.gxt tile.shp -lco FEATURETYPE=TILE.TILE</pre>
+</div>
+<p>Annexer de nouveaux éléments à un fichier .GXT existant :</p>
+<div class="highlight-python"><pre>ogr2ogr -f "Geoconcept" -update -append tile.gxt tile.shp -nln TILE.TILE</pre>
+</div>
+<p>traduire un fichier .GXT en fichier Mapinfo :</p>
+<div class="highlight-python"><pre>ogr2ogr -f "MapInfo File" -dsco FORMAT=MIF tile.mif tile.gxt TILE.TILE</pre>
+</div>
+</div></blockquote>
+</div>
+</div>
+<div class="section" id="voir-aussi">
+<h2>Voir aussi<a class="headerlink" href="#voir-aussi" title="Lien permanent vers ce titre">¶</a></h2>
+<ul class="simple">
+<li><a class="reference external" href="http://www.geoconcept.com">Site officiel de GeoConcept</a></li>
+</ul>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+
+
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="geojson.html" title="GeoJSON"
+             >suivant</a></li>
+        <li class="right" >
+          <a href="fmeobjects.html" title="FMEObjects Gateway"
+             >précédent</a> |</li>
+        <li><a href="../../index.html">GDAL v1.9.0 documentation</a> &raquo;</li>
+          <li><a href="../index.html" >OGR</a> &raquo;</li>
+          <li><a href="index.html" >Formats vecteur d&#8217;OGR</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+    <a href="http://creativecommons.org/licenses/by/2.0/fr/deed.fr">Licence Creative Common BY</a>
+    <!--
+      &copy; Copyright 2011, Yves Jacolin.-->
+      Créé avec <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0.7.
+    </div>
+  </body>
+</html>

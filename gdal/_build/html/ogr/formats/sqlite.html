@@ -1,0 +1,245 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF8" />
+    
+    <title>SQLite/SpatiaLite RDBMS &mdash; GDAL v1.9.0 documentation</title>
+    <link rel="stylesheet" href="../../_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '1.9.0',
+        COLLAPSE_MODINDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../_static/translations.js"></script>
+    <link rel="top" title="GDAL v1.9.0 documentation" href="../../index.html" />
+    <link rel="up" title="Formats vecteur d’OGR" href="index.html" />
+    <link rel="next" title="SUA - Tim Newport-Peace’s Special Use Airspace Format" href="sua.html" />
+    <link rel="prev" title="ESRI Shapefile" href="shapefile.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="sua.html" title="SUA - Tim Newport-Peace’s Special Use Airspace Format"
+             accesskey="N">suivant</a></li>
+        <li class="right" >
+          <a href="shapefile.html" title="ESRI Shapefile"
+             accesskey="P">précédent</a> |</li>
+        <li><a href="../../index.html">GDAL v1.9.0 documentation</a> &raquo;</li>
+          <li><a href="../index.html" >OGR</a> &raquo;</li>
+          <li><a href="index.html" accesskey="U">Formats vecteur d&#8217;OGR</a> &raquo;</li> 
+      </ul>
+    </div>
+
+
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <h3><a href="../../index.html">Table des matières</a></h3>
+            <ul>
+<li><a class="reference internal" href="#">SQLite/SpatiaLite RDBMS</a><ul>
+<li><a class="reference internal" href="#utiliser-la-bibliotheque-spatialite-extension-spatiale-pour-sqlite">Utiliser la bibliothèque SpatiaLite (extension spatiale pour SQLite)</a></li>
+<li><a class="reference internal" href="#problemes-de-creation">Problèmes de création</a><ul>
+<li><a class="reference internal" href="#options-de-creation-de-la-base-de-donnees">Options de création de la base de données</a></li>
+<li><a class="reference internal" href="#options-de-creation-de-couche">Options de création de couche</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#autres-informations">Autres informations</a></li>
+</ul>
+</li>
+</ul>
+
+            <h4>Sujet précédent</h4>
+            <p class="topless"><a href="shapefile.html"
+                                  title="Chapitre précédent">ESRI Shapefile</a></p>
+            <h4>Sujet suivant</h4>
+            <p class="topless"><a href="sua.html"
+                                  title="Chapitre suivant">SUA - Tim Newport-Peace&#8217;s Special Use Airspace Format</a></p>
+            <h3>Cette page</h3>
+            <ul class="this-page-menu">
+              <li><a href="../../_sources/ogr/formats/sqlite.txt"
+                     rel="nofollow">Montrer la source</a></li>
+            </ul>
+          <div id="searchbox" style="display: none">
+            <h3>Recherche rapide</h3>
+              <form class="search" action="../../search.html" method="get">
+                <input type="text" name="q" size="18" />
+                <input type="submit" value="Go" />
+                <input type="hidden" name="check_keywords" value="yes" />
+                <input type="hidden" name="area" value="default" />
+              </form>
+              <p class="searchtip" style="font-size: 90%">
+              Enter search terms or a module, class or function name.
+              </p>
+          </div>
+          <script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="sqlite-spatialite-rdbms">
+<span id="gdal-ogr-formats-sqlite"></span><h1>SQLite/SpatiaLite RDBMS<a class="headerlink" href="#sqlite-spatialite-rdbms" title="Lien permanent vers ce titre">¶</a></h1>
+<p>OGR gère en option les tables spatiales et non-spatiale stocké dans les fichiers
+de base de données SQLite. SQLIte est un moteur RDBMS basé sur des fichiers
+simples et légers avec des commandes SQL assez complètes et avec des
+performances respectables.</p>
+<p>Le pilote recherche une table <em>geometry_columns</em> énoncés tels que définis par
+le standard <em>Simple Features</em> de l&#8217;OGC, plus particulièrement comme définie
+dans la <a class="reference external" href="http://trac.osgeo.org/fdo/wiki/FDORfc16">RFC 16 de FDO</a>. Si trouvé,
+elle est utilisé pour mappé les tables et les couches.</p>
+<p>Si <em>geometry_columns</em> est trouvée, chaque table est traitée comme une couche.
+Les couches avec un champ <em>WKT_GEOMETRY</em> seront traitées comme des tables
+spatiales, et la colonne <em>WKT_GEOMETRY</em> sera lu comme une géométrie Well Known
+Text</p>
+<p>Si <em>geometry_columns</em> est trouvée, elle sera utilisée pour rechercher le système
+de référence spatiale dans la table <em>spatial_ref_sys</em>.</p>
+<p>Les bases de données SQLite sont essentiellement sans type, mais le pilote
+SQLite tentera de classifier les champs attributaires comme texte, entier ou
+virgule flottante basé sur le contenu de la première ligne de la table. Aucun
+type de champ attributaire n&#8217;existant dans SQLite.</p>
+<p>Les bases de données SQLite fonctionne souvent mal sur un NFS, ou d&#8217;autres
+protocoles de systèmes de fichiers par réseau dû à une faible gestion des
+cadenas. Il est plus sure d&#8217;opérer seulement avec des fichiers SQLite sur un
+disque système du système local.</p>
+<p>SQLite est un pilote compilé en option. Il n&#8217;est pas compilé par défaut.</p>
+<p>Bien que le pilote SQLite gère la lecture des données spatiales à partir des
+enregistrements, il n&#8217;y a pas de gestion pour l&#8217;indexation spatiale, donc les
+requêtes spatiales tendent à être longue. Les requêtes attributaires peuvent
+être rapide, spécialement si des indexes sont construits pour les colonnes
+attributaires appropriées en utilisant la commande SQL &#8220;CREATE INDEX ON ( )&#8221;.</p>
+<p>Par défaut, les requêtes SQL sont passées directement au moteur de base de
+données SQLite. Il est également possible de demander au pilote de prendre
+en charge les commandes SQL avec le <a class="reference internal" href="../sql.html#gdal-ogr-sql"><em>SQL dans OGR</em></a>, en passant la chaine
+&#8220;OGRSQL&#8221; à la méthode <em>ExecuteSQL()</em>, comme nom du dialecte SQL.</p>
+<p>À partir de OGR 1.8.0, l&#8217;option de configuration <em>OGR_SQLITE_SYNCHRONOUS</em> a été
+ajoutée. Quand définie à OFF, cela déclenche une commande &#8216;PRAGMA synchronous = OFF&#8217;
+à la base de données SQLite.
+Cela a l&#8217;avantage d’accélérer certaines opérations d&#8217;écriture (par exemple les
+systèmes de fichier EXT4), mais au dépend de la sécurité des données ; crash du
+système/OS. Utilisez le donc avec soin dans des environnements en production et
+lisez la
+<a class="reference external" href="http://www.sqlite.org/pragma.html#pragma_synchronous">documentation de SQLite qui en parle</a>.</p>
+<div class="section" id="utiliser-la-bibliotheque-spatialite-extension-spatiale-pour-sqlite">
+<h2>Utiliser la bibliothèque SpatiaLite (extension spatiale pour SQLite)<a class="headerlink" href="#utiliser-la-bibliotheque-spatialite-extension-spatiale-pour-sqlite" title="Lien permanent vers ce titre">¶</a></h2>
+<p>(À partir de GDAL 1.7.0)</p>
+<p>Le pilote SQLite peut lire et écrire des bases de données SpatiaLite sans nécessité
+le chargement de la bibliothèque SpatiaLite. Mais si vous configurez GDAL/OGR avec
+un lien explicite à la bibliothèque  SpatiaLite (version &gt;= 2.3), vous aurez les
+avantages de toutes les extensions fournie par cette bibliothèque, comme les indexes
+spatiaux, les fonctions spatiales, etc.</p>
+<p>Quelques exemples :</p>
+<div class="highlight-python"><pre># Duplique la base de données échantillon fournie avec SpatiaLite (ne nécessite
+# pas un lien explicite avec SpatiaLite)
+ogr2ogr -f SQLite testspatialite.sqlite test-2.3.sqlite  -dsco SPATIALITE=YES
+
+# Ajouter un index spatial sur la colonne géométrique de la table Towns
+# (nécessite un lien explicite avec SpatiaLite)
+ogrinfo testspatialite.sqlite -sql "SELECT CreateSpatialIndex('Towns', 'geometry')"
+
+# Faire une requête avec un filtre spatial (nécessite un lien explicite avec SpatiaLite)
+ogrinfo testspatialite.sqlite \
+    -sql "SELECT Name, asText(geometry) FROM Towns WHERE MBRIntersects(geometry, BuildMBR(754000, 4692000, 770000, 4924000))"</pre>
+</div>
+<p>ou</p>
+<div class="highlight-python"><pre># fonctionnera plus rapidement avec des filtres spatiaux et des liens
+# explicites avec SpatiaLite
+ogrinfo testspatialite.sqlite Towns -spat 754000 4692000 770000 4924000</pre>
+</div>
+</div>
+<div class="section" id="problemes-de-creation">
+<h2>Problèmes de création<a class="headerlink" href="#problemes-de-creation" title="Lien permanent vers ce titre">¶</a></h2>
+<p>Le pilote SQLite gère la création de fichiers de base de données SQLite ou
+l&#8217;ajout de tables à une base existante. Remarquez qu&#8217;un nouveau fichier de base
+de données ne peut pas être crée sur un fichier existant.</p>
+<div class="section" id="options-de-creation-de-la-base-de-donnees">
+<h3>Options de création de la base de données<a class="headerlink" href="#options-de-creation-de-la-base-de-donnees" title="Lien permanent vers ce titre">¶</a></h3>
+<ul class="simple">
+<li><strong>METADATA=yes/no :</strong> cela permet d&#8217;éviter la création des tables
+<em>geometry_columns</em> et <em>spatial_ref_sys</em> dans une nouvelle base de données.
+Par défaut les tables de méta-données sont créées lorsqu&#8217;une nouvelle base de
+données est crée.</li>
+<li><strong>SPATIALITE=yes/no :</strong> (à partir de GDAL 1.7.0) créé le mode SpatiaLite des
+tables de métadonnées, qui sont un peu différente des métadonnées utilisées par
+ce pilote OGR et des spécifications OGC. Implique <strong>METADATA=yes</strong>.</li>
+<li><strong>INIT_WITH_EPSG=yes/no :</strong> (à partir de GDAL 1.8.0) insère le contenu du fichier
+CSV EPSG dans la table <em>spatial_ref_sys</em>. no par défaut.</li>
+</ul>
+</div>
+<div class="section" id="options-de-creation-de-couche">
+<h3>Options de création de couche<a class="headerlink" href="#options-de-creation-de-couche" title="Lien permanent vers ce titre">¶</a></h3>
+<ul class="simple">
+<li><strong>FORMAT=WKB/WKT/SPATIALITE :</strong> contrôle le format utilisé pour la colonne géométrique.
+Par défaut WKB (Well Known Binary) est utilisé. Cela est généralement plus
+efficace lors du traitement et de l&#8217;espace utilisé, mais plus complexe à
+comprendre ou utiliser dans des application simples que le WKT (Well Known Text).
+L&#8217;extension SpatiaLite utilise son propre format binaire pour stocker les
+géométries et vous pouvez le choisir également. Il sera automatiquement
+sélectionné lorsque la base de données SpatiaLite est ouverte ou créé avec l&#8217;option
+<strong>SPATIALITE=yes</strong>. La valeur SPATIALITE est disponible à partir de GDAL 1.7.0</li>
+<li><strong>LAUNDER=yes/no :</strong> contrôle si les noms de la couche et des champs seront
+nettoyer pour une utilisation plus facile dans SQLite. Les noms nettoyés seront
+converties en minuscule et certains caractères spéciaux seront changés en
+&#8216;underscores&#8217;.</li>
+<li><strong>SPATIAL_INDEX=yes/no :</strong> (À partir de GDAL 1.7.0) si la base de données est
+de type SpatiaLite, et si OGR est lié à libspatialite, cette option peut être
+utilisé pour contrôler si un index spatiale doit être créé. Yes par défaut.</li>
+</ul>
+</div>
+</div>
+<div class="section" id="autres-informations">
+<h2>Autres informations<a class="headerlink" href="#autres-informations" title="Lien permanent vers ce titre">¶</a></h2>
+<ul class="simple">
+<li>Le développement du pilote SQLite pour OGR a été financé par
+<a class="reference external" href="http://www.dmsolutions.ca/">le groupe DM Solutions</a> et <a class="reference external" href="http://www.gomoos.org/">GoMOOS</a>.</li>
+<li><a class="reference external" href="http://www.sqlite.org">Page principale pour SQLite</a>.</li>
+<li><a class="reference external" href="http://www.gaia-gis.it/spatialite/">Extension spatiaLite de SQLite</a>.</li>
+<li><a class="reference external" href="http://trac.osgeo.org/fdo/wiki/FDORfc16">FDO RFC 16</a> : Fournisseur FDO pour SQLite</li>
+</ul>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+
+
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="sua.html" title="SUA - Tim Newport-Peace’s Special Use Airspace Format"
+             >suivant</a></li>
+        <li class="right" >
+          <a href="shapefile.html" title="ESRI Shapefile"
+             >précédent</a> |</li>
+        <li><a href="../../index.html">GDAL v1.9.0 documentation</a> &raquo;</li>
+          <li><a href="../index.html" >OGR</a> &raquo;</li>
+          <li><a href="index.html" >Formats vecteur d&#8217;OGR</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+    <a href="http://creativecommons.org/licenses/by/2.0/fr/deed.fr">Licence Creative Common BY</a>
+    <!--
+      &copy; Copyright 2011, Yves Jacolin.-->
+      Créé avec <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0.7.
+    </div>
+  </body>
+</html>

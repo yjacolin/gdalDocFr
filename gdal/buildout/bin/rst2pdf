@@ -1,0 +1,18 @@
+#!/usr/bin/python
+
+import sys
+sys.path[0:0] = [
+    '/home/yves/Documents/Geomatique/OSGeo/Projects/gdal/rst/buildout/eggs/Sphinx-1.0.7-py2.7.egg',
+    '/home/yves/Documents/Geomatique/OSGeo/Projects/gdal/rst/buildout/eggs/rst2pdf-0.16-py2.7.egg',
+    '/home/yves/Documents/Geomatique/OSGeo/Projects/gdal/rst/buildout/eggs/Pygments-1.4-py2.7.egg',
+    '/usr/lib/python2.7/dist-packages',
+    '/home/yves/Documents/Geomatique/OSGeo/Projects/gdal/rst/buildout/eggs/docutils-0.8.1-py2.7.egg',
+    '/home/yves/Documents/Geomatique/OSGeo/Projects/gdal/rst/buildout/eggs/distribute-0.6.21-py2.7.egg',
+    '/home/yves/Documents/Geomatique/OSGeo/Projects/gdal/rst/buildout/eggs/Jinja2-2.6-py2.7.egg',
+    ]
+
+
+import rst2pdf.createpdf
+
+if __name__ == '__main__':
+    rst2pdf.createpdf.main()

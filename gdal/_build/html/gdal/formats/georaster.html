@@ -1,0 +1,300 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF8" />
+    
+    <title>GeoRaster d’Oracle Spatial &mdash; GDAL v1.9.0 documentation</title>
+    <link rel="stylesheet" href="../../_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '1.9.0',
+        COLLAPSE_MODINDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../_static/translations.js"></script>
+    <link rel="top" title="GDAL v1.9.0 documentation" href="../../index.html" />
+    <link rel="up" title="Formats" href="index.html" />
+    <link rel="next" title="GIF – Graphics Interchange Format" href="gif.html" />
+    <link rel="prev" title="FAST – EOSAT FAST Format" href="fast.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="gif.html" title="GIF – Graphics Interchange Format"
+             accesskey="N">suivant</a></li>
+        <li class="right" >
+          <a href="fast.html" title="FAST – EOSAT FAST Format"
+             accesskey="P">précédent</a> |</li>
+        <li><a href="../../index.html">GDAL v1.9.0 documentation</a> &raquo;</li>
+          <li><a href="../index.html" >GDAL</a> &raquo;</li>
+          <li><a href="index.html" accesskey="U">Formats</a> &raquo;</li> 
+      </ul>
+    </div>
+
+
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <h3><a href="../../index.html">Table des matières</a></h3>
+            <ul>
+<li><a class="reference internal" href="#">GeoRaster d&#8217;Oracle Spatial</a><ul>
+<li><a class="reference internal" href="#naviguer-dans-la-base-de-donnees-des-georasters">Naviguer dans la base de données des GeoRasters</a></li>
+<li><a class="reference internal" href="#options-de-creation">Options de création</a></li>
+<li><a class="reference internal" href="#importer-des-georaster">Importer des GeoRaster</a></li>
+<li><a class="reference internal" href="#exporter-georaster">Exporter GeoRaster</a></li>
+<li><a class="reference internal" href="#utilisation-generale-de-georaster">Utilisation générale de GeoRaster</a></li>
+</ul>
+</li>
+</ul>
+
+            <h4>Sujet précédent</h4>
+            <p class="topless"><a href="fast.html"
+                                  title="Chapitre précédent">FAST &#8211; EOSAT FAST Format</a></p>
+            <h4>Sujet suivant</h4>
+            <p class="topless"><a href="gif.html"
+                                  title="Chapitre suivant">GIF &#8211; Graphics Interchange Format</a></p>
+            <h3>Cette page</h3>
+            <ul class="this-page-menu">
+              <li><a href="../../_sources/gdal/formats/georaster.txt"
+                     rel="nofollow">Montrer la source</a></li>
+            </ul>
+          <div id="searchbox" style="display: none">
+            <h3>Recherche rapide</h3>
+              <form class="search" action="../../search.html" method="get">
+                <input type="text" name="q" size="18" />
+                <input type="submit" value="Go" />
+                <input type="hidden" name="check_keywords" value="yes" />
+                <input type="hidden" name="area" value="default" />
+              </form>
+              <p class="searchtip" style="font-size: 90%">
+              Enter search terms or a module, class or function name.
+              </p>
+          </div>
+          <script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="georaster-d-oracle-spatial">
+<span id="gdal-gdal-formats-georaster"></span><h1>GeoRaster d&#8217;Oracle Spatial<a class="headerlink" href="#georaster-d-oracle-spatial" title="Lien permanent vers ce titre">¶</a></h1>
+<p>Ce pilote gère la lecture et l&#8217;écriture de données raster au format GeoRaster
+d&#8217;Oracle Spatial (10g ou supérieur). Le pilote GeoRaster d&#8217;Oracle Spatial est
+compilé en option comme plugin GDAL mais il nécessite les bibliothèques clientes
+d&#8217;Oracle.</p>
+<p>Lors de l&#8217;ouverture du GeoRaster, son nom doit être définie sous la forme :</p>
+<div class="highlight-python"><pre>georaster:&lt;user&gt;{,/}&lt;pwd&gt;{,@}[db],[schema.][table],[column],[where]
+georaster:&lt;user&gt;{,/}&lt;pwd&gt;{,@}[db],&lt;rdt&gt;,&lt;rid&gt;</pre>
+</div>
+<p>où :</p>
+<ul class="simple">
+<li><em>user</em>   = login du nom d&#8217;utilisateur du serveur Oracle ;</li>
+<li><em>pwd</em>    = mot de passe utilisateur ;</li>
+<li><em>db</em>     = identification du serveur Oracle (nom de la base de données) ;</li>
+<li><em>schema</em> = nom du schéma ;</li>
+<li><em>table</em>  = nom d&#8217;une table GeoRaster (table qui contient des colonnes
+GeoRaster) ;</li>
+<li><em>column</em> = nom de la colonne données de type <em>MDSYS.SDO_GEORASTER</em> ;</li>
+<li><em>where</em>  = un clause WHERE simple pour identifier un ou plusieurs GeoRaster ;</li>
+<li><em>rdt</em>    = nom d&#8217;une table de données raster ;</li>
+<li><em>rid</em>    = identification numérique d&#8217;un GeoRaster.</li>
+</ul>
+<p>Exemples :</p>
+<div class="highlight-python"><pre>geor:scott,tiger,demodb,table,column,id=1
+geor:scott,tiger,demodb,table,column,"id = 1"
+"georaster:scott/tiger@demodb,table,column,gain&gt;10"
+"georaster:scott/tiger@demodb,table,column,city='Brasilia'"
+georaster:scott,tiger,,rdt_10$,10
+geor:scott/tiger,,rdt_10$,10</pre>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">N&#8217;utilisez pas d&#8217;espace autour des valeurs du champ et la virgule.</p>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Comme dans les deux exemples précédents, le champs du nom de la base de
+données peut être laissé vide (&#8221;,,&#8221;) et le TNSNAME sera utilisé.</p>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Si la requête résulte en plus d&#8217;un GeoRaster elle sera traitée comme une liste
+de métadonnées de sous-jeu de données (voir plus bas).</p>
+</div>
+<div class="section" id="naviguer-dans-la-base-de-donnees-des-georasters">
+<h2>Naviguer dans la base de données des GeoRasters<a class="headerlink" href="#naviguer-dans-la-base-de-donnees-des-georasters" title="Lien permanent vers ce titre">¶</a></h2>
+<p>En fournissant certaine information basique le pilote GeoRaster est capable de
+lister les rasters existant stockés sur le serveur :</p>
+<p>Pour lister toutes les tables sur le serveur qui appartiennent à un utilisateur
+et à une base de données :</p>
+<div class="highlight-python"><pre>% gdalinfo georaster:scott/tiger@db1</pre>
+</div>
+<p>Pour lister toutes les colonnes de types GeoRaster qui existent dans cette table :</p>
+<div class="highlight-python"><pre>% gdalinfo georaster:scott/tiger@db1,table_name</pre>
+</div>
+<p>Ceci listera tous les objets GeoRaster stocké dans cette table :</p>
+<div class="highlight-python"><pre>% gdalinfo georaster:scott/tiger@db1,table_name,georaster_column</pre>
+</div>
+<p>Ceci listera tous les GeoRaster existant sur cette table selon la clause QHERE :</p>
+<div class="highlight-python"><pre>% gdalinfo georaster:scott/tiger@db1,table_name,georaster_column,city='Brasilia'</pre>
+</div>
+<p>Notez que le résultat de ces requêtes est renvoyé à GDAL comme méta-données
+d&#8217;un sous jeu de données, par exemple :</p>
+<div class="highlight-python"><pre>% gdalinfo georaster:scott/tiger
+Driver: GeoRaster/Oracle Spatial GeoRaster
+Subdatasets:
+SUBDATASET_1_NAME=georaster:scott,tiger,,LANDSAT
+SUBDATASET_1_DESC=Table:LANDSAT
+SUBDATASET_2_NAME=georaster:scott,tiger,,GDAL_IMPORT
+SUBDATASET_2_DESC=Table:GDAL_IMPORT</pre>
+</div>
+</div>
+<div class="section" id="options-de-creation">
+<h2>Options de création<a class="headerlink" href="#options-de-creation" title="Lien permanent vers ce titre">¶</a></h2>
+<ul>
+<li><p class="first"><strong>BLOCKXSIZE :</strong> le nombre de colonne de pixel dans un bloc raster.</p>
+</li>
+<li><p class="first"><strong>BLOCKYSIZE :</strong> le nombre de ligne de pixel dans un bloc raster.</p>
+</li>
+<li><p class="first"><strong>BLOCKBSIZE :</strong> le nombre de bandes dans un bloc raster.</p>
+</li>
+<li><p class="first"><strong>SRID :</strong> assigne une identification de projection/système de référence EPSG
+à un GeoRaster.</p>
+</li>
+<li><p class="first"><strong>INTERLEAVE :</strong> mode d&#8217;entrelacement de bande, BAND, LINE, PIXEL (ou BSQ,
+BIP, BIL) pour les entrelacements de bandes séquentielles, Ligne ou Pixel.</p>
+</li>
+<li><p class="first"><strong>DESCRIPTION :</strong> une description simple d&#8217;une nouvelle table dans la syntaxe
+SQL. Si la table existe déjà, cette option de création sera ignorée, par
+exemple :</p>
+<div class="highlight-python"><pre>% gdal_translate -of georaster landsat_823.tif geor:scott/tiger@orcl,landsat,raster \
+-co DESCRIPTION="(ID NUMBER, NAME VARCHAR2(40), RASTER MDSYS.SDO_GEORASTER)" \
+-co INSERT="VALUES (1,'Scene 823',SDO_GEOR.INIT())"</pre>
+</div>
+</li>
+<li><p class="first"><strong>INSERT :</strong> une clause SQL simple d&#8217;insert/values pour informer le pilote
+des valeurs qu&#8217;il doit insérer dans une nouvelle ligne de la table, par exemple :</p>
+<div class="highlight-python"><pre>% gdal_translate -of georaster landsat_825.tif geor:scott/tiger@orcl,landsat,raster \
+-co INSERT="ID, RASTER VALUES (2,SDO_GEOR.INIT())"</pre>
+</div>
+</li>
+<li><p class="first"><strong>COMPRESS :</strong> options de compression, JPEG-F, JPEG-B, DEFLATE ou NONE. Les
+deux options JPEG sont avec pertes, ce qui signifie que les pixels originels
+sont modifiés. Le type JPEG-F stocke une structure complète du JPEG sur
+chaque bloc tandis que le type JPEG-B est plus petit puisqu&#8217;il ne stocke pas
+les tables de quantification et d&#8217;Huffman.</p>
+</li>
+<li><p class="first"><strong>QUALITY :</strong> option de la qualité de la compression pour le format JPEG de 0
+à 100. 75 par défaut.</p>
+</li>
+<li><p class="first"><strong>NBITS :</strong> type de données sous byte, options : 1, 2 ou 4.</p>
+</li>
+</ul>
+</div>
+<div class="section" id="importer-des-georaster">
+<h2>Importer des GeoRaster<a class="headerlink" href="#importer-des-georaster" title="Lien permanent vers ce titre">¶</a></h2>
+<p>Pendant le processus d&#8217;import de raster dans un objet GeoRaster il est possible
+de donner au pilote une simple définition de table SQL et également une clause
+de valeurs/insert SQL pour informer le pilote de la table à créer et les valeurs
+à ajouter aux nouvelles lignes. L&#8217;exemple suivant réalise cela :</p>
+<div class="highlight-python"><pre>% gdal_translate -of georaster landsat_1.tif georaster:scott/tiger,,landsat,scene \
+-co "DESCRIPTION=(ID NUMBER, SITE VARCHAR2(45), SCENE MDSYS.SDO_GEORASTER)" \
+-co "INSERT=VALUES(1,'West fields', SDO_GEOR.INIT())"</pre>
+</div>
+<p>Notez que l&#8217;option de création <em>DESCRIPTION</em> nécessite de donner le nom de la
+table (landsat). Le nom de la colonne (scene) doit correspondre la description :</p>
+<div class="highlight-python"><pre>% gdal_translate -of georaster landsat_1.tif georaster:scott/tiger,,landsat,scene \
+-co "DESCRIPTION=(ID NUMBER, SITE VARCHAR2(45), SCENE MDSYS.SDO_GEORASTER)" \
+-co "INSERT=VALUES(1,'West fields', SDO_GEOR.INIT())"</pre>
+</div>
+<p>Si la table <em>landsat</em> existe, l&#8217;option <em>DESCRIPTION</em> est ignorée. Le pilote peut
+seulement mette à jour une colonne GeoRaster par commande <tt class="docutils literal"><span class="pre">gdal_translate</span></tt>.
+Oracle créé des noms et valeurs par défauts pour RDT et RID pendant
+l&#8217;initialisation des objet <em>SDO_GEORASTER</em> mais les utilisateurs peuvent aussi
+définir un nom et une valeur de leur choix.</p>
+<div class="highlight-python"><pre>% gdal_translate -of georaster landsat_1.tif georaster:scott/tiger,,landsat,scene \
+-co "INSERT=VALUES(10,'Main building', SDO_GEOR.INIT("RDT", 10))"</pre>
+</div>
+<p>Si aucune information n&#8217;est données sur l&#8217;endroit où stocker le raster, le
+pilote créera (s&#8217;il n&#8217;existe pas déjà) une table par défaut nommée <em>GDAL_IMPORT</em>
+avec juste une colonne GeoRaster nommée <em>RASTER</em>, par exemple :</p>
+<div class="highlight-python"><pre>% gdal_translate -of georaster input.tif “geor:scott/tiger@dbdemo”</pre>
+</div>
+</div>
+<div class="section" id="exporter-georaster">
+<h2>Exporter GeoRaster<a class="headerlink" href="#exporter-georaster" title="Lien permanent vers ce titre">¶</a></h2>
+<p>Un GeoRaster peut être identifié par une clause Where ou par une pair de RDT &amp;
+RID :</p>
+<div class="highlight-python"><pre>% gdal_translate -of gtiff geor:scott/tiger@dbdemo,landsat,scene,id=54 output.tif
+% gdal_translate -of gtiff geor:scott/tiger@dbdemo,st_rdt_1,130 output.tif</pre>
+</div>
+</div>
+<div class="section" id="utilisation-generale-de-georaster">
+<h2>Utilisation générale de GeoRaster<a class="headerlink" href="#utilisation-generale-de-georaster" title="Lien permanent vers ce titre">¶</a></h2>
+<p>Les GeoRaster peuvent être utilisé dans n&#8217;importe quel ligne de commande GDAL
+avec toutes les options disponibles. Comme  une extraction d&#8217;une reprojection
+d&#8217;un sous jeu de données d&#8217;image :</p>
+<div class="highlight-python"><pre>% gdal_translate -of gtiff geor:scott/tiger@dbdemo,landsat,scene,id=54 output.tif \
+-srcwin 0 0 800 600
+
+% gdalwarp -of png geor:scott/tiger@dbdemo,st_rdt_1,130 output.png -t_srs EPSG:9000913</pre>
+</div>
+<p>Deux GeoRaster différents peuvent être utilisé comme entré et sortie lors de la
+même opération :</p>
+<div class="highlight-python"><pre>% gdal_translate -of georaster geor:scott/tiger@dbdemo,landsat,scene,id=54 geor:scott/tiger@proj1,projview,image -co \
+INSERT="VALUES (102, SDO_GEOR.INIT())"</pre>
+</div>
+<p>Les applications qui utilisent GDAL peuvent théoriquement lire et écrire du
+GeoRaster comme tout autre format mais la plupart d&#8217;entre eux sont plus enclins
+à tenter d&#8217;accéder aux fichiers sur le système de fichier donc une alternative
+est de créer un VRT pour représenter la description du GeoRaster, par exemple :</p>
+<div class="highlight-python"><pre>% gdal_translate -of VRT geor:scott/tiger@dbdemo,landsat,scene,id=54 view_54.vrt
+% openenv view_54.vrt</pre>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+
+
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="gif.html" title="GIF – Graphics Interchange Format"
+             >suivant</a></li>
+        <li class="right" >
+          <a href="fast.html" title="FAST – EOSAT FAST Format"
+             >précédent</a> |</li>
+        <li><a href="../../index.html">GDAL v1.9.0 documentation</a> &raquo;</li>
+          <li><a href="../index.html" >GDAL</a> &raquo;</li>
+          <li><a href="index.html" >Formats</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+    <a href="http://creativecommons.org/licenses/by/2.0/fr/deed.fr">Licence Creative Common BY</a>
+    <!--
+      &copy; Copyright 2011, Yves Jacolin.-->
+      Créé avec <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0.7.
+    </div>
+  </body>
+</html>

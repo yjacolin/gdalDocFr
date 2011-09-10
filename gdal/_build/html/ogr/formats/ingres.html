@@ -1,0 +1,208 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF8" />
+    
+    <title>INGRES &mdash; GDAL v1.9.0 documentation</title>
+    <link rel="stylesheet" href="../../_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '1.9.0',
+        COLLAPSE_MODINDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../_static/translations.js"></script>
+    <link rel="top" title="GDAL v1.9.0 documentation" href="../../index.html" />
+    <link rel="up" title="Formats vecteur d’OGR" href="index.html" />
+    <link rel="next" title="KML - Keyhole Markup Language" href="kml.html" />
+    <link rel="prev" title="INTERLIS" href="ili.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="kml.html" title="KML - Keyhole Markup Language"
+             accesskey="N">suivant</a></li>
+        <li class="right" >
+          <a href="ili.html" title="INTERLIS"
+             accesskey="P">précédent</a> |</li>
+        <li><a href="../../index.html">GDAL v1.9.0 documentation</a> &raquo;</li>
+          <li><a href="../index.html" >OGR</a> &raquo;</li>
+          <li><a href="index.html" accesskey="U">Formats vecteur d&#8217;OGR</a> &raquo;</li> 
+      </ul>
+    </div>
+
+
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <h3><a href="../../index.html">Table des matières</a></h3>
+            <ul>
+<li><a class="reference internal" href="#">INGRES</a><ul>
+<li><a class="reference internal" href="#avertissements">Avertissements</a></li>
+<li><a class="reference internal" href="#problemes-lors-de-la-creation">Problèmes lors de la création</a></li>
+<li><a class="reference internal" href="#options-de-creation-de-couche">Options de création de couche</a></li>
+</ul>
+</li>
+</ul>
+
+            <h4>Sujet précédent</h4>
+            <p class="topless"><a href="ili.html"
+                                  title="Chapitre précédent">INTERLIS</a></p>
+            <h4>Sujet suivant</h4>
+            <p class="topless"><a href="kml.html"
+                                  title="Chapitre suivant">KML - Keyhole Markup Language</a></p>
+            <h3>Cette page</h3>
+            <ul class="this-page-menu">
+              <li><a href="../../_sources/ogr/formats/ingres.txt"
+                     rel="nofollow">Montrer la source</a></li>
+            </ul>
+          <div id="searchbox" style="display: none">
+            <h3>Recherche rapide</h3>
+              <form class="search" action="../../search.html" method="get">
+                <input type="text" name="q" size="18" />
+                <input type="submit" value="Go" />
+                <input type="hidden" name="check_keywords" value="yes" />
+                <input type="hidden" name="area" value="default" />
+              </form>
+              <p class="searchtip" style="font-size: 90%">
+              Enter search terms or a module, class or function name.
+              </p>
+          </div>
+          <script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="ingres">
+<span id="gdal-ogr-formats-ingres"></span><h1>INGRES<a class="headerlink" href="#ingres" title="Lien permanent vers ce titre">¶</a></h1>
+<p>Le pilote implémente la lecture et l&#8217;écriture pour les données spatiales dans
+des tables de base de donnés INGRES. Cette fonctionnalité a été introduite dans
+GDAL/OGR 1.6.0.</p>
+<p>Lors de l&#8217;ouverture d&#8217;une base de données, son nom doit être définie dans la
+forme <em>&#64;driver=ingres,dbname=dbname[,options]</em> où les options peuvent être
+listées séparé par des virgules comme <em>username=*userid</em>, password=*password*,
+timeout=*timeout*, tables=table1/table2*. Le pilote (driver) et les valeurs de
+<em>dbname</em> sont nécessaires alors que le reste est optionnel. Si le nom de
+l&#8217;utilisateur et le mot de passe ne sont pas fournie une tentative est faite
+pour s&#8217;authentifier comme l&#8217;utilisateur encors.</p>
+<p>Exemples :</p>
+<div class="highlight-python"><pre>@driver=ingres,dbname=test,userid=warmerda,password=test,tables=usa/canada
+
+@driver=ingres,dbname=mapping</pre>
+</div>
+<p>Si la liste des tables n&#8217;est pas fournie, une tentative est réalisée pour
+énumérer toutes les tables non système comme couches, autrement seul les tables
+listées sont représentées comme couches. Cette option est surtout utile
+lorsqu&#8217;une base de données possède beaucoup de tables, et scanner tous les
+schémas pourrait prendre trop de temps.</p>
+<p>Si un champ entier nommé &#8220;ogr_fid&#8221; existe dans une table celui-ci sera nommée
+comme FID, autrement les FIDs seront assignés séquentiellement. Cela implique
+que différents FIDs seront assigné à une enregistrement/objets en fonction des
+filtres de requête attributaire et spatial en un temps données.</p>
+<p>Par défaut, les requêtes SQL sont envoyé directement au moteur de base de
+données INGRES. Il est aussi possible de réaliser une requête au pilote pour
+prendre en charge les commandes SQL avec le moteur SQL d&#8217;OGR en envoyant la
+chaîne &#8220;OGRSQL&#8221; à la méthode <em>ExecuteSQL()</em> comme nom du dialecte SQL. Pour
+l&#8217;instant le pilote INGRES gère seulement les vieux types de données spatiales
+d&#8217;INGRES tels que <em>POLYGON</em>, <em>POINT</em>, <em>LINE</em>, <em>LONG POLYGON</em>, <em>LONG LINE</em>, etc.
+Il est prévue dans le futur qu&#8217;un nouvel ensemble de type spatial conforme à
+l&#8217;OGC soit géré.</p>
+<div class="section" id="avertissements">
+<h2>Avertissements<a class="headerlink" href="#avertissements" title="Lien permanent vers ce titre">¶</a></h2>
+<ul class="simple">
+<li>Les types spéciaux CIRCLE et ICIRCLE ne sont pas géré pour l&#8217;instant en lecture.</li>
+<li>Aucun index spatial rapide n&#8217;est utilisé lors de la lecture, les filtres
+spatiaux sont donc implémenté en lisant et parsant tous les enregistrements,
+et ceux qui ne satisferaient pas le filtre spatial sont ignorés.</li>
+<li>Il n&#8217;y a pas de gestion pour les systèmes de coordonnées.</li>
+</ul>
+</div>
+<div class="section" id="problemes-lors-de-la-creation">
+<h2>Problèmes lors de la création<a class="headerlink" href="#problemes-lors-de-la-creation" title="Lien permanent vers ce titre">¶</a></h2>
+<p>Le pilote INGRES ne gère pas la création de nouveaux jeux de données (une base
+de données dans INGRES) mais il permet la création de nouvelles couches (tables)
+dans une instance de base de données existante.</p>
+<ul class="simple">
+<li>Le pilote INGRES ne permet pas l&#8217;encodage de caractères pour le moment.</li>
+<li>Le pilote INGRES n&#8217;est pas transactionnel pour le moment.</li>
+<li>les types spatiaux BOX et IBOX ne sont pas gérés pour la création et
+lorsqu&#8217;ils sont lu sont représentés comme des polygones.</li>
+<li>Les types <em>non-LONG</em> (tels que <em>LINE</em>, <em>ILINE</em>, et <em>POLYGON</em>) gère seulement
+un nombre limité de sommet. Toute tentative pour créer des objets avec plus
+que le maximum de sommet possible pour cette couche échouera.</li>
+<li>Les vieux types spatiaux d&#8217;ingres sont très particulier pour les validations
+géométriques et toute tentative pour insérer (créer) des objets avec des
+géométries invalides échouera. Les raisons de l&#8217;invalidité incluent
+auto-intersection de polyligne, et auto-intersection de polygones.</li>
+</ul>
+</div>
+<div class="section" id="options-de-creation-de-couche">
+<h2>Options de création de couche<a class="headerlink" href="#options-de-creation-de-couche" title="Lien permanent vers ce titre">¶</a></h2>
+<ul class="simple">
+<li><strong>OVERWRITE :</strong> il peut être à &#8220;YES&#8221; pour forcer une couche existante au
+nom désiré à être détruite avant la création de la couche voulues.</li>
+<li><strong>LAUNDER :</strong> il peut être à &#8220;YES&#8221; pour forcer les nouveaux champs créés sur
+cette couche pour avoir leur noms de champs &#8220;nettoyés&#8221; dans une forme
+compatible avec MySQL. Cela les passe les caractères en minuscule et
+convertie certains caractères spéciaux comme &#8220;-&#8221; et &#8220;#&#8221; en &#8220;_&#8221;. Si &#8220;NO&#8221; les
+noms exactes sont préservés. La valeur par défaut est &#8220;YES&#8221;.</li>
+<li><strong>PRECISION :</strong> il peut être à &#8220;TRUE&#8221; pour tenter de préserver la largeur et
+la précisions des champs pour la création et la lecture des couches MySQL. La
+valeur par défaut est &#8220;TRUE&#8221;.</li>
+<li><strong>GEOMETRY_NAME :</strong> cette option définie le nom de la colonne géométrique. La
+valeur par défaut est &#8220;SHAPE&#8221;.</li>
+<li><strong>INGRES_FID :</strong> cette option définie le nom de la colonne FID. La valeur par
+défaut est &#8220;OGR_FID&#8221;.</li>
+<li><strong>GEOMETRY_TYPE :</strong> définie le type d&#8217;objet pour la colonne géométrique. Il
+peut être l&#8217;un de <em>POINT</em>, <em>LSEG</em>, <em>LINE</em>, <em>LONG LINE</em>, <em>POLYGON</em>, ou <em>LONG
+POLYGON</em>. Par défaut <em>POINT</em>, <em>LONG LINE</em> ou <em>LONG POLYGON</em> sont utilisés en
+fonction du type de couche.</li>
+</ul>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+
+
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="kml.html" title="KML - Keyhole Markup Language"
+             >suivant</a></li>
+        <li class="right" >
+          <a href="ili.html" title="INTERLIS"
+             >précédent</a> |</li>
+        <li><a href="../../index.html">GDAL v1.9.0 documentation</a> &raquo;</li>
+          <li><a href="../index.html" >OGR</a> &raquo;</li>
+          <li><a href="index.html" >Formats vecteur d&#8217;OGR</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+    <a href="http://creativecommons.org/licenses/by/2.0/fr/deed.fr">Licence Creative Common BY</a>
+    <!--
+      &copy; Copyright 2011, Yves Jacolin.-->
+      Créé avec <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0.7.
+    </div>
+  </body>
+</html>

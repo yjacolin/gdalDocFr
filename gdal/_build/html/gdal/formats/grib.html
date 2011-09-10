@@ -1,0 +1,158 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF8" />
+    
+    <title>GRIB – WMO General Regularly-distributed Information sous la forme Binaire &mdash; GDAL v1.9.0 documentation</title>
+    <link rel="stylesheet" href="../../_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '1.9.0',
+        COLLAPSE_MODINDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../_static/translations.js"></script>
+    <link rel="top" title="GDAL v1.9.0 documentation" href="../../index.html" />
+    <link rel="up" title="Formats" href="index.html" />
+    <link rel="next" title="Le format Gtiff" href="gtiff.html" />
+    <link rel="prev" title="Le format GRASS" href="grass.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="gtiff.html" title="Le format Gtiff"
+             accesskey="N">suivant</a></li>
+        <li class="right" >
+          <a href="grass.html" title="Le format GRASS"
+             accesskey="P">précédent</a> |</li>
+        <li><a href="../../index.html">GDAL v1.9.0 documentation</a> &raquo;</li>
+          <li><a href="../index.html" >GDAL</a> &raquo;</li>
+          <li><a href="index.html" accesskey="U">Formats</a> &raquo;</li> 
+      </ul>
+    </div>
+
+
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <h4>Sujet précédent</h4>
+            <p class="topless"><a href="grass.html"
+                                  title="Chapitre précédent">Le format GRASS</a></p>
+            <h4>Sujet suivant</h4>
+            <p class="topless"><a href="gtiff.html"
+                                  title="Chapitre suivant">Le format Gtiff</a></p>
+            <h3>Cette page</h3>
+            <ul class="this-page-menu">
+              <li><a href="../../_sources/gdal/formats/grib.txt"
+                     rel="nofollow">Montrer la source</a></li>
+            </ul>
+          <div id="searchbox" style="display: none">
+            <h3>Recherche rapide</h3>
+              <form class="search" action="../../search.html" method="get">
+                <input type="text" name="q" size="18" />
+                <input type="submit" value="Go" />
+                <input type="hidden" name="check_keywords" value="yes" />
+                <input type="hidden" name="area" value="default" />
+              </form>
+              <p class="searchtip" style="font-size: 90%">
+              Enter search terms or a module, class or function name.
+              </p>
+          </div>
+          <script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="grib-wmo-general-regularly-distributed-information-sous-la-forme-binaire">
+<span id="gdal-gdal-formats-grib"></span><h1>GRIB &#8211; WMO General Regularly-distributed Information sous la forme Binaire<a class="headerlink" href="#grib-wmo-general-regularly-distributed-information-sous-la-forme-binaire" title="Lien permanent vers ce titre">¶</a></h1>
+<p>GDAL gère la lecture des données raster des formats GRIB1 et GRIB2, avec un
+embryon de gestion pour le système de coordonnées, le géoréférencement et les
+autres méta-données. Le format GRIB est communément utilisé pour la distribution
+d&#8217;information métérologique, et est diffusé par l&#8217;Organisation Météorologique
+Mondiale.</p>
+<p>Le pilote GRIB de GDAL est basé sur une version modifiée de l&#8217;application degrib
+qui a été écrite par Arthur Taylor du NOAA NWS NDFD (MDL). L&#8217;application degrib
+(et le pilote GRIB de GDAL) est compilé avec la bibliothèque de décodage de grib
+g2clib écrit initialement par John Huddleston du NOAA NWS NCEP.</p>
+<p>Il y a plusieurs schémas d&#8217;encodage pour les données raster au format GRIB. La
+plupart devrait être géré en incluant l&#8217;encodage PNG. Les fichiers GRIB encodés
+en JPEG2000 sont généralement géré si GDAL est également compilé avec la gestion
+du JPEG2000 par un des pilotes JPGE2000 de GDAL. La bibliothèque JasPer
+généralement fournie la meilleure gestion du jpeg2000 pour le pilote GRIB.</p>
+<p>Les fichiers GRIB peuvent être représenté dans GDAL comme ayant plusieurs bandes,
+avec un ensemble de bande représentant une séquence temps. Les bandes GRIB sont
+représentées en Float64 (virgule flottante à double précision) sans regard de
+leur valeurs réelles. Les méta-données GRIB sont capturés par bande de
+méta-données et utilisé pour définir des descriptions de bandes, similaire à
+ceci :</p>
+<div class="highlight-python"><pre>Description = 100000[Pa] ISBL="Isobaric surface"
+    GRIB_UNIT=[gpm]
+    GRIB_COMMENT=Geopotential height [gpm]
+    GRIB_ELEMENT=HGT
+    GRIB_SHORT_NAME=100000-ISBL
+    GRIB_REF_TIME=  1201100400 sec UTC
+    GRIB_VALID_TIME=  1201104000 sec UTC
+    GRIB_FORECAST_SECONDS=3600 sec</pre>
+</div>
+<p>Les fichiers GRIB2 peuvent également inclure un extrait du numéro de modèle de
+définition du produit (octet 8-9), et les valeurs du modèle de définition du
+produit (&gt; à 10 octets) sous forme de métadonnées comme ceci :</p>
+<div class="highlight-python"><pre>GRIB_PDS_PDTN=0
+GRIB_PDS_TEMPLATE_NUMBERS=3 5 2 0 105 0 0 0 1 0 0 0 1 100 0 0 1 134 160 255 0 0 0 0 0</pre>
+</div>
+<p>La bibliothèque que GDAL utilise pour lire les fichiers GRIB est connu pour ne pas
+être thread-safen vous devez donc éviter de lire et écrite plusieurs jeux de
+données GRIB au même moment à partir de thread différents.</p>
+<p><strong>Lisez également :</strong></p>
+<ul class="simple">
+<li><a class="reference external" href="http://www.weather.gov/mdl/NDFD_GRIB2Decoder/">Décodeur GRIB2 de &#8220;degrib&#8221; NOAA NWS NDFD</a></li>
+<li><a class="reference external" href="http://www.nco.ncep.noaa.gov/pmb/codes/GRIB2/">Bibliothèque de décodage de grib par g2clib NOAA NWS NCEP</a></li>
+<li><a class="reference external" href="http://www.wmo.int/pages/prog/www/WMOCodes/GRIB.html">Documents sur le format GRIB WMS</a></li>
+</ul>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+
+
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="gtiff.html" title="Le format Gtiff"
+             >suivant</a></li>
+        <li class="right" >
+          <a href="grass.html" title="Le format GRASS"
+             >précédent</a> |</li>
+        <li><a href="../../index.html">GDAL v1.9.0 documentation</a> &raquo;</li>
+          <li><a href="../index.html" >GDAL</a> &raquo;</li>
+          <li><a href="index.html" >Formats</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+    <a href="http://creativecommons.org/licenses/by/2.0/fr/deed.fr">Licence Creative Common BY</a>
+    <!--
+      &copy; Copyright 2011, Yves Jacolin.-->
+      Créé avec <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0.7.
+    </div>
+  </body>
+</html>

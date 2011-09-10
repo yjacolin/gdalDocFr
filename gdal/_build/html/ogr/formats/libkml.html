@@ -1,0 +1,455 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF8" />
+    
+    <title>Pilote LIBKML (.kml .kmz) &mdash; GDAL v1.9.0 documentation</title>
+    <link rel="stylesheet" href="../../_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '1.9.0',
+        COLLAPSE_MODINDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../_static/translations.js"></script>
+    <link rel="top" title="GDAL v1.9.0 documentation" href="../../index.html" />
+    <link rel="up" title="Formats vecteur d’OGR" href="index.html" />
+    <link rel="next" title="Access MDB databases" href="mdb.html" />
+    <link rel="prev" title="KML - Keyhole Markup Language" href="kml.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="mdb.html" title="Access MDB databases"
+             accesskey="N">suivant</a></li>
+        <li class="right" >
+          <a href="kml.html" title="KML - Keyhole Markup Language"
+             accesskey="P">précédent</a> |</li>
+        <li><a href="../../index.html">GDAL v1.9.0 documentation</a> &raquo;</li>
+          <li><a href="../index.html" >OGR</a> &raquo;</li>
+          <li><a href="index.html" accesskey="U">Formats vecteur d&#8217;OGR</a> &raquo;</li> 
+      </ul>
+    </div>
+
+
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <h3><a href="../../index.html">Table des matières</a></h3>
+            <ul>
+<li><a class="reference internal" href="#">Pilote LIBKML (.kml .kmz)</a><ul>
+<li><a class="reference internal" href="#datasource">Datasource</a><ul>
+<li><a class="reference internal" href="#styletable">StyleTable</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#layer">Layer</a></li>
+<li><a class="reference internal" href="#id3">Style</a></li>
+<li><a class="reference internal" href="#schema">Schéma</a></li>
+<li><a class="reference internal" href="#feature">Feature</a><ul>
+<li><a class="reference internal" href="#id8">Style</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#champs">Champs</a></li>
+<li><a class="reference internal" href="#geometrie">Géométrie</a></li>
+<li><a class="reference internal" href="#exemple">Exemple</a></li>
+</ul>
+</li>
+</ul>
+
+            <h4>Sujet précédent</h4>
+            <p class="topless"><a href="kml.html"
+                                  title="Chapitre précédent">KML - Keyhole Markup Language</a></p>
+            <h4>Sujet suivant</h4>
+            <p class="topless"><a href="mdb.html"
+                                  title="Chapitre suivant">Access MDB databases</a></p>
+            <h3>Cette page</h3>
+            <ul class="this-page-menu">
+              <li><a href="../../_sources/ogr/formats/libkml.txt"
+                     rel="nofollow">Montrer la source</a></li>
+            </ul>
+          <div id="searchbox" style="display: none">
+            <h3>Recherche rapide</h3>
+              <form class="search" action="../../search.html" method="get">
+                <input type="text" name="q" size="18" />
+                <input type="submit" value="Go" />
+                <input type="hidden" name="check_keywords" value="yes" />
+                <input type="hidden" name="area" value="default" />
+              </form>
+              <p class="searchtip" style="font-size: 90%">
+              Enter search terms or a module, class or function name.
+              </p>
+          </div>
+          <script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="pilote-libkml-kml-kmz">
+<span id="gdal-ogr-formats-libkml"></span><h1>Pilote LIBKML (.kml .kmz)<a class="headerlink" href="#pilote-libkml-kml-kmz" title="Lien permanent vers ce titre">¶</a></h1>
+<p>Le pilote LIBKML est un client de <a class="reference external" href="http://code.google.com/p/libkml/">Libkml</a>
+de Google, une implémentation de référence du <a class="reference external" href="http://www.opengeospatial.org/standards/kml/">KML</a>
+en lecture et écriture, sous la forme d&#8217;une biliothèque C++ multi-plateforme.
+Vous devez compiler et installer Libkml dans le but d&#8217;utiliser ce pilote OGR.</p>
+<p>Notez que si vous compilez et incluez le pilote LIBKML, il deviendra le lecteur
+par défaut du KML pour OGR, écrasant le pilote KML précédent. Vous pouvez toujours
+définir soit KML ou LIBKML comme pilote de sortie via la ligne de commande.</p>
+<p>Libkml de Google fournit des services de lecture pour un fichier KML valide.
+Toutefois, s&#8217;il vous plaît notez que certaines installations KML ne correspondent
+pas aux spécifications Simple Feature qu&#8217;ogr utilise comme structure interne.
+Par conséquent, un meilleur effort sera fait par le pilote pour comprendre le
+contenu d&#8217;un dossier KML lu par libkml dans OGR, mais votre version peut varier.
+S&#8217;il vous plaît essayez quelques fichiers KML comme échantillons pour avoir une
+idée de ce qui est bien interprété. En particulier, l&#8217;imbrication de features
+définit dans plus d&#8217;une profondeur seront aplaties pour être géré par le format
+interne d&#8217;OGR.</p>
+<div class="section" id="datasource">
+<h2>Datasource<a class="headerlink" href="#datasource" title="Lien permanent vers ce titre">¶</a></h2>
+<p>Vous pouvez définir un <a class="reference external" href="http://www.gdal.org/ogr/ogr_arch.html#ogr_arch_data_source">datasource</a>
+comme fichier kml <tt class="docutils literal"><span class="pre">somefile.kml</span></tt>, un répertoire <tt class="docutils literal"><span class="pre">somedir/</span></tt>, ou un fichier kmz
+<tt class="docutils literal"><span class="pre">somefile.kmz</span></tt>.</p>
+<p>Par défaut, sur les sources de données kmz et répertoire, un fichier index de
+toutes les couches sera lu ou écrit à partir ou vers le fichier doc.xml. Il
+contient <a class="reference external" href="http://code.google.com/apis/kml/documentation/kmlreference.html#networklink">&lt;NetworkLink&gt;</a>
+pour chaque fichier couche dans le datasource. Cette fonctionnalité peut être
+désactivée en définissant la variable d&#8217;environnement <em>LIBKML_USE_DOC.KML</em> à &#8220;no&#8221;.</p>
+<div class="section" id="styletable">
+<h3>StyleTable<a class="headerlink" href="#styletable" title="Lien permanent vers ce titre">¶</a></h3>
+<p>Les tables des styles des datasource sont écrit dans le
+<a class="reference external" href="http://code.google.com/apis/kml/documentation/kmlreference.html#document">&lt;Document&gt;</a>
+dans un .kml, style/style.kml dans un fichier kmz, or style.kml dans un répertoire,
+sous forme d&#8217;un ou plusieurs éléments
+<a class="reference external" href="http://code.google.com/apis/kml/documentation/kmlreference.html#style">&lt;Style&gt;</a>.
+Tous les <a class="reference external" href="http://www.gdal.org/ogr/ogr_feature_style.html">styles de feature d&#8217;OGR</a>
+ne peuvent être traduit en KML.</p>
+</div>
+</div>
+<div class="section" id="layer">
+<h2>Layer<a class="headerlink" href="#layer" title="Lien permanent vers ce titre">¶</a></h2>
+<p><a class="reference external" href="http://www.gdal.org/ogr/ogr_arch.html#ogr_arch_layer">Layers</a> sont déclarées
+dans les fichiers kml en tant que
+<a class="reference external" href="http://code.google.com/apis/kml/documentation/kmlreference.html#document">&lt;Document&gt;</a> ou
+<a class="reference external" href="http://code.google.com/apis/kml/documentation/kmlreference.html#folder">&lt;Folder&gt;</a>,
+et dans les fichiers kmz ou les répertoires  comme des fichiers kml séparés.</p>
+</div>
+<div class="section" id="id3">
+<h2>Style<a class="headerlink" href="#id3" title="Lien permanent vers ce titre">¶</a></h2>
+<p>Les tables de style des couches ne peuvent pas être lues ou écrites à partir
+de/vers une couche kml qui est un
+<a class="reference external" href="http://code.google.com/apis/kml/documentation/kmlreference.html#folder">&lt;Folder&gt;</a>,
+sinon ils sont dans le
+<a class="reference external" href="http://code.google.com/apis/kml/documentation/kmlreference.html#document">&lt;Document&gt;</a>
+d&#8217;une couche.</p>
+</div>
+<div class="section" id="schema">
+<h2>Schéma<a class="headerlink" href="#schema" title="Lien permanent vers ce titre">¶</a></h2>
+<p>La lecture et l&#8217;écriture de <a class="reference external" href="http://code.google.com/apis/kml/documentation/kmlreference.html#schema">&lt;Schema&gt;</a>
+est géré pour les fichiers .kml, .kmz et les répertoires.</p>
+</div>
+<div class="section" id="feature">
+<h2>Feature<a class="headerlink" href="#feature" title="Lien permanent vers ce titre">¶</a></h2>
+<p>Une <a class="reference external" href="http://www.gdal.org/ogr/ogr_arch.html#ogr_arch_feature">feature</a> OGR se
+traduit en kml en tant que <a class="reference external" href="http://code.google.com/apis/kml/documentation/kmlreference.html#placemark">&lt;Placemark&gt;</a>.</p>
+<div class="section" id="id8">
+<h3>Style<a class="headerlink" href="#id8" title="Lien permanent vers ce titre">¶</a></h3>
+<p>Les chaînes de style au niveau de la feature sont déclarées dans le KML soit en
+tant que
+<a class="reference external" href="http://code.google.com/apis/kml/documentation/kmlreference.html#style">&lt;Style&gt;</a>
+ou <a class="reference external" href="http://code.google.com/apis/kml/documentation/kmlreference.html#styleurl">&lt;StyleUrl&gt;</a>
+dans chaque
+<a class="reference external" href="http://code.google.com/apis/kml/documentation/kmlreference.html#placemark">&lt;Placemark&gt;</a>.</p>
+<p>Lors de la lecture d&#8217;une feature kml et que la variable d&#8217;environnement
+<em>LIBKML_RESOLVE_STYLE</em> est positionnée à yes, les urls de styles sont recherchés
+dans les tableaux de style et les chaînes de style des features sont défini sur
+le style à partir de la table. C&#8217;est pour permettre la lecture de styles partagés
+par les applications, comme MapServer, qui ne lisent pas de tables de style.</p>
+<p>Lors de la lecture d&#8217;une feature kml et que la variable d&#8217;environnement
+<em>LIBKML_EXTERNAL_STYLE</em> est positionnée à yes, une url de style qui est externe
+à la source de données est lu à partir du disque ou récupérés sur le serveur et
+analysée dans la table de style de la datasource. Si le style KML ne peut être
+lu ou <em>LIBKML_EXTERNAL_STYLE</em> est positionnée à no, alors l&#8217;url du style est
+copiée à la chaîne de style.</p>
+</div>
+</div>
+<div class="section" id="champs">
+<h2>Champs<a class="headerlink" href="#champs" title="Lien permanent vers ce titre">¶</a></h2>
+<p>Les champs OGR (attributs des feature) sont traduit vers le kml avec
+<a class="reference external" href="http://code.google.com/apis/kml/documentation/kmlreference.html#schema">&lt;Schema&gt;</a>
+et <a class="reference external" href="http://code.google.com/apis/kml/documentation/kmlreference.html#simpledata">&lt;SimpleData&gt;</a>,
+sauf pour certains champs spéciaux comme noté ci-dessous.</p>
+<p>Un ensemble riche de variables d&#8217;environnement est disponible pour définir
+comment les champs en entrée et en sortie, sont traduit en kml
+<a class="reference external" href="http://code.google.com/apis/kml/documentation/kmlreference.html#placemark">&lt;Placemark&gt;</a>.
+Par exemple, si vous voulez un champ appelé &#8216;Cities&#8217; pour être traduit dans la balise
+<a class="reference external" href="http://code.google.com/apis/kml/documentation/kmlreference.html#name">&lt;name&gt;</a>
+en KML, vous pouvez définir une variable d&#8217;environnement.</p>
+<ul>
+<li><dl class="first docutils">
+<dt><strong>Name :</strong></dt>
+<dd><p class="first last">Ce champ de caractère traduit vers le kml la balise
+<a class="reference external" href="http://code.google.com/apis/kml/documentation/kmlreference.html#name">&lt;name&gt;</a>.
+Le nom du champ ogr peut être changé avec la variable d&#8217;environnement
+<em>LIBKML_NAME_FIELD</em>.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt><strong>description :</strong></dt>
+<dd><p class="first last">Ce champ de caractère traduit vers le kml la balise
+<a class="reference external" href="http://code.google.com/apis/kml/documentation/kmlreference.html#description">&lt;description&gt;</a>.
+Le nom du champ ogr peut être changé avec la variable d&#8217;environnement
+<em>LIBKML_DESCRIPTION_FIELD</em>.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt><strong>timestamp :</strong></dt>
+<dd><p class="first last">Ce champ de caractère ou datetime ou date et/ou time traduit vers le kml
+la balise
+<a class="reference external" href="http://code.google.com/apis/kml/documentation/kmlreference.html#timestamp">&lt;timestamp&gt;</a>.
+Le nom du champ ogr peut être changé avec la variable d&#8217;environnement
+<em>LIBKML_TIMESTAMP_FIELD</em>.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt><strong>begin :</strong></dt>
+<dd><p class="first last">Ce champ de caractère ou datetime ou date et/ou time traduit vers le kml
+la balise
+<a class="reference external" href="http://code.google.com/apis/kml/documentation/kmlreference.html#begin">&lt;begin&gt;</a>.
+Le nom du champ ogr peut être changé avec la variable d&#8217;environnement
+<em>LIBKML_BEGIN_FIELD</em>.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt><strong>end :</strong></dt>
+<dd><p class="first last">Ce champ de caractère ou datetime ou date et/ou time traduit vers le kml
+la balise
+<a class="reference external" href="http://code.google.com/apis/kml/documentation/kmlreference.html#end">&lt;end&gt;</a>.
+Le nom du champ ogr peut être changé avec la variable d&#8217;environnement
+<em>LIBKML_END_FIELD</em>.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt><strong>altitudeMode :</strong></dt>
+<dd><p class="first last">Ce champ de caractère traduit vers le kml la balise
+<a class="reference external" href="http://code.google.com/apis/kml/documentation/kmlreference.html#altitudemode">&lt;altitudeMode&gt;</a>
+ou
+<a class="reference external" href="http://code.google.com/apis/kml/documentation/kmlreference.html#gxaltitudemode">&lt;gx:altitudeMode&gt;</a>.
+Le nom du champ ogr peut être changé avec la variable d&#8217;environnement
+<em>LIBKML_ALTITUDEMODE_FIELD</em>.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt><strong>tessellate :</strong></dt>
+<dd><p class="first last">Ce champ d&#8217;entier traduit vers le kml la balise
+<a class="reference external" href="http://code.google.com/apis/kml/documentation/kmlreference.html#tessellate">&lt;tessellate&gt;</a>
+Le nom du champ ogr peut être changé avec la variable d&#8217;environnement
+<em>LIBKML_TESSELLATE_FIELD</em>.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt><strong>extrude :</strong></dt>
+<dd><p class="first last">Ce champ d&#8217;entier traduit vers le kml la balise
+<a class="reference external" href="http://code.google.com/apis/kml/documentation/kmlreference.html#extrude">&lt;extrude&gt;</a>
+Le nom du champ ogr peut être changé avec la variable d&#8217;environnement
+<em>LIBKML_EXTRUDE_FIELD</em>.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt><strong>visibility :</strong></dt>
+<dd><p class="first last">Ce champ d&#8217;entier traduit vers le kml la balise <a class="reference external" href="http://code.google.com/apis/kml/documentation/kmlreference.html#visibility">&lt;visibility&gt;</a>.
+Le nom du champ ogr peut être changé avec la variable d&#8217;environnement
+<em>LIBKML_VISIBILITY_FIELD</em>.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt><strong>OGR_STYLE :</strong></dt>
+<dd><p class="first last">Ce champ de caractère traduit vers un style de feature, OGR li ce champs
+s&#8217;il n&#8217;y a pas de chaînes de style définie sur la feature.</p>
+</dd>
+</dl>
+</li>
+</ul>
+</div>
+<div class="section" id="geometrie">
+<h2>Géométrie<a class="headerlink" href="#geometrie" title="Lien permanent vers ce titre">¶</a></h2>
+<p>Traduction de la <a class="reference external" href="http://www.gdal.org/ogr/ogr_arch.html#ogr_arch_geometry">Geometry</a>
+d&#8217;OGR vers la géométrie KML est assez simple, avec seulement quelques exceptions.
+Point vers <a class="reference external" href="http://code.google.com/apis/kml/documentation/kmlreference.html#point">&lt;Point&gt;</a>,
+LineString vers <a class="reference external" href="http://code.google.com/apis/kml/documentation/kmlreference.html#linestring">&lt;LineString&gt;</a>,
+LinearRing vers <a class="reference external" href="http://code.google.com/apis/kml/documentation/kmlreference.html#linearring">&lt;LinearRing&gt;</a>,
+et Polygon vers <a class="reference external" href="http://code.google.com/apis/kml/documentation/kmlreference.html#polygon">&lt;Polygon&gt;</a>.</p>
+<p>Dans OGR un polygone contient un tableau de LinearRings, le premier est celui à
+l&#8217;extérieur. KML a la balise <a class="reference external" href="http://code.google.com/apis/kml/documentation/kmlreference.html#outerboundaryis">&lt;outerBoundaryIs&gt;</a>
+et <a class="reference external" href="http://code.google.com/apis/kml/documentation/kmlreference.html#innerboundaryis">&lt;innerBoundaryIs&gt;</a>
+pour différencier les deux. OGR possède plusieurs types Multi des géométries :
+GeometryCollection, MultiPolygon, MultiPoint, et MultiLineString. Quand cela est
+possible, OGR tentera de traduire
+<a class="reference external" href="http://code.google.com/apis/kml/documentation/kmlreference.html#multigeometry">&lt;MultiGeometry&gt;</a>
+vers le type de géométrie OGR la plus précise (MultiPoint, MultiLineString ou
+MultiPolygon), et pas défaut vers GeometryCollection dans le cas de contenu
+mixte.</p>
+<p>Parfois, la géométrie kml couvrira la Dateline, dans des applications comme QGIS
+ou MapServer cela va créer des lignes horizontales sur tout le pourtour du globe.
+En réglant la variable d&#8217;environnement <em>LIBKML_WRAPDATELINE</em> à &#8220;yes&#8221;, contraindra
+le pilote libkml à diviser la géométrie à la Dateline lorsqu&#8217;il est lu.</p>
+</div>
+<div class="section" id="exemple">
+<h2>Exemple<a class="headerlink" href="#exemple" title="Lien permanent vers ce titre">¶</a></h2>
+<p>Le script bash suivant construira un fichier <a class="reference external" href="http://www.gdal.org/ogr/drv_csv.html">csv</a>
+et un fichier <a class="reference internal" href="vrt.html#gdal-ogr-formats-vrt"><em>Virtual Format</em></a>, puis les traduira en KML en utilisant
+<a class="reference internal" href="../ogr2ogr.html#gdal-ogr-ogr2ogr"><em>ogr2ogr</em></a> dans un fichier .kml avec un timestamp et des styles.</p>
+<div class="highlight-python"><pre>#!/bin/bash
+# Copyright (c) 2010, Brian Case
+#
+# Permission is hereby granted, free of charge, to any person obtaining a
+# copy of this software and associated documentation files (the "Software"),
+# to deal in the Software without restriction, including without limitation
+# the rights to use, copy, modify, merge, publish, distribute, sublicense,
+# and/or sell copies of the Software, and to permit persons to whom the
+# Software is furnished to do so, subject to the following conditions:
+#
+# The above copyright notice and this permission notice shall be included
+# in all copies or substantial portions of the Software.
+#
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
+# OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+# THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+# FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
+# DEALINGS IN THE SOFTWARE.
+
+
+icon="http://maps.google.com/mapfiles/kml/shapes/shaded_dot.png"
+rgba33="#FF9900"
+rgba70="#FFFF00"
+rgba150="#00FF00"
+rgba300="#0000FF"
+rgba500="#9900FF"
+rgba800="#FF0000"
+
+function docsv {
+
+    IFS=','
+
+    while read Date Time Lat Lon Mag Dep
+    do
+        ts=$(echo $Date | sed 's:/:-:g')T${Time%%.*}Z
+        rgba=""
+
+        if [[ $rgba == "" ]] &amp;&amp; [[ $Dep -lt 33 ]]
+        then
+            rgba=$rgba33
+        fi
+
+        if [[ $rgba == "" ]] &amp;&amp; [[ $Dep -lt 70 ]]
+        then
+            rgba=$rgba70
+        fi
+
+        if [[ $rgba == "" ]] &amp;&amp; [[ $Dep -lt 150 ]]
+        then
+            rgba=$rgba150
+        fi
+
+        if [[ $rgba == "" ]] &amp;&amp; [[ $Dep -lt 300 ]]
+        then
+            rgba=$rgba300
+        fi
+
+        if [[ $rgba == "" ]] &amp;&amp; [[ $Dep -lt 500 ]]
+        then
+            rgba=$rgba500
+        fi
+
+        if [[ $rgba == "" ]]
+        then
+            rgba=$rgba800
+        fi
+
+
+
+        style="\"SYMBOL(s:$Mag,id:\"\"$icon\"\",c:$rgba)\""
+
+        echo $Date,$Time,$Lat,$Lon,$Mag,$Dep,$ts,"$style"
+    done
+
+}
+
+
+wget http://neic.usgs.gov/neis/gis/qed.asc -O /dev/stdout |\
+tail -n +2 &gt; qed.asc
+
+echo Date,TimeUTC,Latitude,Longitude,Magnitude,Depth,timestamp,OGR_STYLE &gt; qed.csv
+
+docsv &lt; qed.asc &gt;&gt; qed.csv
+
+cat &gt; qed.vrt &lt;&lt; EOF
+&lt;OGRVRTDataSource&gt;
+    &lt;OGRVRTLayer name="qed"&gt;
+        &lt;SrcDataSource&gt;qed.csv&lt;/SrcDataSource&gt;
+        &lt;GeometryType&gt;wkbPoint&lt;/GeometryType&gt;
+        &lt;LayerSRS&gt;WGS84&lt;/LayerSRS&gt;
+        &lt;GeometryField encoding="PointFromColumns" x="Longitude" y="Latitude"/&gt;
+    &lt;/OGRVRTLayer&gt;
+&lt;/OGRVRTDataSource&gt;
+
+EOF
+
+ogr2ogr -f libkml qed.kml qed.vrt</pre>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+
+
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="mdb.html" title="Access MDB databases"
+             >suivant</a></li>
+        <li class="right" >
+          <a href="kml.html" title="KML - Keyhole Markup Language"
+             >précédent</a> |</li>
+        <li><a href="../../index.html">GDAL v1.9.0 documentation</a> &raquo;</li>
+          <li><a href="../index.html" >OGR</a> &raquo;</li>
+          <li><a href="index.html" >Formats vecteur d&#8217;OGR</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+    <a href="http://creativecommons.org/licenses/by/2.0/fr/deed.fr">Licence Creative Common BY</a>
+    <!--
+      &copy; Copyright 2011, Yves Jacolin.-->
+      Créé avec <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0.7.
+    </div>
+  </body>
+</html>

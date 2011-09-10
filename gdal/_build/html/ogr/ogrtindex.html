@@ -1,0 +1,151 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF8" />
+    
+    <title>ogrtindex &mdash; GDAL v1.9.0 documentation</title>
+    <link rel="stylesheet" href="../_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.9.0',
+        COLLAPSE_MODINDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/translations.js"></script>
+    <link rel="top" title="GDAL v1.9.0 documentation" href="../index.html" />
+    <link rel="up" title="OGR" href="index.html" />
+    <link rel="next" title="Formats vecteur d’OGR" href="formats/index.html" />
+    <link rel="prev" title="ogr2ogr" href="ogr2ogr.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="formats/index.html" title="Formats vecteur d’OGR"
+             accesskey="N">suivant</a></li>
+        <li class="right" >
+          <a href="ogr2ogr.html" title="ogr2ogr"
+             accesskey="P">précédent</a> |</li>
+        <li><a href="../index.html">GDAL v1.9.0 documentation</a> &raquo;</li>
+          <li><a href="index.html" accesskey="U">OGR</a> &raquo;</li> 
+      </ul>
+    </div>
+
+
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <h4>Sujet précédent</h4>
+            <p class="topless"><a href="ogr2ogr.html"
+                                  title="Chapitre précédent">ogr2ogr</a></p>
+            <h4>Sujet suivant</h4>
+            <p class="topless"><a href="formats/index.html"
+                                  title="Chapitre suivant">Formats vecteur d&#8217;OGR</a></p>
+            <h3>Cette page</h3>
+            <ul class="this-page-menu">
+              <li><a href="../_sources/ogr/ogrtindex.txt"
+                     rel="nofollow">Montrer la source</a></li>
+            </ul>
+          <div id="searchbox" style="display: none">
+            <h3>Recherche rapide</h3>
+              <form class="search" action="../search.html" method="get">
+                <input type="text" name="q" size="18" />
+                <input type="submit" value="Go" />
+                <input type="hidden" name="check_keywords" value="yes" />
+                <input type="hidden" name="area" value="default" />
+              </form>
+              <p class="searchtip" style="font-size: 90%">
+              Enter search terms or a module, class or function name.
+              </p>
+          </div>
+          <script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="ogrtindex">
+<span id="gdal-ogr-ogrtindex"></span><h1>ogrtindex<a class="headerlink" href="#ogrtindex" title="Lien permanent vers ce titre">¶</a></h1>
+<p>Créer un index de tuile.</p>
+<p><strong>Utilisation :</strong></p>
+<div class="highlight-python"><pre>ogrtindex [-lnum n]... [-lname name]... [-f output_format]
+      [-write_absolute_path] [-skip_different_projection]
+             output_dataset src_dataset...</pre>
+</div>
+<p>Le programme <tt class="docutils literal"><span class="pre">ogrtindex</span></tt> peut être utilisé pour créer des index de tuiles -
+un fichier contenant une liste d&#8217;identification d&#8217;un groupe d&#8217;autre fichiers en
+fonction de leurs étendues spatiales. Cela a d&#8217;abord pour but d&#8217;être utilisé
+avec <a class="reference external" href="http://mapserver.org">MapServer</a> pour l&#8217;accès aux tuiles en
+utilisant le type de connexion ogr.</p>
+<ul class="simple">
+<li><strong>-lnum n :</strong> ajoute le numéro de couche &#8216;n&#8217; de chaque fichier source dans
+l&#8217;index des tuiles.</li>
+<li><strong>-lname nom :</strong> ajoute la couche nommé &#8216;nom&#8217; de chaque fichier source dans
+l&#8217;index des tuiles.</li>
+<li><strong>-f output_format :</strong> sélectionne un nom de format en sortie. Créer un
+shapefile par défaut.</li>
+<li><strong>-tileindex field_name :</strong> le nom à utiliser pour le nom du jeu de données.
+<em>LOCATION</em> par défaut.</li>
+<li><strong>-write_absolute_path :</strong> les noms de fichiers sont écrit avec des chemins
+absolus.</li>
+<li><strong>-skip_different_projection :</strong> seulement les couches avec le même
+référentiel de projection que des couches déjà inséré dans l&#8217;index des tuiles
+seront inséré.</li>
+</ul>
+<p>Si aucun arguments <em>-lnum</em> ou <em>-lname</em> sont données, il est supposé que toutes
+les couches dans les jeux de données sources doivent être ajoutées à l&#8217;index de
+tuile comme enregistrement indépendant.</p>
+<p>Si l&#8217;index de tuile existe déjà, les enregistrements seront ajouté, autrement
+l&#8217;index sera crée.</p>
+<p>C&#8217;est un des défauts de l&#8217;actuel programme <tt class="docutils literal"><span class="pre">ogrtindex</span></tt> qui ne cherche pas à
+copier la définition du système de coordonnées de la source de données vers
+l&#8217;index de tuiles (comme il est attendue par <a class="reference external" href="http://mapserver.org">MapServer</a>
+quand <em>PROJECTION AUTO</em> est utilisé).</p>
+<p>Cet exemple créera un shapefile (tindex.shp) contenant un index de tuiles des
+couches <em>BL2000_LINK</em> dans tous les fichiers NTF dans le répertoire de travail :</p>
+<div class="highlight-python"><pre>% ogrtindex tindex.shp wrk/*.NTF</pre>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+
+
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="formats/index.html" title="Formats vecteur d’OGR"
+             >suivant</a></li>
+        <li class="right" >
+          <a href="ogr2ogr.html" title="ogr2ogr"
+             >précédent</a> |</li>
+        <li><a href="../index.html">GDAL v1.9.0 documentation</a> &raquo;</li>
+          <li><a href="index.html" >OGR</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+    <a href="http://creativecommons.org/licenses/by/2.0/fr/deed.fr">Licence Creative Common BY</a>
+    <!--
+      &copy; Copyright 2011, Yves Jacolin.-->
+      Créé avec <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0.7.
+    </div>
+  </body>
+</html>
