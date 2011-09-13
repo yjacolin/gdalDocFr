@@ -74,8 +74,8 @@ comme enfant immédiat de l'élément *WCS_GDAL* pour être définie en option.
 Time
 -----
 
-À partir de GDAL 1.9.0, ce pilote inclues la gestion expérimentale des serveurs 
-WCS 1.0.0 basé sur le temps. Lors de l'accès initial la dernière position du 
+À partir de GDAL 1.9.0, ce pilote inclus la gestion expérimentale des serveurs 
+WCS 1.0.0 basés sur le temps. Lors de l'accès initial la dernière position du 
 temps offerte sera identifié comme *DefaultTime*. Chaque position de temps 
 disponible pour la couverture sera traité comme sous jeu de données.
 
