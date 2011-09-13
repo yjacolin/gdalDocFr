@@ -8,10 +8,10 @@ Le pilote optionnel WCS pour GDAL permet l'utilisation de couverture dans un
 serveur WCS comme un jeu de données raster. GDAL agit comme un client au serveur 
 WCS.
 
-Accéder à nu serveur WCS est réalisé en créant un fichier xml de description de 
+L'accès à un serveur WCS est réalisé en créant un fichier xml de description du 
 service local ressemblant à quelque chose comme ce qui suit, avec l'url du 
 serveur de couverture, et le nom de la couverture à accéder. Il est important 
-qu'il n'y est pas d'espace ou d'autre contenu avec l'élément <WCS_GDAL>.
+qu'il n'y est pas d'espace ou d'autre caractère superflux contenu dans l'élément <WCS_GDAL>.
 ::
     
     <WCS_GDAL>
@@ -25,8 +25,8 @@ information sera mis en cache dans le fichier de description du service pour
 permettre une ouverture future plus rapide – aucun accès au serveur ne doit 
 être requis tant que l'imagerie est lu pour de future ouverture.
 
-Le pilote WCS doit géré les serveurs WCS 1.0.0 et 1.1.0, mais les serveurs WCS 
-0.7 ne sont pas gérés. N'importe quel format qui est un fichier simple, et qui 
+Le pilote WCS doit gérer les serveurs WCS 1.0.0 et 1.1.0, par contre les serveurs WCS 
+0.7 ne sont pas gérés. N'importe quel format qui est un fichier simple et qui 
 est dans un format géré par GDAL doit fonctionner. Le pilote préférera un format 
 avec l'extension tiff dans le nom, sinon il se rabattra au premier format 
 offert. Les systèmes de coordonnée sont lu à partir du résultat de 
