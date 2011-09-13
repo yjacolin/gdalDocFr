@@ -109,10 +109,11 @@ shapefile et sortir un tiff qui correspond à l'étendue du shapefile.
     dst_ds.GetRasterBand(4).WriteArray( opaque )
 
 
-===== Puis je utiliser gdal_rasterize pour générer des polygones "non solides " ? =====
+Puis je utiliser gdal_rasterize pour générer des polygones "non solides" ?
+===========================================================================
 
-Lisez la page `How gdal_rasterize works <htttp://lists.maptools.org/pipermail/gdal-dev/2006-June/009294.html>`_
- dans les archives de gdal-dev.
+Lisez la page `How gdal_rasterize works <http://lists.maptools.org/pipermail/gdal-dev/2006-June/009294.html>`_ 
+dans les archives de gdal-dev.
 
 Comme Chris Barker le suggère, les possibilités de rastérisation deGDAL sont 
 assez limitées d'un point de vue du style du rendu. D'autres outils peuvent être 
