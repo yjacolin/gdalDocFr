@@ -1,7 +1,7 @@
 .. _`gdal.faq.gdal`:
 
 ===============
-F.A.Q. Rasters
+F.A.Q. Raster
 ===============
 
 Pourquoi gdalwarp ou gdal_merge n'écrit pas la plupart des formats ?
