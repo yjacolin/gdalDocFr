@@ -4,7 +4,7 @@
 gdal_translate
 ===============
 
-Convertit des données raster en différents formats.
+Converti des données raster en différents formats.
 
 **Usage :**
 ::
