@@ -11,7 +11,7 @@ Ce pilote peut se connecter à un service WFS de l'OGC. Il gère les protocoles 
 de compiler le pilote WFS. Habituellement les requêtes WFS renvoie les résultats 
 au format GML, le pilote GML doit donc généralement être définie pour la gestion 
 de la lecture (nécessite donc que GDAL/OGR soit compilé avec la gestion de Xerces 
-ou Expat). Il ets parfois possible d'utiliser un formats sous-jascent quand le 
+ou Expat). Il est parfois possible d'utiliser un formats sous-jascent quand le 
 serveur les gère (tel que OUTPUTFORMAT=json).
 
 Le pilote gère les services en lecture seul, ainsi que ceux en mode 
@@ -35,8 +35,10 @@ octet du fichier) :
         <URL>http://path/to/WFS/service[?OPTIONAL_PARAMETER1=VALUE[&amp;OPTIONNAL_PARAMETER2=VALUE]]</URL>
     </OGRWFSDataSource>
 
-At the first opening, the content of the result of the *GetCapabilities* request will be appended to the file, so that it can be cached
-for later openings of the dataset. The same applies for the *DescribeFeatureType* request issued to discover the field definition of each layer.
+À la première ouverture, le contenu du résultat de la requête *GetCapabilities* sera ajouté au fichier, 
+afin de mettre en cache pour une ouverture ultérieure du jeu de données. La même chose 
+s'applique pour la requête *DescribeFeatureType* réalisée pour découvrir la définition des champs 
+de chaque couche.
 
 Le fichier de description de service possède les éléments additionnels suivants 
 comme enfant immédiat de l'élément ``OGRWFSDataSource`` qui peuvent être définie 
@@ -48,8 +50,8 @@ en option.
   et un mot de passe au serveur distant.
 * **HttpAuth :** peut être BASIC, NTLM ou ANY pour contrôler la méthode 
   d'authentification à utiliser.
-* **Version :**  Set a specific WFS version to use (either 1.0.0 or 1.1.0).
-* **PagingAllowed :** définir à ON su la pagination doit être activée. Voir la 
+* **Version :**  définie une version spécifique du WFS à utiliser (soit 1.0.0 ou 1.1.0).
+* **PagingAllowed :** définir à ON pour que la pagination soit activée. Voir la 
   section :ref:`gdal.ogr.formats.wfs.pagination`.
 * **PageSize :** taille de la page quand la pagination est activée. Voir la 
   section :ref:`gdal.ogr.formats.wfs.pagination`.
