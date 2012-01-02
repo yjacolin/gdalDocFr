@@ -1,6 +1,5 @@
 .. _`gdal.gdal.formats.rasterlite`:
 
-==================================
 Rasterlite - Rasters in SQLite DB
 ==================================
 
@@ -36,7 +35,7 @@ le pilote pour les tuiles internes.
 
 
 Syntaxe de la chaîne de connexion en mode lecture
-==================================================
+--------------------------------------------------
 
 Syntaxe : ``'rasterlitedb_name' or 'RASTERLITE:rasterlitedb_name[,table=raster_table_prefix][,minx=minx_val,miny=miny_val,maxx=maxx_val,maxy=maxy_val][,level=level_number]``
 
@@ -53,7 +52,7 @@ où :
   la pyramide.
 
 Problèmes  de création
-======================
+-----------------------
 
 Le pilote peut créer une nouvelle base de données si nécessaire, créer une 
 nouvelle table raster si nécessaire et copier un jeu de données source dans la 
@@ -73,7 +72,7 @@ plus haut, mais seulement si la base de données n'existe pas déjà. Dans ce ca
 nom de la table raster sera la base du nom de la base de données elle-même.
 
 Options de création
----------------------
+*******************
 
 * **WIPE (=NO by default):** définie à YES pour supprimer toutes les données pré-
   existantes dans la table définie
@@ -92,7 +91,7 @@ Options de création
 * **FILTER :** (pilote EPSILON) identifiant du filtre. 'daub97lift' par défaut.
 
 Aperçues
-=========
+----------
 
 Le pilote gère la construction (si le jeu de données est ouvert en mode update) 
 et la lecture des aperçues internes.
@@ -101,7 +100,7 @@ Si aucun aperçue interne n'est détecté, le pilote tentera d'utiliser des aper
 externes (fichiers .ovr).
 
 Exemples
-=========
+---------
 
 * Accéder à une BdD rasterlite avec une table raster unique :
   ::
@@ -192,7 +191,7 @@ Exemples
 
 
 Voir également
-===============
+---------------
 
 * `Page principale sur Spatialite et Rasterlite <http://www.gaia-gis.it/spatialite>`_
 * `Manuel sur Rasterlite <http://www.gaia-gis.it/spatialite/rasterlite-man.pdf>`_

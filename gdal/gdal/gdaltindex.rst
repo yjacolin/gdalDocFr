@@ -1,6 +1,5 @@
 .. _`gdal.gdal.gdaltindex`:
 
-===========
 gdaltindex
 ===========
 

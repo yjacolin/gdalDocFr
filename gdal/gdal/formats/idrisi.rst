@@ -1,6 +1,5 @@
 .. _`gdal.gdal.formats.idrisi`:
 
-=============================
 RST --- Idrisi Raster Format
 =============================
 

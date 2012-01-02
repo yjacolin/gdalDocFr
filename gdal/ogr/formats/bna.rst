@@ -1,6 +1,5 @@
 .. _`gdal.ogr.formats.bna`:
 
-================
 BNA - Atlas BNA
 ================
 
@@ -42,7 +41,7 @@ multipolygones dans le modèle Simple Feature d'OGR.
 Les ellipses et cercles sont transformés en polygone avec 360 points.
 
 Problèmes lors de la création
-==============================
+------------------------------
 
 Lors de l'export, toutes les couches sont écrites dans un seul fichier BNA. La 
 mise à jour de fichiers existants n'est pas gérée pour l'instant.
@@ -82,7 +81,7 @@ données) :
   nombre de décimal pour les coordonnés. 10 par défaut.
 
 Exemple
-========
+-------
 
 La commande ''ogrinfo'' peut être utilisée pour faire un dump du contenu des fichiers de données BNA :
 ::
@@ -95,7 +94,7 @@ La commande ''ogr2ogr'' peut être utilisée pour réaliser une traduction du fo
     ogr2ogr -f BNA -dsco "NB_IDS=2" -dsco "ELLIPSES_AS_ELLIPSES=NO" output.bna input.bna
 
 Voir également
-===============
+---------------
 
 * `Description du format de fichier BNA <http://www.softwright.com/faq/support/boundary_file_bna_format.html>`_
 * `Une autre description du format de fichier BNA  <http://64.145.236.125/forum/topic.asp?topic_id=1930&forum_id=1&Topic_Title=how+to+edit+*.bna+files%3F&forum_title=Surfer+Support&M=False>`_

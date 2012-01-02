@@ -1,6 +1,5 @@
 .. _`gdal.gdal.gdal_contour`:
 
-=============
 gdal_contour
 =============
 

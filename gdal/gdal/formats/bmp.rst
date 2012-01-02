@@ -1,6 +1,5 @@
 .. _`gdal.gdal.formats.bmp`:
 
-====================================================
 BMP --- Microsoft Windows Device Independent Bitmap
 ====================================================
 

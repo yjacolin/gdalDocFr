@@ -1,6 +1,5 @@
 .. _`gdal.ogr.formats.sua`:
 
-======================================================
 SUA - Tim Newport-Peace's Special Use Airspace Format
 ======================================================
 
@@ -15,7 +14,7 @@ type Polygon et les champs suivants : TYPE, CLASS, TITLE, TOPS, BASE.
 Les géométries Airspace faites d'arcs seront téssélées.
 
 Voir également
-===============
+--------------
 
 * `Description du format .SUA <http://soaring.gahsys.com/TP/sua.html>`_
 

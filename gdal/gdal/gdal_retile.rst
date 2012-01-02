@@ -1,6 +1,5 @@
 .. _`gdal.gdal.gdal_retile`:
 
-===============
 gdal_retile.py
 ===============
 
@@ -8,7 +7,7 @@ gdal_retile.py
 construit les niveaux de la pyramide tuilée.
 
 Usage
-======
+------
 
 Usage :
 ::
@@ -25,7 +24,7 @@ Usage :
                -targetDir TileDirectory input_files
 
 Description
-============
+-------------
 
 La commande recréera les tuiles d'un ensemble de tuiles en entrée. Toutes les 
 tuiles en entrée doivent être géoréférencées dans le même système de coordonnées 

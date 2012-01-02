@@ -1,6 +1,5 @@
 .. _`gdal.ogr.formats.mysql`:
 
-======
 MySQL
 ======
 
@@ -33,7 +32,7 @@ la chaine "OGRSQL" à la méthode *ExecuteSQL()*, en tant que nom du dialecte
 SQL.
 
 Avertissements
-===============
+--------------
 
 * Dans le cas d'une couche définie par une commande SQL, les champs soit qui 
   sont nommés "OGC_FID" soit ceux qui sont définie NOT NULL, ceux qui sont une 
@@ -72,7 +71,7 @@ Avertissements
   than 'max_allowed_packet' bytes*, vous devez augmenter ce paramètre.
 
 Problèmes de création
-======================
+---------------------
 
 Le pilote MySQL ne gère pas la création de nouveaux jeu de données (une base de 
 données dans MySQL), mais il permet la création de nouvelles couches dans une 
@@ -91,7 +90,7 @@ moment.
 Le pilote MySQL n'est pas transactionnel pour le moment.
 
 Options de création de couche
-==============================
+-----------------------------
 
 * **OVERWRITE :** elle peut être définie à "YES" pour forcer les couches 
   existantes de même nom à être détruite avant la création de la couche demandée.

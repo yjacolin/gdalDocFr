@@ -1,8 +1,8 @@
 .. _`gdal.gdal.index`:
 
-======
-GDAL
-======
+===================
+Les commandes GDAL
+===================
 
 .. toctree::
     :maxdepth: 2

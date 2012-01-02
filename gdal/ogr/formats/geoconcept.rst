@@ -1,6 +1,5 @@
 .. _`gdal.ogr.formats.geoconcept`:
 
-======================================================
 GeoConcept Export (disponible à partir de GDAL 1.6.0)
 ======================================================
 
@@ -13,7 +12,7 @@ comme un jeu de données comprenant plusieurs couches. Actuellement, le pilote
 ne gère que les multi-polygones, les lignes et les points.
 
 Le format "fichier texte" de GeoConcept (GXT)
-==============================================
+----------------------------------------------
 
 Parmi ses formats d'import/export, GeoConcept propose un format texte simple 
 nommé .GXT (auparavant .TXT), qui peut contenir des objets de différents 
@@ -26,7 +25,7 @@ Les définitions de champs sont stockés dans un fichier .GCT associé, qui n'es
 utilisé que pour la création.
 
 Problèmes de création
-======================
+-----------------------
 
 Les fichiers GeoConcept peuvent contenir différentes sortes de géométrie (une 
 par couche). Ceci rend très difficile la traduction d'une géométrie multiple 
@@ -47,7 +46,7 @@ Les champs (fichier .GCT) connaissent un certain nombre de contraintes (TODO) :
 Le pilote OGR pour GeoConcept ne gère pas les fonctions de suppression.
 
 Options de création de jeux de données
-=======================================
+---------------------------------------
 
 *EXTENSION=TXT|GXT* : indique l'extension de l'export GeoConcept.
 
@@ -95,7 +94,7 @@ Les règles suivantes s'appliquent dans la section "champs" :
   soit sur la base du nom de la couche, soit en utilisant l'option ''-nln''.
 
 Options de création de couche
-==============================
+------------------------------
 
 FEATURETYPE=TYPE.SUBTYPE : définit les éléments à créer. TYPE correspond à un 
 des noms (Name) présents dans le fichier .GCT pour une section "type". SUBTYPE 
@@ -107,10 +106,10 @@ At the present moment, coordinates are written with 2 decimales for cartesian
 +geographical spatial reference systems.
 
 Exemples
-=========
+---------
 
 Exemple de fichier .GCT
-------------------------
+************************
 
   ::
     
@@ -183,7 +182,7 @@ Exemple de fichier .GCT
     //#ENDSECTION CONFIG
 
 Exemple de fichier .GXT
-------------------------
+************************
   ::
     
     //$DELIMITER "	"
@@ -201,7 +200,7 @@ Exemple de fichier .GXT
  
 
 Exemple d'utilisation
-----------------------
+**********************
 
   Création d'un GXT :
   ::
@@ -220,7 +219,7 @@ Exemple d'utilisation
     ogr2ogr -f "MapInfo File" -dsco FORMAT=MIF tile.mif tile.gxt TILE.TILE
 
 Voir aussi
-==========
+-----------
 
 * `Site officiel de GeoConcept <http://www.geoconcept.com>`_
 

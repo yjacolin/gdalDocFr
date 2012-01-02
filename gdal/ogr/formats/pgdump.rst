@@ -1,6 +1,5 @@
 .. _`gdal.ogr.formats.pgdump`:
 
-========================
 Dump SQL pour PostgreSQL 
 ========================
 
@@ -19,10 +18,10 @@ de définir /vsistdout/ comme fichier en sortie pour tout envoyer dans la sortie
 standard.
 
 Options de création 
-====================
+-------------------
 
 Options de création de jeu de données
----------------------------------------
+**************************************
 
 * **LINEFORMAT :** par défaut les fichiers sont créés avec la convention de 
   terminaison de ligne de la plateforme locale (CR/LF sous win32 ou LF sur tous 
@@ -31,7 +30,7 @@ Options de création de jeu de données
   LINEFORMAT qui peut avoir les valeurs **CRLF** (format DOS) ou **LF** (format Unix). 
 
 Options de création de couche
--------------------------------
+******************************
 
 * **GEOM_TYPE :** l'option de création de couche *GEOM_TYPE* peut être 
   définie à *Geometry*, "geography" (PostGIS >= 1.5), pour forcer le type de la géométrie 
@@ -80,14 +79,14 @@ Options de création de couche
   remplie avec le SRID définie).
 
 Variables d'environnement
---------------------------
+**************************
 
 * **PG_USE_COPY :** peut être à "YES" pour utiliser COPY lors de l'insertion des 
   données dans Postgresql. COPY est moins robuste que INSERT, mais est 
   significativement plus rapide.
 
 Exemple
---------
+********
 
 * translation simple d'un shapefile vers PostgreSQL dans un fichier abc.sql. 
   la table 'abc' sera créée avec les features à partir de abc.shp et les données 

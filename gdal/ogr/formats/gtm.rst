@@ -1,6 +1,5 @@
 .. _`gdal.ogr.formats.gtm`:
 
-=====================
 GTM - GPS TrackMaker
 =====================
 
@@ -22,7 +21,7 @@ n'est pas le cas une alerte sera envoyée).
 Le pilote OGR gère seulement les POINT, LINESTRING, et MULTILINESTRING.
 
 Exemple
-=========
+--------
 
 * La commande ``ogrinfo`` peut être utilisée opur dumper le contenu d'un fichier 
   de données GTM :
@@ -46,7 +45,7 @@ Exemple
     ou MULTILINESTRING.
 
 Voir également
-===============
+---------------
 
 * `Home page pour le Programme GPS TrackMaker <http://www.gpstm.com/>`_
 * `Documentation du format GTM 211 <http://www.gpstm.com/download/GTM211_format.pdf>`_

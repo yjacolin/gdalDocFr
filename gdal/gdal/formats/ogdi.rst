@@ -1,6 +1,5 @@
 .. _`gdal.gdal.formats.ogdi`:
 
-===================
 OGDI -- Pont OGDI
 ===================
 
@@ -83,7 +82,8 @@ les couches disponibles pour un accès direct.
         SUBDATASET_4_NAME=gltp:/adrg/usr4/mpp1/adrg/TPUS0101:"TPUS0102.IMG":Image
         SUBDATASET_4_DESC=TPUS0102.IMG as Image
 
-**Lisez également :**
+Lisez également
+---------------
 
 * `ogdi.sourceforge.net <http://ogdi.sourceforge.net/>`_
 

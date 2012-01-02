@@ -1,6 +1,5 @@
 .. _`gdal.gdal.rgb2pct`:
 
-===========
 rgb2pct.py
 ===========
 
@@ -34,7 +33,7 @@ Floyd-Steinberg pour optimiser la qualité visuelle de l'image en sortie.
     seulement si GDAL a été compilé avec le support de Python.
 
 Exemple
-=========
+--------
 
 Si vous désirez créer la palette à la main, le format le plus simple est 
 probablement le format VRT de GDAL. Dans l'exemple suivant un VRT a été créé 
@@ -59,7 +58,7 @@ RVB 238/238/238/255, 237/237/237/255, 236/236/236/255 et 229/229/229/255.
 
 .. _`gdal.gdal.pct2rgb`:
 
-===========
+
 pct2rgb.py
 ===========
 

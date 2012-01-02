@@ -1,6 +1,5 @@
 .. _`gdal.gdal.gdal_translate`:
 
-===============
 gdal_translate
 ===============
 

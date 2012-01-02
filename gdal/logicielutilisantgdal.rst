@@ -1,6 +1,5 @@
 .. _`gdal.logicielutilisantgdal`:
 
-========================
 Logiciel utilisant GDAL
 ========================
 

@@ -1,6 +1,5 @@
 .. _`gdal.ogr.formats.ingres`:
 
-======
 INGRES
 ======
 
@@ -44,7 +43,7 @@ Il est prévue dans le futur qu'un nouvel ensemble de type spatial conforme à
 l'OGC soit géré.
 
 Avertissements
-===============
+---------------
 
 * Les types spéciaux CIRCLE et ICIRCLE ne sont pas géré pour l'instant en lecture.
 * Aucun index spatial rapide n'est utilisé lors de la lecture, les filtres 
@@ -53,7 +52,7 @@ Avertissements
 * Il n'y a pas de gestion pour les systèmes de coordonnées.
 
 Problèmes lors de la création
-==============================
+-------------------------------
 
 Le pilote INGRES ne gère pas la création de nouveaux jeux de données (une base 
 de données dans INGRES) mais il permet la création de nouvelles couches (tables) 
@@ -72,7 +71,7 @@ dans une instance de base de données existante.
   auto-intersection de polyligne, et auto-intersection de polygones.
 
 Options de création de couche
-==============================
+------------------------------
 
 * **OVERWRITE :** il peut être à "YES" pour forcer une couche existante au 
   nom désiré à être détruite avant la création de la couche voulues.

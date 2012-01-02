@@ -1,11 +1,10 @@
 .. _`gdal.ogr.formats.ao`:
 
-==================
 ArcObjects d'ESRI
 ==================
 
 Aperçu
-=======
+-------
 
 Le pilote ArcObjects d'OGR fournit un accès en lecture seule vers les sources de 
 données ArcObjects. Puisqu'il utilise le SDK d'ESRI, il est nécessaire d'avoir 
@@ -38,7 +37,7 @@ l'API FileGeoDatabase ouverte.
 
 
 Dépendances
-=============
+-----------
 
 * Une licence ArcView ou ArcEngine (ou supérieur) - est nécessaire pour que cela 
   fonctionne.
@@ -48,7 +47,7 @@ Dépendances
   cependant le développeur n'a pas accès à ce SDK et n'a donc pas pu l'essayer.
 
 Usage
-=====
+-----
 
 Préfixé la source de données avec "AO:" 
 
@@ -70,7 +69,7 @@ Préfixé la source de données avec "AO:"
     ogrinfo -al AO:"C:\somefolder\MySDEConnection.sde"
 
 Notes de compilation
-=====================
+---------------------
 
 Lisez :ref:`gdal.install`. Vous trouverez une section similaire dans *nmake.opt* 
 pour ArcObjects.
@@ -85,7 +84,7 @@ et exécutez :
     nmake /f makefile.vc plugin-install
 
 Problèmes connus
-=================
+----------------
 
 Les champs *date* et *blob* n'ont pas été implémentés. C'est probablement juste 
 quelques lignes de code, mais le développeur n'a pas eut assez de temps.

@@ -1,13 +1,12 @@
 .. _`gdal.gdal.formats.divers_formats`:
 
-===============
 Formats divers
 ===============
 
 .. _`gdal.gdal.formats.divers_formats.aaigrid`:
 
 AAIGrid -- Arc/Info ASCII Grid
-===============================
+-------------------------------
 
 Géré pour l'accès en lecture et écriture, incluant la lecture d'une 
 transformation affine de géoréférencement et certaines projections. Ce format 
@@ -51,7 +50,7 @@ Le pilote AIG est également disponible pour le format de grille binaire d'Arc/I
 .. _`gdal.gdal.formats.divers_formats.ace2`:
 
 ACE2 -- ACE2
-=============
+-------------
 
 (à partir de GDAL >= 1.9.0)
 
@@ -67,7 +66,7 @@ de type Int16, alors que les données d'altitude sont retournées comme Float32.
 .. _`gdal.gdal.formats.divers_formats.adrgarc`:
 
 ADRG/ARC Digitized Raster Graphics (.gen/.thf)
-================================================
+-----------------------------------------------
 
 Géré par GDAL en lecture. La création est possible mais doit être considérée 
 comme expérimentale et une manière de tester l'accès en lecture (bien que les 
@@ -93,7 +92,7 @@ Voyez également : Les `spécification ADRG <http://earth-info.nga.mil/publicati
 .. _`gdal.gdal.formats.divers_formats.aig`:
 
 AIG -- Arc/Info Binary Grid
-============================
+----------------------------
 
 Géré par GDAL pour l'accès en lecture. Ce format est le format binaire 
 interne pour les grilles Arc/Info, et prend la forme de répertoire de niveau de 
@@ -120,7 +119,7 @@ mainteneur,  warmerdam@pobox.com.
 .. _`gdal.gdal.formats.divers_formats.bsb`:
 
 Format BSB -- Maptech/NOAA BSB Nautical Chart
-==============================================
+----------------------------------------------
 
 Le format BSB Nautical Chart est géré en accès en lecture, incluant la lecture 
 de la table de couleur et les points de références (comme les points d'amer). 
@@ -144,7 +143,7 @@ est *RGB*. Voici d'autres valeurs qui peuvent être utilisées : *DAY*, *DSK*,
 .. _`gdal.gdal.formats.divers_formats.bt`:
 
 Format BT -- VTP .bt Binary Terrain
-=====================================
+------------------------------------
 
 Le format .BT est utilisé pour les donnés d'élévation dans le logiciel VTP. Le 
 pilote inclut la gestion pour la lecture et l'écriture du format .bt 1.3 
@@ -169,7 +168,7 @@ http://www.vterrain.org/Implementation/Formats/BT.html.
 .. _`gdal.gdal.formats.divers_formats.ceos`:
 
 CEOS -- CEOS Image
-===================
+-------------------
 
 C'est un simple lecteur pour les fichiers images ceaos. Pour l'utiliser, 
 sélectionné le fichier d'imagerie principale. Ce pilote lit seulement les 
@@ -187,7 +186,7 @@ de données SAR CEOS.
 .. _`gdal.gdal.formats.divers_formats.dods`:
 
 DODS/OPeNDAP – lecture des rasters à partir de serveurs DODS/OPeNDAP
-======================================================================
+---------------------------------------------------------------------
 
 Gestion pour l'accès en lecture des serveurs DODS/OPeNDAP. Envoie l'URL 
 DODS/OPeNDAP au pilote tel que vous l'aurez accéder pour un fichier local. L'URL 
@@ -199,7 +198,7 @@ et la longitude. Lisez le fichier README.DODS pour de plus amples informations.
 .. _`gdal.gdal.formats.divers_formats.doq1`:
 
 DOQ1 -- Première génération USGS DOQ
-=======================================
+-------------------------------------
 
 Gestion de l'accès en lecture, incluant la lecture d'une transformation du 
 géoréférencement affine, et la capture de la projection. Ce format est le vieux 
@@ -210,7 +209,7 @@ format, non étiqueté DOQ (Digital Ortho Quad) de l'USGS.
 .. _`gdal.gdal.formats.divers_formats.doq2`:
 
 DOQ2 – Nouveau USGS DOQ étiqueté
-====================================
+----------------------------------
 
 Gestion pour l'accès en lecture, incluant la lecture  d'une transformation du 
 géoréférencement affine, et la capture de la projection et la lecture des autres 
@@ -227,7 +226,7 @@ http://rockyweb.cr.usgs.gov/nmpstds/doqstds.html
 .. _`gdal.gdal.formats.divers_formats.e00grid`:
 
 E00GRID -- Arc/Info Export E00 GRID
-====================================
+------------------------------------
 
 (GDAL >= 1.9.0)
 
@@ -242,7 +241,7 @@ Le pilote a été testé avec des jeux de données tels que ceux disponibles sur
 .. _`gdal.gdal.formats.divers_formats.ehdr`:
 
 EHdr -- ESRI .hdr Labelled
-===========================
+---------------------------
 
 GDAL gère la lecture et l'écriture du format d'étiquette .hdr d'ESRI, souvent 
 appelé format BIL d'ESRI. Les types de données raster d'entier en 8, 16 et 32 
@@ -288,7 +287,7 @@ Lisez également :
 .. _`gdal.gdal.formats.divers_formats.envi`:
 
 ENVI - ENVI .hdr Labelled Raster
-=================================
+--------------------------------
 
 GDAL gère certaines variations de fichiers raster brute avec un fichier.hdr de 
 styles ENVI associés décrivant le format. Pour sélectionner un fichier raster 
@@ -319,7 +318,7 @@ Options de création :
 .. _`gdal.gdal.formats.divers_formats.envisat`:
 
 Envisat -- Envisat Image Product
-==================================
+----------------------------------
 
 GDAL gère le format du produit Envisat en accès en lecture. Tous les types 
 d'échantillon sont gérés. Les fichiers avec deux jeux de données de mesures 
@@ -345,7 +344,7 @@ en utilisant le domaine de métadonnées "RECORDS".
 .. _`gdal.gdal.formats.divers_formats.fits`:
 
 FITS -- Flexible Image Transport System
-=======================================
+----------------------------------------
 
 FITS est un format utilisé principalement par les astronomes, mais c'est un 
 format relativement simple qui gère les types d'images arbitraires et les images 
@@ -376,7 +375,7 @@ des données à partir de/vers le fichier.
 .. _`gdal.gdal.formats.divers_formats.grssgrd`:
 
 GRASSASCIIGrid -- GRASS ASCII Grid
-===================================
+-----------------------------------
 
 (GDAL >= 1.9.0)
 
@@ -396,7 +395,7 @@ sont géré pour l'instant).
 .. _`gdal.gdal.formats.divers_formats.gsag`:
 
 GSAG -- Golden Software ASCII Grid File Format
-==============================================
+-----------------------------------------------
 
 C'est la version basé sur l'ASCII (lisible par un être humain) d'un des formats 
 raster utilisé par les produits de Golden Software (tels que ceux de la série 
@@ -409,7 +408,7 @@ couleur, les méta-données, et les formes ne sont pas gérés.
 .. _`gdal.gdal.formats.divers_formats.gsbg`:
 
 GSBG -- Golden Software Binary Grid File Format
-================================================
+-----------------------------------------------
 
 C'est la version binaire (non lisible par un être humain) d'un des formats 
 raster utilisés par les produits de Golden Software (tels que ceux de la série 
@@ -423,7 +422,7 @@ gérés.
 .. _`gdal.gdal.formats.divers_formats.gs7bg`:
 
 GS7BG -- Golden Software Surfer 7 Binary Grid File Format
-==========================================================
+----------------------------------------------------------
 
 C'est la version binaire (non lisible par un être humain) d'un des formats 
 raster utilisés par les produits de Golden Software (tels que ceux de la série 
@@ -436,7 +435,7 @@ est géré en lecture seule.
 .. _`gdal.gdal.formats.divers_formats.gxf`:
 
 GXF -- Grid eXchange File
-==========================
+-------------------------
 
 C'est un format d'échange de raster diffusé par Geosoft, et en fait un standard 
 dans le champ de la gravité/magnétique. Le format est géré en lecture et 
@@ -455,7 +454,7 @@ http://home.gdal.org/projects/gxf/index.html
 .. _`gdal.gdal.formats.divers_formats.ida`:
 
 IDA -- Analyse et affichage d'image
-===================================
+-----------------------------------
 
 GDAL gère la lecture et l'écriture des images IDA avec quelques limitations. Les 
 images IDA sont les images du format de WinDisp 4. Les fichiers ont toujours 
@@ -481,7 +480,7 @@ re-échantillonée vers les valeurs brutes originales pour analyse.
 .. _`gdal.gdal.formats.divers_formats.jdem`:
 
 JDEM -- Japanese DEM (.mem)
-=============================
+---------------------------
 
 GDAL inclut la gestion de la lecture pour les fichiers DEM Japonais, ayant 
 normalement l'extension .mem. Ces fichiers sont un produit de la Japanese 
@@ -500,7 +499,7 @@ http://www.gsi.go.jp/ENGLISH/
 .. _`gdal.gdal.formats.divers_formats.lan`:
 
 LAN -- Erdas 7.x .LAN et .GIS
-===============================
+------------------------------
 
 GDAL gère la lecture des fichiers raster Erdas 7.x .LAN et GIS. Pour l'instant 
 les types de données des pixels de 4 bits, 8 bits et 16 bits sont gérés pour la 
@@ -523,7 +522,7 @@ Le développement de ce pilote a été financé par Kevin Flanders de PeopleGIS
 .. _`gdal.gdal.formats.divers_formats.mff`:
 
 MFF -- Vexcel MFF Raster
-=========================
+-------------------------
 
 GDAL inclut la gestion de la lecture, la mise à jour et la création du format 
 raster MFF de Vexcel. Les jeux de données MFF consistent en un fichier d'en-tête 
@@ -555,7 +554,7 @@ qui peut prendre la valeur de LSB (Integer -- little endian), et MSB (Motorola
 .. _`gdal.gdal.formats.divers_formats.ndf`:
 
 NDF -- NLAPS Data Format
-========================
+------------------------
 
 GDAL a une gestion limitée des fichiers de Format de Données NLAPS. C'est un 
 format d'abord   utilisé par le Centre de Données Eros pour la distribution des 
@@ -576,7 +575,7 @@ http://landsat.usgs.gov/documents/NLAPSII.pdf
 .. _`gdal.gdal.formats.divers_formats.gmt`:
 
 GMT -- GMT Compatible netCDF
-=============================
+----------------------------
 
 GDAL a une gestion limitée pour la lecture et l'écriture des fichies grid de 
 netCDF. Les fichiers netCDF qui ne sont pas reconnus comme grilles (il manque 
@@ -604,7 +603,7 @@ La gestion de netCDF dans GDAL est optionnelle et n'est pas compilée par défau
 .. _`gdal.gdal.formats.divers_formats.paux`:
 
 PAux -- PCI .aux Labelled Raw Format
-=====================================
+------------------------------------
 
 GDAL inclut un développement partiel des fichiers rasters brutes étiquetées .aux 
 pour la lecture, l'écriture et la création. Pour ouvrir un fichier étiquetté 
@@ -616,7 +615,7 @@ de données (8U, 16U, 16S, et 32R) sont gérés. Pour l'instant, le
 géo-référencement, les projections et les autres méta-données sont ignorés.
 
 Options de création
---------------------
+********************
 
 * **INTERLEAVE=PIXEL/LINE/BAND :** établit l'entrelacement de la sortie, BAND 
   par défaut.
@@ -628,7 +627,7 @@ Voyez également : `Description du format .aux de PCI <http://www.pcigeomatics.c
 .. _`gdal.gdal.formats.divers_formats.pcraster`:
 
 PCRaster raster file format
-============================
+----------------------------
 
 GDAL inclut la gestion de la lecture et l'écriture de fichiers raster PCRaster. 
 PCRaster est un système de modélisation dynamique pour des modèles de simulation 
@@ -697,7 +696,7 @@ Environmental Software company website.
 .. _`gdal.gdal.formats.divers_formats.png`:
 
 PNG -- Portable Network Graphics
-=================================
+---------------------------------
 
 GDAL inclut une gestion de la lecture et de la création des fichiers .png. Les 
 fichiers en nuance de gris, pseudo-couleur, avec une palette, RVB et RVBA sont 
@@ -741,7 +740,7 @@ libpng. Plus d'information est disponible sur http://www.libpng.org/pub/png.
 .. _`gdal.gdal.formats.divers_formats.pnm`:
 
 PNM -- Netpbm (.pgm, .ppm)
-===========================
+--------------------------
 
 GDAL inclut la gestion en lecture, et création des fichiers compatibles .pgm 
 (nuance de gris), et .ppm (couleur RVB) avec l'outil Netpbm. Seul le format 
@@ -761,7 +760,7 @@ Les fichiers Netpbm peuvent être créés avec le type PNM.
 .. _`gdal.gdal.formats.divers_formats.rpftoc`:
 
 Raster Product Format/RPF (a.toc)
-=================================
+---------------------------------
 
 C'est un lecteur (et seulement en lecture) de produits RPF, comme CADRG ou CIB 
 qui utilise un fichier de contenu - *A.TOC* - à partir d'un échange RPF, et 
@@ -821,7 +820,7 @@ Voir également :
 .. _`gdal.gdal.formats.divers_formats.sar_ceos`:
 
 SAR_CEOS -- CEOS SAR Image
-============================
+---------------------------
 
 C'est un lecteur en lecture seul pour les fichiers images CEOS SAR. Pour 
 l'utiliser, sélectionner le fichier image principal.
@@ -877,7 +876,7 @@ L'identité des bandes est également reflétée dans les métas-données.
 .. _`gdal.gdal.formats.divers_formats.ctg`:
 
 CTG -- USGS LULC Composite Theme Grid
-======================================
+---------------------------------------
 
 (GDAL >= 1.9.0)
 
@@ -907,7 +906,7 @@ sur le site USGS.
 .. _`gdal.gdal.formats.divers_formats.dimap`:
 
 DIMAP -- Spot DIMAP
-====================
+-------------------
 
 C'est un pilote en lecture seul pour les images décrites Spot DIMAP. Pour 
 l'utiliser, sélectionnez le fichier METADATA.DIM dans le répertoire du produit, 
@@ -929,7 +928,7 @@ d'obtenir cette information.
 .. _`gdal.gdal.formats.divers_formats.saga`:
 
 SDAT -- SAGA GIS Binary Grid File Format
-=========================================
+-----------------------------------------
 
 (à partir de GDAL 1.7.0)
 
@@ -957,7 +956,7 @@ grilles SAGA qui ont été écrite TOPTOBOTTOM.
 .. _`gdal.gdal.formats.divers_formats.sdts`:
 
 SDTS -- USGS SDTS DEM
-======================
+----------------------
 
 GDAL inclut la gestion de la lecture des DEM formatés en USGS SDTS. Les fichiers 
 DEM de l'USGS sont toujours renvoyé avec un type de données entier de 16 bite 
@@ -977,7 +976,7 @@ ou des mètres (« m »).
 .. _`gdal.gdal.formats.divers_formats.sgi`:
 
 SGI - SGI Image Format
-=======================
+-----------------------
 
 Le pilote SGI gère pour l'instant la lecture et l'écriture des fichiers images 
 SIG.
@@ -1000,7 +999,7 @@ Bourke.
 .. _`gdal.gdal.formats.divers_formats.snodas`:
 
 SNODAS -- Snow Data Assimilation System
-========================================
+----------------------------------------
 
 (À partir de GDAL >= 1.9.0)
 
@@ -1015,7 +1014,7 @@ fournir à GDAL est le fichier.Hdr.
 .. _`gdal.gdal.formats.divers_formats.gen`:
 
 Standard Product Format (ASRP/USRP) (.gen)
-===========================================
+-------------------------------------------
 
 (à partir de GDAL 1.7.0)
 
@@ -1034,7 +1033,7 @@ palette et un géoéréferencement.
 .. _`gdal.gdal.formats.divers_formats.srtmhgt`:
 
 SRTMHGT - SRTM HGT Format
-==========================
+--------------------------
 
 Le pilote SRTM HGT gère aujourd'hui la lecture des fichiers SRTM-3 et SRTM-1 V2 
 (HGT).
@@ -1054,7 +1053,7 @@ la taille, et les limites doivent être appropriées pour une cellule.
 .. _`gdal.gdal.formats.divers_formats.ecrgtoc`:
 
 ECRG Table Of Contents (TOC.xml)
-================================
+--------------------------------
 
 À partir de GDAL 1.9.0
 
@@ -1075,7 +1074,7 @@ Résultat de la commande ``gdalinfo`` sur un fichier TOC.xml :
     SUBDATASET_1_DESC=ECRG:FalconView
 
 Voir également
----------------
+***************
 
 * :ref:`gdal.gdal.formats.nitf` : format des cadres ECRG ;
 * `MIL-PRF-32283 <http://www.everyspec.com/MIL-PRF/MIL-PRF+%28030000+-+79999%29/MIL-PRF-32283_26022/">`_ : spécification des produits ECRG.
@@ -1085,7 +1084,7 @@ Voir également
 .. _`gdal.gdal.formats.divers_formats.eir`:
 
 EIR -- Erdas Imagine Raw
-=========================
+-------------------------
 
 GDAL gère le format Erdas Imagine Raw pour l'accès en lecture incluant les 
 entiers non signés 1, 2, 4, 8, 16 et 32 bit, les entiers signés 16 et 32 bit et 
@@ -1102,7 +1101,7 @@ brutes réels peuvent avoir l'extension .bl.
 .. _`gdal.gdal.formats.divers_formats.wld`:
 
 WLD -- ESRI World File
-=======================
+-----------------------
 
 Un fichier world file est un fichier texte ASCII consistant à 6 valeurs séparées 
 par des nouvelles lignes. Le format est :
@@ -1135,7 +1134,7 @@ fournit.
 .. _`gdal.gdal.formats.divers_formats.xpm`:
 
 XPM - X11 Pixmap
-===================
+-----------------
 
 GDAL inclut la gestion pour la lecture et l'écriture des fichiers image XPM 
 (Format Pixmap X11). Ceux-ci sont des images à une bande de cartes de couleur 
@@ -1153,7 +1152,7 @@ de gris, et les tables de couleurs seront réduites à 70 couleurs automatiqueme
 .. _`gdal.gdal.formats.divers_formats.hdr`:
 
 GenBin - Binaire Générique (étiqueté .hdr)
-=============================================
+------------------------------------------
 
 Ce pilote gère la lecture des fichiers "Binaire Générique" étiquetés avec un 
 fichier .hdr mais distinct du format plus commun d'ESRI étiqueté .hdr  (pilote 
@@ -1178,7 +1177,7 @@ gérés lorsqu'ils sont fournis.
 .. _`gdal.gdal.formats.divers_formats.gff`:
 
 GFF - Sandia National Laboratories GSAT File Format
-===================================================
+----------------------------------------------------
 
 Le pilote GDAL en lecture seul a été pensé pour fournir un accès aux données 
 traitées à partir des différents capteurs expérimentaux des Laboratoires 
@@ -1201,7 +1200,7 @@ L'extension pour les formats GFF est .gff.
 .. _`gdal.gdal.formats.divers_formats.zmap`:
 
 ZMap -- ZMap Plus Grid
-======================
+-----------------------
 
 (à partir de GDAL >= 1.9.0)
 

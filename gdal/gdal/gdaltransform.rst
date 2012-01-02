@@ -1,6 +1,5 @@
 .. _`gdal.gdal.gdaltransform`:
 
-===============
 gdaltransform
 ===============
 
@@ -16,7 +15,7 @@ Transforme des coordonnées
         [srcfile [dstfile]]
 
 Description
-============
+------------
 
 La commande ''gdaltransform'' reprojete une liste de coordonnées vers n'importe 
 quelle projection gérée, incluant les transformations basées sur les points 
@@ -62,7 +61,7 @@ sur cette image. Si un fichier sorti est fourni, l'output est en coordonnées
 pixel/ligne sur cette image.
 
 Exemple de reprojection
-=========================
+------------------------
 
 Simple reprojection d'un système de coordonnées projeté à un autre :
 ::
@@ -77,7 +76,7 @@ Lambert 72" :
     244510.77404604 166154.532871342 -1046.79270555763
 
 Exemple d'image RPC
-======================
+--------------------
 
 La commande suivante demande une transformation basée sur des RPC en utilisant 
 le modèle RPC associé avec le fichier nommé. Parce que l'option *-i* (inverse) est 

@@ -1,13 +1,12 @@
 .. _`gdal.gdal.gdal_proximity`:
 
-================
 gdal_proximity
 ================
 
 produit une carte raster de proximité.
 
 Usage
-=====
+------
 ::
     
     gdal_proximity.py srcfile dstfile [-srcband n] [-dstband n] 
@@ -17,7 +16,7 @@ Usage
                   [-maxdist n] [-nodata n] [-fixed-buf-val n]
 
 Description
-============
+------------
 
 Le script ``gdal_proximty.py`` génère une carter raster de proximité indiquant 
 la distance  du centre de chaque pixel au centre du pixel le plus proche 

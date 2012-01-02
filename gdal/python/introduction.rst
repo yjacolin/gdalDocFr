@@ -1,12 +1,11 @@
 .. _`gdal.python.intro`:
 
-=============
 Introduction
 =============
 
 
 Installation
-=============
+-------------
 
 Il existe plusieurs possibilités pour installer des extensions Python. Celles 
 proposaient ici sont indépendantes du système et permettent une certaine 
@@ -15,7 +14,7 @@ indépendances avec celui-ci.
 Pour Windows installez `Python pour Windows <http://sourceforge.net/projects/pywin32/>`_
 
 Système
---------
+*********
 
 ::
     
@@ -27,7 +26,7 @@ Ou (mais lié à un système Debian ou Ubuntu) :
     $ sudo apt-get install python-gdal
 
 Environnement virtuel
-----------------------
+**********************
 
 Installez les paquetages libgdal, exemple pour Ubuntu/Debian :
 ::
@@ -99,7 +98,7 @@ Pour en sortir :
     (env)$ deactivate
 
 API
-====
+----
 
 Utilisation de Doxygen pour générer l'API : http://softlibre.free.fr/gdal/osgeo.ogr.html
 
@@ -110,12 +109,13 @@ Utilisation de Doxygen pour générer l'API : http://softlibre.free.fr/gdal/osge
     $ epidoc ou sphinx
 
 Utiliser la bibliothèque Python
-=================================
+---------------------------------
+
 Si les étapes précédentes ont été réussi vous devez avoir la possibilité d'utiliser 
 la bibliothèque GDAL-OGR en Python et avoir l'API au format HTML.
 
 La classe GDAL
----------------
+***************
 
 Pour utiliser GDAL :
 ::
@@ -144,7 +144,7 @@ La procédure pour manipuler des données raster est celle-ci :
 * destruction des objets utilisés : dataset, bande, driver, etc.
 
 La classe OGR
----------------
+***************
 
 Les classes OGR ont évoluées depuis quelques versions. Elles font désormais 
 partie de la classe *osgeo*. Pour garder une compatibilité avec les anciennes 

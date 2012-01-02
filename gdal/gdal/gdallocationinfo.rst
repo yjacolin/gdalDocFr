@@ -1,13 +1,12 @@
 .. _`gdal.gdal.gdallocationinfo`:
 
-==================
 gdallocationinfo
 ==================
 
 Outil de requête raster
 
 Usage
-=====
+-------
 
 Usage :
 ::
@@ -17,7 +16,7 @@ Usage :
                    srcfile [x y]
 
 Description
-=============
+------------
 
 La commande ``gdallocationinfo`` fournie un mécanisme pour demander des 
 informations sur un pixel pour une localisation donnée dans l'un des différents 
@@ -74,7 +73,7 @@ Il est prévue que des possibilités de rapport supplémentaire seront ajouté �
 ``gdallocationinfo`` dans le futur.
 
 Exemple
-========
+---------
 
 Exemple simple reportant un pixel (256,256) sur le fichier *utm.tif*.
 ::

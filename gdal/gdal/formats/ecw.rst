@@ -1,6 +1,5 @@
 .. _`gdal.gdal.formats.ecw`:
 
-=========================================
 Le format ECW - ERDAS Compress Wavelets
 =========================================
 
@@ -27,7 +26,7 @@ ERMapper, vous pouvez l'obliger à le définir au moment de la création avec le
 options de création du PROJ et du DATUM.
 
 Problèmes de création
-=====================
+----------------------
 
 En plus des fichiers ECW, ce pilote gère aussi l'accès au service de réseau 
 d'image en utilisant le protocole "ECWP". Utilisez l'url complète *ecwp://* du 
@@ -64,7 +63,7 @@ Le format ECW ne supporte pas la création d'aperçu puisque le format ECW est
 déjà censé être optimisé pour les « aperçues arbitraires ».
 
 Options de configuration
-=========================
+-------------------------
  
 Le SDK ECW d'ERDAS gère une grande variété d'`options de configuration 
 <http://trac.osgeo.org/gdal/wiki/ConfigOptions>`_ pour contrôler différentes 
@@ -104,7 +103,7 @@ sur la signification de ces options.
   voir plus haut.
 
 Voyez également
-===============
+----------------
 
 * Implementé dans *gdal/frmts/ecw/*.
 * La page ECW (http://www.erdas.com/products/ERDASECWJPEG2000SDK/Details.aspx) chez 

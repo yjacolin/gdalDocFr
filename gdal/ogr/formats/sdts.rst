@@ -1,6 +1,5 @@
 .. _`gdal.ogr.formats.sdts`:
 
-======
 SDTS
 ======
 
@@ -25,7 +24,7 @@ attaché, mais peuvent être accédé séparément de leur propre couche.
 Ce pilote ne gère pas les jeux de données SDTS raster (DEM).
 
 Voir également
-==============
+--------------
 
 * `Bibliothèque d'abstraction de SDTS <http://home.gdal.org/projects/sdts/index.html>`_ : 
   la bibliothèque de base utilisé pour implémenter le pilote.

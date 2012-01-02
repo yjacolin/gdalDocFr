@@ -1,6 +1,5 @@
 .. _`gdal.gdal.formats.jaxapalsar`:
 
-================================
 JAXA PALSAR Processed Products
 ================================
 

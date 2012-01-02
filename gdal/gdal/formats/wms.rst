@@ -1,6 +1,5 @@
 .. _`gdal.gdal.formats.wms`:
 
-========================
 WMS -- Web Map Services
 ========================
 
@@ -152,31 +151,31 @@ des services d'image gérée.
 +-----------------------------------------------+-------------------------------------------------------------------------------+
 
 Minipilote
-============
+----------
 
 Le pilote WMS de GDAL gère plusieurs 'minipilote' interne, qui permettent des accès 
 à différents services de cartographiques web. Chacun de ces services peuvent gérer 
 un ensemble différent d'options dans le bloc *Service*.
 
 WMS
-----
+****
 
 Communications avec un serveur WMS OGS. Possède la gestion pour les requêtes 
 tuilées et non tuilées.
 
 TileService
------------
+************
 
 Service pour gérer la communication avec un `service <http://www.worldwindcentral.com/wiki/TileService>`_ 
 WorldWind. L'accès est toujours basé sur les tuiles.
 
 WorldWind
----------
+*********
 
 Accès aux services web tuilé de WorldWind. L'accès est toujours basé sur les tuiles.
 
 TMS (GDAL 1.7.0 et sup.)
--------------------------
+************************
 
 Le mini-pilote TMS est structuré d'abord pour gérer l'utilisation des 
 `spécifications TMS <http://wiki.osgeo.org/wiki/Tile_Map_Service_Specification>`_. 
@@ -218,7 +217,7 @@ OpenStreetMap et plus autres très populaires.
 Deux exemples d'usage de service TMS sont présentés plus bas.
 
 OnEarth Tiled WMS (GDAL 1.9.0 et sup.)
------------------------------------------
+**************************************
 
 Le mini-pilote WMS tuilé d'OnEarth gère les spécifications WMS tuilés implémentées 
 pour le pilote JPL d'OnEarth suivant la spécification 
@@ -239,7 +238,7 @@ La plupart des autres informations sont automatiquement récupérées du serveur
 distant en utilisant la méthode *GetTileService* au moment de l'ouverture.
 
 VirtualEarth (GDAL 1.9.0 et sup.)
-------------------------------------
+*********************************
 
 Accès au service de tuile par le web de Virtual Earth. L'accès est toujours basé 
 sur les tuiles.
@@ -259,7 +258,7 @@ L'élément *DataWindow* peut être omis. Les valeurs par défaut sont :
 * BlockSizeY = 256
 
 Exemples
-=========
+---------
 
 * `onearth_global_mosaic.xml <http://www.gdal.org/frmt_wms_onearth_global_mosaic.xml>`_ - 
   mosaic Landsat à partir du serveur WMS `OnEarth <http://onearth.jpl.nasa.gov/>`_
@@ -328,7 +327,7 @@ Exemples
 * `Couche Aerial de VirtualEarth <http://www.gdal.org/frmt_wms_virtualearth.xml>`_ accédé avec le minipilote VirtualEarth.
 
 Syntaxe ouverte
-================
+----------------
  
 Le pilote WMS peut ouvrir :
 
@@ -366,7 +365,7 @@ Le pilote WMS peut ouvrir :
     gdalinfo "http://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer?f=json&amp;pretty=true"
 
 Voir également
-==============
+--------------
 
 * OGC WMS Standards : http://www.opengeospatial.org/standards/wms
 * Recommandation du WMS Tiling Client (WMS-C) : http://wiki.osgeo.org/index.php/WMS_Tiling_Client_Recommendation

@@ -1,6 +1,5 @@
 .. _`gdal.ogr.formats.memory`:
 
-=======
 Memory
 =======
 
@@ -19,7 +18,7 @@ Chercher les géométries par id des géométries devrait être rapide (juste un
 tableau à lire et les géométrie à copier).
 
 Problèmes de création
-=====================
+----------------------
 
 N'importe quel nom peut être utilisé pour une source de données crée. Il n'y a 
 pas d'options de création de source de données ou  de couche. Les noms des 

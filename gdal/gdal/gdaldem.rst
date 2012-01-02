@@ -1,13 +1,12 @@
 .. _`gdal.gdal.gdaldem`:
 
-========
 gdaldem
 ========
 
 Outils pour analyser et visualiser des MNT, (à partir de GDAL 1.7.0)
 
 Synopsis
-=========
+---------
 
 Usage :
 
@@ -122,10 +121,10 @@ définie, ''gdaldem'' calculera les valeurs au bord de l'image ou si une valeur
 *nodata* est trouvée dans la fenêtre 3x3, en interpolant les valeurs manquantes.
 
 Modes
-======
+-------
 
 hillshade
-----------
+**********
 
 Cette commande renvoie un raster de 8 bit avec un bel effet de relief ombragé. 
 Cela est très utile pour visualiser le terrain. Vous pouvez en option définir 
@@ -150,7 +149,7 @@ Les options spécifiques suivantes sont disponibles :
   arrive au dessus du MNT. 0 si c'est une lumière rasante.
 
 slope
------
+******
 
 Cette commande utilise un raster MNT et renvoie un raster en float 32 bit avec 
 des valeurs de pente. Vous avez la possibilité de définir le type de pente que 
@@ -170,7 +169,7 @@ Les options spécifiques suivantes sont disponibles :
   mètre (ou *scale=370400* si elles sont en pied).
 
 aspect
--------
+*******
 
 Cette commande renvoie un raster float 32 bit avec des valeurs entre 0° et 360° 
 représentant l'azymuth dont les pentes font face. La définition de l'azymuth 
@@ -191,7 +190,7 @@ identique à celui de la commande ''r.slope.aspect'' de GRASS. Autrement il est
 identique à celui de la commande *aspect.cpp* de Matthew Perry.
 
 color-relief
--------------
+*************
 
 Cette commande renvoie un raster à 3 bande (RVB) ou à 4 bandes (RVBA) avec des 
 valeurs calculées à partir de l'élévation et d'un fichier de configuration de 
@@ -259,7 +258,7 @@ Par exemple :
     nv     0   0   0   0 
 
 TRI
-----
+*****
 
 Cette commande renvoie un raster à une seule bande avec des valeurs calculées à 
 partir de l'élévation. TRI signifie *Terrain Ruggedness Index*, qui est définie 
@@ -271,7 +270,7 @@ La valeur -9999 est utilisé comme valeur *nodata* en sortie.
 Il n'y a pas d'options spécifiques.
 
 TPI
-----
+****
 
 Cette commande renvoie un raste à une seule bande avec des valeurs calculées à 
 partir de l'élévation. TPI signifie *Topographic Position Index*, qui est 
@@ -283,7 +282,7 @@ La valeur -9999 est utilisé comme valeur *nodata* en sortie.
 Il n'y a pas d'options spécifiques.
 
 roughness
------------
+***********
 
 Cette commande renvoie un raster à une seule bande calculé à partir de 
 l'élévation. La rugosité est la plus grande différence inter-cellule d'un pixel 
@@ -295,7 +294,7 @@ La valeur -9999 est utilisé comme valeur *nodata* en sortie.
 Il n'y a pas d'options spécifiques.
 
 Auteurs
-========
+--------
 
 Matthew Perry <perrygeo@gmail.com>, Even Rouault 
 <even.rouault@mines-paris.org>, Howard Butler <hobu.inc@gmail.com>, 
@@ -307,7 +306,7 @@ Corps of Engineers, Construction Engineering Research Laboratories, Champaign,
 Illinois, 1-425.
 
 Voir également
-===============
+----------------
 
 Documentation des commandes GRASS connexes :
 

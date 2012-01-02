@@ -1,6 +1,5 @@
 .. _`gdal.ogr.formats.gft`:
 
-===========================
 GFT - Google Fusion Tables
 ===========================
 
@@ -12,7 +11,7 @@ compilé avec la gestion de Curl pour que le pilote GFT soit compilé.
 Le pilote gère la lecture et l'écriture des opérations.
 
 Syntaxe des noms des jeux de données
-=====================================
+-------------------------------------
 
 La syntaxe minimale pour ouvrir une source de données GFT est : ``GFT:``
 
@@ -36,7 +35,7 @@ Des paramètres supplémentaires optionnels peuvent être définie après le sig
 Si plusieurs paramètres sont définie, ils doivent être séparés par un espace.
 
 Authentification
-=================
+----------------
 
 La plupart des opérations, en particulier celles pour écrire, nécessite un compte 
 Google valide pour fournir les informations d'authentification au pilote. La seule 
@@ -60,7 +59,7 @@ Les informations d'authentification peuvent être fournie de différentes maniè
 * en spécifiant la clé d'authentification via le paramètre de connexion *auth*.
 
 Géométrie
-==========
+---------
 
 Géométries dans les tables GFT doivent être exprimées dans la projection 
 géodésique WGS84. GFT les autorise d'être encodé sous différentes formes :
@@ -82,20 +81,20 @@ sélectionner une autre colonne comme colonne géométrique en spécifiant
 *table_name(geometry_column_name)* comme nom de couche envoyé à *GetLayerByName().*
 
 Filtre
-========
+-------
 
 Le pilote fera parvenir n'importe quel filtre spatial définie avec 
 *SetSpatialFilter()* au serveur. Il fera de même pour les filtres attributaires 
 définie via *SetAttributeFilter()*.
 
 Pagination
-===========
+-----------
 
 Les features sont récupérées à partir du serveur par tranche de 500 par défaut. 
 Ce nombre peut être modifié avec l'option de configuration *GFT_PAGE_SIZE*.
 
 Gestion de l'écriture
-======================
+----------------------
 
 La création et la suppression de table est possible. Notez que les champs ne 
 peuvent qu'être ajouté à une table dans laquelle il n'y a pas de feature encore 
@@ -119,7 +118,7 @@ OGR reprojetera automatiquement ses géométries dans la projection géodésique
 WGS84 si nécessaire (si la projection originale est liée à la géométrie).
 
 Gestion de l'écriture et transactions OGR
-==========================================
+------------------------------------------
 
 Les opérations ci-dessus sont par défaut déclenchées vers le serveur synchrone 
 avec l'appel à l'API d'OGR. Cela peut cependant causer des problèmes de 
@@ -138,7 +137,7 @@ INSERTs et jusqu'à 1 Mo de contenu par transaction.
     immédiatement.
 
 SQL
-====
+-----
 
 Les commandes SQL envoyées aux appels *OGRDataSource::ExecuteSQL()* sont exécutées 
 côté serveur, sauf si le dialecte OGRSQL est définie. Le sous ensemble de SQL 
@@ -149,7 +148,7 @@ des tables renvoyés par OGR. Pour convenance, cependant OGR modifiera vos
 commandes SQL pour remplacer le nom de la table par son id.
 
 Exemples
-=========
+---------
 
 * Lister les tables et les vues de l'utilisateur authentifié :
   ::
@@ -183,7 +182,7 @@ Exemples
   valeur et utiliser simplement "GFT:" comme DSN.
 
 Voir également
-==============
+--------------
 
 * `Guide du développeur de Google Fusion Tables <http://code.google.com/intl/fr/apis/fusiontables/docs/developers_guide.html>`_
 * `Référence des développeurs de Google Fusion Tables <http://code.google.com/intl/fr/apis/fusiontables/docs/developers_reference.html>`_

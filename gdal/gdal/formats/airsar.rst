@@ -1,6 +1,5 @@
 .. _`gdal.gdal.formats.airsar`:
 
-=====================================
 AIRSAR -- AIRSAR Polarimetric Format
 =====================================
 

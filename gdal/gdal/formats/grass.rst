@@ -1,6 +1,5 @@
 .. _`gdal.gdal.formats.grass`:
 
-================
 Le format GRASS
 ================
 
@@ -11,12 +10,12 @@ bibliothèque est configurée, et nécessite que libgrass soit pré-installée (
 les remarques ci-dessous).
 
 Sélection des rasters de GRASS
-===============================
+-------------------------------
 
 Les rasters de GRASS peuvent être sélectionnés de différentes manières.
 
 Chemin complet vers le fichier cellhd
---------------------------------------
+***************************************
 
 Le chemin complet vers le fichier cellhd pour la cellule peut être définie. Ce 
 n'est pas un chemin relatif, ou du moins il doit contenir toutes les parties du 
@@ -31,7 +30,7 @@ Par exemple :
     % gdalinfo /u/data/grassdb/proj_tm/PERMANENT/cellhd/proj_tm
 
 Chemin complet vers le répertoire
-----------------------------------
+**********************************
 
 Le chemin complet vers le répertoire contenant les informations sur le groupe 
 d'image (ou le fichier REF à l'intérieure) peut être définie pour se référer à 
@@ -45,7 +44,7 @@ Par exemple :
     % gdalinfo /usr2/data/grassdb/imagery/raw/group/testmff
 
 Fichier de configuration
---------------------------
+*************************
 
 S'il y a un fichier de configuration .grassrc5 correcte dans le répertoire home 
 de l'utilisateur, alors les cellules et les groupes d'images peuvent être 
@@ -54,7 +53,7 @@ cellules ou les images dans la région en court et le jeu de données comme
 définie dans le fichier .grassrc5.
 
 Fonctionnalités gérées
-=======================
+----------------------
 
 Les fonctionnalités suivantes sont gérées par le lien GDAL/GRASS :
 

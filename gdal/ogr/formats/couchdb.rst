@@ -1,6 +1,5 @@
 .. _`gdal.ogr.formats.couchdb`:
 
-===========================
 CouchDB - CouchDB/GeoCouch
 ===========================
 
@@ -13,7 +12,7 @@ compiler le pilote de CouchDB.
 Le pilote gère les opérations en lecture et écriture.
 
 Concepts CouchDB vs OGR
-========================
+------------------------
 
 Une base de données CouchDB est considérée comme un couche OGR. Un document 
 CouchDB est considéré comme une feature OGR.
@@ -22,7 +21,7 @@ OGR prend en charge de préférence les documents CouchDB qui suivent les
 spécifications GeoJSON.
 
 Syntaxe du nom de jeu de données
-=================================
+---------------------------------
 
 La syntaxe pour ouvrir une source de données CouchDB est : ``couchdb:http://example.com[/layername]`` 
 où http://example.com pointe vers la racine d'un dépôt CouchDB et, en option, 
@@ -34,7 +33,7 @@ Il est également possible d'ouvrir directement une vue :
 l'appel de *emit()* dans la fonction *map()*.
 
 Authentification
-=================
+-----------------
 
 Certaines opérations, en particulier les opérations d'écriture, nécessitent une 
 authentification.
@@ -42,7 +41,7 @@ L'authentification peut être envoyée avec la variable d'environnement
 *COUCHDB_USERPWD* définie par *user:password* ou directement dans l'URL.
 
 Filtrage
-==========
+---------
 
 Le pilote transmettra n'importe quel filtre défini avec *SetSpatialFilter()* vers
 le serveur quand l'extension GeoCouch est disponible. Il fera de même pour les 
@@ -60,13 +59,13 @@ nécessaire d'avoir des permissions d'écriture dans la base de données pour cr
 nouvelle vue d'index.
 
 Pagination
-===========
+----------
 
 Les features sont récupérées à partir du serveur par tranche de 500 par défaut. 
 Ce nombre peut être modifié avec l'option de configuration *COUCHDB_PAGE_SIZE*.
 
 Gestion de l'écriture
-======================
+----------------------
 
 La création et la suppression de table sont possibles.
 
@@ -78,7 +77,7 @@ commande réussit, OGR ira chercher les champs \_id et \_rev renvoyés et les
 utilisera.
 
 Gestion de l'écriture et transactions OGR
-==========================================
+------------------------------------------
 
 Les opérations *CreateFeature()* / *SetFeature()* sont par défaut transmises au
 serveur en synchronisation avec l'appel de l'API d'OGR. Cela peut cependant 
@@ -91,7 +90,7 @@ seront stockées en mémoire et seulement exécutées au moment de l'appel de
 *CommitTransaction()*.
 
 Options de création de couche
-==============================
+-------------------------------
 
 Les options de création de couche suivantes sont gérées :
 
@@ -121,7 +120,7 @@ Les options de création de couche suivantes sont gérées :
     un rôle similaire.
 
 Exemples
-==========
+---------
 
 Lister les tables d'un répertoire CouchDB :
 ::
@@ -136,7 +135,7 @@ Créer et remplir une table à partir d'un shapefile :
 
 
 Voir également
-==============
+---------------
 
 * `Référence de CouchDB <http://wiki.apache.org/couchdb/Reference>`_
 * `Dépôt du code source de GeoCouch <http://github.com/couchbase/geocouch>`_

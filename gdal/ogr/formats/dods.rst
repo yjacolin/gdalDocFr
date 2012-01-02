@@ -1,6 +1,5 @@
 .. _`gdal.ogr.formats.dods`:
 
-==============
 DODS/OPeNDAP
 ==============
 
@@ -53,7 +52,7 @@ Une définition DAS pour une couche OGR doit ressembler à ceci :
     }
 
 Avertissement
-==============
+--------------
 
 * Aucune largeurs de champ n'est capturée pour les champs attributaires à partir 
   du format DODS.
@@ -62,7 +61,7 @@ Avertissement
   *USE_CACHE=1* dans votre fichier *~/.dodsrc*.
 
 Voir également
-==============
+---------------
 
 * `OPeNDAP <http://www.opendap.org/>`_
 

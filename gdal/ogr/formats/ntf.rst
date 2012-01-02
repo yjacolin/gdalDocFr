@@ -1,6 +1,5 @@
 .. _`gdal.ogr.formats.ntf`:
 
-========
 UK .NTF
 ========
 
@@ -21,11 +20,11 @@ d'autre organisation que le *UK Ordnance Survey*.
 
 * `Information Générale sur le NTF UK <http://home.gdal.org/projects/ntf/index.html>`_
 
-Implementation Notes
-=====================
+Notes d'implémentation
+-----------------------
 
 Produits (et couches) gérés
-----------------------------
+****************************
 
 * **Landline (et Landline Plus) :**
 
@@ -102,7 +101,7 @@ classes d'objets qui ne sont pas définie dans le fichier, et ils n'apparaitront
 donc pas dans la couche *FEATURE_CLASSES*.
 
 Schémas des produits
----------------------
+*********************
 
 L'approche entreprise pour ce lecteur est de traiter un fichier, ou un 
 répertoire de fichier comme un simple jeu de données. Tous les fichiers dans le 
@@ -127,7 +126,7 @@ fichier *ntf_estlayers.cpp*. Ce fichier contient également tous les codes de
 traduction spécifique au produit.
 
 Attributs spéciaux
--------------------
+*******************
 
 * **FEAT_CODE :** code générale entier de l'objet, peut être utilisé pour 
   rechercher un nom dans la table/couche *FEATURE_CLASSES*.
@@ -156,7 +155,7 @@ Attributs spéciaux
   avec une collection donnée dans la couche *BOUNDARYLINE_COLLECTIONS*.
 
 Produits génériques
---------------------
+*********************
 
 Dans le cas où un fichier n'est pas identifier comme faisant partie d'un produit 
 connus existant il sera traité d'une manière générique. Dans ce cas le jeu de 

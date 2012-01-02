@@ -1,6 +1,5 @@
 .. _`gdal.gdal.gdalwarp`:
 
-=========
 gdalwarp 
 =========
 

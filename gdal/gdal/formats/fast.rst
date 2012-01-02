@@ -1,6 +1,5 @@
 .. _`gdal.gdal.formats.fast`:
 
-==========================
 FAST -- EOSAT FAST Format
 ==========================
 
@@ -22,10 +21,10 @@ Les noms des fichiers des images seront extraits et les données seront importé
 chaque fichier sera interprété comme une bande.
 
 Les données
-=============
+-----------
 
 FAST-L7A
-----------
+********
 
 FAST-L7A consiste en plusieurs fichiers : un gros avec les données de l'image et 
 trois petits fichiers avec des informations d'administration. Vous devez donner 
@@ -74,7 +73,7 @@ L7fppprrr_rrrYYYYMMDD_HPN.FST, L7fppprrr_rrrYYYYMMDD_HRF.FST ou
 L7fppprrr_rrrYYYYMMDD_HTM.FST. 
 
 IRS-1C/1D
-----------
+**********
 
 Le format Fast Rev. C ne contient pas les noms des fichiers des bandes dans les 
 en-têtes administratifs. Nous devons donc deviner les noms des fichiers des 
@@ -89,6 +88,7 @@ GDAL. Ceux-ci sont :
     ...
 
 ou
+
 ::
     
     <header>.<ext>
@@ -97,6 +97,7 @@ ou
     ...
 
 ou
+
 ::
     
     <header>.<ext>
@@ -105,6 +106,7 @@ ou
     ...
 
 ou
+
 ::
     
     <header>.<ext>
@@ -113,6 +115,7 @@ ou
     ...
 
 ou
+
 ::
     
     <header>.<ext>
@@ -127,14 +130,14 @@ nommé différemment vous devez les renommer manuellement avant l'importation de
 données avec GDAL.
 
 Géoréférencement
-=================
+----------------
 
 Toutes les projections USGS doivent être gérées (pour ne pas les nommer UTM, 
 LCC, PS, PC, TM, OM, SOM). Contactez-moi si vous avez des problèmes avec 
 l'extraction de la projection appropriée.
 
 Méta-données
--------------
+*************
 
 Les coefficients de calibration pour chaque bande signalée comme des objets de 
 méta-données.

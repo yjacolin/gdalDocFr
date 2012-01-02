@@ -1,6 +1,5 @@
 .. _`gdal.gdal.gdal_merge`:
 
-==============
 gdal_merge.py
 ==============
 
@@ -55,7 +54,7 @@ dessus les premières.
     été compilé avec le support de Python.
 
 Exemple
-========
+--------
 
 Créer une image avec les pixels dans toutes les bandes initialisés à 255.
 ::

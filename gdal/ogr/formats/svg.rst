@@ -1,6 +1,5 @@
 .. _`gdal.ogr.formats.svg`:
 
-===============================
 SVG - Scalable Vector Graphics
 ===============================
 
@@ -21,7 +20,7 @@ Le pilote renverra 3 couches :
 * polygons
 
 Voir également
-===============
+---------------
 
 * `Page SVG du W3C <http://www.w3.org/TR/SVG/>`_
 * `Documentation du vecteur de Cloudmade <http://developers.cloudmade.com/wiki/vector-stream-server/Documentation>`_

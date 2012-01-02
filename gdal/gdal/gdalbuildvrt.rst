@@ -1,13 +1,12 @@
 .. _`gdal.gdal.gdalbuildvrt`:
 
-=============
 gdalbuildvrt
 =============
 
 Construit un VRT à partir d'une liste de jeu de données.
 
 Usage
-======
+------
 
 ::
     
@@ -19,7 +18,7 @@ Usage
 
 
 Description
-=============
+------------
 
 Ce programme construit un fichier VRT (Jeu de données virtuel) qui est une 
 mosaïque d'une liste de jeux de données de GDAL en entrée. La liste des jeux de 
@@ -120,7 +119,7 @@ est compilé par défaut à partir de GDAL 1.6.1.
 * **-overwrite :** écrase le VRT s'il existe déjà.
 
 Exemple
-========
+--------
 
 ::
     

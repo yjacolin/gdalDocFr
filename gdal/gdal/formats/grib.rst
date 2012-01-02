@@ -1,13 +1,12 @@
 .. _`gdal.gdal.formats.grib`:
 
-============================================================================
 GRIB -- WMO General Regularly-distributed Information sous la forme Binaire
 ============================================================================
 
 GDAL gère la lecture des données raster des formats GRIB1 et GRIB2, avec un 
 embryon de gestion pour le système de coordonnées, le géoréférencement et les 
 autres méta-données. Le format GRIB est communément utilisé pour la distribution 
-d'information métérologique, et est diffusé par l'Organisation Météorologique 
+d'information météorologique, et est diffusé par l'Organisation Météorologique 
 Mondiale.
 
 Le pilote GRIB de GDAL est basé sur une version modifiée de l'application degrib 
@@ -47,7 +46,7 @@ produit (> à 10 octets) sous forme de métadonnées comme ceci :
     GRIB_PDS_TEMPLATE_NUMBERS=3 5 2 0 105 0 0 0 1 0 0 0 1 100 0 0 1 134 160 255 0 0 0 0 0
 
 La bibliothèque que GDAL utilise pour lire les fichiers GRIB est connu pour ne pas 
-être thread-safen vous devez donc éviter de lire et écrite plusieurs jeux de 
+être thread-safe vous devez donc éviter de lire et écrite plusieurs jeux de 
 données GRIB au même moment à partir de thread différents.
 
 **Lisez également :**

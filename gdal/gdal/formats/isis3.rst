@@ -1,6 +1,5 @@
 .. _`gdal.gdal.formats.isis3`:
 
-==================================================
 ISIS3 -- USGS Astrogeology ISIS Cube (Version 3)
 ==================================================
 
@@ -22,7 +21,7 @@ L'implémentation de ce pilote a été financé par la *Geological Survey* des
 ISIS3 fait partie de la famille des formats PDS et ISIS2.
 
 Voir également
-==============
+---------------
 
 * Implémenté dans *gdal/frmts/pds/isis2dataset.cpp*.
 * :ref:`gdal.gdal.formats.pds`

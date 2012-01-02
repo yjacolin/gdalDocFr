@@ -1,6 +1,5 @@
 .. _`gdal.ogr.formats.nas`:
 
-============
 NAS - ALKIS
 ============
 
@@ -15,7 +14,7 @@ Ce pilote a été implémenté dans le contexte du projet PostNAS qui a plus
 d'information sur son utilisation.
 
 Voir également
-===============
+--------------
 
 * `PostNAS <http://trac.wheregroup.com/PostNAS>`_
 

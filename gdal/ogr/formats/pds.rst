@@ -1,6 +1,5 @@
 .. _`gdal.ogr.formats.pds`:
 
-==================================
 PDS - Planetary Data Systems TABLE
 ==================================
 

@@ -1,6 +1,5 @@
 .. _`gdal.ogr.formats.htf`:
 
-==================================
 HTF - Hydrographic Transfer Format
 ==================================
 
@@ -79,7 +78,7 @@ de la Clé de Population du Champ. Les champs supplémentaires peuvent aussi êt
 ajoutés.
 
 Voir également
-==============
+---------------
 
 * `Page principale du format HTF - Hydrographic Transfer Format <http://www.hydro.gov.au/tools/htf/htf.htm>`_
 * `Spécification technique HTF <http://www.hydro.gov.au/tools/htf/htf.pdf>`_

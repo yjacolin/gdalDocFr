@@ -1,6 +1,5 @@
 .. _`gdal.gdal.formats.jpeg2000`:
 
-=========================================================
 JPEG2000 --- Implémentation du format JPEG-2000 partie 1
 =========================================================
 
@@ -11,7 +10,7 @@ et seront stockées comme contenu brute XML dans le domaine de métadonnées
 xml:XMP.
 
 Options de création
-====================
+--------------------
 
 * **WORLDFILE=ON** : Force la génération d'un fichier world associé (.wld).
 * **FORMAT=JP2|JPC** : Définie le format du fichier en sortie.
@@ -98,7 +97,7 @@ Les options suivantes sont gérées par l'encodeur :
 .. _`gdal.gdal.formats.jpeg2000.argument_m`:
 
 Argument m
------------
+************
 
 +---------------+--------------+
 + Valeur        + Description  +
@@ -111,7 +110,7 @@ Argument m
 .. _`gdal.gdal.formats.jpeg2000.argument_p`:
 
 Argument P
-----------
+***********
 
 +---------------+-----------------------------------------------------------------------+
 +  Valeur       +  Description                                                          +
@@ -129,7 +128,8 @@ Argument P
 + cprl          + component-position-resolution-layer (CPRL) progressive                +
 +---------------+-----------------------------------------------------------------------+
 
-**Voir également :**
+Voir également
+---------------
 
 * Implémenté dans *gdal/frmts/jpeg2000/jpeg2000dataset.cpp*.
 * Vous avez besoin de la bibliothèque JasPer pour compiler ce pilote avec la 

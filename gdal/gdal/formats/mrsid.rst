@@ -1,6 +1,5 @@
 .. _`gdal.gdal.formats.mrsid`:
 
-===================================================
 MrSID --- Multi-resolution Seamless Image Database
 ===================================================
 
@@ -24,7 +23,7 @@ JPEG2000, ce pilote peut aussi être utilisé pour le format JPEG2000.
 
 
 Méta-données
-=============
+-------------
 
 Les méta-données MrSID sont traduites de manière transparente dans les chaînes 
 de méta-données de GDAL. Les fichiers au format MrSID contiennent un ensemble 
@@ -40,7 +39,7 @@ pour travailler sur les images MrSID attendez vous à ce que les noms des clés
 des méta-données soient affichés différemment.
 
 Géoréférencement
-=================
+----------------
 
 Les images MrSID peuvent contenir des informations de géoréférencement et du 
 système de coordonnées sous la forme de clé géographique (GeoKeys) GeoTiff, 
@@ -53,7 +52,7 @@ fichiers crées avec un vieil encodeur, vous ne pouvez pas utiliser leurs
 informations de géoréférencement.
 
 Options de création
-====================
+-------------------
 
 L'écriture au format MrSID est seulement géré si GDAL est compilé avec l'ESDK 
 5.x ou supérieur de MrSID. Celui-ci est normalement vendu uniquement par 
@@ -80,7 +79,8 @@ de création suivante sont gérées :
   qu'un algorithme d'optimisation à deux passages doit être utilisé pendant la 
   compression.
 
-**Lisez également  :**
+Lisez également 
+----------------
 
 * Implementé dans *gdal/frmts/mrsid/mrsiddataset.cpp*.
 * LizardTech's Web site

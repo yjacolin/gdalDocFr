@@ -1,6 +1,5 @@
 .. _`gdal.ogr.formats.avce00`:
 
-================================
 Couverture Arc/Info E00 (ASCII)
 ================================
 
@@ -40,7 +39,7 @@ La lecture aléatoire (par FID) d'arcs ou de polygone est gérée, elle peut ne 
 généralement lente.
 
 Voir aussi
-============
+-----------
 
   * `Page de la bibliothèque AVCE00 <http://avce00.maptools.org/>`_
   * `Pilote OGR pour AVCBin (Couverture binaire) <http://www.gdal.org/ogr/ogr_avcbin.html>`_

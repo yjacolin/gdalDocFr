@@ -1,11 +1,10 @@
 .. _`gdal.python.vecteur.intro`:
 
-=============
 Vecteurs
 =============
 
 Lire un fichier vecteur
-=======================
+------------------------
 
 La lecture d'un fichier vecteur se fait en plusieurs étape :
 
@@ -73,7 +72,7 @@ avec la classe *Feature*.
     ds_ref.Destroy()
 
 Écrire un fichier vecteur
-==========================
+--------------------------
 ::
     
     # Create a Shapefile
@@ -85,7 +84,7 @@ avec la classe *Feature*.
     layer = ds.CreateLayer(output, geom_type=ogr.wkbPolygon)
 
 Création de shapefile à partir de coordonnées
-----------------------------------------------
+**********************************************
 
 Pour créer des objets géométriques à partir de coordonnées une possibilité est 
 de passer par Wkt ([http://en.wikipedia.org/wiki/Well-known_text Well-known text]). 
@@ -125,7 +124,7 @@ Exemple : création d'un shapefile de points à partir des coordonnées x y
     f.Destroy()
 
 Projections
-============
+-------------
 
 Exemple : définir une projection (Lambert 2 étendu) à un shapefile :
 ::
@@ -156,7 +155,7 @@ Il est conseillé d'utiliser plutôt *Transform* et donc de définir au préalab
 objet *CoordinateTransformation* pour des modifications sur un grand nombre d'objets.
 
 Comment Reprojeter des données
--------------------------------
+********************************
 
 On créé deux objets Références Spatiales et pour chacun on importe les données 
 de reprojection via un import à partir d'un code EPSG. Puis on créé un objet 
@@ -177,16 +176,16 @@ Géométrie à partir d'un WKT. On lui assigne un projection, puis on reprojète
     return pt
 
 Requêtes spatiales
-===================
+-------------------
 
 Par bbox
----------
+***********
 
 Par objet géométrique
-----------------------
+************************
 
 Par requête SQL
-----------------
+****************
 
 
 

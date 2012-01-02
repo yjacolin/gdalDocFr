@@ -1,18 +1,20 @@
 .. _`gdal.gdal.gdal_sieve`:
 
-===========
 gdal_sieve
 ===========
 
 Supprime les petits polygones raster.
 
-**Usage :**
+Usage
+-------
+
 ::
     
     gdal_sieve [-q] [-st threshold] [-4] [-8] [-o name=value]
            srcfile [-nomask] [-mask filename] [-of format] [dstfile]
 
-**Description :**
+Description
+------------
 
 Le script ``gdal_sieve.py`` enlève les polygones raster plus petits que la 
 taille du seuil définie (en pixels) et les remplace avec la valeur du pixel du 

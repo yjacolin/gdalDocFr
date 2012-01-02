@@ -1,12 +1,14 @@
 .. _`gdal.gdal.gdal-config`:
 
-============
+
 gdal-config
 ============
 
 Détermine diverses informations sur l'installation de GDAL.
 
-**Usage :**
+Usage
+------
+
 ::
     
     gdal-config [OPTIONS]

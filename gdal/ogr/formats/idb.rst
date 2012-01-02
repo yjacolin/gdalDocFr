@@ -1,6 +1,5 @@
 .. _`gdal.ogr.formats.idb`:
 
-======
 IDB
 ======
 
@@ -28,7 +27,7 @@ déterminer comment le lire.
 Le pilote gère la détection automatique des FID.
 
 Variables d'environnement
-=========================
+--------------------------
 
 * **INFORMIXDIR :** il doit être définie au répertoire d'installation du SDK 
   client d'Informix
@@ -41,7 +40,7 @@ Pour plus d'information sur les variables d'Informix lisez la documentation du
 SDK client d'Informix.
 
 Exemple
-========
+--------
 
 Cet exemple montre l'utilisation de ''ogrinfo'' pour lister les couches 
 DataBlade d'Informix sur un hôte différent :

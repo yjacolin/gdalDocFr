@@ -1,6 +1,5 @@
 .. _`gdal.gdal.formats.jp2ecw`:
 
-===================================
 JP2ECW -- ERMapper JPEG2000 (.jp2)
 ===================================
 
@@ -15,7 +14,7 @@ La gestion du pilote JP2ECW dans GDAL est optionnelle et nécessite la liaison
 vers la bibliothèque SDK ECW externe fournit par ERDAS.
 
 Problèmes de création
-======================
+----------------------
 
 Le SDK ECW 4.x d'ERDAS est seulement gratuit pour la décompression d'image. Pour 
 compresser des images il est nécessaire de compiler le SDK en lecture/écriture et 
@@ -74,7 +73,7 @@ Le format JPEG2000 ne gère pas la création des aperçues puisque le format est
 déjà considéré comme suffisamment optimisé pour les « aperçues arbitraires ».
 
 Options de configuration
-=========================
+-------------------------
  
 Le SDK ECW d'ERDAS gère une grande variété d'`options de configuration 
 <http://trac.osgeo.org/gdal/wiki/ConfigOptions>`_ pour contrôler différentes 
@@ -102,7 +101,7 @@ sur la signification de ces options.
   voir plus haut.
 
 Voir également
-===============
+--------------
 
 * Implémenté dans *gdal/frmts/ecw/ecwdataset.cpp*.
 * SDK ECW disponible sur `Erdas.com <http://www.erdas.com/products/ERDASECWJPEG2000SDK/Details.aspx>`_

@@ -1,6 +1,5 @@
 .. _`gdal.ogr.formats.gml`:
 
-================================
 GML - Geography Markup Language
 ================================
 
@@ -21,7 +20,7 @@ Version de GML gérées :
 +-----------------------+-----------------------+------------------+
 
 Parseur
-=======
+--------
 
 La première fois qu'un fichier GML est ouvert il est complètement scanné dans le 
 but d'obtenir l'ensemble des *featuretypes*, les attributs associés pour 
@@ -53,7 +52,7 @@ Les options de configuration peuvent être définie via la fonction
 *CPLSetConfigOption()* ou comme variables d'environnement.
 
 Lecture des géométries
-=======================
+-----------------------
 
 Lors de la lecture d'une feature, le pilote prendra par défaut seulement en compte 
 la dernière géométrie GML reconnu trouvée (dans le cas où il y en a plusieurs) 
@@ -84,7 +83,7 @@ les noeuds, sous forme de OGRMultiPoint, l'option de configuration
 fait seul les géométries secondaires sont renvoyées.
 
 Résolution gml:xlink 
-====================
+---------------------
 
 OGR 1.8.0 ajoute la gestion de la résolution des gml:xlink. Quand le *résolveur* 
 trouve un élément contenant une balise xlink:href, il tente de trouver l'élément 
@@ -114,7 +113,7 @@ résolution en même temps (défaut). Définissez à **NONE** pour résoudre tou
 xlinks.
 
 Problèmes d'encodage
-=====================
+---------------------
 
 La bibliothèque Expat gère la lecture des encodages internes suivants :
 
@@ -137,7 +136,7 @@ exemple et changer la valeur du paramètre *encoding* dans l'en-tête XML en
 conséquence.
 
 Feature id (fid / gml:id)
-==========================
+-------------------------
 
 À partir de OGR 1.9.0, le pilote expose le contenu de l'attribut *gml:id* comme 
 champ de chaîne de caractères appelé *gml_id*, lors de la lecture des documents 
@@ -156,7 +155,7 @@ appelé *fid*, son contenu sera également utilisé pour écrire le contenu de
 l'attribut fid de la feature créée.
 
 Problèmes lors de création
-===========================
+--------------------------
 
 Lors de l'export, toutes les couches sont écrites dans un seul fichier GML dans 
 une seule collection d'objet. Chaque nom de couche est utilisé comme nom 
@@ -191,8 +190,8 @@ suivantes :
   augmentation de la taille.
 
 
-Syntax of .gfs file by example
-=================================
+Syntaxe des fichiers .gfs par l'exemple
+-----------------------------------------
 
 Considérons le fichier test.gml suivant :
 
@@ -267,7 +266,7 @@ La sortie de *ogrinfo test.gml -ro -al* est :
 	POINT (3 50)
 
 Exemple
-=======
+--------
 
 La commande ogr2ogr peut être utilisé pour faire un dump des résultats d'une 
 requête Oracle en GML :
@@ -284,7 +283,7 @@ requête PostGIS en GML :
 
 
 Voir aussi
-==========
+----------
 
 * `Spécifications du GML <http://www.opengeospatial.org/standards/gml>`_
 * `Profile GML 3.1.1 simple features <http://portal.opengeospatial.org/files/?artifact_id=15201>`_

@@ -1,6 +1,5 @@
 .. _`gdal.gdal.gdal_rasterize`:
 
-===============
 gdal_rasterize
 ===============
 

@@ -1,6 +1,5 @@
 .. _`gdal.ogr.formats.s57`:
 
-===============
 IHO S-57 (ENC)
 ===============
 
@@ -34,7 +33,7 @@ du fichier de base. Les données des objets fournit à l'application inclus alor
 toutes les mises à jours.
 
 Traduction d'objet
-===================
+-------------------
 
 Normalement tous les objets lu d'un fichier S-57 sont assigné à une couche basée 
 sur le nom de la classe d'objet (*OBJL*) à laquelle ils appartiennent. Par exemple, 
@@ -112,7 +111,7 @@ Ce qui suit est présent si *LNAM_REFS* est activé :
 
 
 Sondages
-==========
+---------
 
 La profondeur du sondage est pris en charge d'une manière assez spéciale 
 dans le format S-57, dans l'objectif de représenter efficacement les nombreux 
@@ -123,7 +122,7 @@ les sondages d'un enregistrement d'objet isolé possédera la même valeur
 *AGEN*, *FIDN*, *FIDS* et *LNAM*.
 
 Options de contrôle du format S-57
-===================================
+-----------------------------------
 
 Il y a plusieurs options de contrôle qui peuvent être utilisées pour modifier 
 le comportement du lecteur S-57. Les utilisateurs peuvent définir ceux-ci en 
@@ -161,8 +160,8 @@ les ajoutant dans la variable d'environnement *OGR_S57_OPTIONS*.
     
     set OGR_S57_OPTIONS = "RETURN_PRIMITIVES=ON,RETURN_LINKAGES=ON,LNAM_REFS=ON"
 
-Export du formar S-57
-======================
+Export du format S-57
+----------------------
 
 La possibilité d'export du S-57 préliminaire a été ajoutée à la version 1.2.0 de 
 GDAL/OGR mais a seulement pour une utilisation spécialisée, et n'est pas 
@@ -173,7 +172,7 @@ pour gérer la conversion du format S-57 vers le format S-57 via OGR.
     set OGR_S57_OPTIONS = "RETURN_PRIMITIVES=ON,RETURN_LINKAGES=ON,LNAM_REFS=ON"
 
 Voir également
-===============
+---------------
 
 * `Catalogue des objets/attributs en ligne de S-57 <http://www.s-57.com/|>`_
 * `Page de S-57 de Frank <http://home.gdal.org/projects/s57/index.html>`_ : 

@@ -1,6 +1,5 @@
 .. _`gdal.ogr.formats.tiger`:
 
-========================
 U.S. Census TIGER/Line
 ========================
 
@@ -61,7 +60,7 @@ TIGER/Line à partir de 1988 devrait fonctionner avec le lecteur, avec des perte
 d'informations spécifique à certaine version.
 
 Représentation des objets
-==========================
+--------------------------
 
 Avec quelques exceptions, un objet est créé pour chaque enregistrement d'un 
 fichier de données TIGER/Line. Chaque fichier (c'est à dire, .RT1, .RTA) est 
@@ -78,7 +77,7 @@ le jeu de données (répertoire) consiste à des données de plus d'une région.
 Ce qui suit est une liste de types d'objet, et leur lien avec le produit TIGER/Line.
 
 CompleteChain
---------------
+***************
 
 Une *CompleteChain* est une polyligne avec un TLID associé (TIGER/Line ID). Les 
 objets *CompleteChain* sont établi à partir d'un enregistement de type 1 
@@ -93,7 +92,7 @@ la clé primaire, et est unique dans la couverture nationale entière de TIGER/L
 Ces objets ont toujours une géométrie 'line'.
 
 AltName
---------
+*********
 
 Ces objets sont dérivés des enregistrement de type 4 (Index pour Alterner des 
 Identifiants d'objet, *Index to Alternate Feature Identifiers*), et liés à un 
@@ -114,7 +113,7 @@ alternatifs.
 Ces objets n'ont pas de géométrie associée.
 
 FeatureIds
------------
+***********
 
 Ces objets sont dérivés des enregistrement du type 5 (Identifiants d'Objet de 
 chaîne Complète, *Complete Chain Feature Identifiers*). Chaque objet contient 
@@ -126,7 +125,7 @@ L'attribut *FEAT* est la clé primaire, et est unique dans le module région.
 Ces objets n'ont pas de géométrie associée.
 
 ZipCodes
----------
+*********
 
 Ces objets sont dérivés des enregistrements detype 6 (Données des Codes Postaux 
 et des Précisions d'Adresse Aditionnelle, *Additional Address Range and ZIP Code 
@@ -137,7 +136,7 @@ plusieurs à un entre les objets *ZipCodes* et *CompleteChain*.
 Ces objets n'ont pas de géométrie associée.
 
 Landmarks
------------
+**********
 
 Ces objets sont dérivés des enregistrements de type 7 (Objets Landmark, 
 *Landmark Feature*). Ils sont liés à un point ou à une zone de repère 
@@ -151,7 +150,7 @@ attachée. Il sera nécessaire de le collecter (via l'objet *AreaLandmark*) à
 partir d'un objet Polygone.
 
 AreaLandmarks
---------------
+**************
 
 Ces objets sont dérivé des enregistrement de type 8 (Polygone lié aux zone de 
 repérage, *Polygons Linked to Area Landmarks*). Chacun associé un objet landmark 
@@ -161,7 +160,7 @@ relation plusieurs à plusieurs avec les objets polygones.
 Ces objets n'ont pas de géométrie associée.
 
 KeyFeatures
--------------
+************
 
 Ces objets sont dérivés des enregistrements de type 9 (Codes d'entité 
 Géographique des Polygones, *Polygon Geographic Entity Codes*). Ils peuvent être 
@@ -171,7 +170,7 @@ associé avec un objet *FeatureIds* (via l'attribut *FEAT*), et un objet polygon
 Ces objets n'ont pas de géométrie associée.
 
 Polygon
---------
+********
 
 Ces objets sont dérivées des enregistrements de type A (Codes d'Entité des 
 Polygones Géographiques, *Polygon Geographic Entity Codes*) et si disponible le 
@@ -186,7 +185,7 @@ jeu de données TIGER et extraire la couche polygone avec une géométrie comme 
 shapefile.
 
 EntityNames
-------------
+************
 
 Ces objets sont dérivées des enregistrements de type C (Nomes d'Entité 
 Géographique).
@@ -194,7 +193,7 @@ Géographique).
 Ces objets n'ont pas de géométrie associée.
 
 IDHistory
------------
+**********
 
 Ces objets sont dérivés des enregistrements de type H (Historique des ID de 
 TIGER/LINE, *TIGER/Line ID History*). Ils peuvent être utilisés pour tracer le 
@@ -203,7 +202,7 @@ découpage, la fusion, la création et la suppression des objets *CompleteChain*
 Ces objets n'ont pas de géométrie associée.
 
 PolyChainLink
---------------
+**************
 
 Ces objets sont dérivés des enregistrement de type I (Liens entre les Polygones 
 et les Chaines Complète, *Link Between Complete Chains and Polygons*). Ils sont 
@@ -216,7 +215,7 @@ objets *CompleteChain*.
 Ces objets n'ont pas de géométrie associée.
 
 PIP
-----
+****
 
 Ces objets sont dérivés des enregistrements de type P (Point interne à un 
 Polygone, *Polygon Internal Point*). Ils sont reliés à un objet Polygone vie 
@@ -226,7 +225,7 @@ les objets polygones.
 Ces objets n'ont pas de géométrie associée. 
 
 ZipPlus4
----------
+********
 
 Ces objets sont dérivés des enregistrements de type Z (Codes ZIP + 4). Les 
 objets *ZipPlus4* ont une relation plusieurs à un avec les objets *CompleteChain*.
@@ -234,7 +233,7 @@ objets *ZipPlus4* ont une relation plusieurs à un avec les objets *CompleteChai
 Ces objets n'ont pas de géométrie associée. 
 
 Voir également
-===============
+---------------
 
 * http://www.census.gov/geo/www/tiger/ : Plus d'information sur le format de 
   fichier TIGER/Line, et les produits de données peuvent être trouvés sur cette 

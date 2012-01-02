@@ -1,12 +1,13 @@
 .. _`gdal.ogr.ogrinfo`:
 
-========
 ogrinfo
 ========
 
 Listes des informations sur une source de données géré par OGR.
 
-Utilisation :
+Usage
+------
+
 ::
     
     ogrinfo [--help-general] [-ro] [-q] [-where restricted_where]

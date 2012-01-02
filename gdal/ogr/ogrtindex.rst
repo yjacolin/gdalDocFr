@@ -1,12 +1,13 @@
 .. _`gdal.ogr.ogrtindex`:
 
-==========
 ogrtindex
 ==========
 
 Créer un index de tuile.
 
-**Utilisation :**
+Usage
+-------
+
 ::
     
     ogrtindex [-lnum n]... [-lname name]... [-f output_format]

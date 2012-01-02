@@ -1,18 +1,20 @@
 .. _`gdal.gdal.gdal_polygonize`:
 
-=================
 gdal_polygonize
 =================
 
 Produit une couche polygonale à partir d'un raster.
 
-**Usage :**
+Usage
+-----
+
 ::
     
     gdal_polygonize [-o name=value] [-nomask] [-mask filename] raster_file [-b band]
                 [-q] [-f ogr_format] out_file [layer] [fieldname]
 
-**Description :**
+Description
+------------
 
 Cette commande créée des polygones vectoriels pour toutes les zones connectés 
 d'un pixel dans un raster partageant une valeur commune. Chaque polygone est 

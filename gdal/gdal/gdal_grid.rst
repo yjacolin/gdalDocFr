@@ -1,13 +1,12 @@
 .. _`gdal.gdal.gdal_grid`:
 
-==========
 gdal_grid
 ==========
 
 créer une grille régulière à partir de données éparses.
 
 Usage
-=====
+-------
 
 
 Usage :
@@ -28,7 +27,7 @@ Usage :
 
 
 Description
-============
+------------
 
 Ce programme créé une grille régulière (raster) à partir des données 
 éparpillées à partir d'une source de données OGR. Les données en entrées seront 
@@ -93,12 +92,12 @@ choisir diverses méthodes d'interpolations.
 .. _`gdal.gdal.gdal_grid.algo`:
 
 Algorithmes d'interpolation
-=============================
+---------------------------
 
 Il y a plusieurs algorithmes d'interpolation disponible.
 
 invdist
--------
+********
 
 Inverse de la distance à la puissance. C'est l'algorithme par défaut. Il possède 
 les paramètres suivants :
@@ -126,7 +125,7 @@ les paramètres suivants :
 * **nodata :** valeur *NODATA* pour remplir les points vides (0.0 par défaut).
 
 average
---------
+********
 
 Algorithme de la moyenne mobile. Il possède les paramètres suivants :
 
@@ -148,7 +147,7 @@ la moyenne mobile. C'est une fenêtre qui sera moyennée lors du calcul des
 valeurs des nœuds de la grille.
 
 nearest
---------
+********
 
 Algorithme du plus proche voisin. Il possède les paramètres suivants :
 
@@ -165,7 +164,7 @@ Algorithme du plus proche voisin. Il possède les paramètres suivants :
 .. _`gdal.gdal.gdal_grid.metriques`:
 
 Métriques des données
-======================
+----------------------
 
 Outre les fonctionnalités d'interpolation ``gdal_grid can`` peut être utilisé 
 pour calculer certaines données métriques en utilisant la fenêtre définie et la 
@@ -207,7 +206,7 @@ Tous les métriques ont les mêmes ensembles d'options :
 .. _`gdal.gdal.gdal_grid.csv`:
 
 Lire des valeurs séparées par des virgules
-============================================
+-------------------------------------------
 
 Souvent vous avez un fichier texte avec une liste de valeurs XYZ séparées par 
 des virgules à utiliser (appelé fichier CSV). Vous pouvez facilement utiliser 
@@ -257,7 +256,7 @@ La page de description des fichiers :ref:`gdal.ogr.formats.csv` contient
 des détails sur le format CSV géré par GDAL/OGR.
 
 Exemple
-========
+--------
 
 Les exemples suivants pourraient créer un fichier raster TIFF à partir d'une 
 source de données VRT décrit dans la section :ref:`gdal.gdal.gdal_grid.csv` en 

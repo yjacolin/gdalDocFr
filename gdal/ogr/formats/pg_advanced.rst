@@ -1,6 +1,5 @@
 .. _`gdal.ogr.formats.pg_advanced`:
 
-====================================================
 Informations avancées du pilote PostgreSQL / PostGIS
 ====================================================
 
@@ -8,7 +7,7 @@ L'information collectée dans cette page traite de sujet avancé, non trouvé da
 la page :ref:`gdal.ogr.formats.pg`.
 
 Options de connexion relié aux schémas et tables
-=================================================
+--------------------------------------------------
 
 À partir de GDAL 1.8.0, l'ouverture de la base de données doit être significativement 
 plus rapide que dans les versions précédentes, l'utilisation des options *tables=* 
@@ -40,7 +39,7 @@ avez la table 'foo' dans le schéma public, et une table 'foo' dans le schéma
 seront listées : 'foo' (implicitement dans 'bar_schema') et 'public.foo'.
 
 Colonnes géométrique multiples
-===============================
+-------------------------------
 
 À partir de GDAL 1.6.0, le pilote PostgreSQL gère l'accès aux tables avec 
 plusieurs colonnes géométriques PostGIS. Pour de telles tables, il y aura autant 
@@ -59,7 +58,7 @@ Par conséquent, cette possibilité doit être utilisée essentiellement en lect
 seule.
 
 Couches
-=======
+--------
 
 À partir de GDAL 1.6.0, même quand PostGIS est activé, si l'utilisateur définit 
 la variable d'environnement 
@@ -102,7 +101,7 @@ données dans un autre format tout en évitant la redondance des données à par
 des vues.
 
 Vues nommées
-============
+-------------
 
 Quand PostGIS est activé pour la base de données accédée, les vues nommées sont 
 gérées, si et seulement si une entré dans la table *geometry_columns* existe. 
@@ -120,8 +119,8 @@ explicitement le nom de la vue dans l'option *table=* de la chaîne de
 connections. Voyez au-dessus. La contrainte est qu'OGR ne sera pas capable de 
 rapporter un SRS valide et de retrouver le bon type de la géométrie.
 
-Récuper le FID d'une feature nouvellement insérée
-==================================================
+Récupérer le FID d'une feature nouvellement insérée
+----------------------------------------------------
 
 À partir d'OGR 1.8.0 et des bases de données PostgreSQL >= 8.2, le FID d'une 
 feature (i.e. habtiduellement la valeur de la colonne *OGC_FID* pour une feature) 
@@ -157,7 +156,7 @@ Le comportement d'OGR < 1.8.0 peut être obtenu en définissant l'option de
 configuration *OGR_PG_RETRIEVE_FID* à FALSE.
 
 Avertissements
-===============
+---------------
 
 * La logique de reconnaissance des types est pour l'instant assez pauvre. Les 
   types *INT** et *NUMERIC(width,0)* sont mappé en *integer*, les types *FLOAT* 
@@ -172,7 +171,7 @@ Avertissements
   transaction et renverra un message d'erreur.
 
 Exemples avancés
------------------
+******************
 
 * Cet exemple montre l'utilisation de ``ogrinfo`` pour lister seulement les 
   couches définies par l'option *tables=* (à partir de GDAL 1.6.0).

@@ -1,6 +1,5 @@
 .. _`gdal.ogr.formats.edigeo`:
 
-========
 EDIGEO
 ========
 
@@ -32,7 +31,7 @@ faut gérer un gros échange de fichier EDIGEO.
 .. -->
 
 Étiquettes
------------
+------------
 
 Pour les fichiers PCI d'EDIGEO, les étiquettes sont contenu dans la couche 
 ID_S_OBJ_Z_1_2_2. OGR exportera les styles en suivant la 

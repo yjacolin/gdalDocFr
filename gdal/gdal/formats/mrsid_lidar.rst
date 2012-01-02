@@ -1,6 +1,5 @@
 .. _`gdal.gdal.formats.mrsid_lidar`:
 
-================================================================
 Compression Lidar de MrSID/MG4 / Fichiers view de Cloud ponctuel
 ================================================================
 
@@ -23,10 +22,10 @@ logiciel open source. Vous devez contacter LizardTech pour l'obtenir (voyez le
 lien en bas de ce chapitre).**
 
 Exemple de fichier View (à partir de la spécification des documents View)
-==========================================================================
+--------------------------------------------------------------------------
 
 Fichier .view le plus simple possible
---------------------------------------
+**************************************
 
 Le plus simple moyen pour afficher un fichier MG4 est de l'envelopper dans un 
 fichier View (.view) comme cela. Ici, la référence relative au fichier MG4 
@@ -46,7 +45,7 @@ qui est le type de données de la bande que nous allons exposer.
     </PointCloudView>
 
 Découpe des données
---------------------
+********************
 
 Ceci est similaire à l'exemple ci-dessus, mais nous utilisons la balise 
 optionnelle ClipBox pour sélectionner une étendue de 300 mètres nord-sud via le
@@ -63,7 +62,7 @@ nous pourrions aussi découper dans la direction Z.
 
 
 Expose as a bare earth (Max) DEM
----------------------------------
+*********************************
 
 Ici, nous exposons une seule bande (élévation) mais désirons seulement les points 
 qui ont été classifié comme "Ground". *ClassificationFitler* définie une valeur de 
@@ -84,7 +83,7 @@ la plus grande des deux valeurs d'élévation.
     </PointCloudView>
 
 Image d'intensité
-------------------
+******************
 
 Ici nous exposons une image d'intensité à partir du cloud ponctuel.
 
@@ -100,7 +99,7 @@ Ici nous exposons une image d'intensité à partir du cloud ponctuel.
 
 
 Images RVB
------------
+***********
 
 Certaines images cloud ponctuelle inclut des données RVB. Si c'est le cas, vous 
 pouvez utiliser un fichier .view comme celui-ci pour exposer ces données.
@@ -122,12 +121,12 @@ pouvez utiliser un fichier .view comme celui-ci pour exposer ces données.
 
 
 Gestion de l'écriture 
-======================
+----------------------
 
 Ce pilote ne gère pas l'écriture de fichiers MG4.
 
 Limitations de l'implémentation actuelle
-========================================
+-----------------------------------------
 
 Seulement une balise *<InputFile>* est gérée. Elle doit référencer un fichier MG4.
 
@@ -141,7 +140,7 @@ et les paramètres invalides. Plusieurs entrées invalides échoueront probablem
 silencieusement.
 
 Voir également
-===============
+---------------
 
 * Implémenté dans *gdal/frmts/mrsid_lidar/gdal_MG4Lidar.cpp*
 * Spécification des `documents de visualisation de MrSID/MG4 LiDAR`_

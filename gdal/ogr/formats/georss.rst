@@ -1,6 +1,5 @@
 .. _`gdal.ogr.formats.georss`:
 
-=========================================================
 GeoRSS : Geographically Encoded Objects pour les flux RSS
 =========================================================
 
@@ -37,7 +36,7 @@ sont récupérés à partir du contenu des éléments *<item>* (document RSS) ou
 *<entry>* (document Atom).
 
 Problèmes d'encodage
-=====================
+--------------------
 
 La bibliothèque Expat gère la lecture des encodages internes suivants :
 
@@ -62,7 +61,7 @@ Lors de l'écriture du fichier GeoRSS, le pilote s'attend à ce que du contenu e
 UTF-8 lui soit passé.
 
 Définitions des champs
-=========================
+----------------------
 
 Lors de la lecture d'un document, le pilote réalisera d'abord une lecture 
 complète du document pour obtenir les définitions du champ.
@@ -114,7 +113,7 @@ Sera interprété dans le modèle SF d'OGR comme :
     POINT (2 49)
 
 Problèmes lors de la création
-==============================
+-----------------------------
 
 À l'export, toutes les couches sont écrites en un seul fichier. La mise à jour 
 de fichiers existant n'est pas gérée.
@@ -184,7 +183,7 @@ l'option *-sql* de la commande ogr2ogr (voir RFC21 :
 `cast des types SQL d'OGR et alias des noms de champ <http://trac.osgeo.org/gdal/wiki/rfc21_ogrsqlcast>`_)
 
 Exemple
-========
+----------
 
 * la commande ''ogrinfo'' peut être utilisé pour dumper le contenu d'un fichier 
   de données GeoRSS :
@@ -240,7 +239,7 @@ Exemple
     gdal.Unlink('/vsimem/temp')
 
 Voir aussi
-==========
+-----------
 
 * `Page pour le format GeoRSS <http://georss.org/>`_
 * `Page Wikipedia pour le format GeoRSS <http://fr.wikipedia.org/wiki/GeoRSS>`_

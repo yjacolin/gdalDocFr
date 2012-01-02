@@ -1,6 +1,5 @@
 .. _`gdal.gdal.formats.elas`:
 
-========================================================
 ELAS - Earth Resources Laboratory Applications Software
 ========================================================
 

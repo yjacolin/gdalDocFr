@@ -1,6 +1,5 @@
 .. _`gdal.gdal.formats.xyz`:
 
-=========================
 XYZ -- ASCII Gridded XYZ
 =========================
 
@@ -29,11 +28,11 @@ chaque ligne.
 
 L'ouverture d'un gros jeu de données peut être lente puisque le pilote doit scanner 
 l'ensemble du fichier pour déterminer la taille du jeu de donnes et la résolution 
-spatiale. Le pilote autodétectera le type de données parmi Byte, Int16, Int32 ou 
+spatiale. Le pilote auto-détectera le type de données parmi Byte, Int16, Int32 ou 
 Float32.
 
 Options de création
-===================
+------------------
 
 * **COLUMN_SEPARATOR=a_value :** où a_value est une chaîne utilisée pour séparer 
   la valeur des colonnes X,Y et Z. Par défaut à un espace
@@ -41,7 +40,7 @@ Options de création
   contenu est X <col_sep> Y <col_sep> Z). NO par défaut
 
 Voir également
-==============
+--------------
 
 * Documentation de la commande :ref:`gdal.gdal.gdal_grid`
 

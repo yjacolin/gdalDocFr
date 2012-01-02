@@ -267,5 +267,19 @@ Celle-ci vous renvoie :
         USGSDEM (rw): USGS Optional ASCII DEM (and CDED)
         GXF (ro): GeoSoft Grid Exchange Format
 
+Comment réaliser des calculs à la volée sur deux couches différentes avec GDAL ?
+=================================================================================
+
+GDAL possède une fonctionnalité méconnus : les plugins. Vous pouvez écrire vos 
+propres fonctions/pilote en C++ et les utiliser dans GDAL.
+
+Il faut réaliser un fichier virtuel, une bibliothèque qui contiendra les fonctions et 
+enregistrer la bibliothèque créé dans GDAL à l'aide de la variable d'environnement 
+*GDAL_DRIVER_PATH*.
+
+Voyez le tutorial des fichiers :ref:`gdal.gdal.formats.vrt` et 
+le ticket `#3367 <http://trac.osgeo.org/gdal/ticket/3367>`_ pour un exemple de 
+bibliothèque.
+
 
 .. yjacolin at free.fr, Yves Jacolin - 2009/03/10 21:27

@@ -1,6 +1,5 @@
 .. _`gdal.gdal.formats.terragen`:
 
-====================================
 Terragen --- Terragen™ Terrain File
 ====================================
 
@@ -14,7 +13,7 @@ Les élévations vides ne sont pas gérées. Les pixels sont considéré comme d
 points.
 
 Lecture
-=========
+--------
 
 ``dataset::GetProjectionRef()`` renvoie un système de coordonnées local en 
 utilisant des mètres.
@@ -25,7 +24,7 @@ Les élévations sont en *Int16*. Vous devez utiliser ``band::GetScale()`` et
 ``band::GetOffset()`` pour les convertir en mètres.
 
 Écriture
-=========
+---------
 
 Utilisez l'appel *Create*. Définissez l'option *MINUSERPIXELVALUE* (de type 
 *float*) pour l'élévation la plus basse de vos données élévation, et 
@@ -43,7 +42,7 @@ utilisé pour utiliser au mieux le domaine sur 16 bit.
 Les élévations sont en *Float32*.
 
 Roundtripping
-===============
+--------------
 
 Les erreurs par trip tendent à quelques centimètres pour les élévations et 
 jusqu'à un ou deux mètres pour l'étendue au sol si des systèmes de coordonnées 
@@ -51,7 +50,7 @@ basé sur les degrés sont écrit. Les gros MNT en degré implique des distorsio
 inévitable depuis que le pilote utilise seulement des mètres.
 
 Historique
-============
+-----------
 
 * **v1.0 (Mar 26/06) :** Création ;
 * **v1.1 (Apr 20/06) :** Ajout des corrections de la lecture de SIZE et de la 
@@ -59,7 +58,8 @@ Historique
 * **v1.2 (Jun 6/07) :** Amélioration de la détermination de l'échelle et de la 
   hauteur de base lors de l'écriture.
 
-**Lisez également :**
+Lisez également
+---------------
 
 * Implémenté dans *gdal/frmts/terragen/terragendataset.cpp*.
 * Lisez le fichier `readme.txt <http://gdal.org/readme.txt>`_ pour l'installation 

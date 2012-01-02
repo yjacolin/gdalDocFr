@@ -1,6 +1,5 @@
 .. _`gdal.gdal.formats.jp2openjpeg`:
 
-==================================================================
 JP2OpenJPEG --- pilote JPEG2000 basé sur la bibliothèque OpenJPEG
 ==================================================================
 
@@ -27,7 +26,7 @@ xml:XMP.
 En création, le piloet ne gère pas l'écriture de GeoJP2 ou GMLJP2.
 
 Options de création
-====================
+-------------------
 
 * **CODEC=JP2/J2K :** JP2 ajoutera des boîtes JP2 autour des données codestream. 
   La valeur est déterminé automatiquement à partir de l'extension du fichier. Si 
@@ -44,7 +43,7 @@ Options de création
 * **EPH=YES/NO :** YES signifie générer des segments marqueur EPH. No par défaut.
 
 Patches pour la bibliothèque OpenJPEG
-======================================
+--------------------------------------
 
 Liens vers des patches utiles à appliquer à OpenJPEG (valide pour la branche v2 à la révision r565) :
 
@@ -52,7 +51,7 @@ Liens vers des patches utiles à appliquer à OpenJPEG (valide pour la branche v
 *  `Fixe un conflit de noms de fonction interne avec Jaspe qui peuvent entraîner des crashes <http://code.google.com/p/openjpeg/issues/detail?id=30>`_
 
 Voir également
-==================
+---------------
 
 * Implémenté dans *gdal/frmts/openjpeg/openjpegdataset.cpp*.
 * `Page official du JPEG-2000 <http://www.jpeg.org/JPEG2000.html>`_

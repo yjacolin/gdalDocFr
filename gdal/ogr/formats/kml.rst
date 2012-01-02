@@ -1,6 +1,5 @@
 .. _`gdal.ogr.formats.kml`:
 
-==============================
 KML - Keyhole Markup Language
 ==============================
 
@@ -17,7 +16,7 @@ le pilote KML *(il existe des scripts supplémentaires fournies avec le projet
 GDAL qui peuvent construire des export d'autres sortes)*.
 
 Lecture du KML
-==============
+---------------
 
 La lecture du KML est seulement disponible si GDAL/OGR est compilé avec le 
 parser XML Expat, autrement seule l'écriture du KML sera gérée.
@@ -30,7 +29,7 @@ ne sera pas transmit à la sortie. Depuis GDAL 1.6.1, les répertoires contenant
 types de géométries multiples, comme les points et les polygones, sont gérés.
 
 Écriture du KML
-================
+----------------
 
 Puisque toutes les géométries du KML ne sont pas représenté dans le modèle de 
 géométrie *Features*, vous ne pourrez pas générer plusieurs attributs 
@@ -57,7 +56,7 @@ lignes et autres attributs de styles. Essayez sur des échantillons pour avoir
 une meilleure vision des possibilités.
 
 Problèmes d'encodage
----------------------
+********************
 
 La bibliothèque Expat gère la lecture des encodages internes suivants :
 
@@ -81,7 +80,7 @@ gérés par la commande *iconv* par exemple et changer la valeur du paramètre
 Lors de l'écriture du fichier KML, le pilote s'attend à du contenu en UTF-8.
 
 Options de création
---------------------
+*******************
 
 Les options de création suivantes sont gérées :
 
@@ -103,7 +102,7 @@ Les options de création suivantes sont gérées :
     ogr2ogr -f KML output.kml input.shp -dsco AltitudeMode=absolute
 
 Exemple
-========
+-------
 
 La commande ``ogr2ogr`` peut être utilisé pur faire un dump d'une requête PostGIS 
 vers le format KML :
@@ -117,7 +116,7 @@ Pour faire un dump d'un fichier .kml comme OGR le voit :
     ogrinfo -ro somedisplay.kml
 
 Avertissement
-=============
+-------------
 
 Google Earth semble avoir quelques limites avec le nombre de coordonnées dans 
 des géométries complexes comme les polygone. Si le problème apparait, les 
@@ -131,7 +130,7 @@ Voici la discussion sur ce problème sur le
 dans le thread `polygone affiché avec des rayures verticales <http://groups.google.com/group/kml-support-getting-started/browse_thread/thread/e6995b8073e69c41>`_.
 
 Voir également
-===============
+---------------
 
 * `Spécification KML <http://earth.google.com/kml/kml_intro.html>`_
 * `Cours KML <http://www.keyhole.com/kml/kml_tut.html>`_

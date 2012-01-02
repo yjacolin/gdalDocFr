@@ -1,6 +1,5 @@
 .. _`gdal.gdal.formats.wcs`:
 
-================================
 WCS -- OGC Web Coverage Service
 ================================
 
@@ -84,7 +83,7 @@ description du service est le nom du fichier. Pour le moment la gestion du temps
 n'est pas disponible pour les versions autres que WCS 1.0.0. 
 
 Voir également
-==============
+---------------
 
 * Standards WCS de l'OGC : http://www.opengeospatial.org/standards/wcs
 

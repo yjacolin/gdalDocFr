@@ -1,6 +1,5 @@
 .. _`gdal.gdal.formats.bag`:
 
-==================================
 BAG --- Bathymetry Attributed Grid
 ==================================
 
@@ -23,7 +22,7 @@ Le XML complet de métadonnées est disponible dans le domaine de métadonnées
 Les valeurs Nodata, minimum et maximum pour chaque bande sont également fournies.
 
 Voir également
-===============
+---------------
 
 * Implémenté dans *gdal/frmts/hdf5/bagdataset.cpp*.
 * Le projet Open Navigation Surface <http://www.opennavsurf.org>`_

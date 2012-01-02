@@ -1,6 +1,5 @@
 .. _`gdal.ogr.formats.dxf`:
 
-=============
 DXF d'AutoCAD
 =============
 
@@ -23,7 +22,7 @@ Les features possèderont toutes les attributs génériques suivants :
 
 
 Éléments gérés
-================
+---------------
 
 Les types d'éléments suivants sont gérés :
 
@@ -59,7 +58,7 @@ Cet angle est définie par *OGR_ARC_STEPSIZE*. Par défaut à 4 degrés, mais pe
 écrasé par la variable de configuration *OGR_ARC_STEPSIZE*.
 
 DXF_INLINE_BLOCKS
-==================
+-------------------
 
 Le comportement par défaut pour les entités INSERT est d'être étendue avec la 
 géométrie du bloc qu'ils référencent. Cependant si l'option de configuration 
@@ -82,7 +81,7 @@ disponible via la couche blocs. En export cette configuration entrainera la
 création de blocs identiques.
 
 Encodages des caractères
-========================
+--------------------------
 
 Normalement les fichiers DXF sont dans l'encodage ANSI_1252 / Win1252.  GDAL/OGR 
 tente de traduire cela vers l'UTF-8 lors de la lecture puis en ANSI_1252 pour 
@@ -103,7 +102,7 @@ du DXF. Utiliser le nom "UTF-8" pour le *DXF_ENCODING* évitera toute tentative 
 re-encodage lors de la lecture.
 
 Problèmes de création
-======================
+----------------------
 
 Les fichiers DXF sont écrits au format AutoCAD 2000. Un en-tête standard (Tout 
 jusqu'au mot clé ENTITIES) est écrit à partir du fichier *$GDAL_DATA/header.dxf*, 
@@ -130,7 +129,7 @@ des fichiers DXF complet. Le pilote les scannera et extraira seulement les
 portions nécessaires (portion avant ou après la section ENTITIES). 
 
 Références des blocs
----------------------
+*********************
 
 Il est possible d'exporter un "bloc" de couche vers le DXF en plus de la couche 
 "entities" dans le but de produire les définitions des BLOCKs réel DXF dans le 
@@ -151,7 +150,7 @@ définie à FALSE reproduira approximativement les blocs originaux et gardera le
 entités INSERT comme des entités INSERT plutôt que des les éclater.
 
 Définitions des couches
-------------------------
+***********************
 
 Lors de l'écriture des entités, si il est rempli  le champs LayerName est utilisé 
 pour définir la couche entités écrite. Si la couche n'est pas déjà définie dans 
@@ -159,7 +158,7 @@ le modèle d'en-tête alors une nouvelle définition de couche sera introduite, 
 de la définition de la couche par défaut ("0").
 
 Définitions de type de ligne
-------------------------------
+*****************************
 
 Lors de l'écriture des entités LWPOLYLINE les règles suivantes s'appliquent au 
 regard des définitions Linetype.

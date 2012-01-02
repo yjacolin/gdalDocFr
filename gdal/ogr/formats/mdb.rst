@@ -1,6 +1,5 @@
 .. _`gdal.ogr.formats.mdb`:
 
-====================
 Access MDB databases
 ====================
 
@@ -20,7 +19,7 @@ les autres bases de données MDB, toutes les tables seront présentées comme co
 OGR.
 
 Comment compiler le pilote MDB (sur Linux)
-===========================================
+-------------------------------------------
 
 Vous avez besoin d'un JDK (JRE n'est pas suffisant) pour compiler le pilote.
 
@@ -42,7 +41,7 @@ Sur les autres version de Linux, vous pouvez devoir spécifier :
 où */path/to/libjvm/directory* est par exemple */usr/lib/jvm/java-6-openjdk/jre/lib/amd64*.
 
 Comment lancer le pilote MDB (sur Linux)
-========================================
+-----------------------------------------
 
 Vous avez besoin de JRE et 3 JAR externe pour lancer le pilote.
 
@@ -56,13 +55,13 @@ Vous avez besoin de JRE et 3 JAR externe pour lancer le pilote.
    pointer explicitement avec la variable d'environnement *CLASSPATH*.
 
 Ressources
-==========
+-----------
 
 * Page principale de la bibliothèque `Jackcess <http://jackcess.sourceforge.net/>`_.
 * Utilitaire qui contient les `dépendances JARs <http://mdb-sqlite.googlecode.com/files/mdb-sqlite-1.0.2.tar.bz2>`_ nécessaires.
 
 Voir également
-===============
+--------------
 
 * La page du pilote :ref:`gdal.ogr.formats.pgeo`.
 * La page du pilote :ref:`gdal.ogr.formats.geomedia`

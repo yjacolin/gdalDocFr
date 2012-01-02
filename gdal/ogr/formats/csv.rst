@@ -1,6 +1,5 @@
 .. _`gdal.ogr.formats.csv`:
 
-============================
 Comma Separated Value (.csv)
 ============================
 
@@ -43,7 +42,7 @@ précision de chaque colonne,par exemple "Integer(5)","Real(10.7)","String(15)".
 Le pilote utilisera alors ces types comme spécifiés pour les colonnes CSV.
 
 Format
-======
+------
 
 Les fichiers CSV ont une ligne pour chaque objet (enregistrement) dans la couche 
 (table). Les valeurs du champ attributaire sont séparées par des virgules. Au 
@@ -88,7 +87,7 @@ scripts ou d'autres mécanismes peuvent généralement convertir les autres
 variations sous une forme qui est compatible avec le pilote CSV d'OGR.
 
 Lecture de fichier CSV contenant des informations spatiales
-=============================================================
+------------------------------------------------------------
 
 Il est possible d'extraire l'information spatiale (points) d'un fichier CSV qui 
 possède des colonnes pour les coordonnées X et Y, par l'utilisation du pilote 
@@ -139,7 +138,7 @@ et ``ogrinfo -ro -al test.vrt`` renverra :
         POINT (0.75 47.5 0)
 
 Problèmes lors de la création
-===============================
+------------------------------
 
 Le pilote gère la création de nouvelles base de données (comme un répertoire de 
 fichier .csv), en ajoutant de nouveaux fichiers csv à un répertoire existant un 
@@ -168,7 +167,7 @@ Options de création de couche:
   séparateur de champ. Valeur par défaut : COMMA
 
 Exemples
----------
+*********
 
 * cet exemple montre l'utilisation d``'ogr2ogr`` pour transformer un shapefile 
   avec une géométrie ponctuelle en un fichier .csv avec les coordonnées X,Y,Z 
@@ -178,7 +177,7 @@ Exemples
       ogr2ogr -f CSV output.csv input.shp -lco GEOMETRY=AS_XYZ
 
 Sources de données particulières
-=================================
+---------------------------------
 
 Le pilote CSV peut également lire des fichiers dont la structure est proche des 
 fichiers CSV :
@@ -189,7 +188,7 @@ fichiers CSV :
 * The allCountries file from <a href="http://www.geonames.org">GeoNames</a> (OGR >= 1.9.0 for direct import)
 
 Autres remarques
-=================
+-----------------
 
 * le développement du pilote CSV d'OGR a été financé par 
   `DM Solutions Group <http://www.dmsolutions.ca/>`_ et `GoMOOS <http://www.gomoos.org/>`_. 

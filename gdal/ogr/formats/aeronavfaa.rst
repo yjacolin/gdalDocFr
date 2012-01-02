@@ -1,6 +1,5 @@
 .. _`gdal.ogr.formats.aeronavfaa`:
 
-=============
 Aeronav FAA
 =============
 
@@ -9,7 +8,7 @@ Aeronav FAA
 This driver reads text files describing aeronav information - obstacles, navaids and routes - as provided by the FAA.<p>
 
 Voir également
-===============
+---------------
 
 * `Fichier Digital Obstacle <http://www.faa.gov/air_traffic/flight_info/aeronav/productcatalog/digitalproducts/dof/>`_
 * `Fichier données NAVAID Digital <http://www.faa.gov/air_traffic/flight_info/aeronav/productcatalog/digitalproducts/navaid/>`_

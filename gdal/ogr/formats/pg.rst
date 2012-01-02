@@ -1,6 +1,5 @@
 .. _`gdal.ogr.formats.pg`:
 
-=====================
 PostgreSQL / PostGIS
 =====================
 
@@ -17,7 +16,7 @@ Vous pouvez trouver des informations additionnelles sur le pilote dans la page
 :ref:`gdal.ogr.formats.pg_advanced`.
 
 Connexion à une base de données
-================================
+-------------------------------
 
 Pour se connecter à une source de données Postgres, utilisez une chaîne de 
 connections définissant le nom de la base de données, avec autant de paramètres 
@@ -44,7 +43,7 @@ Il est également possible d'omettre le nom de la base de données et se connect
     postgres.
 
 Les colonnes géométriques
-==========================
+---------------------------
 
 Si la table *geometry_columns* existe, alors toutes les tables listées et les 
 vues nommées seront traitées comme des couches OGR. Autrement toutes les tables 
@@ -55,7 +54,7 @@ utilisateurs attributaires seront traitées comme des couches.
 introduit dans PostGIS 1.5.
 
 Requêtes SQL
-============
+------------
 
 Le pilote PostgreSQL envoie les commandes SQL directement à PostgreSQL par 
 défaut, plutôt que de les évaluer en interne lors de l'utilisation de l'appel 
@@ -70,7 +69,7 @@ Le pilote PostgreSQL dans OGR gère les appels *OGRDataSource::StartTrasaction()
 dans le sens normal de SQL.
 
 Problèmes lors de la création
-==============================
+------------------------------
 
 Le pilote PostgreSQL ne gère pas la création de nouveau jeu de données (une 
 base de données dans PostgreSQL), mais il permet la création de nouvelles 
@@ -98,12 +97,12 @@ Les erreurs peuvent être récupérées en englobant cette commande avec la pair
 *CPLPushErrorHandler()/CPLPopErrorHandler()*.
 
 Options de création de jeu de données
---------------------------------------
+*************************************
 
 Aucune.
 
 Options de création de couches
--------------------------------
+********************************
 
 * **GEOM_TYPE :** l'option de création de couche *GEOM_TYPE* peut être 
   définie à *Geometry*, "geography" (PostGIS >= 1.5), *BYTEA* ou *OID* pour forcer le type de la géométrie 
@@ -154,7 +153,7 @@ Options de création de couches
   et le nom de la table. YES par défaut.
 
 Options de configuration
---------------------------
+*************************
 
 Il y a une variété d'`options de configuration <http://trac.osgeo.org/gdal/wiki/ConfigOptions>`_ 
 qui aide à contrôler le comportement de ce pilote.
@@ -177,7 +176,7 @@ qui aide à contrôler le comportement de ce pilote.
   valeur par défaut est donc NO.
 
 Exemples
-=========
+---------
 
 * Des traductions simples de shapefile dans PostgreSQL. la table 'abc' sera crée 
   avec les géométries de *abc.shp* et les attributs de *abc.dbf*. L'instance de 
@@ -220,7 +219,7 @@ Exemples
     ogrinfo -ro PG:'host=myserver.velocet.ca user=postgres dbname=warmerda'
 
 FAQ
------
+*****
 
 * Pourquoi ne puis pas voir mes tables ? PostGIS est installé et j'ai des données.
     Vous devez avoir les permissions sur toutes les tables que vous voulez lire 
@@ -233,7 +232,7 @@ FAQ
     *PG_LIST_ALL_TABLES* à YES. (par exemple ``ogrinfo --config PG_LIST_ALL_TABLES YES PG:xxxxx``).
 
 Lisez également
-===============
+----------------
 
 * :ref:`gdal.ogr.formats.pg_advanced`
 * :ref:`gdal.ogr.formats.pgdump`

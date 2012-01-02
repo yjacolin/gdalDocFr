@@ -2,7 +2,6 @@
 
 .. _`gdal.gdal.formats.mff2`:
 
-===========================
 MFF2 -- Vexcel MFF2 Image
 ===========================
 
@@ -36,10 +35,10 @@ de 8, 16, 32) devraient être gérés.
 .. note:: implémenté dans gdal/frmts/raw/hkvdataset.cpp.
 
 Détails du format
-=================
+-----------------
 
 Structure générale du MFF2
----------------------------
+***************************
 
 Un « fichier » MFF2 est en réalité un ensemble de fichiers stockés dans un 
 répertoire contenant un fichier d'en-tête ASCII nommé « attrib » et des données 
@@ -51,7 +50,7 @@ Les fichiers ASCII sont arrangés sous forme de pairs clé=valeur. Les pairs
 autorisées pour chaque fichier sont décrites ci-dessous.
 
 Le fichier "attrib"
---------------------
+********************
 
 Au minimum, le fichier « attrib » doit contenir l'étendue de l'image, la taille 
 en pixel en octets, l'encodage des pixels et le type des données, et l'ordre 
@@ -83,14 +82,14 @@ données binaire.
     channel.interleave = { *pixel tile sequential }
 
 Le fichier "image_data"
------------------------
+***********************
 
 Le fichier « image_data » est constitué de données binaire brute avec une 
 étendue, l'encodage du pixel, et le nombre de canaux comme indiqué dans le 
 fichier « attrib ».
 
 Le fichier "georef"
---------------------
+*******************
 
 Le fichier « georef » est utilisé pour décrire des informations de géocodage et 
 de projection pour les données binaires. Par exemple,
@@ -135,7 +134,7 @@ Remarquez que les coins sont toujours exprimé en latitude/longitude, même pour
 les images projetées.
 
 Projection gérées
------------------
+******************
 
 image projetée latitude/longitude Orthogonal -ll, avec les latitudes parallèles 
 aux lignes et les longitudes parallèles aux colonnes. Paramètres : nom du 
@@ -152,7 +151,7 @@ méridien central valide le plus proche basé sur la longitude centrale de l'ima
 en sortie. La latitude à l'origine, de la projection UTM est toujours de 0 degré.
 
 Ellipsoïdes reconnus
----------------------
+*********************
 
 Le format MFF2 associe les noms suivants avec les paramètres du rayon à 
 l'équateur et le coefficient à l'aplatissement de l'ellipsoïde :
@@ -191,7 +190,7 @@ l'équateur et le coefficient à l'aplatissement de l'ellipsoïde :
 
 
 Explication des champs
------------------------
+***********************
 
 * **channel.enumeration :**  (optionnelle seulement nécessaire pour les 
   multibandes) Nombre de canaux dedonnées (par exemple 3 pour rgb)

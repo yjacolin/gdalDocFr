@@ -1,6 +1,5 @@
 .. _`gdal.ogr.formats.ogdi`:
 
-=============
 OGDI Vectors
 =============
 
@@ -52,7 +51,7 @@ Les couches Raster ne peuvent pas être lu avec ce pilote mais peut être récup
 avec le pilote Raster OGDI de GDAL.
 
 Exemples
-=========
+---------
 
 Exemple d'usage d'``ogrinfo`` :
 ::
@@ -80,7 +79,7 @@ les guillemets du nom de la couche :
            -sql 'select * from "polbndl@bnd(*)_line" where use=26'
 
 Voir également
-===============
+----------------
 
 * `OGDI.SourceForge.Net <http://ogdi.sourceforge.net/>`_
 * `Couvertures VMap0 <http://www.terragear.org/docs/vmap0/coverage.html>`_

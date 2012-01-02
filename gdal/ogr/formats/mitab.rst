@@ -1,6 +1,5 @@
 .. _`gdal.ogr.formats.mitab`:
 
-=======================
 MapInfo TAB et MIF/MID
 =======================
 
@@ -24,7 +23,7 @@ Les informations de système de coordonnées de Mapinfo sont gérées en lecture
 écriture.
 
 Problèmes de création
-======================
+----------------------
 
 Le format des fichiers .TAB nécessite que les limites (l'extension géographique) 
 d'un nouveau fichier soient indiquées avant l'écriture des premières 
@@ -57,13 +56,13 @@ limitations :
 
 
 Options de création de jeux de données
-=======================================
+---------------------------------------
 
 * **FORMAT=MIF :** Pour créer des fichiers .MIF/.MID au lieu de fichiers .TAB 
   (la sortie est en .TAB par défaut).
 
 Options de création de couche
-==============================
+------------------------------
 
 * **SPATIAL_INDEX_MODE=QUICK :** A utiliser pour activer le "mode d'indexation 
   spatiale rapide".
@@ -79,14 +78,14 @@ en fait le type d'index spatial produit par le pilote .TAB d'OGR avant GDAL
 rapide, mais les requêtes spatiales peuvent être jusqu'à 30 fois plus lentes.
 
 Compatibilité
----------------
+**************
  
 Avant la v1.8.0, le pilote utilisait d'une manière incorrect un "." comme 
 délimiteur pour les paramètres id: et à partir de v1.8.0 le pilote utilise une 
 virgule comme délimiteur comme le prévoie la spécification Feature Style d'OGR.
 
 Voir aussi
-==========
+----------
 
 * `MITAB <http://mitab.maptools.org/>`_
 

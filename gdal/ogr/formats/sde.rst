@@ -1,6 +1,5 @@
 .. _`gdal.ogr.formats.sde`:
 
-================
 ESRI ArcSDE
 ================
 
@@ -60,7 +59,7 @@ qualifié. À cause de cela, il est généralement préférable de toujours util
 des noms entièrement qualifiés.
 
 Options de création de couches
-==============================
+--------------------------------
 
 * **OVERWRITE :** peut être définie pour permettre l'écrasement d'une 
   couche existante pendant le processus de création de couche. Si définie, et 
@@ -90,7 +89,7 @@ Options de création de couches
   GDAL/OGR 1.9.0.
 
 Variables d'environnement
-=========================
+--------------------------
 
 * **OGR_SDE_GETLAYERTYPE :** peut être à *TRUE* pour déterminer le type 
   de géométrie à partir de la base de données. Autrement, le pilote SDE 
@@ -108,7 +107,7 @@ Variables d'environnement
   GDAL/OGR 1.9.0.
 
 Exemples
-=========
+---------
 
 Voyez le script test ``ogr_sde.py`` pour des exemples de chaîne de 
 connections et des usages de ce pilote.

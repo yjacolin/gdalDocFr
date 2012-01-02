@@ -1,17 +1,19 @@
 .. _`gdal.gdal.gdal_fillnodata`:
 
-================
 gdal_fillnodata
 ================
 
-**Usage :**
+Usage
+-----
+
 ::
     
     gdal_nodatafill [-q] [-md max_distance] [-si smooth_iterations]
                 [-o name=value] [-b band]
                 srcfile [-nomask] [-mask filename] [-of format] [dstfile]
 
-**Description :**
+Description
+-------------
 
 Le script ``gdal_nodatafill.py`` remplit les régions sélectionné (généralement 
 des zones *nodata*) en interpolant à partir de pixels valides autour des bords 

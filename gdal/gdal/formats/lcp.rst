@@ -2,7 +2,6 @@
 
 .. _`gdal.gdal.formats.lcp`:
 
-===========================================
 Pilote GDAL pour le format FARSITE v.4 LCP
 ===========================================
 

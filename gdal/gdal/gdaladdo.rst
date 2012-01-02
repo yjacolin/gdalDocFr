@@ -1,6 +1,5 @@
 .. _`gdal.gdal.gdaladdo`:
 
-=========
 gdaladdo
 =========
 
@@ -64,7 +63,7 @@ associé disponible pour une utilisation directe avec Imagine ou ArcGIS ainsi
 que les applications GDAL (par exemple --config USE_RRD YES).
 
 Aperçus externes dans le format GeoTIFF
-========================================
+----------------------------------------
 
 Les aperçus externes créés dans un format TIFF peuvent être compressés en 
 utilisant l'option de configuration ``COMPREES_OVERVIEW``. Toutes les méthodes 

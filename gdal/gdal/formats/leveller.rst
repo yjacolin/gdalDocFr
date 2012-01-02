@@ -1,6 +1,5 @@
 .. _`gdal.gdal.formats.leveller`:
 
-=========================================
 Leveller --- Daylon Leveller Heightfield
 =========================================
 
@@ -19,9 +18,8 @@ Le type de bande est toujours Float32, même avec les formats versions 4 et 5
 utilise physiquement des points fixes de 16.16. Le pilote les convertit en point 
 flottant.
 
-
 Lecture
-========
+--------
 
 ``dataset::GetProjectionRef()`` renverra seulement un système de coordonnée pour 
 les fichiers de versions 4 à 6.
@@ -41,7 +39,7 @@ physique vers celle logique (c'est à dire brute vers celle du monde réelle)
 pour les données d'élévation.
 
 Écriture
-========
+---------
 
 L'appel ``dataset::Create()`` est géré, mais pour les fichiers de version 7 
 seulement.
@@ -58,13 +56,14 @@ logiques (le monde réel) vers les élévations physiques.
 Les informations d'en-tête sont écrit lors du premier appel à *band::IWriteBlock*.
 
 Historique
-===========
+-----------
 
 * v1.2 (Jul 17/07) : ajout de la version 7 et gestion de *Create*.
 * v1.1 (Oct 20/05) : correction des erreurs dans coordsys et dans « elev 
   scaling » errors.
 
-**Lire également :**
+Lire également
+---------------
 
 * Implémenté dans gdal/frmts/leveller/levellerdataset.cpp.
 * Le SDK de Leveller, qui documente le format Leveller : 

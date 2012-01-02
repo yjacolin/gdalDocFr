@@ -1,6 +1,5 @@
 .. _`gdal.gdal.formats.isis2`:
 
-============================================================
 ISIS2 -- Cube ISIS de l'astrogéologie de l'USGS (Version 2)
 ============================================================
 
@@ -22,14 +21,14 @@ L'implémentation de ce pilote a été financé par la *Geological Survey* des
 ISIS2 fait partie de la famille des formats PDS et ISIS3.
 
 Problèmes de création
-=======================
+----------------------
 
 Pour le moment le pilote ISIS2 écrit un en-tête très minimal avec seulement les 
 informations de structure de l'image. Aucun système de coordonnées, de géoréférencement 
 ou d'autres métadonnées n'est capturé.
 
 Options de création
--------------------
+*******************
 
 * **LABELING_METHOD=ATTACHED/DETACHED :** Détermine si l'en-tête des étiquettes 
   doivent être dans le même fichier que l'image (ATTACHED par défaut) ou dans un 
@@ -38,7 +37,7 @@ Options de création
   images détachés, "cub" par défaut.  Utilisé seulement si LABELING_METHOD=DETACHED.
 
 Voir également
-===============
+---------------
 
 * Implémenté dans *gdal/frmts/pds/isis2dataset.cpp*.
 * :ref:`gdal.gdal.formats.pds`

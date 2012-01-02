@@ -1,6 +1,5 @@
 .. _`gdal.ogr.formats.dgn`:
 
-=================
 Microstation DGN
 =================
 
@@ -25,7 +24,7 @@ minimiser le traitement des éléments en dehors de la fenêtre du filtre spatia
 courant quand cela est possible.
 
 Éléments gérés
-=================
+--------------
 
 Les types d'élément suivants sont gérés :
 
@@ -43,7 +42,7 @@ composant associé est perdu. Chaque composant d'un objet complexe ou d'une
 cellule est traité comme un objet indépendant.
 
 Information de style
-=====================
+--------------------
 
 Certaine information de dessin sur les objets peuvent être extraite à partir 
 des attributs génériques *ColorIndex*, *Weight* et *Style* ; cependant pour 
@@ -60,10 +59,10 @@ bords ainsi que une couleur de remplissage si elle est fournie. Les motifs de
 remplissage ne sont pas gérés.
 
 Les éléments textuels contiendront les informations sur le texte, l'angle, la 
-couleur et la taille (exprimé en unité de groupe) dans la chaine style.
+couleur et la taille (exprimé en unité de groupe) dans la chaîne style.
 
 Options de création
-====================
+--------------------
 
 Les fichiers DGN 2D peuvent être écrit avec OGR avec des limitations 
 significatives :
@@ -116,7 +115,7 @@ La création de jeu de donnés gère les options suivantes :
   d'ensemencement est utilisée par défaut.
 
 Voir également
-==============
+---------------
 
 * `Page Dgnlib <http://dgnlib.maptools.org/>`_
 * `Spécification des Styles des objets d'OGR <http://home.gdal.org/projects/opengis/ogr_feature_style.html>`_ 

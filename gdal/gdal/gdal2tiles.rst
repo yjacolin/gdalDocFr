@@ -1,13 +1,12 @@
 .. _`gdal.gdal.gdal2tiles`:
 
-==============
 gdal2tiles.py
 ==============
 
 génère un répertoire avec des tuiles TMS, un KML et des visualisateurs web simples.
 
 Usage
-======
+------
 
 ::
     
@@ -17,7 +16,7 @@ Usage
                 input_file [output_dir]
 
 Description
-==============
+------------
 
 La commande génère un répertoire avec de petites tuiles et métadonnées, suivant 
 la spécification du Service de Tuilage de carte de l'OSGeo. Des pages web 

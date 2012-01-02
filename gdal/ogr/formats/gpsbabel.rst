@@ -1,6 +1,5 @@
 .. _`gdal.ogr.formats.gpsbabel`:
 
-=========
 GPSBabel
 =========
 
@@ -12,7 +11,7 @@ pour accéder aux différents formats de fichier GPS.
 L'exécutable GPSBabel doit être accessible à travers le PATH.
 
 Gestion de la lecture
-======================
+----------------------
 
 Le pilote nécessite le pilote :ref:`gdal.ogr.formats.gpx` pour gérer entièrement 
 la lecture (via la bibliothèque Expat) et être capable de parser la sortie de 
@@ -60,7 +59,7 @@ GPX temporaire sur disque au lieu d'un en mémoire, lors de la lecture d'un gros
 volume de données.
 
 Gestion de l'écriture
-======================
+----------------------
 
 Le pilote repose sur le pilote GPX pour créer un fichier intermédiaire qui sera 
 finalement traduit par GPSBabel vers le format de GPSBabel désiré (le pilote GPX 
@@ -88,7 +87,7 @@ GPX temporaire sur disque au lieu d'un en mémoire, lors de l'écriture d'un gro
 volume de données.
 
 Exemples
----------
+*********
 
 * Lire les waypoints à partir d'un récepteur USB Garmin :
   ::

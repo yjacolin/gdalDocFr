@@ -1,6 +1,5 @@
 .. _`gdal.ogr.formats.shapefile`:
 
-===============
 ESRI Shapefile
 ===============
 
@@ -51,8 +50,8 @@ shapefile par n'importe quel encodage géré par CPLRecode ou par "" pour évite
 n'importe quel enregistrement (la gestion de l'enregistrement est nouveau dans 
 GDAL/OGR 1.9.0).
 
-Indexe spatiale  et attributaire
-=================================
+Indexe spatiale et attributaire
+--------------------------------
 
 Le pilote OGR shapefile gère l'indexage spatial et une forme limitée d'indexage 
 attributaire.
@@ -99,7 +98,7 @@ mapinfo et n'est pas compatible avec toute autre application shapefile.
 
 
 Problèmes de création
-======================
+----------------------
 
 Le pilote shapefile traite un répertoire comme un jeu de données, et chaque 
 ensemble Shapefile (.shp, .shx, and .dbf) comme une couche. Le nom du jeu de 
@@ -164,7 +163,7 @@ les supprimer réellement (entrainant une renumérotation des FID) appeler la
 fonction SQL 'REPACK' par la méthode *ExecuteSQL()* de la source de données.
 
 Étendue spatiale
-=================
+----------------
 
 Shapefiles stocke l'étendue spatiale de al couche dans le fichier .SHP. L'étendue 
 spatiale de la couche est automatiquement mis à jour lors de l'insertion d'une 
@@ -178,7 +177,7 @@ de la source de données. La même chose s'applique pour la suppression d'une sh
 .. note:: RECOMPUTE EXTENT ON est disponible à partir d'OGR >= 1.9.0.
 
 Problèmes sur les tailles
-==========================
+--------------------------
 
 * Geometry : le format Shapefile utilise explicitement des offsets de 32 bits et 
   ne put donc pas dépasser 8 Go (il utilise en réalité des offsets de 32 bit vers 
@@ -189,12 +188,12 @@ Problèmes sur les tailles
   arbitrairement large.
 
 Options de création de jeu de données
-======================================
+--------------------------------------
 
 Aucune option.
 
 Options de création de couches
-==============================
+--------------------------------
 
 * **SHPT=type :** écrase le type de shapefile crée. Peut être une parmi NULL 
   pour un simple fichier .dbf. avec aucun fichier .shp, *POINT*, *ARC*, 
@@ -206,7 +205,7 @@ Options de création de couches
   peuvent être appropriées.
 
 Exemples
-=========
+---------
 
 Un merge de deux shapefile *file1.shp* et *file2.shp* dans un nouveau fichier 
 *file_merged.shp* est réalisée de cette manière :
@@ -220,7 +219,8 @@ tente de trouver des couches existantes et d'ajouter des géométries en copie.
 
 L'option *-nln* définie le nom de la couche à copier.
 
-Lisez également :
+Lisez également
+----------------
 
 * `Shapelib Page <http:*shapelib.maptools.org/>`_
 * `ESRI Shapefile Technical Description <http://www.esri.com/library/whitepapers/pdfs/shapefile.pdf>`_

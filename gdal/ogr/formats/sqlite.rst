@@ -1,6 +1,5 @@
 .. _`gdal.ogr.formats.sqlite`:
 
-=========================
 SQLite/SpatiaLite RDBMS
 =========================
 
@@ -55,7 +54,7 @@ lisez la
 `documentation de SQLite qui en parle <http://www.sqlite.org/pragma.html#pragma_synchronous>`_.
 
 Utiliser la bibliothèque SpatiaLite (extension spatiale pour SQLite)
-=====================================================================
+----------------------------------------------------------------------
 
 (À partir de GDAL 1.7.0)
 
@@ -89,14 +88,14 @@ ou
     ogrinfo testspatialite.sqlite Towns -spat 754000 4692000 770000 4924000
 
 Problèmes de création
-=====================
+----------------------
 
 Le pilote SQLite gère la création de fichiers de base de données SQLite ou 
 l'ajout de tables à une base existante. Remarquez qu'un nouveau fichier de base 
 de données ne peut pas être crée sur un fichier existant.
 
 Options de création de la base de données
--------------------------------------------
+******************************************
 
 * **METADATA=yes/no :** cela permet d'éviter la création des tables 
   *geometry_columns* et *spatial_ref_sys* dans une nouvelle base de données. 
@@ -109,7 +108,7 @@ Options de création de la base de données
   CSV EPSG dans la table *spatial_ref_sys*. no par défaut.
 
 Options de création de couche
-------------------------------
+******************************
 
 * **FORMAT=WKB/WKT/SPATIALITE :** contrôle le format utilisé pour la colonne géométrique. 
   Par défaut WKB (Well Known Binary) est utilisé. Cela est généralement plus 
@@ -128,7 +127,7 @@ Options de création de couche
   utilisé pour contrôler si un index spatiale doit être créé. Yes par défaut.
 
 Autres informations
-====================
+--------------------
 
 * Le développement du pilote SQLite pour OGR a été financé par 
   `le groupe DM Solutions <http://www.dmsolutions.ca/>`_ et `GoMOOS <http://www.gomoos.org/>`_.

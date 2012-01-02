@@ -1,15 +1,14 @@
 .. _`gdal.ogr.formats.mssqlspatial`:
 
-====================================================
 MSSQLSpatial - Microsoft SQL Server Spatial Database
 ====================================================
 
-Ce pilote implémente la gestion de l'accés aux tables spatiales dans Microsoft SQL 
+Ce pilote implémente la gestion de l’accès aux tables spatiales dans Microsoft SQL 
 Server 2008+ qui contiennent les types de données géométriques et géographiques 
 pour représenter les colonnes géométrie.
 
 Se connecter à une base de données
------------------------------------
+------------------------------------
 
 Pour se connecter à un source de données MSSQL, utilisez une chaîne de connexion 
 définissant le nom de la base de données avec des paramètres supplémentaires si 
@@ -58,14 +57,14 @@ Le pilote MSSQL dans OGR gère les appels *OGRLayer::StartTrasaction()*,
 sens normal de SQL.
 
 Problèmes lors de la création
-==============================
+-----------------------------
 
 Ce pilote ne gère pas la création d'une nouvelle base de données, vous devrez 
 utiliser l'*Outils client du Serveur Microsoft SQL* pour cela, mais il permet la 
 création de nouvelles couches dans une base existante.
 
 Options de création de couche
-------------------------------
+*****************************
 
 * **GEOM_TYPE**: l'option de création *GEOM_TYPE* peut être définie parmi 
   "geometry" ou "geography". Si cette option n'est pas définie la valeur par 
@@ -99,7 +98,7 @@ Options de création de couche
   dérivé à partir du code d'autorité du SRS de la couche source.
 
 Création d'index spatial
--------------------------
+************************
 
 Par défaut le pilote MS SQL Spatial ne créé par d'index spatiaux pour la table 
 pendant la création de la couche. Cependant vous devez créer un index spatial en 
@@ -115,7 +114,7 @@ L'index spatial peut aussi être supprimé en utilisant la syntaxe suivante :
     drop spatial index on schema.table
 
 Exemples
-=========
+---------
 
 Créer une couche à partir d'un source de données OGR :
 ::

@@ -1,6 +1,5 @@
 .. _`gdal.gdal.formats.ers`:
 
-=====================
 ERS -- ERMapper .ERS
 =====================
 

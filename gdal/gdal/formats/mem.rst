@@ -1,6 +1,5 @@
 .. _`gdal.gdal.formats.mem`:
 
-=========================
 MEM -- In Memory Raster
 =========================
 
@@ -14,7 +13,7 @@ le géoréférencement, les points d'amer, l'interprétation des couleurs, les
 tables de couleur et tous les types de données des pixel.
 
 Format des noms des jeux de données
-====================================
+-----------------------------------
 
 Il est possible d'ouvrir un tableau existant en mémoire. Pour cela, construire 
 un nom de jeux de données de la forme suivante :
@@ -48,7 +47,7 @@ Par exemple :
   la suivante.
 
 Options de création
-====================
+-------------------
 
 * Il n'y a aucune options de création de gérées.
 * Le format MEM  est un des seuls qui gère la méthode ``AddBand()``. La méthode 

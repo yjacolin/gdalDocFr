@@ -1,6 +1,5 @@
 .. _`gdal.gdal.formats.rik`:
 
-==========================
 RIK -- Swedish Grid Maps
 ==========================
 

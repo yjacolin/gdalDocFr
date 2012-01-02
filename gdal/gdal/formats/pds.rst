@@ -1,6 +1,5 @@
 .. _`gdal.gdal.formats.pds`:
 
-=====================================
 PDS -- Système de données planétaire
 =====================================
 
@@ -28,7 +27,7 @@ l'interprétation du géoréférencement. Certains détails sont disponibles dan
 PDS fait partie de la famille des formats incluant ISIS2 et ISIS3.
 
 Voir également
-===============
+---------------
 
 * Implémentéd dans *gdal/frmts/pds/pdsdataset.cpp*.
 * `Système de données planétaire de la NASA <http://pds.nasa.gov/>`_

@@ -1,14 +1,13 @@
 .. _`gdal.gdal.formats.dods`:
 
-=============================
 DODS -- OPeNDAP Grid Client
 =============================
 
 GDAL inclut en option la gestion en lecture des grilles 2D et des tableaux via 
 le protocole OPeNDAP (DODS).
 
-dénomination des jeux de données
-=================================
+Dénomination des jeux de données
+----------------------------------
 
 La spécification complète du nom des jeux de données consiste en une URL du jeu 
 de données OPeNDAP, le chemin complet vers le tableau désiré ou la variable 
@@ -47,7 +46,7 @@ séparées.
 
 
 Méta-données spécialisées AIS/DAS
-===================================
+-----------------------------------
 
 Diverses informations seront transportées via le DAS décrivant le jeu de données. 
 Certains pilotes DODS (tels que celui basé sur GDAL) retourne déjà les 
@@ -80,7 +79,7 @@ du fonctionnement du mécanisme AIS.
 
 
 Jeu de données
----------------
+***************
 
 Il y aura un objet dans le DAS nommé GLOBAL contenant les attributs du jeu de 
 données dans l'ensemble.
@@ -117,7 +116,7 @@ pour calculer une transformation géométrique interne si l'une d'elle n'est pas
 fournit, mais si les deux sont fournit la transformation géométrique prendra le dessus.
 
 Bande
-------
+******
 
 Il y aura un objet dans le DAS nommé après chaque bande contenant des attributs 
 d'une bande spécifique.

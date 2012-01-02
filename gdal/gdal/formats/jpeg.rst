@@ -1,6 +1,5 @@
 .. _`gdal.gdal.formats.jpeg`:
 
-=============================
 JPEG -- JPEG JFIF File Format
 =============================
 
@@ -49,7 +48,7 @@ et seront stockées comme contenu brute XML dans le domaine de métadonnées
 xml:XMP.
 
 Options de création
-====================
+-------------------
 
 Les fichiers JPEG sont crée en utilisant le code du pilote « JPEG ». Seules les 
 types de bande en byte sont gérés, et seulement les configurations 1 et 3 bandes 

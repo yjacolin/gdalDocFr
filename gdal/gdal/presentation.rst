@@ -1,6 +1,5 @@
 .. _`gdal.gdal.presentation`:
 
-==================
 Utilitaires GDAL
 ==================
 
@@ -39,7 +38,7 @@ Les programmes suivants sont distribués avec GDAL :
   qui utilisent GDAL.
 
 Créer de nouveaux fichiers
-===========================
+----------------------------
 
 Accéder à un fichier existant est assez facile. Il suffit d'indiquer le nom du 
 fichier ou du jeu de données en paramètre dans la ligne de commande. Par contre, 
@@ -55,92 +54,94 @@ introduites ici.
   ``--formats``. Seuls les formats décrits comme “rw” (Lecture-écriture) peuvent 
   être créés.
 
-Plusieurs utilitaires créent par défaut des fichiers GéoTiff, si aucun format 
-n'est spécifié. Les extensions des fichiers ne sont pas utilisées pour 
-déterminer le format de sortie, ni ajoutées par GDAL si l'utilisateur les a omis.
+  Plusieurs utilitaires créent par défaut des fichiers GéoTiff, si aucun format 
+  n'est spécifié. Les extensions des fichiers ne sont pas utilisées pour 
+  déterminer le format de sortie, ni ajoutées par GDAL si l'utilisateur les a omis.
 
 * ``-co NAME=VALUE`` : Plusieurs formats ont une ou plusieurs options 
   spécifiques de création qui peuvent être utilisé pour contrôler la création 
   de fichier. Par exemple, le pilote GéoTiff supporte des options de créations 
   pour préciser la compression, ou si le fichier doit être tuilé.
 
-Ces options de création disponibles varient en fonction du pilote et certains 
-formats n'en ont pas du tout. La liste d'options supportées pour chaque format 
-peut être affichée avec le drapeau ``--format <format>`` en ligne de commande, 
-mais la documentation Web du format est certainement l'endroit le plus 
-approprié pour obtenir tous les détails nécessaires.
+  Ces options de création disponibles varient en fonction du pilote et certains 
+  formats en n'ont pas du tout. La liste des options supportées pour chaque format 
+  peut être affichée avec le drapeau ``--format <format>`` en ligne de commande, 
+  mais la documentation Web du format est certainement l'endroit le plus 
+  approprié pour obtenir tous les détails nécessaires.
 
 * ``-a_srs SRS`` : Plusieurs utilitaires (dont ``gdal_translate`` et 
   ``gdalwarp``) incluent la possibilité de définir les systèmes de coordonnées 
   dans la ligne de commande avec les options ``-a_srs`` (définit SRS à la 
   sortie), ``-s_srs`` (source SRS) et ``-t_srs`` (cible SRS).
 
-Ces options permettent de définir le système de coordonnées (*SRS* signifie 
-*Spatial Reference System*, système de référence spatial) de nombreuses façons :
+  Ces options permettent de définir le système de coordonnées (*SRS* signifie 
+  *Spatial Reference System*, système de référence spatial) de nombreuses façons :
 
-* **NAD27/NAD83/WGS84/WGS72 :** Ces systèmes de coordonnées géographiques 
-  (lat/lon) communs sont précisés directement avec ces termes.
-* **EPSG:n :** les Systèmes de coordonnées (projetés ou géographiques) sont 
-  indiqués en se basant sur leur code EPSG, par exemple EPSG:2154 correspond au 
-  Lambert 93 en France. Une liste des systèmes de coordonnées est disponible 
-  dans les fichiers gcs.csv et pcs.csv de GDAL.
-* **PROJ.4 Définitions :** Une chaîne de définition PROJ.4 est utilisée comme 
-  système de coordonnées. Par exemple, "+proj=utm +zone=11 +datum=WGS84". 
-  Prenez soin de garder la chaîne proj.4 en un morceau, sous la forme d'un seul 
-  argument, en utilisant des guillemets doubles.
-* **OpenGIS Well Known Text :** L'Open GIS Consortium a défini un format 
-  textuel pour décrire les systèmes de coordonnées comme une partie des 
-  spécifications Simple Features. Ce format est celui que GDAL utilise comme 
-  système de coordonnées. Le nom du fichier contenant une définition du système 
-  de coordonnées WKT, peut être utilisé comme argument du système de 
-  coordonnées, ou le système de coordonnées complet peut être utilisé dans la 
-  ligne de commande (bien que gérer tous les guillemets puisse être un défi).
-* **ESRI Well Known Text :** ESRI utilise une légère variation du format WKT de 
-  l'OGC dans leur produit ArcGIS (fichiers .prj), et ceux-ci peuvent être 
-  utilisés de la même manière que les fichiers WKT, mais le nom du fichier doit 
-  être précédé de *ESRI::*. Par exemple "ESRI::NAD 1927 StatePlane Wyoming West 
-  FIPS 4904.prj".
-* **Références spatiales à partir d'URL :** par exemple 
-  http://spatialreference.org/ref/user/north-pacific-albers-conic-equal-area/.
-* **Un nom de fichier :** Le nom d'un fichier contenant des définitions de 
-  système de coordonnées en WKT, chaînes PROJ.4, ou XML/GML peut être fourni.
+  * **NAD27/NAD83/WGS84/WGS72 :** Ces systèmes de coordonnées géographiques 
+    (lat/lon) communs sont précisés directement avec ces termes.
+  * **EPSG:n :** les Systèmes de coordonnées (projetés ou géographiques) sont 
+    indiqués en se basant sur leur code EPSG, par exemple EPSG:2154 correspond au 
+    Lambert 93 en France. Une liste des systèmes de coordonnées est disponible 
+    dans les fichiers gcs.csv et pcs.csv de GDAL.
+  * **PROJ.4 Définitions :** Une chaîne de définition PROJ.4 est utilisée comme 
+    système de coordonnées. Par exemple, "+proj=utm +zone=11 +datum=WGS84". 
+    Prenez soin de garder la chaîne proj.4 en un morceau, sous la forme d'un seul 
+    argument, en utilisant des guillemets doubles.
+  * **OpenGIS Well Known Text :** L'Open GIS Consortium a défini un format 
+    textuel pour décrire les systèmes de coordonnées comme une partie des 
+    spécifications Simple Features. Ce format est celui que GDAL utilise comme 
+    système de coordonnées. Le nom du fichier contenant une définition du système 
+    de coordonnées WKT, peut être utilisé comme argument du système de 
+    coordonnées, ou le système de coordonnées complet peut être utilisé dans la 
+    ligne de commande (bien que gérer tous les guillemets puisse être un défi).
+  * **ESRI Well Known Text :** ESRI utilise une légère variation du format WKT de 
+    l'OGC dans leur produit ArcGIS (fichiers .prj), et ceux-ci peuvent être 
+    utilisés de la même manière que les fichiers WKT, mais le nom du fichier doit 
+    être précédé de *ESRI::*. Par exemple "ESRI::NAD 1927 StatePlane Wyoming West 
+    FIPS 4904.prj".
+  * **Références spatiales à partir d'URL :** par exemple 
+    http://spatialreference.org/ref/user/north-pacific-albers-conic-equal-area/.
+  * **Un nom de fichier :** Le nom d'un fichier contenant des définitions de 
+    système de coordonnées en WKT, chaînes PROJ.4, ou XML/GML peut être fourni.
 
 Options de la ligne de commande
-===================================
+--------------------------------
 
 Tous les programmes en ligne de commande de GDAL supportent les options 
 générales suivantes :
 
-* ``--version`` : Affiche la version de GDAL et termine.
-* ``--formats`` : Liste tous les formats raster supportés par cette compilation 
+* ``--version`` : affiche la version de GDAL et termine.
+* ``--formats`` : liste tous les formats raster supportés par cette compilation 
   de GDAL (en lecture seule et en lecture écriture) et se termine. La gestion 
   du format est indiquée comme suit :
-* 'ro' et un pilote en lecture seule ; 
-* 'rw' est lu ou écrit (c'est à dire géré par *CreateCopy*);
-* 'rw+' est lu, écrit et mis à jour (c'est à dire géré par *Create*). Le 
-  caractère 'v' est ajouté pour les formats gérant l'IO virtuel (/vsimem, 
-  /vsigzip, /vsizip, etc). Note : Les formats valides pour la sortie de 
-  ``gdalwarp`` sont les formats qui gère la méthode *Create()* (marqué rw+), a 
-  seulement la méthode *CreateCopy()*.
-* ``--format format`` : Liste des informations détaillées sur le pilote du 
+
+  * 'ro' et un pilote en lecture seule ; 
+  * 'rw' est lu ou écrit (c'est à dire géré par *CreateCopy*);
+  * 'rw+' est lu, écrit et mis à jour (c'est à dire géré par *Create*). Le 
+    caractère 'v' est ajouté pour les formats gérant l'IO virtuel (/vsimem, 
+    /vsigzip, /vsizip, etc). Note : Les formats valides pour la sortie de 
+    ``gdalwarp`` sont les formats qui gère la méthode *Create()* (marqué rw+), a 
+    seulement la méthode *CreateCopy()*.
+
+* ``--format format`` : liste des informations détaillées sur le pilote du 
   format. Le format doit être le nom court affiché par l'option --formats, tels 
   que GTiff.
-* ``--optfile file`` : Lit le nom du fichier et substitut son contenu dans la 
+* ``--optfile file`` : lit le nom du fichier et substitut son contenu dans la 
   liste des options de la ligne de commande. Les lignes débutantes par # sont 
   ignorées. Des arguments de plusieurs mots peuvent être réunis en les 
   entourant de guillemets.
-* ``--config key value`` : Définit la valeur de `la clé dans la configuration <http://trac.osgeo.org/gdal/wiki/ConfigOptions>`_, 
+* ``--config key value`` : définit la valeur de `la clé dans la configuration <http://trac.osgeo.org/gdal/wiki/ConfigOptions>`_, 
   par opposition à la déclaration des variables d'environnements. Il existe des 
   mots-clés de configuration communs tels que GDAL_CACHEMAX (mémoire utilisé en 
   interne pour mettre en cache en mégaoctets) et GDAL_DATA (chemin du répertoire 
   des "données" de GDAL). Des pilotes individuels peuvent être influencés par 
   d'autres options de configuration.
-* ``--debug value`` : Contrôle quel message de débogage sera affiché. Une 
+* ``--debug value`` : contrôle quel message de débogage sera affiché. Une 
   valeur à ON permettra l'affichage des messages de débogage. Une valeur à OFF 
   n'affichera pas les messages de débogage. Une autre valeur sélectionnera 
   seulement les messages de débogages contenant cette chaîne dans le code le 
   précédent.
-* ``--help-general`` : Donne un bref message des usages des options en ligne de 
+* ``--help-general`` : donne un bref message des usages des options en ligne de 
   commande et termine.
 
 .. yjacolin at free.fr, Yves Jacolin - 2010/12/27 17:43* (Trunk 21320)

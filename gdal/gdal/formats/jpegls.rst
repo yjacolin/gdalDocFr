@@ -1,6 +1,5 @@
 .. _`gdal.gdal.formats.jpegls`:
 
-========
 JPEGLS
 ========
 
@@ -19,7 +18,7 @@ disponible), puisque l'ensemble de l'image doit être compressé/décompressé e
 une seule opération.
 
 Options de création
-====================
+-------------------
 
 * **INTERLEAVE=PIXEL/LINE/BAND :** entrelacement des données en flux compressé. 
   BAND par défaut.
@@ -28,7 +27,7 @@ Options de création
   l'erreur.
 
 Voir également
-===============
+--------------
 
 * Implémenté dans *gdal/frmts/jpegls/jpeglsdataset.cpp*.
 * `Page principale de la bibliothèque CharLS <http://charls.codeplex.com/>`_

@@ -1,6 +1,5 @@
 .. _`gdal.gdal.formats.georaster`:
 
-===========================
 GeoRaster d'Oracle Spatial
 ===========================
 
@@ -51,7 +50,7 @@ Exemples :
     de métadonnées de sous-jeu de données (voir plus bas).
 
 Naviguer dans la base de données des GeoRasters
-================================================
+-------------------------------------------------
 
 En fournissant certaine information basique le pilote GeoRaster est capable de 
 lister les rasters existant stockés sur le serveur :
@@ -91,7 +90,7 @@ d'un sous jeu de données, par exemple :
     SUBDATASET_2_DESC=Table:GDAL_IMPORT
 
 Options de création
-====================
+--------------------
 
 * **BLOCKXSIZE :** le nombre de colonne de pixel dans un bloc raster.
 * **BLOCKYSIZE :** le nombre de ligne de pixel dans un bloc raster.
@@ -126,7 +125,7 @@ Options de création
 * **NBITS :** type de données sous byte, options : 1, 2 ou 4.
 
 Importer des GeoRaster
-======================
+----------------------
 
 Pendant le processus d'import de raster dans un objet GeoRaster il est possible 
 de donner au pilote une simple définition de table SQL et également une clause 
@@ -163,8 +162,8 @@ avec juste une colonne GeoRaster nommée *RASTER*, par exemple :
     
     % gdal_translate -of georaster input.tif “geor:scott/tiger@dbdemo”
 
-Exporter GeoRaster
-==================
+Exporter des GeoRaster
+-----------------------
 
 Un GeoRaster peut être identifié par une clause Where ou par une pair de RDT & 
 RID :
@@ -174,7 +173,7 @@ RID :
     % gdal_translate -of gtiff geor:scott/tiger@dbdemo,st_rdt_1,130 output.tif
 
 Utilisation générale de GeoRaster
-==================================
+----------------------------------
 
 Les GeoRaster peuvent être utilisé dans n'importe quel ligne de commande GDAL 
 avec toutes les options disponibles. Comme  une extraction d'une reprojection 

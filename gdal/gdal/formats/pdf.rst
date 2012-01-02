@@ -1,6 +1,5 @@
 .. _`gdal.gdal.formats.pdf`:
 
-===============
 Geospatial PDF
 ===============
 
@@ -45,7 +44,7 @@ déformation.
 et seront stockées comme contenu brute XML dans le domaine de métadonnées xml:XMP.
 
 Restrictions
-===============
+-------------
 
 L'ouverture d'un document PDF (pour obtenir le géoréférencement) est rapide, mais 
 au premier accès à un bloc raster, la page entière sera rasterisée, ce qui peut 
@@ -63,7 +62,7 @@ superficie (en terme de points sur l'écran).
 Il n'y a pour l'instant aucune gestion de sélection du rendu de couche.
 
 Voir également
-================
+---------------
 
 * `Bonne pratique de l'encodage GeoPDF de l'OGC version 2.2 <http://portal.opengeospatial.org/files/?artifact_id=33332>`_
 * `Supplément  d'Adobe pour l'ISO 32000 <http://www.adobe.com/devnet/acrobat/pdfs/adobe_supplement_iso32000.pdf>`_

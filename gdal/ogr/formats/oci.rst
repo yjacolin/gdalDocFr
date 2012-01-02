@@ -1,6 +1,5 @@
 .. _`gdal.ogr.formats.oci`:
 
-==============
 Oracle Spatial
 ==============
 
@@ -30,7 +29,7 @@ Lors du chargement des données dans Oracle Spatial, OGR créera toujours le cha
 *OGR_FID*.
 
 Problèmes avec SQL
-===================
+-------------------
 
 Par défaut le pilote d'Oracle envoie une requête SQL directement au moteur 
 Oracle plutôt que de l'évaluer en interne lors de l'utilisation de l'appel 
@@ -48,7 +47,7 @@ commandes SQL avec le :ref:`gdal.ogr.sql`, en envoyant la chaine
 "*OGRSQL*" à la méthode *ExecuteSQL()* comme nom du dialecte SQL.
 
 Avertissements
-===============
+---------------
 
 * La logique de reconnaissance de type est actuellement assez pauvre. Aucun 
   effort n'est fait pour préserver la longueur réelles pour les champs de type 
@@ -70,7 +69,7 @@ Avertissements
   types de données de texte d'annotation dans Oracle Spatial.
 
 Problèmes de création
-=====================
+---------------------
 
 Le pilote Oracle Spatial ne gère pas la création de nouveaux jeux de données 
 (instances de bases de données), mais il doit permettre la création de nouvelles 
@@ -85,7 +84,7 @@ additionnel en dehors de l'étendue originel sans modifier manuellement
 l'information *DIMINFO* dans *USER_SDO_GEOM_METADATA* et reconstruire l'index spatial.
 
 Options de création de couche
-------------------------------
+******************************
 
 * **OVERWRITE :** peut être *YES* pour forcer une couche existante au nom 
   désiré d'être détruite avant la création de la couche demandée.
@@ -145,7 +144,7 @@ Options de création de couche
   il peut être fournit avec l'option de création de couche *GEOMETRY_NAME*.
 
 Exemple
---------
+*******
 
 Simple traduction d'un shapefile vers Oracle. La table 'ABC' sera créée avec 
 les objets provenant du fichier *abc.shp* et les attributs du fichier *abc.dbf*.
@@ -171,7 +170,7 @@ peuvent également être utilisé via l'option en ligne de commande *-sql* d'``o
     ogrinfo -ro OCI:warmerda/password -sql "SELECT pop_1994 from canada where province_name = 'Alberta'"
 
 Crédits
-========
+--------
 
 Le développeur voudrait remercier la société `SRC, LLC <http://www.extendthereach.com/>`_ 
 pour son apport financier au développement de pilote.

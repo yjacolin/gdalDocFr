@@ -1,6 +1,5 @@
 .. _`gdal.gdal.formats.jp2mrsid`:
 
-====================================
 JP2MrSID --- JPEG2000 via MrSID SDK
 ====================================
 
@@ -11,7 +10,7 @@ La gestion du JPEG2000 de MrSID est seulement disponible avec la version 5.X ou
 plus récente du DSDK et du EDSK.
 
 Options de création
-====================
+--------------------
 
 Si vous avez l'ESDK de MrSID (5.X ou plus récent), il peut être utilisé pour 
 écrire des fichiers JPEG2000. Les options de création suivantes sont gérées :

@@ -1,12 +1,13 @@
 .. _`gdal.ogr.ogr2ogr`:
 
-========
 ogr2ogr
 ========
 
 Convertie des données *simple features* entre divers formats de fichiers.
 
-**Utilisation :**
+Usage
+------
+
 ::
     
     ogr2ogr [--help-general] [-skipfailures] [-append] [-update]
@@ -147,7 +148,7 @@ Options avancées :
   pour remplir les coordonnées Z des géométries.
 
 Exemples
-========
+----------
 
 Exemple ajoutant une couche existante (les deux options nécessites d'être 
 utilisé) :

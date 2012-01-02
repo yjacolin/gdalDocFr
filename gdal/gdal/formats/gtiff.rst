@@ -1,6 +1,5 @@
 .. _`gdal.gdal.formats.gtiff`:
 
-================
 Le format Gtiff
 ================
 
@@ -23,7 +22,7 @@ automatiquement transformé sous la forme RVBA (Rouge, Vert, Bleu, Alpha), et
 traité comme quatre bandes de huit bites.
 
 Géo-référencement
-==================
+------------------
 
 La plupart des projections devrait être supportées, avec le signalement que, 
 dans le but de traduire un système de projection non commune et de coordonnées 
@@ -53,7 +52,7 @@ sont trouvés, ils seront utilisés pour lire les RPCs, même si la balise
 .. _`gdal.gdal.formats.gtiff.internal_mask`:
 
 Masques de transparence interne
-================================
+--------------------------------
 (*à partir de GDAL 1.6.0*)
 
 Les fichiers TIFF peuvent contenir des masques de transparence internes. Le 
@@ -83,7 +82,7 @@ est définie à NO. Cela n'affecte pas la manière dont la bande de masque est �
 .. _`gdal.gdal.formats.gtiff.apercues`:
 
 Aperçus
-========
+--------
 
 Le pilote GeoTIFF gère la lecture, la création et la mise à jour d'aperçus 
 internes. Ceux-ci peuvent être créés sur des fichiers GeoTIFF ouverts en mode 
@@ -104,7 +103,7 @@ la variable d'environnement*GDAL_TIFF_OVR_BLOCKSIZE* à une puissance de deux
 entre 64 et 4096. 128 est la valeur par défaut.
 
 Métadonnée
-==========
+-----------
 
 GDAL peut faire face aux balises baseline  du TIFF comme métadonnées au niveau du 
 jeu de données :
@@ -141,7 +140,7 @@ fichier et seront stockées dans un contenu brute XML dans le domaine de
 métadonnées xml:XMP.
 
 Valeur nodata
-==============
+--------------
 
 GDAL stocke la valeur nodata de la bande dans la balise ASCII non standard 
 *TIFFTAG_GDAL_NODATA* (code 42113) pour les fichiers créés avec le profile par 
@@ -152,7 +151,7 @@ stockée dans le fichier PAM .aux.xml file.
 .. _`gdal.gdal.formats.gtiff.issues`:
 
 Problèmes de création
-======================
+---------------------
 
 Les fichiers GeoTIFF peuvent être créés avec n'importe quel type de bande 
 définie dans GDAL, les types complexes inclus. Les fichiers créés peuvent avoir 
@@ -170,7 +169,7 @@ partir d'un ensemble de données GDAL avec ces objets (*GDALDriver:CreateCopy()*
     dans le format GeoTIFF.
 
 Options de création
---------------------
+********************
 
 * **TFW=YES :** Force la génération d'un fichier associé world d'ESRI (.tfw). 
   Lisez la section les fichiers world pour plus de détails.
@@ -274,7 +273,7 @@ Options de création
   utilisées.
 
 À propos de la compression d'images RVB au format JPEG
-=========================================================
+-------------------------------------------------------
 
 Lorsqu'on convertit une image RVB dans le format JPEG-dans-TIFF, utilisez 
 PHOTOMETRIC=YCBCR peut rendre le fichier résultant typiquement de 2 à 3 fois 
@@ -285,7 +284,7 @@ Prenez note également que les dimensions des tuiles ou des "strips" doivent êt
 un multiple de 8 pour PHOTOMETRIC=RGB ou 16 pour PHOTOMETRIC=YCBCR
 
 Options de configuration
--------------------------
+*************************
 
 Ce paragraphe liste les options de configuration qui peuvent être définie pour 
 modifier le comportement par défaut du pilote GTiff.

@@ -1,6 +1,5 @@
 .. _`gdal.ogr.formats.libkml`:
 
-==========================
 Pilote LIBKML (.kml .kmz)
 ==========================
 
@@ -24,7 +23,7 @@ définit dans plus d'une profondeur seront aplaties pour être géré par le for
 interne d'OGR.
   
 Datasource
-=========== 
+-----------
 
 Vous pouvez définir un `datasource <http://www.gdal.org/ogr/ogr_arch.html#ogr_arch_data_source>`_ 
 comme fichier kml ``somefile.kml``, un répertoire ``somedir/``, ou un fichier kmz 
@@ -37,7 +36,7 @@ pour chaque fichier couche dans le datasource. Cette fonctionnalité peut être
 désactivée en définissant la variable d'environnement *LIBKML_USE_DOC.KML* à "no".
  
 StyleTable
------------  
+***********
 
 Les tables des styles des datasource sont écrit dans le 
 `<Document> <http://code.google.com/apis/kml/documentation/kmlreference.html#document>`_ 
@@ -48,7 +47,7 @@ Tous les `styles de feature d'OGR <http://www.gdal.org/ogr/ogr_feature_style.htm
 ne peuvent être traduit en KML.
 
 Layer
-=====
+-----
 
 `Layers <http://www.gdal.org/ogr/ogr_arch.html#ogr_arch_layer>`_ sont déclarées 
 dans les fichiers kml en tant que 
@@ -57,7 +56,7 @@ dans les fichiers kml en tant que
 et dans les fichiers kmz ou les répertoires  comme des fichiers kml séparés.
 
 Style
-======
+------
 
 Les tables de style des couches ne peuvent pas être lues ou écrites à partir 
 de/vers une couche kml qui est un 
@@ -67,7 +66,7 @@ sinon ils sont dans le
 d'une couche.
 
 Schéma
-=======
+-------
 
 La lecture et l'écriture de `<Schema> <http://code.google.com/apis/kml/documentation/kmlreference.html#schema>`_ 
 est géré pour les fichiers .kml, .kmz et les répertoires.
@@ -79,7 +78,7 @@ Une `feature <http://www.gdal.org/ogr/ogr_arch.html#ogr_arch_feature>`_ OGR se
 traduit en kml en tant que `<Placemark> <http://code.google.com/apis/kml/documentation/kmlreference.html#placemark>`_.
   
 Style
-------
+*****
 
 Les chaînes de style au niveau de la feature sont déclarées dans le KML soit en 
 tant que 
@@ -102,7 +101,7 @@ lu ou *LIBKML_EXTERNAL_STYLE* est positionnée à no, alors l'url du style est
 copiée à la chaîne de style.
 
 Champs
-=======
+------
 
 Les champs OGR (attributs des feature) sont traduit vers le kml avec 
 `<Schema> <http://code.google.com/apis/kml/documentation/kmlreference.html#schema>`_ 
@@ -171,7 +170,7 @@ en KML, vous pouvez définir une variable d'environnement.
 
   
 Géométrie
-=========
+-----------
 
 Traduction de la `Geometry <http://www.gdal.org/ogr/ogr_arch.html#ogr_arch_geometry>`_ 
 d'OGR vers la géométrie KML est assez simple, avec seulement quelques exceptions. 
@@ -197,7 +196,7 @@ En réglant la variable d'environnement *LIBKML_WRAPDATELINE* à "yes", contrain
 le pilote libkml à diviser la géométrie à la Dateline lorsqu'il est lu.
 
 Exemple
-========
+--------
 
 Le script bash suivant construira un fichier `csv <http://www.gdal.org/ogr/drv_csv.html>`_ 
 et un fichier :ref:`gdal.ogr.formats.vrt`, puis les traduira en KML en utilisant 

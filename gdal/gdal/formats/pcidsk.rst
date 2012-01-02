@@ -1,6 +1,5 @@
 .. _`gdal.gdal.formats.pcidsk`:
 
-=======================================
 PCIDSK --- PCI Geomatics Database File
 =======================================
 
@@ -26,7 +25,7 @@ que les nouveaux aperçues demandés seront construit en externe comme un fichie
 Les segments vectoriels sont géré par le pilote OGR PCIDSK.
 
 Options de création
-====================
+-------------------
 
 Notez que les fichiers PCIDSK ont toujours produit des pixels entrelacés, même 
 si d'autres organisations sont géré en lecture.
@@ -41,7 +40,7 @@ si d'autres organisations sont géré en lecture.
   sélectionné avec ce paramètre - par défaut 127 pour 127x127.
 
 Lisez également
-================
+---------------
 
 * Implémenté dans *gdal/frmts/pcidsk/pcidskdataset2.cpp*.
 * `SDK PCIDSK <http://home.gdal.org/projects/pcidsk/index.html>`_.

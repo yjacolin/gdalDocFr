@@ -1,6 +1,5 @@
 .. _`gdal.ogr.formats.FMEObjects`:
 
-====================
 FMEObjects Gateway
 ====================
 
@@ -34,7 +33,7 @@ attributs graphiques de FME (couleur, largeur de ligne, etc) ne sont pas
 convertie dans les informations de Style des objets d'OGR (OGR Feature Style).
 
 Cache
-======
+------
 
 Dans le but d'activer l'accès rapide à de large jeux de données sans avoir à 
 les traduire à chaque fois qu'ils sont accédés, le pont FMEObjects gère un 
@@ -56,7 +55,7 @@ Les entrées à partir des lecteurs de SDE et d'ORACLE ne sont pas en cache. Ces
 sources sont traitées spécialement de différentes manières également.
 
 Avertissements
-================
+---------------
 
 - Établir une session FME est une opération assez dispendieuse sur un système 
   Linux à 350Mhz, cela peut excéder 10 s.
@@ -66,7 +65,7 @@ Avertissements
   indéfiniment.
 
 Configuration/compilation
-==========================
+-------------------------
 
 Pour inclure un pont avec FMEObjects dans une compilation OGR il est nécessaire 
 d'avoir chargé FME sur le système. Le paramètre de configuration 

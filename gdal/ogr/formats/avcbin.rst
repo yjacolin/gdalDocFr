@@ -1,6 +1,5 @@
 .. _`gdal.ogr.formats.avcbin`:
 
-=========================
 Arc/Info Binary Coverage
 =========================
 
@@ -47,7 +46,7 @@ La lecture aléatoire (par FID) des arcs, et des polygones est gérée, il peut 
 pas être géré pour les autres types d'objets.
 
 Voir également
-==============
+--------------
 
 * `Page de la bibliothèque AVCE00 <http://avce00.maptools.org/>`_
 * `Pilote d'OGR pour AVCE00 (.E00) <http://gdal.org/ogr/ogr_avce00.html>`_

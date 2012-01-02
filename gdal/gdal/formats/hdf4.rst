@@ -1,6 +1,5 @@
 .. _`gdal.gdal.formats.hdf4`:
 
-====================================================
 HDF4 --- Hierarchical Data Format Version 4 (HDF4)
 ====================================================
 
@@ -15,8 +14,8 @@ le stockage des données (satellites télémétrique de type 'Terra' et 'Aqua').
 Dans le futur ils passeront au format HDF5-EOS, qui sera utilisé pour le 
 satellite télémétrique de type 'Aura'.
 
-Gestion des Images Multiple (Sous-ensemble de données)
-======================================================
+Gestion des Images Multiples (Sous-ensemble de données)
+--------------------------------------------------------
 
 Le Format de Données Hiérarchique (HDF) est un conteneur pour différents 
 sous-ensemble de données. Pour les données stockant des sous-ensemble de Données 
@@ -146,7 +145,7 @@ pouvez trouver des informations sur différents outils HDF en utilisant les
 liens à la fin de cette section).
 
 Géo-référencement
-==================
+------------------
 
 Il n'y a pas de manière universelle pour stocker le géo-référencement dans les 
 fichiers HDF. Cependant, certains types de produits ont des mécanismes pour 
@@ -168,7 +167,7 @@ ce comportement en définissant la variable d'environnement *GEOL_AS_GCPS* à
 PARTIAL (défaut), NONE, ou FULL.
 
 Problèmes de création
-======================
+---------------------
 
 Ce pilote support la création des ensembles de données Scientifique HDF4. Vous 
 pouvez créer un ensemble de données 2D (un pour chaque bande en entrée) ou un 
@@ -192,14 +191,14 @@ projections et la matrice de transformation sont restaurés.
   sera créée.
 
 Méta-données
-==============
+--------------
 
 Tous les attributs HDF4 sont traduit en transparence comme des méta-données 
 GDAL. Dans les fichiers HDF, les  attributs peuvent être assigné à l'ensemble 
 du fichier autant qu'à des sous-ensemble de données particuliers. 
 
 Compilation du pilote
-======================
+----------------------
 
 Ce pilote a été compilé au plus haut de la bibliothèque NCSA HDF, vous avez donc 
 besoin de compiler GDAL avec le support HDF4. Vous pouvez chercher un binaire 
@@ -218,16 +217,19 @@ changer cette valeur et recompiler la bibliothèque HDF4 (et relier GDAL si vous
 utilisez des bibliothèques HDF statiques).
 
 Voir aussi
-===========
+----------
 
 * Implémenté comme *gdal/frmts/hdf4/hdf4dataset.cpp* et *gdal/frmts/hdf4/hdf4imagedataset.cpp*.
 * `Group HDF <http://www.hdfgroup.org/>`_
 * Sources de donnée aux formats HDF4 et HDF4-EOS : 
-  - `Earth Observing System Data Gateway <http://edcimswww.cr.usgs.gov/pub/imswelcome/>`_
+
+  * `Earth Observing System Data Gateway <http://edcimswww.cr.usgs.gov/pub/imswelcome/>`_
+
 * Documentation de produits individuels, géré par ce pilote :
-  - `Geo-Referencing ASTER L1B Data <http://edcdaac.usgs.gov/aster/ASTER_GeoRef_FINAL.pdf>`_
-  - `ASTER Standard Data Product Specifications Document <http://asterweb.jpl.nasa.gov/documents/ASTERHigherLevelUserGuideVer2May01.pdf>`_
-  - `MODIS Level 1B Product Information and Status <http://www.mcst.ssai.biz/mcstweb/L1B/product.html>`_
-  - `MODIS Ocean User's Guide <http://modis-ocean.gsfc.nasa.gov/userguide.html>`_
+
+  * `Geo-Referencing ASTER L1B Data <http://edcdaac.usgs.gov/aster/ASTER_GeoRef_FINAL.pdf>`_
+  * `ASTER Standard Data Product Specifications Document <http://asterweb.jpl.nasa.gov/documents/ASTERHigherLevelUserGuideVer2May01.pdf>`_
+  * `MODIS Level 1B Product Information and Status <http://www.mcst.ssai.biz/mcstweb/L1B/product.html>`_
+  * `MODIS Ocean User's Guide <http://modis-ocean.gsfc.nasa.gov/userguide.html>`_
 
 .. yjacolin at free.fr, Yves Jacolin - 2011/08/098 (trunk 22813)

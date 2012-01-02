@@ -1,6 +1,5 @@
 .. _`gdal.gdal.formats.cosar`:
 
-==============================================
 COSAR -- TerraSAR-X Complex SAR Data Product
 ==============================================
 

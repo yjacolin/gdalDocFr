@@ -1,6 +1,5 @@
 .. _`gdal.ogr.formats.grass`:
 
-======
 GRASS
 ======
 
@@ -21,7 +20,7 @@ en autant d'objet (une pour chaque catégorie).
 À la fois les cartes 2D et 3D sont gérées.
 
 Nom de la source de données
-============================
+----------------------------
 
 Le nom de la source de données est le chemin complet vers le fichier 'head' 
 dans le répertoire vector/ de GRASS. En utilisant les noms des variables 
@@ -36,7 +35,7 @@ où 'mymap' est le nom d ela carte vectorielle. Par exemple :
     /home/cimrman/grass_data/jizerky/jara/vector/liptakov/head
 
 Noms de la couche
-==================
+------------------
 
 Habituellement les numéros de la couche sont utilisé comme noms de couche. Le 
 numéro 0 d'une couche est utilisé pour tous les objets sans catégorie. Il est 
@@ -57,7 +56,7 @@ il est possible d'assigner le nom 'rivers'
 la couche 1 qui sera listée est la couche 'rivers'.
 
 Filtre attributaire
-====================
+--------------------
 
 Si une couche a des attributs stockés dans une base de données, la requête est 
 passée au pilote de la base de données sous-jacente. Ce qui signifie que les 
@@ -75,7 +74,7 @@ peuvent avoir la même catégorie.
 L'évaluation est réalisée lorsque le filtre des attributs est défini.
 
 Filtre spatial
-===============
+---------------
 
 Les boites englobantes des objets géométriques stockées dans une structure 
 topologique sont utilisées pour évaluer si des géométries correspondent au 
@@ -84,7 +83,7 @@ filtre spatial en cours.
 L'évaluation est réalisée une fois que le filtre spatial est défini.
 
 GISBASE
-========
+--------
 
 *GISBASE* est le chemin complet vers le répertoire où GRASS est installé. Par 
 défaut, le pilote GRASS utilise le chemin donné par le script de configuration 
@@ -93,7 +92,7 @@ d'environnement *GISBASE*. *GISBASE* est utilisé pour trouver les pilotes des
 bases de données GRASS.
 
 Topologie manquante
-====================
+--------------------
 
 Le pilote GRASS peut lire les fichiers vecteurs de GRASS si la topologie est 
 disponible (aka niveau 2). Si une erreur est retournée, disant que la topologie 
@@ -101,7 +100,7 @@ n'est pas disponible, il est nécessaire de construire la topologie avec
 le module ``v.build`` de GRASS.
 
 Accès aléatoire
-================
+-----------------
 
 Si un accès aléatoire (*GetFeature* au lieu de *GetNextFeature*) est utilisé 
 sur une couche avec des attributs, la lecture des géométries peut être assez 
@@ -112,7 +111,7 @@ habituellement lent. Cela peut être amélioré du côté  de GRASS  lors de
 l'optimisation et de l'écriture des fichiers basés sur des pilotes (DBF, SQLite).
 
 Problèmes connus
-================
+----------------
 
 À cause d'un bug dans la bibliothèque de GRASS, il est impossible de 
 démarrer/arrêter les pilotes des bases de données dans l'ordre FIFO et l'ordre 
@@ -128,7 +127,7 @@ autre couche sont lu puis la lecture de la première couche est terminée, parce
 que dans ce cas-là la commande *kill()* n'est pas utilisée.
 
 Voir également
-==============
+---------------
 
 * `Page principale de GRASS <http:*grass.itc.it/>`_
 

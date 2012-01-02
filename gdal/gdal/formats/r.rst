@@ -1,6 +1,5 @@
 .. _`gdal.gdal.formats.r`:
 
-=========================
 R -- R Object Data Store
 =========================
 
@@ -16,7 +15,7 @@ Pour le moment il n'y a pas de gestion de lecture et d'écriture d'informations
 géoréférencement.
 
 Options de création
-====================
+-------------------
 
 * **ASCII=YES/NO :** produit un fichier formaté en ASCII, au lieu du binaire, si 
   définie à YES. NO par défaut.
@@ -24,7 +23,7 @@ Options de création
   non compressé. YES par défaut.
 
 Voir également
-===============
+--------------
 
 * `Project R <http://www.r-project.org/>`_
 

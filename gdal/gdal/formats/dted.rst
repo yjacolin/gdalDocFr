@@ -1,6 +1,5 @@
 .. _`gdal.gdal.formats.dted`:
 
-================================
 DTED -- Military Elevation Data
 ================================
 
@@ -11,10 +10,10 @@ sont également retourné. Une diversité de champs d'en-tête sont renvoyé com
 méta-données de niveau du jeu de données.
 
 Problèmes de lecture
-=====================
+---------------------
 
 Vitesse de lecture
--------------------
+******************
 
 Les données d'élévation dans les fichiers DTED sont organisé par colonne. Cette 
 organisation des données ne fonctionne pas très bien avec les algorithmes de 
@@ -26,7 +25,7 @@ Utiliser seulement cette option si vous avez besoin de réaliser un calcul sur
 le fichier complet.
 
 Problèmes de géoréférencement
-------------------------------
+******************************
 
 La spécification DTED (`MIL-PRF-89020B <http://www.nga.mil/ast/fm/acq/89020B.pdf>`_) 
 affirme que le datum horizontal doit être le système Géodésique Mondiale (World 
@@ -45,7 +44,7 @@ situation.
 
 
 Problèmes de checksum
-----------------------
+**********************
 
 le comportement par défaut du pilote DTED est d'ignorer le checksum lors de la 
 lecture des données à parti du fichier. Cependant, vous pouvez définir la 
@@ -57,7 +56,7 @@ checksum calculé à partir des données ne correspond pas, une erreur sera
 retournée.
 
 Problème lors de la création
-=============================
+-----------------------------
 
 Le pilote DTED doit gérer les nouveaux fichiers, mais les données en entrée 
 doivent être formaté exactement comme une cellule de niveau 0, 1 ou 2. C'est à 

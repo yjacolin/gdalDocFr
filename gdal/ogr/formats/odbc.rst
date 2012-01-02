@@ -1,6 +1,5 @@
 .. _`gdal.ogr.formats.odbc`:
 
-===========
 ODBC RDBMS
 ===========
 
@@ -57,14 +56,14 @@ pour prendre en charge les commandes SQL avec le moteur :ref:`gdal.ogr.sql`, en
 passant la chaine "OGRSQL" à la méthode *ExecuteSQL()*, comme nom du dialecte SQL.
 
 Problèmes de création
-======================
+----------------------
 
 Pour l'instant le pilote ODBC d'OGR est ne lecture seule, les applications 
 utilisant OGR ne peuvent donc pas créer de nouvelles géométries, tables et 
 sources de données. Cette limitation sera supprimé dans le futur.
 
 Lisez également
-================
+----------------
 
 * `Référence de l'API ODBC MSDN <http://msdn.microsoft.com/en-us/library/ms714562(VS.85).aspx">MSDN ODBC API Reference>`_
 

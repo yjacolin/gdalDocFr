@@ -1,6 +1,5 @@
 .. _`gdal.python.biblio`:
 
-=============
 Bibliographie
 =============
 

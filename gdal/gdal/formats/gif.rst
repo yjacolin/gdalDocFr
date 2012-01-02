@@ -1,6 +1,5 @@
 .. _`gdal.gdal.formats.gif`:
 
-===================================
 GIF -- Graphics Interchange Format
 ===================================
 
@@ -19,7 +18,7 @@ lu et utilisé pour établir la géotransformation pour l'image.
 fichier, et sera stocké comme XML brute dans le domaine de médatonnées xml:XMP.
 
 Problème lors de la création
-=============================
+-----------------------------
 
 Les fichiers GIF peuvent seulement être créé comme une bande de 8 bit en 
 utilisant le mécanisme « CreateCopy ». S'il est écrit à partir d'un fichier qui 

@@ -1,6 +1,5 @@
 .. _`gdal.ogr.sql`:
 
-=============
 SQL dans OGR
 =============
 
@@ -13,7 +12,7 @@ SQL générique dans OGR, et des problèmes avec la gestion des SQL spécifique 
 pilote.
 
 Syntaxe SQL gérée
-===================
+------------------
 
 La classe *OGRLayer* gère également l'application d'un filtre de requête 
 attributaire aux features retournées en utilisant la méthode 
@@ -31,7 +30,7 @@ méthode *SetAttributeFilter()*
 
 
 SELECT
-=======
+-------
 
 La requête SELECT est utilisée pour récupérer les objets d'une couche (analogue 
 aux lignes des tables dans un RDBMS) avec le résultat de la requête représentée 
@@ -75,7 +74,7 @@ Cette requête SELECT produira une table avec juste un objet, avec un attribut
 
 
 Opérateurs de liste de champs
-------------------------------
+*******************************
 
 La liste de champs est une liste séparée par des virgules de champs pour 
 rapporter les objets en sortie de la couche source. Ils apparaitront sur les 
@@ -143,7 +142,7 @@ ou
 
 
 Utiliser les alias des noms de champs
---------------------------------------
+***************************************
 
 SQL d'OGR gère le renommage des champs en suivant la spécifications SQL92 en 
 utilisant le mot-clé AS comme pour l'exemple suivant :
@@ -165,7 +164,7 @@ l'expression de la colonne, comme ces deux exemples :
 
 
 Changer le type des champs
-----------------------------
+***************************
 
 À partir de GDAL 1.6.0, SQL d'OGR gère le changement du type des colonnes en 
 utilisant l'opérateur CAST conforme SQL92 comme pour l'exemple suivant :
@@ -197,7 +196,7 @@ liste de définition de champs. Dans d'autres contexte il est encore utile de
 convertir entre les types de donnée numérique, chaîne et date.
 
 WHERE
--------
+********
 
 L'argument de la clause WHERE est une expression logique assez simpliste utilisé 
 pour sélectionner les enregistrements d'une couche source. En plus de cette 
@@ -281,7 +280,7 @@ priorité. quelques prédicats plus compliqués :
 
 
 Limitations de la clause WHERE
--------------------------------
+*******************************
 
 - Les champs doivent tous venir de la table primaire (celle listée dans la 
   clause FROM.
@@ -289,7 +288,7 @@ Limitations de la clause WHERE
   <= et >=.
 
 ORDER BY
----------
+***********
 
 La clause ORDER BY est utilisé pour forcer les objets renvoyés à être ordonné 
 (ascendant ou descendant) sur un des champs. L'ordre ascendant (augmentant) est 
@@ -311,7 +310,7 @@ L'ordonnancement de valeurs de champs de type chaine est sensible à la casse, e
 pas insensible à la casse comme dans la plupart des cas dans SQL d'OGR.
 
 Clause JOIN
-------------
+*************
 
 SQL d'OGR gère une forme limité de jointure une à une. Cela permet à des 
 enregistrements d'une table secondaire d'être utilisé pour la recherche avec une 
@@ -403,7 +402,7 @@ Il est possible de réaliser des jointures multiples dans une seule requête :
 
 
 Limitations de la clause JOIN
-------------------------------
+*******************************
 
 - Les jointures peuvent être des opérations couteuses si la table secondaire 
   n'est pas indexée sur le champ clé de la jointure.
@@ -427,7 +426,7 @@ Limitations de la clause JOIN
   trouvé, seul le premier enregistrement sera utilisé.
 
 Champs spéciaux
-================
+----------------
 
 Le processeur de requête SLQ d'OGR traite certains attributs d'objets comme des 
 champs spéciaux interne et peuvent être utilisé dans les requêtes SQL comme tout 
@@ -439,7 +438,7 @@ prennent la priorité sur tous les autres champs avec le même nom dans la sourc
 de données.
 
 FID
------
+****
 
 Normalement l'id de l'objet est une propriété spéciale d'un objet et n'est pas 
 traité comme un attribut d'objet. Dans certains cas il est pratique de pouvoir 
@@ -453,7 +452,7 @@ explicitement inclus en utilisant la syntaxe suivante :
     SELECT FID, * FROM nation
 
 OGR_GEOMETRY
--------------
+*************
 
 Certaines sources de donnés (comme les fichiers tab de MapInfo) peuvent prendre 
 en charge des géométries de différents types dans la même couche. Le champ 
@@ -467,7 +466,7 @@ particulier des géométries :
     SELECT * FROM nation WHERE OGR_GEOMETRY='POINT' OR OGR_GEOMETRY='POLYGON'
 
 OGR_GEOM_WKT
--------------
+*************
 
 La représentation *Well Known Text* d'une géométrie peut aussi être utilisé 
 comme champ spécial. Pour sélectionner le WKT d'une géométrie *OGR_GEOM_WKT* 
@@ -486,7 +485,7 @@ pouvons avoir des effets similaire à l'utilisation de *OGR_GEOMETRY* :
 
 
 OGR_GEOM_AREA
---------------
+**************
 
 (à partir de GDAL 1.7.0)
 
@@ -503,7 +502,7 @@ donnée :
     SELECT * FROM nation WHERE OGR_GEOM_AREA > 10000000'
 
 OGR_STYLE
------------
+***********
 
 Le champs spécial *OGR_STYLE* représente la chaine de style d'un objet renvoyé 
 par la méthode *OGRFeature::GetStyleString()*. En utilisant ce champ et 
@@ -515,7 +514,7 @@ exemple nous pouvons sélectionner  l'objet annotation avec :
 
 
 CREATE INDEX
-=============
+-------------
 
 Certains pilotes SQL d'OGR gère la création d'indexes attributaires. Pour 
 l'instant cela inclus le pilote Shapefile. Un inde accélère  les requêtes 
@@ -528,7 +527,7 @@ table *nation* une commande telle que celle-ci peut être utilisée :
     CREATE INDEX ON nation USING nation_id
 
 Limitations des Index
-----------------------
+**********************
 
 - Les index ne sont pas maintenu dynamiquement lors de l'ajout ou la 
   suppression d'une couche d'un nouvel objet.
@@ -541,7 +540,7 @@ Limitations des Index
   valeur*.
 
 DROP INDEX
-===========
+------------
 
 La commande SQL d'OGR DROP INDEX peut être utilisé pour supprimer tous les 
 indexes sur une table particulière ou juste l'index d'une colonne particulière.
@@ -551,7 +550,7 @@ indexes sur une table particulière ou juste l'index d'une colonne particulière
     DROP INDEX ON nation
 
 ExecuteSQL()
-=============
+-------------
 
 SQL est exécuté en fonction de *OGRDataSource,*, et pas en fonction d'une couche 
 spécifique. L'appel ressemblera à ceci :
@@ -579,7 +578,7 @@ L'échec de la publication avant que la source de données ne soit détruite
 entrainera un crash.
 
 SQL hors OGR
-=============
+--------------
 
 Tous les pilotes d'OGR pour les systèmes de bases de données : MySQL, PostgreSQL 
 et PostGIS (:ref:`gdal.ogr.formats.postgresql`), Oracle 

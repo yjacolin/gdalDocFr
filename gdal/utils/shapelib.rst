@@ -1,6 +1,5 @@
 .. `gdal.utils.shapelib`:
 
-=========
 ShapeLib
 =========
 
@@ -9,7 +8,7 @@ ShapeLib
  * Documentation : http://shapelib.maptools.org/shapelib-tools.html
 
 Description
-============
+-------------
 (ceci est une traduction du site).
 
 La bibliothèque C Shapefile fournie la possibilité d'écrire de simple programme 
@@ -18,7 +17,7 @@ d'ESRI, et leur attribut associé (.dbf). Des outils à utiliser en ligne de
 commande sont fournies avec cette bibliothèque.
 
 Outils
-========
+--------
 Liste des outils :
 
   * dbfcreate
@@ -40,7 +39,7 @@ Liste des outils :
     * shpproj
 
 dbfcreate
-----------
+***********
 
  * **Objectif :** créer un nouveau fichier .dbf vide.
  * **Usage :** dbfcreate xbase_file [ [ -s field_name width ],[ -n field_name width decimals ] ]...
@@ -60,7 +59,7 @@ dbfcreate
     NAME ( string (20)), AREA ( float (9,3)) and VALUE ( float (9,2))
 
 dbfadd
--------
+********
 
  * **Objectif :** ajoute un enregistrement dans un fichier .dbf existant.
  * **Usage :** dbfadd xbase_file field_values
@@ -78,7 +77,7 @@ dbfadd
   pour le champ AREA et '150.22' pour le champ VALUE.
 
 dbfdump
--------
+********
 
  * **Objectif :** dump le contenu d'un fichier xBase vers la console.
  * **Usage :** dbfdump [-h] [-r] [-m] xbase_file
@@ -102,7 +101,7 @@ dbfdump
     REGION1 25.656 150.22 
 
 shpcreate
-----------
+***********
 
   * **Objectif :** créé un nouveau fichier shapefile vide.
   * **Usage :** shpcreate shp_file [point|arc|polygon|multipoint]
@@ -118,7 +117,7 @@ shpcreate
     seront créé). 
 
 shpadd
--------
+********
 
  * **Objectif :** ajoute un shape dans un shapefile existant.
  * **Usage :** shpadd shp_file [ [x y] [+] ]*
@@ -144,7 +143,7 @@ shpadd
     vertice 3: 100000 7000000
 
 shpdump
---------
+********
 
  * **Objectif :** dump le contenu d'un shapefile en affichant l'information comme 
    le type de shape, l'étendue du fichier, le nombre total d'objets et les 
@@ -176,7 +175,7 @@ shpdump
             (  100000.000, 7000000.000, 0, 0)
 
 shprewind
-----------
+**********
 
  * **Objectif :** valide et reset l'ordre d'enroulement de l'anneau dans les 
    géométries polygonales pour correspondre aux nécessités de la spécification 
@@ -193,7 +192,7 @@ shprewind
     $ shprewind badshapefile newshapefile 
 
 dbfinfo
--------
+**********
 
  * **Objectif :** affiche des informations basiques pour un fichier xBase donné, 
    comme le nombre de colonne, le nombre d'enregistrement et le type de chaque 
@@ -214,7 +213,7 @@ dbfinfo
           VALUE           float  (9,2)
 
 dbfcat
-------
+*******
 
  * **Objectif :** ajoute les enregistrements d'un fichier xBase source dans un 
    fichier xBase finale. Les deux fichiers doivent avoir le même nombre de champs.
@@ -233,7 +232,7 @@ dbfcat
     $ dbfcat -v testbase1 testbase2 
 
 shpinfo
---------
+********
 
  * **Objectif :** affiche des informations basiques pour un shapefile donné, 
    comme le type de shapefile, le nombre d'objets et leurs étendues.
@@ -252,7 +251,7 @@ shpinfo
             (         250000,        7000000)
 
 shpcat
--------
+*******
 
  * **Objectif :** ajoute le contenu d'un shapfile source dans un shapefile final. 
    Les deux fichiers doivent avoir le même type de shapefile.
@@ -267,7 +266,7 @@ shpcat
     $ shpcat shapefile1 shapefile2 
 
 shpcentrd
-----------
+***********
 
  * **Objectif :** calcule le centroid XY pour des shapefile polygonaux.
  * **Usage :** shpcentrd shp_file new_shp_file
@@ -281,7 +280,7 @@ shpcentrd
     $ shpcentrd apolygonfile pointcentrd 
 
 shpdxf
--------
+******
 
  * **Objectif :** créé un fichier DXF à partir d'un fichier shapefile existant.
  * **Usage :** shpdxf shapefile {idfield}
@@ -296,7 +295,7 @@ shpdxf
     # ...
 
 shpfix
--------
+*******
 
  * **Objectif :** progamme qui corrige les valeurs nulles et inconsistante dans 
    des Shapefiles comme cela arrive de temps en temps.
@@ -311,13 +310,13 @@ shpfix
     $ shpfix broken fixed 
 
 shpproj
---------
+********
 
  * **Objectif :** Reprojette des Shapefiles en utilisant PROJ.4
  * **Usage :** shpproj shp_file new_shp ( -i=in_proj_file | -i="in_params" | -i=geographic ) ( -o=out_info_file | -o="out_params" | -o=geographic )
 
 Entré
-******
+``````
 
 L'entré peut provenir d'un des trois sources. Un fichier de paramètre de 
 projection, directement via des paramètres ou géographique. Si le shapefile 
@@ -327,14 +326,14 @@ l'entré est omise sa valeur par défaut est géographique, sauf si le fichier p
 existe.
 
 Sortie
-*******
+```````
 
 La sortie peut provenir d'un des trois sources. Un fichier de paramètre de 
 projection, directement via des paramètres ou géographique. Si la sortie est 
 omise sa valeur par défaut est géographique.
 
 Fichier de paramètres de projection
-*************************************
+````````````````````````````````````
 
 Ce fichier **doit** se terminer avec l'extension ".prj". Il est sous la forme 
 d'un paramètre projection par ligne. Les paramètres peuvent être dans n'importe 
@@ -342,7 +341,7 @@ quel ordre. Les paramètres de projection sont ceux utilisé pour définir une
 projection PROJ.4.
 
 Paramètres de projection
-*************************
+``````````````````````````
 
 Les paramètres de projection sont les mêmes que ceux utilisés par proj et invproj. Utilisez
 

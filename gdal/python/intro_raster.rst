@@ -1,14 +1,14 @@
 .. _`gdal.python.raster.intro`:
 
-=============
+
 Raster
-=============
+=======
 
 Lire un fichier Raster
-=======================
+-------------------------
 
 Les drivers
------------
+**************
 
 Vous devez charger les drivers pour les utiliser. Pour charger les drivers en 
 une fois (pour lire un raster seulement, pas pour écrire), utiliser :
@@ -27,7 +27,7 @@ enfin enregistrez le :
     driver.register()
 
 Lire un fichier raster
-----------------------
+**********************
 
 Vous pouvez maintenant lire un fichier raster sous forme de jeu de données 
 (dataset) :
@@ -68,7 +68,7 @@ En plus des méthodes définie dans l'API il existe trois propriétés :
     ds.RasterCount
 
 Bande
-------
+*******
 
 Pour travailler sur les pixels, nous devons obtenir la bande :
 ::
@@ -164,4 +164,4 @@ Le tableau de valeur est un tableau de colonne, les deux valeurs sont bien des c
     Ne traitez pas un pixel à la fois, mais utiliser les fonctions built-in de Python, notamment le module Numpy ou Numeric.
 
 Écrire un fichier Raster
-========================
+-------------------------

@@ -1,6 +1,5 @@
 .. _`gdal.gdal.formats.l1b`:
 
-===================================================
 L1B -- NOAA Polar Orbiter Level 1b Data Set (AVHRR)
 ===================================================
 
@@ -12,7 +11,7 @@ dron@ak4719.spb.edu).  AVHRR LAC/HRPT (résolution de 1 km) et GAC (résolution
 de 4 km)  devraient être traité correctement.
 
 Géo-référencement
-==================
+------------------
 
 Notez que le modèle de géoréférencement par affine simple de GDAL est 
 complètement inutilisable pour les données NOAA. Vous ne devez pas le relier. 
@@ -37,7 +36,7 @@ localisée en haut de l'image. Si vous désirez déterminer la direction réelle
 déplacement du satellite vous devez regarder la méta-données LOCATION.
 
 Données
-========
+--------
 
 Dans le cas du NOAA-10 dans le canal 5 vous obtiendrez la répétition du canal 4 
 des données. Les instruments AVHRR/3 (NOAA-15 – NOAA-17) est un radiomètre à six 
@@ -47,7 +46,7 @@ champ description du canal  reporté par ``gdalinfo`` pour déterminer quel sort
 de canal est contenu dans le fichier de traitement.
 
 Méta-données
-=============
+-------------
 
 Plusieurs paramètres, obtenu à partir du jeu de données sont rangés comme 
 enregistrement de méta-données.
@@ -70,7 +69,8 @@ Les enregistrements des méta-données :
   le satellite se déplace des faibles latitudes vers les hautes latitudes, et 
   *Descending* pour les autres cas.
 
-**Lisez également :**
+Lisez également
+----------------
 
 * Implémenté dans gdal/frmts/l1b/l1bdataset.cpp.
 * NOAA Polar Orbiter Level 1b Data Set est documenté dans ``POD User's Guide`` 

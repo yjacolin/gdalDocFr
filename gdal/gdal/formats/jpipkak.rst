@@ -1,6 +1,5 @@
 .. _`gdal.gdal.formats.jpipkak`:
 
-=========================
 JPIPKAK - JPIP Streaming
 =========================
 
@@ -11,7 +10,7 @@ distants avec une bande passante des connexions limitée ou des réseaux à haut
 concurrence.
 
 JPIPKAK - aperçu JPIP
-======================
+----------------------
 
 Un bref aperçu de la séquence des événements JPIP  est présenté dans cette section, 
 plus d'information peut être trouvé dans `JPEG 2000 Interactive Protocol (Part 
@@ -49,7 +48,7 @@ requêtes ont été réalisé à une niveau de résolution 1:1.
    région spatiale associée à la fenêtre de vue demandée.
 
 JPIPKAK - approche
-===================
+-------------------
 
 Le pilote JPIPKAK utilise une approche qui a d'abord été démontré ici, 
 `J2KViewer <http://www.drc-dev.ohiolink.edu/browser/J2KViewer>`_, par Juan Pablo 
@@ -73,7 +72,7 @@ performance de Kakadu.
 .. image:: _static/components.png
 
 JPIPKAK - implémentation
-=========================
+-------------------------
 
 L'implémentation gère les API C et C++ de GDAL et fournie un wrapper SWIG initial 
 pour ce pilote avec un exemple ImageIO Java (**TODO** - Exemple qGIS).
@@ -85,19 +84,17 @@ serveur sont multiplexées pour utiliser la bande passant disponible efficacemen
 Le client identifie ces fenêtres en utilisant les valeurs "0" (faible) ou "1" 
 (haut) pour une option de la requête de métadonnées "PRIORITY".
 
-**Note : gestion SSL**
+.. note:: gestion SSL
+    Si le client est compilé avec la gestion de SSL, alors le pilote détermine s'il 
+    utilise SSL si la requête est un protocole jpips:// en opposition à jpip://. Notez 
+    que le pilote ne vérifie pas les certificats des serveurs en utilisant le bundle 
+    du certificat de Curl et il est pour le moment définir pour accepter tous les 
+    certificats du serveur SSL.
 
-Si le client est compilé avec la gestion de SSL, alors le pilote détermine s'il 
-utilise SSL si la requête est un protocole jpips:// en opposition à jpip://. Notez 
-que le pilote ne vérifie pas les certificats des serveurs en utilisant le bundle 
-du certificat de Curl et il est pour le moment définir pour accepter tous les 
-certificats du serveur SSL.
-
-**Note : libCurl**
-
-JPIP définie des valeurs client/serveur en utilisant les en-têtes HTTP, les 
-modifications ont été faire dans la bibliothèque de portabilité HTTP de GDAL pour 
-gérer cela.
+.. note:: libCurl
+    JPIP définie des valeurs client/serveur en utilisant les en-têtes HTTP, les 
+    modifications ont été faire dans la bibliothèque de portabilité HTTP de GDAL pour 
+    gérer cela.
 
 .. _`gdal.gdal.formats.jpip.sequence`:
 
@@ -217,7 +214,7 @@ gérer cela.
 26. *Draw*
 
 JPIPKAK - exigences d'installation
-====================================
+-----------------------------------
 
 * `Libcurl 7.9.4 <http://curl.haxx.se/>`_
 * `OpenSSL 0.9.8K <http://www.openssl.org/>`_ (si SSL est nécessaire, une 
@@ -235,7 +232,7 @@ Voir également :
 * `IAS demo (example JPIP(S) streams) <http://iasdemo.ittvis.com/>`_
 
 Notes
-======
+------
 
 Pilote développé originellement par <http://www.ittvis.com">ITT VIS</a> et donné 
 à GDAL pour permettre le flux de jeux de données JPEG 2000 de client JPIP avec 

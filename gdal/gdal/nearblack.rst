@@ -1,13 +1,12 @@
 .. _`gdal.gdal.nearblack`:
 
-==========
 nearblack
 ==========
 
 Convertie des bords plus ou moins en noirs/blanc en noir.
 
 Usage
-=====
+------
 ::
     
     nearblack [-of format] [-white] [-near dist] [-nb non_black_pixels]
@@ -15,7 +14,7 @@ Usage
 
 
 Description
-============
+-------------
 
 La commande va scanner une image et tenter de définir tous les pixels qui sont 
 proches du noir (ou proche du blanc) autour du bord en noir (ou blanc) exact. 

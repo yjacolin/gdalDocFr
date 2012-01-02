@@ -1,6 +1,5 @@
 .. _`gdal.ogr.formats.openair`:
 
-==============================================
 OpenAir - OpenAir Special Use Airspace Format
 ==============================================
 
@@ -21,7 +20,7 @@ label (élément AT). Il peut y avoir de multiple enregistrement AT pour un segm
 airspace AT. Les champs sont les mêmes que ceux de la couche 'airspaces'.
 
 Voir également
-===============
+---------------
 
 * `Description du format OpenAir <http://www.winpilot.com/UsersGuide/UserAirspace.asp>`_
 

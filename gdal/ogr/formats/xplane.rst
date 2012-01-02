@@ -1,6 +1,5 @@
 .. _`gdal.ogr.formats.xplane`:
 
-=====================================
 X-Plane/Flightgear aeronautical data
 =====================================
 
@@ -41,7 +40,7 @@ cache les features en RAM, mais juste à les récupérer de la couche en cours. 
 sur, cela aura un impact négatif sur les performances.
 
 Exemples
-========
+---------
 
 convertir toutes les couches contenu dans *apt.dat* dans un ensemble de shapefiles :
 
@@ -52,13 +51,13 @@ convertir toutes les couches contenu dans *apt.dat* dans une base de données Po
   % PG_USE_COPY=yes ogr2ogr -overwrite -f PostgreSQL PG:"dbname=apt" apt.dat
 
 Voir également
-================
+--------------
 
 * `Définition du fichier données X-Plane <http://data.x-plane.com/designers.html>`_
 
 
 Airport data (apt.dat)
-=======================
+----------------------
 
 Ce fichier contient la description des éléments définissant les aéroports, les 
 héliports, les bases nautiques, avec leur pistes et route de taxi, les 
@@ -89,7 +88,7 @@ Toutes les couches autre que APT se référeront à l'aéroport grâce à la col
 *apt_icao*, qui peut servir de clé étrangère.
 
 Couche APT
-----------
+***********
 
 Principale description pour un aéroport. La position rapportée sera la position 
 de la tour de contrôle si présente, autrement la position trouvée du premier 
@@ -107,7 +106,7 @@ seuil de la piste.
 * tower_name  : Chaine (32.0). Nom de la tour de contrôle si présente.
 
 Couche RunwayThreshold
-***********************
+```````````````````````
 
 Cette couche contient la description d'un seuil  d'une piste.
 La piste en elle-même est complètement décrite par ces deux seuils, et la couche 
@@ -207,7 +206,7 @@ La piste en elle-même est complètement décrite par ces deux seuils, et la cou
   l'approche de la fin de la piste.
 
 Couche RunwayPolygon
-*********************
+``````````````````````
 
 Cette couche contient la forme rectangulaire de la piste. Elle est calculé à 
 partir des informations de seuil de la piste. Quand cela n'est pas définie, la 
@@ -229,7 +228,7 @@ signification du champ est la même que la couche *RunwayThreshold*.
 * true_heading_deg : Réel (6.2). En-tête réel de la première à la seconde piste.
 
 WaterRunwayThreshold (Point)
-****************************
+`````````````````````````````
 
 **Champs :**
 
@@ -245,7 +244,7 @@ WaterRunwayThreshold (Point)
   l'approche de la fin de la piste.
 
 WaterRunwayPolygon (Polygone)
-******************************
+``````````````````````````````
 
 Cette couche contient la forme rectangulaire d'une piste d'ammerissage. Elle est 
 construite à partir des informations des seuils des pistes d'atterrissage de l'eau.
@@ -261,7 +260,7 @@ construite à partir des informations des seuils des pistes d'atterrissage de l'
 * true_heading_deg : Réel (6.2) 
 
 Stopway layer (Polygon)
-************************
+```````````````````````
 
 (À partir de GDAL 1.7.0)
 
@@ -284,7 +283,7 @@ Champs :
   dépassement à la fin de l'approche de la piste en mètre.
 
 Helipad (Point)
-****************
+````````````````
 
 Cette couche contient le centre de la piste d'atterrissage d'hélicoptères.
 
@@ -310,13 +309,13 @@ Cette couche contient le centre de la piste d'atterrissage d'hélicoptères.
     * Red (Enregistrement V810) 
 
 HelipadPolygon (Polygone)
-****************************
+``````````````````````````
 
 Cette couche contient la forme rectangulaire d'une aire d'atterrissage 
 d'hélicoptères. Les champs sont identique à la couche *Helipad*.
 
 TaxiwayRectangle (Polygone) - Enregistrement V810
-**************************************************
+````````````````````````````````````````````````````
 
 Cette couche content la forme rectangulaire d'une voie de taxie.
 
@@ -333,7 +332,7 @@ Cette couche content la forme rectangulaire d'une voie de taxie.
 * edge_lighting : Entier (1.0). Définie à 1 si la piste de taxi a des bords lumineux.
 
 Pavement (Polygone)
-********************
+```````````````````
 
 Cette couche contient des tronçons polygonaux de chaussée  pour les voies de 
 taxi et des tabliers. Les polygones peuvent inclure des troues.
@@ -355,7 +354,7 @@ linéaires.
   degré réel
 
 APTBoundary (Polygone)
-***********************
+```````````````````````
 
 Cette couche contient les limites de l'aéroport. Il y a au maximum une telle 
 géométrie par aéroport. Le polygone peut inclure des troues. Les courbes de 
@@ -366,8 +365,8 @@ béziers sont discrétisées en morceaux linéaires.
 * apt_icao : Chaine (4.0)
 * name : Chaine (0.0) 
 
-APTLinearFeature (Chaine linéaire)
-**********************************
+APTLinearFeature (Chaîne linéaire)
+````````````````````````````````````
 
 Cette couche contienr les objets linéaires. Les courbes de béziers sont d
 iscrétisées en morceaux linéaire.
@@ -378,7 +377,7 @@ iscrétisées en morceaux linéaire.
 * name : Chaine (0.0) 
 
 StartupLocation (Point)
-************************
+```````````````````````
 
 Définie les positions des portes, locations de rampe, etc.
 
@@ -389,7 +388,7 @@ Définie les positions des portes, locations de rampe, etc.
 * true_heading_deg : Réel (6.2) 
 
 APTLightBeacon (Point)
-***********************
+```````````````````````
 
 Définie les balises-lumières des aéroports.
 
@@ -406,7 +405,7 @@ Définie les balises-lumières des aéroports.
     * White-white-green : champ militaire
 
 APTWindsock (Point)
-********************
+````````````````````
 
 Définie les biroutes des aéroports.
 
@@ -417,7 +416,7 @@ Définie les biroutes des aéroports.
 * is_illuminated: Integer (1.0)
 
 TaxiwaySign (Point)
-********************
+````````````````````
 
 Définie les signes des voies de taxi des aéroports.
 
@@ -431,7 +430,7 @@ Définie les signes des voies de taxi des aéroports.
 * size: Integer (1.0). De  1 à 5. Voyez les spécification d'X-Plane pour plus de détails.
 
 VASI_PAPI_WIGWAG (Point)
-*************************
+`````````````````````````
 
 Définie un *VASI*, *PAPI* ou *Wig-Wag*. Pour les valeurs *PAPI* et *Wig-Wags*, 
 les coordonnées est le centre de l'affichage. Pour la valeur *VASI*, c'est le 
@@ -455,7 +454,7 @@ point central entre les deux unités de lumière des *VASI*.
 * visual_glide_deg : Réel (4.2) 
 
 ATCFreq (None)
-***************
+```````````````
 
 Définie une réquence ATC d'nu aéroport. Notez que cette couche n'a pas de géométrie.
 
@@ -481,7 +480,7 @@ Définie une réquence ATC d'nu aéroport. Notez que cette couche n'a pas de gé
 * freq_mhz : Réel (7.3). Fréquence en MHz.
 
 Aides à la navigation (nav.dat)
-================================
+--------------------------------
 
 Ce fichier contient la description de divers phare d'aides à la navigation.
 
@@ -496,7 +495,7 @@ Les couches suivantes sont retournées :
 * DMEILS (Point)
 
 ILS (Point)
------------
+************
 
 *Localiser* qui est une partie d'un ILS complet, ou un *localiser* indépendant 
 (LOC) également inclut un LDA (*Landing Directional Aid*) ou un SDF (*Simplified 
@@ -526,7 +525,7 @@ Directional Facility*).
 * true_heading_deg : réel (6.2). En-tête réel du *localiser* en degré.
 
 VOR (Point)
-------------
+************
 
 *Navaid* du type *VOR*, *VORTAC* ou *VOR-DME*.
 
@@ -542,7 +541,7 @@ VOR (Point)
   *VOR/VORTAC* en degré.
 
 NDB (Point)
--------------
+************
 
 **Champs :**
 
@@ -554,7 +553,7 @@ NDB (Point)
 * range_km : réel (7.3) 
 
 GS - Glideslope (Point)
-------------------------
+************************
 
 Glideslope nav-aid.
 
@@ -570,7 +569,7 @@ Glideslope nav-aid.
 * glide_slope : réel (6.2). Angle du *glide-slope* en degré (typiquement 3 degrés) 
 
 Marker - ILS marker beacons. (Point)
-------------------------------------
+*************************************
 
 *Nav-aids* de type *Outer Marker* (OM), *Middle Marker* (MM) ou *Inner Marker* (IM).
 
@@ -585,7 +584,7 @@ Marker - ILS marker beacons. (Point)
 * true_heading_deg : réel (6.2). En-tête réel du *glideslope* en degré. 
 
 DME (Point)
-------------
+************
 
 DME, incluant l'élément DME d'un VORTAC, VOR-DME ou NDB-DME.
 
@@ -601,7 +600,7 @@ DME, incluant l'élément DME d'un VORTAC, VOR-DME ou NDB-DME.
   DME pour donner la lecture du cockpit désirée.
 
 DMEILS (Point)
----------------
+**************
 
 Élément DME d'un ILS.
 
@@ -620,7 +619,7 @@ DMEILS (Point)
 
 
 Intersections IFR (fix.dat)
-============================
+----------------------------
 
 Ce fichier contient les intersections IFR (souvent nommé *fixes*).
 
@@ -629,14 +628,14 @@ La couche suivante est renvoyée :
 * FIX (Point)
 
 FIX (Point)
-------------
+************
 
 **Champs :**
 
 * fix_name : Chaine (5.0). Nom de l'intersection. *NON* unique. 
 
 Airways (awy.dat)
-=================
+-----------------
 
 Ce fichier contient la description des segments de la route de vol.
 
@@ -646,7 +645,7 @@ Les couches suivantes sont retournées :
 * AirwayIntersection (point)
 
 AirwaySegment (Line String)
------------------------------
+****************************
 
 **Champs :**
 
@@ -662,7 +661,7 @@ AirwaySegment (Line String)
   route de vol. 
 
 AirwayIntersection (Point)
-----------------------------
+**************************
 
 **Champ :**
 

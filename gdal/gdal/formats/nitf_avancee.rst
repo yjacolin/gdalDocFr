@@ -1,6 +1,5 @@
 .. _`gdal.gdal.formats.nitf_avancee`:
 
-==========================================
 NITF -- Information Avancée sur le pilote
 ==========================================
 
@@ -11,7 +10,7 @@ pour le pilote. Cette information est collecté ici et est surtout utilisable
 pour les développeurs et les utilisateurs avancés.
 
 Segments CGM
-=============
+-------------
 
 Les fichiers NITF qui ont des données CGM (qui sont un segment de type GR - 
 graphique, ou SY avec un STYPE de valeur 'C') rendront cette information 
@@ -61,7 +60,7 @@ utilisateur a trouvé la bibliothèque  `UniConverter <http://sk1project.org/mod
 utile pour cela.
 
 Fichiers NITF Multi-Image
-==========================
+--------------------------
 
 Les fichiers NITF avec plus d'un segment d'image (IM) présentera les segments 
 d'image comme des sous jeux de données. L'ouverture de multiple fichiers NITF 
@@ -86,7 +85,7 @@ données est un concept GDAL générique  discuté dans le
 `document Modèle de données <http://www.gdal.org/gdal_datamodel.html>`_.
 
 Segments Texte
-===============
+---------------
 
 Les fichiers NITF qui ont des segments textes (qui est un segment de type TX) 
 rendra cette information disponible comme méta-données dans le domaine TEXT. 
@@ -133,7 +132,7 @@ Notez que passer TEXT comme option de création écrasera le texte existant lu d
 le domaine de métadonnées TEXT.
 
 TRE
-=====
+----
 
 Les fichiers NITF avec des extensions enregistrées (ou non enregistrées ?) sur 
 l'en-tête du fichier, ou l'en-tête de l'image géoréférencée les rendront 
@@ -159,7 +158,7 @@ nommée "TRENAME_2", le troisième "TRENAME_3" où TRENAME est le *nom TRE*.
     MAPLOB=M  0598005958-000003067885.8-000002163353.8
 
 TREs comme xml:TRE
-===================
+-------------------
  
 À partir de GDAL 1.9.0, tous les TRE trouvé dans le fichier et correspondant à 
 l'une des descriptions de TRE du fichier `nitf_spec.xml <http://trac.osgeo.org/gdal/browser/trunk/gdal/data/nitf_spec.xml>`_ 
@@ -219,7 +218,7 @@ domaine de métadonnées xml:TRE.
 
 
 Fichier brute/ En-tête d'image
-===============================
+-------------------------------
 
 Dans certains cas l'application peut avoir besoin de récupérer des informations 
 très spécifique à partir de l'image ou de l'en-tête du fichier qui n'est pas 

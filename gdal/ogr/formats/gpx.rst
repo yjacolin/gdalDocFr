@@ -1,6 +1,5 @@
 .. _`gdal.ogr.formats.gpx`:
 
-==========================
 GPX - GPS Exchange Format
 ==========================
 
@@ -44,7 +43,7 @@ géométrique. Le nombre par défaut peut être changé par la variable
 d'environnement *GPX_N_MAX_LINKS*.
 
 Problèmes d'encodage
-=====================
+---------------------
 
 La bibliothèque Expat gère la lecture des encodages internes suivants :
 
@@ -68,7 +67,7 @@ la valeur du paramètre d'encodage dans l'en-tête du XML.
 Lors de l'écriture d'un fichier GPX, le pilote s'attend à du contenu en UTF-8.
 
 Lecture des l'élément extensions
-=================================
+--------------------------------
 
 Si l'élément <extensions> est détecté dans le fichier GPX, OGR exposera le 
 contenu de ses sous-éléments comme champs. Un contenu complexe des sous-éléments 
@@ -109,8 +108,8 @@ sera interprété dans un modèle *Simple Feature* d'OGR comme :
     apparaissent plus tard, vous pouvez forcer le parsage explicite de 
     l'ensemble du fichier avec la variable d'environnement *GPX_USE_EXTENSIONS*.
 
-Problème de création
-=====================
+Problèmes de création
+----------------------
 
 Lors de l'export, toutes les couches sont écrites dans un seul fichier GPX. La 
 mise à jour de fichier existant n'est pas pour l'instant gérée.
@@ -193,7 +192,7 @@ Cela peut être réalisé avec un jeu de données :ref:`gdal.ogr.formats.vrt`, o
 utilisant l'option "-sql" de la commande ``ogr2ogr``.
 
 Problèmes lors de la traduction en Shapefile
-=============================================
+---------------------------------------------
  
 * Lors de la traduction de la couche *track_points* vers un Shapefile, les noms 
   des champs "track_seg_id" et "track_seg_point_id" sont tronqué en 10 caractères 
@@ -228,7 +227,7 @@ Problèmes lors de la traduction en Shapefile
 
 
 Exemple
-========
+--------
 
 La commande ogrinfo peut être utilisée pour faire un dump du contenu d'un 
 fichier de données GPX :
@@ -282,7 +281,7 @@ Utilisez l'option -sql pour remaper les noms des champs par un permis par le sch
     ogr2ogr -f GPX output.gpx input.shp -sql "SELECT field1 AS name, field2 AS desc FROM source_layer"
 
 Voir également
-===============
+---------------
 
 * `Page web pour le format GPX format <http://www.topografix.com/gpx.asp>`_
 * `Documenation du format GPX 1.1 <http://www.topografix.com/GPX/1/1/>`_

@@ -1,6 +1,5 @@
 .. _`gdal.ogr.formats.wfs`:
 
-======================
 WFS - Service WFS OGC
 ======================
 
@@ -18,7 +17,7 @@ Le pilote gère les services en lecture seul, ainsi que ceux en mode
 Transactionnel (WFS-T).
 
 Syntaxe des noms de jeux de données
-====================================
+------------------------------------
 
 La syntaxe minimale pour ouvrir une source de données WFS est : 
 *WFS:http://path/to/WFS/service* ou *http://path/to/WFS/service?SERVICE=WFS*
@@ -59,7 +58,7 @@ en option.
 .. _`gdal.ogr.formats.wfs.pagination`:
 
 Pagination des requêtes
-========================
+-----------------------
 
 Généralement, lors de la lecture de la première feature d'une couche, le contenu 
 de la couche entière sera récupérée du serveur.
@@ -74,7 +73,7 @@ en définissant l'option de configuration *OGR_WFS_PAGE_SIZE*. Ces deux options
 peuvent également être définie dans le fichier XML de description WFS.
 
 Filtrage
-=========
+----------
 
 Le pilote renverra n'importe quel filtre spatial avec *SetSpatialFilter()* vers 
 le serveur. Il fera également sont possible pour les filtres attributaires définie 
@@ -84,7 +83,7 @@ qui peut être une opération lente parce qu'impliquant la récupération de tou
 les features du serveur.
 
 Gestion de l'écriture / WFS-T
-=============================
+------------------------------
 
 Le protocol WFS-T permette à l'utilisateur d'opérer au niveau de la feature. 
 Aucune création de source de données, couche ou champs n'est pas possible.
@@ -117,7 +116,7 @@ OGR sera ignoré. La requête renvoyée au pilote prendra seulement en compte la
 valeur du champ gml:id de la feature. La même chose s'applique pour *DeleteFeature()*.
 
 Transaction OGR et gestion de l'écriture
-========================================
+-----------------------------------------
 
 Les opérations ci-dessus sont par défaut déclenchées vers le serveur en synchrone 
 avec l'appel de l'API d'OGR. Cela peut cependant causer des problèmes de 
@@ -141,7 +140,7 @@ insérées pendant la dernière transaction commitée.
     déclenché immédiatement.
 
 Commandes SQL spéciales
-========================
+------------------------
 
 Les commandes SQL et pseudo-SQL suivantes envoyées à *OGRDataSource::ExecuteSQL()* 
 sont spécifiques au pilote WFS :
@@ -159,7 +158,7 @@ attributaires côté serveur doit être réalisé via les interfaces *SetSpatial
 et *SetAttributeFilter()*.
 
 Métadonnées des couches
-========================
+------------------------
 
 (OGR >= 1.9.0)
 
@@ -172,7 +171,7 @@ partir du document renvoyé par le GetCapabilities.
 Cette couche est retournée via GetLayerByName("WFSLayerMetadata").
 
 Exemples
-=========
+---------
 
 * Liste les types d'un serveur WFS :
   ::
@@ -202,7 +201,7 @@ Exemples
     ogrinfo -ro -al "WFS:http://v2.suite.opengeo.org/geoserver/ows" WFSLayerMetadata
 
 Voir également
-==============
+---------------
 
 * `Standard WFS de l'OGC <http://www.opengeospatial.org/standards/wfs>`_
 * :ref:`gdal.ogr.formats.gml`

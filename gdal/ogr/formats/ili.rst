@@ -1,6 +1,5 @@
 .. _`gdal.ogr.formats.ili`:
 
-=========
 INTERLIS
 =========
 
@@ -22,7 +21,7 @@ unifié et des possibilités d'échanges flexible les avantages suivantes appara
 * la sécurité du *contrat-preuve* et la disponibilité du logiciel.
 
 Modèle
-=======
+-------
 
 Les données sont lues et écrites dans des fichiers de transfert qui ont des 
 formats différent dans INTERLIS 1 (.itf) et INTERLIS 2 (.xml). Pour utiliser le 
@@ -66,14 +65,14 @@ Quelques transformations possible avec :ref:`gdal.ogr.ogr2ogr`.
     ogr2ogr -f PostgreSQL PG:dbname=warmerda av_fixpunkte_mit_LFPNachfuehrung.itf,av.ili -append
 
 Interpolation d'arc
-====================
+--------------------
 
 Les géométries d'arc d'INTERLIS sont converties en polygone.
 
 L'angle d'interpolation peut être changé avec la variable d'environnement *ARC_DEGREES* (Par défaut : 1 degré).
 
 Autres remarques
-=================
+-----------------
 
 * Plus d'information : http://gis.hsr.ch/wiki/OGR (en allemand)
 * Le développement du pilote ONTERLIS d'OGR a été financé par 

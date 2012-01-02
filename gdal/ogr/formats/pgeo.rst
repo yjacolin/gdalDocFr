@@ -1,6 +1,5 @@
 .. _`gdal.ogr.formats.pgeo`:
 
-==========================
 ESRI Personal GeoDatabase
 ==========================
 
@@ -41,8 +40,8 @@ données MDB. Il est également possible de demander au pilote de prendre en cha
 les commandes SQL avec le moteur :ref:`gdal.ogr.sql`, en définissant la chaine 
 *OGRSQL* à la méthode *ExecuteSQL()*, comme nom du dialecte SQL.
 
-Comment utiliser le pilote PGeo avec unixODBC et MDB Tools
-===========================================================
+Comment utiliser le pilote PGeo avec unixODBC et MDB Tools ?
+------------------------------------------------------------
 
 À partir de GDAL/OGR 1.9.0, le pilote :ref:`gdal.ogr.formats.mdb` est une autre 
 façon de lire les fichiers .mdb géodatabase personnelle d'ESRI sans nécessité 
@@ -53,7 +52,7 @@ paquet unixODBC et pour accéder aux Géodatabases Personnelles avec le pilote
 PGeo.
 
 Pré-requis
------------
+**********
 
 - Installez `unixODBC <http://www.unixodbc.org/>`_ >= 2.2.11
 - Installez `MDB Tools`_ >= 0.6. La version 
@@ -62,7 +61,7 @@ Pré-requis
 (sur Ubuntu 8.04 : ``sudo apt-get install unixodbc libmdbodbc``)
 
 Configuration
---------------
+**************
 
 Il y a deux fichiers de configuration pour unixODBC :
 
@@ -86,7 +85,7 @@ Le format des fichiers de configuration est très simple :
 Pour plus de détails, référez-vous au `manuel d'unixODBC <http://www.unixodbc.org/doc/>`_.
 
 1. Configuration du pilote ODBC
-********************************
+`````````````````````````````````
 
 D'abord , vous devez configurer le pilote ODBC pour accéder aux bases de données 
 Microsoft Access(r) avec MDB Tools. Ajoutez la définition suivante à votre 
@@ -110,7 +109,7 @@ fichier *odbcinst.ini*.
 * *Driver* - chemin complet de pilote ODBC pour MDB Tools.
 
 2. Configuration de la source de données ODBC
-***********************************************
+``````````````````````````````````````````````
 
 Dans cette section, on utilise 'sample.mdb' comme nom de la géodatabase 
 personnelle, remplacez la avec le nom de votre propre base de données.
@@ -149,7 +148,7 @@ Explication étape par étape d'une entrée DSN :
   MDB Tools.
 
 Tester le pilote PGeo avec ogrinfo
------------------------------------
+***********************************
 
 Maintenant vous pouvez tester l'accès à une source de données PGeo avec ``ogrinfo``.
 
@@ -188,13 +187,13 @@ Maintenant, vous pouvez réaliser une requête pour détailler une couche partic
     Layer name: ...
 
 Ressources
-============
+-----------
 
 * `À propos des geodatabase d'ESRI <http://www.esri.com/software/arcgis/geodatabase/index.html>`_
 * `[mdbtools-dev] les connexions sans DSN non géré ? <http://sourceforge.net/mailarchive/forum.php?thread_id=10463538&forum_id=5183>`_
 
 Voir également
-===============
+---------------
 
 * :ref:`gdal.ogr.formats.mdb`
 

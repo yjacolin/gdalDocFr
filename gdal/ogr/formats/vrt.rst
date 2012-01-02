@@ -1,6 +1,5 @@
 .. _`gdal.ogr.formats.vrt`:
 
-==============
 Virtual Format
 ==============
 
@@ -16,7 +15,7 @@ pour l'accès à une source de données pas sous forme de fichier.
 Les fichiers virtuel sont pour l'instant normalement préparés à la main.
 
 Problèmes de création
-======================
+----------------------
 
 Avant GDAL 1.7.0, le pilote VRT d'OGR était en lecture seule.
 
@@ -31,7 +30,7 @@ sont remplies :
   l'élément *FID* n'est pas définie.
 
 Format de fichier virtuel
-==========================
+--------------------------
 
 L'élément racine d'un fichier de contrôle XML est *OGRVRTDataSource*. il a un 
 enfant *OGRVRTLayer* pour chaque couche dans la source de données virtuelle. Cet 
@@ -107,7 +106,7 @@ les sous-éléments suivants :
     défaut, la valeur de "name".
 
 Exemple : couche ponctuelle ODBC
-=================================
+----------------------------------
 
 Dans l'exemple suivant (disease.ovf) la mauvaise table à partir de la base de 
 données ODBC DISEASE est utilisée pour créer une couche spatiale. Le fichier 
@@ -129,7 +128,7 @@ système de coordonnées WGS84.
     </OGRVRTDataSource>
 
 Exemple : renommer des attributs
-=================================
+---------------------------------
 
 Il peut être utile dans certaines circonstance de pouvoir renommer les noms des 
 champs à partir d'une couche source en un nom différent. Cela est 
@@ -161,7 +160,7 @@ définitions de champs explicites :
 
 
 Exemple : Filtre spatial transparent (GDAL >= 1.7.0)
-=====================================================
+-----------------------------------------------------
  
 L'exemple suivant retournera seulement les features à partir de la couche source 
 qui intersecte la région (0,40)-(10,50). De plus, les géométries retournées seront 
@@ -178,7 +177,7 @@ découpées pour correspondre à cette région.
 
 
 Autres remarques
-================
+-----------------
 
 * Quand *GeometryField* est *WKT*, les filtres spatiaux sont appliqués après 
   extractions de toutes les lignes à partir de la source de données. 

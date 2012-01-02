@@ -1,6 +1,5 @@
 .. _`gdal.gdal.formats.jp2kak`:
 
-=======================================
 JP2KAK -- JPEG-2000 (basé sur Kakadu)
 =======================================
 
@@ -39,7 +38,7 @@ JPEG2000, et seront stockées comme contenu brute XML dans le domaine de métado
 xml:XMP.
 
 Problèmes de création
-======================
+---------------------
 
 Les fichiers JPEG2000 peuvent seulement être crée en utilisant le mécanisme 
 *CreateCopy* pour les copier dans un jeu de donnée existant.

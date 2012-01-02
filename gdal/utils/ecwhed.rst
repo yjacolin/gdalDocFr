@@ -1,58 +1,70 @@
 .. _`gdal.utils.ecwhed`:
 
-========
 ecwhed
 ========
 
-ECW header viewer and editor
-SYNOPSIS
+Éditeur et visualiser d'en-tête ECW
 
-Usage:
+Synopsis
+---------
 
-ecwhed [--help]
+Usage :
+::
+
+    ecwhed [--help]
        [--version]
        [-a_ullr ulx uly lrx lry]
        [-co "DATUM=VALUE"]
        [-co "PROJ=VALUE"]
        file
 
-DESCRIPTION
+Description
+------------
 
-The ecwhed utility is a viewer and editor for ECW files headers. The program can change the datum, projection and corner coordinates without decompressing and recompressing the image.
+La commande ``ecwhed`` est un visualiseur et éditeur pour les en-têtes des fichiers 
+ECW. Le programme peut changer les datums, la projection et les coordonnées des 
+coins sans décompresser et recompresser l'image.
 
--a_ullr ulx uly lrx lry:
-    Assign/override the georeferenced bounds of the output file. This assigns georeferenced bounds to the output file, ignoring what would have been derived from the source file.
+ * **-a_ullr ulx uly lrx lry :** assigne/écrase les limites de géoréférencement 
+   du fichier en sortie. Cela assigne les limites de géoréférencement au fichier 
+   en sortie, ignorant celle dérivée du fichier source.
 
--co "DATUM=VALUE":
-    Assign/override the datum
+ * **-co "DATUM=VALUE" :** assigne/écrase un datum
 
--co "PROJ=VALUE":
-    Assign/override the projection 
+ * **-co "PROJ=VALUE" :** assigne/écrase la projection 
 
-EXAMPLES
+Exemples
+---------
 
-For instance, the georeferencing information contained in an ECW file can be displayed with a command like this:
+Par exemple, les informations de géoréférencement contenu dans un fichier ECW 
+peuvent être affichées avec la commande suivante :
+::
 
-ecwhed FRA-0100.ecw
+    ecwhed FRA-0100.ecw
 
-Datum = NTF
-Projection = LM2FRANC
-Origin = (223000.000000, 2152500.000000)
-Pixel Size = (100.000000, -100.000000)
-Corner Coordinates:
-Upper Left = (223000.000000, 2152500.000000)
-Upper Right = (547500.000000, 2152500.000000)
-Lower Left = (223000.000000, 1690000.000000)
-Lower Right = (547500.000000, 1690000.000000)
+    Datum = NTF
+    Projection = LM2FRANC
+    Origin = (223000.000000, 2152500.000000)
+    Pixel Size = (100.000000, -100.000000)
+    Corner Coordinates:
+    Upper Left = (223000.000000, 2152500.000000)
+    Upper Right = (547500.000000, 2152500.000000)
+    Lower Left = (223000.000000, 1690000.000000)
+    Lower Right = (547500.000000, 1690000.000000)
 
-For instance, an ECW file can be georeferenced with a command like this:
+Par exemple, un fichier ECW peut être géoréférencé avec la commande suivante :
 
-ecwhed -co "DATUM=NTF" -co "PROJ=LM2FRANC" -a_ullr 970000 1860000 980000 1850000 map.ecw
+::
+    
+    ecwhed -co "DATUM=NTF" -co "PROJ=LM2FRANC" -a_ullr 970000 1860000 980000 1850000 map.ecw
 
-DOWNLOAD
+Téléchargement
+---------------
 
-The source code is available here : ecwhed-0.1.tar.gz . It is released under the GPL license version 2. To compile it, you will need the ECW SDK from ErMapper, that can be downloaded from the ErMapper web site.
+Le code source est disponible ici : `ecwhed-0.1.tar.gz <http://jrepetto.free.fr/ecwhed/ecwhed-0.1.tar.gz>`_. 
+Diffusé sous lince GPL version 2. Pour la compiler, vous avez besoin du SDK ECW 
+d'ErMapper, qui peut être téléchargé à partir du `site web d'ErMapper <http://www.ermapper.com/>`_.
 
 Source : http://jrepetto.free.fr/ecwhed/
 
-Last Revision : 02/07/2008
+.. Dernière révision : 02/07/2008
