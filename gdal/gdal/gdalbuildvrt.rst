@@ -14,6 +14,7 @@ Usage
              [-tr xres yres] [-tap] [-separate] [-allow_projection_difference] [-q]
              [-te xmin ymin xmax ymax] [-addalpha] [-hidenodata]
              [-srcnodata "value [value...]"] [-vrtnodata "value [value...]"]
+             [-a_srs srs_def]
              [-input_file_list my_liste.txt] [-overwrite] output.vrt [gdalfile]*
 
 
@@ -28,8 +29,8 @@ importantes, ou cela peut être un index de tuile de MapServer (voir l'utilitair
 :ref:`gdal.gdal.gdaltindex` ). Dans ce dernier cas, toutes les entrées dans l'index de 
 tuile seront ajoutées au VRT.
 
-Avec l'option *-separate*, chaque fichiers est placé dans une bande séparée et 
-empilée dans les bandes VRT. Autrement, les fichiers sont considéré comme des 
+Avec l'option *-separate*, chaque fichier est placé dans une bande séparée et 
+empilée dans les bandes VRT. Autrement, les fichiers sont considérés comme des 
 tuiles d'une mosaïque plus importante et le fichier VRT a autant de bande que 
 ceux des fichiers en entrée.
 
@@ -40,14 +41,15 @@ ajoutés au fichier VRT plutôt que le jeu de données lui-même.
 ``gdalbuildvrt`` réalise quelques vérifications pour s'assurer que tous les 
 fichiers qui seront mis dans le VRT ont des caractéristiques similaires : nombre 
 de bandes, projection, interprétation de couleur... Sinon, les fichiers qui ne 
-correspondent pas aux caractéristiques communes seront ignorés.
+correspondent pas aux caractéristiques communes seront ignorés (cela n'est vrai 
+que dans le mode par défaut et pas avec l'option *-separate*).
 
 S'il y a un certain taux de recouvrement, ente les fichiers, l'ordre de 
 superposition peut dépendre de l'ordre où ils sont insérés dans le fichier VRT, 
 mais vous ne devez pas compter sur ce comportement.
 
 Cette commande est en partie différente de la commande ``gdal_vrtmerge.py`` et 
-est compilé par défaut à partir de GDAL 1.6.1.
+est compilée par défaut à partir de GDAL 1.6.1.
 
 * **-tileindex :** utilise la valeur définie comme champ d'index de tuile, au 
   lieu de la valeur par défaut, 'location'.
@@ -62,7 +64,7 @@ est compilé par défaut à partir de GDAL 1.6.1.
   combinaison avec l'option *-tr* pour définir une résolution cible.
 * **-tr xres yres :** (à partir de GDAL 1.7.0) définie la résolution cible. 
   Les valeurs doivent être exprimées en unité géorérérencée. Les deux valeurs 
-  doivent être positives. Définir ces valeurs est bien sur incompatible avec les 
+  doivent être positives. Définir ces valeurs est bien sûr incompatible avec les 
   valeurs *highest|lowest|average* de l'option *-resolution*.
 * **-tap :** (GDAL >= 1.8.0) (*target aligned pixels*) aligne les coordonnées de 
   l'étendue du fichier en sortie avec les valeurs de l'option *-tr*, de telle 
@@ -112,6 +114,9 @@ est compilé par défaut à partir de GDAL 1.6.1.
   est définie, la commande acceptera de réaliser un VRT même si les jeux de 
   données en entrée n'ont pas la même projection. Note : cela ne signifie pas 
   qu'ils seront reprojeté. Leurs projections seront simplement ignoré.
+* **-a_srs srs_def :** (à partir de GDAL 1.10) écrase la projection pour le fichier 
+  en sortie. La valeur *srs_def* peut être n'importe quel des valeurs usuelles dans 
+  GDAL/OGR, WKT complet, PROJ.4, EPSG:n ou un fichier contenant le WKT. 
 * **-input_file_list :** pour définir un fichier texte avec un nom de fichier à 
   chaque ligne.
 * **-q :** (à partir de GDAL 1.7.0) pour désactiver la barre de progression dans 
@@ -121,12 +126,31 @@ est compilé par défaut à partir de GDAL 1.6.1.
 Exemple
 --------
 
+Réalise une mosaïque virtuelle à partir de tous les fichiers TIFF contenu dans un 
+répertoire :
+
 ::
     
     gdalbuildvrt doq_index.vrt doq/*.tif
+
+Réalise une mosaïque virtuelle à partir de fichiers dont le nom est définie dans un 
+fichier externe :
+
+::
+	
     gdalbuildvrt -input_file_list my_liste.txt doq_index.vrt
+
+Réalise une mosaïque virtuelle RVB à partir de 3 fichiers en entrée avec une bande unique :
+
+::
+	
     gdalbuildvrt -separate rgb.vrt red.tif green.tif blue.tif
+
+Réalise une mosaïque virtuelle avec une couleur d'arrière-plan bleu (RVB : 0 0 255) :
+
+::
+	
     gdalbuildvrt -hidenodata -vrtnodata "0 0 255" doq_index.vrt doq/*.tif
 
 
-.. yjacolin at free.fr, Yves Jacolin - 2010/12/28 15:12 (http://gdal.org/gdalbuildvrt.html Trunk 21324)
+.. yjacolin at free.fr, Yves Jacolin - 2013/01/01 (http://gdal.org/gdalbuildvrt.html Trunk 25410)

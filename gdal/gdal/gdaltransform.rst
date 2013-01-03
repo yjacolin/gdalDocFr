@@ -3,7 +3,7 @@
 gdaltransform
 ===============
 
-Transforme des coordonnées
+Reprojete des coordonnées
 
 **Usage :**
 ::
@@ -41,7 +41,7 @@ d'amer (GCP).
 * **-rpc :** force l'utilisation des RPCs. 
 * **-geoloc :** force l'utilisation des tableaux de géolocation.
 * **-i :** transformation inverse : de la destination vers la source.
-* **-gcppixel line easting northing [elevation] :** fourni un point d'amer à 
+* **-gcp pixel line easting northing [elevation] :** fourni un point d'amer à 
   utiliser pour la transformation (généralement ou plus sont requis).
 * **srcfile :** fichier avec la définition de la projection source ou les points 
   d'amer. S'il n'est pas donné, la projection source est lu à partir de la 
@@ -53,7 +53,7 @@ standard, transformée, et écrite vers la sortie standard de la même manière.
 Toutes les transformations offertes par ''gdalwarp'' sont prises en charge, 
 incluant celles basées sur les points d'amer.
 
-Notez que l'entrée et la sortie doivent toujours sous forme décimale. Il n'y 
+Notez que l'entrée et la sortie doivent toujours êtrer sous forme décimale. Il n'y 
 pas de gestion actuellement pour l'entrée et la sortie en DMS.
 
 Si un fichier image en entré est fournie, input est en coordonnées pixel/ligne 
@@ -64,6 +64,7 @@ Exemple de reprojection
 ------------------------
 
 Simple reprojection d'un système de coordonnées projeté à un autre :
+
 ::
     
     gdaltransform -s_srs EPSG:28992 -t_srs EPSG:31370
@@ -71,6 +72,7 @@ Simple reprojection d'un système de coordonnées projeté à un autre :
 
 Produit la sortie suivante en mètre dans la projection "Belge 1972 / Belgian 
 Lambert 72" :
+
 ::
     
     244510.77404604 166154.532871342 -1046.79270555763
@@ -82,14 +84,16 @@ La commande suivante demande une transformation basée sur des RPC en utilisant
 le modèle RPC associé avec le fichier nommé. Parce que l'option *-i* (inverse) est 
 utilisée, la transformation part des coordonnées géoréférencées (WGS84) en 
 sortie vers des coordonnées d'images.
+
 ::
     
     gdaltransform -i -rpc 06OCT20025052-P2AS-005553965230_01_P001.TIF
     125.67206 39.85307 50                    
 
 produit cette sortie mesurée en pixel et lignes d'une image :
+
 ::
     
     3499.49282422381 2910.83892848414 50
 
-.. yjacolin at free.fr, Yves Jacolin - 2009/02/18 21:50 ([http://gdal.org/gdaltransform.html Page originale)
+.. yjacolin at free.fr, Yves Jacolin - 2013/01/01 ([http://gdal.org/gdaltransform.html r25410)

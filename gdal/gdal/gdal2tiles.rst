@@ -3,17 +3,17 @@
 gdal2tiles.py
 ==============
 
-génère un répertoire avec des tuiles TMS, un KML et des visualisateurs web simples.
+Génère un répertoire avec des tuiles TMS, un KML et des visualisateurs web simples.
 
 Usage
 ------
 
 ::
     
-    gdal2tiles.py [-title "Title"] [-publishurl http:*yourserver/dir/]
-                [-nogooglemaps] [-noopenlayers] [-nokml]
-                [-googlemapskey KEY] [-forcekml] [-v]
-                input_file [output_dir]
+    gdal2tiles.py [-p profile] [-r resampling] [-s srs] [-z zoom]
+                [-e] [-a nodata] [-v] [-h] [-k] [-n] [-u url]
+                [-w webviewer] [-title "Title"] [-c copyright]
+                [-g googlekey] [-b bingkey] input_file [output_dir]
 
 Description
 ------------
@@ -34,21 +34,45 @@ Les fichiers world et les références spatiales incluses sont utilisés durant 
 génération des tuiles, mais vous pouvez publier également une image sans le 
 géoréférencement.
 
-* **-title "Title" :** titre utilisé pour les métadonnées générées, les 
-  visualisateurs web et les fichiers KML.
-* **-publishurl http:*yourserver/dir/ :** adresse du répertoire dans lequel 
-  vous allez télécharger le résultat. Il doit se terminer par un slash.
-* **-nogooglemaps :** ne génère pas de page HTML de base pour Google Maps. 
-* **-noopenlayers :** ne génère pas de page HTML de base pour OpenLayers. 
-* **-nokml :** ne génère pas de fichier KML pour Google Earth. 
-* **-googlemapskey KEY :** clé pour votre domaine généré sur la page web de 
-  l'API de Google Maps (http://www.google.com/apis/maps/signup.html). 
-* **-forcekml :** force la régénération des fichiers KML. Le fichier en entrée 
-  doit utiliser des coordonnées *EPSG:4326* !
-* **-v :** génère une sortie verbeuse lors de la génération des tuiles.
+
+* **-p PROFILE, --profile=PROFILE :** Profile de coupe des tuiles (mercator, geodetic, 
+  raster) - 'mercator' par défaut (compatible avec Google Maps). 
+* **-r RESAMPLING, --resampling=RESAMPLING :** Méthode de reéchantillonage (average, near, 
+  bilinear, cubic, cubicspline, lanczos, antialias) - 'average' par défaut.
+* **-s SRS, --s_srs=SRS :** Le système de référence spatial utilisé pour la source 
+  de données en entrée.
+* **-z ZOOM, --zoom=ZOOM :** Niveaux de zoom à générer (format : '2-5' ou '10'). 
+* **-e, --resume :** Mode résume. Génère seulement les fichiers manquants.
+* **-a NODATA, --srcnodata=NODATA :** Valeur de transparence NODATA à assigner 
+  aux données en entrée.
+* **-v, --verbose :**  génère une sortie verbeuse lors de la génération des tuiles. 
+* **-h, --help :** Affiche un message d'aide et quitte. 
+* **--version :** Affiche le numéro de version du programme et quitte. 
+
+**Options KML (Google Earth) :**
+
+Options pour les métadonnées SuperOverlay de Google Earth
+
+* **-k, --force-kml :** génère les fichiers KML pour Google Earth - par défaut pour 
+  le profile 'geodetic' et 'raster' en EPSG:4326. Pour des sources de données dans 
+  des projections différentes, utilisez le avec précaution !
+* **-n, --no-kml :** Évite la génération de fichier KML pour EPSG:4326. 
+* **-u URL, --url=URL :** Adresse URL où les tuiles générées seront publiées.
+
+**Options du visualiseur Web :**
+
+Options pour les visualiseurs HTML générés a la Google Maps.
+
+* **-w WEBVIEWER, --webviewer=WEBVIEWER :**
+    Web viewer to generate (all,google,openlayers,none) - default 'all'. 
+* **-t TITLE, --title=TITLE :** Titre de la carte. 
+* **-c COPYRIGHT, --copyright=COPYRIGHT :** Copyright de la carte. 
+* **-g GOOGLEKEY, --googlekey=GOOGLEKEY :** Clé de l'API de Google Map, voir 
+  http://code.google.com/apis/maps/signup.html. 
+* **-b BINGKEY, --bingkey=BINGKEY :** Clé de l'API Bing Maps, voir https://www.bingmapsportal.com/
 
 .. warning::
     gdal2tiles.py est un script Python qui nécessite la compilation avec la 
     liaison python de nouvelle génération.
 
-.. yves at georezo.net, Yves Jacolin - 2010/12/29 15:10 (http://gdal.org/gdal2tiles.html Trunk r21324)
+.. yjacolin at free.fr, Yves Jacolin - 2013/01/01 (http://gdal.org/gdal2tiles.html Trunk r25410)

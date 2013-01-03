@@ -22,16 +22,16 @@ Ce programme transforme des géométries vectorielles (points, lignes et
 polygones) dans des bande(s) raster d'une image raster. Les fichiers vecteurs 
 sont lus à partir des formats vectoriels gérés par OGR.
 
-Notez que les données vecteur doivent être dans le même système de coordonnées 
-que les données raster ; la reprojection à la volée n'est pas possible.
+.. note:: Les données vecteur doivent être dans le même système de coordonnées 
+   que les données raster ; la reprojection à la volée n'est pas possible.
 
 Depuis GDAL 1.8.0, le fichier cible de GDAL peut être créé par 
 ``gdal_rasterize``. Une des options *-tr* ou *-ts* doit être utilisé dans ce cas.
 
 * **-b band :** la bande dans laquelle placer les valeurs. Plusieurs arguments 
   *-b* peuvent être utilisés pour transformer une liste de bandes. Par défaut, 
-  une seule bande est transformée.
-* **-i :** inverse la rastérisation.  Imposer la valeur de la brulure fixée ou 
+  seule la bande 1 est transformée.
+* **-i :** inverse la rastérisation. Imposer la valeur de la brulure fixée ou 
   la valeur de la brulure associée avec le premier objet dans toute l'image en 
   dehors du polygone fournie.
 * **-at :** active l'option de rasterisation ALL_TOUCHED afin que tous les 
@@ -49,7 +49,7 @@ Depuis GDAL 1.8.0, le fichier cible de GDAL peut être créé par
   et les lignes sont dessinés en 3D.
 * **-l layername :** la ou les couche(s) de la source de données qui sera 
   utilisée pour les objets en entrées. Peut être définie plusieurs fois, mais 
-  au moins une couche ou une option -sql doit être définie.
+  au moins une couche ou une option *-sql* doit être définie.
 * **-where expression :** une requête SQL de style WHERE optionnel doit être 
   appliqué pour sélectionner les objets à rastériser à partir d'une ou plusieurs 
   couche(s).
@@ -101,14 +101,16 @@ Depuis GDAL 1.8.0, le fichier cible de GDAL peut être créé par
 
 La commande suivante rastérisera tous les polygones à partir de mask.shp en un 
 fichier RGB TIFF work.tif avec la couleur rouge (RGB = 255,0,0) :
+
 ::
     
     gdal_rasterize -b 1 -b 2 -b 3 -burn 255 -burn 0 -burn 0 -l mask mask.shp work.tif
   
 La commande suivante rastérisera tout les bâtiments « class A » dans le fichier 
 d'élévation en sortie, en prenant l'élévation à partir de l'attribut ROOF_H :
+
 ::
     
     gdal_rasterize -a ROOF_H -where 'class="A"' -l footprints footprints.shp city_dem.tif
 
-.. yves at georezo.net, Yves Jacolin - 2010/12/28 18:39 (http://gdal.org/gdal_rasterize.html Trunk r21324)
+.. yves at georezo.net, Yves Jacolin - 2013/01/01 (http://gdal.org/gdal_rasterize.html Trunk r25410)

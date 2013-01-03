@@ -127,4 +127,4 @@ Créer des aperçus au format Erdas Imagine pour le fichier JPEG indiqué :
     
     gdaladdo --config USE_RRD YES airphoto.jpg 3 9 27 81
 
-.. yjacolin at free.fr, Yves Jacolin - 2010/12/27 18:20* (http://gdal.org/gdaladdo.html Trunk 21320)
+.. yjacolin at free.fr, Yves Jacolin - 2013/01/01 (http://gdal.org/gdaladdo.html Trunk 25410)

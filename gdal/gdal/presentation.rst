@@ -33,7 +33,9 @@ Les programmes suivants sont distribués avec GDAL :
 * :ref:`gdal.gdal.gdal_polygonize` - Génère des polygones à partir d'un raster.
 * :ref:`gdal.gdal.gdal_sieve` - Filtre sieve de raster.
 * :ref:`gdal.gdal.gdal_fillnodata` - Interpole dans les régions *nodata*.
-* :ref:`gdal.gdal.gdallocationinfo` - Interroger un raster pour une localisation donnée. 
+* :ref:`gdal.gdal.gdallocationinfo` - Interroger un raster pour une localisation donnée.
+* :ref:`gdal.gdal.gdalsrsinfo` - Renvoie un SRS données en différents formats (GDAL >= 1.9.0).
+* :ref:`gdal.gdal.gdalmove` - Transforme le système de coordonnés d'un fichier (GDAL >= 1.10).
 * :ref:`gdal.gdal.gdal-config` - Obtient des informations pour compiler des logiciels 
   qui utilisent GDAL.
 
@@ -59,8 +61,8 @@ introduites ici.
   déterminer le format de sortie, ni ajoutées par GDAL si l'utilisateur les a omis.
 
 * ``-co NAME=VALUE`` : Plusieurs formats ont une ou plusieurs options 
-  spécifiques de création qui peuvent être utilisé pour contrôler la création 
-  de fichier. Par exemple, le pilote GéoTiff supporte des options de créations 
+  spécifiques de création qui peuvent être utilisées pour contrôler la création 
+  du fichier. Par exemple, le pilote GéoTiff supporte des options de créations 
   pour préciser la compression, ou si le fichier doit être tuilé.
 
   Ces options de création disponibles varient en fonction du pilote et certains 
@@ -71,8 +73,8 @@ introduites ici.
 
 * ``-a_srs SRS`` : Plusieurs utilitaires (dont ``gdal_translate`` et 
   ``gdalwarp``) incluent la possibilité de définir les systèmes de coordonnées 
-  dans la ligne de commande avec les options ``-a_srs`` (définit SRS à la 
-  sortie), ``-s_srs`` (source SRS) et ``-t_srs`` (cible SRS).
+  dans la ligne de commande avec les options ``-a_srs`` (définit le SRS à la 
+  sortie), ``-s_srs`` (le SRS source) et ``-t_srs`` (le SRS cible).
 
   Ces options permettent de définir le système de coordonnées (*SRS* signifie 
   *Spatial Reference System*, système de référence spatial) de nombreuses façons :
@@ -120,7 +122,7 @@ générales suivantes :
   * 'rw+' est lu, écrit et mis à jour (c'est à dire géré par *Create*). Le 
     caractère 'v' est ajouté pour les formats gérant l'IO virtuel (/vsimem, 
     /vsigzip, /vsizip, etc). Note : Les formats valides pour la sortie de 
-    ``gdalwarp`` sont les formats qui gère la méthode *Create()* (marqué rw+), a 
+    ``gdalwarp`` sont les formats qui gèrent la méthode *Create()* (marqué rw+), a 
     seulement la méthode *CreateCopy()*.
 
 * ``--format format`` : liste des informations détaillées sur le pilote du 
@@ -144,4 +146,4 @@ générales suivantes :
 * ``--help-general`` : donne un bref message des usages des options en ligne de 
   commande et termine.
 
-.. yjacolin at free.fr, Yves Jacolin - 2010/12/27 17:43* (Trunk 21320)
+.. yjacolin at free.fr, Yves Jacolin - 2013/01/01* (gdal/apps/gdal_utilities.dox Trunk 25410)

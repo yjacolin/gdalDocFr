@@ -1,13 +1,13 @@
 .. `gdal.utils.index`:
 
-============
-Utilitaires
-============
+======================
+D'autres utilitaires
+======================
 
 Cette section présente d'autres utilitaires qui peuvent apporter des fonctionnalités 
 complémentaires à GDAL-OGR.
 
-Listes des commandes
+Liste des commandes
 =====================
 
 .. toctree::

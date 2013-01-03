@@ -14,7 +14,7 @@ Converti des données raster en différents formats.
        [-of format] [-b band] [-mask band] [-expand {gray|rgb|rgba}]
        [-outsize xsize[%] ysize[%]]
        [-unscale] [-scale [src_min src_max [dst_min dst_max]]]
-       [-srcwin xoff yoff xsize ysize] [-projwin ulx uly lrx lry]
+       [-srcwin xoff yoff xsize ysize] [-projwin ulx uly lrx lry] [-epo] [-eco]
        [-a_srs srs_def] [-a_ullr ulx uly lrx lry] [-a_nodata value]
        [-gcp pixel line easting northing [elevation]]*
        [-mo "META-TAG=VALUE"]* [-q] [-sds]
@@ -33,7 +33,9 @@ re-échantillonner, réduire les pixels pendant le calcul.
 * **-b band :** Sélectionne une bande en entrée pour la sortie. Les bandes sont 
   numérotées à partir de 1. De multiples options ``-b`` peuvent être utilisées 
   pour sélectionner une série de bandes en entrée pour l'insertion dans le 
-  fichier de sortie ou pour ordonner les bandes.
+  fichier de sortie ou pour ré-ordonner les bandes. À partir de GDAL 1.8.0, 
+  *band* peut aussi être définie à "mask,1" (ou simplement "mask") pour 
+  signifier la bande de masque de la première bande du jeu de données en entrée.
 * **-mask *band* :** (GDAL >= 1.8.0) Sélectionne une bande *band* en entrée 
   pour créer une bande de masquage dans le jeu de données en sortie. Les bandes 
   sont numéroté à partir  de 1. *band* peut être définie à "none" pour éviter 
@@ -43,13 +45,13 @@ re-échantillonner, réduire les pixels pendant le calcul.
   sortie ("-b mask"). *band* peut également être définie à "mask,1" (ou 
   seulement "mask") pour signifier la bande de masque de la première bande du 
   jeu de données en entrée.
-* **-expand rgb|rgba:** (From GDAL 1.6.0) Présente un jeu de donné avec une 
+* **-expand rgb|rgba:** (À partir de GDAL 1.6.0) Présente un jeu de donné avec une 
   bande munie d'une table de couleur comme un fichier avec 3 (RVB) ou 4 
   (RVBA) bandes. Utile pour des pilotes comme JPEG, JPEG2000, MrSID, ECW qui ne 
   gèrent pas des rasters avec les tables de couleurs. La valeur 'gray' (à partir 
   de GDAL 1.7.0) permet d'étendre un jeu de données avec une table de couleur 
   qui contient seulement les niveaux de gris en un jeu de données de gris indéxé.
-* **-outsize xsize[%] ysize[%] :** Définit la taille du fichier exporté. L'unité 
+* **-outsize xsize[%] ysize[%] :** Définie la taille du fichier exporté. L'unité 
   est le pixel et ligne sauf si '%' est utilisé auquel cas il est une fraction 
   de la taille de l'image en entrée.
 * **-scale [src_min src_max [dst_min dst_max]] :** Redimensionne la valeur du 
@@ -65,6 +67,14 @@ re-échantillonner, réduire les pixels pendant le calcul.
 * **-projwin ulx uly lrx lry :** Sélectionne une région à partir de l'image 
   source pour copie (comme *-srcwin*) mais avec les bords en coordonnées 
   géoréférencées.
+* **-epo :** (En erreur lorsque partiellement en dehors) (GDAL >= 1.10) Si cette 
+  option est définie, les valeurs de *-srcwin* ou *-projwin*  qui tombent 
+  partiellement en dehors de l'étendue du raster source sera considéré comme des 
+  erreurs. Le comportement par défaut à partir de GDAL 1.10 est d'accepter de 
+  telles requêtes lorsqu'elles étaient considéré comme des erreurs auparavant.
+* **-eco :** (En erreur lorsque complètement en dehors) (GDAL >= 1.10) Même chose 
+  que pour *-epo*, sauf que le critère pour l'envoie d'erreur est que la requête 
+  doit tomber complètement en dehors de l'étendue du raster source.
 * **-a_srs srs_def :** Écrase la projection du fichier de sortie. La paramètre 
   *srs_def* peut être de la forme de n'importe quel de ceux acceptés par 
   GDAL/ORG, WKT, PROJ4, EPSG:n ou un fichier contenant un WKT.
@@ -88,6 +98,7 @@ re-échantillonner, réduire les pixels pendant le calcul.
 * **-sds :** Copie tous les sous-ensembles de données de ce fichier en fichier 
   indépendant. Utilisé avec les formats HDF ou OGDI qui possèdent des 
   sous-ensembles de données.
+* **-stats :** (GDAL >= 1.8.0) Force le calcul des statistiques.
 * **src_dataset :** Le nom du fichier source. Il peut être soit un nom de 
   fichier, une URL d'une source de données ou un nom d'un sous jeu de données 
   pour les fichiers de plusieurs jeux de données.
@@ -112,5 +123,5 @@ données RGB avec un masque :
     gdal_translate withmask.tif rgba.tif -b 1 -b 2 -b 3 -b mask
 
 
-.. yjacolin at free.fr, Yves Jacolin - 2010/12/27 17:47 (http:*gdal.org/gdal_translate.html - Trunk 21320)
+.. yjacolin at free.fr, Yves Jacolin - 2013/10/10 (http:*gdal.org/gdal_translate.html - Trunk 25410)
 

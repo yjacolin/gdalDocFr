@@ -2,6 +2,7 @@
 Historique des versions
 =======================
 
+* 2013-01 : mise à jour 1.9.* et début 1.10
 * 2011-09 : rajout doc utils/ecwhdr
 * 2011-08 : rajout section utils
 * 2011-06 : passage en rst et fin mise à jour 1.8.0, début 1.9.0

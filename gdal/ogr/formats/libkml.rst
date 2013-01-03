@@ -72,13 +72,13 @@ La lecture et l'écriture de `<Schema> <http://code.google.com/apis/kml/document
 est géré pour les fichiers .kml, .kmz et les répertoires.
 
 Feature
-========
+--------
 
 Une `feature <http://www.gdal.org/ogr/ogr_arch.html#ogr_arch_feature>`_ OGR se 
 traduit en kml en tant que `<Placemark> <http://code.google.com/apis/kml/documentation/kmlreference.html#placemark>`_.
-  
+
 Style
-*****
+******
 
 Les chaînes de style au niveau de la feature sont déclarées dans le KML soit en 
 tant que 

@@ -87,5 +87,5 @@ un fichier RVB en sortie au format désiré.
     rend ce script obsolète.
 
 
-.. yjacolin@free.fr, Yves Jacolin - 2009/02/15 20:10 (http://gdal.org/rgb2pct.html 
-   rgb2pct Trunk 21324 et http://gdal.org/pct2rgb.htmlpct2rgb Trunk 21324)
+.. yjacolin@free.fr, Yves Jacolin - 2013/01/01 (http://gdal.org/rgb2pct.html 
+   rgb2pct Trunk 25410 et http://gdal.org/pct2rgb.htmlpct2rgb Trunk 25410)

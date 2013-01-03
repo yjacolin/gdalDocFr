@@ -9,7 +9,7 @@ GDAL-OGR, le couteau suisse du géomaticien
 
 .. include:: NEWS.rst
 
-:ref:`gdal.plan`
+.. :ref:`gdal.plan`
 
 .. toctree::
     :hidden:

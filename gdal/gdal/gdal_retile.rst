@@ -10,6 +10,7 @@ Usage
 ------
 
 Usage :
+
 ::
     
     gdal_retile.py [-v] [-co NAME=VALUE]* [-of out_format] [-ps pixelWidth pixelHeight]
@@ -74,7 +75,7 @@ utilise l'option générale ``--optfile``.
   ``gdal_retile.py`` de finir dans un temps raisonnable. Utiliser ce paramètre 
   permet de créer une structure différente en sortie. Les tuiles de l'image de 
   base sont stockées dans un sous-répertoire nommé 0, les pyramides dans les 
-  sous-répertoires sont numérotés 1,2,... Dans chacun des ces répertoires un 
+  sous-répertoires sont numérotés 1,2, ... Dans chacun des ces répertoires un 
   autre niveau de sous-répertoire est créé, numéroté de 0 à n, en fonction du 
   nombre de ligne de tuile qui sont nécessaire pour chaque niveau. Enfin, un 
   répertoire contient seulement les tuiles pour une ligne d'un niveau 
@@ -85,4 +86,4 @@ utilise l'option générale ``--optfile``.
     ``gdal_merge.py`` est un script Python, et ne fonctionnera seulement si 
     GDAL a été compilé avec la gestion de Python.
 
-.. yves at free.fr, Yves Jacolin - 2010/12/29 15:12 (http://gdal.org/gdal_retile.html Trunk r21324)
+.. yjacolin at free.fr, Yves Jacolin - 2013/01/01 (http://gdal.org/gdal_retile.html Trunk r25410)

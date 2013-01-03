@@ -3,7 +3,7 @@
 gdal_contour
 =============
 
-construit les lignes de contours à partir d'un modèle d'élévation raster dans 
+Construit les lignes de contours à partir d'un modèle d'élévation raster dans 
 un fichier vecteur.
 
 **Usage :**
@@ -18,9 +18,10 @@ un fichier vecteur.
 Ce programme génère un fichier de contour en vecteur à partir d'un modèle 
 d'élévation en raster (DEM).
 
-À partir de la version 1.7 les chaînes linéaire de contour seront orientées 
-systématiquement. Le côté haut sera vers la droite, c'est à dire qu'une ligne 
-aura pour sens le sens des aiguilles d'une montre.
+.. versionadded:: 1.7.0 
+   Les chaînes linéaire de contour seront orientées 
+   systématiquement. Le côté haut sera vers la droite, c'est à dire qu'une ligne 
+   aura pour sens le sens des aiguilles d'une montre.
 
 * **-b band :** définie une bande particulière à utiliser à partir du DEM. Par 
   défaut la bande nº 1.
@@ -49,4 +50,4 @@ Cela créera un contour de 10 m à partir des données d'un DEM dans le fichier
     
     gdal_contour -a elev dem.tif contour.shp 10.0
 
-.. yves at georezo.net, Yves Jacolin - 2010*12*28 18:37 (http://gdal.org*gdal_contour.html Trunk r21324)
+.. yjacolin at free.fr, Yves Jacolin - 2013/01/01 (http://gdal.orggdal_contour.html Trunk r25410)

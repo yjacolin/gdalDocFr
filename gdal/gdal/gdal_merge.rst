@@ -56,16 +56,18 @@ dessus les premières.
 Exemple
 --------
 
-Créer une image avec les pixels dans toutes les bandes initialisés à 255.
+Créer une image avec les pixels dans toutes les bandes initialisés à 255 :
+
 ::
     
     % gdal_merge.py -init 255 -o out.tif in1.tif in2.tif
 
 Créer une image RVB qui affiche en bleu les pixels sans données. Les deux 
-premières bandes seront initialisé à 0 et la troisième le sera à 255.
+premières bandes seront initialisé à 0 et la troisième le sera à 255 :
+
 ::
     
     % gdal_merge.py -init "0 0 255" -o out.tif in1.tif in2.tif
 
 
-.. yves at georezo.net, Yves Jacolin - 2010/12/29 15:02 (http://gdal.org/gdal_merge.html Trunk r21324)
+.. yjacolin at free.fr, Yves Jacolin - 2013/01/01 (http://gdal.org/gdal_merge.html Trunk r25410)

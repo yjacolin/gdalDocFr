@@ -32,7 +32,7 @@ spatiale. Le pilote auto-détectera le type de données parmi Byte, Int16, Int32
 Float32.
 
 Options de création
-------------------
+--------------------
 
 * **COLUMN_SEPARATOR=a_value :** où a_value est une chaîne utilisée pour séparer 
   la valeur des colonnes X,Y et Z. Par défaut à un espace

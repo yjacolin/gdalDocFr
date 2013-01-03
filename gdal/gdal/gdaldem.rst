@@ -3,7 +3,9 @@
 gdaldem
 ========
 
-Outils pour analyser et visualiser des MNT, (à partir de GDAL 1.7.0)
+Outils pour analyser et visualiser des MNT (à partir de GDAL 1.7.0).
+
+.. versionadded:: 1.7.0
 
 Synopsis
 ---------
@@ -17,7 +19,7 @@ Usage :
         gdaldem hillshade input_dem output_hillshade
                 [-z ZFactor (défaut=1)] [-s scale* (défaut=1)]"
                 [-az Azimuth (défaut=315)] [-alt Altitude (défaut=45)]
-                [-alg ZevenbergenThorne]
+                [-alg ZevenbergenThorne] [-combined]
                 [-compute_edges] [-b Band (défaut=1)] [-of format] [-co "NAME=VALUE"]* [-q]
 
 * Pour générer une carte des pentes à partir de n'importe quel raster 
@@ -147,6 +149,8 @@ Les options spécifiques suivantes sont disponibles :
   de relief.
 * **-alt altitude :** altitude de la lumière, en degrés. 90 si la lumière 
   arrive au dessus du MNT. 0 si c'est une lumière rasante.
+* **-combined combined shading :** (à partir de GDAL 1.10) a combinaison de pente 
+  et d'ombrage oblique.
 
 slope
 ******
@@ -220,7 +224,7 @@ raster source diffère de celui qui a été utilisé lors de la construction du 
 
 Le fichier de configuration des couleurs au format texte contient généralement 
 4 colonnes par ligne : la valeur de l'élévation et les composants correspondants 
-de Rouge, Vert, Bleu (entre 0 et 255). La valeur de l'élévation peut être une 
+de Rouge, Vert, Bleu (entre 0 et 255). La valeur d'élévation peut être une 
 valeur en virgule flottante, ou le mot-clé *nv* pour la valeur *nodata*. 
 L'élévation peut aussi être exprimée en pourcentage : 0 % étant la valeur 
 minimale trouvé dans le raster, 100 % la valeur maximale.
@@ -231,7 +235,7 @@ alpha. S'il n'est pas définie, l'opacité complète (255) est supposée.
 Différents séparateurs de champs sont acceptés : virgule, tabulation, espaces, 
 ':'.
 
-Les couleurs communes utilisées par GRASS peuvent également être spécifiées en 
+Les couleurs généralement utilisées par GRASS peuvent également être spécifiées en 
 utilisant leur nom, au lieu du triplet RVB. La liste des noms gérés est : 
 *white*, *black*, *red*, *green*, *blue*, *yellow*, *magenta*, *cyan*, *aqua*, 
 *grey/gray*, *orange*, *brown*, *purple/violet* et *indigo*.
@@ -248,6 +252,7 @@ Depuis GDAL 1.8.0, les fichiers de palette .cpt GMT sont également géré
 
 
 Par exemple :
+
 ::
     
     3500   white
@@ -305,8 +310,7 @@ Jim Westervelt : U.S. Army CERL, 1993. GRASS 4.1 Reference Manual. U.S. Army
 Corps of Engineers, Construction Engineering Research Laboratories, Champaign, 
 Illinois, 1-425.
 
-Voir également
-----------------
+.. seealso::
 
 Documentation des commandes GRASS connexes :
 
@@ -314,4 +318,4 @@ Documentation des commandes GRASS connexes :
 * http://grass.osgeo.org/grass64/manuals/html64_user/r.shaded.relief.html
 * http://grass.osgeo.org/grass64/manuals/html64_user/r.colors.html 
 
-.. yves at georezo.net, Yves Jacolin - 2010/12/29 15:36 ((http://gdal.org/gdaldem.html Trunk r21324)
+.. yjacolin at free.fr, Yves Jacolin - 2013/01/01 ((http://gdal.org/gdaldem.html Trunk r25410)

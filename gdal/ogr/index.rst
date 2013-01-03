@@ -1,8 +1,8 @@
 .. _`gdal.ogr.index`:
 
-======
-OGR
-======
+==============================
+Les commandes et formats OGR
+==============================
 
 .. toctree::
     :maxdepth: 2

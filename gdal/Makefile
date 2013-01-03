@@ -41,6 +41,11 @@ html:
 	@echo
 	@echo "Build finished. The HTML pages are in $(BUILDDIR)/html."
 
+odt:
+	mkdir -p $(BUILDDIR)/odf/
+	rst2odt --stylesheet=style.odt single.rst > $(BUILDDIR)/odf/gdal_doc_fr_single.odt
+	@echo
+	@echo "Build finished. The ODF pages are in $(BUILDDIR)/odf."
 
 pdf:
 	$(SPHINXBUILD) -b pdf $(ALLSPHINXOPTS) $(BUILDDIR)/pdf

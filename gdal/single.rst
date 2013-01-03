@@ -1,4 +1,4 @@
-.. _`gdal.index`:
+.. _`gdal.single`:
 
 #############################################
 GDAL-OGR, le couteau suisse du géomaticien

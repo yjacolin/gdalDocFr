@@ -9,7 +9,8 @@ Listes des informations sur le jeu de données raster.
 ::
     
     gdalinfo [--help-general] [-mm] [-stats] [-hist] [-nogcp] [-nomd]
-         [-noct] [-checksum] [-mdd domain]* datasetname
+         [-norat] [-noct] [-nofl] [-checksum] [-proj4] [-mdd domain]* 
+         [-sd subdataset] datasetname
 
 Le programme gdalinfo liste diverses informations sur les jeux de données 
 raster supportés par GDAL.
@@ -18,16 +19,30 @@ raster supportés par GDAL.
   le jeu de données.
 * **-stats :** Lit et affiche des statistiques de l'image. Force le calcul si 
   aucune n'est présente dans l'image.
+* **-approx_stats :** Lit et affiche les statistiques de l'image. Force leur
+  calcul is aucune statistique n'est stockée dans l'image. Cependant, elles 
+  peuvent être calculées en se basant sur des aperçus ou un sous jeu de données
+  de toutes les tuiles. Utile si vous êtes pressé et ne désirez pas avoir des 
+  statistiques précises.
 * **-hist :** Renvoie des informations sur l'histogramme pour toutes les bandes.
 * **-nogcp :** Supprime  l'affichage de la liste des points d'amer. Il peut être 
   utile pour certains jeux de données avec un grand nombre de points d'amer 
   (GCP) tel que L1B AVHRR ou HDF4 MODIS qui en contiennent des centaines.
 * **-nomd :** Supprime l'affichage des méta-données. Certains jeux de données 
   peuvent contenir beaucoup de méta-données. 
+* **-nrat :** Supprime l'affichage de la table d'attribut du raster.
 * **-noct :** Supprime l'impression des tables de couleurs.
 * **-checksum :** Force le calcul d'un checksum pour chaque bande du jeu de 
   données.
-* **-mdd domaine :** Affiche les méta-données pour le domaine défini.
+* **-mdd domain :** Affiche les méta-données pour le domaine défini.
+* **-nofl :** (GDAL >= 1.9.0) Affiche seulement le premier fichier de la liste 
+  des fichiers.
+* **-sd *subdataset* :** (GDAL >= 1.9.0) Si le jeu de données en entrée contient 
+  plusieurs sous jeu de données, lit et affiche un sous jeu de données avec un 
+  numéro définie (à partir de 1). Ceci est une alternative à l'utiliastion d'un 
+  nom complet de sous jeu de données.
+* **-proj4 :** (GDAL >= 1.9.0) Affiche une chaîne PROJ.4 correspondant au système 
+  de coordonnées du fichier. 
 
 Le programme ''gdalinfo'' affichera les données suivantes (si elles sont 
 connues) :
@@ -47,7 +62,7 @@ connues) :
 * La taille des blocs des bandes. 
 * Les descriptions des bandes.
 * Les valeurs min/max des bandes (connues en interne et calculables).
-* Checksum des bandes (si le calcul est demandé).
+* Le checksum des bandes (si le calcul est demandé).
 * La valeur NODATA des bandes. 
 * Les résolutions des aperçus des bandes disponibles. 
 * Le type d'unité des bandes (c'est à dire "mètres" ou "pied" pour les bandes 
@@ -85,4 +100,4 @@ connues) :
     Center      (  456080.000, 3735960.000) (117d28'27.39"W, 33d45'52.46"N)
     Band 1 Block=512x16 Type=Byte, ColorInterp=Gray
 
-.. yjacolin at free.fr, Yves Jacolin - 2010/12/27 17:46// (http://gdal.org/gdalinfo.html - Trunk 21320)
+.. yjacolin at free.fr, Yves Jacolin - 2013/01/01 (http://gdal.org/gdalinfo.html - Trunk 25410)

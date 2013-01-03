@@ -1,8 +1,8 @@
 .. _`gdal.gdal.index`:
 
-===================
-Les commandes GDAL
-===================
+==============================
+Les commandes et formats GDAL
+==============================
 
 .. toctree::
     :maxdepth: 2
@@ -30,4 +30,6 @@ Les commandes GDAL
     gdal_fillnodata
     gdallocationinfo
     gdal-config
+    gdalsrsinfo
+    gdalmove
     formats/index

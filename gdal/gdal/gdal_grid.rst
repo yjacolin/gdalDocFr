@@ -3,13 +3,14 @@
 gdal_grid
 ==========
 
-créer une grille régulière à partir de données éparses.
+Créer une grille régulière à partir de données éparses.
 
 Usage
 -------
 
 
 Usage :
+
 ::
     
     gdal_grid [-ot {Byte/Int16/UInt16/UInt32/Int32/Float32/Float64/
@@ -34,10 +35,15 @@ Ce programme créé une grille régulière (raster) à partir des données
 interpolées pour remplir les nœuds de la grille avec des valeurs, vous pouvez 
 choisir diverses méthodes d'interpolations.
 
+À partir de GDAL 1.10, il est possible de définir l'option de configurtion 
+*GDAL_NUM_THREADS* pour paralléliser les processus. La valeur à spécifier est 
+le nombre de threads de travail ou *ALL_CPUS* pour utiliser tout le CPU/core 
+de l'ordinateur.
+
 * **-ot type :** pour définir les types des données des bandes en sortie.
 * **-of format :** sélectionne le format de sortie. GeoTIFF par défaut (GTiff). 
   Utiliser le nom du format court.
-* **xmin xmax :** définie les étendues X géoréférencées du fichier en sortie à 
+* **-txe xmin xmax :** définie les étendues X géoréférencées du fichier en sortie à 
   créer.
 * **-tye ymin ymax :** définie les étendues Y géoréférencées du fichier en 
   sortie à créer.
@@ -216,6 +222,7 @@ l'utiliser comme jeu de données en entré pour *gdal_grid*. Vous pouvez trouver
 des détails supplémentaires sur la page de description du :ref:`gdal.ogr.formats.vrt`.
 
 Voici un petit exemple. Nous avons un fichier CSV appelé *dem.csv* contenant :
+
 ::
     
     Easting,Northing,Elevation
@@ -227,6 +234,7 @@ Voici un petit exemple. Nous avons un fichier CSV appelé *dem.csv* contenant :
 
 Pour les données ci-dessus nous créons un en-tête dem.vrt avec le contenu 
 suivant :
+
 ::
     
     <OGRVRTDataSource>
@@ -237,7 +245,7 @@ suivant :
         </OGRVRTLayer>
     </OGRVRTDataSource>
 
-Cette description définit une géométrie appelée 2.5D avec trois coordonnées X,Y 
+Cette description définie une géométrie appelée 2.5D avec trois coordonnées X,Y 
 et Z. La valeur Z sera utilisée pour l'interpolation. Maintenant vous pouvez 
 utiliser le fichier *dem.vrt* avec tous les programmes OGR (démarrez avec 
 ``ogrinfo`` pour tester que tout fonctionne correctement). La source de données 
@@ -248,6 +256,7 @@ inverser des colonnes, etc.
 
 Si votre fichier CSV ne contient pas d'en-tête de colonne alors il peut être 
 pris en charge comme suit :
+
 ::
     
     <GeometryField encoding="PointFromColumns" x="field_1" y="field_2" z="field_3"/>
@@ -262,6 +271,7 @@ Les exemples suivants pourraient créer un fichier raster TIFF à partir d'une
 source de données VRT décrit dans la section :ref:`gdal.gdal.gdal_grid.csv` en 
 utilisant la distance inverse à la puissance. Les valeurs à interpoler seront 
 lues partir de la valeur Z de l'enregistrement de la géométrie.
+
 ::
     
     gdal_grid -a invdist:power=2.0:smoothing=1.0 -txe 85000 89000 -tye 894000 
@@ -277,4 +287,4 @@ X et Y sont récupérées dans la géométrie et le Z du champ *Elevation*.
     gdal_grid -zfield "Elevation" -a invdist:power=2.0:smoothing=1.0 -txe 85000 89000 -tye 894000 890000 *
       -outsize 400 400 -of GTiff -ot Float64 -l dem dem.vrt dem.tiff
 
-.. yves at free.fr, Yves Jacolin - 2010/12/29 15:22 (http://gdal.org/gdal_grid.html Trunk r21324)
+.. yjacolin at free.fr, Yves Jacolin - 2013/01/01 (http://gdal.org/gdal_grid.html Trunk r25410)

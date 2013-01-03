@@ -1,6 +1,5 @@
 .. _`gdal.gdal.gdal-config`:
 
-
 gdal-config
 ============
 
@@ -34,4 +33,4 @@ utilisant GDAL mais il peut être invoqué par l'utilisateur final.
   a compilé avec GDAL ou non.
 * **--formats :** renvoi quels formats sont configurés dans GDAL vers la sortie.
 
-.. yjacolin at free.fr, Yves Jacolin - 2009/02/15 20:03 (http://gdal.org/gdal-config.html Page originale)
+.. yjacolin at free.fr, Yves Jacolin - 2013/01/01 (http://gdal.org/gdal-config.html Page originale)
