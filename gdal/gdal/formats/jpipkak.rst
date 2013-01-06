@@ -1,5 +1,6 @@
 .. _`gdal.gdal.formats.jpipkak`:
 
+=========================
 JPIPKAK - JPIP Streaming
 =========================
 
@@ -10,7 +11,7 @@ distants avec une bande passante des connexions limitée ou des réseaux à haut
 concurrence.
 
 JPIPKAK - aperçu JPIP
-----------------------
+=======================
 
 Un bref aperçu de la séquence des événements JPIP  est présenté dans cette section, 
 plus d'information peut être trouvé dans `JPEG 2000 Interactive Protocol (Part 
@@ -48,7 +49,7 @@ requêtes ont été réalisé à une niveau de résolution 1:1.
    région spatiale associée à la fenêtre de vue demandée.
 
 JPIPKAK - approche
--------------------
+===================
 
 Le pilote JPIPKAK utilise une approche qui a d'abord été démontré ici, 
 `J2KViewer <http://www.drc-dev.ohiolink.edu/browser/J2KViewer>`_, par Juan Pablo 
@@ -72,7 +73,7 @@ performance de Kakadu.
 .. image:: _static/components.png
 
 JPIPKAK - implémentation
--------------------------
+=========================
 
 L'implémentation gère les API C et C++ de GDAL et fournie un wrapper SWIG initial 
 pour ce pilote avec un exemple ImageIO Java (**TODO** - Exemple qGIS).
@@ -214,7 +215,7 @@ Le client identifie ces fenêtres en utilisant les valeurs "0" (faible) ou "1"
 26. *Draw*
 
 JPIPKAK - exigences d'installation
------------------------------------
+====================================
 
 * `Libcurl 7.9.4 <http://curl.haxx.se/>`_
 * `OpenSSL 0.9.8K <http://www.openssl.org/>`_ (si SSL est nécessaire, une 
@@ -224,7 +225,7 @@ JPIPKAK - exigences d'installation
 Pour le moment seulement un makefile Windows est fournie, cependant cela devrait 
 compiler sous Linux également puisqu'il n'y a pas de dépendances Windows.
 
-Voir également :
+.. seealso::
 
 * `JPEG 2000 Interactive Protocol (Part 9 - JPIP) <http://www.jpeg.org/jpeg2000/j2kpart9.html>`_
 * `http://www.opengeospatial.org/standards/gmljp2 <http://www.opengeospatial.org/standards/gmljp2>`_
@@ -232,7 +233,7 @@ Voir également :
 * `IAS demo (example JPIP(S) streams) <http://iasdemo.ittvis.com/>`_
 
 Notes
-------
+======
 
 Pilote développé originellement par <http://www.ittvis.com">ITT VIS</a> et donné 
 à GDAL pour permettre le flux de jeux de données JPEG 2000 de client JPIP avec 

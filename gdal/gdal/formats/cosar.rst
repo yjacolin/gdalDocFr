@@ -1,5 +1,6 @@
 .. _`gdal.gdal.formats.cosar`:
 
+==============================================
 COSAR -- TerraSAR-X Complex SAR Data Product
 ==============================================
 
@@ -18,7 +19,7 @@ stocké dans un seul burst.
 La gestion des données ScanSAR est en cours de dévéloppement, dû à la difficulté 
 de s'adapter aux identifiant des "bursts" ScanSAR dans le modèle GDAL.
 
-Voir également :
+.. seealso::
 
 * DLR Document TX-GS-DD-3307 "Level 1b Product Format Specification."
 

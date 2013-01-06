@@ -1,5 +1,6 @@
 .. _`gdal.gdal.formats.wcs`:
 
+================================
 WCS -- OGC Web Coverage Service
 ================================
 
@@ -71,19 +72,18 @@ comme enfant immédiat de l'élément *WCS_GDAL* pour être définie en option.
   offerte par défaut.
 
 Time
------
+======
 
-À partir de GDAL 1.9.0, ce pilote inclus la gestion expérimentale des serveurs 
-WCS 1.0.0 basés sur le temps. Lors de l'accès initial la dernière position du 
-temps offerte sera identifié comme *DefaultTime*. Chaque position de temps 
-disponible pour la couverture sera traité comme sous jeu de données.
+.. versionadded:: 1.9.0 ce pilote inclus la gestion expérimentale des serveurs 
+  WCS 1.0.0 basés sur le temps. Lors de l'accès initial la dernière position du 
+  temps offerte sera identifié comme *DefaultTime*. Chaque position de temps 
+  disponible pour la couverture sera traité comme sous jeu de données.
 
 Notez que les jeux de données basés sur le temps ne sont pas gérés lorsque la 
 description du service est le nom du fichier. Pour le moment la gestion du temps 
 n'est pas disponible pour les versions autres que WCS 1.0.0. 
 
-Voir également
----------------
+.. seealso::
 
 * Standards WCS de l'OGC : http://www.opengeospatial.org/standards/wcs
 

@@ -1,9 +1,10 @@
 .. _`gdal.gdal.formats.xyz`:
 
+=========================
 XYZ -- ASCII Gridded XYZ
 =========================
 
-(Disponible à partir de GDAL >= 1.8.0)
+.. versionadded:: 1.8.0
 
 GDAL gère la lecture et l'écritue de jeux de données raster XYZ **quadrillées** 
 ASCII (ie. les XYZ non quadrillé, XYZ LIDAR, etc. doivent être ouvert par d'autres 
@@ -32,15 +33,14 @@ spatiale. Le pilote auto-détectera le type de données parmi Byte, Int16, Int32
 Float32.
 
 Options de création
---------------------
+=====================
 
 * **COLUMN_SEPARATOR=a_value :** où a_value est une chaîne utilisée pour séparer 
   la valeur des colonnes X,Y et Z. Par défaut à un espace
 * **ADD_HEADER_LINE=YES/NO :** si une ligne d'en-tête doit être écrite (le 
   contenu est X <col_sep> Y <col_sep> Z). NO par défaut
 
-Voir également
---------------
+.. seealso::
 
 * Documentation de la commande :ref:`gdal.gdal.gdal_grid`
 

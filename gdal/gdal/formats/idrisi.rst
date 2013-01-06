@@ -1,5 +1,6 @@
 .. _`gdal.gdal.formats.idrisi`:
 
+=============================
 RST --- Idrisi Raster Format
 =============================
 
@@ -42,7 +43,7 @@ commentaire du fihcier RDC.
 * « .smp » le fichier de la table de couleur
 * « .ref » le fichier de référence géographiques
 
-**Voir également :**
+.. seealso::
 
 * Implémenté dans *gdal/frmts/idrisi/idrisiraster.cpp*. 
 * www.idrisi.com

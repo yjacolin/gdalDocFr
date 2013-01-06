@@ -1,5 +1,6 @@
 .. _`gdal.gdal.formats.msg`:
 
+===================================
 MSG -- Météosat Seconde Génération
 ===================================
 
@@ -25,7 +26,7 @@ Ce pilote n'est pas activé par défaut. Lisez la partie « `instructions de com
 d'inclure ce pilote dans votre bibliothèque GDAL.
 
 Instructions de compilation
-----------------------------
+============================
 
 Téléchargez la bibliothèque Eumestat pour la décompression par ondelette. C'est 
 un fichier nommé PublicDecompWt.zip. Décompressez son contenu dans un 
@@ -53,7 +54,7 @@ Le wiki de MSG est disponible sur http://trac.osgeo.org/gdal/wiki/MSG. Il est
 dédié à la documentation de la compilation et astuce d'usage.
 
 Spécification des sources des jeux de données
-----------------------------------------------
+===============================================
 
 Il est possible de sélectionner des fichiers individuels pour l'ouverture. Dans 
 ce cas, le pilote collectera les fichiers qui correspondent aux autres bandes 
@@ -169,15 +170,14 @@ Sans calibration radiométrique, mais pour 10 cycles consécutifs (donc de 1200 
     gdal_translate -of GTiff MSG(c:\hrit-data\,200501181200,(3,2,1),N,N,10,4) d:\output\outfile.tif
 
 Géoréférencement et projection
--------------------------------
+===============================
 
 Les images utilisent la projection de vue satellites géo-stationnaires. La 
 plupart des logiciels SIG ne reconnaissent pas cette projection (nous savons 
 seulement que le logiciel ILWIS possède cette projection), mais ``gdalwarp.exe`` 
 peut être utilisé pour reprojeter les images.
 
-Lisez également
-----------------
+.. seealso::
 
 * Implémenté dans *gdal/frmts/msg/msgdataset.cpp*.
 * http://www.eumetsat.int - Organisation Européenne pour l'Exploitation  des Satellites Météorologique

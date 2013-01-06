@@ -1,5 +1,6 @@
 .. _`gdal.gdal.formats.fast`:
 
+==========================
 FAST -- EOSAT FAST Format
 ==========================
 
@@ -21,7 +22,7 @@ Les noms des fichiers des images seront extraits et les données seront importé
 chaque fichier sera interprété comme une bande.
 
 Les données
------------
+=============
 
 FAST-L7A
 ********
@@ -130,7 +131,7 @@ nommé différemment vous devez les renommer manuellement avant l'importation de
 données avec GDAL.
 
 Géoréférencement
-----------------
+==================
 
 Toutes les projections USGS doivent être gérées (pour ne pas les nommer UTM, 
 LCC, PS, PC, TM, OM, SOM). Contactez-moi si vous avez des problèmes avec 
@@ -148,7 +149,7 @@ méta-données.
 * BIASn : valeur du biais pour le canal n.
 * GAINn : valeur du gain pour le canal n.
 
-**Voir aussi :**
+.. seealso::
 
 * Implémenté dans *gdal/frmts/fast/fastdataset.cpp*.
 * Description du format Landsat FAST L7A est disponible sur 

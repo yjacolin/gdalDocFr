@@ -1,5 +1,6 @@
 .. _`gdal.gdal.formats.gtiff`:
 
+================
 Le format Gtiff
 ================
 
@@ -22,7 +23,7 @@ automatiquement transformé sous la forme RVBA (Rouge, Vert, Bleu, Alpha), et
 traité comme quatre bandes de huit bites.
 
 Géo-référencement
-------------------
+==================
 
 La plupart des projections devrait être supportées, avec le signalement que, 
 dans le but de traduire un système de projection non commune et de coordonnées 
@@ -52,8 +53,8 @@ sont trouvés, ils seront utilisés pour lire les RPCs, même si la balise
 .. _`gdal.gdal.formats.gtiff.internal_mask`:
 
 Masques de transparence interne
---------------------------------
-(*à partir de GDAL 1.6.0*)
+=================================
+.. versionadded:: 1.6.0
 
 Les fichiers TIFF peuvent contenir des masques de transparence internes. Le 
 pilote GeoTIFF reconnait un répertoire interne comme étant un masque de 
@@ -64,25 +65,25 @@ la spécification TIFF autorise des résolutions plus grandes les masques de
 transparence, le pilote GeoTIFF ne gère que ceux qui ont la même dimension que 
 l'image principale. Des masques de transparence internes sont également gérés.
 
-(*à partir de GDAL 1.6.0*) Lorsque la variable d'environnement 
-*GDAL_TIFF_INTERNAL_MASK*  est positionnée à YES, et que le fichier GeoTIFF est 
-ouvert en mode mise à jour, la méthode *CreateMaskBand()* appelée sur un fichier 
-TIFF ou une de ses bandes créera un masque de transparence interne. Sinon, le 
-comportement par défaut des masques de transparence sera utilisé, c'est-à-dire 
-la création d'un fichier .msk, comme indiqué dans la `RFC 15 <http://rac.osgeo.org/gdal/wiki/rfc15_nodatabitmask>`_
+.. versionadded:: 1.6.0 lorsque la variable d'environnement 
+  *GDAL_TIFF_INTERNAL_MASK*  est positionnée à YES, et que le fichier GeoTIFF est 
+  ouvert en mode mise à jour, la méthode *CreateMaskBand()* appelée sur un fichier 
+  TIFF ou une de ses bandes créera un masque de transparence interne. Sinon, le 
+  comportement par défaut des masques de transparence sera utilisé, c'est-à-dire 
+  la création d'un fichier .msk, comme indiqué dans la `RFC 15 <http://rac.osgeo.org/gdal/wiki/rfc15_nodatabitmask>`_
 
-À partir de GDAL 1.8.0,une bande de masque interne d'1-bit sont décompressé. Lors 
-de la relecture, pour réaliser la conversion entre la bande de masque et la 
-bande alpha plus facilement, les bandes de masque sont exposées à l'utilisateur 
-tout en étant promus en 8 bits (i.e. la valeur pour les pixels non masqués est 
-de 255) à moins que l'option de configuration *GDAL_TIFF_INTERNAL_MASK_TO_8BIT* 
-est définie à NO. Cela n'affecte pas la manière dont la bande de masque est écrite 
-(c'est toujours 1-bit).
+.. versionadded:: 1.8.0 une bande de masque interne d'1-bit sont décompressé. Lors 
+  de la relecture, pour réaliser la conversion entre la bande de masque et la 
+  bande alpha plus facilement, les bandes de masque sont exposées à l'utilisateur 
+  tout en étant promus en 8 bits (i.e. la valeur pour les pixels non masqués est 
+  de 255) à moins que l'option de configuration *GDAL_TIFF_INTERNAL_MASK_TO_8BIT* 
+  est définie à NO. Cela n'affecte pas la manière dont la bande de masque est écrite 
+  (c'est toujours 1-bit).
 
 .. _`gdal.gdal.formats.gtiff.apercues`:
 
 Aperçus
---------
+===========
 
 Le pilote GeoTIFF gère la lecture, la création et la mise à jour d'aperçus 
 internes. Ceux-ci peuvent être créés sur des fichiers GeoTIFF ouverts en mode 
@@ -90,6 +91,7 @@ mise à jour (avec gdaladdo par exemple). Si le fichier GeoTIFF est ouvert en
 lecture seule, la création d'aperçus sera faite dans un fichier externe .ovr. 
 Les aperçus sont mise à jour uniquement sur requête par appel à la méthode 
 *BuildOverviews()*.
+
 Si un fichier GeoTIFF possède un masque de transparence et que la variable 
 d'environnement GDAL_TIFF_INTERNAL_MASK est positionnée à YES et que le fichier 
 est ouvert en mode  mise à jour, *BuildOverviews()** créera automatiquement des 
@@ -97,13 +99,13 @@ aperçus pour le masque de transparence interne. Ces aperçus seront rafraichis
 par des appels ultérieurs à *BuildOverviews()*, même si *GDAL_TIFF_INTERNAL_MASK* 
 n'est pas positionnée à YES.
 
-(À partir de GDAL 1.8.0) La taille du bloc (hauteur et largeur de la tuile) 
-utilisée pour les aperçues (interne ou externe) peut être définie en définissant 
-la variable d'environnement*GDAL_TIFF_OVR_BLOCKSIZE* à une puissance de deux 
-entre 64 et 4096. 128 est la valeur par défaut.
+.. versionadded:: 1.8.0 La taille du bloc (hauteur et largeur de la tuile) 
+  utilisée pour les aperçues (interne ou externe) peut être définie en définissant 
+  la variable d'environnement*GDAL_TIFF_OVR_BLOCKSIZE* à une puissance de deux 
+  entre 64 et 4096. 128 est la valeur par défaut.
 
-Métadonnée
------------
+Métadonnées
+============
 
 GDAL peut faire face aux balises baseline  du TIFF comme métadonnées au niveau du 
 jeu de données :
@@ -135,12 +137,12 @@ La valeur de l'item de métadonnées *GDALMD_AREA_OR_POINT* ("AREA_OR_POINT") es
 stockée dans la clé GeoTIFF *RasterPixelIsPoint* pour les profiles *GDALGeoTIFF* 
 ou *GeoTIFF*.
 
-À partir de GDAL 1.9.0, les métadonnées XMP peuvent être extraites à partir du 
+.. versionadded:: 1.90 les métadonnées XMP peuvent être extraites à partir du 
 fichier et seront stockées dans un contenu brute XML dans le domaine de 
 métadonnées xml:XMP.
 
 Valeur nodata
---------------
+===============
 
 GDAL stocke la valeur nodata de la bande dans la balise ASCII non standard 
 *TIFFTAG_GDAL_NODATA* (code 42113) pour les fichiers créés avec le profile par 
@@ -151,7 +153,7 @@ stockée dans le fichier PAM .aux.xml file.
 .. _`gdal.gdal.formats.gtiff.issues`:
 
 Problèmes de création
----------------------
+======================
 
 Les fichiers GeoTIFF peuvent être créés avec n'importe quel type de bande 
 définie dans GDAL, les types complexes inclus. Les fichiers créés peuvent avoir 
@@ -273,7 +275,7 @@ Options de création
   utilisées.
 
 À propos de la compression d'images RVB au format JPEG
--------------------------------------------------------
+=======================================================
 
 Lorsqu'on convertit une image RVB dans le format JPEG-dans-TIFF, utilisez 
 PHOTOMETRIC=YCBCR peut rendre le fichier résultant typiquement de 2 à 3 fois 
@@ -326,7 +328,7 @@ modifier le comportement par défaut du pilote GTiff.
   doivent être en unité linéaire du système de coordonnées. 
   (`Ticket #3901 <http://trac.osgeo.org/gdal/ticket/3901>`_).
 
-**Lisez également :**
+.. seealso::
 
 * Page d'information sur GeoTIFF : http://www.remotesensing.org/geotiff/geotiff.html
 * Page libtiff : http://www.remotesensing.org/geotiff/geotiff.html

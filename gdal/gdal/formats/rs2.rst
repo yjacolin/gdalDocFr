@@ -1,5 +1,6 @@
 .. _`gdal.gdal.formats.rs2`:
 
+==============================
 RS2 -- RadarSat 2 XML Product
 ==============================
 
@@ -26,7 +27,7 @@ autres seront ignorés, ou résultat en plusieurs erreurs *runtime*. Il est esp�
 que ce pilote peut être généralisé avec d'autres échantillons du produit en 
 fonction de leur disponibilité.
 
-**Lisez également :**
+.. seealso::
 
 * RadarSat document RN-RP-51-27.
 

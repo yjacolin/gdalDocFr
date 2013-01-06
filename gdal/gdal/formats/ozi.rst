@@ -1,17 +1,17 @@
 .. _`gdal.gdal.formats.ozi`:
 
+========================
 OZI -- raster OZF2/OZFX3
 ========================
 
-(Disponible à partir de GDAL >= 1.8.0)
+.. versionadded:: 1.8.0
 
 GDAL gère la lecture des jeux de données raster OZF2/OZFX3.
 
 Soit le fichier image soit le fichier .map peut être passé à GDAL. Pour récupérer 
 le géoréférencement, vous devez spécifier le fichier .map.
 
-Voir également
---------------
+.. seealso::
 
 * `Spécification du format OZF2/OZFX3 <http://trac.osgeo.org/gdal/browser/sandbox/klokan/ozf/ozf-binary-format-description.txt>`_
 

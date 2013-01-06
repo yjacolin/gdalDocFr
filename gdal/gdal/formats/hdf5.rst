@@ -1,5 +1,6 @@
 .. _`gdal.gdal.formats.hdf5`:
 
+===================================================
 HDF5 --- Hierarchical Data Format Release 5 (HDF5)
 ===================================================
 
@@ -11,7 +12,7 @@ les fichiers HDF5-EOS. Actuellement EOS utilise HDF5 pour le stockage de donnée
 format HDF5 qui sera utilisé pour la télémétrie à partir des satellites 'Aura' .
 
 Gestion des images multiples (Sous jeux de données)
-----------------------------------------------------
+=====================================================
 
 Hierarchical Data Format est un conteneur pour plusieurs jeux de données 
 différents. Pour le stockage des données. HDF contient des tableaux 
@@ -26,6 +27,7 @@ images individuelles (sous jeux de données) sont assignés à l'objet de
 méta-données *SUBDATASET_n_NAME*. La description pour chaque image est trouvée 
 dans l'objet méta-données *SUBDATASET_n_DESC*. Pour les images HDF5 les noms 
 du sous jeu de données sera formaté comme cela :
+
 ::
     
     HDF5:file_name:subdataset
@@ -159,6 +161,7 @@ CloudFraction (32-bit floating-point) :
 
 
 ... 3 000 points d'amer sont lu à partir du fichier si le tableau de Latitude et Longitude sont présent :
+
 ::
     
     Corner Coordinates:
@@ -185,7 +188,7 @@ autre outil (vous pouvez trouver plus d'informations sur les différents outils
 HDF en utilisant les liens en bas de cette page).
 
 Géoréferencement
------------------
+=================
 
 Il n'y a pas de moyen universel de stockage du géoréférencement dans les 
 fichiers HDF. Cependant, certains types de produits ont des mécanismes pour la 
@@ -195,12 +198,12 @@ ceux gérés sont (subdataset_type affiché entre parenthèses):
 * HDF5 OMI/Aura Ozone (O3) Total Column 1-Orbit L2 Swath 13x24km (Level-2 OMTO3) 
 
 Méta-données
-------------
+=============
 
 Aucune méta-données n'est lues pour l'instant à partir des fichiers HDF5.
 
 Compilation du pilote
----------------------
+======================
 
 Ce pilote est compilé au dessus de la bibliothèque HDF5 NCSA, vous avez donc 
 besoin de télécharger la bibliothèque HDF5-1.6.4 ou plus récent. Vous avez aussi 
@@ -210,8 +213,7 @@ utilisez cygwin) et que les DLL peuvent être localisé par votre variable
 d'environnement PATH. Vous pouvez aussi télécharger le code source de la page 
 HDF NCSA (voir lien ci-dessous).
 
-Voir également
---------------
+.. seealso::
 
 * Implementé dans *gdal/frmts/hdf5/hdf5dataset.cpp and gdal/frmts/hdf5/hdf5imagedataset.cpp*.
 * `Page de téléchargement de NCSA HDF5 <http://hdf.ncsa.uiuc.edu/HDF5/release/obtain5.html>`_ 

@@ -1,5 +1,6 @@
 .. _`gdal.gdal.formats.rasterlite`:
 
+==================================
 Rasterlite - Rasters in SQLite DB
 ==================================
 
@@ -35,7 +36,7 @@ le pilote pour les tuiles internes.
 
 
 Syntaxe de la chaîne de connexion en mode lecture
---------------------------------------------------
+==================================================
 
 Syntaxe : ``'rasterlitedb_name' or 'RASTERLITE:rasterlitedb_name[,table=raster_table_prefix][,minx=minx_val,miny=miny_val,maxx=maxx_val,maxy=maxy_val][,level=level_number]``
 
@@ -52,7 +53,7 @@ où :
   la pyramide.
 
 Problèmes  de création
------------------------
+=======================
 
 Le pilote peut créer une nouvelle base de données si nécessaire, créer une 
 nouvelle table raster si nécessaire et copier un jeu de données source dans la 
@@ -91,7 +92,7 @@ Options de création
 * **FILTER :** (pilote EPSILON) identifiant du filtre. 'daub97lift' par défaut.
 
 Aperçues
-----------
+=========
 
 Le pilote gère la construction (si le jeu de données est ouvert en mode update) 
 et la lecture des aperçues internes.
@@ -100,7 +101,7 @@ Si aucun aperçue interne n'est détecté, le pilote tentera d'utiliser des aper
 externes (fichiers .ovr).
 
 Exemples
----------
+=========
 
 * Accéder à une BdD rasterlite avec une table raster unique :
   ::
@@ -108,6 +109,7 @@ Exemples
     $ gdalinfo rasterlitedb.sqlite -noct
 
   En sortie :
+  
   ::
     
 
@@ -141,11 +143,13 @@ Exemples
     Color Table (RGB with 256 entries)
 
 * Lister une BdD de table multi-raster :
+
   ::
     
     $ gdalinfo multirasterdb.sqlite
 
   En sortie :
+  
   ::
     
     Driver: Rasterlite/Rasterlite
@@ -165,33 +169,37 @@ Exemples
     Center      (  256.0,  256.0)
 
 * Accéder à une table raster dans une BdD de table multi-raster :
+
   ::
     
     $ gdalinfo RASTERLITE:multirasterdb.sqlite,table=raster1
 
 * Créer une nouvelle BdD rasterlite avec des données encodées en tuiles JPEG :
+
   ::
     
     $ gdal_translate -of Rasterlite source.tif RASTERLITE:my_db.sqlite,table=source -co DRIVER=JPEG
 
 * Créer des aperçues internes :
+
   ::
     
     $ gdaladdo RASTERLITE:my_db.sqlite,table=source 2 4 8 16
 
 * Nettoyer des aperçues internes :
+
   ::
     
     $ gdaladdo -clean RASTERLITE:my_db.sqlite,table=source
 
 * Créer des aperçues externe dans un fichier .ovr :
+
   ::
     
     $ gdaladdo -ro RASTERLITE:my_db.sqlite,table=source 2 4 8 16
 
 
-Voir également
----------------
+.. seealso::
 
 * `Page principale sur Spatialite et Rasterlite <http://www.gaia-gis.it/spatialite>`_
 * `Manuel sur Rasterlite <http://www.gaia-gis.it/spatialite/rasterlite-man.pdf>`_

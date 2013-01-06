@@ -1,5 +1,6 @@
 .. _`gdal.gdal.formats.ecw`:
 
+=========================================
 Le format ECW - ERDAS Compress Wavelets
 =========================================
 
@@ -9,24 +10,7 @@ en 8 bit. Les systèmes de coordonnées et les transformations du géo-référen
 sont lu, mais dans certains cas les systèmes de coordonnées ne seront pas traduit.
 
 Le support du pilote ECW dans GDAL est optionnel, et nécessite le lien avec la 
-bibliothèque SDK ECW externe fournit par ERDAS.
-
-Le kit de compression gratuit (Licence de type public) ECW supporte la 
-compression des images jusqu'à 500 Mo. Pour compresser de très grosses images, 
-il est nécessaire d'avoir une licence de la technologie ECW d'ERMapper. Les 
-fichiers à compresser au format ECW doivent également être d'au moins 128 × 128. 
-Les sources qui ne sont pas en 8 bites seront re-échantillonnées par la 
-bibliothèque SDK ECW d'une manière un peu incompréhensible. Le résultat est une 
-image en 8 bites.
-
-Lors de l'écriture des informations du système de coordonnées dans les fichiers 
-ECW, la plupart des systèmes de coordonnées courants ne sont pas intégrés 
-proprement. Si vous connaissez le nom du système de coordonnées au format 
-ERMapper, vous pouvez l'obliger à le définir au moment de la création avec les 
-options de création du PROJ et du DATUM.
-
-Problèmes de création
-----------------------
+bibliothèque SDK ECW externe fournit par Intergraphe (anciennement ERDAS).
 
 En plus des fichiers ECW, ce pilote gère aussi l'accès au service de réseau 
 d'image en utilisant le protocole "ECWP". Utilisez l'url complète *ecwp://* du 
@@ -38,6 +22,44 @@ ECWP de la `RFC 24 <http://trac.osgeo.org/gdal/wiki/rfc24_progressive_data_suppo
 fichiers JPEG2000, et seront stockés comme contenu brute XML dans le domaine de 
 métadonnées xml:XMP.
 
+Mise à jour de géoréférencement / domaine de Métadonnées ECW
+===============================================================
+
+.. versionadded:: à partir de GDAL 1.9.0
+
+Les valeurs des paramètres UNITS, DATUM et PROJ trouvées dans l'en-tête ECW sont 
+retournée par le domaine de méta-données ECW. Ils peuvent être définie avec la 
+méthode SetMetadataItem() dans le but de modifier les informations d'en-tête d'un 
+fichier ECW existant, ouvert en mode mise à jour, sans modifier l'image.
+
+La projection et le géoréférencement peuvent aussi être modifié avec les méthodes 
+SetGeoTransform() et SetProjection(). Si la projection est définie avec 
+SetProjection() et PROJ, DATUM et UNITS avec SetMetadataItem(), les dernières 
+valeurs écraseront les valeurs compilé avec la chaîne de projection.
+
+Problèmes de création
+========================
+
+Le SDK ECW 4.x d'ERDAS est seulement gratuire pour la décompression d'image. Pour 
+compresser des images il est nécessaire de compiler le SDK en lecture / écriture 
+et de fournir la clé de licence OEM lors du fonctionnement qui peut être acheté 
+chez ERDAS.
+
+Pour ceux utilisant toujours le SDK ECW 3.3, les images inférieures à 500 Mo 
+peuvent être compressé gratuitement, tandis que les images plus grosses nécessitent 
+une licence d'ERDAS. Voyez l'agréement de licence et l'option *LARGE_OK*.
+
+Les fichiers à compresser au format ECW doivent également être d'au moins 128 × 128. 
+Les sources qui ne sont pas en 8 bites seront re-échantillonnées par la 
+bibliothèque SDK ECW d'une manière un peu incompréhensible. Le résultat est une 
+image en 8 bites.
+
+Lors de l'écriture des informations du système de coordonnées dans les fichiers 
+ECW, la plupart des systèmes de coordonnées courants ne sont pas intégrés 
+proprement. Si vous connaissez le nom du système de coordonnées au format 
+ERMapper, vous pouvez l'obliger à le définir au moment de la création avec les 
+options de création du PROJ et du DATUM.
+
 **Options de création :**
 
 * **TARGET=pourcentage :** définit la taille de réduction cible comme un 
@@ -47,6 +69,8 @@ métadonnées xml:XMP.
   Des exemples courants sont NUTM11, ou GEODETIC.
 * **DATUM=nom :** nom du datum au format d'ECW à utiliser. Des exemples 
   courants sont WGS84 ou NAD83.
+* **UNITS=name :** (GDAL >= 1.9.0) nom des unités de projection ECW à utiliser : 
+  METERS (par défaut) ou FEET (pied US).
 * **LARGE_OK=YES :** lorsque compilé avec le SDK ECW 3.x cette option peut être 
   définie  pour autoriser la compression des fichiers supérieur à 500 Mo. Il est 
   de la responsabilité de l'utilisateur de s'assurer que les nécessités de licence 
@@ -63,7 +87,7 @@ Le format ECW ne supporte pas la création d'aperçu puisque le format ECW est
 déjà censé être optimisé pour les « aperçues arbitraires ».
 
 Options de configuration
--------------------------
+==========================
  
 Le SDK ECW d'ERDAS gère une grande variété d'`options de configuration 
 <http://trac.osgeo.org/gdal/wiki/ConfigOptions>`_ pour contrôler différentes 
@@ -102,12 +126,11 @@ sur la signification de ces options.
   options de création, peuvent aussi être définir comme options de configuration. 
   voir plus haut.
 
-Voyez également
-----------------
+.. seealso::
 
 * Implementé dans *gdal/frmts/ecw/*.
-* La page ECW (http://www.erdas.com/products/ERDASECWJPEG2000SDK/Details.aspx) chez 
-  http://www.erdas.com.
+* La page ECW (http://geospatial.intergraph.com/products/other/ecw/ERDASECWJPEG2000SDK/Details.aspx chez 
+  http://www.geospatial.intergraph.com)
 * `Astuces de compilation de l'ECW pour GDAL <http://trac.osgeo.org/gdal/wiki/ECW>`_
 
-.. yjacolin at free.fr, Yves Jacolin - 2011/08/07 (trunk 22678)
+.. yjacolin at free.fr, Yves Jacolin - 2013/01/01 (trunk 25804)

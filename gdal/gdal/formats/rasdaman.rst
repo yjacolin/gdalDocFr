@@ -1,5 +1,6 @@
 .. _`gdal.gdal.formats.rasdaman`:
 
+=====================
 Pilote GDAL Rasdaman
 =====================
 
@@ -44,8 +45,7 @@ image :
 Pour le moment il n'y a pas de gestion de lecture et d'écriture d'informations 
 géoréférencement.
 
-Voir également
----------------
+.. seealso::
 
 * `Project Rasdaman <http://www.rasdaman.org/>`_
 

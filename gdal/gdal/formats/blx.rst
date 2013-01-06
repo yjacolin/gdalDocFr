@@ -1,5 +1,6 @@
 .. _`gdal.gdal.formats.blx`:
 
+=====================================
 BLX -- Magellan BLX Topo File Format
 =====================================
 
@@ -17,13 +18,13 @@ gérées au niveau de la tuile. Pour les pixels non définie dans des tuiles non
 vides voyez les options **FILLUNDEF/FILLUNDEFVAL**.
 
 Géoréférencement
-------------------
+==================
 
 La projection BLX est fixée à WGS84 et le géoréférencement à partir des BLX est 
 géré sous la forme de tiepoint et de taille de pixel.
 
 Problèmes lors de la création
-------------------------------
+==============================
 
 **Options de création  :**
 

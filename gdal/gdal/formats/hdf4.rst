@@ -1,5 +1,6 @@
 .. _`gdal.gdal.formats.hdf4`:
 
+====================================================
 HDF4 --- Hierarchical Data Format Version 4 (HDF4)
 ====================================================
 
@@ -15,7 +16,7 @@ Dans le futur ils passeront au format HDF5-EOS, qui sera utilisé pour le
 satellite télémétrique de type 'Aura'.
 
 Gestion des Images Multiples (Sous-ensemble de données)
---------------------------------------------------------
+===========================================================
 
 Le Format de Données Hiérarchique (HDF) est un conteneur pour différents 
 sous-ensemble de données. Pour les données stockant des sous-ensemble de Données 
@@ -48,6 +49,7 @@ Pour la seconde étape, vous devez fournir ce nom à ``gdalinfo`` ou
 ``gdal_translate`` pour la lecture des données.
 Par exemple, nous voulons lire des données à partir du sous-ensemble de données 
 MODIS Level 1B :
+
 ::
     
     $ gdalinfo GSUB1.A2001124.0855.003.200219309451.hdf
@@ -105,6 +107,7 @@ MODIS Level 1B :
 
 Maintenant sélectionnons un sous-ensemble de données, décrit comme 
 [12x2040x1354] EV_1KM_RefSB (16-bit unsigned integer) :
+
 ::
     
     $ gdalinfo HDF4_SDS:MODIS_L1B:GSUB1.A2001124.0855.003.200219309451.hdf:2
@@ -145,7 +148,7 @@ pouvez trouver des informations sur différents outils HDF en utilisant les
 liens à la fin de cette section).
 
 Géo-référencement
-------------------
+==================
 
 Il n'y a pas de manière universelle pour stocker le géo-référencement dans les 
 fichiers HDF. Cependant, certains types de produits ont des mécanismes pour 
@@ -167,7 +170,7 @@ ce comportement en définissant la variable d'environnement *GEOL_AS_GCPS* à
 PARTIAL (défaut), NONE, ou FULL.
 
 Problèmes de création
----------------------
+=======================
 
 Ce pilote support la création des ensembles de données Scientifique HDF4. Vous 
 pouvez créer un ensemble de données 2D (un pour chaque bande en entrée) ou un 
@@ -191,14 +194,14 @@ projections et la matrice de transformation sont restaurés.
   sera créée.
 
 Méta-données
---------------
+==============
 
 Tous les attributs HDF4 sont traduit en transparence comme des méta-données 
 GDAL. Dans les fichiers HDF, les  attributs peuvent être assigné à l'ensemble 
 du fichier autant qu'à des sous-ensemble de données particuliers. 
 
 Compilation du pilote
-----------------------
+=======================
 
 Ce pilote a été compilé au plus haut de la bibliothèque NCSA HDF, vous avez donc 
 besoin de compiler GDAL avec le support HDF4. Vous pouvez chercher un binaire 
@@ -216,8 +219,7 @@ Si vous avez besoin d'ouvrir plus de fichier HDF4 simultanément, vous devez
 changer cette valeur et recompiler la bibliothèque HDF4 (et relier GDAL si vous 
 utilisez des bibliothèques HDF statiques).
 
-Voir aussi
-----------
+.. seealso::
 
 * Implémenté comme *gdal/frmts/hdf4/hdf4dataset.cpp* et *gdal/frmts/hdf4/hdf4imagedataset.cpp*.
 * `Group HDF <http://www.hdfgroup.org/>`_

@@ -1,5 +1,6 @@
 .. _`gdal.gdal.formats.webp`:
 
+============
 WEBP - WEBP
 ============
 
@@ -21,15 +22,14 @@ Le pilote WEBP peut être utilisé comme format interne utilisé par le pilote
 :ref:`gdal.gdal.formats.rasterlite`.
 
 Options de création
--------------------
+====================
 
 * **QUALITY=n** par défaut l'option *quality* est définie à 75, mais cette option 
   peut être utilisé pour sélectionner d'autres valeurs. Les valeurs doivent être 
   comprises entre 1 et 100. Les valeurs faibles résultent en un plus grand taux 
   de compression, mais une moins bonne qualité d'image.
 
-Voir également
----------------
+.. seealso::
 
 * `Home page WebP <http://code.google.com/intl/fr/speed/webp/>`_
 

@@ -1,5 +1,6 @@
 .. _`gdal.gdal.formats.jpeg`:
 
+=============================
 JPEG -- JPEG JFIF File Format
 =============================
 
@@ -43,12 +44,12 @@ version de libjpeg, compatible API et ABI avec IJG libjpeg-6b, qui utilise les
 instructions MMX, SSE et SSE2 SIMD pour accélérer la compression/décompression 
 du JPEG baseline.
 
-À partir de GDAL 1.9.0, les métadonnées XMP peuvent être extraite des fichiers, 
-et seront stockées comme contenu brute XML dans le domaine de métadonnées 
-xml:XMP.
+.. versionadded:: 1.9.0 les métadonnées XMP peuvent être extraite des fichiers, 
+  et seront stockées comme contenu brute XML dans le domaine de métadonnées 
+  xml:XMP.
 
 Options de création
--------------------
+====================
 
 Les fichiers JPEG sont crée en utilisant le code du pilote « JPEG ». Seules les 
 types de bande en byte sont gérés, et seulement les configurations 1 et 3 bandes 
@@ -72,8 +73,7 @@ ajouté comme un masque compressé en zlib au fichier JPEG :
   progressive du tout. GDAL peut lire les jpeg progressifs, mais n'utilise pas 
   l'avantage de leur nature progressive.
 
-Voir également
----------------
+.. seealso::
 
 * Indépendant JPEG Group : http://www.ijg.org/
 * `libjpeg-turbo <http://sourceforge.net/projects/libjpeg-turbo/>`_

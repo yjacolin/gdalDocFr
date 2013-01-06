@@ -1,5 +1,6 @@
 .. _`gdal.gdal.formats.ilwis`:
 
+=====================
 ILWIS -- Raster Map
 =====================
 
@@ -7,8 +8,8 @@ Ce pilote implémente la lecture et l'écriture des cartes raster ILWIS et les
 listes des cartes. Sélectionnez les fichiers raster avec les extensions *.mpr* 
 (pour les cartes raster) ou *.mpl* (pour les listes de cartes).
 
-Fonctionnalités :
-------------------
+Fonctionnalités
+================
  
 * Gère les types de données de pixel en octet, Int16, Int32 et Float64.
 * Gère les listes de carte avec les ensembles de cartes raster ILWIS associés.
@@ -20,17 +21,17 @@ Fonctionnalités :
   type de projection de la projection et au type Lat/Lon qui sont définis dans 
   le fichier .csy, le reste des types de projection pré-définie est ignoré.
 
-Limitations :
--------------
+Limitations
+=============
  
 * Les listes de cartes avec le stockage des cartes raster internes (tels que 
   ceux produits par Import General Raster) ne sont pas gérées.
 * Les fichiers de domaine ILWIS (.dom) et de représentation (.rpr) sont 
   actuellement ignorés.
 
-Note : Implémenté dans *gdal/frmts/ilwis*.
+.. note:: Implémenté dans *gdal/frmts/ilwis*.
 
-**Voir également :**
+.. seealso::
 
 * `http://www.itc.nl/ilwis/default.asp <http://www.itc.nl/ilwis/default.asp>`_.
 

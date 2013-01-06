@@ -1,5 +1,6 @@
 .. _`gdal.gdal.formats.hfa`:
 
+==========================
 HFA -- Erdas Imagine .img
 ==========================
 
@@ -21,7 +22,7 @@ dans une table appelée GDAL_MetaData avec une colonne pour une méta-donnée. L
 titre est la clé et la valeur de la ligne 1 est la valeur.
 
 Problème lors de la création
------------------------------
+=============================
 
 Les fichiers Erdas Imagine peuvent être crées avec n'importe quel type de bande 
 définis par GDAL, les types complexes compris. les fichiers crées peuvent avoir 
@@ -63,7 +64,7 @@ globale HFA_USE_RRD=YES.
 Les noms des couches peuvent être définis et récupérés avec l'appel de 
 *GDALSetDescription/GDALGetDescription* sur les objets bandes du Raster.
 
-**Lisez également :**
+.. seealso::
 
 * Implémenté dans *gdal/frmts/hfa/hfadataset.cpp*.
 * Plus d'information, et d'autres outils sont disponibles sur la page du lecteur 

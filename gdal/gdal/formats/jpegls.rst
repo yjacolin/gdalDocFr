@@ -1,9 +1,10 @@
 .. _`gdal.gdal.formats.jpegls`:
 
+========
 JPEGLS
 ========
 
-(GDAL >= 1.8.0)
+.. versionadded:: 1.8.0
 
 Ce pilote est une implémentation d'un lecteur/écriture de JPEG-LS basé sur la 
 bibliothèque Open Source CharLS (Licence style BSD).
@@ -18,7 +19,7 @@ disponible), puisque l'ensemble de l'image doit être compressé/décompressé e
 une seule opération.
 
 Options de création
--------------------
+====================
 
 * **INTERLEAVE=PIXEL/LINE/BAND :** entrelacement des données en flux compressé. 
   BAND par défaut.
@@ -26,8 +27,7 @@ Options de création
   sans perte. N'importe quelle valeur plus haute sera la limite maximale pour 
   l'erreur.
 
-Voir également
---------------
+.. seealso::
 
 * Implémenté dans *gdal/frmts/jpegls/jpeglsdataset.cpp*.
 * `Page principale de la bibliothèque CharLS <http://charls.codeplex.com/>`_

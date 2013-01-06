@@ -1,5 +1,6 @@
 .. _`gdal.gdal.formats.grib`:
 
+============================================================================
 GRIB -- WMO General Regularly-distributed Information sous la forme Binaire
 ============================================================================
 
@@ -26,6 +27,7 @@ représentées en Float64 (virgule flottante à double précision) sans regard d
 leur valeurs réelles. Les méta-données GRIB sont capturés par bande de 
 méta-données et utilisé pour définir des descriptions de bandes, similaire à 
 ceci :
+
 ::
     
     Description = 100000[Pa] ISBL="Isobaric surface"
@@ -40,19 +42,31 @@ ceci :
 Les fichiers GRIB2 peuvent également inclure un extrait du numéro de modèle de 
 définition du produit (octet 8-9), et les valeurs du modèle de définition du 
 produit (> à 10 octets) sous forme de métadonnées comme ceci :
+
 ::
     
     GRIB_PDS_PDTN=0
     GRIB_PDS_TEMPLATE_NUMBERS=3 5 2 0 105 0 0 0 1 0 0 0 1 100 0 0 1 134 160 255 0 0 0 0 0
 
+Options de configuration
+=========================
+
+Ce paragraphe liste les options de configuration qui peuvent être définie pour modifier 
+le comportement par défaut du pilote GRIB.
+
+* **GRIB_NORMALIZE_UNITS :** (GDAL >= 1.9.0) Peut être définie à NO pour éviter gdal de normaliser à métric.
+
+Problèmes connus
+================
+
 La bibliothèque que GDAL utilise pour lire les fichiers GRIB est connu pour ne pas 
 être thread-safe vous devez donc éviter de lire et écrite plusieurs jeux de 
 données GRIB au même moment à partir de thread différents.
 
-**Lisez également :**
+.. seealso::
 
 * `Décodeur GRIB2 de "degrib" NOAA NWS NDFD <http://www.weather.gov/mdl/NDFD_GRIB2Decoder/>`_
 * `Bibliothèque de décodage de grib par g2clib NOAA NWS NCEP <http://www.nco.ncep.noaa.gov/pmb/codes/GRIB2/>`_
 * `Documents sur le format GRIB WMS <http://www.wmo.int/pages/prog/www/WMOCodes/GRIB.html>`_
 
-.. yjacolin at free.fr, Yves Jacolin - 2011/08/07 (trunk 17959)
+.. yjacolin at free.fr, Yves Jacolin - 2013/01/01 (trunk 23235)

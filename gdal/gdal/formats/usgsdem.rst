@@ -1,5 +1,6 @@
 .. _`gdal.gdal.formats.USGSDEM`:
 
+====================================
 USGSDEM -- USGS ASCII DEM (et CDED)
 ====================================
 
@@ -24,7 +25,7 @@ Discoe. Voyez le projet Virtual Terrain (http://www.vterrain.org/) pour plus
 d'information sur VTP.
 
 Problèmes de création
----------------------
+======================
 
 GDAL gère l'export des fichiers de données DEM de l'USGS  et CDED en 
 géographique (et UTM), ainsi que la possibilité de générer des produits CDED 

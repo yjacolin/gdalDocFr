@@ -1,5 +1,6 @@
 .. _`gdal.gdal.formats.sde`:
 
+===================
 ESRI ArcSDE Raster
 ===================
 
@@ -11,7 +12,7 @@ gère le stockage des données LZW, JP2K, et non compressées, et les présente
 d'une manière transparente à travers son SDK de son API en C.
 
 Fonctionnalités du pilote GDAL du Raster d'ArcSDE
---------------------------------------------------
+==================================================
 
 Le pilote aujourd'hui gère les fonctionnalités suivantes :
 
@@ -37,7 +38,7 @@ Le pilote ne gère pas aujourd'hui les fonctionnalités suivantes :
 * masque NODATA.
 
 Considérations des performances
---------------------------------
+================================
 
 Le pilote raster d'ArcSDE gère actuellement seulement les méthodes de lecture 
 de block. Chaque appel à cette méthode résulte en un requête pour un block de 
@@ -59,7 +60,7 @@ ce pilote doit être considéré  threadsafe, et partager des jeux de données
 entre threads engendrera des résultats indéfinies (et souvent désastreux).
 
 Spécification du jeu de données
---------------------------------
+================================
 
 Les jeux de données SDE sont définies avec les informations suivantes :
 ::

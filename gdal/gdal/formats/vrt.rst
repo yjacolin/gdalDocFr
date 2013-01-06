@@ -1,10 +1,11 @@
 .. _`gdal.gdal.formats.vrt`:
 
+=======================
 Format virtuel de GDAL
 =======================
 
 Introduction
--------------
+==============
 
 Le pilote VRT est un pilote de format pour GDAL qui permet de créer des jeux de 
 données GDAL virtuel à partir d'autres jeux de données GDAL avec des 
@@ -44,7 +45,7 @@ utilisateurs éditant des fichiers .vrt), et comment les fichiers .vrt peuvent
 être crée et manipulé par programmation pour les développeurs.
 
 Format .vrt
-------------
+============
 
 Les fichiers virtuels stockés sur le disque sont laissé au format XML avec les 
 éléments suivants :
@@ -320,7 +321,7 @@ Les fichiers virtuels stockés sur le disque sont laissé au format XML avec les
           de masque lui-même.
 
 Description des .vrt pour les fichiers brutes
------------------------------------------------
+==============================================
 
 Jusqu'ici nous avons décris comment dérivé de nouveaux jeux de données à partir 
 de fichiers existants  géré par GDAL. Cependant, il est également commun d'avoir 
@@ -415,7 +416,7 @@ Un autre exemple, dans ce cas une image de pixel entrelacé de 400x300 RVB.
 
 
 Création programmée de jeux de données VRT
--------------------------------------------
+============================================
 
 Le pilote VRT gère plusieurs méthodes de création de jeux de données VRT. En 
 tant que partie de GDAL 1.2.0 le fichier inclue *vrtdataset.h* doit être installé 
@@ -567,7 +568,7 @@ peut être utilisées pour contrôler le type de bande créé (*VRTRasterBand*,
     delete poVRTDS;
 
 Utilisation des bandes dérivées
---------------------------------
+=================================
 
 Un type de bande spécialisé est une bande 'dérivée' qui dérive ses informations 
 des pixels de ses bandes sources. Avec ce type de bande vous devez définir une 
@@ -638,7 +639,7 @@ partie imaginaire sera perdue.
             ...
 
 Écrire des fonctions pixels
-----------------------------
+=============================
 
 Pour enregistrer cette fonction avec GDAL (avant d'accéder à un jeu de données 
 VRT avec des bandes dérivées qui utilisent cette fonction), une application 
@@ -734,7 +735,7 @@ Ce qui suit est une implémentation de la fonction pixel :
     }
 
 Problèmes de Multi-threading
------------------------------
+==============================
 
 Lors de l'utilisation de jeux de données VRT dans un environnement 
 multi-threading, vous devez être prudent lors de l'ouverture de jeu de données 

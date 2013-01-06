@@ -1,5 +1,6 @@
 .. _`gdal.gdal.formats.mrsid_lidar`:
 
+================================================================
 Compression Lidar de MrSID/MG4 / Fichiers view de Cloud ponctuel
 ================================================================
 
@@ -22,7 +23,7 @@ logiciel open source. Vous devez contacter LizardTech pour l'obtenir (voyez le
 lien en bas de ce chapitre).**
 
 Exemple de fichier View (à partir de la spécification des documents View)
---------------------------------------------------------------------------
+==========================================================================
 
 Fichier .view le plus simple possible
 **************************************
@@ -121,12 +122,12 @@ pouvez utiliser un fichier .view comme celui-ci pour exposer ces données.
 
 
 Gestion de l'écriture 
-----------------------
+======================
 
 Ce pilote ne gère pas l'écriture de fichiers MG4.
 
 Limitations de l'implémentation actuelle
------------------------------------------
+=========================================
 
 Seulement une balise *<InputFile>* est gérée. Elle doit référencer un fichier MG4.
 
@@ -139,8 +140,7 @@ Il y a une insuffisance dans la vérification des erreurs pour les erreurs de fo
 et les paramètres invalides. Plusieurs entrées invalides échoueront probablement 
 silencieusement.
 
-Voir également
----------------
+.. seealso::
 
 * Implémenté dans *gdal/frmts/mrsid_lidar/gdal_MG4Lidar.cpp*
 * Spécification des `documents de visualisation de MrSID/MG4 LiDAR`_

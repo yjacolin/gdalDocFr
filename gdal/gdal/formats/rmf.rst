@@ -1,5 +1,6 @@
 .. _`gdal.gdal.formats.rmf`:
 
+=============================
 RMF --- Raster Matrix Format
 =============================
 
@@ -14,7 +15,7 @@ les données 8 bits peuvent être rangé dans un RSW. Un géoréférencement sim
 peut être fournit pour les deux types d'image.
 
 Méta-données
--------------
+=============
 
 * **ELEVATION_MINIMUM :** valeur d'élévation minimum (seulement MTW).
 * **ELEVATION_MAXIMUM :** valeur d'élévation maximum (seulement MTW).
@@ -25,14 +26,13 @@ Méta-données
   totale). Seulement MTW.
 
 Options création
-----------------
+=================
 
 * **MTW=ON :** force la génération de matrice MTW (RSW sera crée par défaut).
 * **BLOCKXSIZE=n :** définie la largeur de la tuile, par défaut, définie à 256.
 * **BLOCKYSIZE=n :** définie la hauteur de la tuile, par défaut, définie à 256.
 
-Lisez également
-----------------
+.. seealso::
 
 * Implémenté dans *gdal/frmts/rmf/rmfdataset.cpp*.
 * Page principale de "Panorama" GIS : http://www.gisinfo.ru/index_en.htm

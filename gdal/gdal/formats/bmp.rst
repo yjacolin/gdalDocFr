@@ -1,5 +1,6 @@
 .. _`gdal.gdal.formats.bmp`:
 
+====================================================
 BMP --- Microsoft Windows Device Independent Bitmap
 ====================================================
 
@@ -24,7 +25,7 @@ et utilisé pour établir la géotransformation pour l'image.
 * **WORLDFILE=YES :** force la génération d'un fichier world d'ESRI associé 
   (avec l'extension .wld). 
 
-**Lisez également :**
+.. seealso::
 
 * Implémenté dans *gdal/frmts/bmp/bmpdataset.cpp*.
 * **Référence Bitmap MSDN :** http://msdn.microsoft.com/library/default.asp?url=/library/en-us/gdi/bitmaps_9qg5.asp

@@ -1,5 +1,6 @@
 .. _`gdal.gdal.formats.grass`:
 
+================
 Le format GRASS
 ================
 
@@ -10,7 +11,7 @@ bibliothèque est configurée, et nécessite que libgrass soit pré-installée (
 les remarques ci-dessous).
 
 Sélection des rasters de GRASS
--------------------------------
+================================
 
 Les rasters de GRASS peuvent être sélectionnés de différentes manières.
 
@@ -53,7 +54,7 @@ cellules ou les images dans la région en court et le jeu de données comme
 définie dans le fichier .grassrc5.
 
 Fonctionnalités gérées
-----------------------
+======================
 
 Les fonctionnalités suivantes sont gérées par le lien GDAL/GRASS :
 
@@ -67,7 +68,7 @@ Les fonctionnalités suivantes sont gérées par le lien GDAL/GRASS :
   certaines conversions peuvent échouées, en particulier la prise en charge des 
   datums et des unités.
 
-**Voyez également :**
+.. seealso::
 
 * `Page officielle de GRASS GIS <http://grass.itc.it/>`_
 * `page libgrass <http://home.gdal.org/projects/grass/>`_

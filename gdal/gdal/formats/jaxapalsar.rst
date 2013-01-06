@@ -1,5 +1,6 @@
 .. _`gdal.gdal.formats.jaxapalsar`:
 
+================================
 JAXA PALSAR Processed Products
 ================================
 
@@ -32,7 +33,7 @@ pour trouver les fichiers images (les fichiers IMG-*), ansi que les fichiers
 *Leader*. Notez que le fichier *Leader* est essentiel pour des opérations 
 correctes du pilote.
 
-**Lisez également :**
+.. seealso::
 
 * `Données échantillon RESTEC <http://www.alos-restec.jp/sampledata_e.html>`_
 

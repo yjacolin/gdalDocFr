@@ -2,6 +2,7 @@
 
 .. _`gdal.gdal.formats.mff2`:
 
+===========================
 MFF2 -- Vexcel MFF2 Image
 ===========================
 
@@ -35,7 +36,7 @@ de 8, 16, 32) devraient être gérés.
 .. note:: implémenté dans gdal/frmts/raw/hkvdataset.cpp.
 
 Détails du format
------------------
+==================
 
 Structure générale du MFF2
 ***************************
@@ -76,6 +77,7 @@ et celui approprié pour le fichier en cours est indiqué par une « * ».
 Le fichier peut aussi contenir  les lignes suivantes indiquant le nombre de 
 canaux de données, et comment ils sont entrelacés à l'intérieur du fichier de 
 données binaire.
+
 ::
     
     channel.enumeration = 1
@@ -93,6 +95,7 @@ Le fichier "georef"
 
 Le fichier « georef » est utilisé pour décrire des informations de géocodage et 
 de projection pour les données binaires. Par exemple,
+
 ::
     
     top_left.latitude            = 32.93333333333334
@@ -155,6 +158,7 @@ Ellipsoïdes reconnus
 
 Le format MFF2 associe les noms suivants avec les paramètres du rayon à 
 l'équateur et le coefficient à l'aplatissement de l'ellipsoïde :
+
 ::
     
     airy-18304:            6377563.396      299.3249646
@@ -205,6 +209,7 @@ Explication des champs
 * **extent.rows :** nombre de ligne de données.
 * **pixel.encoding = { *unsigned twos-complement ieee-754 } :** combiné avec 
   pixel.size et pixel.field pour donner le type de données :
+  
   ::
     
     (encoding, field, size)- type

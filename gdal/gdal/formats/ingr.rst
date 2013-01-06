@@ -1,5 +1,6 @@
 .. _`gdal.gdal.formats.ingr`:
 
+==================================
 INGR --- Intergraph Raster Format
 ==================================
 
@@ -11,7 +12,7 @@ raster. Il se manifeste dans plusieurs formats de données internes.
 
 
 Lecture des fichiers INGR
---------------------------
+============================
 
 Ceci sont les formats de données que le pilote INGR gère en lecture :
 
@@ -39,7 +40,7 @@ pilote INGR peut lire les instances tuilés et non tuilés de n'importe quels
 formats de données gérés.
 
 Écrire des fichiers INGR
--------------------------
+==========================
 
 Ceci est la liste des formats que le pilote INGR gère en écriture :
 
@@ -52,7 +53,7 @@ Ceci est la liste des formats que le pilote INGR gère en écriture :
 Notez que l'écriture dans ce format n'est pas encouragé !
 
 Extension de fichier
---------------------
+=====================
 
 Ce qui suit est une partie de la liste des extensions de fichier INGR :
 
@@ -95,7 +96,7 @@ d'identifier ou de créer un fichier INGR.
 
 
 Géoréférencement
------------------
+==================
 
 Le pilote INGR ne gère pas la lecture ou l'écriture d'information géoréférencée. 
 La raison est qu'il n'y a pas de manières universelle de stocker le 
@@ -103,8 +104,7 @@ géoréférencement dans les fichiers INGR. Il est possible d'avoir des données
 géoréférencées stocké dans un fichier .dgn d'accompagnement ou dans le stockage 
 des données spécifiques à l'application dans le fichier lui même.
 
-Voir également
-----------------
+.. seealso::
 
 Pour plus d'information :
 

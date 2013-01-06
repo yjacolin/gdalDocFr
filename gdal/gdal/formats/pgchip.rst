@@ -1,5 +1,6 @@
 .. _`gdal.gdal.formats.pgchip`:
 
+==========================================================
 PGCHIP - Le pilote GDAL de Postgis pour les données raster
 ==========================================================
 
@@ -8,7 +9,7 @@ PGCHIP - Le pilote GDAL de Postgis pour les données raster
 
 
 Objectifs
-----------
+==========
 
 Le but du pilote PGCHIP est de fournir une interface entre 
 `GDAL <http://gdal.org>`_ et Postgis. GDAL est une bibliothèque de traduction 
@@ -19,7 +20,7 @@ interface OGR à PostGIS, si vous recherchez cela (code orienté vecteur), vous
 pouvez regarder le :ref:`gdal.ogr.formats.postgresql`. 	
 
 Comment PostGIS gère les rasters ?
-----------------------------------
+===================================
 
 Il ne les gère pas. Cependant, un type spécial nommé CHIP existe dans les 
 sources de PostGIS. Quelques fonctions sont également disponible pour manipuler 
@@ -27,7 +28,7 @@ des données qui pourraient être stockées dans un objet CHIP.
 		
 
 Pourquoi ne pas utliser GDAL pour développer une extension complète de données raster au sein de PostGIS ?
-----------------------------------------------------------------------------------------------------------
+============================================================================================================
 
 GDAL fournie une très bonne interface pour l'implémentation de pilote. Son 
 design permet un développement rapide et facile de nouveaux wrapper pour les 
@@ -41,7 +42,7 @@ du pilotes PGCHIP dans le moteur de base de données. Par ce moyen, nous gardons
 les deux projets parfaitement indépendant.
 
 Restrictions importantes du pilote
------------------------------------
+===================================
 
 * Le pilote PGCHIP est en cours de développement ce qui signifie qu'il n'a pas 
   été entièrement testé et aucune version stable n'est téléchargeable.
@@ -60,7 +61,7 @@ Restrictions importantes du pilote
     $ gdalinfo PG:host=192.168.1.1#dbname=mydb%layer=myRasterTable
 
 Comment j'installe le pilote PGCHIP ?
---------------------------------------
+======================================
 
 **Nécessité :**
 
@@ -100,7 +101,7 @@ Comment j'installe le pilote PGCHIP ?
   - ``make install``
 
 Comment puis je tester le pilote ?
------------------------------------
+====================================
 
 Vous pouvez choisir de compiler votre propre application en utilisant 
 l'`API <http://gdal.maptools.org/gdal_tutorial.html>`_ ou utiliser les 
@@ -117,7 +118,7 @@ un autre format :
     $ gdaltranslate -of bmp  PG:host=192.168.1.1#dbname=mydb%layer=myRasterTable /DATA/myRaster.bmp
 
 TODO List
-----------
+===========
 
 * Tester la compatibilité du pilote avec différents formats raster ;
 * Modifier la chaîne de connection pour faire face avec le nom de la colonne raster ;
@@ -129,13 +130,13 @@ TODO List
 		
 
 Téléchargement
----------------
+===============
 
 `pgchip-1.1.tar.gz <http://simon.benjamin.free.fr/pgchip/download.php>`_
 		
 
 Information sur l'auteur et rapport de bug
--------------------------------------------
+===========================================
 
   simon (dot) benjamin (at) free (dot) fr
 

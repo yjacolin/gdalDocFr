@@ -1,5 +1,6 @@
 .. _`gdal.gdal.formats.gif`:
 
+===================================
 GIF -- Graphics Interchange Format
 ===================================
 
@@ -18,7 +19,7 @@ lu et utilisé pour établir la géotransformation pour l'image.
 fichier, et sera stocké comme XML brute dans le domaine de médatonnées xml:XMP.
 
 Problème lors de la création
------------------------------
+==============================
 
 Les fichiers GIF peuvent seulement être créé comme une bande de 8 bit en 
 utilisant le mécanisme « CreateCopy ». S'il est écrit à partir d'un fichier qui 
@@ -38,7 +39,7 @@ Eric Raymond et Toshio Kuratomi), générant donc des GIG compressé en LZW.
 Ce pilote a été écrit grâce au financement de DM Solutions Group 
 (http://www.dmsolutions.ca), et CIET International (http://www.ciet.org).
 
-**Lisez également :**
+.. seealso::
 
 * `Page principale de giflib <http://sourceforge.net/projects/giflib/>`_
 

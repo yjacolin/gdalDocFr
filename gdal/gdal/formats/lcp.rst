@@ -2,6 +2,7 @@
 
 .. _`gdal.gdal.formats.lcp`:
 
+===========================================
 Pilote GDAL pour le format FARSITE v.4 LCP
 ===========================================
 
@@ -30,6 +31,7 @@ Le pilote LCP de GDAL renvoie des informations sur les méta-données des jeux d
 données et les niveaux de bandes :
 
 **Jeu de données**
+
 ::
     
     LATITUDE: Latitude of the dataset, negative for southern hemisphere
@@ -37,6 +39,7 @@ données et les niveaux de bandes :
     DESCRIPTION: LCP file description
 
 **Bande**
+
 ::
     
     <band>_UNIT or <band>_OPTION: units or options code for the band

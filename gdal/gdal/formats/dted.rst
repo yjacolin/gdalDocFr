@@ -1,5 +1,6 @@
 .. _`gdal.gdal.formats.dted`:
 
+================================
 DTED -- Military Elevation Data
 ================================
 
@@ -10,7 +11,7 @@ sont également retourné. Une diversité de champs d'en-tête sont renvoyé com
 méta-données de niveau du jeu de données.
 
 Problèmes de lecture
----------------------
+=====================
 
 Vitesse de lecture
 ******************
@@ -55,14 +56,14 @@ comme un message important. Si le checksum écrit dans le fichier DTED et le
 checksum calculé à partir des données ne correspond pas, une erreur sera 
 retournée.
 
-Problème lors de la création
------------------------------
+Problèmes lors de la création
+==============================
 
 Le pilote DTED doit gérer les nouveaux fichiers, mais les données en entrée 
 doivent être formaté exactement comme une cellule de niveau 0, 1 ou 2. C'est à 
 dire que la taille et les limites doivent être appropriées pour la cellule.
 
-Lisez également :
+.. seealso::
 
 * Implémenté dans *gdal/frmts/dted/dteddataset.cpp*.
 

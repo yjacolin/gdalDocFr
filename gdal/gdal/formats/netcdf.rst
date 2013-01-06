@@ -1,7 +1,8 @@
 .. _`gdal.gdal.formats.netcdf`:
 
+==================================
 NetCDF : Network Common Data Form
-=================================
+==================================
 
 Ce format est géré en lecture et écriture. NetCDF est une interface pour 
 l'accès au données orienté 'tableau' et est utilisé pour représenter des données 
@@ -10,10 +11,10 @@ scientifique.
 Les méta-données des valeurs rempli ou la compatibilité arrière des valeurs 
 manquantes sont préservés comme valeur NODATA lorsque cela est disponible.
 
-**Note :** Implémenté dans *gdal/frmts/netcdf/netcdfdataset.cpp*.
+.. note:: Implémenté dans *gdal/frmts/netcdf/netcdfdataset.cpp*.
 
 Multiple Image Handling (sous-jeu de données)
----------------------------------------------
+===============================================
 
 Nework Command Data Form est un conteneur pour plusieurs tableaux différents la 
 plupart du temps utilisé pour stocker des jeux de données scientifiques. Un 
@@ -44,6 +45,7 @@ informations sur le jeu de données ou ``gdal_translate`` pour lire le jeu de
 données.
 
 Par exemple, nous voulons lire les données d'un fichier NetCDF :
+
 ::
     
     $ gdalinfo sst.nc
@@ -81,6 +83,7 @@ Par exemple, nous voulons lire les données d'un fichier NetCDF :
 
 
 Ces fichiers NetCDF contiennent 4 jeux de données, *lon_bnds*, *lat_bnds*, *tim_bnds* et *tos*. Maintenant sélectionnez le sous-jeu de données, décrit comme :
+
 ::
     
     NETCDF:"sst.nc":tos
@@ -88,6 +91,7 @@ Ces fichiers NetCDF contiennent 4 jeux de données, *lon_bnds*, *lat_bnds*, *tim
     [24x17x180] sea_surface_temperature (32-bit floating-point)
 
 et obtenez l'information sur le nombre de bande qu'il y a à dans cette variable.
+
 ::
     
     $ gdalinfo NETCDF:"sst.nc":tos
@@ -167,7 +171,7 @@ raster. Si vous voulez explorer toutes les données contenues dans le fichier
 NetCDF vous devez utiliser un autre outil.
 
 Dimension
-----------
+==========
 
 Le pilote NetCDF suppose que les données suivent la convention CF-1 d'UNIDATA. 
 Les dimensions dans les fichiers NetCDF utilisent les règles suivantes : 
@@ -178,7 +182,7 @@ dans l'ordre suivant. Il incrémentera d'abord T puis P. Les méta-données sero
 affichées sur chaque bande avec ses valeurs T et P correspondantes.
 
 Géoréférencement
------------------
+=================
 
 Il n'y a pas de manière universelle de stocker le géoréférencement dans les 
 fichiers netCDF. Le pilote tente d'abord de suivre la convention CF-1 à partir 
@@ -201,7 +205,7 @@ ou,
 * *Westernmost_Easting*
 
 Problèmes de créations
-----------------------
+=======================
 
 Ce pilote gère la création de fichier netCDF en suivant la convention CF-1. Vous 
 pouvez créer des ensembles de jeux de données 2D. Chaque tableau de variable est 
@@ -211,7 +215,7 @@ Chaque bande possédera des métadonnées liée en donnant une courte descriptio
 de la donnée qu'elel contient.
 
 Méta-données GDAL pour NetCDF
-------------------------------
+==============================
 
 Tous les attributs de netCDF sont traduits de manière transparente vers les 
 méta-données GDAL.
@@ -224,6 +228,7 @@ La traduction suit les règles suivantes :
 * L'attribut NetCDF suit la forme : *name=value*.
 
 Exemple :
+
 ::
     
     $ gdalinfo NETCDF:"sst.nc":tos
@@ -273,7 +278,7 @@ Les attributs des variables pour : tos, lon, lat et time
     time#original_units=seconds since 2001-1-1
 
 Compilation du pilote
-----------------------
+=======================
 
 Ce pilote est compilé avec la bibliothèque netCDF d'UNIDATA.
 
@@ -288,12 +293,11 @@ S'il vous plait, notez qu'avec CygWIN vous devez vous assurer que les DLL sont
 
 Le répertoire des DLL de netCDF doit être dans votre *PATH*.
 
-Voir également
----------------
+.. seealso::
 
-  * `convention NetCDF CF-1.0 <http://www.cgd.ucar.edu/cms/eaton/cf-metadata/index.html>`_
-  * `Bibliothèque NetCDF compilé <http://www.unidata.ucar.edu/downloads/netcdf/index.jsp>`_
-  * `Documentation NetCDF <http://www.unidata.ucar.edu/software/netcdf/docs/>`_
+* `convention NetCDF CF-1.0 <http://www.cgd.ucar.edu/cms/eaton/cf-metadata/index.html>`_
+* `Bibliothèque NetCDF compilé <http://www.unidata.ucar.edu/downloads/netcdf/index.jsp>`_
+* `Documentation NetCDF <http://www.unidata.ucar.edu/software/netcdf/docs/>`_
 
 
 .. yjacolin at free.fr, Yves Jacolin - 2009/03/24 19:51 (http://gdal.org/frmt_netcdf.html trunk 11075)

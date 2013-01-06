@@ -1,5 +1,6 @@
 .. _`gdal.gdal.formats.epsilon`:
 
+=========================================
 Epsilon - images compressé par ondelette
 =========================================
 
@@ -18,7 +19,7 @@ bandes (RVB).
 Cela est censé être principalement utilisé par le pilote :ref:`gdal.gdal.formats.rasterlite`.
 
 Options de création
---------------------
+====================
 
 * **TARGET** réduction cible de la taille comme pourcentage de l'original (0-100). 
   96 par défaut.
@@ -35,7 +36,7 @@ Options de création
 * **RGB_RESAMPLE=[YES/NO] :** si le buffer RVB doit être re-échantillonné en 
   4:2:0. YES par défaut.
 
-**Voir également :**
+.. seealso::
 
 * `Page principale d'EPSILON <http://sourceforge.net/projects/epsilon-project>`_
 

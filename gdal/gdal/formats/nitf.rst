@@ -1,5 +1,6 @@
 .. _`gdal.gdal.formats.nitf`:
 
+=============================================
 NITF -- National Imagery Transmission Format
 =============================================
 
@@ -30,7 +31,7 @@ La plupart des fichiers d'en-tête et des champs d'en-tête de l'image sont
 renvoyé comme des méta-données de niveau du jeu de données.
 
 Problèmes lors de la création
-------------------------------
+==============================
 
 À l'export, les fichiers NITF sont toujours écrit en NITF 2.1 avec une image et 
 aucune autre couche auxiliaire. Les images sont non compressées par défaut, mais 
@@ -120,7 +121,7 @@ de métadonnées.
   ``CreateCopy()`` pour le moment.
 
 Liens 
------
+======
 
 * :ref:`gdal.gdal.formats.nitf_avancee`
 * `Page publique du Bureau Technique du NITFS <http://www.gwg.nga.mil/ntb/>`_.
@@ -131,7 +132,7 @@ Liens
 * `MIL-PRF-32283 <http://www.everyspec.com/MIL-PRF/MIL-PRF+%28030000+-+79999%29/MIL-PRF-32283_26022/>`_ : Spécification des produits ECRG.
 
 Crédit
--------
+=======
 
 L'auteur souhaite remercier AUG Signal (http://www.augsignals.com/) et le 
 programme GeoConnections (http://geoconnections.org/) pour l'aide au 

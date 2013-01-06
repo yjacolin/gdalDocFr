@@ -1,5 +1,6 @@
 .. _`gdal.gdal.formats.georaster`:
 
+===========================
 GeoRaster d'Oracle Spatial
 ===========================
 
@@ -50,7 +51,7 @@ Exemples :
     de métadonnées de sous-jeu de données (voir plus bas).
 
 Naviguer dans la base de données des GeoRasters
--------------------------------------------------
+==================================================
 
 En fournissant certaine information basique le pilote GeoRaster est capable de 
 lister les rasters existant stockés sur le serveur :
@@ -90,7 +91,7 @@ d'un sous jeu de données, par exemple :
     SUBDATASET_2_DESC=Table:GDAL_IMPORT
 
 Options de création
---------------------
+=====================
 
 * **BLOCKXSIZE :** le nombre de colonne de pixel dans un bloc raster.
 * **BLOCKYSIZE :** le nombre de ligne de pixel dans un bloc raster.
@@ -123,9 +124,16 @@ Options de création
 * **QUALITY :** option de la qualité de la compression pour le format JPEG de 0 
   à 100. 75 par défaut.
 * **NBITS :** type de données sous byte, options : 1, 2 ou 4.
+* **SPATIALEXTENT :** génère les étendus spatiales. La valeur par défaut est TRUE ce qui 
+  signifie que cette option doit être informée pour forcer l'étendue spatiale à rester 
+  NULL. Si EXTENTSRID n'est pas définie la géométrie de l'étendue spatiale sera générée 
+  avec le même SRID que l'objet GeoGeoraster.
+* **EXTENTSRID :** code SRID à utilisé la géoémtrie de l'étendue spatiale. Si la 
+  table/colonne a déjà une étendue spatiale, la valeur définie doit être du même 
+  SRID que pour l'étendue spatiale des autres GeoRaster existants.
 
 Importer des GeoRaster
-----------------------
+=======================
 
 Pendant le processus d'import de raster dans un objet GeoRaster il est possible 
 de donner au pilote une simple définition de table SQL et également une clause 
@@ -163,7 +171,7 @@ avec juste une colonne GeoRaster nommée *RASTER*, par exemple :
     % gdal_translate -of georaster input.tif “geor:scott/tiger@dbdemo”
 
 Exporter des GeoRaster
------------------------
+=========================
 
 Un GeoRaster peut être identifié par une clause Where ou par une pair de RDT & 
 RID :
@@ -173,7 +181,7 @@ RID :
     % gdal_translate -of gtiff geor:scott/tiger@dbdemo,st_rdt_1,130 output.tif
 
 Utilisation générale de GeoRaster
-----------------------------------
+===================================
 
 Les GeoRaster peuvent être utilisé dans n'importe quel ligne de commande GDAL 
 avec toutes les options disponibles. Comme  une extraction d'une reprojection 
@@ -201,4 +209,4 @@ est de créer un VRT pour représenter la description du GeoRaster, par exemple 
     % gdal_translate -of VRT geor:scott/tiger@dbdemo,landsat,scene,id=54 view_54.vrt
     % openenv view_54.vrt
 
-.. yjacolin at free.fr, Yves Jacolin - 2009/03/30 21:37 (trunk 21054)
+.. yjacolin at free.fr, Yves Jacolin - 2013/01/01 (trunk 24098)

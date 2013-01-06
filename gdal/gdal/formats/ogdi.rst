@@ -1,5 +1,6 @@
 .. _`gdal.gdal.formats.ogdi`:
 
+===================
 OGDI -- Pont OGDI
 ===================
 
@@ -38,6 +39,7 @@ famille définie dans le nom du jeu de données puisqu'ils ne peuvent pas être
 déterminer automatiquement.
 
 Par exemple :
+
 ::
     
     gltp://gdal.velocet.ca/adrg/usr4/mpp1/adrg/TPUS0101
@@ -82,8 +84,7 @@ les couches disponibles pour un accès direct.
         SUBDATASET_4_NAME=gltp:/adrg/usr4/mpp1/adrg/TPUS0101:"TPUS0102.IMG":Image
         SUBDATASET_4_DESC=TPUS0102.IMG as Image
 
-Lisez également
----------------
+.. seealso::
 
 * `ogdi.sourceforge.net <http://ogdi.sourceforge.net/>`_
 

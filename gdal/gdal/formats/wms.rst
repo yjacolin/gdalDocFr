@@ -1,5 +1,6 @@
 .. _`gdal.gdal.formats.wms`:
 
+========================
 WMS -- Web Map Services
 ========================
 
@@ -151,7 +152,7 @@ des services d'image gérée.
 +-----------------------------------------------+-------------------------------------------------------------------------------+
 
 Minipilote
-----------
+===========
 
 Le pilote WMS de GDAL gère plusieurs 'minipilote' interne, qui permettent des accès 
 à différents services de cartographiques web. Chacun de ces services peuvent gérer 
@@ -258,7 +259,7 @@ L'élément *DataWindow* peut être omis. Les valeurs par défaut sont :
 * BlockSizeY = 256
 
 Exemples
----------
+=========
 
 * `onearth_global_mosaic.xml <http://www.gdal.org/frmt_wms_onearth_global_mosaic.xml>`_ - 
   mosaic Landsat à partir du serveur WMS `OnEarth <http://onearth.jpl.nasa.gov/>`_
@@ -327,7 +328,7 @@ Exemples
 * `Couche Aerial de VirtualEarth <http://www.gdal.org/frmt_wms_virtualearth.xml>`_ accédé avec le minipilote VirtualEarth.
 
 Syntaxe ouverte
-----------------
+=================
  
 Le pilote WMS peut ouvrir :
 
@@ -364,8 +365,7 @@ Le pilote WMS peut ouvrir :
     
     gdalinfo "http://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer?f=json&amp;pretty=true"
 
-Voir également
---------------
+.. seealso::
 
 * OGC WMS Standards : http://www.opengeospatial.org/standards/wms
 * Recommandation du WMS Tiling Client (WMS-C) : http://wiki.osgeo.org/index.php/WMS_Tiling_Client_Recommendation

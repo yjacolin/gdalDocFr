@@ -1,9 +1,10 @@
 .. _`gdal.gdal.formats.jp2openjpeg`:
 
+==================================================================
 JP2OpenJPEG --- pilote JPEG2000 basé sur la bibliothèque OpenJPEG
 ==================================================================
 
-(GDAL >= 1.8.0)
+.. versionadded::
 
 Ce pilote est une implémentation d'un lecteur/écriture  de JPEG2000 basé sur la 
 bibliothèque OpenJPEG **v2**.
@@ -19,14 +20,14 @@ JPEG2000 basé sur la bibliothèque Jasper.
 La branche v2 ajoute également la possiblité d'utiliser l'API VSI Virtual File, 
 le pilote peut donc lire les fichiers NITF compressés en JPEG2000.
 
-À partir de GDAL 1.9.0, les métadonnées XMP peuvent être extraites des fichiers 
-JPEG2000, et seront stockées comme contenu brute XML dans le domaine de métadonnées 
-xml:XMP.
+.. versionadded:: 1.9.0 les métadonnées XMP peuvent être extraites des fichiers 
+  JPEG2000, et seront stockées comme contenu brute XML dans le domaine de métadonnées 
+  xml:XMP.
 
 En création, le piloet ne gère pas l'écriture de GeoJP2 ou GMLJP2.
 
 Options de création
--------------------
+====================
 
 * **CODEC=JP2/J2K :** JP2 ajoutera des boîtes JP2 autour des données codestream. 
   La valeur est déterminé automatiquement à partir de l'extension du fichier. Si 
@@ -43,15 +44,14 @@ Options de création
 * **EPH=YES/NO :** YES signifie générer des segments marqueur EPH. No par défaut.
 
 Patches pour la bibliothèque OpenJPEG
---------------------------------------
+=======================================
 
 Liens vers des patches utiles à appliquer à OpenJPEG (valide pour la branche v2 à la révision r565) :
 
 *  `Fixe une faiblesse dans jp2_read_header_procedure() <http://code.google.com/p/openjpeg/issues/detail?id=29>`_
 *  `Fixe un conflit de noms de fonction interne avec Jaspe qui peuvent entraîner des crashes <http://code.google.com/p/openjpeg/issues/detail?id=30>`_
 
-Voir également
----------------
+.. seealso::
 
 * Implémenté dans *gdal/frmts/openjpeg/openjpegdataset.cpp*.
 * `Page official du JPEG-2000 <http://www.jpeg.org/JPEG2000.html>`_
