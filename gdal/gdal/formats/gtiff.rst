@@ -138,8 +138,11 @@ stockée dans la clé GeoTIFF *RasterPixelIsPoint* pour les profiles *GDALGeoTIF
 ou *GeoTIFF*.
 
 .. versionadded:: 1.90 les métadonnées XMP peuvent être extraites à partir du 
-fichier et seront stockées dans un contenu brute XML dans le domaine de 
-métadonnées xml:XMP.
+   fichier et seront stockées dans un contenu brute XML dans le domaine de 
+   métadonnées xml:XMP.
+
+.. versionadded:: 1.10 les métadonnées EXIF peuvent être extrait du fichier et 
+   seront stockées dans le domaine métadonnées EXIF.
 
 Valeur nodata
 ===============
@@ -233,9 +236,14 @@ Options de création
   MINISBLACK, mais si l'image en entrée possède trois ou quatre bandes de type 
   Octet, alors RGB sera utilisé. Vous pouvez écraser la valeur par défaut en 
   utilisant cette option.
-* **ALPHA=YES :** Le premier "extrasample" est noté comme étant alpha s'il existe 
+* **ALPHA=[YES/NON-PREMULTIPLIED/PREMULTIPLIED/UNSPECIFIED] :** Le premier 
+  "extrasample" est noté comme étant alpha s'il existe 
   un extra samples. Cela est nécessaire si vous désirez produire un fichier 
   TIFF en nuance de gris avec une bande alpha (par exemple).
+  Pour GDAL <1.10 seula la valeur YES est géré et il est interprété comme 
+  *alpha PREMULTIPLIED* (ASSOCALPHA dans TIFF). À partir de GDAL 1.10, YES est 
+  un alias pour *alpha NON-PREMULTIPLIED* et les autres valeurs peuvent être 
+  utilisées.
 * **BIGTIFF=YES/NO/IF_NEEDED/IF_SAFER :** Contrôle si le fichier créé est un 
   fichier BigTIFF ou un TIFF classique. 
 
@@ -334,4 +342,4 @@ modifier le comportement par défaut du pilote GTiff.
 * Page libtiff : http://www.remotesensing.org/geotiff/geotiff.html
 * Détails du format de fichier BigTIFF : http://www.awaresystems.be/imaging/tiff/bigtiff.html
 
-.. yjacolin at free.fr, Yves Jacolin - 2011/08/07 (trunk 22833)
+.. yjacolin at free.fr, Yves Jacolin - 2013/01/01 (trunk 25411)

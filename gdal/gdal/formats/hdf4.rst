@@ -234,4 +234,4 @@ utilisez des bibliothèques HDF statiques).
   * `MODIS Level 1B Product Information and Status <http://www.mcst.ssai.biz/mcstweb/L1B/product.html>`_
   * `MODIS Ocean User's Guide <http://modis-ocean.gsfc.nasa.gov/userguide.html>`_
 
-.. yjacolin at free.fr, Yves Jacolin - 2011/08/098 (trunk 22813)
+.. yjacolin at free.fr, Yves Jacolin - 2013/01/01 (trunk 22813)

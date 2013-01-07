@@ -448,8 +448,8 @@ Par défaut, le type de données renvoyé pour les jeux de données GXF par GDAL
 Float32. À partir de GDAL 1.8.0, vous pouvez définir le type de données en 
 définissant l'option de configuration *GXF_DATATYPE* (Float64 géré pour le moment)
 
-Détails sur le code géré, et le format peuvent être trouvé sur la page GXF-3 
-http://home.gdal.org/projects/gxf/index.html
+Détails sur le code géré, et le format peuvent être trouvé sur la page  
+:ref:`gdal.gdal.formats.gxf.details`
 
 .. note:: Implémenté dans *gdal/frmts/gxf/gxfdataset.cpp*.
 

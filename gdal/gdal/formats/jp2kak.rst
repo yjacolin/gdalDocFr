@@ -38,6 +38,27 @@ automatiquement traduit en RVB. Les images avec une palette sont également gér
 JPEG2000, et seront stockées comme contenu brute XML dans le domaine de métadonnées 
 xml:XMP.
 
+Options de configuration
+=========================
+
+The JP2KAK driver supports the following 
+<a href="http://trac.osgeo.org/gdal/ConfigOptions">Config Options</a>.
+These runtime options can be used to alter the behavior of the driver.
+
+* **JP2KAK_THREADS=n :** By default an effort is made to take advantage of
+  multi-threading on multi-core computers using default rules from the Kakadu 
+  library.  This option may be set to a value of zero to avoid using additional
+  threads or to a specific count to create the requested number of worker threads.<p>
+* **JP2KAK_FUSSY=YES/NO :** This can be set to YES to turn on fussy reporting
+  of problems with the JPEG2000 data stream.  Defaults to NO.<p>
+* **JP2KAK_RESILIENT=YES/NO :** This can be set to YES to force Kakadu to
+  maximimize resilience with incorrectly created JPEG2000 data files, likely at
+  some cost in performance.  This is likely to be necessary if, amoung other reasons,
+  you get an error message about "Expected to find EPH marker following packet header"
+  or error reports indicating the need to run with the resilient and sequential flags
+  on.  Defaults to NO.
+
+
 Problèmes de création
 =======================
 
@@ -97,4 +118,4 @@ niveaux d'aperçus à différentes puissances de deux facteurs.
   : http://www.remotesensing.org/jpeg2000/.
 * Pilote JPEG200 alternatif : http://www.gdal.org/frmt_jpeg2000.html.
 
-.. yjacolin at free.fr, Yves Jacolin - 2011/08/08 (trunk 22678)
+.. yjacolin at free.fr, Yves Jacolin - 2013/01/01 (trunk 23357)
