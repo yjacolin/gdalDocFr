@@ -236,4 +236,4 @@ chose comme :
 Notez que les valeurs numériques encodées en ascii préfixant l'en-tête encodé en 
 base64 est la longueur (décodé) en octets, suivit d'une espace.
 
-.. yjacolin at free.fr, Yves Jacolin - 2011/08/15 (trunk 22866)
+.. yjacolin at free.fr, Yves Jacolin - 2013/01/01 (trunk 22866)

@@ -39,6 +39,10 @@ dans GDAL par '_' pendant la traduction. Si vous utilisez d'autres logiciels
 pour travailler sur les images MrSID attendez vous à ce que les noms des clés 
 des méta-données soient affichés différemment.
 
+.. versionadded:: 1.9.0 les métadonnées XMP peuvent être extraites des fichiers 
+   JPEG2000, et seront stockées comme contenu brute XML dans le domaine de 
+   métadonnées xml:XMP.
+
 Géoréférencement
 ==================
 
@@ -52,37 +56,9 @@ la version 1.5 du logiciel MrSID , mais si vous avez un vieil encodeur ou des
 fichiers crées avec un vieil encodeur, vous ne pouvez pas utiliser leurs 
 informations de géoréférencement.
 
-Options de création
-====================
-
-L'écriture au format MrSID est seulement géré si GDAL est compilé avec l'ESDK 
-5.x ou supérieur de MrSID. Celui-ci est normalement vendu uniquement par 
-Lizardtech d'une manière contrôlée (bien que le DSDK soit libre/gratuit (?) 
-pour quiconque l'utilise dans les contraintes de l'accord de licence). Si vous 
-avez l'EDSK, il peut être utilisé pour écrire des fichiers MrSID. Les options 
-de création suivante sont gérées :
-
-* **WORLDFILE :** Yes pour écrire le fichier world d'ESRI (avec l'extension 
-  .sdw). 
-* **VERSION :** peut être 2 pour une version 2 des fichiers MrSID ou 3 pour une 
-  version 3 des fichiers  MrSID.
-* **COMPRESSION :** Utilisé seulement pour la version 2 des fichiers MrSID. 
-  Indique le taux de compression désiré. La génération 2 du format MrSID ne peut 
-  pas compresser une image sans perte ; donc zéro n'indique pas une compression 
-  numérique sans perte. Une valeur de 1 peut être utilisé pour une plus grande 
-  fidélité, mais une valeur de 20 produira de meilleur résultat (une compression 
-  visuellement sans perte). Vingt signifie un taux de compression de 20:1 
-  (l'image sera compressée au 1/20 de sa taille originelle).
-* **FILESIZE :** Utilisé seulement pour la version 3 du format MrSID. Indique la 
-  taille en octet du fichier en sortie. Utiliser « 0 » pour une compression sans 
-  perte.
-* **TWOPASS :** Utilisé seulement avec les fichiers MrSID version 3. Indique 
-  qu'un algorithme d'optimisation à deux passages doit être utilisé pendant la 
-  compression.
-
 .. seealso::
 
 * Implementé dans *gdal/frmts/mrsid/mrsiddataset.cpp*.
 * LizardTech's Web site
 
-.. yjacolin at free.fr, Yves Jacolin 2009/03/09 21:17 (trunk 9311)
+.. yjacolin at free.fr, Yves Jacolin 2013/01/01 (trunk 25207)

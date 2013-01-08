@@ -183,4 +183,4 @@ peut être utilisé pour reprojeter les images.
 * http://www.eumetsat.int - Organisation Européenne pour l'Exploitation  des Satellites Météorologique
 
 
-.. yjacolin at free.fr, Yves Jacolin - 2009/03/16 21:36 (trunk 15065)
+.. yjacolin at free.fr, Yves Jacolin - 2013/01/01 (trunk 15065)

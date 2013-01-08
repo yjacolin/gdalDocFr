@@ -146,4 +146,4 @@ Argument P
 * :ref:`gdal.gdal.formats.jp2kak`
 
 
-.. yjacolin at free.fr, Yves Jacolin - 2011/08/08 (trunk 22678)
+.. yjacolin at free.fr, Yves Jacolin - 2013/01/01 (trunk 22678)

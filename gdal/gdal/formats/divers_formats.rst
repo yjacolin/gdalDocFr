@@ -479,6 +479,60 @@ re-échantillonée vers les valeurs brutes originales pour analyse.
 
 **Lisez également :** WinDisp : http://www.fao.org/giews/english/windisp/windisp.htm
 
+.. _`gdal.gdal.formats.divers_formats.ilwis`:
+
+ILWIS -- Raster Map
+====================
+Ce pilote implémente la lecture et l'écriture des cartes raster ILWIS et les 
+listes des cartes. Sélectionnez les fichiers raster avec les extensions *.mpr* 
+(pour les cartes raster) ou *.mpl* (pour les listes de cartes).
+
+Fonctionnalités
+***************
+
+* Gère les types de données de pixel en octet, Int16, Int32 et Float64.
+* Gère les listes de carte avec les ensembles de cartes raster ILWIS associés.
+* Lit et écrit le géoréférencement (.grf). Gestion des transformations de 
+  géoréférencement est limitée seulement au GeoRefCorner orienté Nord. Si 
+  possible, la transformation affine est calculée à partir des coordonnées des 
+  coins.
+* Lit et écrit les fichiers de coordonnées (.csy). La gestion est limitée au : 
+  type de projection de la projection et au type Lat/Lon qui sont définis dans 
+  le fichier .csy, le reste des types de projection pré-définie est ignoré.
+
+Limitations
+************
+
+* Les listes de cartes avec le stockage des cartes raster internes (tels que 
+  ceux produits par Import General Raster) ne sont pas gérées.
+* Les fichiers de domaine ILWIS (.dom) et de représentation (.rpr) sont 
+  actuellement ignorés.
+
+.. _`gdal.gdal.formats.divers_formats.iris`:
+
+IRIS - Vaisala's weather radar software format
+================================================
+
+Ce pilote GDAL en lecture seul est conçu pour fournir un accès aux produits 
+générés par le logiciel radar météo IRIS.
+
+Le format du logiciel IRIS inclue de nombreux produits et certains ne sont pas 
+des raster. Le pilote peut lire pour le moment :
+
+* **PPI (réflectivité et vitesse) :** Plan position indicator
+* **CAPPI :** Constant Altitude Plan position indicator
+* **RAIN1 :** Hourly rainfall accumulation
+* **RAINN :** N-Hour rainfall accumulation
+* **TOPS :** Hauteur pour les contour dBZ sélectionnable
+* **VIL :** Vertically integrated liquid pour la couche sélectionnée
+* **MAX :** Column Max Z WF W/NS Sections
+
+La plupart des métadonnées sont lu.
+
+Vaisala fournie des informations sur le format et le logiciel sur http://www.vaisala.com/en/defense/products/weatherradar/Pages/IRIS.aspx.
+
+.. note:: Implementé dans *gdal/frmts/iris/irisdataset.cpp*.
+
 .. _`gdal.gdal.formats.divers_formats.jdem`:
 
 JDEM -- Japanese DEM (.mem)

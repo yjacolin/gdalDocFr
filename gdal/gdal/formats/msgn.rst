@@ -21,4 +21,4 @@ acceptable (pas assez précis) en fonction de vos besoins. L'astuce actuelle est
 d'implémenter la projection géostationnaire CGMS directement, en utilisant le 
 code disponible sur EUMETSAT. 
 
-.. yjacolin at free.fr, Yves Jacolin - 2009/03/27 20:10 (trunk 11698)
+.. yjacolin at free.fr, Yves Jacolin - 2013/01/01 (trunk 11698)

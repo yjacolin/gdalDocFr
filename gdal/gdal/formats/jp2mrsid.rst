@@ -66,4 +66,4 @@ Si vous avez l'ESDK de MrSID (5.X ou plus récent), il peut être utilisé pour
 * Implémenté dans *gdal/frmts/mrsid/mrsiddataset.cpp*.
 * Site de LizardTech : http://www.lizardtech.com/
 
-.. yjacolin at free.fr, Yves Jacolin - 2009/03/09 21:06 (trunk 9914)
+.. yjacolin at free.fr, Yves Jacolin - 2013/01/01(trunk 9914)

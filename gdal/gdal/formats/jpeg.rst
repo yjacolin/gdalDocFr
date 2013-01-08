@@ -79,4 +79,4 @@ ajouté comme un masque compressé en zlib au fichier JPEG :
 * `libjpeg-turbo <http://sourceforge.net/projects/libjpeg-turbo/>`_
 * :ref:`gdal.gdal.formats.gtiff`
 
-.. yjacolin at free.fr, Yves Jacolin - 2011/08/08(trunk 22678)
+.. yjacolin at free.fr, Yves Jacolin - 2013/01/01 (trunk 25410)

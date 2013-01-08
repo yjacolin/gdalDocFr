@@ -277,6 +277,83 @@ Les attributs des variables pour : tos, lon, lat et time
     time#bounds=time_bnds
     time#original_units=seconds since 2001-1-1
 
+Améliorations du pilote
+========================
+
+.. versionadded:: 1.9.0
+
+Le pilote a reçu des modifications significatif dans GDAL 1.9.0, voyez le 
+fichier NEWS et `Amélioration NetCDF <http://trac.osgeo.org/gdal/wiki/NetCDF_Improvements>`_.
+
+Changements importants
+***********************
+
+* ajout de la gestion pour les types de fichiers NC2, NC4 et NC4C pour la 
+  lecture et l'écriture et HDF4 pour la lecture. voir `Format de fichier NetCDF <http://www.unidata.ucar.edu/software/netcdf/docs/netcdf/File-Format.html#File-Format>`_ pour les détails.
+
+  * *NC :* Format classique NetCDF : Le format original binaire.
+  * *NC2 :* Format offset 64-bit : gestion des variables plus grandes
+  * *NC4 :* Format NetCDF-4: Utilise HDF5
+  * *NC4C :* Format du model NetCDF-4 : HDF5 avec des limitations NetCDF
+  * *HDF4 :* Format SD HDF4
+
+* Improved support for CF-1.5 projected and geographic SRS reading and writing
+* Improvements to metadata (global and variable) handling
+* Added simple progress indicator
+* Added support for DEFLATE compression (reading and writing) and szip (reading) - requires NetCDF-4 support
+* Added support for valid_range/valid_min/valid_max
+* Proper handling of signed/unsigned byte data
+* Added support for Create() function - enables to use netcdf directly with gdalwarp
+
+Options de création
+********************
+
+* **FORMAT=[NC/NC2/NC4/NC4C] :** Set the netcdf file format to use, NC is the 
+  default. NC2 is normally supported by recent netcdf installations, but NC4 
+  and NC4C are available if netcdf was compiled with NetCDF-4 (and HDF5) support.
+* **COMPRESS=[NONE/DEFLATE] :** Set the compression to use.  DEFLATE is only 
+  available if netcdf has been compiled with NetCDF-4 support. NC4C format is the 
+  default if DEFLATE compression is used.
+* **ZLEVEL=[1-9] :**  Set the level of compression when using DEFLATE compression. 
+  A value of 9 is best, and 1 is least compression. The default is 1, which offers 
+  the best time/compression ratio.
+* **WRITE_BOTTOMUP=[NO/YES] :**  Set the y-axis order for export, overriding the 
+  order detected by the driver. NetCDF files are usually assumed "bottom-up", 
+  contrary to GDAL's model which is "north up". This normally does not create a 
+  problem in the y-axis order, unless there is no y axis geo-referencing. Files 
+  without geo-referencing information will be exported in the netcdf default 
+  "bottom-up" order, and the contrary for files with geo-referencing. For import 
+  see Configuration Option GDAL_NETCDF_BOTTOMUP below.
+* **WRITE_GDAL_TAGS=[YES/NO] :** Define if GDAL tags used for georeferencing 
+  (spatial_ref and GeoTransform) should be exported, in addition to CF tags. Not 
+  all information is stored in the CF tags (such as named datums and EPSG codes), 
+  therefore the driver exports these variables by default.  In import the CF 
+  "grid_mapping" variable takes precedence and the GDAL tags are used if they 
+  do not conflict with CF metadata.
+* **WRITE_LONLAT=[YES/NO/IF_NEEDED] :** Define if CF lon/lat variables are 
+  written to file. Default is YES for geographic SRS and NO for projected SRS. 
+  This is normally not necessary for projected SRS as GDAL and many 
+  applications use the X/Y dimension variables and CF projection information. 
+  Use of IF_NEEDED option creates lon/lat variables if the projection is not 
+  part of the CF-1.5 standard.
+* **TYPE_LONLAT=[float/double] :** Set the variable type to use for lon/lat 
+  variables. Default is double for geographic SRS and float for projected SRS. 
+  If lon/lat variables are written for a projected SRS, the file is considerably 
+  large (each variables uses X*Y space), therefore TYPE_LONLAT=float and 
+  COMPRESS=DEFLATE are advisable in order to save space.
+* **PIXELTYPE=[DEFAULT/SIGNEDBYTE] :** En définissant ceci à SIGNEDBYTE, un 
+  nouveau fichier Byte peut être forcé à être créé. 
+
+
+Options de configuration
+*************************
+
+* **GDAL_NETCDF_BOTTOMUP=[YES/NO] :** Définie l'ordre de l'axe y pour l'import, 
+  écrasant l'ordre détecté par le pilote. Cette option n'est habituellement pas 
+  nécessaire à moins qu'un jeu de données spécifique cause un problème (qui doit 
+  être reporté dans le trac de GDAL).
+
+
 Compilation du pilote
 =======================
 
@@ -285,19 +362,15 @@ Ce pilote est compilé avec la bibliothèque netCDF d'UNIDATA.
 Vous devez télécharger ou compiler la bibliothèque netCDF avant de configurer 
 GDAL avec la gestion de netCDF.
 
-S'il vous plait, notez qu'avec CygWIN vous devez vous assurer que les DLL sont 
-éxécutable ou bien GDAL ne se lancera pas.
-::
-    
-    chmod a+rx [NetCDF DLLs]
-
-Le répertoire des DLL de netCDF doit être dans votre *PATH*.
+Lisez le `Wiki GDAL sur NetCDF <http://trac.osgeo.org/gdal/wiki/NetCDF>`_ pour 
+les instructions de compilation et les informations en regard de HDF4, NetCDF-4 
+et HDF5.
 
 .. seealso::
 
-* `convention NetCDF CF-1.0 <http://www.cgd.ucar.edu/cms/eaton/cf-metadata/index.html>`_
+* `convention NetCDF CF-1.5 <http://cf-pcmdi.llnl.gov/documents/cf-conventions/1.5/cf-conventions.html>`_
 * `Bibliothèque NetCDF compilé <http://www.unidata.ucar.edu/downloads/netcdf/index.jsp>`_
 * `Documentation NetCDF <http://www.unidata.ucar.edu/software/netcdf/docs/>`_
 
 
-.. yjacolin at free.fr, Yves Jacolin - 2009/03/24 19:51 (http://gdal.org/frmt_netcdf.html trunk 11075)
+.. yjacolin at free.fr, Yves Jacolin - 2013/01/01 (http://gdal.org/frmt_netcdf.html trunk 23644)

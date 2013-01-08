@@ -41,23 +41,23 @@ xml:XMP.
 Options de configuration
 =========================
 
-The JP2KAK driver supports the following 
-<a href="http://trac.osgeo.org/gdal/ConfigOptions">Config Options</a>.
-These runtime options can be used to alter the behavior of the driver.
+Le pilote JP2KAK gère les `options de configuration <http://trac.osgeo.org/gdal/ConfigOptions>`_ 
+suivante. Ces options peuvent être utilisée pour modifier le comportement du 
+pilote.
 
-* **JP2KAK_THREADS=n :** By default an effort is made to take advantage of
-  multi-threading on multi-core computers using default rules from the Kakadu 
-  library.  This option may be set to a value of zero to avoid using additional
-  threads or to a specific count to create the requested number of worker threads.<p>
-* **JP2KAK_FUSSY=YES/NO :** This can be set to YES to turn on fussy reporting
-  of problems with the JPEG2000 data stream.  Defaults to NO.<p>
-* **JP2KAK_RESILIENT=YES/NO :** This can be set to YES to force Kakadu to
-  maximimize resilience with incorrectly created JPEG2000 data files, likely at
-  some cost in performance.  This is likely to be necessary if, amoung other reasons,
-  you get an error message about "Expected to find EPH marker following packet header"
-  or error reports indicating the need to run with the resilient and sequential flags
-  on.  Defaults to NO.
-
+* **JP2KAK_THREADS=n :** Par défaut un effort est réalisé pour utiliser le 
+  multi-threading sur les ordinateurs multi-coeurs en utilisant les règles par défaut 
+  à partir de la bibliothèque Kakadu. Cette option peut être définie à zéro pour 
+  éviter les threads additionnels ou pour définir le nombre de threads à créer.
+* **JP2KAK_FUSSY=YES/NO :** Ceci peut être définie à YES pour activer le report rapide 
+  de problème avec les flux de données JPEG2000. NO par défaut.
+* **JP2KAK_RESILIENT=YES/NO :** Ceci peut être définie à YES pour forcer la 
+  bibliothèque Kakadu à maximiser la résilience avec des fichiers de données JPEG2000 
+  créé incorrectement, probablement avec une perte de performances. Ceci est 
+  probablement nécessaire si, entre autres raisons, vous obtenez un message d'erreur 
+  comme "Expected to find EPH marker following packet header" ou un rapport d'erreurs 
+  indiquant la nécessité de lancer la commande avec l'option de résilience et 
+  séquentielle. NO par défaut.
 
 Problèmes de création
 =======================
