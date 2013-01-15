@@ -28,8 +28,8 @@ images il peut être nécessaire d'importer le fichier via un processus en deux
 étapes.
 
 La première étape est d'obtenir un rapport des images qui composent le jeu de 
-données dans le fichier en utilisant ``gdalinfo``, puis d'importer les images 
-désirées en utilisant ``gdal_translate``. La commande ``gdalinfo`` liste tous 
+données dans le fichier en utilisant :ref:`gdal.gdal.gdalinfo`, puis d'importer les images 
+désirées en utilisant :ref:`gdal.gdal.gdal_translate`. La commande :ref:`gdal.gdal.gdalinfo` liste tous 
 les sous-jeu de données  multidimensionnel à partir du fichier netCDF d'entrée.
 
 Le nom des images individuelles sont assigné à l'entrée de méta-données 
@@ -40,8 +40,8 @@ de méta-données *SUBDATASET_n_DESC*. Pour netCDF les images suivront ce format
 où *filename* esy le nom du fichier en entrée, et *variable_name* est le jeu de 
 données sélectionné dans le fichier.
 
-Pour la seconde étape vous fournissez ce nom pour ``gdalinfo`` pour obtenir les 
-informations sur le jeu de données ou ``gdal_translate`` pour lire le jeu de 
+Pour la seconde étape vous fournissez ce nom pour :ref:`gdal.gdal.gdalinfo` pour obtenir les 
+informations sur le jeu de données ou :ref:`gdal.gdal.gdal_translate` pour lire le jeu de 
 données.
 
 Par exemple, nous voulons lire les données d'un fichier NetCDF :
@@ -158,7 +158,7 @@ et obtenez l'information sur le nombre de bande qu'il y a à dans cette variable
 des méta-données attachées à chaque bande. Dans cet exemple, les méta-données 
 indique que chaque bande corresponde à un tableau de température mensuelle de 
 la surface de la mer à partir de janvier 2001. Il y a 24 mois de données dans 
-ce sous-jeu de données. Vosu pouvez utiliser ``gdal_translate`` pour lire le 
+ce sous-jeu de données. Vous pouvez utiliser :ref:`gdal.gdal.gdal_translate` pour lire le 
 sous-jeu de données.
 
 Notez que vous devez fournir exactement le contenu de la ligne noté 
@@ -297,53 +297,60 @@ Changements importants
   * *NC4C :* Format du model NetCDF-4 : HDF5 avec des limitations NetCDF
   * *HDF4 :* Format SD HDF4
 
-* Improved support for CF-1.5 projected and geographic SRS reading and writing
-* Improvements to metadata (global and variable) handling
-* Added simple progress indicator
-* Added support for DEFLATE compression (reading and writing) and szip (reading) - requires NetCDF-4 support
-* Added support for valid_range/valid_min/valid_max
-* Proper handling of signed/unsigned byte data
-* Added support for Create() function - enables to use netcdf directly with gdalwarp
+* Gestion améliorée pour CF-1.5 pour les projections projectées et geographiques en lecture et écriture.
+* Amélioration de la prise en charge des métadonnées (global et variable).
+* Ajout d'un indicateur de progression simple 
+* Ajout de la gestion de la compression DEFLATE (en lecture et écriture) et szip (en lecture) - nécessite la gestion de NetCDF-4.
+* Ajout de la gestion pour les paramètres valid_range/valid_min/valid_max
+* Prise en charge correct des données bytes signés/non signés.
+* Ajout de la gestion pour la fonction *Create()* - permet d'utiliser netcdf directement avec :ref:`gdal.gdal.gdalwarp`
 
 Options de création
 ********************
 
-* **FORMAT=[NC/NC2/NC4/NC4C] :** Set the netcdf file format to use, NC is the 
-  default. NC2 is normally supported by recent netcdf installations, but NC4 
-  and NC4C are available if netcdf was compiled with NetCDF-4 (and HDF5) support.
-* **COMPRESS=[NONE/DEFLATE] :** Set the compression to use.  DEFLATE is only 
-  available if netcdf has been compiled with NetCDF-4 support. NC4C format is the 
-  default if DEFLATE compression is used.
-* **ZLEVEL=[1-9] :**  Set the level of compression when using DEFLATE compression. 
-  A value of 9 is best, and 1 is least compression. The default is 1, which offers 
-  the best time/compression ratio.
-* **WRITE_BOTTOMUP=[NO/YES] :**  Set the y-axis order for export, overriding the 
-  order detected by the driver. NetCDF files are usually assumed "bottom-up", 
-  contrary to GDAL's model which is "north up". This normally does not create a 
-  problem in the y-axis order, unless there is no y axis geo-referencing. Files 
-  without geo-referencing information will be exported in the netcdf default 
-  "bottom-up" order, and the contrary for files with geo-referencing. For import 
-  see Configuration Option GDAL_NETCDF_BOTTOMUP below.
-* **WRITE_GDAL_TAGS=[YES/NO] :** Define if GDAL tags used for georeferencing 
-  (spatial_ref and GeoTransform) should be exported, in addition to CF tags. Not 
-  all information is stored in the CF tags (such as named datums and EPSG codes), 
-  therefore the driver exports these variables by default.  In import the CF 
-  "grid_mapping" variable takes precedence and the GDAL tags are used if they 
-  do not conflict with CF metadata.
-* **WRITE_LONLAT=[YES/NO/IF_NEEDED] :** Define if CF lon/lat variables are 
-  written to file. Default is YES for geographic SRS and NO for projected SRS. 
-  This is normally not necessary for projected SRS as GDAL and many 
-  applications use the X/Y dimension variables and CF projection information. 
-  Use of IF_NEEDED option creates lon/lat variables if the projection is not 
-  part of the CF-1.5 standard.
-* **TYPE_LONLAT=[float/double] :** Set the variable type to use for lon/lat 
-  variables. Default is double for geographic SRS and float for projected SRS. 
-  If lon/lat variables are written for a projected SRS, the file is considerably 
-  large (each variables uses X*Y space), therefore TYPE_LONLAT=float and 
-  COMPRESS=DEFLATE are advisable in order to save space.
+* **FORMAT=[NC/NC2/NC4/NC4C] :** Définie le format de fichier netcdf à utiliser,
+  NC est celui par défaut. NC2 n'est normalement géré par les installations 
+  récentes de netcdf, mais NC4 et NC4C sont disponible si netcdf a été 
+  compilé avec la gestion de NetCDF-4 (et HDF5).
+* **COMPRESS=[NONE/DEFLATE] :** Définie la compression à utiliser  DEFLATE est 
+  disponible seulement si netcdf a été compilé avec la gestion de NetCDF-4. 
+  Le format NC4C est celui par défaut si la compression DEFLATE est utilisée.
+* **ZLEVEL=[1-9] :** Définie le niveau de compression lors de l'utilisation de 
+  DEFLATE. Une valeur de 9 est le plus haut, et 1 est la plus basse. 1 est la 
+  valeur par défaut, qui offre le meilleur taux de compression/temps.
+* **WRITE_BOTTOMUP=[NO/YES] :** Définie l'ordre de l'axe y pour l'export, 
+  écrasant l'ordre détecté par le pilote. Les fichiers NetCDF sont habituellement 
+  supposé "bottom-up", contrairement au model de GDAL qui est "north-up". Cela 
+  ne créé pas de problème dans l'ordre de l'axe y à moins qu'il n'y ait pas 
+  de géoréférencement de l'axe y. Les fichiers sans informations géo-référencement 
+  seront exportés dans l'ordre "bottom-up" par défaut du NetCDF et le contraire 
+  pour les fichiers avec géo-référencement. Pour l'import voir le paramètre 
+  *GDAL_NETCDF_BOTTOMUP* dans la section :ref:`gdal.gdal.formats.netcdf.co` 
+  ci-dessous.
+* **WRITE_GDAL_TAGS=[YES/NO] :** Définie si les balises GDAL utilisées pour le 
+  géo-référencement (spatial_ref et GeoTransform) doivent être exportées, en 
+  plus des balises CF. Toutes les informations sont stockées dans la balise CF 
+  (tels que les datums nommés et les codes EPSG), Par conséquent le pilote 
+  exporte ces varaibles par défaut. En import les variables CF "grid_mapping" 
+  prend la précédence et les balises GDAL sont utilisées si elles ne rentrent 
+  pas en conflit avec les métadonnées CF.
+* **WRITE_LONLAT=[YES/NO/IF_NEEDED] :** Définie si les variables lon/lat CF sont 
+  écrites dans le fichier. YES par défaut pour les SRS géographiques et NO pour 
+  les SRS projetés. Ce n'est normalement pas nécessaire pour les SRS projetés 
+  puisque GDAL et beaucoup d'applications utilises les variables de dimensions 
+  X/Y et les informations de projection CF. L'utilisation de l'option *IF_NEEDED* 
+  créé des varaibles lon/lat si la projection ne fait pas partie du standard 
+  CF-1.5.
+* **TYPE_LONLAT=[float/double] :** Définie le type de variable à utiliser pour 
+  les variables lon/lat. *Double* par défaut pour les SRS géographique et 
+  *float* pour les SRS projetés. Si les variables lon/lat sont écrit pour un 
+  SRS projeté, le fichier est considérablement large (chaque variable utilise 
+  X*Y espaces); par conséquent *TYPE_LONLAT=float* et *COMPRESS=DEFLATE* sont 
+  conseillés pour sauver de l'espace.
 * **PIXELTYPE=[DEFAULT/SIGNEDBYTE] :** En définissant ceci à SIGNEDBYTE, un 
   nouveau fichier Byte peut être forcé à être créé. 
 
+.. _`gdal.gdal.formats.netcdf.co`:
 
 Options de configuration
 *************************
