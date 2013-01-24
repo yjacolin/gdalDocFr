@@ -97,4 +97,4 @@ Le code de lecture des MNT de l'USGS dans GDAL est dérivé de l'importateur du
 logiciel VTP (http://www.vterrain.org/). Les possibilité d'export a été 
 développé avec l'aide financière du *Yukon Department of Environment*.
 
-.. yjacolin at free.fr, Yves Jacolin - 2009/03/09 21:56 (trunk 14519)
+.. yjacolin at free.fr, Yves Jacolin - 2013/01/23 (trunk 25410)

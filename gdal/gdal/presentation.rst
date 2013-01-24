@@ -121,9 +121,11 @@ générales suivantes :
   * 'rw' est lu ou écrit (c'est à dire géré par *CreateCopy*);
   * 'rw+' est lu, écrit et mis à jour (c'est à dire géré par *Create*). Le 
     caractère 'v' est ajouté pour les formats gérant l'IO virtuel (/vsimem, 
-    /vsigzip, /vsizip, etc). Note : Les formats valides pour la sortie de 
+    /vsigzip, /vsizip, etc). Un 's' est ajouté pour les formats gérant les 
+	sous jeux de données. Note : Les formats valides pour la sortie de 
     ``gdalwarp`` sont les formats qui gèrent la méthode *Create()* (marqué rw+), a 
     seulement la méthode *CreateCopy()*.
+ 
 
 * ``--format format`` : liste des informations détaillées sur le pilote du 
   format. Le format doit être le nom court affiché par l'option --formats, tels 
@@ -146,4 +148,4 @@ générales suivantes :
 * ``--help-general`` : donne un bref message des usages des options en ligne de 
   commande et termine.
 
-.. yjacolin at free.fr, Yves Jacolin - 2013/01/01* (gdal/apps/gdal_utilities.dox Trunk 25410)
+.. yjacolin at free.fr, Yves Jacolin - 2013/01/24 (gdal/apps/gdal_utilities.dox Trunk 25494)

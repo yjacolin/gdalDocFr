@@ -16,21 +16,29 @@ bibliothèque WebP (du moins dans sa version 0.1) ne propose que la compression 
 la décompression des images complètes, La RAM peut donc  être une limitation
 lorsqu'il s'agit de grandes images.
 
-Le pilote WEBP ne gère que 3 bandes (RGB) d'images.
+Le pilote WEBP gère 3 bandes (RGB) d'images. Il gère également 4 bandes (RVBA) 
+à partir de GDAL 1.10 et libwebp 0.1.4.
 
 Le pilote WEBP peut être utilisé comme format interne utilisé par le pilote 
 :ref:`gdal.gdal.formats.rasterlite`.
 
+.. versionadded:: 1.10 Les métadonnées XMP peuvent être extraites du fichier 
+   et seront stockées comme contenu brute XML dans le domaine de métadonnées 
+   xml:XMP.
+
 Options de création
 ====================
 
-* **QUALITY=n** par défaut l'option *quality* est définie à 75, mais cette option 
+* **QUALITY=n :** par défaut l'option *quality* est définie à 75, mais cette option 
   peut être utilisé pour sélectionner d'autres valeurs. Les valeurs doivent être 
   comprises entre 1 et 100. Les valeurs faibles résultent en un plus grand taux 
   de compression, mais une moins bonne qualité d'image.
+* **LOSSLESS=True/False (GDAL >= 1.10.0 et libwebp >= 0.1.4) :** Par défaut une 
+  compression avec perte est utilisé. Si définie à *True* une compression sans 
+  perte sera utilisée.
 
 .. seealso::
 
-* `Home page WebP <http://code.google.com/intl/fr/speed/webp/>`_
+  * `Home page WebP <http://code.google.com/intl/fr/speed/webp/>`_
 
-.. yjacolin at free.fr, Yves Jacolin - 2011/08/19 (trunk 22043)
+.. yjacolin at free.fr, Yves Jacolin - 2013/01/24 (trunk 25229)

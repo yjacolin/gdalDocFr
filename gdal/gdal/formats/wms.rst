@@ -95,6 +95,9 @@ des services d'image gérée.
 + <BandsCount>3</BandsCount>                    + Nombre de bandes/canaux, 1 pour des données en nuance de gris, 3 pour RVB.    +
 +                                               + (optionnel, défaut à 3)                                                       +
 +-----------------------------------------------+-------------------------------------------------------------------------------+
++ <DataType>Byte</DataType>                     + Type de données de la bande, parmi Byte, Int16, UInt16, Int32, UInt32,        +
++                                               + FLoat32, FLoat64, etc. (optionel, Byte par défaut).                           +
++-----------------------------------------------+-------------------------------------------------------------------------------+
 + <BlockSizeX>1024</BlockSizeX>                 + Taille du bloc en pixels. (optionnel, défaut à 1024, sauf pour VirtualEarth)  +
 +-----------------------------------------------+-------------------------------------------------------------------------------+
 + <BlockSizeY>1024</BlockSizeY>                 + Taille du bloc en pixels. (optionnel, défaut à 1024, sauf pour VirtualEarth)  +
@@ -148,6 +151,14 @@ des services d'image gérée.
 + <Referer>http://example.foo/</Referer>        + Chaîne de *Referer* HTTP. Certains serveurs peuvent le nécessiter (optionnel).+
 +                                               + Ajouter à GDAL  1.9.0                                                         +
 +-----------------------------------------------+-------------------------------------------------------------------------------+
++ <ZeroBlockHttpCodes>204,404                   + Liste de codes de réponse HTTP séparés par des virgules qui seront            +
++                        </ZeroBlockHttpCodes>  + interprété comme des images remplies de 0 au lieu d'annuler la requête. Ajout +
++                                               + dans GDAL 1.9.0 (optionnel, 204 par édfaut).                                  +
++-----------------------------------------------+-------------------------------------------------------------------------------+
++ <ZeroBlockOnServerException>true              + S'il faut traiter une Exception de service retourné par le serveur comme une  +
++               </ZeroBlockOnServerException>   + image remplie de 0 au lieu d'annuler la requête. Ajouté dans GDAL 1.9.0       +
++                                               + (optionnel, faux pas défaut).                                                 +
++-----------------------------------------------+-------------------------------------------------------------------------------+
 + </GDAL_WMS>                                   +                                                                               +
 +-----------------------------------------------+-------------------------------------------------------------------------------+
 
@@ -163,6 +174,60 @@ WMS
 
 Communications avec un serveur WMS OGS. Possède la gestion pour les requêtes 
 tuilées et non tuilées.
+
+.. versionadded:: 1.10 Les couches WMS peuvent être interrogées (via un requête 
+   GetFeatureInfo) avec la commande gdallocationinfo ou avec avec la méthode 
+   *GetMetadataItem("Pixel_iCol_iLine", "LocationInfo")* sur un objet bande.
+
+::
+	
+	gdallocationinfo "WMS:http://demo.opengeo.org/geoserver/gwc/service/wms?SERVICE=WMS&VERSION=1.1.1&
+	                            REQUEST=GetMap&LAYERS=og:bugsites&SRS=EPSG:900913&
+	                            BBOX=-1.15841845090625E7,5479006.186718751,-1.1505912992109375E7,5557277.703671876&
+	                            FORMAT=image/png&TILESIZE=256&OVERVIEWCOUNT=25&MINRESOLUTION=0.0046653459640220&TILED=true"
+	                           -geoloc -11547071.455 5528616 -xml -b 1
+    
+
+Renvoie :
+
+::
+	
+	Report pixel="248595" line="191985">
+	  <BandReport band="1">
+	    <LocationInfo>
+	      <wfs:FeatureCollection xmlns="http://www.opengis.net/wfs"
+	                                xmlns:wfs="http://www.opengis.net/wfs"
+	                                xmlns:gml="http://www.opengis.net/gml"
+	                                xmlns:og="http://opengeo.org"
+	                                xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	                                xsi:schemaLocation="http://opengeo.org http://demo.opengeo.org/geoserver/wfs?service=WFS&version=1.0.0&request=DescribeFeatureType&typeName=og%3Abugsites http://www.opengis.net/wfs http://demo.opengeo.org/geoserver/schemas/wfs/1.0.0/WFS-basic.xsd">
+	        <gml:boundedBy>
+	          <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#26713">
+	            <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">601228,4917635 601228,4917635</gml:coordinates>
+	          </gml:Box>
+	        </gml:boundedBy>
+	        <gml:featureMember>
+	          <og:bugsites fid="bugsites.40946">
+	            <gml:boundedBy>
+	              <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#26713">
+	                <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">601228,4917635 601228,4917635</gml:coordinates>
+	              </gml:Box>
+	            </gml:boundedBy>
+	            <og:cat>86</og:cat>
+	            <og:str1>Beetle site</og:str1>
+	            <og:the_geom>
+	              <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#26713">
+	                <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">601228,4917635</gml:coordinates>
+	              </gml:Point>
+	            </og:the_geom>
+	          </og:bugsites>
+	        </gml:featureMember>
+	      </wfs:FeatureCollection>
+	    </LocationInfo>
+	    <Value>255</Value>
+	  </BandReport>
+	</Report>
+    
 
 TileService
 ************
@@ -267,13 +332,11 @@ Exemples
     
     gdal_translate -of JPEG -outsize 500 250 onearth_global_mosaic.xml onearth_global_mosaic.jpg
 
-  .. image:: _static/onearth_global_mosaic.jpg
-
   ::
     
     gdal_translate -of JPEG -projwin -10 55 30 35 -outsize 500 250 onearth_global_mosaic.xml onearth_global_mosaic2.jpg
 
-  .. image:: _static/onearth_global_mosaic2.jpg
+  .. note:: Ce serveur n'accepte plus les requêtes WMS normale.
 
 * `metacarta_wmsc.xml <http://www.gdal.org/frmt_wms_metacarta_wmsc.xml>`_ - il 
   est possible de configurer un service WMS se conformant à un cache WMS-C en 
@@ -367,10 +430,10 @@ Le pilote WMS peut ouvrir :
 
 .. seealso::
 
-* OGC WMS Standards : http://www.opengeospatial.org/standards/wms
-* Recommandation du WMS Tiling Client (WMS-C) : http://wiki.osgeo.org/index.php/WMS_Tiling_Client_Recommendation
-* TileService WorldWind : http://www.worldwindcentral.com/wiki/TileService
+* `OGC WMS Standards <http://www.opengeospatial.org/standards/wms>`_
+* `Recommandation du WMS Tiling Client (WMS-C) <http://wiki.osgeo.org/index.php/WMS_Tiling_Client_Recommendation>`_
+* `TileService WorldWind <http://www.worldwindcentral.com/wiki/TileService>`_
 * `Spécification TMS <http://wiki.osgeo.org/wiki/Tile_Map_Service_Specification>`_
 * `Spécification WMS Tuilé OnEarth <http://onearth.jpl.nasa.gov/tiled.html>`_
 
-.. yjacolin at free.fr, Yves Jacolin - 2011/09/03(trunk 22175)
+.. yjacolin at free.fr, Yves Jacolin - 2013/01/23 (trunk 23906)

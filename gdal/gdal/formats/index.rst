@@ -322,7 +322,7 @@ Les formats
     gif
     grass
     grib
-	gta
+    gta
     gtiff
     hdf4
     hdf5
@@ -343,6 +343,8 @@ Les formats
     l1b
     lcp
     leveller
+    map
+    mbtiles
     mem
     mff2
     mrsid
@@ -350,7 +352,7 @@ Les formats
     msg
     msgn
     netcdf
-	ngsgeoid
+    ngsgeoid
     nitf
     nitf_avancee
     ogdi

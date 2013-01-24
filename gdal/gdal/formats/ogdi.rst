@@ -88,4 +88,4 @@ les couches disponibles pour un accès direct.
 
 * `ogdi.sourceforge.net <http://ogdi.sourceforge.net/>`_
 
-.. yjacolin at free.fr, Yves Jacolin - 2009/03/14 16:00 (trunk 14660)
+.. yjacolin at free.fr, Yves Jacolin - 2009/03/14 (trunk 14660)

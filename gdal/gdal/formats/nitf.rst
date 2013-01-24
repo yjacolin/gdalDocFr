@@ -96,6 +96,10 @@ de métadonnées.
 * **IREP :** définir à "RGB/LUT" pour réserver l'espace pour une table de 
   couleur pour chaque bande en sortie (seulement nécessaire pour la méthode 
   ``Create()``, pas pour ``CreateCopy()``).
+* **IREPBAND :** (GDAL >= 1.9.0) Liste séparé par des virgules de bandes 
+  IREPBAND dans l'ordre des bandes.
+* **ISUBCAT :** (GDAL >= 1.9.0) Liste spéré par des virgules des bandes 
+  ISUBCAT dans l'ordre des bandes.
 * **LUT_SIZE :** définie pour contrôler la taille des tables de 
   pseudo-couleurs pour les bandes RVB/LUT. Une valeur de 256 est assumé si 
   aucune est présente (seulement nécessaire pour la méthode ``Create()``, pas 
@@ -140,4 +144,4 @@ développement de ce pilote ainsi que Steve Rawlinson (JPEG), Reiner Beck
 (BLOCKA) pour l'aide à l'ajout de fonctionnalités.
 
 
-.. yjacolin at free.fr, Yves Jacolin - 2011/08/15 (trunk 22861)
+.. yjacolin at free.fr, Yves Jacolin - 2013/01/17 (trunk 23491)

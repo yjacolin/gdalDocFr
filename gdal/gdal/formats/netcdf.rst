@@ -154,7 +154,7 @@ et obtenez l'information sur le nombre de bande qu'il y a à dans cette variable
             NETCDF_time_units=days since 2001-1-1
 
 
-``gdalinfo`` affiche le nombre de bandes dans un sous-jeu de données. Il y a 
+:ref:`gdal.gdal.gdalinfo` affiche le nombre de bandes dans un sous-jeu de données. Il y a 
 des méta-données attachées à chaque bande. Dans cet exemple, les méta-données 
 indique que chaque bande corresponde à un tableau de température mensuelle de 
 la surface de la mer à partir de janvier 2001. Il y a 24 mois de données dans 

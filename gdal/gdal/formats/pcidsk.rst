@@ -45,4 +45,4 @@ si d'autres organisations sont géré en lecture.
 * Implémenté dans *gdal/frmts/pcidsk/pcidskdataset2.cpp*.
 * `SDK PCIDSK <http://home.gdal.org/projects/pcidsk/index.html>`_.
 
-.. yjacolin at free.fr, Yves Jacolin - 2011/08/15 (trunk 7688)
+.. yjacolin at free.fr, Yves Jacolin - 2013/01/20 (trunk 21567)

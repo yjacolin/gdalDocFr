@@ -4,8 +4,8 @@
 Rasterlite - Rasters in SQLite DB
 ==================================
 
-À partir de GDAL 1.7.0, le pilote Rasterlite permet la lecture et la création de 
-bases de données Rasterlite.
+.. versionadded:: 1.7.0 Le pilote Rasterlite permet la lecture et la création de 
+   bases de données Rasterlite.
 
 Ces bases de données peuvent être produites par les utilitaires de la distribution 
 `rasterlite <http://www.gaia-gis.it/spatialite>`_, tel que rasterlite_load, 
@@ -99,6 +99,33 @@ et la lecture des aperçues internes.
 
 Si aucun aperçue interne n'est détecté, le pilote tentera d'utiliser des aperçues 
 externes (fichiers .ovr).
+
+.. versionadded:: 1.10, options qui peut être utilisé pour construire des 
+   aperçus interne. Ils peuvent être définie avec l'option de configuration 
+   RASTERLITE_OVR_OPTIONS, comme une liste d'options de création séparé par 
+   des virgules. Voir des exemples ci-dessous.
+
+   Toutes les méthodes de reéchantillonage géré par les aperçus GDAL sont 
+   disponibles.
+
+Astuces de performances
+========================
+
+Certaines astuces de performance du pilote SQLite OGR s'applique. En particulier 
+la définition de l'option de configuration *OGR_SQLITE_SYNCHRONOUS* à OFF lors 
+de la création d'un jeu de données ou de l'ajout des aperçues peut accroître 
+les performances sur certains systèmes de fichiers.
+
+Après avoir ajouté toutes les tables raster en construit tous les niveaux 
+d'aperçus il est conseillé de lancer :
+
+::
+	
+	ogrinfo rasterlitedb.sqlite -sql "VACUUM"
+
+dans le but d'optimiser la abse de données et accroître les performances de 
+lecture par la suite. C'est particulièrement vrai avec les gros jeu de données 
+rasterlite. Notez que l'opération peut prendre du temps.
 
 Exemples
 =========
@@ -198,6 +225,11 @@ Exemples
     
     $ gdaladdo -ro RASTERLITE:my_db.sqlite,table=source 2 4 8 16
 
+* Créer des aperçus internes avec des options (GDAL 1.10 ou supérieur) :
+
+  ::
+	
+	$ gdaladdo RASTERLITE:my_db.sqlite,table=source 2 4 8 16 --config RASTERLITE_OVR_OPTIONS DRIVER=GTiff,COMPRESS=JPEG,PHOTOMETRIC=YCbCr
 
 .. seealso::
 
@@ -205,5 +237,6 @@ Exemples
 * `Manuel sur Rasterlite <http://www.gaia-gis.it/spatialite/rasterlite-man.pdf>`_
 * `Howto sur Rasterlite <http://www.gaia-gis.it/spatialite/rasterlite-how-to.pdf>`_
 * `Base de données échantillon <http://www.gaia-gis.it/spatialite/resources.html>`_
+* `Pilote SQLite d'OGR <http://gdal.org/ogr/drv_sqlite.html>`_
 
-.. yjacolin at free.fr, Yves Jacolin - 2011/08/21 (trunk )
+.. yjacolin at free.fr, Yves Jacolin - 2013/01/23 (trunk r25229)

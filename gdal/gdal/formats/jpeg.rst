@@ -72,11 +72,25 @@ ajouté comme un masque compressé en zlib au fichier JPEG :
   téléchargé. Cependant, certaines applications ne peuvent  pas lire les jpeg 
   progressive du tout. GDAL peut lire les jpeg progressifs, mais n'utilise pas 
   l'avantage de leur nature progressive.
+* **INTERNAL_MASK=YES/NO :** Par défaut, si nécessaire, un masque interne dans 
+  l'approche "masque compressé en zlib ajouté au fichier" est écrit pour 
+  identifier les pixels qui ne sont pas des données valides. À partir de GDAL 
+  1.10, cela peut être désactivé en définissant cette option à *NO*.
+* **ARITHMETIC=YES/NO :** (À partir de GDAL 1.10) Pour activer l'encodage 
+  arithmétique. Pas activé dans toutes les compilations de libjpeg à cause 
+  de potentielles restrictions légales.
+* **BLOCK=1...16 :** (À partir de  GDAL 1.10 and libjpeg 8c) Taille des blocs 
+  DCT. Toutes les valeurs de 1 à 16 sont possible. 8 par défaut (format ligne 
+  de base). Une valeur autre que 8 produira des fichiers incompatible avec 
+  les versions inférieures à 8c de libjpeg.
+* **COLOR_TRANSFORM=RGB or RGB1 :** (À partir de GDAL 1.10 et libjpeg 9). 
+  Définie à RGB1 pour les RVB sans perte. Note : cela produira des fichiers 
+  incompatible avec les versions inférieures à 9 de libjpeg.
 
 .. seealso::
 
-* Indépendant JPEG Group : http://www.ijg.org/
-* `libjpeg-turbo <http://sourceforge.net/projects/libjpeg-turbo/>`_
-* :ref:`gdal.gdal.formats.gtiff`
+  * Indépendant JPEG Group : http://www.ijg.org/
+  * `libjpeg-turbo <http://sourceforge.net/projects/libjpeg-turbo/>`_
+  * :ref:`gdal.gdal.formats.gtiff`
 
-.. yjacolin at free.fr, Yves Jacolin - 2013/01/01 (trunk 25410)
+.. yjacolin at free.fr, Yves Jacolin - 2013/01/24 (trunk 25506)

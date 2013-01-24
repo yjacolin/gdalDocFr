@@ -50,6 +50,14 @@ de la moitié de la résolution (pour chaque dimension) de la couche de base. Si
 le fichier possède des niveaux de résolution au niveau sélectionné, ces niveaux 
 seront recalculés et écrits de nouveau.
 
+Pour les aperçues internes de GeoTIFF (ou les aperçues externes au format GeoTIFF), 
+notez que *-clean* ne retrécie pas le fichier. Une utilisation ultérieure de 
+*gdaladdo* avec des niveaux d'aperçues entraînera le grossissement du fichier, 
+plutôt que l'utilisation de l'espace des aperçues préalablement effacées. Si 
+vous désirez juste modifier la méthode de réechantillonage sur un fichier qui 
+a déjà des aperçues calculés, vous n'avez pas besoin de nettoyer les aperçues 
+existants.
+
 Certains pilotes de format ne supportent pas les aperçus. Plusieurs pilotes de 
 formats rangent les aperçus dans un fichier secondaire avec l'extension .ovr 
 qui est en réalité un format tiff. Par défaut le pilote GeoTIFF range les 
@@ -81,6 +89,7 @@ récent).
 
 Pour produire des aperçus en JPEG dans TIFF le plus petit possible, vous devez 
 utiliser :
+
 ::
     
     --config COMPRESS_OVERVIEW JPEG --config PHOTOMETRIC_OVERVIEW YCBCR --config INTERLEAVE_OVERVIEW PIXEL
@@ -104,11 +113,13 @@ sur toutes ces options.
 **Exemple :**
 
 Créer des aperçus, inclus dans le fichier TIFF fournit :
+
 ::
     
     gdaladdo -r average abc.tif 2 4 8 16
 
 Créer un fichier d'aperçu externe en GeoTIFF compressé à partir du fichier ERDAS .IMG :
+
 ::
     
     gdaladdo -ro --config COMPRESS_OVERVIEW DEFLATE erdas.img 2 4 8 16
@@ -117,14 +128,16 @@ Créer un fichier d'aperçu du GeoTIFF compressé en JPEG à partir d'un jeu de
 données RVB à 3 bandes (si le jeu de données est un GeoTiff que l'on peut écrire, 
 Vous avez également besoin d'ajouter l'option *-ro* pour forcer la génération des 
 aperçues externes) :
+
 ::
     
     gdaladdo --config COMPRESS_OVERVIEW JPEG --config PHOTOMETRIC_OVERVIEW YCBCR
          --config INTERLEAVE_OVERVIEW PIXEL rgb_dataset.ext 2 4 8 16
 
 Créer des aperçus au format Erdas Imagine pour le fichier JPEG indiqué :
+
 ::
     
     gdaladdo --config USE_RRD YES airphoto.jpg 3 9 27 81
 
-.. yjacolin at free.fr, Yves Jacolin - 2013/01/01 (http://gdal.org/gdaladdo.html Trunk 25410)
+.. yjacolin at free.fr, Yves Jacolin - 2013/01/01 (http://gdal.org/gdaladdo.html Trunk 25434)
