@@ -1,5 +1,6 @@
 .. _`gdal.ogr.formats.csv`:
 
+============================
 Comma Separated Value (.csv)
 ============================
 
@@ -42,7 +43,7 @@ précision de chaque colonne,par exemple "Integer(5)","Real(10.7)","String(15)".
 Le pilote utilisera alors ces types comme spécifiés pour les colonnes CSV.
 
 Format
-------
+=======
 
 Les fichiers CSV ont une ligne pour chaque objet (enregistrement) dans la couche 
 (table). Les valeurs du champ attributaire sont séparées par des virgules. Au 
@@ -63,9 +64,19 @@ Le pilote tente de traiter la première ligne du fichier comme une liste de noms
 de champ pour tous les champs. Cependant, si un ou plusieurs champs sont 
 numérique il est supposé que la première ligne est en réalité des valeurs de 
 données et des noms de champs factices sont générés en interne ((field_1 à 
-field_n) et le premier enregistrement est traité comme un objet.
+field_n) et le premier enregistrement est traité comme un objet. 
 
-Exemple (employee.csv):
+.. versionadded:: 1.9.0 Les valeurs numériques sont traités comme noms de 
+   champs si elles sont entourées de guillemets doubles.
+
+Tous les fichiers CSV sont traité comme encodé en UTF-8. À partir de GDAL 
+1.9.0, un *Byte Order Mark* (BOM) en début de fichier sera interprété 
+correctement. À partir de la 1.9.2 l'option *WRITE_BOM* peut être 
+utilisée pour créer un fichier avec un *Byte Order Mark*, ce qui peut 
+améliorer la compatibilité avec certain logiciel (particulièrement Exczel).
+
+Exemple (employee.csv) :
+
 ::
     
     ID,Salary,Name,Comments
@@ -87,13 +98,14 @@ scripts ou d'autres mécanismes peuvent généralement convertir les autres
 variations sous une forme qui est compatible avec le pilote CSV d'OGR.
 
 Lecture de fichier CSV contenant des informations spatiales
-------------------------------------------------------------
+===========================================================
 
 Il est possible d'extraire l'information spatiale (points) d'un fichier CSV qui 
 possède des colonnes pour les coordonnées X et Y, par l'utilisation du pilote 
 VRT.
 
 Considérez le fichier CSV suivant (test.csv) :
+
 ::
     
     Latitude,Longitude,Name
@@ -138,14 +150,14 @@ et ``ogrinfo -ro -al test.vrt`` renverra :
         POINT (0.75 47.5 0)
 
 Problèmes lors de la création
-------------------------------
+==============================
 
 Le pilote gère la création de nouvelles base de données (comme un répertoire de 
 fichier .csv), en ajoutant de nouveaux fichiers csv à un répertoire existant un 
 fichier csv ou en ajoutant des objets à une table CSV existante. La suppression 
 ou le remplacement d'objets existants n'est pas gérés.
 
-Options de création de couche:
+Options de création de couche :
 
 * **LINEFORMAT :** par défaut lors de la création d'un nouveau fichier csv 
   ceux-ci sont créés avec les conventions de fin de ligne de la plateforme local 
@@ -161,10 +173,24 @@ Options de création de couche:
   ajoutées à la colonne avec les valeurs des attributs.
 * **CREATE_CSVT=YES/NO (débute avec GDAL 1.7.0) :** créer le fichier associé 
   .csvt (voir plus haut dans le paragraphe) pour décrire le type de chaque 
-  colonne de la cuoche et ses largeurs et précisions optionnelles. Valeur par 
+  colonne de la couche et ses largeurs et précisions optionnelles. Valeur par 
   défaut : NO
 * **SEPARATOR=COMMA/SEMICOLON/TAB (à partir de GDAL 1.7.0):** caractère de 
   séparateur de champ. Valeur par défaut : COMMA
+* **WRITE_BOM =YES/NO :** (À partir de GDAL >1.9.2) Écrit un *Byte Order Mark* 
+  UTF-8 (BOM) au début du fichier. Valeur par défaut: *NO*.
+
+Gestion de l'API du Système de Fichier Virtuel VSI
+===================================================
+
+(Certaines fonctions ci-dessous peuvent nécessiter OGR >= 1.9.0).
+ 
+Le pilote gère la lecture et l'écriture vers les fichiers gérés par l'API 
+du Système de Fichier Virtual VSI, ce qui inclus les fichiers "normaux" 
+ainsi que les fichiers dans les domaines /vsizip/ (lecture-écriture), 
+/vsigzip/ (lecture-écriture), /vsicurl/ (lecture seule).
+
+L'écriture vers /dev/stdout ou /vsistdout/ est également géré.
 
 Exemples
 *********
@@ -177,7 +203,7 @@ Exemples
       ogr2ogr -f CSV output.csv input.shp -lco GEOMETRY=AS_XYZ
 
 Sources de données particulières
----------------------------------
+=================================
 
 Le pilote CSV peut également lire des fichiers dont la structure est proche des 
 fichiers CSV :
@@ -185,12 +211,13 @@ fichiers CSV :
 * Fichier données Airport NfdcFacilities.xls, NfdcRunways.xls, NfdcRemarks.xls et NfdcSchedules.xls
   trouve sur le `FAA website <http://www.faa.gov/airports/airport_safety/airportdata_5010/menu/index.cfm">`_ (OGR >= 1.8.0)
 * Fichier du `USGS GNIS <http://geonames.usgs.gov/domestic/download_data.htm">`_ (Geographic Names Information System) (OGR >= 1.9.0)
-* The allCountries file from <a href="http://www.geonames.org">GeoNames</a> (OGR >= 1.9.0 for direct import)
+* The allCountries file from `GeoNames <http://www.geonames.org>`_ (OGR >= 1.9.0 for direct import)
+* `Fichiers .TSV d'Eurostat <http://epp.eurostat.ec.europa.eu/NavTree_prod/everybody/BulkDownloadListing?file=read_me.pdf>`_
 
 Autres remarques
------------------
+=================
 
 * le développement du pilote CSV d'OGR a été financé par 
   `DM Solutions Group <http://www.dmsolutions.ca/>`_ et `GoMOOS <http://www.gomoos.org/>`_. 
 
-.. yjacolin at free.fr, Yves Jacolin - 2011/06/30 (trunk 22099)
+.. yjacolin at free.fr, Yves Jacolin - 2013/01/23 (trunk 25355)

@@ -1,5 +1,6 @@
 .. _`gdal.ogr.formats.bna`:
 
+================
 BNA - Atlas BNA
 ================
 
@@ -41,7 +42,7 @@ multipolygones dans le modèle Simple Feature d'OGR.
 Les ellipses et cercles sont transformés en polygone avec 360 points.
 
 Problèmes lors de la création
-------------------------------
+==============================
 
 Lors de l'export, toutes les couches sont écrites dans un seul fichier BNA. La 
 mise à jour de fichiers existants n'est pas gérée pour l'instant.
@@ -80,26 +81,41 @@ données) :
 * **COORDINATE_PRECISION :** cette option peut être utilisée pour définir le 
   nombre de décimal pour les coordonnés. 10 par défaut.
 
-Exemple
--------
+Gestion de l'API du système de fichier Virtuel VSI
+====================================================
 
-La commande ''ogrinfo'' peut être utilisée pour faire un dump du contenu des fichiers de données BNA :
+(Certaines fonctions ci-dessous peuvent nécessiter OGR >= 1.9.0).
+ 
+Le pilote gère la lecture et l'écriture vers les fichiers gérés par l'API 
+du Système de Fichier Virtual VSI, ce qui inclus les fichiers "normaux" 
+ainsi que les fichiers dans les domaines /vsizip/ (lecture-écriture), 
+/vsigzip/ (lecture-écriture), /vsicurl/ (lecture seule).
+
+L'écriture vers /dev/stdout ou /vsistdout/ est également géré.
+
+Exemples
+=========
+
+La commande ''ogrinfo'' peut être utilisée pour faire un dump du contenu des 
+fichiers de données BNA :
+
 ::
     
     ogrinfo -ro -al a_bna_file.bna
 
-La commande ''ogr2ogr'' peut être utilisée pour réaliser une traduction du format BNA vers le format BNA :
+La commande ''ogr2ogr'' peut être utilisée pour réaliser une traduction du 
+format BNA vers le format BNA :
+
 ::
     
     ogr2ogr -f BNA -dsco "NB_IDS=2" -dsco "ELLIPSES_AS_ELLIPSES=NO" output.bna input.bna
 
-Voir également
----------------
+.. seealso::
 
-* `Description du format de fichier BNA <http://www.softwright.com/faq/support/boundary_file_bna_format.html>`_
-* `Une autre description du format de fichier BNA  <http://64.145.236.125/forum/topic.asp?topic_id=1930&forum_id=1&Topic_Title=how+to+edit+*.bna+files%3F&forum_title=Surfer+Support&M=False>`_
-* `Archive des produits lié à Census (ACRP) <http://sedac.ciesin.org/plue/cenguide.html>`_ 
-  : téléchargement de jeu de données BNA de fichier de limite basé sur des 
-  fichiers TIGER 1992 contenant les géographies des États-Unis
+ * `Description du format de fichier BNA <http://www.softwright.com/faq/support/boundary_file_bna_format.html>`_
+ * `Une autre description du format de fichier BNA  <http://64.145.236.125/forum/topic.asp?topic_id=1930&forum_id=1&Topic_Title=how+to+edit+*.bna+files%3F&forum_title=Surfer+Support&M=False>`_
+ *  `Archive des produits lié à Census (ACRP) <http://sedac.ciesin.org/plue/cenguide.html>`_ 
+    : téléchargement de jeu de données BNA de fichier de limite basé sur des 
+    fichiers TIGER 1992 contenant les géographies des États-Unis
 
-.. yjacolin at free.fr, Yves Jacolin - 2009/02/22 20:07 (trunk 11894)
+.. yjacolin at free.fr, Yves Jacolin - 2013/01/23 (trunk 23022)
