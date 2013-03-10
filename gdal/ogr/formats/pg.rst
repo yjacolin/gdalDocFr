@@ -108,15 +108,15 @@ Options de création de couches
   définie à *Geometry*, "geography" (PostGIS >= 1.5), *BYTEA* ou *OID* pour forcer le type de la géométrie 
   utilisée pour une table. Pour une base de données PostGIS, "geometry" est la 
   valeur par défaut.
-* **OVERWRITE :** Il peut être définie à *YES* pour forcer une couche 
+* **OVERWRITE :** Elle peut être définie à *YES* pour forcer une couche 
   existante du nom désiré à être détruite avant la création de la couche demandée.
-* **LAUNDER :** Il peut être définie à *YES* pour forcer les nouveaux champs 
-  crées sur cette couche à avoir les noms de champs "nettoyer" dans une forme 
-  compatible avec PostgreSQL. Cela convertie en minuscule et convertie certains 
-  caractères  spéciaux comme "-" et "#" en "_". Si *NO* les noms exacts seront 
+* **LAUNDER :** Elle peut être définie à *YES* pour forcer les nouveaux champs 
+  créés sur cette couche à avoir les noms de champs "nettoyés" dans une forme 
+  compatible avec PostgreSQL. Cela convertie la valeur en minuscule ainsi que certains 
+  caractères spéciaux comme "-" et "#" en "_". Si la valeur *NO* est utilisée les noms exacts seront 
   préservés. La valeur par défaut est *YES*. Si activé le nom de la table 
-  (couche) sera également nettoyer.
-* **PRECISION :** Il peut être définie à *YES* pour forcer la création de 
+  (couche) sera également nettoyé.
+* **PRECISION :** Elle peut être définie à *YES* pour forcer la création de 
   nouveaux champs dans cette couche pour essayer de représenter l'information de 
   précision et longueur, si disponible en utilisant les types 
   *NUMERIC(width,precision)* ou *CHAR(width)*. Si *NO* alors les types *FLOAT8*, 
@@ -125,7 +125,7 @@ Options de création de couches
   à définir à 2 pour les couches 2D avec PostGIS 1.0+ puisqu'il a des 
   contraintes sur la dimension de la géométrie pendant le chargement.
 * **GEOMETRY_NAME :** définie le nom de la colonne géométrique dans une 
-  nouvelle table. S'il est omis, sera définie par défaut à *wkb_geometry* pour 
+  nouvelle table. Si elle est omise, elle sera définie par défaut à *wkb_geometry* pour 
   GEOM_TYPE=geometry, ou *the_geog* pour GEOM_TYPE=geography..
 * **SCHEMA :** Définie le nom du schéma pour une nouvelle table. L'utilisation 
   d'un même nom de couche dans un schéma différent est gérée, mais pas dans un 
@@ -139,7 +139,7 @@ Options de création de couches
   Créer un index spatial sur la colonne géométrique pour accélérer les requêtes. 
   Définissez-la à *OFF* pour la désactiver (a un effet seulement quand PostGIS 
   est disponible).
-* **TEMPORARY :** (à partir de GDAL 1.8.0) définie à OFF par défaut. créé une table 
+* **TEMPORARY :** (à partir de GDAL 1.8.0) définie à OFF par défaut. Créer une table 
   temporaire au lieu d'une table permanente.
 * **NONE_AS_UNKNOWN :** (à partir de GDAL 1.8.1) peut être définie à TRUE pour 
   forcer les couches non-spatiales (wkbNone) à être créées comme table spatiale 
