@@ -1,5 +1,6 @@
 .. _`gdal.ogr.formats.geojson`:
 
+========
 GeoJSON
 ========
 
@@ -20,7 +21,7 @@ de services de Feature qui suivent les `spécifications REST des GeoServices
 implémenté par l'`API du serveur REST d'ArcGIS <http://help.arcgis.com/en/arcgisserver/10.0/apis/rest/index.html>`_.
 
 Source de données
------------------
+==================
 
 Le pilote GeoJSON d'OGR accepte trois types de sources de données :
 
@@ -32,7 +33,7 @@ Le pilote GeoJSON d'OGR accepte trois types de sources de données :
 * du texte passé directement et encodé en GeoJSON
 
 Couche
--------
+=======
 
 Un jeu de données GeoJSON est traduit à un objet *OGRLayer* simple avec un nom prédéfinie *OGRGeoJson* :
 ::
@@ -53,7 +54,7 @@ FeatureCollection,le pilote produira une couche avec seulement un objet.
 Autrement, une couche consistera d'un ensemble d'objets.
 
 Objet
-------
+=======
 
 Le pilote GeoJSON d'OGR relie chaque objet des types suivants aux nouveaux 
 objets *OGRFeature* : Point, LineString, Polygon, GeometryCollection, Feature.
@@ -77,7 +78,7 @@ est de préserver tous les attributs (comme une union, voir paragraphe précéde
 ce qui est équivalent à définir *ATTRIBUTES_SKIP=NO*.
 
 Géométrie
-----------
+==========
 
 Comme pour le problème des objets avec des propriétés mixtes, le brouillon de 
 la spécification GeoJSON ne nécessite pas que tous les objets géométriques dans 
@@ -102,7 +103,7 @@ Variables d'environnement
   attributs
 
 Option de création de couche
------------------------------
+=============================
 
 * **WRITE_BBOX = YES/NO :** (OGR >= 1.9.0) définie à YES pour écrire une propriété 
   bbox avec la bounding box des géométries au niveau de la feature et de la 
@@ -111,8 +112,18 @@ Option de création de couche
   chiffre à écrire après la virgule pour les coordonnées. 15 par défaut. Une 
   coupure intelligente permettra de supprimer les zéros en trop.
 
-Exemple
---------
+Gestion de l'API de Système de Fichier Virtuel
+================================================
+
+.. warning:: Certaines fonctionnalités ci-dessous peuvent nécessité OGR >= 1.9.0
+
+Le pilote gère la lecture et l'écriture vers les fichiers géré par l'API du Système de Fichier Virtuel ce qui inclus 
+les fichiers "normaux", ainsi que les fichiers dans les domaines /vsizip/ (lecture-écriture), /vsigzip/ (lecture-écriture) , /vsicurl/ (lecture-seule).
+
+L'écriture vers /dev/stdout ou /vsistdout/ est également gérée.
+
+Exemples
+==========
 
 Comment faire un dump du contenu d'un fichier .geojson :
 ::
@@ -138,8 +149,7 @@ REST :
     ogrinfo -ro -al
       "http://sampleserver3.arcgisonline.com/ArcGIS/rest/services/Hydrography/Watershed173811/FeatureServer/0/query?where=objectid+%3D+objectid&amp;outfields=*&amp;f=json"
 
-Lisez également
-----------------
+.. readalso::
 
 * `GeoJSON <http://geojson.org/>`_ - encoding geographic content in JSON
 * `JSON <http://json.org/>`_ - JavaScript Object Notation
@@ -147,4 +157,4 @@ Lisez également
 * `[Gdal-dev] OGR GeoJSON Driver <http://lists.osgeo.org/pipermail/gdal-dev/2007-November/014746.html>`_ - driver announcement
 * `Spécification REST des GeoServices <http://www.esri.com/industries/landing-pages/geoservices/geoservices.html>`_
 
-.. yjacolin at free.fr, Yves Jacolin - 2011/07/10 (trunk 22490)
+.. yjacolin at free.fr, Yves Jacolin - 2013/04/03 (trunk 23022)

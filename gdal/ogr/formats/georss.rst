@@ -1,5 +1,6 @@
 .. _`gdal.ogr.formats.georss`:
 
+=========================================================
 GeoRSS : Geographically Encoded Objects pour les flux RSS
 =========================================================
 
@@ -36,7 +37,7 @@ sont récupérés à partir du contenu des éléments *<item>* (document RSS) ou
 *<entry>* (document Atom).
 
 Problèmes d'encodage
---------------------
+=====================
 
 La bibliothèque Expat gère la lecture des encodages internes suivants :
 
@@ -61,7 +62,7 @@ Lors de l'écriture du fichier GeoRSS, le pilote s'attend à ce que du contenu e
 UTF-8 lui soit passé.
 
 Définitions des champs
-----------------------
+=======================
 
 Lors de la lecture d'un document, le pilote réalisera d'abord une lecture 
 complète du document pour obtenir les définitions du champ.
@@ -113,7 +114,7 @@ Sera interprété dans le modèle SF d'OGR comme :
     POINT (2 49)
 
 Problèmes lors de la création
------------------------------
+==============================
 
 À l'export, toutes les couches sont écrites en un seul fichier. La mise à jour 
 de fichiers existant n'est pas gérée.
@@ -182,8 +183,20 @@ peut être réalisé avec un :ref:`gdal.ogr.formats.vrt`, ou en utilisant
 l'option *-sql* de la commande ogr2ogr (voir RFC21 : 
 `cast des types SQL d'OGR et alias des noms de champ <http://trac.osgeo.org/gdal/wiki/rfc21_ogrsqlcast>`_)
 
-Exemple
-----------
+VSI Virtual File System API support
+====================================
+
+(Certains fonctionnalités ci-dessous peuvent nécessiter OGR >= 1.9.0)
+
+Le pilote gère la lecture et l'écriture de fichiers gérés par l'API VSI Virtual 
+File System, ce qui inclus les fichiers "normaux" ainsi que les fichiers dans 
+les domaines /vsizip/ (lecture-écriture), /vsigzip/ (lecture-écriture), 
+/vsicurl/ (lecture seule).
+
+L'écriture dans /dev/stdout ou /vsistdout/ est également géré.
+
+Exemples
+========
 
 * la commande ''ogrinfo'' peut être utilisé pour dumper le contenu d'un fichier 
   de données GeoRSS :
@@ -238,15 +251,14 @@ Exemple
     # Libère la mémoire associé avec le fichier en mémoire
     gdal.Unlink('/vsimem/temp')
 
-Voir aussi
------------
+.. seealso::
 
-* `Page pour le format GeoRSS <http://georss.org/>`_
-* `Page Wikipedia pour le format GeoRSS <http://fr.wikipedia.org/wiki/GeoRSS>`_
-* `Page Wikipedia pour le format RSS <http://fr.wikipedia.org/wiki/RSS_(format)>`_
-* `Spécification RSS 2.0 <http://www.rssboard.org/rss-specification>`_
-* `Page Wikipedia pour le format Atom <http://fr.wikipedia.org/wiki/Atom_(standard)>`_
-* `Spécification Atom 1.0 <http://www.ietf.org/rfc/rfc4287.txt>`_
+  * `Page pour le format GeoRSS <http://georss.org/>`_
+  * `Page Wikipedia pour le format GeoRSS <http://fr.wikipedia.org/wiki/GeoRSS>`_
+  * `Page Wikipedia pour le format RSS <http://fr.wikipedia.org/wiki/RSS_(format)>`_
+  * `Spécification RSS 2.0 <http://www.rssboard.org/rss-specification>`_
+  * `Page Wikipedia pour le format Atom <http://fr.wikipedia.org/wiki/Atom_(standard)>`_
+  * `Spécification Atom 1.0 <http://www.ietf.org/rfc/rfc4287.txt>`_
 
 
-.. yjacolin@free.fr, Yves Jacolin - 2009/03/04 19:54 (trunk 18832)
+.. yjacolin@free.fr, Yves Jacolin - 2013/05/01 (trunk 23022)

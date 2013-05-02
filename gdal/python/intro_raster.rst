@@ -24,7 +24,7 @@ Puis créez votre objet driver :
 enfin enregistrez le :
 ::
     
-    driver.register()
+    driver.Register()
 
 Lire un fichier raster
 **********************
@@ -34,7 +34,7 @@ Vous pouvez maintenant lire un fichier raster sous forme de jeu de données
 ::
     
     file = '~/Local/Data/Raster/N43E004.hgt'
-    ds = gdal.Open(file, GA_ReadOnly)
+    ds = gdal.Open(file, gdal.GA_ReadOnly)
 
 La méthode Open() prend deux paramètres : le chemin du fichier et la méthode de 
 lecture. Vous avez deux constantes possibles pour la méthode de lecture :
@@ -148,7 +148,7 @@ Si vous avez un offset négatif, il est fort probable que vous ayez choisit un p
     
     data = band.ReadAsArray(xOffset, yOffset, 1, 1)
 
-Les données (cad la variable data) est un tableau en 2 dimensions de la taille qui a été définir plus haut (1,1). Pour récupérer une valeur du tableau :
+Les données (cad la variable data) est un tableau en 2 dimensions de la taille qui a été définie plus haut (1,1). Pour récupérer une valeur du tableau :
 ::
     
     value = data[0,0]
@@ -160,7 +160,7 @@ Le tableau de valeur est un tableau de colonne, les deux valeurs sont bien des c
 .. note::
     **Quelques conseils :**
 
-    Ne lisez pas un pixel à chaque fois mais récupérer les tous en une fois, puis traiter les. Ne lisez qu'un pixel à la fois si vous êtes sur d'en avoir besoin que d'un ou deux ! Malheureusement pour de gros jeux de données, cela peut poser problème ;) La solution est d'utiliser la taille des blocs ou de lire une ligne et de faire le traitement voulut, puis la ligne suivante.
+    Ne lisez pas un pixel à chaque fois mais récupérer les tous en une fois, puis traiter les. Ne lisez qu'un pixel à la fois si vous êtes sur d'en avoir besoin que d'un ou deux ! Malheureusement pour de gros jeux de données, cela peut poser problème ;) La solution est d'utiliser la taille des blocs ou de lire une ligne et de faire le traitement voulu, puis traiter la ligne suivante.
     Ne traitez pas un pixel à la fois, mais utiliser les fonctions built-in de Python, notamment le module Numpy ou Numeric.
 
 Écrire un fichier Raster

@@ -1,5 +1,6 @@
 .. _`gdal.ogr.formats.gmt`:
 
+=========================
 GMT ASCII Vectors (.gmt)
 =========================
 
@@ -16,7 +17,7 @@ attributaires en commentaire dans l'en-tête, et pour chaque objet géométrique
 peut avoir des attributs.
 
 Problème de création
----------------------
+=====================
 
 Le pilote gère la création de nouveau fichiers GMLT et l'ajout d'objet 
 géométriques additionnel à des fichiers existant, mais la mise à jour d'objet 

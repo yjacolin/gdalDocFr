@@ -1,5 +1,6 @@
 .. _`gdal.ogr.formats.geomedia`:
 
+================================
 Base de données MDB de Geomedia
 ================================
 
@@ -40,7 +41,7 @@ charge les commandes SQL avec le moteur :ref:`gdal.ogr.sql`,  en passant la cha�
 **"OGRSQL"** à la méthode *ExecuteSQL()* comme nom du dialect SQL.
 
 Comment utiliser le pilote Geomedia avec unixODBC et les outils MDB (sous Unix et Linux)
------------------------------------------------------------------------------------------
+==========================================================================================
 
 À partir de  GDAL/OGR 1.9.0, le pilote :ref:`gdal.ogr.formats.mdb` est une 
 alternative pour la lecture des fichiers .mdb de Geomedia sans nécessité 
@@ -49,9 +50,8 @@ unixODBC et les outils MDB.
 Référez vous à la section similaire du pilote :ref:`gdal.ogr.formats.pgeo`. Le 
 préfixe à utiliser pour ce pilote est *Geomedia:*.
 
-Voir également
----------------
+.. seealso::
 
-* :ref:`gdal.ogr.formats.mdb`
+  * :ref:`gdal.ogr.formats.mdb`
 
 .. yjacolin at free.fr, Yves Jacolin - 2011/07/10 (trunk 21551)

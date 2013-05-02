@@ -1,5 +1,6 @@
 .. _`gdal.ogr.formats.edigeo`:
 
+========
 EDIGEO
 ========
 
@@ -31,7 +32,7 @@ faut gérer un gros échange de fichier EDIGEO.
 .. -->
 
 Étiquettes
-------------
+============
 
 Pour les fichiers PCI d'EDIGEO, les étiquettes sont contenu dans la couche 
 ID_S_OBJ_Z_1_2_2. OGR exportera les styles en suivant la 
@@ -57,8 +58,7 @@ différente couche ID_S_OBJ_Z_1_2_2 en fonction de la valeur de
 xxx=OBJ_OBJ_LNK_LAYER. Cela peut être désactivé en définissant 
 *OGR_EDIGEO_CREATE_LABEL_LAYERS* à NO.
 
-Voir également
----------------
+.. seealso::
 
 *  `Introduction au standard EDIGEO <http://georezo.net/wiki/main/donnees/edigeo>`_ (en Français)
 *  `Standard EDIGEO - AFNOR NF Z 52000 <http://georezo.net/wiki/_media/main/geomatique/norme_edigeo.zip>`_ (en Français)

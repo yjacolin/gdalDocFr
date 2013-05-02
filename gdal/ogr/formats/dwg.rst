@@ -4,64 +4,65 @@
 AutoCAD DWG
 ============
 
-OGR supports reading most versions of AutoCAD DWG when built with the Open
-Design Alliance Teiga library.  DWG is an binary working format
-used for AutoCAD drawings.  A reasonable effort has been made to make the
-OGR DWG driver work similarly to the OGR DXF driver which shares a common
-data model.  The entire contents of the .dwg file is
-represented as a single layer named "entities".
+OGR gère la lecture la plupart des versions DWG d'AutoCAD lorsqu'il est compilé 
+avec la bibliothèque Teiga de l'Open Design Alliance. DWG est un format binaire 
+de travail utilisé pour les dessins AutoCAD. Un effort raisonnable a été fait 
+pour rendre le fonctionnement du pilote DWG d'OGR similaire au pilote DXF d'OGR 
+qui partage un modèle de données commun. L'intégralité du contenu du fichier 
+.dwg est représentée comme une couche unique nommé «entités».
 
-DWG files are considered to have no georeferencing information through OGR.
-Features will all have the following generic attributes:
+Les fichiers DWG sont considérés sans information de géoréférencement via OGR. 
+Les entités possèderont les attributs génériques suivants :
 
-* Layer: The name of the DXF layer.  The default layer is "0".
-* SubClasses: Where available, a list of classes to which an element belongs.
-* ExtendedEntity: Where available, extended entity attributes all appended to form a single text attribute.
-* Linetype: Where available, the line type used for this entity.
-* EntityHandle: The hexadecimal entity handle.  A sort of feature id.
-* Text: The text of labels.
+* **Layer :** le nom de la couche DXF. La couche par défaut est "0".
+* **SubClasses :** lorsque c'est disponible, une liste de de classes à laquelle 
+  apaprtient un éléemnt.
+* **ExtendedEntity :** lorsque c'est disponible, attributs d'entitées étendues 
+  aggrégés pour former un attribut texte unique.
+* **Linetype :** lorsque c'est disponible, le type de ligne utilisé pour cette 
+  entité.
+* **EntityHandle :** La prise en charge de l'entité héxadecimale. Une sorte d'id 
+  d'entité.
+* **Text :** le texte des étiquettes.
 
+Une tentative raisonnable est réalisée pour préserver les couleurs et la largeur 
+des lignes, la taille et l'orientation du texte via les informations de styles 
+des entités d'OGR lors de la traduction des éléments. Pour le moment aucun effort 
+n'est fait pour préserver les styles de remplissage ou les styles de ligne complexe.
 
-A reasonable attempt is made to preserve line color, line width, text size
-and orientation via OGR feature styling information when translating elements.
-Currently no effort is made to preserve fill styles or complex line style
-attributes.
-
-The approximation of arcs, ellipses, circles and rounded polylines as
-linestrings is done by splitting the arcs into subarcs of no more than a
-threshhold angle.  This angle is the OGR_ARC_STEPSIZE.  This defaults to
-four degrees, but may be overridden by setting the configuration variable
-OGR_ARC_STEPSIZE.
+L'approximation des arcs, ellipses, cercles et polylignes arrondies comme linestring 
+est réalisée en découpant l'arc en sous-arcs inférieur à seuil d'angle. Cet angle 
+est OGR_ARC_STEPSIZE.  Par défaut à 4 degrés, mais peut être écrasé en définissant 
+la variable de configuration ``OGR_ARC_STEPSIZE``.
 
 DWG_INLINE_BLOCKS
 =================
 
-The default behavior is for block references to be expanded with the
-geometry of the block they reference.  However, if the DWG_INLINE_BLOCKS
-configuration option is set to the value FALSE, then the behavior is different
-as described here.
+Le comportement par défaut pour les références des blocs est d'être étendues avec 
+la géométrie du bloc qu'ils référencent. Cependant, si l'option de configuration 
+DWG_INLINE_BLOCKS est définie à la valeur FALSE alors le comportement est différent 
+comme décrit ici.
 
-* A new layer will be available called blocks.  It will contain one or
-  more features for each block defined in the file.  In addition to the usual
-  attributes, they will also have a BlockName attribute indicate what block
-  they are part of.
-* The entities layer will have new attributes BlockName, BlockScale,
-  and BlockAngle.
-* block referencesd will populate these new fields with the corresponding
-  information (they are null for all other entities).
-* block references will not have block geometry inlined - instead they will
-  have a point geometry for the insertion point.
+* Une nouvelle couche sera disponible appellée blocks. Il contiendra une ou plusieurs 
+  entités pour chaque blocs définie dans le fichier. En plus des attributs habituels, 
+  ceux-ci auront un attribut BlockName qui indique quel bloc ils font partie.
+* La couche entité aura de nouveaux attributs BlockName, BlockScale,
+  et BlockAngle.
+* Les blocs réféerencés rempliront ces nouveaux champs avec l'information 
+  correspondante (ils seront null pour tous les autres entités).
+* Les références de bloc n'auront pas de géométrie du bloc en ligne - à la place ils 
+  auront une géométrie point pour le point d'intersection.
 
+L'intention est qu'avec DWG_INLINE_BLOCKS désactivé, les références de bloc resteront 
+comme références et les définitions de bloc original seront disponible via la couche 
+des blocs.
 
-The intention is that with DWG_INLINE_BLOCKS disabled, the block references
-will remain as references and the original block definitions will be
-available via the blocks layer.<p>
+Compilation
+============
 
-Building
-========
-
-Currently DWG building is somewhat adhoc.  On linux the normal practice is
-to hand edit gdal/ogr/ogrsf_frmts/dwg/GNUmakefile, update paths, and then
-build the driver as a plugin using the "make plugin" target.
+La compilation du pilote DWG est pour le moment adhoc. Sous Linux le fonctionnement 
+normal est d'éditer à la main gdal/ogr/ogrsf_frmts/dwg/GNUmakefile, mettre à jour 
+les chemins puis alors de compiler le pilote comme plugin en utilisant la cible 
+"make plugin".
 
 .. yjacolin at free.fr 2013/01/24 (trunk r23625)

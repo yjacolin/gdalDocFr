@@ -32,7 +32,7 @@ Les formats OGR
 +---------------------------------------+-----------------------+---------------+-----------------------+-------------------------------+
 + :ref:`gdal.ogr.formats.edigeo`        + EDIGeo                + Non           +  Oui                  + Oui                           +
 +---------------------------------------+-----------------------+---------------+-----------------------+-------------------------------+
-+ :ref:`gdal.ogr.formts.elasticsearch`  + ElasticSearch         + Oui (écriture + -                     + Non, nécessite libcurl        +
++ :ref:`gdal.ogr.formats.elasticsearch` + ElasticSearch         + Oui (écriture + --                    + Non, nécessite libcurl        +
 +                                       +                       + seule)        +                       +                               +
 +---------------------------------------+-----------------------+---------------+-----------------------+-------------------------------+
 + :ref:`gdal.ogr.formats.filegdb`       + FileGDB               + Oui           +  Oui                  + Non, nécessite la bibliothèque+

@@ -1,5 +1,6 @@
 .. _`gdal.ogr.formats.dxf`:
 
+=============
 DXF d'AutoCAD
 =============
 
@@ -22,7 +23,7 @@ Les features possèderont toutes les attributs génériques suivants :
 
 
 Éléments gérés
----------------
+===============
 
 Les types d'éléments suivants sont gérés :
 
@@ -58,7 +59,7 @@ Cet angle est définie par *OGR_ARC_STEPSIZE*. Par défaut à 4 degrés, mais pe
 écrasé par la variable de configuration *OGR_ARC_STEPSIZE*.
 
 DXF_INLINE_BLOCKS
--------------------
+==================
 
 Le comportement par défaut pour les entités INSERT est d'être étendue avec la 
 géométrie du bloc qu'ils référencent. Cependant si l'option de configuration 
@@ -81,7 +82,7 @@ disponible via la couche blocs. En export cette configuration entrainera la
 création de blocs identiques.
 
 Encodages des caractères
---------------------------
+=========================
 
 Normalement les fichiers DXF sont dans l'encodage ANSI_1252 / Win1252.  GDAL/OGR 
 tente de traduire cela vers l'UTF-8 lors de la lecture puis en ANSI_1252 pour 
@@ -102,7 +103,7 @@ du DXF. Utiliser le nom "UTF-8" pour le *DXF_ENCODING* évitera toute tentative 
 re-encodage lors de la lecture.
 
 Problèmes de création
-----------------------
+=======================
 
 Les fichiers DXF sont écrits au format AutoCAD 2000. Un en-tête standard (Tout 
 jusqu'au mot clé ENTITIES) est écrit à partir du fichier *$GDAL_DATA/header.dxf*, 

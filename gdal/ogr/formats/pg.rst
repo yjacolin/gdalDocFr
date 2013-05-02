@@ -134,7 +134,7 @@ Options de création de couches
   pas, puisque la commande ``ogr2ogr`` ne comprendra pas que la couche existante 
   doit être détruite dans le schéma défini. Utilisez l'option *-nln* de 
   ``ogr2ogr`` à la place, ou mieux la chaîne de connexion *active_schema*.  
-  Voir ci-dessous les exemples.
+  Voir les exemples dans :ref:`gdal.ogr.formats.pg_advanced`.
 * **SPATIAL_INDEX :** (à partir de GDAL 1.6.0) Définie à *ON* par défaut. 
   Créer un index spatial sur la colonne géométrique pour accélérer les requêtes. 
   Définissez-la à *OFF* pour la désactiver (a un effet seulement quand PostGIS 
