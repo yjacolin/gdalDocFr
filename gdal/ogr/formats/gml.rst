@@ -1,5 +1,6 @@
 .. _`gdal.ogr.formats.gml`:
 
+================================
 GML - Geography Markup Language
 ================================
 
@@ -19,17 +20,39 @@ Version de GML gérées :
 + OGR < 1.8.0		+ GML2 et GML3 limité   +GML 2.1.2	   +
 +-----------------------+-----------------------+------------------+
 
-Parseur
---------
 
-La première fois qu'un fichier GML est ouvert il est complètement scanné dans le 
-but d'obtenir l'ensemble des *featuretypes*, les attributs associés pour 
+Parseurs
+=========
+
+The reading part of the driver only works if OGR is built with Xerces linked in. Starting with OGR 1.7.0, when Xerces is unavailable, read support also works if OGR is built with Expat linked in. XML validation is disabled by default. GML writing is always supported, even without Xerces or Expat.
+
+Note: starting with OGR 1.9.0, if both Xerces and Expat are available at build time, the GML driver will preferentially select at runtime the Expat parser for cases where it is possible (GML file in a compatible encoding), and default back to Xerces parser in other cases. However, the choice of the parser can be overriden by specifying the GML_PARSER configuration option to EXPAT or XERCES.
+
+CRS support
+============
+
+Since OGR 1.8.0, the GML driver has coordinate system support. This is only reported when all the geometries of a layer have a srsName attribute, whose value is the same for all geometries. For srsName such as "urn:ogc:def:crs:EPSG:", for geographic coordinate systems (as returned by WFS 1.1.0 for example), the axis order should be (latitude, longitude) as required by the standards, but this is unusual and can cause issues with applications unaware of axis order. So by default, the driver will swap the coordinates so that they are in the (longitude, latitude) order and report a SRS without axis order specified. It is possible to get the original (latitude, longitude) order and SRS with axis order by setting the configuration option GML_INVERT_AXIS_ORDER_IF_LAT_LONG to NO.
+
+There also situations where the srsName is of the form "EPSG:XXXX" (whereas "urn:ogc:def:crs:EPSG::XXXX" would have been more explicit on the intent) and the coordinates in the file are in (latitude, longitude) order. By default, OGR will not consider the EPSG axis order and will report the coordinates in (latitude,longitude) order. However, if you set the configuration option GML_CONSIDER_EPSG_AS_URN to YES, the rules explained in the previous paragraph will be applied.
+
+Since OGR 1.10, the above also applied for projected coordinate systems whose EPSG preferred axis order is (northing, easting).
+
+Schéma
+=======
+
+In contrast to most GML readers, the OGR GML reader does not require the presence of an XML Schema definition of the feature classes (file with .xsd extension) to be able to read the GML file. If the .xsd file is absent or OGR is not able to parse it, the driver attempts to automatically discover the feature classes and their associated properties by scanning the file and looking for "known" gml objects in the gml namespace to determine the organization. While this approach is error prone, it has the advantage of working for GML files even if the associated schema (.xsd) file has been lost.
+
+Starting with OGR 1.10, it is possible to specify an explicit filename for the XSD schema to use, by using "a_filename.gml,xsd=another_filename.xsd" as a connection string.
+
+La première fois qu'un fichier GML est ouvert, si le fichier .xsd est absent ou 
+ne peut être parsé, il est complètement scanné dans le but d'obtenir l'ensemble 
+des types des entités, les attributs associés pour 
 chacun d'eux et d'autres informations au niveau du jeu de données. Ces 
 informations sont stockées dans un fichier .gfs avec le même nom que le fichier 
 GML cible. Un accès ultérieur au même fichier GML utilisera ce fichier .gfs pour 
 prédéfinir les informations de niveau du jeu de données accélérant son accès. 
-Pour une étendues limité le fichier .gfs peut être édité manuellement pour 
-modifier la manière dont le fichier GML sera parsé. Soyez avertie que le fichier 
+Pour une étendue limité, le fichier .gfs peut être édité manuellement pour 
+modifier la manière dont le fichier GML sera parsé. Mais sachez que le fichier 
 .gfs sera automatiquement régénéré si le .gml associé a un timestamp supérieur.
 
 Lors du pré-scan du fichier GML pour déterminer la liste des types d'objets, et 
@@ -52,7 +75,7 @@ Les options de configuration peuvent être définie via la fonction
 *CPLSetConfigOption()* ou comme variables d'environnement.
 
 Lecture des géométries
------------------------
+=======================
 
 Lors de la lecture d'une feature, le pilote prendra par défaut seulement en compte 
 la dernière géométrie GML reconnu trouvée (dans le cas où il y en a plusieurs) 
@@ -83,7 +106,7 @@ les noeuds, sous forme de OGRMultiPoint, l'option de configuration
 fait seul les géométries secondaires sont renvoyées.
 
 Résolution gml:xlink 
----------------------
+======================
 
 OGR 1.8.0 ajoute la gestion de la résolution des gml:xlink. Quand le *résolveur* 
 trouve un élément contenant une balise xlink:href, il tente de trouver l'élément 
@@ -112,8 +135,76 @@ séparés par des virgules des éléments avec l'option de configuration
 résolution en même temps (défaut). Définissez à **NONE** pour résoudre tous les 
 xlinks.
 
+Starting since OGR 1.9.0 an alternative resolution method is available.
+This alternative method will be activated using the configuration option
+**GML_SKIP_RESOLVE_ELEMS HUGE**. In this case any gml:xlink will be 
+resolved using a temporary SQLite DB so to identify any corresponding
+gml:id relation. At the end of this SQL-based process, a resolved file
+will be generated exactly as in the <b>NONE</b> case but without their limits. 
+The main advantages in using an external (temporary) DBMS so to resolve 
+gml:xlink and gml:id relations are the followings:
+
+* no memory size constraints. The *NONE* method stores the whole
+  GML node-tree in-memory; and this practically means that no GML
+  file bigger than 1 GB can be processed at all using a 32-bit
+  platform, due to memory allocation limits. Using a file-system
+  based DBMS avoids at all this issue.
+* by far better efficiency, most notably when huge GML files containing
+  many thousands (or even millions) of xlink:href / gml:id relational 
+  pairs.
+* using the **GML_SKIP_RESOLVE_ELEMS HUGE** method realistically allows 
+  to succesfully resolve some really huge GML file (3GB+) containing many 
+  millions xlink:href / gml:id in a reasonable time (about an hour or so on).
+* The **GML_SKIP_RESOLVE_ELEMS HUGE** method supports the followind further
+  configuration option:
+
+    * you can use **GML_GFS_TEMPLATE** *path_to_template.gfs*
+      in order to unconditionally use a predefined GFS file. This option is really useful
+      when you are planning to import many distinct GML files in subsequent steps [*-append*] 
+      and you absolutely want to preserve a fully consistent data layout for the whole GML set.
+      Please, pay attention not to use the *-lco LAUNDER=yes* setting when using *GML_GFS_TEMPLATE*; 
+      this should break the correct recognition of attribute names between subsequent GML import runs.
+
+TopoSurface interpretation rules [polygons and internal holes]
+================================================================
+
+Starting since OGR 1.9.0 the GML driver is able to recognize two different interpretation
+rules for TopoSurface when a polygon contains any internal hole:
+
+* the previously supported interpretation rule assumed that:
+
+  * each TopoSurface may be represented as a collection of many Faces</li>
+  * *positive* Faces [i.e. declaring <b>orientation="+"</b>] are assumed to
+    represent the Exterior Ring of some Polygon.
+  * *negative* Faces [i.e. declaring <b>orientation="-"</b>] are assumed to
+     represent an Interior Ring (aka <i>hole</i>) belonging to the latest declared 
+     Exterior Ring.
+   * ordering any Edge used to represent each Ring is important: each Edge is expected
+     to be exactly adjacent to the next one.
+
+* the new interpretation rule now assumes that:
+
+  * each TopoSurface may be represented as a collection of many Faces
+  * the declared <b>orientation</b> for any Face has nothing to deal with Exterior/Interior Rings
+  * each Face is now intended to represent a complete Polygon, eventually including any possible Interior 
+    Ring (*holes*)
+  * the relative ordering of any Edge composing the same Face is completely not relevant.
+               
+The newest interpretation seems to fully match GML 3 standard recommendations; so this latest
+is now assumed to be the default interpretation supported by OGR.
+
+.. note:: Using the newest interpretation requires GDAL/OGR to be built against the GEOS library.
+
+Using the *GML_FACE_HOLE_NEGATIVE*> configuration option you can anyway select the
+actual interpretation to be applied when parsing GML 3 Topologies:
+
+* setting *GML_FACE_HOLE_NEGATIVE NO* (*default* option) will activate
+  the newest interpretation rule
+* but explicitly setting *GML_FACE_HOLE_NEGATIVE YES* still enables to activate
+  the old interpretation rule
+
 Problèmes d'encodage
----------------------
+=====================
 
 La bibliothèque Expat gère la lecture des encodages internes suivants :
 
@@ -135,8 +226,13 @@ pouvez le convertir dans l'un des encodages gérés avec la commande *iconv* par
 exemple et changer la valeur du paramètre *encoding* dans l'en-tête XML en 
 conséquence.
 
+.. note:: The .xsd schema files are parsed with an integrated XML parser which
+   does not currently understand XML encodings specified in the XML header. It expects encoding to be always
+   UTF-8. If attribute names in the schema file contains non-ascii characters, it is
+   better to use *iconv* utility and convert the .xsd file into UTF-8 encoding first.
+
 Feature id (fid / gml:id)
--------------------------
+===========================
 
 À partir de OGR 1.9.0, le pilote expose le contenu de l'attribut *gml:id* comme 
 champ de chaîne de caractères appelé *gml_id*, lors de la lecture des documents 
@@ -154,8 +250,58 @@ défaut en tant que champ *fid* (resp. *gml_id*). L'auto-détection peut être
 appelé *fid*, son contenu sera également utilisé pour écrire le contenu de 
 l'attribut fid de la feature créée.
 
+Problèmes de performance avec les gros fichiers GML multi-couches
+==================================================================
+
+Il y a seulement un parseur GML par source de données GML partagé entre les 
+différentes couches. Par défaut, le pilote GML recommencera la lecture du 
+début du fichier, chaque fois qu'une couche est accédée pour la première fois, 
+ce qui entraine une perte des performances avec les gros ficheirs GML.
+
+À partir de OGR 1.9.0, l'option de configuration **GML_READ_MODE** peut être 
+définie à **SEQUENTIAL_LAYERS** si toutes les entités appartenant à la même 
+couche sont écris séquentiellement dans le fichier. Le lecteur évitera alors 
+les resets inutiles lorsque les couches sont lues complètement l'une après 
+l'autre. Pour obtenir les meilleures performances, les couches doivent être 
+lues dans l'ordre où elles apparaissent dans le fichier.
+
+Si aucun fichiers .xsd et .gfs ne sont trouvé, le parseur détectera le layout 
+des couches lors de la construction du fichier .gfs? Si les couches sont 
+définies comme séquentielles, un élement *<SequentialLayers>true</SequentialLayers>* 
+sera écrit dans le fichier  .gfs, afni que le mode GML_READ_MODE soient automatiquement 
+initialisé à MONOBLOCK_LAYERS si non explicitement définie par l'utilisateur.
+
+À partir d'OGR 1.9.0, L'option de configuration GML_READ_MODE peut être définie 
+à INTERLEAVED_LAYERS pour permettre de lire un fichier GML dont les entités dans 
+différentes couches sont entrelacées. Dans ce cas, la sémantique de la fonction 
+GetNextFeature() sera sensiblement altéré d'une manière à ce que les valeurs NULL 
+ne signifie pas nécessairement que toutes les entités de la couche actuelle 
+doivent être lues, mais cela peut aussi signifieer qu'il y a encore une entité 
+à lire mais qu'elle appartient à une autre couche. Dans ce cas, le fichier doit 
+être lu avec le code de cette façon :
+
+::
+  
+    int nLayerCount = poDS->GetLayerCount();
+    int bFoundFeature;
+    do
+    {
+        bFoundFeature = FALSE;
+        for( int iLayer = 0; iLayer &lt; nLayerCount; iLayer++ )
+        {
+            OGRLayer   *poLayer = poDS->GetLayer(iLayer);
+            OGRFeature *poFeature;
+            while((poFeature = poLayer->GetNextFeature()) != NULL)
+            {
+                bFoundFeature = TRUE;
+                poFeature->DumpReadable(stdout, NULL);
+                OGRFeature::DestroyFeature(poFeature);
+            }
+        }
+    } while (bInterleaved &amp;&amp; bFoundFeature);
+
 Problèmes lors de création
---------------------------
+============================
 
 Lors de l'export, toutes les couches sont écrites dans un seul fichier GML dans 
 une seule collection d'objet. Chaque nom de couche est utilisé comme nom 
@@ -175,8 +321,17 @@ suivantes :
   dans le fichier GML, mais cela est expérimental et probablement pas valide 
   XML. *OFF* désactive la génération du schéma (et est implicite si 
   *XSISCHEMAURI* est utilisé).
-* **FORMAT :** (OGR >= 1.8.0) peut être définie à GML3 pour écrire des fichiers 
-  GML qui suivent le profile GML3 SF-0. Autrement GML2 sera utilisé.
+* **FORMAT :** (OGR >= 1.8.0) peut être définie à 
+
+    * *GML3* pour écrire des fichiers GML qui suivent le profile GML3 SF-0. 
+    * *GML3Deegree* À partir d'OGR 1.9.0 afin de produire un schema .XSD GML 
+      3.1.1, avec quelques variations en respect des recommandations du 
+      profile GML3 SF-0, mais cela sera mieux accepté par certains logiciels 
+      (comme Deegree 3). 
+    * *GML3.2* À partir d'OGR 1.9.0 dans le but de produire des fichiers GML 
+      qui suivent le profile GML 3.2.1 SF-0.
+    
+    Autrement GML2 sera utilisé.
 * **GML3_LONGSRS=YES/NO :** (OGR >= 1.8.0, seulement valide quand FORMAT=GML3) YES 
   par défaut. Si YES, SRS avec l'autorité EPSG sera écrit avec le préfixe 
   "urn:ogc:def:crs:EPSG::". Dans ce cas, si la projection est une projection 
@@ -189,9 +344,23 @@ suivantes :
   sera indentée avec des espaces pour une meilleure lisibilité, mais avec une 
   augmentation de la taille.
 
+Gestion de l'API de gestion des fichiers virtuels
+==================================================
+
+(Certaines fonctions ci-dessous peuvent nécessiter OGR >= 1.9.0).
+ 
+Le pilote gère la lecture et l'écriture vers les fichiers gérés par l'API 
+du Système de Fichier Virtual VSI, ce qui inclus les fichiers "normaux" 
+ainsi que les fichiers dans les domaines /vsizip/ (lecture-écriture), 
+/vsigzip/ (lecture-écriture), /vsicurl/ (lecture seule).
+
+L'écriture vers /dev/stdout ou /vsistdout/ est également géré. Notez que 
+dans ce cas, seulement le contenu du fichier GML sera écrit vers la sortie 
+standard (et pas le .xsd). L'élément <boundedBy> ne sera pas écrit. C'est 
+également le cas si vous écrivez vers /vsigzip/.
 
 Syntaxe des fichiers .gfs par l'exemple
------------------------------------------
+==========================================
 
 Considérons le fichier test.gml suivant :
 
@@ -266,7 +435,7 @@ La sortie de *ogrinfo test.gml -ro -al* est :
 	POINT (3 50)
 
 Exemple
---------
+=========
 
 La commande ogr2ogr peut être utilisé pour faire un dump des résultats d'une 
 requête Oracle en GML :
@@ -282,12 +451,17 @@ requête PostGIS en GML :
         "SELECT pop_1994 from canada where province_name = 'Alberta'"
 
 
-Voir aussi
-----------
+.. seealso::
 
-* `Spécifications du GML <http://www.opengeospatial.org/standards/gml>`_
-* `Profile GML 3.1.1 simple features <http://portal.opengeospatial.org/files/?artifact_id=15201>`_
-* `Xerces <http://xml.apache.org/xerces2-j/index.html>`_
-* :ref:`gdal.ogr.format.nas`
+ * `Spécifications du GML <http://www.opengeospatial.org/standards/gml>`_
+ * `Profile GML 3.1.1 simple features - OGC(R) 06-049r1 <http://portal.opengeospatial.org/files/?artifact_id=15201>`_
+ * `Xerces <http://xml.apache.org/xerces2-j/index.html>`_
+ *  :ref:`gdal.ogr.format.nas`
+ 
+Crédits
+========
 
-.. yjacolin at free.fr, Yves Jacolin - 2011/07/21 (trunk 22494)
+* Implémentation pour **GML_SKIP_RESOLVE_ELEMS HUGE** a été une contribution de 
+  A.Furieri, financé par la Région Toscane.
+ 
+.. yjacolin at free.fr, Yves Jacolin - 2013/05/02 (trunk 2445)
