@@ -43,6 +43,13 @@ Comment convertir un raster en une couche de polygones ?
 
 TBD
 
+Comment puis je supprimer une information de géoréférencement dans un fichier ?
+================================================================================
+
+::
+  
+  gdal_translate -co "PROFILE=BASELINE" monfichier.tif monNouveauFichier.tif
+
 Comment puis je créer un raster blanc basé sur l'étendue de fichiers vecteurs pour utiliser avec gdal_rasterize ?
 ==================================================================================================================
 
