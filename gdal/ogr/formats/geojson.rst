@@ -149,7 +149,7 @@ REST :
     ogrinfo -ro -al
       "http://sampleserver3.arcgisonline.com/ArcGIS/rest/services/Hydrography/Watershed173811/FeatureServer/0/query?where=objectid+%3D+objectid&amp;outfields=*&amp;f=json"
 
-.. readalso::
+.. seealso::
 
 * `GeoJSON <http://geojson.org/>`_ - encoding geographic content in JSON
 * `JSON <http://json.org/>`_ - JavaScript Object Notation
