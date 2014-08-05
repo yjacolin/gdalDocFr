@@ -288,5 +288,10 @@ Voyez le tutorial des fichiers :ref:`gdal.gdal.formats.vrt` et
 le ticket `#3367 <http://trac.osgeo.org/gdal/ticket/3367>`_ pour un exemple de 
 bibliothèque.
 
+Comment fusionner des fichiers raster sans avoir de problèmes ?
+================================================================
+
+*gdal_merge.py* peut avoir des problèmes avec de gros fichiers de données, ainsi 
+*gdalbuildvrt* couplé à *gdal_translate* ou *gdalwarp* sont souvent à privilégier.
 
 .. yjacolin at free.fr, Yves Jacolin - 2009/03/10 21:27
