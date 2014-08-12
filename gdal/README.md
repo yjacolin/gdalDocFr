@@ -23,7 +23,8 @@ Consulter le [dépôt officiel de GDAL](https://github.com/OSGeo/gdal).
 Pour une liste complète, voir [Logiciels utilisant GDAL/OGR](http://gdal.gloobe.org/logicielutilisantgdal.html).
 
 * [GeoDjango](https://code.djangoproject.com/wiki/GeoDjango) : cartouche spatial du framework web Python de référence Django, désormais intégré par défaut à ce dernier
-* [GeoKettle](http://www.spatialytics.org/projects/geokettle/) : crtouche spatial de l'ETL (Extract Transform Load) libre Kettle
+* [Talend DI](https://github.com/talend-spatial/talend-spatial) : cartouche spatial de l'ETL (Extract Transform Load) libre Talend
+* [GeoKettle](http://www.spatialytics.org/projects/geokettle/) : cartouche spatial de l'ETL (Extract Transform Load) libre Kettle
 * [GeoServer](https://github.com/geoserver) : serveur cartographique
 * [GRASS](http://grass.osgeo.org/) : logiciel SIG libre bureautique
 * [gvSIG](http://www.gvsig.org) : logiciel SIG libre bureautique
