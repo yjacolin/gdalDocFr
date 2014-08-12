@@ -6,10 +6,10 @@ Vecteurs
 Lire un fichier vecteur
 ------------------------
 
-La lecture d'un fichier vecteur se fait en plusieurs étape :
+La lecture d'un fichier vecteur se fait en plusieurs étapes :
 
-* ouverture du fichier avec le pilote, on obtient l'objet initiale ;
-* lecture de la couche de cet objet; on obtient l'objet layer ;
+* ouverture du fichier avec le pilote, on obtient l'objet initial ;
+* lecture de la couche de cet objet, on obtient l'objet layer ;
 * lecture des objets (feature) de l'objet layer, on obtient l'objet feature.
 
 Pour chaque objet on a un ensemble de méthodes liées à la classe à laquelle il 
