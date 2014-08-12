@@ -6,7 +6,7 @@ Recettes OGR
 Obtenir la liste alphabétique des pilotes disponibles
 -----------------------------------------------
 
-    Une fois GDAL/OGR correctement installés avec Python, il est toujours utile de pouvoir vérifier les pilotes disponibles avec le système et la version installés.  
+    Une fois GDAL/OGR correctement installés avec Python, il est toujours utile de pouvoir vérifier les pilotes disponibles selons le système et la version installés.  
    
 .. code-block:: python
 
@@ -17,26 +17,26 @@ Obtenir la liste alphabétique des pilotes disponibles
         import ogr
 
     # compter le nombre de pilotes disponibles
-    cnt = ogr.GetDriverCount()
+    nbr_pilotes = ogr.GetDriverCount()
 
     # créer une liste vide
-    formatsList = []
+    listeFormats = []
 
     # lister les formats
-    for i in range(cnt):
-        driver = ogr.GetDriver(i)
-        driverName = driver.GetName()   # récupérer le nom du pilote
-        if not driverName in formatsList:
-            formatsList.append(driverName)
+    for i in range(nbr_pilotes):
+        pilote = ogr.GetDriver(i)
+        nomPilote = pilote.GetName()   # récupérer le nom du pilote
+        if not nomPilote in listeFormats:
+            listeFormats.append(nomPilote)
         else:
             pass
 
     # ranger par ordre alphabétique
-    formatsList.sort() # Sorting the messy list of ogr drivers 
+    listeFormats.sort()
 
     # afficher la list
-    for i in formatsList:
-        print i
+    for format in listeFormats:
+        print format
 
 
 
@@ -47,7 +47,7 @@ Récupérer la liste des couches dans une Esri File GeoDataBase
     
 .. code-block:: python
 
-    # import
+    # import depuis la librairie standard
     import sys
 
     # importer OGR
@@ -57,28 +57,28 @@ Récupérer la liste des couches dans une Esri File GeoDataBase
     ogr.UseExceptions()
 
     # charger le pilote
-    driver = ogr.GetDriverByName("OpenFileGDB")
+    pilote = ogr.GetDriverByName("OpenFileGDB")
 
     # ouvrir la FileGDB
     try:
-        gdb = driver.Open(gdb_path, 0)
+        gdb = pilote.Open(gdb_path, 0)
     except Exception, e:
         print e
         sys.exit()
 
     # créer la liste vide
-    featsClassList = []
+    listClassesObjets = []
 
     # parcourir les couches selon leur index
     for featsClass_idx in range(gdb.GetLayerCount()):
         featsClass = gdb.GetLayerByIndex(featsClass_idx)
-        featsClassList.append(featsClass.GetName())
+        listClassesObjets.append(featsClass.GetName())
 
     # trier par ordre alphabétique
-    featsClassList.sort()
+    listClassesObjets.sort()
 
     # afficher le résultat
-    for featsClass in featsClassList:
+    for featsClass in listClassesObjets:
         print featsClass
         
     # fermer proprement
