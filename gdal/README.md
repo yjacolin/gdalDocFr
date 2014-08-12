@@ -1,7 +1,7 @@
 Documentation francophone pour GDAL / OGR
 ====
 
-![Logo GDAL](/gdal/GDAL_logo.png)
+![Logo GDAL](/gdal/gdal/GDAL_logo.png)
 
 Ce dépôt regroupe la traduction de la documentation et des examples de codes (recettes) pour les bibliothèques GDAL/OGR : [accéder au site](http://gdal.gloobe.org/)
 
