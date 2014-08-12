@@ -1,11 +1,12 @@
 Documentation francophone pour GDAL / OGR
 ====
 
-![Logo GDAL](/gdal/GDAL_logo.png?raw=true "Optional Title")
+![Logo GDAL](/gdal/GDAL_logo.png)
 
 Ce dépôt regroupe la traduction de la documentation et des examples de codes (recettes) pour les bibliothèques GDAL/OGR : [accéder au site](http://gdal.gloobe.org/)
 
 Travail mis à disposition par l'[OSGeo France](http://osgeo.asso.fr/).
+
 ![Logo OSGeo France](http://osgeo.asso.fr/sites/default/files/color/osgeo2013-501f811b/logo.png)
 
 ## Site et projet
