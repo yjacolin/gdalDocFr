@@ -62,10 +62,11 @@ et fournit des paquets à jour de GDAL pour Ubuntu Hardy, Karmic et Lucid. Pour
 plus d'informations, vous pouvez consulter la page `UbuntuGIS <https://wiki.ubuntu.com/UbuntuGIS>`_.
 
 Pour installer :
-
 ::
+    
     sudo add-apt-repository ppa:ubuntugis/ppa && sudo apt-get update
     sudo apt-get install gdal-bin
+
 
 MacOS X
 *********
