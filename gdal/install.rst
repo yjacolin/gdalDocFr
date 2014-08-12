@@ -61,6 +61,13 @@ Un nouveau UbuntuGIS est disponible sur `launchpad d'UbuntuGIS <https://launchpa
 et fournit des paquets à jour de GDAL pour Ubuntu Hardy, Karmic et Lucid. Pour 
 plus d'informations, vous pouvez consulter la page `UbuntuGIS <https://wiki.ubuntu.com/UbuntuGIS>`_.
 
+Pour installer :
+::
+    
+    sudo add-apt-repository ppa:ubuntugis/ppa && sudo apt-get update
+    sudo apt-get install gdal-bin
+
+
 MacOS X
 *********
 
@@ -70,8 +77,8 @@ SIG sur http://www.kyngchaos.com/software:frameworks
 Windows
 ********
 
-* Tamas Szekeres maintien un ensemble complet de paquetages binaires pour Win32 
-  et Win64 (compilé avec VC2003/VC2005/VC2008/VC2010) disponible à l'endroit 
+* Tamas Szekeres maintient un ensemble complet de paquetages binaires 32 
+  et 64 bits (compilé avec VC2003/VC2005/VC2008/VC2010) disponible à l'endroit 
   suivant : http://www.gisinternals.com/sdk/
 
   Ces paquets sont basés sur le développement actuel et les branches stables compilées 
@@ -80,6 +87,8 @@ Windows
   sont basé sur la version en développement (1.9.0dev au moment de la rédaction), 
   et les paquets -stable sont basés sur la dernière branche de la version stable 
   (1.8 au moment de la rédaction).
+
+* Un tutoriel complet est disponible sur GeoTribu pour `l'installation de GDAL et Python sur Windows <http://geotribu.net/node/636>`_.
 
 * `MapServer pour Windows (MS4W) <http://www.maptools.org/ms4w/>`_ est un installeur populaire qui contient GDAL, 
   MapServer, et le serveur web Apache. Maintenu par `Gateway Geomatics <http://www.gatewaygeomatics.com/>`_. 
@@ -90,6 +99,7 @@ Windows
 * Des binaires avec plus de fonctionnalités pour Windows, dont python, proj et la 
   gestion C# sont disponibles comme part du paquetage `FWTools <http://fwtools.maptools.org/>`_ 
   (date d'avant la version pre-1.6 de GDAL).
+
 
 OSGeo4W
 ********
