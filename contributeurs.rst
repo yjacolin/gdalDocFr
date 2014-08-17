@@ -9,6 +9,7 @@ Traduction
 
 * Yves Jacolin
 * Jérémie Garniaux
+* Julien Moura
 
 Rédacteurs
 ------------
