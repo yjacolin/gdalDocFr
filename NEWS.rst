@@ -2,6 +2,8 @@
 Historique des versions
 =======================
 
+* 2014 : intégration de nouvelle recette python et réorganisation du dépôt. 
+  poursuite de la traduction de la 2.0
 * 2013-01 : mise à jour 1.9.* et début 1.10
 * 2011-09 : rajout doc utils/ecwhdr
 * 2011-08 : rajout section utils
