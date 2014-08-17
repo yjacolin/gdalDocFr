@@ -38,6 +38,6 @@ Options de création
 
 .. seealso::
 
-* `Page principale d'EPSILON <http://sourceforge.net/projects/epsilon-project>`_
+  * `Page principale d'EPSILON <http://sourceforge.net/projects/epsilon-project>`_
 
 .. yjacolin at free.fr, Yves Jacolin - 2011/08/05 (trunk 22363)

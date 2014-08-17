@@ -113,9 +113,9 @@ niveaux d'aperçus à différentes puissances de deux facteurs.
 
 .. seealso::
 
-* Implémenté dans *gdal/frmts/jp2kak/jp2kakdataset.cpp*.
-* JPEG2000 pour la pag Applications Geospatial, inclus la discussion GeoJP2(tm) 
-  : http://www.remotesensing.org/jpeg2000/.
-* Pilote JPEG200 alternatif : http://www.gdal.org/frmt_jpeg2000.html.
+  * Implémenté dans *gdal/frmts/jp2kak/jp2kakdataset.cpp*.
+  * JPEG2000 pour la pag Applications Geospatial, inclus la discussion GeoJP2(tm) 
+    : http://www.remotesensing.org/jpeg2000/.
+  * Pilote JPEG200 alternatif : http://www.gdal.org/frmt_jpeg2000.html.
 
 .. yjacolin at free.fr, Yves Jacolin - 2013/01/01 (trunk 23357)

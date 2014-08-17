@@ -233,10 +233,10 @@ Exemples
 
 .. seealso::
 
-* `Page principale sur Spatialite et Rasterlite <http://www.gaia-gis.it/spatialite>`_
-* `Manuel sur Rasterlite <http://www.gaia-gis.it/spatialite/rasterlite-man.pdf>`_
-* `Howto sur Rasterlite <http://www.gaia-gis.it/spatialite/rasterlite-how-to.pdf>`_
-* `Base de données échantillon <http://www.gaia-gis.it/spatialite/resources.html>`_
-* `Pilote SQLite d'OGR <http://gdal.org/ogr/drv_sqlite.html>`_
+  * `Page principale sur Spatialite et Rasterlite <http://www.gaia-gis.it/spatialite>`_
+  * `Manuel sur Rasterlite <http://www.gaia-gis.it/spatialite/rasterlite-man.pdf>`_
+  * `Howto sur Rasterlite <http://www.gaia-gis.it/spatialite/rasterlite-how-to.pdf>`_
+  * `Base de données échantillon <http://www.gaia-gis.it/spatialite/resources.html>`_
+  * `Pilote SQLite d'OGR <http://gdal.org/ogr/drv_sqlite.html>`_
 
 .. yjacolin at free.fr, Yves Jacolin - 2013/01/23 (trunk r25229)

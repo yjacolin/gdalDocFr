@@ -72,22 +72,22 @@ Les enregistrements des méta-données :
 
 .. seealso::
 
-* Implémenté dans gdal/frmts/l1b/l1bdataset.cpp.
-* NOAA Polar Orbiter Level 1b Data Set est documenté dans ``POD User's Guide`` 
-  (TIROS-N -- NOAA-14 satellites) et dans ``NOAA KLM User's Guide`` (NOAA-15 -- 
-  NOAA-16 satellites). Vous pouvez trouver ces manuels sur la page 
-  d'introduction de la documentation technique de laNOAA : 
-  http://www2.ncdc.noaa.gov/docs/intro.htm
-* un excellent et complet rapport est contenu dans le livre imprimé 
-  ``The Advanced Very High Resolution Radiometer (AVHRR)`` par Arthur P. 
-  Cracknell, Taylor et Francis Ltd., 1997, ISBN 0-7484-0209-8. 
-* des données NOAA peuvent être téléchargées à partir du site  Comprehensive 
-  Large Array-data Stewardship System (CLASS) : http://www.class.noaa.gov/ 
-  (anciennement SAA). En réalité ce sont  des jeux de données de niveau 1B 
-  selon l'auteur du pilote, son implémentation a été testé seulement avec ces 
-  fichiers.
-* page de statuts des brouillons de la NOAA : http://www.oso.noaa.gov/poesstatus/
-* http://www.lizardtech.com/
+  * Implémenté dans gdal/frmts/l1b/l1bdataset.cpp.
+  * NOAA Polar Orbiter Level 1b Data Set est documenté dans ``POD User's Guide`` 
+    (TIROS-N -- NOAA-14 satellites) et dans ``NOAA KLM User's Guide`` (NOAA-15 -- 
+    NOAA-16 satellites). Vous pouvez trouver ces manuels sur la page 
+    d'introduction de la documentation technique de laNOAA : 
+    http://www2.ncdc.noaa.gov/docs/intro.htm
+  * un excellent et complet rapport est contenu dans le livre imprimé 
+    ``The Advanced Very High Resolution Radiometer (AVHRR)`` par Arthur P. 
+    Cracknell, Taylor et Francis Ltd., 1997, ISBN 0-7484-0209-8. 
+  * des données NOAA peuvent être téléchargées à partir du site  Comprehensive 
+    Large Array-data Stewardship System (CLASS) : http://www.class.noaa.gov/ 
+    (anciennement SAA). En réalité ce sont  des jeux de données de niveau 1B 
+    selon l'auteur du pilote, son implémentation a été testé seulement avec ces 
+    fichiers.
+  * page de statuts des brouillons de la NOAA : http://www.oso.noaa.gov/poesstatus/
+  * http://www.lizardtech.com/
 
 
 .. yjacolin at free.fr, Yves Jacolin - 2009/03/09 21:08 (trunk 9943)

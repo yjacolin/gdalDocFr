@@ -25,6 +25,6 @@ Options de création
 
 .. seealso::
 
-* `Project R <http://www.r-project.org/>`_
+  * `Project R <http://www.r-project.org/>`_
 
 .. yjacolin at free.fr, Yves Jacolin - 2011/08/19 (trunk 17835)

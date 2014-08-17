@@ -338,8 +338,8 @@ modifier le comportement par défaut du pilote GTiff.
 
 .. seealso::
 
-* Page d'information sur GeoTIFF : http://www.remotesensing.org/geotiff/geotiff.html
-* Page libtiff : http://www.remotesensing.org/geotiff/geotiff.html
-* Détails du format de fichier BigTIFF : http://www.awaresystems.be/imaging/tiff/bigtiff.html
+  * Page d'information sur GeoTIFF : http://www.remotesensing.org/geotiff/geotiff.html
+  * Page libtiff : http://www.remotesensing.org/geotiff/geotiff.html
+  * Détails du format de fichier BigTIFF : http://www.awaresystems.be/imaging/tiff/bigtiff.html
 
 .. yjacolin at free.fr, Yves Jacolin - 2013/01/01 (trunk 25411)

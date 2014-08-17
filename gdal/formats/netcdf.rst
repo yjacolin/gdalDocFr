@@ -375,9 +375,9 @@ et HDF5.
 
 .. seealso::
 
-* `convention NetCDF CF-1.5 <http://cf-pcmdi.llnl.gov/documents/cf-conventions/1.5/cf-conventions.html>`_
-* `Bibliothèque NetCDF compilé <http://www.unidata.ucar.edu/downloads/netcdf/index.jsp>`_
-* `Documentation NetCDF <http://www.unidata.ucar.edu/software/netcdf/docs/>`_
+  * `convention NetCDF CF-1.5 <http://cf-pcmdi.llnl.gov/documents/cf-conventions/1.5/cf-conventions.html>`_
+  * `Bibliothèque NetCDF compilé <http://www.unidata.ucar.edu/downloads/netcdf/index.jsp>`_
+  * `Documentation NetCDF <http://www.unidata.ucar.edu/software/netcdf/docs/>`_
 
 
 .. yjacolin at free.fr, Yves Jacolin - 2013/01/01 (http://gdal.org/frmt_netcdf.html trunk 23644)

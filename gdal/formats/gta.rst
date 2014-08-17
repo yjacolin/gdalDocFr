@@ -20,7 +20,7 @@ fichiers.
 
 .. seealso::
 
-* `Page principale de GTA <http://gta.nongnu.org/>`_
+  * `Page principale de GTA <http://gta.nongnu.org/>`_
 
 
 .. yjacolin at free.fr, Yves Jacolin - 2013/01/01 (Trunk r23475)

@@ -215,11 +215,11 @@ HDF NCSA (voir lien ci-dessous).
 
 .. seealso::
 
-* Implementé dans *gdal/frmts/hdf5/hdf5dataset.cpp and gdal/frmts/hdf5/hdf5imagedataset.cpp*.
-* `Page de téléchargement de NCSA HDF5 <http://hdf.ncsa.uiuc.edu/HDF5/release/obtain5.html>`_ 
-  sur le site `National Center for Supercomputing Applications <http://www.ncsa.uiuc.edu/>`_
-* `HDFView est un outil de visualisation pour la navigation et l'édition de fichiers NCSA HDF4 et HDF5 <http://hdf.ncsa.uiuc.edu/hdf-java-html/hdfview/>`_.
-* Documentation pour les produits individuels, géré par ce pilote :
-  - `Aura OMI Total Ozone Data Product-OMTO3 <http:*disc.gsfc.nasa.gov/Aura/OMI/omto3.shtml>`_ 
+  * Implementé dans *gdal/frmts/hdf5/hdf5dataset.cpp and gdal/frmts/hdf5/hdf5imagedataset.cpp*.
+  * `Page de téléchargement de NCSA HDF5 <http://hdf.ncsa.uiuc.edu/HDF5/release/obtain5.html>`_ 
+    sur le site `National Center for Supercomputing Applications <http://www.ncsa.uiuc.edu/>`_
+  * `HDFView est un outil de visualisation pour la navigation et l'édition de fichiers NCSA HDF4 et HDF5 <http://hdf.ncsa.uiuc.edu/hdf-java-html/hdfview/>`_.
+  * Documentation pour les produits individuels, géré par ce pilote :
+    - `Aura OMI Total Ozone Data Product-OMTO3 <http:*disc.gsfc.nasa.gov/Aura/OMI/omto3.shtml>`_ 
 
 .. yjacolin at free.fr, Yves Jacolin - 2011/08/08 (trunk 17235)

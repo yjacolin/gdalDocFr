@@ -24,7 +24,7 @@ Les valeurs Nodata, minimum et maximum pour chaque bande sont également fournie
 
 .. seealso::
 
-* Implémenté dans *gdal/frmts/hdf5/bagdataset.cpp*.
-* Le projet Open Navigation Surface <http://www.opennavsurf.org>`_
+  * Implémenté dans *gdal/frmts/hdf5/bagdataset.cpp*.
+  * Le projet Open Navigation Surface <http://www.opennavsurf.org>`_
 
 .. yjacolin at free.fr, Yves Jacolin - 2011/09/04 (trunk 22975)

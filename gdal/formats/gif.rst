@@ -41,6 +41,6 @@ Ce pilote a été écrit grâce au financement de DM Solutions Group
 
 .. seealso::
 
-* `Page principale de giflib <http://sourceforge.net/projects/giflib/>`_
+  * `Page principale de giflib <http://sourceforge.net/projects/giflib/>`_
 
 .. yjacolin at free.fr, Yves Jacolin - 2011/08/07 (trunk 22678)

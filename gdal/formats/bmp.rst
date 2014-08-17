@@ -27,7 +27,7 @@ et utilisé pour établir la géotransformation pour l'image.
 
 .. seealso::
 
-* Implémenté dans *gdal/frmts/bmp/bmpdataset.cpp*.
-* **Référence Bitmap MSDN :** http://msdn.microsoft.com/library/default.asp?url=/library/en-us/gdi/bitmaps_9qg5.asp
+  * Implémenté dans *gdal/frmts/bmp/bmpdataset.cpp*.
+  * **Référence Bitmap MSDN :** http://msdn.microsoft.com/library/default.asp?url=/library/en-us/gdi/bitmaps_9qg5.asp
 
 .. yjacolin at free.fr, Yves Jacolin - 2009/02/15 19:54 (trunk 13801)

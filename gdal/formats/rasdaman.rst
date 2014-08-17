@@ -47,6 +47,6 @@ géoréférencement.
 
 .. seealso::
 
-* `Project Rasdaman <http://www.rasdaman.org/>`_
+  * `Project Rasdaman <http://www.rasdaman.org/>`_
 
 .. yjacolin at free.fr, Yves Jacolin - 2011/08/19 (trunk 21243)

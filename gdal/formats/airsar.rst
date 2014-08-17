@@ -41,8 +41,8 @@ automatiquement du nom des champs de l'en-tête lui-même.
 Aucun effort n'est fait pour lire les fichiers associés avec le produit d'AIRSAR 
 tel que *mission_l.mocomp*, *mission_meta.airsar* ou *mission_meta.podaac*.
 
-**Lisez également :**
+.. seealso::
 
-* **AIRSAR Data Format :** http://airsar.jpl.nasa.gov/documents/dataformat.htm
+  * **AIRSAR Data Format :** http://airsar.jpl.nasa.gov/documents/dataformat.htm
 
 .. yjacolin at free.fr, Yves Jacolin - 2013/01/01 (trunk 10609)

@@ -45,8 +45,8 @@ commentaire du fihcier RDC.
 
 .. seealso::
 
-* Implémenté dans *gdal/frmts/idrisi/idrisiraster.cpp*. 
-* www.idrisi.com
+  * Implémenté dans *gdal/frmts/idrisi/idrisiraster.cpp*. 
+  * www.idrisi.com
 
 
 .. yjacolin at free.fr, Yves Jacolin - 2009/03/09 20:34 (trunk 13513)

@@ -128,9 +128,9 @@ sur la signification de ces options.
 
 .. seealso::
 
-* Implementé dans *gdal/frmts/ecw/*.
-* La page ECW (http://geospatial.intergraph.com/products/other/ecw/ERDASECWJPEG2000SDK/Details.aspx chez 
-  http://www.geospatial.intergraph.com)
-* `Astuces de compilation de l'ECW pour GDAL <http://trac.osgeo.org/gdal/wiki/ECW>`_
+  * Implementé dans *gdal/frmts/ecw/*.
+  * La page ECW (http://geospatial.intergraph.com/products/other/ecw/ERDASECWJPEG2000SDK/Details.aspx chez 
+    http://www.geospatial.intergraph.com)
+  * `Astuces de compilation de l'ECW pour GDAL <http://trac.osgeo.org/gdal/wiki/ECW>`_
 
 .. yjacolin at free.fr, Yves Jacolin - 2013/01/01 (trunk 25804)

@@ -23,8 +23,8 @@ ISIS3 fait partie de la famille des formats PDS et ISIS2.
 
 .. seealso::
 
-* Implémenté dans *gdal/frmts/pds/isis2dataset.cpp*.
-* :ref:`gdal.gdal.formats.pds`
-* :ref:`gdal.gdal.formats.isis2`
+  * Implémenté dans *gdal/frmts/pds/isis2dataset.cpp*.
+  * :ref:`gdal.gdal.formats.pds`
+  * :ref:`gdal.gdal.formats.isis2`
 
 .. yjacolin at free.fr, Yves Jacolin - 2011/08/18 (trunk 21710)

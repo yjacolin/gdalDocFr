@@ -42,6 +42,6 @@ Options de création
 
 .. seealso::
 
-* Documentation de la commande :ref:`gdal.gdal.gdal_grid`
+  * Documentation de la commande :ref:`gdal.gdal.gdal_grid`
 
 .. yjacolin at free.fr, Yves Jacolin - 2011/08/29 (trunk 19921)

@@ -106,11 +106,11 @@ des données spécifiques à l'application dans le fichier lui même.
 
 .. seealso::
 
-Pour plus d'information :
+  Pour plus d'information :
 
-* Implémenté dans *gdal/frmts/ingr/intergraphraster.cpp*.
-* www.intergraph.com
-* http://www.oreilly.com/www/centers/gff/formats/ingr/index.htm
-* Fichier des spécifications : ftp://ftp.intergraph.com/pub/bbs/scan/note/rffrgps.zip/
+  * Implémenté dans *gdal/frmts/ingr/intergraphraster.cpp*.
+  * www.intergraph.com
+  * http://www.oreilly.com/www/centers/gff/formats/ingr/index.htm
+  * Fichier des spécifications : ftp://ftp.intergraph.com/pub/bbs/scan/note/rffrgps.zip/
 
 .. yjacolin at free.fr, Yves Jacolin - 2008/04/05 18:09 (trunk 12129)

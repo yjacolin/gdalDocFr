@@ -50,9 +50,9 @@ Options de création
 
 .. seealso::
 
-* Implémenté dans *gdal/frmts/openjpeg/openjpegdataset.cpp*.
-* `Page official du JPEG-2000 <http://www.jpeg.org/JPEG2000.html>`_
-* `La page de la bibliothèque OpenJPEG <http://code.google.com/p/openjpeg/>`_
+  * Implémenté dans *gdal/frmts/openjpeg/openjpegdataset.cpp*.
+  * `Page official du JPEG-2000 <http://www.jpeg.org/JPEG2000.html>`_
+  * `La page de la bibliothèque OpenJPEG <http://code.google.com/p/openjpeg/>`_
 
 Autres pilotes JPEG2000 pour GDAL :
 

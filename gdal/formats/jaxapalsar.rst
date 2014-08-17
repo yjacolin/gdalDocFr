@@ -35,6 +35,6 @@ correctes du pilote.
 
 .. seealso::
 
-* `Données échantillon RESTEC <http://www.alos-restec.jp/sampledata_e.html>`_
+  * `Données échantillon RESTEC <http://www.alos-restec.jp/sampledata_e.html>`_
 
 .. softlibre at gloobe.org, Yves Jacolin - 2008/04/01 21:01 (trunk 13809)

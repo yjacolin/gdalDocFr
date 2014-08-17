@@ -32,7 +32,7 @@ mais avec une perte de précision (*[NdT] accuracy*, i.e. la véracité).
 
 .. seealso::
 
-* `Spécification du format HF2/HFZ <http://www.bundysoft.com/docs/doku.php?id=l3dt:formats:specs:hf2>`_
-* `Spécification des blocs d'en-tête étendue de HF2 <http://www.bundysoft.com/docs/doku.php?id=l3dt:formats:specs:hf2#extended_header>`_
+  * `Spécification du format HF2/HFZ <http://www.bundysoft.com/docs/doku.php?id=l3dt:formats:specs:hf2>`_
+  * `Spécification des blocs d'en-tête étendue de HF2 <http://www.bundysoft.com/docs/doku.php?id=l3dt:formats:specs:hf2#extended_header>`_
 
 .. yjacolin at free.fr, Yves Jacolin - 2013/01/01 (trunk 25410)

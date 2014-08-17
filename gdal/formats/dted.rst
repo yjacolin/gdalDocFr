@@ -65,6 +65,6 @@ dire que la taille et les limites doivent être appropriées pour la cellule.
 
 .. seealso::
 
-* Implémenté dans *gdal/frmts/dted/dteddataset.cpp*.
+  * Implémenté dans *gdal/frmts/dted/dteddataset.cpp*.
 
 .. yjacolin at free.fr, Yves Jacolin - 2009/02/22 19:33 (trunk 14661)

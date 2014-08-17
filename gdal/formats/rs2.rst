@@ -29,6 +29,6 @@ fonction de leur disponibilité.
 
 .. seealso::
 
-* RadarSat document RN-RP-51-27.
+  * RadarSat document RN-RP-51-27.
 
 .. yjacolin at free.fr, Yves Jacolin - 2009/03/09 21:33 (trunk 15536)

@@ -29,7 +29,7 @@ Options de création
 
 .. seealso::
 
-* Implémenté dans *gdal/frmts/jpegls/jpeglsdataset.cpp*.
-* `Page principale de la bibliothèque CharLS <http://charls.codeplex.com/>`_
+  * Implémenté dans *gdal/frmts/jpegls/jpeglsdataset.cpp*.
+  * `Page principale de la bibliothèque CharLS <http://charls.codeplex.com/>`_
 
 .. yjacolin at free.fr, Yves Jacolin - 2011/08/08 (trunk 21192)

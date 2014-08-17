@@ -86,6 +86,6 @@ les couches disponibles pour un accès direct.
 
 .. seealso::
 
-* `ogdi.sourceforge.net <http://ogdi.sourceforge.net/>`_
+  * `ogdi.sourceforge.net <http://ogdi.sourceforge.net/>`_
 
 .. yjacolin at free.fr, Yves Jacolin - 2009/03/14 (trunk 14660)

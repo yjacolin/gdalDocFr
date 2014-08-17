@@ -61,9 +61,9 @@ Historique
 
 .. seealso::
 
-* Implémenté dans *gdal/frmts/terragen/terragendataset.cpp*.
-* Lisez le fichier `readme.txt <http://gdal.org/readme.txt>`_ pour l'installation 
-  et la gestion des informations.
-* `Spécification des fichiers <http://www.planetside.co.uk/terragen/dev/tgterrain.html>`_ Terragen Terrain.
+  * Implémenté dans *gdal/frmts/terragen/terragendataset.cpp*.
+  * Lisez le fichier `readme.txt <http://gdal.org/readme.txt>`_ pour l'installation 
+    et la gestion des informations.
+  * `Spécification des fichiers <http://www.planetside.co.uk/terragen/dev/tgterrain.html>`_ Terragen Terrain.
 
 .. yjacolin at free.fr, Yves Jacolin - 2009/03/09 22:10 (trunk 11619)

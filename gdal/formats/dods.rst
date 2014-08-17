@@ -166,6 +166,6 @@ Il aura les sous-items suivants :
 
 .. seealso::
 
-* `Site OPeNDAP <http://www.opendap.org/>`_
+  * `Site OPeNDAP <http://www.opendap.org/>`_
 
 .. yjacolin at free.fr, Yves Jacolin - 2009/02/22 19:32 (Trunk 7509)

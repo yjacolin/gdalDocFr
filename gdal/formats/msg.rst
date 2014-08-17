@@ -179,8 +179,8 @@ peut être utilisé pour reprojeter les images.
 
 .. seealso::
 
-* Implémenté dans *gdal/frmts/msg/msgdataset.cpp*.
-* http://www.eumetsat.int - Organisation Européenne pour l'Exploitation  des Satellites Météorologique
+  * Implémenté dans *gdal/frmts/msg/msgdataset.cpp*.
+  * http://www.eumetsat.int - Organisation Européenne pour l'Exploitation  des Satellites Météorologique
 
 
 .. yjacolin at free.fr, Yves Jacolin - 2013/01/01 (trunk 15065)

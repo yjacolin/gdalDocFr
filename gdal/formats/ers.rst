@@ -29,7 +29,7 @@ Problèmes de création
 
 .. seealso::
 
-* Implémenté dans *gdal/frmts/ers/ersdataset.cpp*.
+  * Implémenté dans *gdal/frmts/ers/ersdataset.cpp*.
 
 .. yjacolin at free.fr, Yves Jacolin - 2013/01/01 (trunk 23028)
 

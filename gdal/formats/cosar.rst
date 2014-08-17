@@ -21,6 +21,6 @@ de s'adapter aux identifiant des "bursts" ScanSAR dans le modèle GDAL.
 
 .. seealso::
 
-* DLR Document TX-GS-DD-3307 "Level 1b Product Format Specification."
+  * DLR Document TX-GS-DD-3307 "Level 1b Product Format Specification."
 
 .. yjacolin at free.fr, Yves Jacolin - 2009/02/22 19:30 (Trunk 13797)

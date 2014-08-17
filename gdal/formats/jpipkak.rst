@@ -227,10 +227,10 @@ compiler sous Linux également puisqu'il n'y a pas de dépendances Windows.
 
 .. seealso::
 
-* `JPEG 2000 Interactive Protocol (Part 9 - JPIP) <http://www.jpeg.org/jpeg2000/j2kpart9.html>`_
-* `http://www.opengeospatial.org/standards/gmljp2 <http://www.opengeospatial.org/standards/gmljp2>`_
-* `Kakadu Software <http://www.kakadusoftware.com>`_
-* `IAS demo (example JPIP(S) streams) <http://iasdemo.ittvis.com/>`_
+  * `JPEG 2000 Interactive Protocol (Part 9 - JPIP) <http://www.jpeg.org/jpeg2000/j2kpart9.html>`_
+  * `http://www.opengeospatial.org/standards/gmljp2 <http://www.opengeospatial.org/standards/gmljp2>`_
+  * `Kakadu Software <http://www.kakadusoftware.com>`_
+  * `IAS demo (example JPIP(S) streams) <http://iasdemo.ittvis.com/>`_
 
 Notes
 ======

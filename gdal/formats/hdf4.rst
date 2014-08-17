@@ -221,17 +221,17 @@ utilisez des bibliothèques HDF statiques).
 
 .. seealso::
 
-* Implémenté comme *gdal/frmts/hdf4/hdf4dataset.cpp* et *gdal/frmts/hdf4/hdf4imagedataset.cpp*.
-* `Group HDF <http://www.hdfgroup.org/>`_
-* Sources de donnée aux formats HDF4 et HDF4-EOS : 
+  * Implémenté comme *gdal/frmts/hdf4/hdf4dataset.cpp* et *gdal/frmts/hdf4/hdf4imagedataset.cpp*.
+  * `Group HDF <http://www.hdfgroup.org/>`_
+  * Sources de donnée aux formats HDF4 et HDF4-EOS : 
 
-  * `Earth Observing System Data Gateway <http://edcimswww.cr.usgs.gov/pub/imswelcome/>`_
+    * `Earth Observing System Data Gateway <http://edcimswww.cr.usgs.gov/pub/imswelcome/>`_
 
-* Documentation de produits individuels, géré par ce pilote :
+  * Documentation de produits individuels, géré par ce pilote :
 
-  * `Geo-Referencing ASTER L1B Data <http://edcdaac.usgs.gov/aster/ASTER_GeoRef_FINAL.pdf>`_
-  * `ASTER Standard Data Product Specifications Document <http://asterweb.jpl.nasa.gov/documents/ASTERHigherLevelUserGuideVer2May01.pdf>`_
-  * `MODIS Level 1B Product Information and Status <http://www.mcst.ssai.biz/mcstweb/L1B/product.html>`_
-  * `MODIS Ocean User's Guide <http://modis-ocean.gsfc.nasa.gov/userguide.html>`_
+    * `Geo-Referencing ASTER L1B Data <http://edcdaac.usgs.gov/aster/ASTER_GeoRef_FINAL.pdf>`_
+    * `ASTER Standard Data Product Specifications Document <http://asterweb.jpl.nasa.gov/documents/ASTERHigherLevelUserGuideVer2May01.pdf>`_
+    * `MODIS Level 1B Product Information and Status <http://www.mcst.ssai.biz/mcstweb/L1B/product.html>`_
+    * `MODIS Ocean User's Guide <http://modis-ocean.gsfc.nasa.gov/userguide.html>`_
 
 .. yjacolin at free.fr, Yves Jacolin - 2013/01/01 (trunk 22813)

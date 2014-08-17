@@ -65,9 +65,9 @@ Historique
 
 .. seealso::
 
-* Implémenté dans gdal/frmts/leveller/levellerdataset.cpp.
-* Le SDK de Leveller, qui documente le format Leveller : 
-  http://www.daylongraphics.com/products/leveller/dev/index.htm
+  * Implémenté dans gdal/frmts/leveller/levellerdataset.cpp.
+  * Le SDK de Leveller, qui documente le format Leveller : 
+    http://www.daylongraphics.com/products/leveller/dev/index.htm
 
 
 .. yjacolin at free.fr, Yves Jacolin - 2009/03/09 21:10 (trunk 11800)

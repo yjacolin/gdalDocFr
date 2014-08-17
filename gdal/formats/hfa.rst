@@ -66,9 +66,9 @@ Les noms des couches peuvent être définis et récupérés avec l'appel de
 
 .. seealso::
 
-* Implémenté dans *gdal/frmts/hfa/hfadataset.cpp*.
-* Plus d'information, et d'autres outils sont disponibles sur la page du lecteur 
-  d'Imagine (img) : http://home.gdal.org/projects/imagine/hfa_index.html
-* Site officiel d'Erdas : http://www.erdas.com/
+  * Implémenté dans *gdal/frmts/hfa/hfadataset.cpp*.
+  * Plus d'information, et d'autres outils sont disponibles sur la page du lecteur 
+    d'Imagine (img) : http://home.gdal.org/projects/imagine/hfa_index.html
+  * Site officiel d'Erdas : http://www.erdas.com/
 
 .. yjacolin at free.fr, Yves Jacolin - 2011/08/08 (trunk 17162)

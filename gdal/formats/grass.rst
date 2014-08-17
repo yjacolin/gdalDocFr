@@ -70,8 +70,8 @@ Les fonctionnalités suivantes sont gérées par le lien GDAL/GRASS :
 
 .. seealso::
 
-* `Page officielle de GRASS GIS <http://grass.itc.it/>`_
-* `page libgrass <http://home.gdal.org/projects/grass/>`_
+  * `Page officielle de GRASS GIS <http://grass.itc.it/>`_
+  * `page libgrass <http://home.gdal.org/projects/grass/>`_
 
 **Remarques sur les variations des pilotes :**
 

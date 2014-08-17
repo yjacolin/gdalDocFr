@@ -39,8 +39,8 @@ Options de création
 
 .. seealso::
 
-* Implémenté dans *gdal/frmts/pds/isis2dataset.cpp*.
-* :ref:`gdal.gdal.formats.pds`
-* :ref:`gdal.gdal.formats.isis2`
+  * Implémenté dans *gdal/frmts/pds/isis2dataset.cpp*.
+  * :ref:`gdal.gdal.formats.pds`
+  * :ref:`gdal.gdal.formats.isis2`
 
 .. yjacolin at free.fr, Yves Jacolin - 2011/08/19 (trunk 21710)

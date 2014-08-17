@@ -13,6 +13,6 @@ le géoréférencement, vous devez spécifier le fichier .map.
 
 .. seealso::
 
-* `Spécification du format OZF2/OZFX3 <http://trac.osgeo.org/gdal/browser/sandbox/klokan/ozf/ozf-binary-format-description.txt>`_
+  * `Spécification du format OZF2/OZFX3 <http://trac.osgeo.org/gdal/browser/sandbox/klokan/ozf/ozf-binary-format-description.txt>`_
 
 .. yjacolin at free.fr, Yves Jacolin - 2011/08/19 (trunk 21249)

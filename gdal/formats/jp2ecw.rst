@@ -103,8 +103,8 @@ sur la signification de ces options.
 
 .. seealso::
 
-* Implémenté dans *gdal/frmts/ecw/ecwdataset.cpp*.
-* SDK ECW disponible sur `Erdas.com <http://www.erdas.com/products/ERDASECWJPEG2000SDK/Details.aspx>`_
-* `Astuces de compilation de l'ECW pour GDAL <http://trac.osgeo.org/gdal/wiki/ECW>`_
+  * Implémenté dans *gdal/frmts/ecw/ecwdataset.cpp*.
+  * SDK ECW disponible sur `Erdas.com <http://www.erdas.com/products/ERDASECWJPEG2000SDK/Details.aspx>`_
+  * `Astuces de compilation de l'ECW pour GDAL <http://trac.osgeo.org/gdal/wiki/ECW>`_
 
 .. yjacolin at free.fr, Yves Jacolin - 2011/08/08 (trunk 21403)

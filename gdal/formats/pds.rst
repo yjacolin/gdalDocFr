@@ -29,9 +29,9 @@ PDS fait partie de la famille des formats incluant ISIS2 et ISIS3.
 
 .. seealso::
 
-* Implémentéd dans *gdal/frmts/pds/pdsdataset.cpp*.
-* `Système de données planétaire de la NASA <http://pds.nasa.gov/>`_
-* :ref:`gdal.gdal.formats.isis2`
-* :ref:`gdal.gdal.formats.isis3`
+  * Implémentéd dans *gdal/frmts/pds/pdsdataset.cpp*.
+  * `Système de données planétaire de la NASA <http://pds.nasa.gov/>`_
+  * :ref:`gdal.gdal.formats.isis2`
+  * :ref:`gdal.gdal.formats.isis3`
 
 .. yjacolin at free.fr, Yves Jacolin - 2011/08/17 (trunk 22516)

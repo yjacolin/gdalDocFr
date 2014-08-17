@@ -58,7 +58,7 @@ informations de géoréférencement.
 
 .. seealso::
 
-* Implementé dans *gdal/frmts/mrsid/mrsiddataset.cpp*.
-* LizardTech's Web site
+  * Implementé dans *gdal/frmts/mrsid/mrsiddataset.cpp*.
+  * Site Web de LizardTech
 
 .. yjacolin at free.fr, Yves Jacolin 2013/01/01 (trunk 25207)

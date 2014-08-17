@@ -142,9 +142,9 @@ silencieusement.
 
 .. seealso::
 
-* Implémenté dans *gdal/frmts/mrsid_lidar/gdal_MG4Lidar.cpp*
-* Spécification des `documents de visualisation de MrSID/MG4 LiDAR`_
-* `Site web de LizardTech <http://www.lizardtech.com>`_
+  * Implémenté dans *gdal/frmts/mrsid_lidar/gdal_MG4Lidar.cpp*
+  * Spécification des `documents de visualisation de MrSID/MG4 LiDAR`_
+  * `Site web de LizardTech <http://www.lizardtech.com>`_
 
 .. _`documents de visualisation de MrSID/MG4 LiDAR`: http://www.gdal.org/frmt_mrsid_lidar_view_point_cloud.html
 

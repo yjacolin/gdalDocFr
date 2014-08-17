@@ -85,6 +85,6 @@ n'est pas disponible pour les versions autres que WCS 1.0.0.
 
 .. seealso::
 
-* Standards WCS de l'OGC : http://www.opengeospatial.org/standards/wcs
+  * Standards WCS de l'OGC : http://www.opengeospatial.org/standards/wcs
 
 .. yjacolin at free.fr, Yves Jacolin - 2011/09/03(trunk 22590)

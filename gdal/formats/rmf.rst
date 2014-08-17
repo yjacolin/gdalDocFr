@@ -34,7 +34,7 @@ Options création
 
 .. seealso::
 
-* Implémenté dans *gdal/frmts/rmf/rmfdataset.cpp*.
-* Page principale de "Panorama" GIS : http://www.gisinfo.ru/index_en.htm
+  * Implémenté dans *gdal/frmts/rmf/rmfdataset.cpp*.
+  * Page principale de "Panorama" GIS : http://www.gisinfo.ru/index_en.htm
 
 .. yjacolin at free.fr, Yves Jacolin -2009/03/09 21:46 (trunk 15709)

@@ -430,10 +430,10 @@ Le pilote WMS peut ouvrir :
 
 .. seealso::
 
-* `OGC WMS Standards <http://www.opengeospatial.org/standards/wms>`_
-* `Recommandation du WMS Tiling Client (WMS-C) <http://wiki.osgeo.org/index.php/WMS_Tiling_Client_Recommendation>`_
-* `TileService WorldWind <http://www.worldwindcentral.com/wiki/TileService>`_
-* `Spécification TMS <http://wiki.osgeo.org/wiki/Tile_Map_Service_Specification>`_
-* `Spécification WMS Tuilé OnEarth <http://onearth.jpl.nasa.gov/tiled.html>`_
+  * `OGC WMS Standards <http://www.opengeospatial.org/standards/wms>`_
+  * `Recommandation du WMS Tiling Client (WMS-C) <http://wiki.osgeo.org/index.php/WMS_Tiling_Client_Recommendation>`_
+  * `TileService WorldWind <http://www.worldwindcentral.com/wiki/TileService>`_
+  * `Spécification TMS <http://wiki.osgeo.org/wiki/Tile_Map_Service_Specification>`_
+  * `Spécification WMS Tuilé OnEarth <http://onearth.jpl.nasa.gov/tiled.html>`_
 
 .. yjacolin at free.fr, Yves Jacolin - 2013/01/23 (trunk 23906)
