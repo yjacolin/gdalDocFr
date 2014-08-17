@@ -24,14 +24,33 @@ Version de GML gérées :
 Parseurs
 =========
 
-The reading part of the driver only works if OGR is built with Xerces linked in. Starting with OGR 1.7.0, when Xerces is unavailable, read support also works if OGR is built with Expat linked in. XML validation is disabled by default. GML writing is always supported, even without Xerces or Expat.
+La partie lecture du pilote fonctionne seulement si OGR est compilé avec Xerces. 
+À partir de OGR 1.7.0, quand Xerces n'est pas disponible, la gestion de la lecture 
+fonctionne également si OGR est compilé avec Expat. La validation XML est désactivée 
+par défaut. L'écriture du GML est toujours géré, même sans Xerces ou Expat.
 
-.. note:: starting with OGR 1.9.0, if both Xerces and Expat are available at build time, the GML driver will preferentially select at runtime the Expat parser for cases where it is possible (GML file in a compatible encoding), and default back to Xerces parser in other cases. However, the choice of the parser can be overriden by specifying the GML_PARSER configuration option to EXPAT or XERCES.
+.. note:: à partir de OGR 1.9.0, si à la fois Xerces et Expat sont disponibles au 
+  moment de la compilation, le pilote GML sélectionnera préférentiellement le 
+  parseur Expat pour les cas où cela est possible (le fichier GML dans un encodage 
+  compatible), et retournera par défaut au parseur Xerces dans les autres cas. 
+  Cependant le choix du parseur peut être écrasé en définissant l'option de 
+  configuration **GML_PARSER** à **EXPAT** or **XERCES**.
 
 Gestion des SCR
 ================
 
-.. versionadded:: OGR 1.8.0, the GML driver has coordinate system support. This is only reported when all the geometries of a layer have a srsName attribute, whose value is the same for all geometries. For srsName such as "urn:ogc:def:crs:EPSG:", for geographic coordinate systems (as returned by WFS 1.1.0 for example), the axis order should be (latitude, longitude) as required by the standards, but this is unusual and can cause issues with applications unaware of axis order. So by default, the driver will swap the coordinates so that they are in the (longitude, latitude) order and report a SRS without axis order specified. It is possible to get the original (latitude, longitude) order and SRS with axis order by setting the configuration option GML_INVERT_AXIS_ORDER_IF_LAT_LONG to NO.
+.. versionadded:: OGR 1.8.0, Le pilote GML gère le système de coordonnées. Cela 
+  est seulement reporté quand toutes les géométries d'une couche possèdent un 
+  attribut srsName, dont la valeur est identique pour toutes les géométries. 
+  Pour les srsName tels que "urn:ogc:def:crs:EPSG:", pour les systèmes de 
+  coordonnées géographiques (comme retourné par les flux WFS 1.1.0 par exemple), 
+  l'ordre des axes doit être (latitude, longitude) comme définie par le standards, 
+  mais cela n'est pas sans risque, notamment pour les applications qui n'ont pas 
+  conscience de l'ordre des axes. Par défaut donc, le pilote inverse les 
+  coordonnées pour qu'elles soient dans l'ordre (longitude, latitude) et reporte 
+  un SRS sans ordre des axes définie. Il est possible d'obtenir l'ordre original 
+  (latitude, longitude) et le SRS avec l'odre des axes en définissant l'option 
+  de configuration **GML_INVERT_AXIS_ORDER_IF_LAT_LONG** à **NO**.
 
 Il y a aussi des situations où le srsName est de la forme "EPSG:XXXX" (où 
 "urn:ogc:def:crs:EPSG::XXXX" aurait été plus explicite sur l'intention) et les 
@@ -80,6 +99,10 @@ sont traité comme des champs de chaines de caractères. Cela peut être réalis
 en définissant l'option de configuration *GML_FIELDTYPES* à la valeur 
 *ALWAYS_STRING*.
 
+.. versionadded:: GDAL 1.11, l'option de configuration **GML_ATTRIBUTES_TO_OGR_FIELDS**
+  peut être définie à **YES** afin que les attributs des éléments GML soient aussi 
+  pris en compte afin de créer les champs OGR.
+
 Les options de configuration peuvent être définie via la fonction 
 *CPLSetConfigOption()* ou en tant que variable d'environnement.
 
@@ -99,12 +122,13 @@ Depuis OGR 1.8.0, un pilote GML spécialisé - pilote :ref:`gdal.ogr.formats.nas
 .. versionadded:: OGR 1.8.0, le pilote GML gèer partiellement la lecture des fichiers 
   AIXM ou CityGML files.
  
-.. versionadded:: OGR 2.0, le pilote GML gère la lecture :
+.. versionadded:: OGR 1.11, le pilote GML gère la lecture :
 
   * des `fichiers GML du Finnish National Land Survey (a.k.a MTK GML) pour les données topographiques 
     <http://xml.nls.fi/XML/Schema/Maastotietojarjestelma/MTK/201202/Maastotiedot.xsd>`_ ;
   * `Finnish National Land Survey GML files pour les données cadastrales <http://xml.nls.fi/XML/Schema/sovellus/ktjkii/modules/kiinteistotietojen_kyselypalvelu_WFS/Asiakasdokumentaatio/ktjkiiwfs/2010/02/>`_ ;
   * `Données cadastrales dans les schémas GML Inspire <http://inspire.ec.europa.eu/schemas/cp/3.0/CadastralParcels.xsd>`_.
+  * `Format d'échange RUIAN de la République Tchèque (VFR) <http://www.cuzk.cz/Uvod/Produkty-a-sluzby/RUIAN/2-Poskytovani-udaju-RUIAN-ISUI-VDP/Vymenny-format-RUIAN/Vymenny-format-RUIAN-%28VFR%29.aspx>`_.
   
 Lecture des géométries
 =======================
@@ -113,7 +137,7 @@ Lors de la lecture d'une feature, le pilote prendra par défaut seulement en com
 la dernière géométrie GML reconnu trouvée (dans le cas où il y en a plusieurs) 
 dans le sous arbre XML décrivant la feature.
 
-.. versionadded:: OGR 2.0, si el schéma .xsd est compris par le lecteur XSD et 
+.. versionadded:: OGR 1.11, si le schéma .xsd est compris par le lecteur XSD et 
 qu'il déclare plusieurs champs géométriques, ou que le fichier .gfs déclare 
 plusieurs champs géométriques, les champs géométriques multiples seront reportés 
 parl e pilote GML selon la `RFC 41 <http://trac.osgeo.org/gdal/wiki/rfc41_multiple_geometry_fields>`_.
@@ -377,7 +401,7 @@ suivantes :
   *XSISCHEMAURI* est utilisé).
 * **PREFIX** (OGR >= 1.10) 'ogr' par défaut. Ceci est le préfix pour l'espace 
   de nom cible de l'application.
-* **STRIP_PREFIX** (OGR >= 2.0) FALSE par défauts. Peut être définie à TRUE 
+* **STRIP_PREFIX** (OGR >= 1.11 FALSE par défauts. Peut être définie à TRUE 
   afin d'éviter l'écriture du préfixe de l'espace de nom cible de l'application 
   dans le fichier GML.
 * **TARGET_NAMESPACE** (OGR >= 1.10) 'http://ogr.maptools.org/' par défaut. 
@@ -394,7 +418,7 @@ suivantes :
     
     Autrement GML2 sera utilisé.
     
-    .. versionadded:: OGR 2.0, les champs de type StringList, RealList ou 
+    .. versionadded:: OGR 1.11, les champs de type StringList, RealList ou 
       IntegerList peuvent être écrit. Cela impliquera une alerte dans le 
       profile SF-1 dans le schéma .XSD (ces types ne sont pas géré par SF-0).
       
@@ -406,9 +430,14 @@ suivantes :
   alors la fonction prendra soin d'échanger l'ordre des coordonnées. Si définie 
   à NO, la projection avec l'autorité EPSG sera écrit avec le préfixe "EPSG:", même 
   s'ils sont dans l'ordre lat/long.
-* **WRITE_FEATURE_BOUNDED_BY**=YES/NO. (OGR >= 2.0, valide seulement quand 
+* **WRITE_FEATURE_BOUNDED_BY**=YES/NO. (OGR >= 1.11, valide seulement quand 
   FORMAT=GML3/GML3Degree/GML3.2) Yes par défaut. Si définie à NO, l'élément 
   <gml:boundedBy> ne sera pas écrit pour chaque entités.
+* **SRSDIMENSION_LOC**=POSLIST/GEOMETRY/GEOMETRY,POSLIST. (seulement valide 
+  FORMAT=GML3, GDAL >= 2.0) POSLIST par défaut. Pour les géométries 2.5D, définie 
+  la localisation où attacher l'attribut srsDimension. Il y a des implémentations 
+  divergentes. Certaines le placent dans l'élement <gml:posList>, d'autres en 
+  haut de l'élément geomtrie.
 * **SPACE_INDENTATION=YES/NO :** (OGR >= 1.8.0) YES par défaut. Si YES, la sortie 
   sera indentée avec des espaces pour une meilleure lisibilité, mais avec une 
   augmentation de la taille.
@@ -490,9 +519,28 @@ Les valeurs acceptées sont : 0 (n'imoprte quel type de géométrie), 1 (point),
 2 (linestring), 3 (polygon), 4 (multipoint), 5 (multilinestring), 6 
 (multipolygon), 7 (geometrycollection).
 
-.. versionadded:: OGR 2.0, les éléments <GeometryElementPath> et <GeometryType> 
+.. versionadded:: OGR 1.11, les éléments <GeometryElementPath> et <GeometryType> 
   peuvent être définie autant de fois qu'il y a de champs géométriques dans le 
-  le fichier GML.
+  le fichier GML. Une autre possibilité est de définir un élément 
+  <GeomPropertyDefn> autant de fois que nécessaire :
+  ::
+    
+    <GMLFeatureClassList>
+      <GMLFeatureClass>
+	<Name>LAYER</Name>
+	<ElementPath>LAYER</ElementPath>
+	<GeomPropertyDefn>
+	    <Name>geometry</Name> <-- OGR geometry name -->
+	    <ElementPath>geometry</ElementPath> <!-- XML element name possibly with '|' to specify the path -->
+	    <Type>MultiPolygon</Type>
+	</GeomPropertyDefn>
+	<GeomPropertyDefn>
+	    <Name>referencePoint</Name>
+	    <ElementPath>referencePoint</ElementPath>
+	    <Type>Point</Type>
+	</GeomPropertyDefn>
+      </GMLFeatureClass>
+    </GMLFeatureClassList>
 
 La sortie de *ogrinfo test.gml -ro -al* est :
 ::
@@ -511,9 +559,73 @@ La sortie de *ogrinfo test.gml -ro -al* est :
 	attrib2 (String) = attrib2_value
 	POINT (3 50)
 
-Syntaxe avancé .gfs (OGR >= 2.0)
+Syntaxe avancé .gfs (OGR >= 1.11)
 ==================================
- 
+
+Définir ElementPath pour trouver des objets inclus dans les objets de haut niveau
+**********************************************************************************
+Considérons le fichier *test.gml* suivant :
+::
+  
+  <?xml version="1.0" encoding="utf-8"?>
+  <gml:FeatureCollection xmlns:xlink="http://www.w3.org/1999/xlink"
+			xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+			gml:id="foo" xmlns:gml="http://www.opengis.net/gml/3.2">
+    <gml:featureMember>
+      <TopLevelObject gml:id="TopLevelObject.1">
+	<content>
+	  <Object gml:id="Object.1">
+	    <geometry>
+	      <gml:Polygon gml:id="Object.1.Geometry" srsName="urn:ogc:def:crs:EPSG::4326">
+		<gml:exterior>
+		  <gml:LinearRing>
+		    <gml:posList srsDimension="2">48 2 49 2 49 3 48 3 48 2</gml:posList>
+		  </gml:LinearRing>
+		</gml:exterior>
+	      </gml:Polygon>
+	    </geometry>
+	    <foo>bar</foo>
+	  </Object>
+	</content>
+	<content>
+	  <Object gml:id="Object.2">
+	    <geometry>
+	      <gml:Polygon gml:id="Object.2.Geometry" srsName="urn:ogc:def:crs:EPSG::4326">
+		<gml:exterior>
+		  <gml:LinearRing>
+		    <gml:posList srsDimension="2">-48 2 -49 2 -49 3 -48 3 -48 2</gml:posList>
+		  </gml:LinearRing>
+		</gml:exterior>
+	      </gml:Polygon>
+	    </geometry>
+	    <foo>baz</foo>
+	  </Object>
+	</content>
+      </TopLevelObject>
+    </gml:featureMember>
+  </gml:FeatureCollection>
+
+Par défaut, seul l'objet TopLevelObject sera reporté et il utilisera seulement 
+la seconde géométrie. Ce n'est pas le comportement désiré dans cette instance. 
+Vous pouvez éditer le fichier .gfs généré et le modifier comme ce qui suit dans 
+le but de définir un chemin complet à l'élément (l'élément XML de haut niveau 
+étant omis) :
+
+::
+  
+  <GMLFeatureClassList>
+    <GMLFeatureClass>
+      <Name>Object</Name>
+      <ElementPath>featureMember|TopLevelObject|content|Object</ElementPath>
+      <GeometryType>3</GeometryType>
+      <PropertyDefn>
+	<Name>foo</Name>
+	<ElementPath>foo</ElementPath>
+	<Type>String</Type>
+      </PropertyDefn>
+    </GMLFeatureClass>
+  </GMLFeatureClassList>
+
 Obtenir des attributs XML en tant que champs OGR
 **************************************************
 
@@ -662,7 +774,7 @@ La sortie de *ogrinfo testcondition.gml -ro -al* est :
     name_others_lang (StringList) = (1:de)
     name_others (StringList) = (1:Deutsche name)
 
-Registre pour des schémas d'application GML (OGR >= 2.0)
+Registre pour des schémas d'application GML (OGR >= 1.11)
 ==========================================================
 
 Le répertoire "data" de l'installation de GDAL contient un fichier 
@@ -701,6 +813,17 @@ Un exemple d'un tel fichier est :
           <featureType elementName="CadastralZoning"
                       gfsSchemaLocation="inspire_cp_CadastralZoning.gfs"/>
       </namespace>
+      &lt;!-- Czech RUIAN (VFR) schema (v1) --&gt;
+      <namespace prefix="vf"
+               uri="urn:cz:isvs:ruian:schemas:VymennyFormatTypy:v1 ../ruian/xsd/vymenny_format/VymennyFormatTypy.xsd"
+               useGlobalSRSName="true">
+	  <featureType elementName="TypSouboru"
+                     elementValue="OB"
+                     gfsSchemaLocation="ruian_vf_ob_v1.gfs"/>
+	  <featureType elementName="TypSouboru"
+                     elementValue="ST"
+                     gfsSchemaLocation="ruian_vf_st_v1.gfs"/>
+      </namespace>
   </gml_registry>
 
 
@@ -714,7 +837,10 @@ Le schéma est utilisé si et seulement si le préfixe de l'espace de nom et l'U
 sont trouvés dans les premiers octets du fichier GML (e.g. 
 *xmlns:ktjkiiwfs="http://xml.nls.fi/ktjkiiwfs/2010/02"*), et que le type de 
 l'entité est aussi détecté dans les premiers octets du fichier GML 
-(e.g. *ktjkiiwfs:KiinteistorajanSijaintitiedot*).
+(e.g. *ktjkiiwfs:KiinteistorajanSijaintitiedot*). Si la valeur de l'élément est 
+définie alors le schéma est utilisé seulement si le type d'entité est trouvé 
+avec la valeur de l'élément dans les premiers octets du fichier GML (e.g. 
+*vf:TypSouboru>OB_UKSH*).
 
 Construire des tables de jonction
 ===================================
@@ -785,5 +911,6 @@ Crédits
 
 * Implémentation pour **GML_SKIP_RESOLVE_ELEMS HUGE** a été une contribution de 
   A.Furieri, financé par la Région Toscane.
- 
-.. yjacolin at free.fr, Yves Jacolin - 2013/11/07 (trunk 26591)
+* La gestion pour les données cadastrale dans les GML du Finnish National Land Survey et GML Inspire a été financé par *The Information Centre of the Ministry of Agriculture and Forestry (Tike)*
+
+.. yjacolin at free.fr, Yves Jacolin - 2014/08/08 (trunk 27581)
