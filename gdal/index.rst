@@ -1,35 +1,35 @@
-.. _`gdal.index`:
+.. _`gdal.gdal.index`:
 
-===========================================
-GDAL-OGR, le couteau suisse du géomaticien
-===========================================
-
-:Author: Yves JACOLIN
-:Date: décembre 2006
-
-.. include:: NEWS.rst
-
-.. :ref:`gdal.plan`
-
-.. toctree::
-    :hidden:
-    
-    NEWS
-
-Table des matières
-====================
+==============================
+Les commandes et formats GDAL
+==============================
 
 .. toctree::
     :maxdepth: 2
 
-    install
-    gdal/index
-    ogr/index
-    python/index
-    faq/index
-    logicielutilisantgdal
-    utils/index
-    contributeurs
-
-
-
+    presentation
+    gdalinfo
+    gdal_translate
+    gdaladdo
+    gdalwarp
+    gdaltindex
+    gdalbuildvrt
+    gdal_contour
+    gdaldem
+    rgb2pct
+    gdal_merge
+    gdal2tiles
+    gdal_rasterize
+    gdaltransform
+    nearblack
+    gdal_retile
+    gdal_grid
+    gdal_proximity
+    gdal_polygonize
+    gdal_sieve
+    gdal_fillnodata
+    gdallocationinfo
+    gdal-config
+    gdalsrsinfo
+    gdalmove
+    formats/index
