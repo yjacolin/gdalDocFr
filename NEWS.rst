@@ -2,6 +2,9 @@
 Historique des versions
 =======================
 
+* 2015 : mise à jour de la doc GDAL (formats) + OGR (formats) - récupération du 
+  retard sur GDAL. De nombreux formats OGR ne sont pas traduit (15) ou manquant 
+  (9).
 * 2014 : intégration de nouvelle recette python et réorganisation du dépôt. 
   poursuite de la traduction de la 2.0
 * 2013-01 : mise à jour 1.9.* et début 1.10
