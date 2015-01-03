@@ -17,6 +17,11 @@ requêtes geospatiales de ces données d'une manière rapide et efficace en util
 une API REST pré-définie. Ce pilote sérialise tous les formats de fichiers gérés 
 par OGR dans un index ElasticSearch.
 
+Cependant, le pilote est limié dans la prise en charge des géométries : même si 
+les polygones sont fournie en entrée, ils sont stockés en tant que 
+`point géo <http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/mapping-geo-point-type.html>`_
+et le "centre" du polygone est utilisé comme valeur du point.
+
 Définitions des champs
 ***********************
 Les champs sont dynamiquement mappé à partir de la source de la données OGR. Cependant 
@@ -106,4 +111,4 @@ Plusieurs options peuvent être définies en même temps.
 * `Exemples sur le Wiki <http://code.google.com/p/ogr2elasticsearch/w/list>`_
 * `Google Group <http://groups.google.com/group/ogr2elasticsearch>`_
 
-.. yjacolin at free.fr, Yves Jacolin - 2013/03/22 (trunk 25229)
+.. yjacolin at free.fr, Yves Jacolin - 2014/11/16 (trunk 27971)

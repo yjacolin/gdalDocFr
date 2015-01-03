@@ -24,4 +24,7 @@ géométriques additionnel à des fichiers existant, mais la mise à jour d'obje
 géométrique existant n'est pas géré. Chaque couche est créer comme un fichier 
 .gmt séparé.
 
-.. yjacolin at free.fr, Yves Jacolin - 2009/02/23 21:19 (trunk 11029)
+Si un nom qui se termine par .gmt n'est pas donné, alors le pilote GMT utilisera 
+le nom de la couche et ajoutera l'extension ".gmt".
+
+.. yjacolin at free.fr, Yves Jacolin - 2014/12/16 (trunk 28156)

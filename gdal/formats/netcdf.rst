@@ -304,6 +304,10 @@ Changements importants
 * Ajout de la gestion pour les paramètres valid_range/valid_min/valid_max
 * Prise en charge correct des données bytes signés/non signés.
 * Ajout de la gestion pour la fonction *Create()* - permet d'utiliser netcdf directement avec :ref:`gdal.gdal.gdalwarp`
+* Ajout de la gestion des variables de coordonnées à deux dimension CF (voir 
+  `Conventions CF <http://cfconventions.org/1.6.html#idp5559280>`_) via des 
+  tableaux GDAL GEOLOCATION (voir `RFC 4: Geolocation Arrays <https://trac.osgeo.org/gdal/wiki/rfc4_geolocate>`_)
+  (GDAL >= 1.10)
 
 Options de création
 ********************
@@ -380,4 +384,4 @@ et HDF5.
   * `Documentation NetCDF <http://www.unidata.ucar.edu/software/netcdf/docs/>`_
 
 
-.. yjacolin at free.fr, Yves Jacolin - 2013/01/01 (http://gdal.org/frmt_netcdf.html trunk 23644)
+.. yjacolin at free.fr, Yves Jacolin - 2014/05/29 (http://gdal.org/frmt_netcdf.html trunk 27422)

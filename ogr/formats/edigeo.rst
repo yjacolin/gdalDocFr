@@ -62,9 +62,9 @@ xxx=OBJ_OBJ_LNK_LAYER. Cela peut être désactivé en définissant
 
 *  `Introduction au standard EDIGEO <http://georezo.net/wiki/main/donnees/edigeo>`_ (en Français)
 *  `Standard EDIGEO - AFNOR NF Z 52000 <http://georezo.net/wiki/_media/main/geomatique/norme_edigeo.zip>`_ (en Français)
-*  `Standard d'échange des objets du PCI selon la norme EDIGEO <http://www.craig.fr/contenu/ressources/dossiers/pci/pdf/EDIGeO_PCI.pdf>`_ (en Français)
+*  `Standard d'échange des objets du PCI selon la norme EDIGEO <href="http://www.craig.fr/contenu/resources/dossiers/pci/pdf/EDIGeO_PCI.pdf>`_ (en Français)
 *  `Page principale du Cadastre français <http://www.cadastre.gouv.fr>`_ (en Français)
 *  `Description du module EDIGEO dans Geotools <http://docs.codehaus.org/pages/viewpage.action?pageId=77692976>`_ (en anglais)
 *  `Échantillon de données EDIGEO <http://svn.geotools.org/trunk/modules/unsupported/edigeo/src/test/resources/org/geotools/data/edigeo/test-data/>`_
 
-.. yjacolin at free.fr, Yves Jacolin - 2011/07/03 (trunk 21652)
+.. yjacolin at free.fr, Yves Jacolin - 2014/11/30 (trunk 28039)

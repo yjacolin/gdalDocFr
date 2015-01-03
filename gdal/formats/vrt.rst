@@ -85,6 +85,18 @@ Les fichiers virtuels stockés sur le disque sont laissé au format XML avec les
         
         <GeoTransform>440720.0,  60,  0.0,  3751320.0,  0.0, -60.0</GeoTransform>
 
+    * **GCPList :** cet élément contient une liste de points d'amer (GCP en 
+      anglais) pour le jeu de données, correspondant aux coordonnées pixel/ligne 
+      et les coordonnées géoréférencées. L'attribut de projection doit contenir 
+      le SRS des coordonnées géoréférencées dans le même format que l'élément SRS.
+      
+      ::
+	
+	<GCPList Projection="EPSG:4326">
+	  <GCP Id="1" Info="a" Pixel="0.5" Line="0.5" X="0.0" Y="0.0" Z="0.0" />
+	  <GCP Id="2" Info="b" Pixel="13.5" Line="23.5" X="1.0" Y="2.0" Z="0.0" />
+	</GCPList>
+
     * **Metadata :** cet élément contient une liste de pair nom/valeur de 
       méta-données associé à VRTDataset comme un tout, ou à VRTRasterBand. Il a un 
       sous-élément <MDI> (méta-données item) qui possède un attribut "key" et la 
@@ -247,17 +259,66 @@ Les fichiers virtuels stockés sur le disque sont laissé au format XML avec les
             <SrcRect xOff="0" yOff="0" xSize="512" ySize="512"/>
             <DstRect xOff="0" yOff="0" xSize="512" ySize="512"/>
             </SimpleSource>
+            
+          À partir de GDAL 2.0, un sous élément OpenOptions peut être ajouté pour 
+          définir l'option ouverte à appliqué lors de l'ouverture du jeu de 
+          données source. Il a le sous élement <OOI> (open option item) qui 
+          possède un attribut "key" et la valeur comme données de l'élément.
+          
+          ::
+	    
+	    <SimpleSource>
+	        <SourceFilename relativeToVRT="1">utm.tif</SourceFilename>
+	        <OpenOptions>
+	            <OOI key="OVERVIEW_LEVEL">0</OOI>
+	        </OpenOptions>
+	        <SourceBand>1</SourceBand>
+	        <SourceProperties RasterXSize="256" RasterYSize="256" DataType="Byte" BlockXSize="128" BlockYSize="128"/>
+	        <SrcRect xOff="0" yOff="0" xSize="256" ySize="256"/>
+	        <DstRect xOff="0" yOff="0" xSize="256" ySize="256"/>
+	    </SimpleSource>
+	    
+	    À partir de GDAL 2.0, un attribut de reéchentillonage peut être 
+	    définie sur un élément *SimpleSource* ou *ComplexSource* pour définir 
+	    l'algorithme de reéchentillonage utilisé quand la taille du 
+	    rectangle de destination n'est pas le même que la taille du rectangle 
+	    source. Les valeurs autorisées pour cet attribut sont : nearest, 
+	    bilinear, cubic, cubicspline, lanczos, average, mode.
+	    
+	    ::
+	      
+	      <SimpleSource resampling="cubic">
+	            <SourceFilename relativeToVRT="1">utm.tif</SourceFilename>
+	            <SourceBand>1</SourceBand>
+	            <SourceProperties RasterXSize="256" RasterYSize="256" DataType="Byte" BlockXSize="128" BlockYSize="128"/>
+	            <SrcRect xOff="0" yOff="0" xSize="256" ySize="256"/>
+	            <DstRect xOff="0" yOff="0" xSize="128" ySize="128"/>
+	      </SimpleSource>
 
-        * **AveragedSource :** *AveragedSource* est dérivé de *SimpleSource* et partage 
-          les mêmes propriétés sauf qu'il utilise un réechentillonnage moyen au lieu de 
-          l'algorithme de plus proche voisin comme dans *SimpleSource*, quand la taille 
-          du rectangle de destination n'est pas le même que la taille du rectangle source.
+        * **AveragedSource :** *AveragedSource* est dérivé de *SimpleSource* et 
+           partage les mêmes propriétés sauf qu'il utilise un réechentillonnage 
+           moyen au lieu de l'algorithme de plus proche voisin comme dans 
+           *SimpleSource*, quand la taille du rectangle de destination n'est pas 
+           le même que la taille du rectangle source. 
+           
+           .. note:: à partir de GDAL 2.0, un mécanisme plus général pour définir 
+              les algorithmes de reéchentillonage peut être utilisé. Lisez le 
+              paragraphe au dessus sur l'attribut ''resampling'.
 
         * **ComplexSource :** le paramètre *ComplexSource* est dérivé de *SimpleSource* 
           (il partage donc les éléments *SourceFilename*, *SourceBand*, *SrcRect* et 
           *DestRect*), mais il fournit la gestion du reéchentillonage et l'écart des 
           valeurs source. Certaines zones de la source peuvent être masquées en 
           définissant la valeur *NODATA*.
+          
+          À partir de GDAL 1.11, une autre solution à l'échelle linéaire, l'échelle 
+          non linéaire, à l'aide d'une fonction de puissance, peut être utilisé en 
+          spécifiant les éléments Exponent, SrcMin, SrcMax, DstMin et DstMax.
+          Si SrcMin et SrcMax ne sont pas définie, ils sont calculés à partir des 
+          valeurs minimales et maximale de la source (ce qui nécessite une analyse 
+          de l'ensemble du jeu de données source). Exponent doit être positif 
+          (ces 5 valeurs peuvent être définie avec les options *-exponent* et 
+          *-scale* de gdal_translate.)
 
           Le paramètre *ComplexSource* gère l'ajout de table lookup (LUK) 
           personnalisée pour transformer les valeurs sources vers la destination. Les LUT 
@@ -279,8 +340,8 @@ Les fichiers virtuels stockés sur le disque sont laissé au format XML avec les
 
           1. masquage des Nodata ;
           2. expansion de la table de couleur ;
-          3. application du ratio d'échelle ;
-          4. application du décalage d'échelle ;
+          3. pour l'échelle linéaire, application du ratio d'échelle, puis un décalage d'échelle ;
+          4. pour l'échelle non linéaire, application de (DstMax-DstMin) * pow( (SrcValue-SrcMin) / (SrcMax-SrcMin), Exponent) + DstMin
           5. lecture de la table.
 
           ::
@@ -296,6 +357,22 @@ Les fichiers virtuels stockés sur le disque sont laissé au format XML avec les
             <SrcRect xOff="0" yOff="0" xSize="512" ySize="512"/>
             <DstRect xOff="0" yOff="0" xSize="512" ySize="512"/>
             </ComplexSource>
+            
+           Échelle non linéaire :
+           
+           ::
+	    
+	    <ComplexSource>
+	        <SourceFilename relativeToVRT="1">16bit.tif</SourceFilename>
+	        <SourceBand>1</SourceBand>
+	        <Exponent>0.75</Exponent>
+	        <SrcMin>0</SrcMin>
+	        <SrcMax>65535</SrcMax>
+	        <DstMin>0</DstMin>
+	        <DstMax>255</DstMax>
+	        <SrcRect xOff="0" yOff="0" xSize="512" ySize="512"/>
+	        <DstRect xOff="0" yOff="0" xSize="512" ySize="512"/>
+	    </ComplexSource>
 
         * **KernelFilteredSource :** c'est un pixel source dérivé de Simple Source (il 
           partage donc les éléments SourceFilename, SourceBand, SrcRect et DestRect 
@@ -561,7 +638,7 @@ peut être utilisées pour contrôler le type de bande créé (*VRTRasterBand*,
     papszOptions = CSLAddNameValue(papszOptions, "PixelOffset", "2"); // optionnal. default = size of band type 
     papszOptions = CSLAddNameValue(papszOptions, "LineOffset", "1024"); // optionnal. default = size of band type * width 
     papszOptions = CSLAddNameValue(papszOptions, "ByteOrder", "LSB"); // optionnal. default = machine order
-    papszOptions = CSLAddNameValue(papszOptions, "RelativeToVRT", "true"); // optionnal. default = false
+    papszOptions = CSLAddNameValue(papszOptions, "relativeToVRT", "true"); // optionnal. default = false
     poVRTDS->AddBand(GDT_Byte, papszOptions);
     CSLDestroy(papszOptions);
 
@@ -745,4 +822,4 @@ données sous-jacent. Si vous ouvrez deux fois le même jeu de données VRT par 
 même thread, l'ensemble des jeux de données VRT partageront la même prise en 
 charge des jeux de données sous-jacent.
 
-.. yjacolin at free.fr, Yves Jacolin - 2011/08/31 (trunk 22897)
+.. yjacolin at free.fr, Yves Jacolin - 2014/12/04 (trunk 28053)

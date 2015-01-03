@@ -47,6 +47,20 @@ Options de création
 * **PROGRESSION :** ordre de progression : LRCP, RLCP, RPCL, PCRL ou CPRL. LRCP par défaut.
 * **SOP=YES/NO :** YES signifie générer des segments marqueur SOP. No par défaut.
 * **EPH=YES/NO :** YES signifie générer des segments marqueur EPH. No par défaut.
+* **YCBCR420=YES/NO :** (GDAL >= 1.11) YES si RVB doit être reéchantilloné en 
+  YCbCr 4:2:0. Défauts à *NO*.
+* **YCC=YES/NO :** (GDAL >= 2.0) YES si l' espace de couleur RVB doit être 
+  transformé en YCC. Défauts à *YES*.
+
+Compression sans perte
+************************
+
+La compression sans perte peut être réalisée si **toutes** les options de 
+création suivantes sont définies :
+
+* QUALITY=100
+* REVERSIBLE=YES
+* YCBCR420=NO (ce qui est la valeur par défaut)
 
 .. seealso::
 
@@ -56,9 +70,9 @@ Options de création
 
 Autres pilotes JPEG2000 pour GDAL :
 
-* :ref:`gdal.gdal.formats.jpeg2000`
-* :ref:`gdal.gdal.formats.jp2ecw`
-* :ref:`gdal.gdal.formats.jp2mrsid`
-* :ref:`gdal.gdal.formats.jp2kak`
+* :ref:`gdal.gdal.formats.jpeg2000` (open source)
+* :ref:`gdal.gdal.formats.jp2ecw` (propriétaire)
+* :ref:`gdal.gdal.formats.jp2mrsid` (propriétaire)
+* :ref:`gdal.gdal.formats.jp2kak` (propriétaire)
 
-.. yjacolin at free.fr, Yves Jacolin - 2011/08/15 (trunk 25433)
+.. yjacolin at free.fr, Yves Jacolin - 2014/09/03 (trunk 27631)

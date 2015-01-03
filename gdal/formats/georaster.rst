@@ -114,13 +114,19 @@ Options de création
   ::
     
     % gdal_translate -of georaster landsat_825.tif geor:scott/tiger@orcl,landsat,raster \
-    -co INSERT="ID, RASTER VALUES (2,SDO_GEOR.INIT())"
+    -co INSERT="(ID, RASTER) VALUES (2,SDO_GEOR.INIT())"
 
-* **COMPRESS :** options de compression, JPEG-F, JPEG-B, DEFLATE ou NONE. Les 
-  deux options JPEG sont avec pertes, ce qui signifie que les pixels originels 
-  sont modifiés. Le type JPEG-F stocke une structure complète du JPEG sur 
-  chaque bloc tandis que le type JPEG-B est plus petit puisqu'il ne stocke pas 
-  les tables de quantification et d'Huffman.
+* **COMPRESS :** options de compression, JPEG-F, les pixels originaux sont 
+  modifiés.
+  
+* **GENPYRAMID :** génère une pyramide après qu'un objet GeoRaster a été importé 
+  dans la base de données. Le contenu de ce paramètre doit être une méthode de 
+  réechentillonage parmi NN (nearest neighbor), BILINEAR, BIQUADRATIC, CUBIC, 
+  AVERAGE4 ou AVERAGE16. Si GENPYRLEVELS n'est pas informée la fonction PL/SQL 
+  *sdo_geor.generatePyramid* calculera le nombre de niveau à générer.
+* **GENPYRLEVELS :** définie le nombre de niveau de pyramide à générer. Si 
+  *GENPYRAMID* n'est pas définie la méthode de réechentillonage NN (nearest 
+  neighbor) s'appliquera.
 * **QUALITY :** option de la qualité de la compression pour le format JPEG de 0 
   à 100. 75 par défaut.
 * **NBITS :** type de données sous byte, options : 1, 2 ou 4.
@@ -131,6 +137,9 @@ Options de création
 * **EXTENTSRID :** code SRID à utilisé la géoémtrie de l'étendue spatiale. Si la 
   table/colonne a déjà une étendue spatiale, la valeur définie doit être du même 
   SRID que pour l'étendue spatiale des autres GeoRaster existants.
+* **OBJECTTABLE :** pour créer RDT en tant qu'objet SDO_RASTER mettez TRUE, la 
+  valeur par défaut est FALSE et le RDT sera créé comme des tables relationnels 
+  régulières. Cela ne s'applique pas au version d'Oracle inférieure à 11.
 
 Importer des GeoRaster
 =======================
@@ -141,12 +150,14 @@ de valeurs/insert SQL pour informer le pilote de la table à créer et les valeu
 à ajouter aux nouvelles lignes. L'exemple suivant réalise cela :
 ::
     
-    % gdal_translate -of georaster landsat_1.tif georaster:scott/tiger,,landsat,scene \
+    % gdal_translate -of georaster Newpor.tif georaster:scott/tiger,,landsat,scene \
     -co "DESCRIPTION=(ID NUMBER, SITE VARCHAR2(45), SCENE MDSYS.SDO_GEORASTER)" \
-    -co "INSERT=VALUES(1,'West fields', SDO_GEOR.INIT())"
+    -co "INSERT=VALUES(1,'West fields', SDO_GEOR.INIT())" \
+    -co "BLOCKXSIZE=512" -co "BLOCKYSIZE=512" -co "BLOCKBSIZE=3" \
+    -co "INTERLEAVE=PIXEL" -co "COMPRESS=JPEG-F"
 
 Notez que l'option de création *DESCRIPTION* nécessite de donner le nom de la 
-table (landsat). Le nom de la colonne (scene) doit correspondre la description :
+table (landsat). Le nom de la colonne (scene) doit correspondre à la description :
 ::
     
     % gdal_translate -of georaster landsat_1.tif georaster:scott/tiger,,landsat,scene \
@@ -209,4 +220,4 @@ est de créer un VRT pour représenter la description du GeoRaster, par exemple 
     % gdal_translate -of VRT geor:scott/tiger@dbdemo,landsat,scene,id=54 view_54.vrt
     % openenv view_54.vrt
 
-.. yjacolin at free.fr, Yves Jacolin - 2013/01/01 (trunk 24098)
+.. yjacolin at free.fr, Yves Jacolin - 2014/09/02 (trunk 27629)

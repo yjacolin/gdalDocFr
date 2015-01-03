@@ -52,6 +52,9 @@ Ceci est la liste des formats que le pilote INGR gère en écriture :
 
 Notez que l'écriture dans ce format n'est pas encouragé !
 
+La compression type 9 RLE bitonal est utilisé lors de la sortie du fichier ".rle". 
+D'autres types de fichier sont non compressés.
+
 Extension de fichier
 =====================
 
@@ -104,6 +107,13 @@ géoréférencement dans les fichiers INGR. Il est possible d'avoir des données
 géoréférencées stocké dans un fichier .dgn d'accompagnement ou dans le stockage 
 des données spécifiques à l'application dans le fichier lui même.
 
+Métadonnées
+===========
+
+L'option de création suivante et mtadonnées de bande sont disponible.
+
+* **RESOLUTION :** c'est en DPI (dots per inch). Microns n'est pas géré.
+
 .. seealso::
 
   Pour plus d'information :
@@ -113,4 +123,4 @@ des données spécifiques à l'application dans le fichier lui même.
   * http://www.oreilly.com/www/centers/gff/formats/ingr/index.htm
   * Fichier des spécifications : ftp://ftp.intergraph.com/pub/bbs/scan/note/rffrgps.zip/
 
-.. yjacolin at free.fr, Yves Jacolin - 2008/04/05 18:09 (trunk 12129)
+.. yjacolin at free.fr, Yves Jacolin - 2013/03/23 (trunk 25785)

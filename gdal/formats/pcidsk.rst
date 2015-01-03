@@ -23,7 +23,7 @@ Les aperçues internes d'images (pyramide) seront également lu correctement bie
 que les nouveaux aperçues demandés seront construit en externe comme un fichier 
 .ovr.
 
-Les segments vectoriels sont géré par le pilote OGR PCIDSK.
+À partir de GDAL 2.0, les segments vecteurs sont également géré par ce pilote.
 
 Options de création
 ====================
@@ -45,4 +45,4 @@ si d'autres organisations sont géré en lecture.
   * Implémenté dans *gdal/frmts/pcidsk/pcidskdataset2.cpp*.
   * `SDK PCIDSK <http://home.gdal.org/projects/pcidsk/index.html>`_.
 
-.. yjacolin at free.fr, Yves Jacolin - 2013/01/20 (trunk 21567)
+.. yjacolin at free.fr, Yves Jacolin - 2014/05/24 (trunk 27384)

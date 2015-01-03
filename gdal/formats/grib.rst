@@ -67,6 +67,6 @@ données GRIB au même moment à partir de thread différents.
 
   * `Décodeur GRIB2 de "degrib" NOAA NWS NDFD <http://www.weather.gov/mdl/NDFD_GRIB2Decoder/>`_
   * `Bibliothèque de décodage de grib par g2clib NOAA NWS NCEP <http://www.nco.ncep.noaa.gov/pmb/codes/GRIB2/>`_
-  * `Documents sur le format GRIB WMS <http://www.wmo.int/pages/prog/www/WMOCodes/GRIB.html>`_
+  * `Documents sur le format GRIB WMO <http://www.wmo.int/pages/prog/www/WDM/Guides/Guide-binary-2.html>`_
 
-.. yjacolin at free.fr, Yves Jacolin - 2013/01/01 (trunk 23235)
+.. yjacolin at free.fr, Yves Jacolin - 2014/10/30 (trunk 27914)

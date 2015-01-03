@@ -157,8 +157,8 @@ générique, c'est à dire seulement réalisée côté client. Les filtres spati
 attributaires côté serveur doit être réalisé via les interfaces *SetSpatialFilter()* 
 et *SetAttributeFilter()*.
 
-Métadonnées des couches
-------------------------
+Special layer : WFSLayerMetadata
+---------------------------------
 
 (OGR >= 1.9.0)
 
@@ -169,6 +169,16 @@ Chaque enregistrement contient un champ "layer_name", "title" et "abstract", à
 partir du document renvoyé par le GetCapabilities.
 
 Cette couche est retournée via GetLayerByName("WFSLayerMetadata").
+
+Special layer : WFSGetCapabilities
+-----------------------------------
+
+(OGR >= 1.9.0)
+
+Une couche "cachée" est appelée "WFSGetCapabilities" est remplie avec le résultat 
+XML brute de la requête GetCapabilities.
+
+Cette couche est retournée par GetLayerByName("WFSGetCapabilities").
 
 Exemples
 ---------
@@ -206,4 +216,4 @@ Voir également
 * `Standard WFS de l'OGC <http://www.opengeospatial.org/standards/wfs>`_
 * :ref:`gdal.ogr.formats.gml`
 
-.. yjacolin at free.fr, Yves Jacolin - 2011/08/04 (trunk 22202)
+.. yjacolin at free.fr, Yves Jacolin - 2011/10/02 (trunk 23163)

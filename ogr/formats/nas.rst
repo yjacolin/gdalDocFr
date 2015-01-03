@@ -13,9 +13,16 @@ Le pilote dépend de la compilation de GDAL/OGR avec la bibliothèque XML Xerces
 Ce pilote a été implémenté dans le contexte du projet PostNAS qui a plus 
 d'information sur son utilisation.
 
+Le pilote recherche "opengis.net/gml" et une des chaînes de séparation listées 
+dans l'option NAS_INDICATOR (dont la valeur par défaut est 
+"NAS-Operationen.xsd;NAS-Operationen_optional.xsd;AAA-Fachschema.xsd") pour 
+déterminer si l'entrée est un fichier NAS et ignore tous les fichiers qui ne 
+correspondent pas.
+
 Voir également
 --------------
 
 * `PostNAS <http://trac.wheregroup.com/PostNAS>`_
+* `norGIS ALKIS-Import <http://www.norbit.de/68/>`_
 
-.. yjacolin at free.fr, Yves Jacolin - 2011/08/02 (trunk 20162)
+.. yjacolin at free.fr, Yves Jacolin - 2014/12/11 (trunk 28131)

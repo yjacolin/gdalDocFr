@@ -37,6 +37,48 @@ SetGeoTransform() et SetProjection(). Si la projection est définie avec
 SetProjection() et PROJ, DATUM et UNITS avec SetMetadataItem(), les dernières 
 valeurs écraseront les valeurs compilé avec la chaîne de projection.
 
+Version 3 des fichiers ECW
+============================
+
+.. versionadded:: à partir de GDAL 1.10.0
+
+Le SDK ECW 5.x fourni un fichier de format ammendé qui permet de stocker des 
+données statistiques, des histogrammes, des métadonnées, des métadonnées rpc et 
+gère le type de données de bande UInt16.
+ 
+Pour le moment tout n'est pas implémenté : 
+
+* **Statistics and Histograms** - implémentation complète pour l'écriture et la 
+  lecture. Pas de clé ECW_OEM_KEY néccessaire.
+* **File Metadata** - gestion en lecture seule. Des statistiques seront aussi 
+  préservées/mises à jour durant la méthode CreateCopy.
+* **RPC Metadata** - géré par le format de fichier, pas géré par le pilote. 
+* **Header Metadata** - écrit par le SDK lui-même. Retournée par gdalinfo.
+
+Clé des métadonnées de fichiers
+*********************************
+
+* FILE_METADATA_ACQUISITION_DATE
+* FILE_METADATA_ACQUISITION_SENSOR_NAME
+* FILE_METADATA_ADDRESS
+* FILE_METADATA_AUTHOR
+* FILE_METADATA_CLASSIFICATION
+* FILE_METADATA_COMPANY - doit être définie à ECW_OEM_KEY
+* FILE_METADATA_COMPRESSION_SOFTWARE - mis à jour pendant la recompression
+* FILE_METADATA_COPYRIGHT
+* FILE_METADATA_EMAIL
+* FILE_METADATA_TELEPHONE
+
+Les métadonnées suivant de l'en-tête seront retournées
+*******************************************************
+
+* CLOCKWISE_ROTATION_DEG
+* COLORSPACE (reporté pour les fichiers en version 2 également)
+* COMPRESSION_DATE
+* COMPRESSION_RATE_ACTUAL
+* COMPRESSION_RATE_TARGET (reporté pour les fichiers en version 2 également)
+* VERSION (reporté pour les fichiers en version 2 également)
+
 Problèmes de création
 ========================
 
@@ -52,7 +94,9 @@ une licence d'ERDAS. Voyez l'agréement de licence et l'option *LARGE_OK*.
 Les fichiers à compresser au format ECW doivent également être d'au moins 128 × 128. 
 Les sources qui ne sont pas en 8 bites seront re-échantillonnées par la 
 bibliothèque SDK ECW d'une manière un peu incompréhensible. Le résultat est une 
-image en 8 bites.
+image en 8 bites pour les fichiers ECW en version. Les fichiers ECW en version 3 
+gère 16 bits par canal (comme type de données Uint16). Veuillez lire les options 
+de création pour activer l'écriture de fichier ECW en version 3.
 
 Lors de l'écriture des informations du système de coordonnées dans les fichiers 
 ECW, la plupart des systèmes de coordonnées courants ne sont pas intégrés 
@@ -82,6 +126,11 @@ options de création du PROJ et du DATUM.
   d'encodage OEM d'ERDAS (voir ECW_ENCODE_KEY). Cela doit correspondre exactement 
   au nom utilisé par ERDAS lors de la fourniture de la clé OEM. Il peut aussi être 
   fournie comme option de configuration.
+* **ECW_FORMAT_VERSION=2/3 :** (GDAL >= 1.10.0) lorsqu'il est compilé avec le 
+  SDK 5.x du format ECW cette option peut être définie pour permettre la création 
+  de fichier ECW en version 3. Cela permet d'écrire des rasters avec un type de 
+  données UInt16 (nouvelle fonctionnalités des fichiers ECW en version 3). La 
+  valeur par défaut est 2 ce qui créera des fichiers ECW en version 2.
 
 Le format ECW ne supporte pas la création d'aperçu puisque le format ECW est 
 déjà censé être optimisé pour les « aperçues arbitraires ».
@@ -133,4 +182,4 @@ sur la signification de ces options.
     http://www.geospatial.intergraph.com)
   * `Astuces de compilation de l'ECW pour GDAL <http://trac.osgeo.org/gdal/wiki/ECW>`_
 
-.. yjacolin at free.fr, Yves Jacolin - 2013/01/01 (trunk 25804)
+.. yjacolin at free.fr, Yves Jacolin - 2013/04/05 (trunk 25864)

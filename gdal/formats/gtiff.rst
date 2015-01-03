@@ -37,8 +37,7 @@ de points d'amer.
 
 Si aucune information de géo-référencement n'est disponible dans le fichier 
 TIFF en lui-même, GDAL cherchera un fichier world d'ESRI avec l'extension .tfw, 
-.tiffw ou .wld, ou également comme un fichier .tab de MapInfo (seul les points 
-d'amer sont utilisé, les Coordsys seront ignorés).
+.tiffw ou .wld, ou également comme un fichier .tab de MapInfo.
 
 GDAL peut lire et écrire le *RPCCoefficientTag* comme décrit dans l'extension 
 proposée `RPCs in GeoTIFF <http://geotiff.maptools.org/rpc_prop.html>`_. La balise 
@@ -144,6 +143,31 @@ ou *GeoTIFF*.
 .. versionadded:: 1.10 les métadonnées EXIF peuvent être extrait du fichier et 
    seront stockées dans le domaine métadonnées EXIF.
 
+Métadonnée de profile de couleur
+=================================
+
+À partir de GDAL 1.11, GDAL peut gérer les métadonnées de profile de couleur 
+suivant dans le domaine COLOR_PROFILE :
+
+* SOURCE_ICC_PROFILE (profile ICC encodé en Base64 inclus dans le fichier. Si 
+  disponible, les autres éléments sont ignorés.)
+* SOURCE_PRIMARIES_RED (xyY dans le format "x,y,1" pour le rouge primaire.)
+* SOURCE_PRIMARIES_GREEN (xyY dans le format "x,y,1" pour le vert primaire)
+* SOURCE_PRIMARIES_BLUE (xyY dans le format "x,y,1" pour le bleu primaire)
+* SOURCE_WHITEPOINT (xyY dans le format "x,y,1" pour le point blanc)
+* TIFFTAG_TRANSFERFUNCTION_RED (table de rouge de TIFFTAG_TRANSFERFUNCTION)
+* TIFFTAG_TRANSFERFUNCTION_GREEN (table de vert de TIFFTAG_TRANSFERFUNCTION)
+* TIFFTAG_TRANSFERFUNCTION_BLUE (table de bleu de TIFFTAG_TRANSFERFUNCTION)
+* TIFFTAG_TRANSFERRANGE_BLACK (domaine minimal de TIFFTAG_TRANSFERRANGE)
+* TIFFTAG_TRANSFERRANGE_WHITE (domaine maximal de TIFFTAG_TRANSFERRANGE)
+
+Notez que ces propriétés de métadonnées peuvent seulement être utilisé sur les 
+données de pixels brute. Si une conversion automatique a été réalisée, les 
+informations de profile de couleur ne puvent pas être utilisées.
+
+Tous ces éléments de métadonnées peuvent être écrasés et/ou utilisé comme options 
+de création.
+
 Valeur nodata
 ===============
 
@@ -202,12 +226,18 @@ Options de création
   compressé en JPEG 12 bit (vue comme des bandes UInt16 avec NBITS=12). Voir la 
   page wiki `"8 et 12 bit JPEG dans les TIFF" <http://trac.osgeo.org/gdal/wiki/TIFF12BitJPEG>`_ 
   pour plus de détails. La compression CCITT doit être uniquement utilisée avec 
-  des données à 1 bite (NBITS=1). La valeur par défaut est aucune compression (NONE).
+  des données à 1 bite (NBITS=1). Les compressions LZW et DEFLATE peuvent être 
+  utilisé avec l'option de création PREDICTOR. La valeur par défaut est aucune 
+  compression (NONE).
 * **PREDICTOR=[1/2/3] :** définit la [predictory] pour la compression LZW ou 
   DEFLATE. La valeur par défaut est de 1 (pas de prédiction), 2 est la 
   prédiction par différence horizontale et 3 par point flottant. [Set the 
   predictor for LZW or DEFLATE compression. The default is 1 (no predictor), 
   2 is horizontal differencing and 3 is floating point prediction.]
+* **DISCARD_LSB=nbits ou nbits_band1,nbits_band2,...nbits_bandN :** (GDAL >= 2.0)
+  Définie le nombre de bites le moins significant à nettoyer, potentiellement dans 
+  différentes bandes. Le plan de compression sans perte est utilisé au mieux avec 
+  *PREDICTOR=2* et *LZW/DEFLATE*.
 * **SPARSE_OK=TRUE/FALSE :** (à partir de GDAL 1.6.0) est ce que les fichiers 
   nouvellement créés doivent ils être autorisés à être *sparsé* ? Les fichiers 
   *sparsés* ont 0 tuiles/strip de distance pour les blocs jamais écrit et sauver 
@@ -217,6 +247,25 @@ Options de création
   la compression JPEG. Une valeur de 100 est la meilleur qualité (faible 
   compression) et 1 est la moins bonne qualité (meilleure compression). Par 
   défaut la valeur est à 75.
+* **JPEGTABLESMODE=0/1/2/3 :** (à partir de GDAL 2.0) configure comment et où la 
+  quantization JPEG et les tables de Huffman sont écrits dans l'élément 
+  JpegTables du TIFF et strip/tile. Défaut à 1.
+
+    * 0 : JpegTables n'est pas écrit. Chaque strip/tile contient ses propres 
+      tables de quantization et utilise le code d'Huffman optimisé.
+    * 1 : JpegTables est écrit avec seulement les tables de quantization. Chaque 
+      strip/tile réfère à ces tables quantifiées et utilise le code d'Huffman 
+      optimisé. C'est généralement le choix optimal pour des tailles de fichiers 
+      plus petits, par conséquent c'est la valeur par défaut.
+    * 2 : JpegTables est écrit seulement avec les tables d'Huffman par défaut. 
+      Chaque strip/tile réfère à ces tables d'Huffman (donc pas au code d'Huffman 
+      optimisé) et contient ses propres tables de quantification (identique). 
+      Cette option n'a pas de valeur pratique anticipée.
+    * 3 : JpegTables est écrit avec les tables de quantification et d'Huffman par 
+      défaut. Chaque strip/tile réfère à ces tables (donc pas le code d'Huffman 
+      optimisé). Cette option peut être plus efficace avec certaines données que 
+      celle de l'option 1, mais cela doit arriver très rarement.
+
 * **ZLEVEL=[1-9]  :** définit le niveau de compression à utiliser avec la 
   compression DEFLATE. Une valeur de 9 correspond à la compression la plus 
   forte, 1 à la plus faible. La valeur par défaut est de 6.
@@ -342,4 +391,4 @@ modifier le comportement par défaut du pilote GTiff.
   * Page libtiff : http://www.remotesensing.org/geotiff/geotiff.html
   * Détails du format de fichier BigTIFF : http://www.awaresystems.be/imaging/tiff/bigtiff.html
 
-.. yjacolin at free.fr, Yves Jacolin - 2013/01/01 (trunk 25411)
+.. yjacolin at free.fr, Yves Jacolin - 2014/12/25 (trunk 28208)

@@ -153,7 +153,7 @@ entités INSERT comme des entités INSERT plutôt que des les éclater.
 Définitions des couches
 ***********************
 
-Lors de l'écriture des entités, si il est rempli  le champs LayerName est utilisé 
+Lors de l'écriture des entités, si il est rempli  le champs Layer est utilisé 
 pour définir la couche entités écrite. Si la couche n'est pas déjà définie dans 
 le modèle d'en-tête alors une nouvelle définition de couche sera introduite, copiée 
 de la définition de la couche par défaut ("0").
@@ -183,4 +183,4 @@ modèle d'en-tête et référencé en utilisant le champ Linetype si désiré.
 
 .. [1] [NdT] *those with their budge of vertices attributes set*
 
-.. yjacolin at free.fr, Yves Jacolin - 2011/07/03 (trunk 22011)
+.. yjacolin at free.fr, Yves Jacolin - 2014/04/05 (trunk 27130)

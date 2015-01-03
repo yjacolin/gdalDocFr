@@ -126,11 +126,10 @@ avant que la dernière géométrie disponible ne soit atteinte), les objets d'un
 autre couche sont lu puis la lecture de la première couche est terminée, parce 
 que dans ce cas-là la commande *kill()* n'est pas utilisée.
 
-Voir également
----------------
+.. seealso::
 
-* `Page principale de GRASS <http:*grass.itc.it/>`_
+  * `Page principale de GRASS <http:*grass.itc.it/>`_
 
 Le développement de ce pilote a été financé par Faunalia (http://www.faunalia.it).
 
-.. yjacolin at free.fr, Yves Jacolin - 2009/02/23 21:26 (trunk 7986)
+.. yjacolin at free.fr, Yves Jacolin - 2009/02/23 21:26 (trunk 10609)

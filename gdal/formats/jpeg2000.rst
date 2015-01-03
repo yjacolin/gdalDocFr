@@ -140,10 +140,10 @@ Argument P
 
 **Autre pilote GDAL JPEG2000 :**
 
-* :ref:`gdal.gdal.formats.jp2openjpeg`
-* :ref:`gdal.gdal.formats.jp2ecw`
-* :ref:`gdal.gdal.formats.jp2mrsid`
-* :ref:`gdal.gdal.formats.jp2kak`
+* :ref:`gdal.gdal.formats.jp2openjpeg` (open source)
+* :ref:`gdal.gdal.formats.jp2ecw` (propriétaire)
+* :ref:`gdal.gdal.formats.jp2mrsid` (propriétaire)
+* :ref:`gdal.gdal.formats.jp2kak` (propriétaire)
 
 
-.. yjacolin at free.fr, Yves Jacolin - 2013/01/01 (trunk 22678)
+.. yjacolin at free.fr, Yves Jacolin - 2014/05/25 (trunk 27400)

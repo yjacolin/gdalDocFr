@@ -19,7 +19,7 @@ et du format JPEG JFIF. Il y a des mécanismes de compressions distincts produit
 par le même groupe. JPEG2000 est basé sur la compression par ondelette.
 
 Le pilote JPEG200 documenté sur cette page (le pilote JP2KAK) est implémenté 
-par-dessus de la bibliothèque commerciale Kakadu (http://www.kakadusoftware.com/). 
+par-dessus de la bibliothèque propriétaire Kakadu (http://www.kakadusoftware.com/). 
 C'est une bibliothèque JPEG200 de grande qualité et hautement performante, 
 largement utilisée dans la communauté géomatique et dans l'imagerie générale. 
 Cependant, elle n'est pas libre et donc une compilation normale de GDAL à partir 
@@ -85,9 +85,13 @@ niveaux d'aperçus à différentes puissances de deux facteurs.
   est de 20000. 
 * **BLOCKYSIZE=n** : Définie la hauteur de la tuile à utiliser. Par défaut elle 
   est de la hauteur de l'image.
+* **FLUSH=TRUE/FALSE :** active/désactive le nettoyage incrémental lors de 
+  l'écriture du fichier. Doit être à FALSE pour RLPC et LRPC Corder. Peut utiliser 
+  beaucoup de mémoire lorsqu'il est à FALSE lors de l'écriture de grosses images. 
+  Défault à TRUE.
 * **GMLJP2=YES/NO** : Indique si une boîte GML conforme au GML de l'OGC dans les 
   spécification JPEG2000 doit être inclus dans le fichier. Oui par défaut.
-* **GeoJP2=YES/NO** : Indique si une boîte GML conforme aux spécifications GeoJP2 
+* **GeoJP2=YES/NO** : Indique si une boîte UUID/GeoTIFF conforme aux spécifications GeoJP2 
   (GeoTIFF dans JPEG2000) doit être inclus dans le fichier. Oui par défaut.
 * **LAYERS=n** : Contrôle le nombre de couche produite. C'est une sorte de 
   résolution de couches, mais pas tout à fait. La valeur par défaut est de 12 
@@ -114,8 +118,11 @@ niveaux d'aperçus à différentes puissances de deux facteurs.
 .. seealso::
 
   * Implémenté dans *gdal/frmts/jp2kak/jp2kakdataset.cpp*.
-  * JPEG2000 pour la pag Applications Geospatial, inclus la discussion GeoJP2(tm) 
-    : http://www.remotesensing.org/jpeg2000/.
-  * Pilote JPEG200 alternatif : http://www.gdal.org/frmt_jpeg2000.html.
+  * Si vous utilisez une version de Kakadu plus vielle que v7.5, configure & 
+    compile GDAL avec eg. *CXXFLAGS="-DKDU_MAJOR_VERSION=7 -DKDU_MINOR_VERSION=3 -DKDU_PATCH_VERSION=2"* 
+    pour la version 7.3.2 de Kakadu.
+  * JPEG2000 pour la page Applications Geospatial, inclus la discussion GeoJP2(tm) 
+    : `http://www.remotesensing.org/jpeg2000/ <http://www.remotesensing.org/jpeg2000/>`_.
+  * Pilote JPEG2000 alternatif : http://www.gdal.org/frmt_jpeg2000.html.
 
-.. yjacolin at free.fr, Yves Jacolin - 2013/01/01 (trunk 23357)
+.. yjacolin at free.fr, Yves Jacolin - 2014/10/03 (trunk 27787)

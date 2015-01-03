@@ -14,7 +14,7 @@ d'un conteneur basé sur RIFF.
 Le pilote repose sur la bibliothèque Open Source WebP (licence BSD). La 
 bibliothèque WebP (du moins dans sa version 0.1) ne propose que la compression et 
 la décompression des images complètes, La RAM peut donc  être une limitation
-lorsqu'il s'agit de grandes images.
+lorsqu'il s'agit de grandes images (qui sont limitées à 16383x16383 pixels).
 
 Le pilote WEBP gère 3 bandes (RGB) d'images. Il gère également 4 bandes (RVBA) 
 à partir de GDAL 1.10 et libwebp 0.1.4.
@@ -39,6 +39,6 @@ Options de création
 
 .. seealso::
 
-  * `Home page WebP <http://code.google.com/intl/fr/speed/webp/>`_
+  * `Home page WebP <https://developers.google.com/speed/webp/>`_
 
-.. yjacolin at free.fr, Yves Jacolin - 2013/01/24 (trunk 25229)
+.. yjacolin at free.fr, Yves Jacolin - 2014/03/08 (trunk 27021)

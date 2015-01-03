@@ -13,7 +13,7 @@ Ce pilote ne gère pas la création de fichier.
 .. seealso::
 
    * Implementé dans *gdal/frmts/map/mapdataset.cpp.*
-   * `Format de fichier Map d'OziExplorer <http://www.rus-roads.ru/gps/help_ozi/map_file_format.html>`_
+   * `Format de fichier Map d'OziExplorer <http://www.oziexplorer3.com/eng/help/map_file_format.html>`_
 
 
-.. yjacolin at free.fr, Yves Jacolin - 2013/01/01 (Trunk r25287)
+.. yjacolin at free.fr, Yves Jacolin - 2014/10/08 (Trunk 27821)

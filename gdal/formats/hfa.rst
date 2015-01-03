@@ -64,6 +64,21 @@ globale HFA_USE_RRD=YES.
 Les noms des couches peuvent être définis et récupérés avec l'appel de 
 *GDALSetDescription/GDALGetDescription* sur les objets bandes du Raster.
 
+Options de configuration
+==========================
+
+Pour le moment seulement une seule `option de configuration à la volée <http://trac.osgeo.org/gdal/wiki/ConfigOptions>`_
+est géré par le pilote HFA : 
+
+* **HFA_COMPRESS_OVR=YES/NO :** (GDAL >= 1.11) s'il faut créer des aperçues 
+  compressés. Par défaut, le comportement est de créer des aperçues compressées 
+  quand le fichier est compressé. Cette option de configuration peut être 
+  utilisé lors de la construction des aperçues .aux externes  pour une image de 
+  base qui n'est pas dans le format Imagine d'Erdas.
+  ::
+    
+    gdaladdo out.tif --config USE_RRD YES 2 --config HFA_COMPRESS_OVR YES 
+
 .. seealso::
 
   * Implémenté dans *gdal/frmts/hfa/hfadataset.cpp*.
@@ -71,4 +86,4 @@ Les noms des couches peuvent être définis et récupérés avec l'appel de
     d'Imagine (img) : http://home.gdal.org/projects/imagine/hfa_index.html
   * Site officiel d'Erdas : http://www.erdas.com/
 
-.. yjacolin at free.fr, Yves Jacolin - 2011/08/08 (trunk 17162)
+.. yjacolin at free.fr, Yves Jacolin - 2014/03/28 (trunk 27110)

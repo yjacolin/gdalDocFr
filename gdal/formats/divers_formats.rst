@@ -304,6 +304,10 @@ les virgules flottantes complexes sur 32 et 64 bits. Il y a une gestion limitée
 reconnaissance du mot-clé map_info avec le système de coordonnées et le 
 géoréférencement. En particulier, UTM et  State Plane devraient fonctionner.
 
+.. versionadded:: 1.10, tous les champs d'en-tête ENVI seront stockés dans le 
+   domaine de métadonnées ENVI et ceux-là peuvent être écrit en dehors du fichier 
+   d'en-tête.
+ 
 Options de création :
 
 * ``INTERLEAVE=BSQ/BIP/BIL`` : force la génération d'un type définie 
@@ -429,8 +433,7 @@ GS7BG -- Golden Software Surfer 7 Binary Grid File Format
 C'est la version binaire (non lisible par un être humain) d'un des formats 
 raster utilisés par les produits de Golden Software (tels que ceux de la série 
 Surfer). Ce format diffère du format GSBG (connu également comme le format 
-grille binaire de Surfer 6), il est plus compliqué et moins flexible. Ce format 
-est géré en lecture seule.
+grille binaire de Surfer 6), il est plus compliqué et moins flexible.
 
 .. note:: Implémenté dans *gdal/frmts/gsg/gs7bgdataset.cpp*.
 
@@ -529,7 +532,8 @@ des raster. Le pilote peut lire pour le moment :
 
 La plupart des métadonnées sont lu.
 
-Vaisala fournie des informations sur le format et le logiciel sur http://www.vaisala.com/en/defense/products/weatherradar/Pages/IRIS.aspx.
+Vaisala fournie des informations sur le format et le logiciel sur 
+http://www.vaisala.com/en/defense/products/weatherradar/Pages/IRIS.aspx.
 
 .. note:: Implementé dans *gdal/frmts/iris/irisdataset.cpp*.
 
@@ -959,6 +963,30 @@ sur le site USGS.
 
 .. note:: Implémenté dans *gdal/frmts/ctg/ctgdataset.cpp*.
 
+
+.. _`gdal.gdal.formats.divers_formats.dds`:
+
+DDS -- DirectDraw Surface
+===========================
+
+.. versionadded:: >= 2.0.0
+
+Supported for writing and creation.  The DirectDraw Surface file format (uses
+the filename extension DDS), from Microsoft, is a standard for storing data
+compressed with the lossy S3 Texture Compression (S3TC) algorithm. The DDS
+format and compression are provided by the crunch library. 
+
+The driver supports the following texture formats: DXT1. DXT1A, DXT3 (default) and
+DXT5. You can set the texture format using the configuration option FORMAT.
+
+The driver supports the following compression quality: SUPERFAST, FAST, NORMAL
+(default), BETTER and UBER. You can set the compression quality using the
+configuration option QUALITY.
+
+Plus d'information sur la `bibliothèque Crunch <http://code.google.com/p/crunch/>`_
+
+.. note:: Implementé dans *gdal/frmts/dds/ddsdataset.cpp*.
+
 .. _`gdal.gdal.formats.divers_formats.dimap`:
 
 DIMAP -- Spot DIMAP
@@ -1282,4 +1310,6 @@ Spécification informelle donnée dans le `thread de la liste de diffusion GDAL-
 
 .. note:: Implémenté dans *gdal/frmts/zmap/zmapdataset.cpp*.
 
-.. yjacolin at free.fr, Yves Jacolin - 2011/09/04 (trunk 22861)
+
+
+.. yjacolin at free.fr, Yves Jacolin - 2013/02/21 (trunk 25660)

@@ -25,6 +25,11 @@ scannées. Une autre approche pour la rectification est la sélection manuelle
 des points d'amer en utilisant des sources externes d'information de 
 géoréférencement.
 
+Avant GDAL 1.10.2, un maximum de 11 x 20 points d'amer étaient reporté. Cela peut 
+être inapproprié pour une transformation correcte. À partir de GDAL 1.10.2, une 
+plus haute densité sera reportée à moins que l'option de configuration 
+*L1B_HIGH_GCP_DENSITY* soit définie à *NO*.
+
 La précision de la détermination des points d'amer dépend du type de satellite. 
 Dans les jeux de données NOAA-9 – NOAA-14 les coordonnées géographiques des 
 points d'amer sont rangés sous la forme de valeur entière eau 128 :sup:`ème` de degré. 
@@ -32,12 +37,17 @@ Nous ne pouvions pas déterminer les positions plus précisément que 1/28 =
 0,0078125 de NOAA-15 – NOAA-17 nous avons beaucoup plus de position précise, 
 ceux-ci sont rangés sous forme de 10 000 :sup:`ème` de degré.
 
+.. versionaddedd:: 1.11, Les points d'amers seront reportés comme un 
+   `tableau de geolocation <http://trac.osgeo.org/gdal/wiki/rfc4_geolocate>`_, 
+   avec une interpolation de Lagrangian de 51 point d'amers par ligne de scan au 
+   nombre de pixels par largeur de ligne de scan.
+
 Les images seront toujours retournées avec la ligne scannée la plus au nord 
 localisée en haut de l'image. Si vous désirez déterminer la direction réelle du 
 déplacement du satellite vous devez regarder la méta-données LOCATION.
 
 Données
-==========
+========
 
 Dans le cas du NOAA-10 dans le canal 5 vous obtiendrez la répétition du canal 4 
 des données. Les instruments AVHRR/3 (NOAA-15 – NOAA-17) est un radiomètre à six 
@@ -70,6 +80,51 @@ Les enregistrements des méta-données :
   le satellite se déplace des faibles latitudes vers les hautes latitudes, et 
   *Descending* pour les autres cas.
 
+.. versionaddedd:: 1.11, la plupart des enregistrements des métadonnées peuvent 
+  être écrite dans un fichier .CSV quand l'option de configuration 
+  *L1B_FETCH_METADATA* est définie à *YES*. Par défaut, le nom du fichier sera 
+  nommé "[l1b_dataset_name]_metadata.csv", et localisé dans le même répertoire 
+  que le jeu de données L1B. En définissant l'option de configuration 
+  *L1B_METADATA_DIRECTORY*, il est possible de créer ce fichier dans un autre 
+  répertoire. La documentation pour interpréter ces métadonnées est 
+  `PODUG 3.1 <http://www.ncdc.noaa.gov/oa/pod-guide/ncdc/docs/podug/html/c3/sec3-1.htm>`_ 
+  pour NOAA <=14 et `KLM 8.3.1.3.3.1 <http://www.ncdc.noaa.gov/oa/pod-guide/ncdc/docs/klm/html/c8/sec83133-1.htm>`_
+  pour NOAA >=15.
+
+Sous jeu de données
+====================
+
+(à partir de GDAL 1.11)
+
+Les jeux de données NOAA <=14 préviennent les sous jeux de données 
+L1B_SOLAR_ZENITH_ANGLES:"l1b_dataset_name" qui contiennent un maximum de 51 
+angles zénithaux solaires pour chaque ligne de scan (en partant d'un échantillon 
+de 5 avec un saut de 8 échantillons pour les données GAC, en partant d'un 
+échantillon de 25 avec un daute de 40 échantillons pour les données 
+HRPT/LAC/FRAC).
+
+Les jeux de données NOAA >=15 préviennent les sous jeux de données
+L1B_ANGLES:"l1b_dataset_name" qui contiennent 3 bandes (angles zénithaux 
+solaires, angles zénithaux satellitaux et angles azimuth relatif) avec 51 valeurs 
+pour chaque ligne de scan (en partant d'un échantillon de 5 avec un saut de 8 
+échantillons pour les données GAC, en partant d'un échantillon de 25 avec un saut 
+de 40 échantillons pour les données HRPT/LAC/FRAC).
+
+Les jeux de données NOAA >=15 préviennent les sous jeux de données 
+L1B_CLOUDS:"l1b_dataset_name" qui contiennent une bande de même dimension que les 
+bandes du principal jeu de données L1B. Les valeurs de chaque pixel sont 0 = 
+inconnus ; 1 = clair; 2 = nuageux ; 3 = partiellement nuageux.
+
+Masque Nodata
+==============
+
+(à partir de GDAL 2.0)
+
+Les jeux de données NOAA >=15 qui retourne dans leur en-tête qu'ils ont des 
+lignes de scan manquantes exposera une bande de masque par jeu de données (selon 
+`RFC 15 : Masques de bande <https://trac.osgeo.org/gdal/wiki/rfc15_nodatabitmask>`_) 
+pour indiquer de telles lignes de scan.
+
 .. seealso::
 
   * Implémenté dans gdal/frmts/l1b/l1bdataset.cpp.
@@ -90,5 +145,4 @@ Les enregistrements des méta-données :
   * http://www.lizardtech.com/
 
 
-.. yjacolin at free.fr, Yves Jacolin - 2009/03/09 21:08 (trunk 9943)
-
+.. yjacolin at free.fr, Yves Jacolin - 2014/09/11 (trunk 27663)

@@ -27,6 +27,14 @@ utilisé par quelques fournisseurs de données pour ajouter un masque pour
 identifier les pixels qui ne sont pas des données valides. Voir 
 `RFC 15 <http://trac.osgeo.org/gdal/wiki/rfc15_nodatabitmask>`_ pour plus de détails.
 
+.. versionadded:: 1.10.1, le pilote prend en charge le bitmask où les bites sont 
+   ordonées avec le bit le plus signifiquant en premier (tandis que la convention 
+   usuel est le moins signifiquant en premier). Le pilote tentera de détecter 
+   automatiquement cette situation, mais les heuristiques peuvent échouer. Dans 
+   ce cas là, vous pouvez définir l'option de configuration *JPEG_MASK_BIT_ORDER* 
+   à *MSB*. Le bitmask peut également être complètement ignoré en spécifiant 
+   *JPEG_READ_MASK* à *NO*.
+
 Le pilote JPEG de GDAL est compilé en utilisant la bibliothèque jpeg du *Groupe 
 JPEG indépendant*. Notez également que le pilote GeoTIFF gère les TIFF tuilés 
 avec des tuiles compressées en JPEG.
@@ -47,6 +55,32 @@ du JPEG baseline.
 .. versionadded:: 1.9.0 les métadonnées XMP peuvent être extraite des fichiers, 
   et seront stockées comme contenu brute XML dans le domaine de métadonnées 
   xml:XMP.
+
+.. versionadded:: 2.0, les vignettes EXIF inclus (avec compression JPEG) peuvent 
+   être utilisé comme aperçues et générées par GDAL.
+
+Métadonnes de profile de couleur
+================================
+
+.. versionadded:: 1.11, GDAL prend en charge les métadonnées de profile de couleur 
+   suivant dans le domaine *COLOR_PROFILE* :
+
+* SOURCE_ICC_PROFILE (profile ICC encodé en Base64 inclus dans le fichier.)
+
+Notez que cette propriété de métadonnées peut seulement être utilisé sur les données 
+pixels brutes. Si une conversion automatique versr RVB a été réalisée, l'information 
+de profile de couleur ne peut pas être utilisé.
+
+Cet élément de métadonnées peut être utilisé comme options de création.
+
+Gestion des erreurs
+====================
+
+Lors du décodage, la bibliothèque libjpeg a une certaine résilience lors d'erreurs 
+dans le flux de données JPEG et essayera de les récupérer autant que possible. 
+À partir de GDAL 1.11.2, ces erreurs seront rapportés comme alertes GDAL, mais 
+peuvent optionnellement être considérés comme de véritables erreurs en 
+définissant l'option de configuration *GDAL_ERROR_ON_LIBJPEG_WARNING* à *TRUE*.
 
 Options de création
 ====================
@@ -86,6 +120,19 @@ ajouté comme un masque compressé en zlib au fichier JPEG :
 * **COLOR_TRANSFORM=RGB or RGB1 :** (À partir de GDAL 1.10 et libjpeg 9). 
   Définie à RGB1 pour les RVB sans perte. Note : cela produira des fichiers 
   incompatible avec les versions inférieures à 9 de libjpeg.
+* **SOURCE_ICC_PROFILE=value :** (à partir de GDAL 1.11). Profile ICC encodé en 
+  Base64.
+* **COMMENT=string :** (à partir de GDAL 2.0). Chaîne à inclure dans un marqueur 
+  de commentaire JPEG. Lors de la lecture, de telles chaînes sont exposées dans 
+  l'élément COMMENT de métadonnées.
+* **EXIF_THUMBNAIL=YES/NO :** (à partir de GDAL 2.0). Pour générer une vignette 
+  (aperçu) EXIF, lui-même compressé en JPEG. Défaut à NO. Si activé, la 
+  dimension maximale de la vignette sera de 128, si ni *THUMBNAIL_WIDTH* ou 
+  *THUMBNAIL_HEIGHT* ne sont définie.
+* **THUMBNAIL_WIDTH=n :** (à partir de GDAL 2.0). Largeur de la vignette. Seulement 
+  pris en considération si *EXIF_THUMBNAIL=YES*.
+* **THUMBNAIL_HEIGHT=n :** (à partir de GDAL 2.0). Hauteur de la vignette. Seulement 
+  pris en considération si *EXIF_THUMBNAIL=YES*.
 
 .. seealso::
 
@@ -93,4 +140,4 @@ ajouté comme un masque compressé en zlib au fichier JPEG :
   * `libjpeg-turbo <http://sourceforge.net/projects/libjpeg-turbo/>`_
   * :ref:`gdal.gdal.formats.gtiff`
 
-.. yjacolin at free.fr, Yves Jacolin - 2013/01/24 (trunk 25506)
+.. yjacolin at free.fr, Yves Jacolin - 2014/12/30 (trunk 28270)

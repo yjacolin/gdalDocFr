@@ -261,4 +261,4 @@ Exemples
   * `Spécification Atom 1.0 <http://www.ietf.org/rfc/rfc4287.txt>`_
 
 
-.. yjacolin@free.fr, Yves Jacolin - 2013/05/01 (trunk 23022)
+.. yjacolin@free.fr, Yves Jacolin - 2014/11/30 (trunk 28039)

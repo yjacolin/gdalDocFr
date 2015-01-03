@@ -29,16 +29,16 @@ Sur Ubuntu 10.04 avec le packaqe *openjdk-6-jdk* installé,
     
     ./configure --with-java=yes --with-mdb=yes
 
-Il est possible d'ajouter l'option *--with-jvm-lib-add-rpath* pour inclure le 
-chemin dans la *libjvm.so* dans la bibliothèque GDAL.
-
 Sur les autres version de Linux, vous pouvez devoir spécifier :
 
 ::
     
     ./configure --with-java=/path/to/jdk/root/path --with-jvm-lib=/path/to/libjvm/directory --with-mdb=yes
 
-où */path/to/libjvm/directory* est par exemple */usr/lib/jvm/java-6-openjdk/jre/lib/amd64*.
+où */path/to/libjvm/directory* est par exemple */usr/lib/jvm/java-6-openjdk/jre/lib/amd64/server*.
+
+Il est possible d'ajouter l'option *--with-jvm-lib-add-rpath* (pas de valeur ou yes) 
+pour inclure le chemin vers *libjvm.so* dans la bibliothèque GDAL.
 
 Comment lancer le pilote MDB (sur Linux)
 -----------------------------------------
@@ -67,4 +67,4 @@ Voir également
 * La page du pilote :ref:`gdal.ogr.formats.geomedia`
 
 
-.. yjacolin at free.fr, Yves Jacolin  2011/08/02 (trunk 21564)
+.. yjacolin at free.fr, Yves Jacolin  2014/11/30 (trunk 28039)

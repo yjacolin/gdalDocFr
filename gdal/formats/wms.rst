@@ -34,7 +34,8 @@ des services d'image gérée.
 +                                               + (optionnel FALSE par défaut). Le format de requête et BandsCount nécessite la +
 +                                               + gestion de l'alpha.                                                           +
 +-----------------------------------------------+-------------------------------------------------------------------------------+
-+ <Layers>modis,global_mosaic</Layers>          + Liste de couches séparés par des virgules (nécessaire sauf pour TiledWMS).    +
++ <Layers>modis,global_mosaic</Layers>          + Une URL encodée, une liste de couches séparés par des virgules (nécessaire    +
++                                               + sauf pour TiledWMS).                                                          +
 +-----------------------------------------------+-------------------------------------------------------------------------------+
 + <TiledGroupName>Clementine</TiledGroupName>   + Liste de couches séparée par une virgule (nécessaire pour TiledWMS).          +
 +-----------------------------------------------+-------------------------------------------------------------------------------+
@@ -111,7 +112,8 @@ des services d'image gérée.
 +-----------------------------------------------+-------------------------------------------------------------------------------+
 + <Path>./gdalwmscache</Path>                   + Endroit où stocker les fichiers du cache. Il est sain d'utiliser le même      +
 +                                               + chemin de cache pour différentes sources de données. (optionnel, défaut à     +
-+                                               + ./gdalwmscache)                                                               +
++                                               + ./gdalwmscache si l'option de configuration *GDAL_DEFAULT_WMS_CACHE_PATH*     +
++                                               + n'est pas défini                                                              +
 +-----------------------------------------------+-------------------------------------------------------------------------------+
 + <Depth>2</Depth>                              + Nombre de répertoire de couches. 2 résultera à des fichiers écrit sous la     +
 +                                               + forme  cache_path/A/B/ABCDEF... (optionnel, défauts à 2)                      +
@@ -148,6 +150,13 @@ des services d'image gérée.
 + (http://www.gdal.org/frmt_wms.html)           + connus tel que "Mozilla/5.0" (optionnel, "GDAL WMS driver                     +
 + </UserAgent>                                  + (http://www.gdal.org/frmt_wms.html)" par défaut). Ajouté à GDAL 1.8.0         +
 +-----------------------------------------------+-------------------------------------------------------------------------------+
++ <UserPwd>user:password</UserPwd>              + utilisateur et mot de passe pour l'authentification HTTP (optionnel). Ajouté  +
++                                               + GDAL 1.10.0                                                                   +
++-----------------------------------------------+-------------------------------------------------------------------------------+
++ <UnsafeSSL>true</UnsafeSSL>                   + Saute la vérification du certificat SSL. Peut être nécessaire si le serveur   +
++                                               + utilise un certificat auto-signé (optionnel, défaut à false). Ajouté à GDAL   +
++                                               + 1.8.0                                                                         +
++-----------------------------------------------+-------------------------------------------------------------------------------+
 + <Referer>http://example.foo/</Referer>        + Chaîne de *Referer* HTTP. Certains serveurs peuvent le nécessiter (optionnel).+
 +                                               + Ajouter à GDAL  1.9.0                                                         +
 +-----------------------------------------------+-------------------------------------------------------------------------------+
@@ -182,7 +191,7 @@ tuilées et non tuilées.
 ::
 	
 	gdallocationinfo "WMS:http://demo.opengeo.org/geoserver/gwc/service/wms?SERVICE=WMS&VERSION=1.1.1&
-	                            REQUEST=GetMap&LAYERS=og:bugsites&SRS=EPSG:900913&
+	                            REQUEST=GetMap&amp;LAYERS=og%3Abugsites&amp;SRS=EPSG:900913&amp;
 	                            BBOX=-1.15841845090625E7,5479006.186718751,-1.1505912992109375E7,5557277.703671876&
 	                            FORMAT=image/png&TILESIZE=256&OVERVIEWCOUNT=25&MINRESOLUTION=0.0046653459640220&TILED=true"
 	                           -geoloc -11547071.455 5528616 -xml -b 1
@@ -265,7 +274,7 @@ Les variables gérées (le nom est sensible à la casse) sont :
 
 Un *ServerURL* typique ressemblerait à cela :
 
-``http://labs.metacarta.com/wms-c/Basic.py/${version}/${layer}/${z}/${x}/${y}.${format}``
+``ttp://tilecache.osgeo.org/wms-c/Basic.py/${version}/${layer}/${z}/${x}/${y}.${format}``
 
 Dans le but de mieux convenir aux utilisateurs du TMS, n'importe quel URL qui ne 
 contient pas "${" aura automatiquement la chaîne ci-dessus (après "Basic.py/") 
@@ -383,8 +392,6 @@ Exemples
   minipilote TMS.
 * `Serveur carto de tuiles d'ArcGIS <http://www.gdal.org/frmt_wms_arcgis_mapserver_tms.xml>`_ 
   accédé avec le minipilote TMS.
-* `Cartes du géoportail Suisse <http://www.gdal.org/frmt_wms_swissgeo_tms.xml>`_ 
-  accédé avec le minipilote TMS (nécessite GDAL >= 1.9.0)
 * Exemples du WMS tuilé de OnEarth `Clementine <http://www.gdal.org/frmt_twms_Clementine.xml>`_,
   `journalier <http://www.gdal.org/frmt_twms_daily.xml>`_, et 
   `srtm <http://www.gdal.org/frmt_twms_srtm.xml>`_.
@@ -412,8 +419,8 @@ Le pilote WMS peut ouvrir :
   l'a retournée par la syntaxe précédente :
   ::
     
-    gdalinfo "WMS:http://wms.geobase.ca/wms-bin/cubeserv.cgi?SERVICE=WMS&amp;VERSION=1.1.1&amp; \
-    REQUEST=GetMap&amp;LAYERS=DNEC_250K:ELEVATION/ELEVATION&amp;SRS=EPSG:42304&amp;BBOX=-3000000,-1500000,6000000,4500000"
+    gdalinfo "WMS:http://wms.geobase.ca/wms-bin/cubeserv.cgi?SERVICE=WMS&amp;VERSION=1.1.1&amp;REQUEST=GetMap&amp; \
+    LAYERS=DNEC_250K%3AELEVATION%2FELEVATION&amp;SRS=EPSG:42304&amp;BBOX=-3000000,-1500000,6000000,4500000"
 
 * (GDAL >= 1.9.0) l'URL de base d'un service WMS tuilé, préfixé avec *WMS:* et 
   avec l'argument GET *request=GetTileService* :
@@ -436,4 +443,4 @@ Le pilote WMS peut ouvrir :
   * `Spécification TMS <http://wiki.osgeo.org/wiki/Tile_Map_Service_Specification>`_
   * `Spécification WMS Tuilé OnEarth <http://onearth.jpl.nasa.gov/tiled.html>`_
 
-.. yjacolin at free.fr, Yves Jacolin - 2013/01/23 (trunk 23906)
+.. yjacolin at free.fr, Yves Jacolin - 2014/12/15 (trunk 28145)

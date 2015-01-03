@@ -19,16 +19,17 @@ GDAL doit compiler avec la gestion de libpoppler (licencé en GPL), et libpopple
 lui même doit avoir été configuré avec ``--enable-xpdf-headers`` afin que les 
 en têtes xpdf C++ soient disponibles. Note : l'API C++ poppler n'est pas stable, 
 la compilation du pilote peut donc échouer avec des versions trop ancienne ou 
-trop récente. Les versions testées avec succès sont poppler >= 0.12.X et <= 0.22.0.
+trop récente. Les versions testées avec succès sont poppler >= 0.12.X et <= 0.26.0.
 
 .. versionadded:: 1.9.0 comme une alternative, le pilote PDF peut être compilé 
-  avec libpodofo (sous licence LGPL) pour éviter la dépendance avec libpoppler. 
-  Cela est suffisant pour obtenir les informations de géoréférencement. Cependant, pour
-  obtenir l'imagerie, l'utilitaire pdftoppm qui vient avec la distribution poppler 
-  doit être disponible dans le PATH du système. Un fichier temporaire sera généré 
-  dans un répertoire déterminé par les options de configuration suivantes : *CPL_TMPDIR*, 
-  *TMPDIR* ou *TEMP* (dans cet ordre). Si aucun n'est définie, le répertoire courant 
-  sera utilisé. Testé avec succès avec les versions 0.8.4 et 0.9.1 de libpodofo.
+  avec libpodofo (sous licence LGPL) pour éviter la dépendance à libpoppler. 
+  Cela est suffisant pour obtenir les informations vectorielles et de 
+  géoréférencement. Cependant, pour obtenir l'imagerie, l'utilitaire pdftoppm 
+  qui vient avec la distribution poppler doit être disponible dans le PATH du 
+  système. Un fichier temporaire sera généré dans un répertoire déterminé par 
+  les options de configuration suivantes : *CPL_TMPDIR*, *TMPDIR* ou *TEMP* 
+  (dans cet ordre). Si aucun n'est définie, le répertoire courant sera utilisé. 
+  Testé avec succès avec les versions 0.8.4 et 0.9.1 de libpodofo.
 
 Le pilote gère la lecture de géoréférencement encodées dans l'un des deux moyens 
 existants acutellemnt : en fonction des meilleures pratiques d'encodage de l'OGC, 
@@ -49,6 +50,52 @@ déformation.
    dans les PDF Topo d'USGS peuvent être extrait du fichier et seront 
    stockés comme contenu brute XML dans le domaine de métadonnées 
    EMBEDDED_METADATA.
+
+Gestion du vecteur
+===================
+
+.. versionadded:: 1.10, ce pilote peut lire et écrire des PDF geospatiaux avec 
+   des entités vectorielles. La gestion de la lecture des vecteurs nécessite un 
+   lien vers les bibliothèques poppler, mais pas l'écriture.
+   
+   Le pilote peut lire des entités vectorielles encodées selon les facilités de 
+   structure logique du PDF (comme décrit dans les spécifications PDF "§10.6 - 
+   Logical Structure"), ou récupérer seulement les géométries vectorielles pour 
+   d'autres fichiers PDF.
+
+Gestion des styles des entités
+===============================
+
+Pour la gestion de l'écriture, le pilote possède une gestion partiel pour les 
+informations de styles lié à une entité, encodées selon les 
+`spécifications de style des entités OGR <http://www.gdal.org/ogr_feature_style.html>`_.
+
+Les outils suivants sont reconnus :
+
+* Pour les points, LABEL et SYMBOL.
+* Pour les lignes, PEN.
+* Pour les polygones, PEN et BRUSH.
+
+Les attributs géré pour chaque outils sont résummé dans le tableau suivant :
+
++=============+=========================================================================================+=======================================+
++ Outils      +  Attributs gérés                                                                        + Exemple                               +
++=============+=========================================================================================+=======================================+
++ PEN         + couleur, largeur et motif de pointillé                                                  + PEN(c:#FF0000,w:5px)                  +
++-------------+-----------------------------------------------------------------------------------------+---------------------------------------+
++ BRUSH       + couleur d'avant plan                                                                    + BRUSH(fc:#0000FF)                     +
++-------------+-----------------------------------------------------------------------------------------+---------------------------------------+
++ LABEL       + texte (limité aux chaînes ASCII), couleur d'avant plan, taille, décalages x et y, angle + LABEL(c:#000000,t:"Hello World!",s:5) +
++-------------+-----------------------------------------------------------------------------------------+---------------------------------------+
++ SYMBOL      + id (ogr-sym-0 à ogr-sym-9 et nom du fichier pour les symbols raster), couleur et taille + SYMBOL(c:#00FF00,id:"ogr-sym-3",s:10) +
++             +                                                                                         + SYMBOL(c:#00000080,id:"a_symbol.png") +
++-------------+-----------------------------------------------------------------------------------------+---------------------------------------+
+
+Les valeurs alphas sont géré pour les couleurs pour contrôler l'opacityé. Si ce 
+n'est pas définie, pour BRUSH, il a une opacité de 50 %.
+
+Pour SYMBOL avec un nom bitmap, seulement la valeur alpga de la couleur définie 
+avec 'c' est pris en compte.
 
 Options de configuration
 ========================
@@ -78,8 +125,7 @@ Options de configuration
      couches non explicitement listé seront désactivées.
    * **GDAL_PDF_LAYERS_OFF  =** liste de couches (séparée par des virgules) à désactiver. 
      Les noms des couches peuvent être obtenus en interrogeant le domaine de métadonnées 
-     LAYERS. Quand cette option est définie, les couches non explicitement listé seront 
-     désactivées.
+     LAYERS.
 
 Domaine de métadonnées LAYERS
 ===============================
@@ -154,7 +200,10 @@ Options de création
   pour les données raster. DEFLATE par défaut.
 * **STREAM_COMPRESS=[NONE/DEFLATE] :** Définie la compression à utiliser pour les 
   objets flux. DEFLATE est la valeur par défaut.
-* **DPI=value :** Définie la DPI à utiliser. 72 par défaut.
+* **DPI=value :** Définie la DPI à utiliser. 72 par défaut. Peut être 
+  automatiquement ajusté à la pljus haute valeur afin que la dimension de la page 
+  n'excéde pas la valeur maximale de 14400 (en unité utilisateur) autorisé par 
+  Acrobat.
 * **PREDICTOR=[1/2] :** Seulement pour la compression *DEFLATE*. Peut être définie 
   à 2 pour utiliser un prédicteur horizontal qui peut créer des fichiers plus 
   petits (mais pas toujours). 1 par défaut.
@@ -306,10 +355,9 @@ Exemples
 
 .. seealso::
 
-  * :ref:`gdal.ogr.formats.pdf`
-
   Spécifications :
 
+  * `Spécification des styles d'entité OGR <http://www.gdal.org/ogr_feature_style.html>`_
   * `Bonne pratique de l'encodage GeoPDF de l'OGC version 2.2 (08-139r3) <http://portal.opengeospatial.org/files/?artifact_id=40537>`_
   * `Supplément  d'Adobe pour l'ISO 32000 <http://www.adobe.com/devnet/acrobat/pdfs/adobe_supplement_iso32000.pdf>`_
   * `Référence PDF, version 1.7 <http://www.adobe.com/devnet/acrobat/pdfs/pdf_reference_1-7.pdf>`_
@@ -325,4 +373,5 @@ Exemples
   * `Quelques échantillons PDF Geospatial <http://acrobatusers.com/gallery/geospatial>`_
   * `D'autres échantillon PDF Geospatial <http://www.agc.army.mil/geopdf_gallery.html>`_
   * `Tutorial pour générer des cartes PDF géospatiales à partir de données OSM <http://latuviitta.org/documents/Geospatial_PDF_maps_from_OSM_with_GDAL.pdf>`_
-.. yjacolin at free.fr, Yves Jacolin - 2011/08/17 (trunk 25536)
+
+.. yjacolin at free.fr, Yves Jacolin - 2014/11/30 (trunk 28039)

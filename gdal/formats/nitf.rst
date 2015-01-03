@@ -70,13 +70,21 @@ de métadonnées.
     peuvent être écrite.
   * M3 est une variation de C3. la seule différence est qu'une carte de bloc est 
     écrite, ce qui permet la recherche rapide d'un bloc (à partir de GDAL 1.7.0).
-  * C8 signifie compression JPEG2000 (un bloc) et est disponible pour les deux 
-    méthodes ``CreateCopy()`` et ``Create()``. La compression *JPEG2000* est 
-    seulement disponible si le pilote *JP2ECW* est disponible. Les options de 
-    création spécifique au format JP2ECW *TARGET* et *PROFILE* peuvent être 
-    utilisée. Voyez la documentation du :ref:`gdal.gdal.formats.jp2ecw`. À partir 
-    de GDAL 1.7.0, si le pilote JP2ECW n'est pas disponible, le pilote Jasper 
-    JPEG2000 peut être utilisé dans le cas de ``CreateCopy()``.
+  * C8 signifie compression JPEG2000 (un bloc) et est disponible pour les  
+    méthodes ``CreateCopy()`` et/ou ``Create()``. La compression *JPEG2000* est 
+    seulement disponible si les pilotes *JP2ECW*, JP2KAK ou Jasper sont 
+    disponibles.
+    
+    * JP2ECW : les options de création spécifique au format JP2ECW *TARGET* et 
+      *PROFILE* peuvent être utilisée. Voyez la documentation du 
+      :ref:`gdal.gdal.formats.jp2ecw`. 
+    * JP2KAK : les options de création généraux spécifique à JP2KAK peuvent être 
+      utilisé ((QUALITY, BLOCKXSIZE, BLOCKYSIZE, GMLPJ2, GeoJP2, LAYERS, ROI). 
+      seulement la méthode *CreateCopy()* est disponible. Voyez 
+      :ref:`gdal.gdal.formats.jp2kak`. 
+    * À partir de GDAL 1.7.0, si le pilote JP2ECW et JP2KAK ne sont pas 
+      disponibles, le pilote JPEG2000 de Jasper peut être utilisé dans le cas 
+      de ``CreateCopy()``.
 
 * **NUMI=n :** (à partir de GDAL 1.7.0) Nombre d'images. 1 par défaut. Cette 
   option  est seulement compatible avec IC=NC (images non compressées).
@@ -144,4 +152,4 @@ développement de ce pilote ainsi que Steve Rawlinson (JPEG), Reiner Beck
 (BLOCKA) pour l'aide à l'ajout de fonctionnalités.
 
 
-.. yjacolin at free.fr, Yves Jacolin - 2013/01/17 (trunk 23491)
+.. yjacolin at free.fr, Yves Jacolin - 2014/02/24 (trunk 26980)
