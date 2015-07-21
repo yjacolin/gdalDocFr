@@ -20,7 +20,7 @@ raster supportés par GDAL.
 * **-stats :** Lit et affiche des statistiques de l'image. Force le calcul si 
   aucune n'est présente dans l'image.
 * **-approx_stats :** Lit et affiche les statistiques de l'image. Force leur
-  calcul is aucune statistique n'est stockée dans l'image. Cependant, elles 
+  calcul si aucune statistique n'est stockée dans l'image. Cependant, elles 
   peuvent être calculées en se basant sur des aperçus ou un sous jeu de données
   de toutes les tuiles. Utile si vous êtes pressé et ne désirez pas avoir des 
   statistiques précises.
