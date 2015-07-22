@@ -22,7 +22,7 @@ gérée par OGR vers la sortie standard (le terminal).
 * **-ro :** ouvre la source de données en lecture seule. 
 * **-al :** liste tous les objets de toutes les couches (utilisé à la place de 
   fournir des noms de couche comme arguments). 
-* **-so`` / ``Summary Only :** supprime la liste des objets, affiche seulement 
+* **-so** / **Summary Only :** supprime la liste des objets, affiche seulement 
   les informations comme la projection, le schéma, le nombre d'objets et l'étendue.
 * **-q :** Rapport d'informations diverses en mode silence, incluant le système 
   de coordonnées, le schéma de la couche, l'étendue et le nombre d'objets.
