@@ -44,7 +44,7 @@ Vous pouvez ainsi accéder aux informations de cette couche :
     Layer_ref.GetFeatureCount()
     feature = Layer_ref.GetFeature(1) # Récupère l'objet (feature) numéro 1
 
-Vous pouvez trouvez plus d'information dans la classe *OGRDataSource*.
+Vous pouvez trouver plus d'information dans la classe *OGRDataSource*.
 
 Lorsque vous avez l'objet *feature*, vous pouvez gérer vos objets géométriques 
 avec la classe *Feature*.
