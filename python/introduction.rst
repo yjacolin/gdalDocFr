@@ -8,7 +8,7 @@ Installation
 -------------
 
 Il existe plusieurs possibilités pour installer des extensions Python. Celles 
-proposaient ici sont indépendantes du système et permettent une certaine 
+proposées ici sont indépendantes du système et permettent une certaine 
 indépendances avec celui-ci.
 
 Pour Windows installez `Python pour Windows <http://sourceforge.net/projects/pywin32/>`_
