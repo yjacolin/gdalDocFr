@@ -13,8 +13,8 @@ indépendances avec celui-ci.
 
 Pour Windows installez `Python pour Windows <http://sourceforge.net/projects/pywin32/>`_
 
-Système
-*********
+Système Unix
+*************
 
 ::
     
